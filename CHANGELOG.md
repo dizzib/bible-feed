@@ -1,3 +1,5 @@
+<!-- markdownlint-configure-file { "MD022": false, "MD024": false, "MD030": false, "MD032": false} -->
+
 # Bible Feed changelog
 
 All notable changes to this project will be documented in this file.
@@ -11,18 +13,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - increase font size when space permits
-
-## [1.0.3] - 2024-07-22
-
-### Changed
-- improve font sizes
-
-### Fixed
-- test whether to advance lists when launching app
-
-## [1.0.2] - 2024-07-17
-
-### Fixed
-- scale selector wheel childHeight with text-size
-
-<!-- markdownlint-configure-file { "MD022": false, "MD024": false, "MD030": false, "MD032": false} -->
