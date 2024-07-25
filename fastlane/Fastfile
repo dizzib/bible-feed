@@ -1,0 +1,50 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+opt_out_usage
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  FileNotFound = Class.new(StandardError)
+  def get_version
+    path = "../android/local.properties"
+    if !File.exist?(path) then raise FileNotFound end
+    file = File.read(path)
+    vname = /(?<=flutter.versionName=).+/.match(file)[0]
+    vcode = /(?<=flutter.versionCode=).+/.match(file)[0]
+    "#{vname}+#{vcode}"
+  end
+
+  def populate_changelog
+    version = get_version
+    vname = version.split("+")[0]
+    vcode = version.split("+")[1]
+    changelog = read_changelog(section_identifier: "[#{vname}]")
+    file = "./metadata/android/en-US/changelogs/#{vcode}.txt"
+    File.open(file, 'w') do |f| f << changelog end
+  end
+
+  ensure_env_vars(env_vars: ['SYMBOLS_FILE_PATH', 'MAPPING_FILE_PATH'])
+
+  desc "Deploy to Google Play internal"
+  lane :internal do
+    populate_changelog
+    upload_to_play_store(
+      mapping_paths: [ ENV['SYMBOLS_FILE_PATH'], ENV['MAPPING_FILE_PATH'] ],
+      release_status: 'draft',
+      track: 'internal',
+    )
+  end
+end

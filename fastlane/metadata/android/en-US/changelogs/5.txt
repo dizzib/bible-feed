@@ -1,0 +1,4 @@
+Initial release to Android Play-Store.
+
+Changed
+- increase font size when space permits
