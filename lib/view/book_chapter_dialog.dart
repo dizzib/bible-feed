@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:selector_wheel/selector_wheel.dart';
 import '../model/feed.dart';
+
+// known issues with various wheel pickers...
+//
+// - selector_wheel (https://github.com/AlexLomm/selector_wheel)
+//    - non standard grab behaviour (see https://github.com/AlexLomm/selector_wheel/issues/2)
+//    - poor performance on Moto E5 plus
+//
+// - wheel_picker (https://pub.dev/packages/wheel_picker)
+//    - does not seem to rebuild as expected
+//    - cannot set the width (https://github.com/stavgafny/wheel_picker/issues/4)
 
 class BookChapterDialog extends StatefulWidget {
   const BookChapterDialog({ super.key, required this.feed, });
@@ -15,6 +24,8 @@ class BookChapterDialog extends StatefulWidget {
 class _BookChapterDialogState extends State<BookChapterDialog> {
   late Book _selectedBook;
   late int _selectedChapter;
+  late FixedExtentScrollController _bookWheelController;
+  late FixedExtentScrollController _chapterWheelController;
 
   @override
   void initState() {
@@ -25,7 +36,6 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
 
   @override
   Widget build(BuildContext context) {
-
     Widget header() {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -38,62 +48,73 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
 
     Widget wheels(BoxConstraints c) {
       var textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
-      var t = Theme.of(context);
+      var textStyle = TextStyle(
+        fontSize: c.maxWidth < 200 ? 16 : 24,
+        fontWeight: FontWeight.w600,
+      );
 
       Widget bookWheel() {
         var books = widget.feed.books;
-        return SelectorWheel(
+        _bookWheelController = FixedExtentScrollController(initialItem:books.indexOf(_selectedBook));
+        return SizedBox(
           width: c.maxWidth * 0.8,
-          childCount: books.count,
-          childHeight: 35 * textScaleFactor,
-          selectedItemIndex: books.indexOf(_selectedBook),
-          convertIndexToValue: (int index) {
-            return SelectorWheelValue(
-              label: books[index].name,
-              index: index,
-              value: books[index],);
-          },
-          onValueChanged: (SelectorWheelValue<Book> v) {
-            setState(() {_selectedBook = v.value;});
-          }
+          child: ListWheelScrollView.useDelegate(
+            childDelegate: ListWheelChildBuilderDelegate(
+              builder: (BuildContext context, int index) {
+                if (index < 0 || index >= books.count) return null;
+                return Text(books[index].name, style: textStyle);
+              }
+            ),
+            controller: _bookWheelController,
+            diameterRatio: 1.3,
+            itemExtent: 35 * textScaleFactor,
+            magnification: 1.2,
+            onSelectedItemChanged: (index) {
+              setState(() {
+                _selectedBook = books[index];
+                if (_selectedChapter > _selectedBook.count) {
+                _selectedChapter = _selectedBook.count;
+                _chapterWheelController.jumpToItem(_selectedChapter - 1);
+              }
+              });
+            },
+            overAndUnderCenterOpacity: 0.5,
+            physics: const FixedExtentScrollPhysics(),
+            useMagnifier: true,
+          ),
         );
       }
 
       Widget chapterWheel() {
-        return SelectorWheel(
-          childCount: _selectedBook.count,
-          childHeight: 35 * textScaleFactor,
-          width: c.maxWidth * 0.2,
-          selectedItemIndex: _selectedChapter - 1,
-          convertIndexToValue: (int index) {
-            return SelectorWheelValue(
-              label: '${1 + index}',
-              index: index,
-              value: 1 + index,);
-          },
-          onValueChanged: (SelectorWheelValue<int> v) {
-            setState(() {_selectedChapter = v.value;});
-          }
+        _chapterWheelController = FixedExtentScrollController(initialItem:_selectedChapter - 1);
+        return Flexible(
+          child: ListWheelScrollView.useDelegate(
+            childDelegate: ListWheelChildBuilderDelegate(
+              builder: (BuildContext context, int index) {
+                if (index < 0 || index >= _selectedBook.count) return null;
+                return Text((index+1).toString(), style: textStyle);
+              }
+            ),
+            controller: _chapterWheelController,
+            diameterRatio: 1.3,
+            itemExtent: 35 * textScaleFactor,
+            magnification: 1.2,
+            onSelectedItemChanged: (index) {
+              setState(() {_selectedChapter = index + 1;});
+            },
+            overAndUnderCenterOpacity: 0.5,
+            physics: const FixedExtentScrollPhysics(),
+            useMagnifier: true,
+          ),
         );
       }
 
       return SizedBox(
         width: c.maxWidth,
         height: c.maxHeight * 0.65,
-        child: Theme(
-          data: ThemeData(
-            colorScheme: t.colorScheme.copyWith(),
-            textTheme: t.textTheme.copyWith(
-              titleLarge: t.textTheme.titleLarge?.copyWith(
-                fontSize: c.maxWidth < 200 ? 16 : 24,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [ bookWheel(), chapterWheel() ],
-          ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [ bookWheel(), chapterWheel() ],
         ),
       );
     }
@@ -150,5 +171,10 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
         ),
       )
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

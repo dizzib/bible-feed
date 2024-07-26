@@ -36,7 +36,6 @@ dependencies:
   cron: ^0.6.0
   logger: ^2.2.0
   provider: ^6.0.0
-  selector_wheel: ^1.1.2
   shared_preferences: ^2.2.3
 
 dev_dependencies:
