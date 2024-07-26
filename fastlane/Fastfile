@@ -17,22 +17,17 @@ opt_out_usage
 default_platform(:android)
 
 platform :android do
+  # get version name + code
+  path = "../android/local.properties"
   FileNotFound = Class.new(StandardError)
-  def get_version
-    path = "../android/local.properties"
-    if !File.exist?(path) then raise FileNotFound end
-    file = File.read(path)
-    vname = /(?<=flutter.versionName=).+/.match(file)[0]
-    vcode = /(?<=flutter.versionCode=).+/.match(file)[0]
-    "#{vname}+#{vcode}"
-  end
+  if !File.exist?(path) then raise FileNotFound end
+  file = File.read(path)
+  $vname = /(?<=flutter.versionName=).+/.match(file)[0]
+  $vcode = /(?<=flutter.versionCode=).+/.match(file)[0]
 
   def populate_changelog
-    version = get_version
-    vname = version.split("+")[0]
-    vcode = version.split("+")[1]
-    changelog = read_changelog(section_identifier: "[#{vname}]")
-    file = "./metadata/android/en-US/changelogs/#{vcode}.txt"
+    changelog = read_changelog(section_identifier: "[#{$vname}]")
+    file = "./metadata/android/en-US/changelogs/#{$vcode}.txt"
     File.open(file, 'w') do |f| f << changelog end
   end
 
@@ -44,7 +39,9 @@ platform :android do
     upload_to_play_store(
       mapping_paths: [ ENV['SYMBOLS_FILE_PATH'], ENV['MAPPING_FILE_PATH'] ],
       release_status: 'draft',
+      skip_upload_aab: true,
       track: 'internal',
+      version_code: $vcode,
     )
   end
 end
