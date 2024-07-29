@@ -48,7 +48,7 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
 
     Widget wheels(BoxConstraints c) {
       var textStyle = TextStyle(
-        fontSize: c.maxWidth < 200 ? 16 : 24, // accomodate small displays
+        fontSize: (c.maxWidth < 200 || c.maxHeight < 200) ? 16 : 24, // accomodate small displays
         fontWeight: FontWeight.w600,
         overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
       );
@@ -62,7 +62,7 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
           childDelegate: ListWheelChildBuilderDelegate(builder: builder),
           controller: controller,
           diameterRatio: 1.3,
-          itemExtent: 35 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
+          itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
           magnification: 1.1,
           onSelectedItemChanged: onSelectedItemChanged,
           overAndUnderCenterOpacity: 0.5,
