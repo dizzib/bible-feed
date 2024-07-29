@@ -53,6 +53,21 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
         overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
       );
 
+      // workaround bug in ListWheelScrollView where changing textStyle.fontSize -> itemExtent
+      // renders badly. In this case let's jumpToItem on next frame
+      Widget workaroundItemExtentBug({
+        required void Function(Duration) postFrameCallback,
+        required ListWheelScrollView child
+      }) {
+        return NotificationListener(
+          onNotification: (SizeChangedLayoutNotification notification) {
+            WidgetsBinding.instance.addPostFrameCallback(postFrameCallback);
+            return true;  // cancel bubbling
+          },
+          child: SizeChangedLayoutNotifier(child: child)
+        );
+      }
+
       ListWheelScrollView makeListWheelScrollView({
         required Widget? Function(BuildContext _, int index) builder,
         required ScrollController controller,
@@ -76,38 +91,48 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
         _bookWheelController = FixedExtentScrollController(initialItem:books.indexOf(_selectedBook));
         return SizedBox(
           width: c.maxWidth * 0.8,
-          child: makeListWheelScrollView(
-            builder: (BuildContext _, int index) {
-              if (index < 0 || index >= books.count) return null;
-              return Text(books[index].name, style: textStyle);
+          child: workaroundItemExtentBug(
+            postFrameCallback: (_) {
+              _bookWheelController.jumpToItem(books.indexOf(_selectedBook));
             },
-            controller: _bookWheelController,
-            onSelectedItemChanged: (index) {
-              setState(() {
-                _selectedBook = books[index];
-                if (_selectedChapter > _selectedBook.count) {
-                _selectedChapter = _selectedBook.count;
-                _chapterWheelController.jumpToItem(_selectedChapter - 1);
-              }
-              });
-            },
-          ),
+            child: makeListWheelScrollView(
+              builder: (BuildContext _, int index) {
+                if (index < 0 || index >= books.count) return null;
+                return Text(books[index].name, style: textStyle);
+              },
+              controller: _bookWheelController,
+              onSelectedItemChanged: (index) {
+                setState(() {
+                  _selectedBook = books[index];
+                  if (_selectedChapter > _selectedBook.count) {
+                    _selectedChapter = _selectedBook.count;
+                    _chapterWheelController.jumpToItem(_selectedChapter - 1);
+                  }
+                });
+              },
+            ),
+          )
         );
       }
 
       Widget chapterWheel() {
         _chapterWheelController = FixedExtentScrollController(initialItem:_selectedChapter - 1);
         return Flexible(
-          child: makeListWheelScrollView(
-            builder: (BuildContext _, int index) {
-              if (index < 0 || index >= _selectedBook.count) return null;
-              return Text((index+1).toString(), style: textStyle);
+          child: workaroundItemExtentBug(
+            postFrameCallback: (_) {
+              _chapterWheelController.jumpToItem(_selectedChapter - 1);
             },
-            controller: _chapterWheelController,
-            onSelectedItemChanged: (index) {
-              setState(() {_selectedChapter = index + 1;});
-            },
-          ),
+            child: makeListWheelScrollView(
+              builder: (BuildContext _, int index) {
+                if (index < 0 || index >= _selectedBook.count) return null;
+                return Text((index+1).toString(), style: textStyle);
+              },
+              controller: _chapterWheelController,
+              onSelectedItemChanged: (index) {
+                setState(() {_selectedChapter = index + 1;});
+              },
+            ),
+          )
         );
       }
 
