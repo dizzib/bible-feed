@@ -88,13 +88,12 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
 
       Widget bookWheel() {
         var books = widget.feed.books;
-        _bookWheelController = FixedExtentScrollController(initialItem:books.indexOf(_selectedBook));
+        var selectedBookIndex = books.indexOf(_selectedBook);
+        _bookWheelController = FixedExtentScrollController(initialItem:selectedBookIndex);
         return SizedBox(
           width: c.maxWidth * 0.8,
           child: workaroundItemExtentBug(
-            postFrameCallback: (_) {
-              _bookWheelController.jumpToItem(books.indexOf(_selectedBook));
-            },
+            postFrameCallback: (_) { _bookWheelController.jumpToItem(selectedBookIndex); },
             child: makeListWheelScrollView(
               builder: (BuildContext _, int index) {
                 if (index < 0 || index >= books.count) return null;
@@ -119,9 +118,7 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
         _chapterWheelController = FixedExtentScrollController(initialItem:_selectedChapter - 1);
         return Flexible(
           child: workaroundItemExtentBug(
-            postFrameCallback: (_) {
-              _chapterWheelController.jumpToItem(_selectedChapter - 1);
-            },
+            postFrameCallback: (_) { _chapterWheelController.jumpToItem(_selectedChapter - 1); },
             child: makeListWheelScrollView(
               builder: (BuildContext _, int index) {
                 if (index < 0 || index >= _selectedBook.count) return null;
