@@ -173,9 +173,4 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
       )
     );
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }
