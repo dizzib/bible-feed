@@ -37,14 +37,10 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    var td = ThemeData.dark();
-    var tl = ThemeData.light();
     return SafeArea(
       child: MaterialApp(
         title: 'Bible Feed',
-        // other techniques to customise these themes seem to result in high-contrast!?
-        theme: tl.copyWith(colorScheme: tl.colorScheme.copyWith(secondaryContainer: Colors.amber)),
-        darkTheme: td.copyWith(colorScheme: td.colorScheme.copyWith(secondaryContainer: Colors.red)),
+        darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
         home: ChangeNotifierProvider<Feeds>(
           create: (_) => feeds,
