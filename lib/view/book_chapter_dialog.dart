@@ -47,29 +47,41 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
     }
 
     Widget wheels(BoxConstraints c) {
-      var textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
       var textStyle = TextStyle(
-        fontSize: c.maxWidth < 200 ? 16 : 24,
+        fontSize: c.maxWidth < 200 ? 16 : 24, // accomodate small displays
         fontWeight: FontWeight.w600,
-        overflow: TextOverflow.ellipsis,
+        overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
       );
+
+      ListWheelScrollView makeListWheelScrollView({
+        required Widget? Function(BuildContext _, int index) builder,
+        required ScrollController controller,
+        required void Function(int index) onSelectedItemChanged
+      }) {
+        return ListWheelScrollView.useDelegate(
+          childDelegate: ListWheelChildBuilderDelegate(builder: builder),
+          controller: controller,
+          diameterRatio: 1.3,
+          itemExtent: 35 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
+          magnification: 1.1,
+          onSelectedItemChanged: onSelectedItemChanged,
+          overAndUnderCenterOpacity: 0.5,
+          physics: const FixedExtentScrollPhysics(),
+          useMagnifier: true,
+        );
+      }
 
       Widget bookWheel() {
         var books = widget.feed.books;
         _bookWheelController = FixedExtentScrollController(initialItem:books.indexOf(_selectedBook));
         return SizedBox(
           width: c.maxWidth * 0.8,
-          child: ListWheelScrollView.useDelegate(
-            childDelegate: ListWheelChildBuilderDelegate(
-              builder: (BuildContext context, int index) {
-                if (index < 0 || index >= books.count) return null;
-                return Text(books[index].name, style: textStyle);
-              }
-            ),
+          child: makeListWheelScrollView(
+            builder: (BuildContext _, int index) {
+              if (index < 0 || index >= books.count) return null;
+              return Text(books[index].name, style: textStyle);
+            },
             controller: _bookWheelController,
-            diameterRatio: 1.3,
-            itemExtent: 35 * textScaleFactor,
-            magnification: 1.2,
             onSelectedItemChanged: (index) {
               setState(() {
                 _selectedBook = books[index];
@@ -79,9 +91,6 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
               }
               });
             },
-            overAndUnderCenterOpacity: 0.5,
-            physics: const FixedExtentScrollPhysics(),
-            useMagnifier: true,
           ),
         );
       }
@@ -89,23 +98,15 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
       Widget chapterWheel() {
         _chapterWheelController = FixedExtentScrollController(initialItem:_selectedChapter - 1);
         return Flexible(
-          child: ListWheelScrollView.useDelegate(
-            childDelegate: ListWheelChildBuilderDelegate(
-              builder: (BuildContext context, int index) {
-                if (index < 0 || index >= _selectedBook.count) return null;
-                return Text((index+1).toString(), style: textStyle);
-              }
-            ),
+          child: makeListWheelScrollView(
+            builder: (BuildContext _, int index) {
+              if (index < 0 || index >= _selectedBook.count) return null;
+              return Text((index+1).toString(), style: textStyle);
+            },
             controller: _chapterWheelController,
-            diameterRatio: 1.3,
-            itemExtent: 35 * textScaleFactor,
-            magnification: 1.2,
             onSelectedItemChanged: (index) {
               setState(() {_selectedChapter = index + 1;});
             },
-            overAndUnderCenterOpacity: 0.5,
-            physics: const FixedExtentScrollPhysics(),
-            useMagnifier: true,
           ),
         );
       }
@@ -122,9 +123,8 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
 
     Widget footer() {
       var f = widget.feed;
-      var bks = f.books;
-      var chaptersTo = bks.chaptersTo(_selectedBook, _selectedChapter).toString();
-      var totalChapters = bks.totalChapters.toString();
+      var chaptersTo = f.books.chaptersTo(_selectedBook, _selectedChapter).toString();
+      var totalChapters = f.books.totalChapters.toString();
       return Row(
         children: [
           Expanded(
