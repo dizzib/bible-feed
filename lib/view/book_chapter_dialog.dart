@@ -51,6 +51,7 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
       var textStyle = TextStyle(
         fontSize: c.maxWidth < 200 ? 16 : 24,
         fontWeight: FontWeight.w600,
+        overflow: TextOverflow.ellipsis,
       );
 
       Widget bookWheel() {
