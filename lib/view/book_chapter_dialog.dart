@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../model/feed.dart';
+import '../view/list_wheel.dart';
 
 // known issues with various wheel pickers...
 //
@@ -24,8 +25,8 @@ class BookChapterDialog extends StatefulWidget {
 class _BookChapterDialogState extends State<BookChapterDialog> {
   late Book _selectedBook;
   late int _selectedChapter;
-  late FixedExtentScrollController _bookWheelController;
-  late FixedExtentScrollController _chapterWheelController;
+
+  late ListWheel _chapterListWheel;
 
   @override
   void initState() {
@@ -46,101 +47,38 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
       );
     }
 
-    Widget wheels(BoxConstraints c) {
-      var textStyle = TextStyle(
-        fontSize: (c.maxWidth < 200 || c.maxHeight < 200) ? 16 : 24, // accomodate small displays
-        fontWeight: FontWeight.w600,
-        overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
-      );
-
-      // workaround bug in ListWheelScrollView where changing textStyle.fontSize -> itemExtent
-      // renders badly. In this case let's jumpToItem on next frame
-      Widget workaroundItemExtentBug({
-        required void Function(Duration) postFrameCallback,
-        required ListWheelScrollView child
-      }) {
-        return NotificationListener(
-          onNotification: (SizeChangedLayoutNotification notification) {
-            WidgetsBinding.instance.addPostFrameCallback(postFrameCallback);
-            return true;  // cancel bubbling
-          },
-          child: SizeChangedLayoutNotifier(child: child)
-        );
-      }
-
-      ListWheelScrollView makeListWheelScrollView({
-        required Widget? Function(BuildContext _, int index) builder,
-        required ScrollController controller,
-        required void Function(int index) onSelectedItemChanged
-      }) {
-        return ListWheelScrollView.useDelegate(
-          childDelegate: ListWheelChildBuilderDelegate(builder: builder),
-          controller: controller,
-          diameterRatio: 1.3,
-          itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
-          magnification: 1.1,
-          onSelectedItemChanged: onSelectedItemChanged,
-          overAndUnderCenterOpacity: 0.5,
-          physics: const FixedExtentScrollPhysics(),
-          useMagnifier: true,
-        );
-      }
-
-      Widget bookWheel() {
-        var books = widget.feed.books;
-        var selectedBookIndex = books.indexOf(_selectedBook);
-        _bookWheelController = FixedExtentScrollController(initialItem:selectedBookIndex);
-        return SizedBox(
-          width: c.maxWidth * 0.8,
-          child: workaroundItemExtentBug(
-            postFrameCallback: (_) { _bookWheelController.jumpToItem(selectedBookIndex); },
-            child: makeListWheelScrollView(
-              builder: (BuildContext _, int index) {
-                if (index < 0 || index >= books.count) return null;
-                return Text(books[index].name, style: textStyle);
-              },
-              controller: _bookWheelController,
-              onSelectedItemChanged: (index) {
-                setState(() {
-                  _selectedBook = books[index];
-                  if (_selectedChapter > _selectedBook.count) {
-                    _selectedChapter = _selectedBook.count;
-                    _chapterWheelController.jumpToItem(_selectedChapter - 1);
-                  }
-                });
-              },
-            ),
-          )
-        );
-      }
-
-      Widget chapterWheel() {
-        _chapterWheelController = FixedExtentScrollController(initialItem:_selectedChapter - 1);
-        return Flexible(
-          child: workaroundItemExtentBug(
-            postFrameCallback: (_) { _chapterWheelController.jumpToItem(_selectedChapter - 1); },
-            child: makeListWheelScrollView(
-              builder: (BuildContext _, int index) {
-                if (index < 0 || index >= _selectedBook.count) return null;
-                return Text((index+1).toString(), style: textStyle);
-              },
-              controller: _chapterWheelController,
-              onSelectedItemChanged: (index) {
-                setState(() {_selectedChapter = index + 1;});
-              },
-            ),
-          )
-        );
-      }
-
+    Widget bookWheel(BoxConstraints c) {
+      var books = widget.feed.books;
+      var selectedBookIndex = books.indexOf(_selectedBook);
       return SizedBox(
-        width: c.maxWidth,
-        height: c.maxHeight * 0.65,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [ bookWheel(), chapterWheel() ],
+        width: c.maxWidth * 0.8,
+        child: ListWheel(
+          constraints: c,
+          count: books.count,
+          convertIndexToValue: (index) { return books[index].name; },
+          getSelectedItemIndex: () { return selectedBookIndex; },
+          onSelectedItemChanged: (index) {
+            setState(() {
+              _selectedBook = books[index];
+              // if (_selectedChapter > _selectedBook.count) {
+                // _selectedChapter = _selectedBook.count;
+                // _chapterListWheel.selectItem(_selectedChapter - 1);
+              // }
+            });
+          },
         ),
       );
+    }
+
+    Widget chapterWheel(BoxConstraints c) {
+      _chapterListWheel = ListWheel(
+          constraints: c,
+          count: _selectedBook.count,
+          convertIndexToValue: (index) { return (index + 1).toString(); },
+          getSelectedItemIndex: () { return _selectedChapter - 1; },
+          onSelectedItemChanged: (index) { setState(() {_selectedChapter = index + 1;}); },
+        );
+      return Flexible(child: _chapterListWheel);
     }
 
     Widget footer() {
@@ -185,7 +123,14 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
                   visible: constraints.maxHeight > 280,
                   child: header(),
                 ),
-                wheels(constraints),
+                SizedBox(
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight * 0.65,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [ bookWheel(constraints), chapterWheel(constraints) ],
+                  ),
+                ),
                 LinearProgressIndicator(value: widget.feed.books.progressTo(_selectedBook, _selectedChapter)),
                 footer(),
               ],
