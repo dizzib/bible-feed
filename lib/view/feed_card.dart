@@ -5,12 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../model/feed.dart';
 import 'book_chapter_dialog.dart';
 
-class FeedCard extends StatefulWidget {
-  @override
-  State<FeedCard> createState() => _FeedCardState();
-}
-
-class _FeedCardState extends State<FeedCard> {
+class FeedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var feed = context.watch<Feed>();
