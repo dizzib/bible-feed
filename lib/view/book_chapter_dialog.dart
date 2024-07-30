@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:provider/provider.dart';
 import '../model/feed.dart';
-import '../view/list_wheel.dart';
-
-// known issues with various wheel pickers...
-//
-// - selector_wheel (https://github.com/AlexLomm/selector_wheel)
-//    - non standard grab behaviour (see https://github.com/AlexLomm/selector_wheel/issues/2)
-//    - poor performance on Moto E5 plus
-//
-// - wheel_picker (https://pub.dev/packages/wheel_picker)
-//    - does not seem to rebuild as expected
-//    - cannot set the width (https://github.com/stavgafny/wheel_picker/issues/4)
+import '../view/book_chapter_wheels.dart';
+import '../view/wheel_state.dart';
 
 class BookChapterDialog extends StatefulWidget {
   const BookChapterDialog({ super.key, required this.feed, });
@@ -23,16 +15,19 @@ class BookChapterDialog extends StatefulWidget {
 }
 
 class _BookChapterDialogState extends State<BookChapterDialog> {
-  late Book _selectedBook;
-  late int _selectedChapter;
-
-  late ListWheel _chapterListWheel;
+  late WheelState<Book> _bookWheelState;
+  late WheelState<int> _chapterWheelState;
 
   @override
   void initState() {
     super.initState();
-    _selectedBook = widget.feed.books.current;
-    _selectedChapter = _selectedBook.chapter;
+
+    var books = widget.feed.books;
+    var selectedBook = books.current;
+    var selectedBookIndex = books.indexOf(selectedBook);
+
+    _bookWheelState = WheelState<Book>(selectedBookIndex, selectedBook);
+    _chapterWheelState = WheelState<int>(selectedBook.chapter - 1, selectedBook.chapter);
   }
 
   @override
@@ -47,43 +42,9 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
       );
     }
 
-    Widget bookWheel(BoxConstraints c) {
-      var books = widget.feed.books;
-      var selectedBookIndex = books.indexOf(_selectedBook);
-      return SizedBox(
-        width: c.maxWidth * 0.8,
-        child: ListWheel(
-          constraints: c,
-          count: books.count,
-          convertIndexToValue: (index) { return books[index].name; },
-          getSelectedItemIndex: () { return selectedBookIndex; },
-          onSelectedItemChanged: (index) {
-            setState(() {
-              _selectedBook = books[index];
-              // if (_selectedChapter > _selectedBook.count) {
-                // _selectedChapter = _selectedBook.count;
-                // _chapterListWheel.selectItem(_selectedChapter - 1);
-              // }
-            });
-          },
-        ),
-      );
-    }
-
-    Widget chapterWheel(BoxConstraints c) {
-      _chapterListWheel = ListWheel(
-          constraints: c,
-          count: _selectedBook.count,
-          convertIndexToValue: (index) { return (index + 1).toString(); },
-          getSelectedItemIndex: () { return _selectedChapter - 1; },
-          onSelectedItemChanged: (index) { setState(() {_selectedChapter = index + 1;}); },
-        );
-      return Flexible(child: _chapterListWheel);
-    }
-
     Widget footer() {
       var f = widget.feed;
-      var chaptersTo = f.books.chaptersTo(_selectedBook, _selectedChapter).toString();
+      var chaptersTo = f.books.chaptersTo(_bookWheelState.item, _chapterWheelState.item).toString();
       var totalChapters = f.books.totalChapters.toString();
       return Row(
         children: [
@@ -99,7 +60,7 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
           ),
           TextButton(
             onPressed: () {
-              f.setBookAndChapter(_selectedBook, _selectedChapter);
+              f.setBookAndChapter(_bookWheelState.item, _chapterWheelState.item);
               Navigator.pop(context);
             },
             child: const Padding(
@@ -126,12 +87,18 @@ class _BookChapterDialogState extends State<BookChapterDialog> {
                 SizedBox(
                   width: constraints.maxWidth,
                   height: constraints.maxHeight * 0.65,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [ bookWheel(constraints), chapterWheel(constraints) ],
+                  child: MultiProvider(
+                    providers: [
+                      ChangeNotifierProvider.value(value: _bookWheelState),
+                      ChangeNotifierProvider.value(value: _chapterWheelState)
+                    ],
+                    child: BookChapterWheels(
+                      feed: widget.feed,
+                      constraints: constraints
+                    )
                   ),
                 ),
-                LinearProgressIndicator(value: widget.feed.books.progressTo(_selectedBook, _selectedChapter)),
+                LinearProgressIndicator(value: widget.feed.books.progressTo(_bookWheelState.item, _chapterWheelState.item)),
                 footer(),
               ],
             );

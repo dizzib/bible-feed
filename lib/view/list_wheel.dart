@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../view/wheel_state.dart';
 
 // known issues with various wheel pickers...
 //
@@ -10,41 +12,33 @@ import 'package:flutter/material.dart';
 //    - does not seem to rebuild as expected
 //    - cannot set the width (https://github.com/stavgafny/wheel_picker/issues/4)
 //
-class ListWheel extends StatefulWidget {
+class ListWheel<T> extends StatefulWidget {
   const ListWheel({
     super.key,
     required this.constraints,
     required this.count,
-    required this.convertIndexToValue,
-    required this.getSelectedItemIndex,
-    required this.onSelectedItemChanged,
+    required this.indexToItem,
+    required this.itemToString,
   });
 
   final BoxConstraints constraints;
   final int count;
-  final String Function(int index) convertIndexToValue;
-  final int Function() getSelectedItemIndex;
-  final void Function(int index) onSelectedItemChanged;
-
-  // final _ListWheelState appState = new _ListWheelState();
-  // void selectItem(int index) {
-  //   ._controller.jumpToItem(index);
-  //   // WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     // _ListWheelState()._controller.jumpToItem(index);
-  //   // }
-  // }
+  final T Function(int index) indexToItem;
+  final String Function(T item) itemToString;
 
   @override
-  State<ListWheel> createState() => _ListWheelState();
+  State<ListWheel> createState() => _ListWheelState<T>();
 }
 
-class _ListWheelState extends State<ListWheel> {
+class _ListWheelState<T> extends State<ListWheel<T>> {
   late FixedExtentScrollController _controller;
+  late WheelState<T> _wheelState;
 
   @override
   void initState() {
     super.initState();
-    _controller = FixedExtentScrollController(initialItem: widget.getSelectedItemIndex());
+    _wheelState = Provider.of<WheelState<T>>(context, listen:false);
+    _controller = FixedExtentScrollController(initialItem: _wheelState.index);
   }
 
   @override
@@ -54,6 +48,13 @@ class _ListWheelState extends State<ListWheel> {
       fontWeight: FontWeight.w600,
       overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
     );
+
+    // guard against selected index exceeding count - 1
+    if (_wheelState.index >= widget.count) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _controller.jumpToItem(widget.count - 1);
+      });
+    }
 
     // print('---');
     // print(widget.getSelectedItemIndex());
@@ -81,14 +82,17 @@ class _ListWheelState extends State<ListWheel> {
       childDelegate: ListWheelChildBuilderDelegate(
         builder: (BuildContext _, int index) {
           if (index < 0 || index >= widget.count) return null;
-          return Text(widget.convertIndexToValue(index), style: textStyle);
+          return Text(widget.itemToString(widget.indexToItem(index)), style: textStyle);
         },
       ),
       controller: _controller,
       diameterRatio: 1.3,
       itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
       magnification: 1.1,
-      onSelectedItemChanged: widget.onSelectedItemChanged,
+      onSelectedItemChanged: (index) {
+        _wheelState.index = index;
+        _wheelState.item = widget.indexToItem(index);
+      },
       overAndUnderCenterOpacity: 0.5,
       physics: const FixedExtentScrollPhysics(),
       useMagnifier: true,
