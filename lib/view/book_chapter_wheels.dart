@@ -4,7 +4,7 @@ import '../model/feed.dart';
 import '../view/list_wheel.dart';
 import '../view/wheel_state.dart';
 
-class BookChapterWheels extends StatefulWidget {
+class BookChapterWheels extends StatelessWidget {
   const BookChapterWheels({
     super.key,
     required this.feed,
@@ -15,21 +15,8 @@ class BookChapterWheels extends StatefulWidget {
   final BoxConstraints constraints;
 
   @override
-  State<BookChapterWheels> createState() => _BookChapterWheelsState();
-}
-
-class _BookChapterWheelsState extends State<BookChapterWheels> {
-  late ListWheel<Book> _bookWheel;
-  late ListWheel<int> _chapterWheel;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var books = widget.feed.books;
+    var books = feed.books;
 
     ListWheel<Book> bookWheel(BoxConstraints c) {
       return ListWheel<Book>(
@@ -42,7 +29,6 @@ class _BookChapterWheelsState extends State<BookChapterWheels> {
 
     ListWheel<int> chapterWheel(BoxConstraints c) {
       var bookWheelState = Provider.of<WheelState<Book>>(context);
-      print('sbi:${bookWheelState.index}');
       return ListWheel<int>(
         constraints: c,
         count: books[bookWheelState.index].count,
@@ -51,17 +37,14 @@ class _BookChapterWheelsState extends State<BookChapterWheels> {
       );
     }
 
-    _bookWheel = bookWheel(widget.constraints);
-    _chapterWheel = chapterWheel(widget.constraints);
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: widget.constraints.maxWidth * 0.8,
-          child: _bookWheel,
+          width: constraints.maxWidth * 0.8,
+          child: bookWheel(constraints),
         ),
-        Flexible(child: _chapterWheel),
+        Flexible(child: chapterWheel(constraints)),
       ],
     );
   }
