@@ -5,12 +5,12 @@ import '../view/list_wheel.dart';
 import '../view/list_wheel_state.dart';
 
 class BookChapterWheels extends StatelessWidget {
-  final Feed feed;
+  final Books books;
   final BoxConstraints constraints;
 
   const BookChapterWheels({
     super.key,
-    required this.feed,
+    required this.books,
     required this.constraints,
   });
 
@@ -27,8 +27,8 @@ class BookChapterWheels extends StatelessWidget {
         SizedBox(
           width: constraints.maxWidth * 0.8,
           child: ListWheel<Book>(
-            count: feed.books.count,
-            indexToItem: (index) => feed.books[index],
+            count: books.count,
+            indexToItem: (index) => books[index],
             itemToString: (Book b) => b.name,
             textStyle: textStyle,
           )

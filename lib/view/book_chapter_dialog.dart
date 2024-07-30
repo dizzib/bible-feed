@@ -50,7 +50,7 @@ class BookChapterDialog extends StatelessWidget {
                     width: constraints.maxWidth,
                     height: constraints.maxHeight * 0.65,
                     child: BookChapterWheels(
-                      feed: feed,
+                      books: feed.books,
                       constraints: constraints
                     )
                   ),
