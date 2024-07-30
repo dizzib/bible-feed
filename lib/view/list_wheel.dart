@@ -55,7 +55,7 @@ class ListWheel<T> extends StatelessWidget {
     // guard against selected index exceeding count - 1
     if (wheelState.index >= count) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        controller.jumpToItem(0);  // bugfix: without this, ListWheelScrollView sometimes partially renders
+        controller.jumpToItem(0);  // hack: without this, ListWheelScrollView sometimes partially renders
         controller.jumpToItem(count - 1);
         setWheelState(count - 1);
       });
