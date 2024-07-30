@@ -15,7 +15,7 @@ class BookChapterWheels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getTextStyle(BoxConstraints c) => TextStyle(
-      fontSize: (c.maxWidth < 200 || c.maxHeight < 200) ? 16 : 23,
+      fontSize: (c.maxWidth < 200 || c.maxHeight < 190) ? 16 : 23,
       fontWeight: FontWeight.w600,
       overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
     );

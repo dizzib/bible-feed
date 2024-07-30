@@ -28,34 +28,35 @@ class BookChapterDialog extends StatelessWidget {
         ),
       );
 
-    return Dialog(
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 300),
-        child: LayoutBuilder(
-          builder: (_, constraints) {
-            return MultiProvider(
+    return LayoutBuilder(
+      builder: (_, constraints) {
+        return Dialog(
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: constraints.maxHeight * 0.8,
+              maxWidth: 300,
+            ),
+            child: MultiProvider(
               providers: [
                 ChangeNotifierProvider.value(value: bookWheelState),
                 ChangeNotifierProvider.value(value: chapterWheelState)
               ],
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   Visibility(
                     visible: constraints.maxHeight > 280,
                     child: header(),
                   ),
-                  SizedBox(
-                    height: constraints.maxHeight * 0.65,
+                  Expanded(
                     child: BookChapterWheels(books: feed.books)
                   ),
                   BookChapterDialogFooter(feed: feed)
                 ],
               )
-            );
-          }
-        ),
-      )
+            )
+          )
+        );
+      }
     );
   }
 }
