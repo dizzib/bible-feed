@@ -15,16 +15,16 @@ import '../view/wheel_state.dart';
 class ListWheel<T> extends StatelessWidget {
   const ListWheel({
     super.key,
-    required this.constraints,
     required this.count,
     required this.indexToItem,
     required this.itemToString,
+    required this.textStyle,
   });
 
-  final BoxConstraints constraints;
   final int count;
   final T Function(int index) indexToItem;
   final String Function(T item) itemToString;
+  final TextStyle textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +35,6 @@ class ListWheel<T> extends StatelessWidget {
       wheelState.index = index;
       wheelState.item = indexToItem(index);
     }
-
-    final textStyle = TextStyle(
-      fontSize: (constraints.maxWidth < 200 || constraints.maxHeight < 200) ? 16 : 24, // accomodate small displays
-      fontWeight: FontWeight.w600,
-      overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
-    );
 
     // guard against selected index exceeding count - 1
     if (wheelState.index >= count) {
