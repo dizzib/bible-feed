@@ -19,11 +19,11 @@ void main() {
   testWidgets('main', (t) async {
     void setState() {
       var bookChapterState = [
-      [0, 5], [2, 10],
+      [0, 5], [1, 12],
       [4, 4], [6, 2],
-      [0, 15], [0, 27],
-      [0, 9], [5, 16],
-      [4, 8], [0, 20]
+      [0, 40], [0, 144],
+      [0, 3], [5, 17],
+      [3, 34], [0, 8]
       ];
       var chaptersReadState = [
         0, 1,
