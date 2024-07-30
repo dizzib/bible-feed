@@ -14,19 +14,8 @@ class BookChapterDialog extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     final selectedBook = feed.books.current;
-    final bookWheelState = ListWheelState<Book>(feed.books.indexOf(selectedBook), selectedBook);
-    final chapterWheelState = ListWheelState<int>(selectedBook.chapter - 1, selectedBook.chapter);
-
-    header() =>
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          feed.books.name,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-      );
 
     return LayoutBuilder(
       builder: (_, constraints) {
@@ -38,14 +27,26 @@ class BookChapterDialog extends StatelessWidget {
             ),
             child: MultiProvider(
               providers: [
-                ChangeNotifierProvider.value(value: bookWheelState),
-                ChangeNotifierProvider.value(value: chapterWheelState)
+                ChangeNotifierProvider.value(
+                  value: ListWheelState<Book>(feed.books.indexOf(selectedBook), selectedBook)
+                ),
+                ChangeNotifierProvider.value(
+                  value: ListWheelState<int>(selectedBook.chapter - 1, selectedBook.chapter)
+                )
               ],
               child: Column(
                 children: [
                   Visibility(
                     visible: constraints.maxHeight > 280,
-                    child: header(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        feed.books.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    )
                   ),
                   Expanded(
                     child: BookChapterWheels(books: feed.books)
