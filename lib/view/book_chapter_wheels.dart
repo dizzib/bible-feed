@@ -22,31 +22,25 @@ class BookChapterWheels extends StatelessWidget {
       overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
     );
 
-    bookWheel() {
-      return ListWheel<Book>(
-        count: feed.books.count,
-        indexToItem: (index) => feed.books[index],
-        itemToString: (Book b) => b.name,
-        textStyle: textStyle,
-      );
-    }
-
-    chapterWheel() {
-      return ListWheel<int>(
-        count: Provider.of<WheelState<Book>>(context).item.count,
-        indexToItem: (index) => index + 1,
-        itemToString: (int chapter) => chapter.toString(),
-        textStyle: textStyle,
-      );
-    }
-
     return Row(
       children: [
         SizedBox(
           width: constraints.maxWidth * 0.8,
-          child: bookWheel(),
+          child: ListWheel<Book>(
+            count: feed.books.count,
+            indexToItem: (index) => feed.books[index],
+            itemToString: (Book b) => b.name,
+            textStyle: textStyle,
+          )
         ),
-        Flexible(child: chapterWheel()),
+        Flexible(
+          child: ListWheel<int>(
+            count: Provider.of<WheelState<Book>>(context).item.count,
+            indexToItem: (index) => index + 1,
+            itemToString: (int chapter) => chapter.toString(),
+            textStyle: textStyle,
+          )
+        ),
       ],
     );
   }
