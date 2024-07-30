@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
 import '../model/feed.dart';
 import '../view/book_chapter_wheels.dart';
+import '../view/book_chapter_dialog_footer.dart';
 import '../view/wheel_state.dart';
 
 class BookChapterDialog extends StatelessWidget {
@@ -26,37 +26,6 @@ class BookChapterDialog extends StatelessWidget {
           feed.books.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-      );
-    }
-
-    Widget footer() {
-      var bookWheelState = Provider.of<WheelState<Book>>(context);
-      var f = feed;
-      var chaptersTo = f.books.chaptersTo(bookWheelState.item, chapterWheelState.item).toString();
-      var totalChapters = f.books.totalChapters.toString();
-      return Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: AutoSizeText(
-                '$chaptersTo of $totalChapters',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            )
-          ),
-          TextButton(
-            onPressed: () {
-              f.setBookAndChapter(bookWheelState.item, chapterWheelState.item);
-              Navigator.pop(context);
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Text('Update'),
-            ),
-          ),
-        ],
       );
     }
 
@@ -85,8 +54,7 @@ class BookChapterDialog extends StatelessWidget {
                       constraints: constraints
                     )
                   ),
-                  LinearProgressIndicator(value: feed.books.progressTo(bookWheelState.item, chapterWheelState.item)),
-                  footer(),
+                  BookChapterDialogFooter(feed: feed),
                 ],
               )
             );
