@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../view/list_wheel_gradient.dart';
+import '../view/list_wheel_effects.dart';
 import '../view/wheel_state.dart';
 
 // known issues with various wheel pickers...
@@ -29,23 +29,10 @@ class ListWheel<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mq = MediaQuery.of(context);
-    var itemExtent = textStyle.fontSize! * 1.4 * mq.textScaler.scale(1);  // accomodate text size from device settings
-    var isDarkMode = mq.platformBrightness == Brightness.dark;
+    var deviceTextScale = MediaQuery.of(context).textScaler.scale(1);  // from device settings
+    var itemExtent = textStyle.fontSize! * 1.4 * deviceTextScale;  // accomodate various text sizes
     var wheelState = Provider.of<WheelState<T>>(context, listen:false);
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
-
-    Widget highlight() =>
-      Align(
-        alignment: Alignment.center,
-        child: Container(
-          height: itemExtent,
-          decoration: BoxDecoration(
-            color: isDarkMode ? Colors.red : Colors.orange[300],
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        )
-      );
 
     // workaround bug in ListWheelScrollView where a changing textStyle.fontSize -> itemExtent
     // renders badly. In this case jumpToItem on next frame
@@ -78,7 +65,7 @@ class ListWheel<T> extends StatelessWidget {
       children: [
         const ListWheelGradient(begin: Alignment.topCenter, end:Alignment.bottomCenter),
         const ListWheelGradient(begin: Alignment.bottomCenter, end:Alignment.topCenter),
-        highlight(),
+        ListWheelHighlight(itemExtent: itemExtent),
         workaroundItemExtentBug(
           ListWheelScrollView.useDelegate(
             childDelegate: ListWheelChildBuilderDelegate(

@@ -1,5 +1,28 @@
 import 'package:flutter/material.dart';
 
+class ListWheelHighlight extends StatelessWidget {
+  const ListWheelHighlight({
+    required this.itemExtent,
+  });
+
+  final double itemExtent;
+
+  @override
+  Widget build(BuildContext context) {
+    var isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        height: itemExtent,
+        decoration: BoxDecoration(
+          color: isDarkMode ? Colors.red : Colors.orange[300],
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      )
+    );
+  }
+}
+
 class ListWheelGradient extends StatelessWidget {
   const ListWheelGradient({
     required this.begin,
