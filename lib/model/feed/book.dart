@@ -2,7 +2,11 @@ part of '../feed.dart';
 
 // an individual book e.g. Matthew, with reading state
 class Book {
-  Book(this.key, this._name, int chapterCount) : _chapters = List<int>.generate(chapterCount, (n) => n);
+  Book(
+    this.key,
+    this._name,
+    int chapterCount
+  ) : _chapters = List<int>.generate(chapterCount, (n) => n);
 
   // private
   final List<int> _chapters;

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
+// highlight selected item
 class ListWheelHighlight extends StatelessWidget {
-  const ListWheelHighlight({
-    required this.height,
-  });
-
   final double height;
+
+  const ListWheelHighlight({ required this.height, });
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +22,15 @@ class ListWheelHighlight extends StatelessWidget {
   }
 }
 
+// background fade effect
 class ListWheelGradient extends StatelessWidget {
+  final Alignment begin;
+  final Alignment end;
+
   const ListWheelGradient({
     required this.begin,
     required this.end,
   });
-
-  final Alignment begin;
-  final Alignment end;
 
   @override
   Widget build(BuildContext context) {

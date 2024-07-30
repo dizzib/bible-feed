@@ -5,15 +5,16 @@ part 'feed/book.dart';
 part 'feed/books.dart';
 
 class _StoreKeys {
+  final String book;
+  final String chapter;
+  final String isChapterRead;
+  final String dateLastSaved;
+
   _StoreKeys(String booksKey) :
     book = '$booksKey.book',
     chapter = '$booksKey.chapter',
     dateLastSaved = '$booksKey.dateLastSaved',
     isChapterRead = '$booksKey.isChapterRead';
-  final String book;
-  final String chapter;
-  final String isChapterRead;
-  final String dateLastSaved;
 }
 
 // Feed manipulates, dispenses and stores a reading list (Books)

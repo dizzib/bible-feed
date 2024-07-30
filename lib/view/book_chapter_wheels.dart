@@ -5,14 +5,14 @@ import '../view/list_wheel.dart';
 import '../view/list_wheel_state.dart';
 
 class BookChapterWheels extends StatelessWidget {
+  final Feed feed;
+  final BoxConstraints constraints;
+
   const BookChapterWheels({
     super.key,
     required this.feed,
     required this.constraints,
   });
-
-  final Feed feed;
-  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {

@@ -14,6 +14,11 @@ import '../view/list_wheel_state.dart';
 //    - cannot set the width (https://github.com/stavgafny/wheel_picker/issues/4)
 //
 class ListWheel<T> extends StatelessWidget {
+  final int count;
+  final T Function(int index) indexToItem;
+  final String Function(T item) itemToString;
+  final TextStyle textStyle;
+
   const ListWheel({
     super.key,
     required this.count,
@@ -21,11 +26,6 @@ class ListWheel<T> extends StatelessWidget {
     required this.itemToString,
     required this.textStyle,
   });
-
-  final int count;
-  final T Function(int index) indexToItem;
-  final String Function(T item) itemToString;
-  final TextStyle textStyle;
 
   @override
   Widget build(BuildContext context) {
