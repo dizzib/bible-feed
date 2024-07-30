@@ -7,17 +7,13 @@ import '../view/wheel_state.dart';
 
 class BookChapterDialog extends StatelessWidget {
   const BookChapterDialog({ super.key, required this.feed, });
-
   final Feed feed;
 
   @override
   Widget build(BuildContext context) {
-    var books = feed.books;
-    var selectedBook = books.current;
-    var selectedBookIndex = books.indexOf(selectedBook);
-
-    WheelState<Book> bookWheelState = WheelState<Book>(selectedBookIndex, selectedBook);
-    WheelState<int> chapterWheelState = WheelState<int>(selectedBook.chapter - 1, selectedBook.chapter);
+    final selectedBook = feed.books.current;
+    final bookWheelState = WheelState<Book>(feed.books.indexOf(selectedBook), selectedBook);
+    final chapterWheelState = WheelState<int>(selectedBook.chapter - 1, selectedBook.chapter);
 
     Widget header() {
       return Padding(

@@ -6,16 +6,14 @@ import '../view/wheel_state.dart';
 
 class BookChapterDialogFooter extends StatelessWidget {
   const BookChapterDialogFooter({ super.key, required this.feed, });
-
   final Feed feed;
 
   @override
   Widget build(BuildContext context) {
     var book = Provider.of<WheelState<Book>>(context).item;
-    var books = feed.books;
     var chapter = Provider.of<WheelState<int>>(context).item;
-    var chaptersTo = books.chaptersTo(book, chapter).toString();
-    var totalChapters = books.totalChapters.toString();
+    var chaptersTo = feed.books.chaptersTo(book, chapter).toString();
+    var totalChapters = feed.books.totalChapters.toString();
 
     return Column(
       children: [
