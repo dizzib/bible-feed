@@ -4,10 +4,10 @@ import '../model/feed.dart';
 import '../view/list_wheel.dart';
 import '../view/list_wheel_state.dart';
 
-class BookChapterWheels extends StatelessWidget {
+class BookChapterDialogWheels extends StatelessWidget {
   final Books books;
 
-  const BookChapterWheels({
+  const BookChapterDialogWheels({
     super.key,
     required this.books,
   });
