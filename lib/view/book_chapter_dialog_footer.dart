@@ -16,8 +16,6 @@ class BookChapterDialogFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     var book = Provider.of<ListWheelState<Book>>(context).item;
     var chapter = Provider.of<ListWheelState<int>>(context).item;
-    var chaptersTo = feed.books.chaptersTo(book, chapter).toString();
-    var totalChapters = feed.books.totalChapters.toString();
 
     return Column(
       children: [
@@ -28,7 +26,7 @@ class BookChapterDialogFooter extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: AutoSizeText(
-                  '$chaptersTo of $totalChapters',
+                  '${feed.books.chaptersTo(book, chapter)} of ${feed.books.totalChapters}',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
