@@ -35,7 +35,7 @@ class BookChapterDialogWheels extends StatelessWidget {
             ),
             Flexible(
               child: ListWheel<int>(
-                count: Provider.of<ListWheelState<Book>>(context).item.count,
+                count: books[Provider.of<ListWheelState<Book>>(context).index].count,
                 indexToItem: (index) => index + 1,
                 itemToString: (int chapter) => chapter.toString(),
                 textStyle: getTextStyle(constraints),

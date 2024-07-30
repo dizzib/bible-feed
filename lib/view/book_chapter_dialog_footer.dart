@@ -14,8 +14,8 @@ class BookChapterDialogFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var book = Provider.of<ListWheelState<Book>>(context).item;
-    var chapter = Provider.of<ListWheelState<int>>(context).item;
+    var book = feed.books[Provider.of<ListWheelState<Book>>(context).index];
+    var chapter = Provider.of<ListWheelState<int>>(context).index + 1;
 
     return Column(
       children: [

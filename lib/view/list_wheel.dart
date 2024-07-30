@@ -47,18 +47,12 @@ class ListWheel<T> extends StatelessWidget {
       );
     }
 
-    // always keep index and item in sync
-    void setWheelState(int index) {
-      wheelState.index = index;
-      wheelState.item = indexToItem(index);
-    }
-
     // guard against selected index exceeding count - 1
     if (wheelState.index >= count) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         controller.jumpToItem(0);  // hack: without this, ListWheelScrollView sometimes partially renders
         controller.jumpToItem(count - 1);
-        setWheelState(count - 1);
+        wheelState.index = count - 1;
       });
     }
 
@@ -79,7 +73,7 @@ class ListWheel<T> extends StatelessWidget {
             diameterRatio: 1.1,
             itemExtent: itemExtent,
             magnification: magnification,
-            onSelectedItemChanged: (index) => setWheelState(index),
+            onSelectedItemChanged: (index) => wheelState.index = index,
             overAndUnderCenterOpacity: 0.7,
             physics: const FixedExtentScrollPhysics(),
             useMagnifier: true,

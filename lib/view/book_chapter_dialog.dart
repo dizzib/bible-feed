@@ -27,12 +27,8 @@ class BookChapterDialog extends StatelessWidget {
             ),
             child: MultiProvider(
               providers: [
-                ChangeNotifierProvider.value(
-                  value: ListWheelState<Book>(feed.books.indexOf(selectedBook), selectedBook)
-                ),
-                ChangeNotifierProvider.value(
-                  value: ListWheelState<int>(selectedBook.chapter - 1, selectedBook.chapter)
-                )
+                ChangeNotifierProvider.value(value: ListWheelState<Book>(feed.books.indexOf(selectedBook))),
+                ChangeNotifierProvider.value(value: ListWheelState<int>(selectedBook.chapter - 1))
               ],
               child: Column(
                 children: [
