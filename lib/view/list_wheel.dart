@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../view/list_wheel_gradient.dart';
 import '../view/wheel_state.dart';
 
 // known issues with various wheel pickers...
@@ -75,6 +76,8 @@ class ListWheel<T> extends StatelessWidget {
 
     return Stack(
       children: [
+        const ListWheelGradient(begin: Alignment.topCenter, end:Alignment.bottomCenter),
+        const ListWheelGradient(begin: Alignment.bottomCenter, end:Alignment.topCenter),
         highlight(),
         workaroundItemExtentBug(
           ListWheelScrollView.useDelegate(
@@ -89,10 +92,10 @@ class ListWheel<T> extends StatelessWidget {
             diameterRatio: 1.3,
             itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
             onSelectedItemChanged: (index) => setWheelState(index),
-            overAndUnderCenterOpacity: 0.9,
+            overAndUnderCenterOpacity: 0.7,
             physics: const FixedExtentScrollPhysics(),
           )
-        )
+        ),
       ]
     );
   }
