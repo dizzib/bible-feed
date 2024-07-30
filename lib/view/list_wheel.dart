@@ -28,8 +28,23 @@ class ListWheel<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WheelState<T> wheelState = Provider.of<WheelState<T>>(context, listen:false);
-    FixedExtentScrollController controller = FixedExtentScrollController(initialItem: wheelState.index);
+    var mq = MediaQuery.of(context);
+    var itemExtent = textStyle.fontSize! * 1.4 * mq.textScaler.scale(1);  // accomodate text size from device settings
+    var isDarkMode = mq.platformBrightness == Brightness.dark;
+    var wheelState = Provider.of<WheelState<T>>(context, listen:false);
+    var controller = FixedExtentScrollController(initialItem: wheelState.index);
+
+    Widget highlight() =>
+      Align(
+        alignment: Alignment.center,
+        child: Container(
+          height: itemExtent,
+          decoration: BoxDecoration(
+            color: isDarkMode ? Colors.red : Colors.orange[300],
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+        )
+      );
 
     // workaround bug in ListWheelScrollView where changing textStyle.fontSize -> itemExtent
     // renders badly. In this case jumpToItem on next frame
@@ -57,23 +72,26 @@ class ListWheel<T> extends StatelessWidget {
       });
     }
 
-    return workaroundItemExtentBug(
-      ListWheelScrollView.useDelegate(
-        childDelegate: ListWheelChildBuilderDelegate(
-          builder: (BuildContext _, int index) {
-            if (index < 0 || index >= count) return null;
-            return Text(itemToString(indexToItem(index)), style: textStyle);
-          },
-        ),
-        controller: controller,
-        diameterRatio: 1.3,
-        itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
-        magnification: 1.1,
-        onSelectedItemChanged: (index) => setWheelState(index),
-        overAndUnderCenterOpacity: 0.5,
-        physics: const FixedExtentScrollPhysics(),
-        useMagnifier: true,
-      )
+    return Stack(
+      children: [
+        highlight(),
+        workaroundItemExtentBug(
+          ListWheelScrollView.useDelegate(
+            childDelegate: ListWheelChildBuilderDelegate(
+              builder: (BuildContext _, int index) {
+                if (index < 0 || index >= count) return null;
+                return Text(itemToString(indexToItem(index)), style: textStyle);
+              },
+            ),
+            controller: controller,
+            diameterRatio: 1.3,
+            itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
+            onSelectedItemChanged: (index) => setWheelState(index),
+            overAndUnderCenterOpacity: 0.9,
+            physics: const FixedExtentScrollPhysics(),
+          )
+        )
+      ]
     );
   }
 }
