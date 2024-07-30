@@ -33,9 +33,8 @@ class BookChapterWheels extends StatelessWidget {
     }
 
     chapterWheel() {
-      var bookWheelState = Provider.of<WheelState<Book>>(context);
       return ListWheel<int>(
-        count: feed.books[bookWheelState.index].count,
+        count: Provider.of<WheelState<Book>>(context).item.count,
         indexToItem: (index) => index + 1,
         itemToString: (int chapter) => chapter.toString(),
         textStyle: TextStyle(
