@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../view/list_wheel_effects.dart';
-import '../view/wheel_state.dart';
+import '../view/list_wheel_state.dart';
 
 // known issues with various wheel pickers...
 //

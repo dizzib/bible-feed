@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/feed.dart';
 import '../view/list_wheel.dart';
-import '../view/wheel_state.dart';
+import '../view/list_wheel_state.dart';
 
 class BookChapterWheels extends StatelessWidget {
   const BookChapterWheels({

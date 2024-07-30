@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../model/feed.dart';
 import '../view/book_chapter_wheels.dart';
 import '../view/book_chapter_dialog_footer.dart';
-import '../view/wheel_state.dart';
+import '../view/list_wheel_state.dart';
 
 class BookChapterDialog extends StatelessWidget {
   const BookChapterDialog({ super.key, required this.feed, });
