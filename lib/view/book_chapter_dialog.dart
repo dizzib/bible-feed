@@ -19,15 +19,14 @@ class BookChapterDialog extends StatelessWidget {
     final bookWheelState = ListWheelState<Book>(feed.books.indexOf(selectedBook), selectedBook);
     final chapterWheelState = ListWheelState<int>(selectedBook.chapter - 1, selectedBook.chapter);
 
-    Widget header() {
-      return Padding(
+    header() =>
+      Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
           feed.books.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       );
-    }
 
     return Dialog(
       child: Container(
