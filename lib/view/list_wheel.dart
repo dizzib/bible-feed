@@ -46,7 +46,7 @@ class ListWheel<T> extends StatelessWidget {
         )
       );
 
-    // workaround bug in ListWheelScrollView where changing textStyle.fontSize -> itemExtent
+    // workaround bug in ListWheelScrollView where a changing textStyle.fontSize -> itemExtent
     // renders badly. In this case jumpToItem on next frame
     Widget workaroundItemExtentBug(Widget child) {
       return NotificationListener(
@@ -67,6 +67,7 @@ class ListWheel<T> extends StatelessWidget {
     // guard against selected index exceeding count - 1
     if (wheelState.index >= count) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.jumpToItem(0);  // bugfix: without this, ListWheelScrollView sometimes partially renders
         controller.jumpToItem(count - 1);
         setWheelState(count - 1);
       });
@@ -79,6 +80,7 @@ class ListWheel<T> extends StatelessWidget {
           ListWheelScrollView.useDelegate(
             childDelegate: ListWheelChildBuilderDelegate(
               builder: (BuildContext _, int index) {
+                // print(count);
                 if (index < 0 || index >= count) return null;
                 return Text(itemToString(indexToItem(index)), style: textStyle);
               },
