@@ -16,18 +16,19 @@ class BookChapterWheels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextStyle(
-      fontSize: (constraints.maxWidth < 200 || constraints.maxHeight < 200) ? 16 : 24, // accomodate small displays
-      fontWeight: FontWeight.w600,
-      overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
-    );
+    // accomodate small displays
+    double fontSize = (constraints.maxWidth < 200 || constraints.maxHeight < 200) ? 16 : 24;
 
     ListWheel<Book> bookWheel() {
       return ListWheel<Book>(
         count: feed.books.count,
         indexToItem: (index) => feed.books[index],
         itemToString: (Book b) => b.name,
-        textStyle: textStyle,
+        textStyle: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
+        ),
       );
     }
 
@@ -37,7 +38,10 @@ class BookChapterWheels extends StatelessWidget {
         count: feed.books[bookWheelState.index].count,
         indexToItem: (index) => index + 1,
         itemToString: (int chapter) => chapter.toString(),
-        textStyle: textStyle,
+        textStyle: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w600,
+        ),
       );
     }
 
