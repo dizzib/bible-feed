@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class ListWheelHighlight extends StatelessWidget {
   const ListWheelHighlight({
-    required this.itemExtent,
+    required this.height,
   });
 
-  final double itemExtent;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ListWheelHighlight extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: itemExtent,
+        height: height,
         decoration: BoxDecoration(
           color: isDarkMode ? Colors.red : Colors.orange[300],
           borderRadius: BorderRadius.circular(8.0),

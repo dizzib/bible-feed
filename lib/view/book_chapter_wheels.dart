@@ -17,7 +17,7 @@ class BookChapterWheels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // accomodate small displays
-    final double fontSize = (constraints.maxWidth < 200 || constraints.maxHeight < 200) ? 16 : 24;
+    final double fontSize = (constraints.maxWidth < 200 || constraints.maxHeight < 200) ? 16 : 23;
 
     bookWheel() {
       return ListWheel<Book>(
