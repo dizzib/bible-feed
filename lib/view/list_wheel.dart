@@ -31,6 +31,19 @@ class ListWheel<T> extends StatelessWidget {
     WheelState<T> wheelState = Provider.of<WheelState<T>>(context, listen:false);
     FixedExtentScrollController controller = FixedExtentScrollController(initialItem: wheelState.index);
 
+    // workaround bug in ListWheelScrollView where changing textStyle.fontSize -> itemExtent
+    // renders badly. In this case jumpToItem on next frame
+    Widget workaroundItemExtentBug(Widget child) {
+      return NotificationListener(
+        onNotification: (SizeChangedLayoutNotification notification) {
+          WidgetsBinding.instance.addPostFrameCallback((_) => controller.jumpToItem(wheelState.index));
+          return true;  // cancel bubbling
+        },
+        child: SizeChangedLayoutNotifier(child: child)
+      );
+    }
+
+    // always keep index and item in sync
     void setWheelState(int index) {
       wheelState.index = index;
       wheelState.item = indexToItem(index);
@@ -44,36 +57,23 @@ class ListWheel<T> extends StatelessWidget {
       });
     }
 
-    // workaround bug in ListWheelScrollView where changing textStyle.fontSize -> itemExtent
-    // renders badly. In this case let's jumpToItem on next frame
-    // Widget workaroundItemExtentBug({
-    //   required void Function(Duration) postFrameCallback,
-    //   required ListWheelScrollView child
-    // }) {
-    //   return NotificationListener(
-    //     onNotification: (SizeChangedLayoutNotification notification) {
-    //       WidgetsBinding.instance.addPostFrameCallback(postFrameCallback);
-    //       return true;  // cancel bubbling
-    //     },
-    //     child: SizeChangedLayoutNotifier(child: child)
-    //   );
-    // }
-
-    return ListWheelScrollView.useDelegate(
-      childDelegate: ListWheelChildBuilderDelegate(
-        builder: (BuildContext _, int index) {
-          if (index < 0 || index >= count) return null;
-          return Text(itemToString(indexToItem(index)), style: textStyle);
-        },
-      ),
-      controller: controller,
-      diameterRatio: 1.3,
-      itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
-      magnification: 1.1,
-      onSelectedItemChanged: (index) => setWheelState(index),
-      overAndUnderCenterOpacity: 0.5,
-      physics: const FixedExtentScrollPhysics(),
-      useMagnifier: true,
+    return workaroundItemExtentBug(
+      ListWheelScrollView.useDelegate(
+        childDelegate: ListWheelChildBuilderDelegate(
+          builder: (BuildContext _, int index) {
+            if (index < 0 || index >= count) return null;
+            return Text(itemToString(indexToItem(index)), style: textStyle);
+          },
+        ),
+        controller: controller,
+        diameterRatio: 1.3,
+        itemExtent: textStyle.fontSize! * 1.4 * MediaQuery.of(context).textScaler.scale(1),  // text size in device settings
+        magnification: 1.1,
+        onSelectedItemChanged: (index) => setWheelState(index),
+        overAndUnderCenterOpacity: 0.5,
+        physics: const FixedExtentScrollPhysics(),
+        useMagnifier: true,
+      )
     );
   }
 }
