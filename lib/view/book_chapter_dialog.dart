@@ -47,14 +47,10 @@ class BookChapterDialog extends StatelessWidget {
                     child: header(),
                   ),
                   SizedBox(
-                    width: constraints.maxWidth,
                     height: constraints.maxHeight * 0.65,
-                    child: BookChapterWheels(
-                      books: feed.books,
-                      constraints: constraints
-                    )
+                    child: BookChapterWheels(books: feed.books)
                   ),
-                  BookChapterDialogFooter(feed: feed),
+                  BookChapterDialogFooter(feed: feed)
                 ],
               )
             );
