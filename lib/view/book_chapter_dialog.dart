@@ -16,8 +16,8 @@ class BookChapterDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedBook = feed.books.current;
-    final bookWheelState = WheelState<Book>(feed.books.indexOf(selectedBook), selectedBook);
-    final chapterWheelState = WheelState<int>(selectedBook.chapter - 1, selectedBook.chapter);
+    final bookWheelState = ListWheelState<Book>(feed.books.indexOf(selectedBook), selectedBook);
+    final chapterWheelState = ListWheelState<int>(selectedBook.chapter - 1, selectedBook.chapter);
 
     Widget header() {
       return Padding(

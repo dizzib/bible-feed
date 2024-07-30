@@ -32,7 +32,7 @@ class ListWheel<T> extends StatelessWidget {
     const magnification = 1.1;
     var deviceTextScale = MediaQuery.of(context).textScaler.scale(1);  // from device settings
     var itemExtent = textStyle.fontSize! * 1.4 * deviceTextScale;  // accomodate various text sizes
-    var wheelState = Provider.of<WheelState<T>>(context, listen:false);
+    var wheelState = Provider.of<ListWheelState<T>>(context, listen:false);
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
     // workaround bug in ListWheelScrollView where a changing textStyle.fontSize -> itemExtent
