@@ -47,7 +47,7 @@ class ListWheel<T> extends StatelessWidget {
       );
     }
 
-    // guard against selected index exceeding the maximum
+    // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
     var maxIndex = count - 1;
     if (wheelState.index > maxIndex) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
