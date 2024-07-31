@@ -37,9 +37,9 @@ platform :android do
   lane :internal do
     populate_changelog
     upload_to_play_store(
-      mapping_paths: [ ENV['SYMBOLS_FILE_PATH'], ENV['MAPPING_FILE_PATH'] ],
+      mapping_paths: [ENV['SYMBOLS_FILE_PATH'], ENV['MAPPING_FILE_PATH']],
       release_status: 'draft',
-      skip_upload_aab: true,
+      skip_upload_aab: false,
       track: 'internal',
       version_code: $vcode,
     )
