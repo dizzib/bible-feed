@@ -11,7 +11,7 @@ class FeedsView extends StatelessWidget {
     context.watch<Feeds>();
     Navigator.maybePop(context);  // dismiss possible dialog (originator might be cron)
 
-    feedCard(int index) =>
+    feedCard(index) =>
       Expanded(
         child: ChangeNotifierProvider.value(
           value: feeds[index],
