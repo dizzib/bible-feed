@@ -1,0 +1,2 @@
+Changed
+- fix BookChapterDialog regression when device rotates
