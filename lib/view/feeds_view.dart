@@ -7,7 +7,7 @@ import 'feed_card.dart';
 
 class FeedsView extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     context.watch<Feeds>();
     Navigator.maybePop(context);  // dismiss possible dialog (originator might be cron)
 

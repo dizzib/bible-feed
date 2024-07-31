@@ -7,7 +7,7 @@ class ListWheelHighlight extends StatelessWidget {
   const ListWheelHighlight({ required this.height, });
 
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     var isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Align(
       alignment: Alignment.center,
@@ -33,7 +33,7 @@ class ListWheelGradient extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     var surfaceColor = Theme.of(context).colorScheme.surface;
     return Align(
       alignment: begin,

@@ -13,7 +13,7 @@ class BookChapterDialogWheels extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     getTextStyle(BoxConstraints c) => TextStyle(
       fontSize: (c.maxWidth < 200 || c.maxHeight < 190) ? 16 : 23,
       fontWeight: FontWeight.w600,

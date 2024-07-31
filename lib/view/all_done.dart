@@ -5,7 +5,7 @@ import '../data/feeds.dart';
 
 class AllDone extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     void showAlert() {
       Text getTextWidget(String text, [double size = 16]) { return Text(text, style: TextStyle(fontSize: size)); }
       showDialog(

@@ -7,7 +7,7 @@ import 'book_chapter_dialog.dart';
 
 class FeedCard extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     var feed = context.watch<Feed>();
     var book = feed.books.current;
 

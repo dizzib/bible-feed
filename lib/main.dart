@@ -36,7 +36,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     return SafeArea(
       child: MaterialApp(
         title: 'Bible Feed',

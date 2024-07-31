@@ -28,7 +28,7 @@ class ListWheel<T> extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  build(context) {
     const magnification = 1.1;
     var deviceTextScale = MediaQuery.of(context).textScaler.scale(1);  // from device settings
     var itemExtent = textStyle.fontSize! * 1.4 * deviceTextScale;  // accomodate various text sizes
@@ -64,7 +64,7 @@ class ListWheel<T> extends StatelessWidget {
         workaroundItemExtentBug(
           ListWheelScrollView.useDelegate(
             childDelegate: ListWheelChildBuilderDelegate(
-              builder: (BuildContext _, int index) {
+              builder: (_, int index) {
                 if (index < 0 || index >= count) return null;
                 return Text(itemToString(indexToItem(index)), style: textStyle);
               },
