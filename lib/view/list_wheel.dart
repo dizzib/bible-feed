@@ -37,15 +37,14 @@ class ListWheel<T> extends StatelessWidget {
 
     // workaround bug in ListWheelScrollView where a changing textStyle.fontSize -> itemExtent
     // renders badly. In this case jumpToItem on next frame
-    Widget workaroundItemExtentBug(Widget child) {
-      return NotificationListener(
+    workaroundItemExtentBug(child) =>
+      NotificationListener(
         onNotification: (SizeChangedLayoutNotification notification) {
           WidgetsBinding.instance.addPostFrameCallback((_) => controller.jumpToItem(wheelState.index));
           return true;  // cancel bubbling
         },
         child: SizeChangedLayoutNotifier(child: child)
       );
-    }
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
     var maxIndex = count - 1;
