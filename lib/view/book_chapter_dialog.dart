@@ -15,7 +15,10 @@ class BookChapterDialog extends StatelessWidget {
 
   @override
   Widget build(context) {
+    // NOTE: keep this ABOVE the LayoutBuilder, otherwise ListWheelState gets reset on device rotation
     final selectedBook = feed.books.current;
+    final bookWheelState = ListWheelState<Book>(feed.books.indexOf(selectedBook));
+    final chapterWheelState = ListWheelState<int>(selectedBook.chapter - 1);
 
     return LayoutBuilder(
       builder: (_, constraints) {
@@ -27,8 +30,8 @@ class BookChapterDialog extends StatelessWidget {
             ),
             child: MultiProvider(
               providers: [
-                ChangeNotifierProvider.value(value: ListWheelState<Book>(feed.books.indexOf(selectedBook))),
-                ChangeNotifierProvider.value(value: ListWheelState<int>(selectedBook.chapter - 1))
+                ChangeNotifierProvider.value(value: bookWheelState),
+                ChangeNotifierProvider.value(value: chapterWheelState)
               ],
               child: Column(
                 children: [
