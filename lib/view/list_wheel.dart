@@ -47,12 +47,13 @@ class ListWheel<T> extends StatelessWidget {
       );
     }
 
-    // guard against selected index exceeding count - 1
-    if (wheelState.index >= count) {
+    // guard against selected index exceeding the maximum
+    var maxIndex = count - 1;
+    if (wheelState.index > maxIndex) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         controller.jumpToItem(0);  // hack: without this, ListWheelScrollView sometimes partially renders
-        controller.jumpToItem(count - 1);
-        wheelState.index = count - 1;
+        controller.jumpToItem(maxIndex);
+        wheelState.index = maxIndex;
       });
     }
 
