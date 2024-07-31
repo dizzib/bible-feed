@@ -11,20 +11,18 @@ class FeedCard extends StatelessWidget {
     var feed = context.watch<Feed>();
     var book = feed.books.current;
 
-    void showBookChapterDialog() {
-      showDialog(
-        context: context,
-        builder: (_) {
-          return BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-            child: BookChapterDialog(feed: feed)
-          );
-        },
-      );
-    }
+    showBookChapterDialog() => showDialog(
+      context: context,
+      builder: (_) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+          child: BookChapterDialog(feed: feed)
+        );
+      },
+    );
 
-    Widget titleBar() {
-      return Row(
+    titleBar() =>
+      Row(
         children: [
           Expanded(
             child: Padding(
@@ -42,11 +40,9 @@ class FeedCard extends StatelessWidget {
           ),
         ],
       );
-    }
 
-    Widget bookChapter(BoxConstraints c) {
-      double getFontSize() { return (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30; }
-      return Expanded(
+    bookChapter({required double fontSize}) =>
+      Expanded(
         child: Padding(
           padding: const EdgeInsets.all(2.0),
           child: Row(
@@ -57,21 +53,20 @@ class FeedCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: AutoSizeText(
                     book.name,
-                    style: TextStyle(fontSize: getFontSize()),
+                    style: TextStyle(fontSize: fontSize),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
               AutoSizeText(
                 book.chapter.toString(),
-                style: TextStyle(fontSize: getFontSize()),
+                style: TextStyle(fontSize: fontSize),
                 maxLines: 1,
               ),
             ],
           ),
         ),
       );
-    }
 
     return Opacity(
       opacity: book.isChapterRead ? 0.2 : 1,
@@ -91,7 +86,9 @@ class FeedCard extends StatelessWidget {
                     child: titleBar()
                   ),
                   LinearProgressIndicator(value: feed.books.progress),
-                  bookChapter(constraints),
+                  bookChapter(
+                    fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
+                  )
                 ],
               );
             }
