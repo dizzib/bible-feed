@@ -16,7 +16,7 @@ class FeedCard extends StatelessWidget {
       builder: (_) {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-          child: BookChapterDialog(feed: feed)
+          child: BookChapterDialog(feed)
         );
       },
     );

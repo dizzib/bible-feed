@@ -7,7 +7,7 @@ import '../view/list_wheel_state.dart';
 class BookChapterDialogFooter extends StatelessWidget {
   final Feed feed;
 
-  const BookChapterDialogFooter({ required this.feed });
+  const BookChapterDialogFooter(this.feed);
 
   @override
   build(context) {

@@ -8,11 +8,11 @@ import '../view/list_wheel_state.dart';
 class BookChapterDialog extends StatelessWidget {
   final Feed feed;
 
-  const BookChapterDialog({ required this.feed });
+  const BookChapterDialog(this.feed);
 
   @override
   build(context) {
-    // NOTE: keep this ABOVE the LayoutBuilder, otherwise ListWheelState gets reset on device rotation
+    // NOTE: keep this OUTSIDE the LayoutBuilder, otherwise *WheelStates get reset on device rotation
     final selectedBook = feed.books.current;
     final bookWheelState = ListWheelState<Book>(feed.books.indexOf(selectedBook));
     final chapterWheelState = ListWheelState<int>(selectedBook.chapter - 1);
@@ -44,10 +44,8 @@ class BookChapterDialog extends StatelessWidget {
                       ),
                     )
                   ),
-                  Expanded(
-                    child: BookChapterDialogWheels(books: feed.books)
-                  ),
-                  BookChapterDialogFooter(feed: feed)
+                  Expanded(child: BookChapterDialogWheels(feed.books)),
+                  BookChapterDialogFooter(feed)
                 ],
               )
             )
