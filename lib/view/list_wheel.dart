@@ -35,6 +35,16 @@ class ListWheel<T> extends StatelessWidget {
     var wheelState = Provider.of<ListWheelState<T>>(context, listen:false);
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
+    // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
+    var maxIndex = count - 1;
+    if (wheelState.index > maxIndex) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.jumpToItem(0);  // hack: without this, ListWheelScrollView sometimes partially renders
+        controller.jumpToItem(maxIndex);
+        wheelState.index = maxIndex;
+      });
+    }
+
     // workaround bug in ListWheelScrollView where a changing textStyle.fontSize -> itemExtent
     // renders badly. In this case jumpToItem on next frame
     workaroundItemExtentBug(child) =>
@@ -45,16 +55,6 @@ class ListWheel<T> extends StatelessWidget {
         },
         child: SizeChangedLayoutNotifier(child: child)
       );
-
-    // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
-    var maxIndex = count - 1;
-    if (wheelState.index > maxIndex) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        controller.jumpToItem(0);  // hack: without this, ListWheelScrollView sometimes partially renders
-        controller.jumpToItem(maxIndex);
-        wheelState.index = maxIndex;
-      });
-    }
 
     return Stack(
       children: [
