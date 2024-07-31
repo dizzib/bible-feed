@@ -14,16 +14,16 @@ import '../view/list_wheel_state.dart';
 //    - cannot set the width (https://github.com/stavgafny/wheel_picker/issues/4)
 //
 class ListWheel<T> extends StatelessWidget {
-  final int count;
   final T Function(int index) indexToItem;
   final String Function(T item) itemToString;
+  final int maxIndex;
   final TextStyle textStyle;
 
   const ListWheel({
     super.key,
-    required this.count,
     required this.indexToItem,
     required this.itemToString,
+    required this.maxIndex,
     required this.textStyle,
   });
 
@@ -36,7 +36,6 @@ class ListWheel<T> extends StatelessWidget {
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
-    var maxIndex = count - 1;
     if (wheelState.index > maxIndex) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         controller.jumpToItem(0);  // hack: without this, ListWheelScrollView sometimes partially renders
@@ -65,7 +64,7 @@ class ListWheel<T> extends StatelessWidget {
           ListWheelScrollView.useDelegate(
             childDelegate: ListWheelChildBuilderDelegate(
               builder: (_, int index) {
-                if (index < 0 || index >= count) return null;
+                if (index < 0 || index > maxIndex) return null;
                 return Text(itemToString(indexToItem(index)), style: textStyle);
               },
             ),

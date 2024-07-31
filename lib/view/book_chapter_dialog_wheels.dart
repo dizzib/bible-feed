@@ -27,17 +27,17 @@ class BookChapterDialogWheels extends StatelessWidget {
             SizedBox(
               width: constraints.maxWidth * 0.8,
               child: ListWheel<Book>(
-                count: books.count,
                 indexToItem: (index) => books[index],
                 itemToString: (Book b) => b.name,
+                maxIndex: books.count - 1,
                 textStyle: getTextStyle(constraints),
               )
             ),
             Flexible(
               child: ListWheel<int>(
-                count: books[Provider.of<ListWheelState<Book>>(context).index].count,
                 indexToItem: (index) => index + 1,
                 itemToString: (int chapter) => chapter.toString(),
+                maxIndex: books[Provider.of<ListWheelState<Book>>(context).index].count - 1,
                 textStyle: getTextStyle(constraints),
               )
             ),
