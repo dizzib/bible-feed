@@ -20,7 +20,6 @@ class ListWheel<T> extends StatelessWidget {
   final TextStyle textStyle;
 
   const ListWheel({
-    super.key,
     required this.indexToItem,
     required this.itemToString,
     required this.maxIndex,

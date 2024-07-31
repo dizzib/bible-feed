@@ -7,10 +7,7 @@ import '../view/list_wheel_state.dart';
 class BookChapterDialogWheels extends StatelessWidget {
   final Books books;
 
-  const BookChapterDialogWheels({
-    super.key,
-    required this.books,
-  });
+  const BookChapterDialogWheels({ required this.books, });
 
   @override
   build(context) {
