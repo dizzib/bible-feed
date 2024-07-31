@@ -75,7 +75,7 @@ class FeedCard extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           onLongPress: showBookChapterDialog,
-          onTap: () { feed.toggleIsChapterRead(); },
+          onTap: feed.toggleIsChapterRead,
           child: LayoutBuilder(
             builder: (_, constraints) {
               return Column(
