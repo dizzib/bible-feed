@@ -5,20 +5,19 @@ import '../util/date.dart';
 import 'feed.dart';
 
 class Feeds with ChangeNotifier {
+  final _cron = Cron();
+  final List<Feed> _feedList;
+
   Feeds(List<Books> bookList) : _feedList = bookList.map((bks) => Feed(bks)).toList() {
     for (var f in _feedList) { f.addListener(() => notifyListeners()); }
     _cron.schedule(Schedule.parse('0 0 * * *'), () async { maybeAdvance(); });
     maybeAdvance();
   }
 
-  /// private
-  final Cron _cron = Cron();
-  final List<Feed> _feedList;
-
   /// public
-  Feed operator [](int i) => _feedList[i];
-  bool get areChaptersRead => _feedList.where((feed) => !feed.books.current.isChapterRead).isEmpty;
-  bool? get hasEverAdvanced => Store.getBool('hasEverAdvanced');
+  operator [](int i) => _feedList[i];
+  get areChaptersRead => _feedList.where((feed) => !feed.books.current.isChapterRead).isEmpty;
+  get hasEverAdvanced => Store.getBool('hasEverAdvanced');
 
   void forceAdvance() {
     for (var f in _feedList) { f.nextChapter(); }
