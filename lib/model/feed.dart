@@ -30,20 +30,16 @@ class Feed with ChangeNotifier {
 
   void _loadState() {
     String? bookKey = Store.getString(_storeKeys.book);
-    if (bookKey == null) return;
-    books.current = books.getBook(bookKey);
+    if (bookKey != null) books.current = books.getBook(bookKey);
 
     int? chapter = Store.getInt(_storeKeys.chapter);
-    if (chapter == null) return;
-    books.current.chapter = chapter;
+    if (chapter != null) books.current.chapter = chapter;
 
     bool? isChapterRead = Store.getBool(_storeKeys.isChapterRead);
-    if (isChapterRead == null) return;
-    books.current.isChapterRead = isChapterRead;
+    if (isChapterRead != null) books.current.isChapterRead = isChapterRead;
 
     String? dateIso8601 = Store.getString(_storeKeys.dateLastSaved);
-    if (dateIso8601 == null) return;
-    dateLastSaved = DateTime.parse(dateIso8601);
+    if (dateIso8601 != null) dateLastSaved = DateTime.parse(dateIso8601);
   }
 
   void _saveState() {
