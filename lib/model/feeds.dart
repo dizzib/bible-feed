@@ -15,7 +15,7 @@ class Feeds with ChangeNotifier {
   }
 
   /// public
-  operator [](int i) => _feedList[i];
+  Feed operator [](int i) => _feedList[i];
   get areChaptersRead => _feedList.where((feed) => !feed.books.current.isChapterRead).isEmpty;
   get hasEverAdvanced => Store.getBool('hasEverAdvanced');
 
