@@ -19,15 +19,15 @@ class _StoreKeys {
 
 // Feed manipulates, dispenses and stores a reading list (Books)
 class Feed with ChangeNotifier {
+  final Books books;
+  final _StoreKeys _storeKeys;
+
   Feed(this.books) : _storeKeys = _StoreKeys(books._key) {
     _loadState();
     notifyListeners();
   }
 
   /// private
-
-  final _StoreKeys _storeKeys;
-
   void _loadState() {
     var bookKey = Store.getString(_storeKeys.book);
     if (bookKey == null) return;  // on first run, this will be null
@@ -47,7 +47,7 @@ class Feed with ChangeNotifier {
 
   /// public
 
-  final Books books;
+  // state
   DateTime dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
 
   void nextChapter() {
