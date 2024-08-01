@@ -22,7 +22,7 @@ class Feed with ChangeNotifier {
   final Books books;
   final _StoreKeys _storeKeys;
 
-  Feed(this.books) : _storeKeys = _StoreKeys(books._key) { _loadStateAndNotifyListeners(); }
+  Feed(this.books) : _storeKeys = _StoreKeys(books.key) { _loadStateAndNotifyListeners(); }
 
   /// private
   void _loadStateAndNotifyListeners() {

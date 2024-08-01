@@ -2,13 +2,13 @@ part of '../feed.dart';
 
 // books in a reading list (e.g. Matthew, Mark, Luke and John) with state
 class Books {
-  final String _key;  // e.g. gos
+  final String key;  // e.g. gos
   final String name;  // e.g. Gospels
   final List<Book> _bookList;
   final int _totalChapters;
 
   Books(
-    this._key,
+    this.key,
     this.name,
     this._bookList
   ) : _totalChapters = _bookList.fold(0, (t, b) => t + b.count);
