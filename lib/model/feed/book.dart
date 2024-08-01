@@ -22,7 +22,7 @@ class Book {
   @visibleForTesting nextChapter() {
     assert(_isChapterRead);
     _index = ++_index % chapterCount;
-    isChapterRead = false;
+    _isChapterRead = false;
   }
 
   // public
