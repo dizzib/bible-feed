@@ -11,7 +11,7 @@ void main() {
   test('constructor', () {
     expect(b.chapter, 1);
     expect(b.chaptersRead, 0);
-    expect(b.count, 3);
+    expect(b.chapterCount, 3);
     expect(b.isChapterRead, false);
     expect(b.key, 'bk');
     expect(b.name, 'Book');

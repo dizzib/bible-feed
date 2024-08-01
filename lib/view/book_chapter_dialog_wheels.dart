@@ -34,7 +34,7 @@ class BookChapterDialogWheels extends StatelessWidget {
               child: ListWheel<int>(
                 indexToItem: (index) => index + 1,
                 itemToString: (int chapter) => chapter.toString(),
-                maxIndex: books[Provider.of<ListWheelState<Book>>(context).index].count - 1,
+                maxIndex: books[Provider.of<ListWheelState<Book>>(context).index].chapterCount - 1,
                 textStyle: getTextStyle(constraints),
               )
             ),

@@ -4,13 +4,9 @@ part of '../feed.dart';
 class Book {
   final String key;  // e.g. mat
   final String name;  // e.g. Matthew
-  final List<int> _chapters;
+  final int chapterCount;
 
-  Book(
-    this.key,
-    this.name,
-    int chapterCount
-  ) : _chapters = List<int>.generate(chapterCount, (n) => n);
+  Book(this.key, this.name, this.chapterCount);
 
   // state
   int _index = 0;
@@ -23,14 +19,13 @@ class Book {
   @visibleForTesting set chapter(int val) => _index = val - 1;
   @visibleForTesting get chaptersRead => _index + (isChapterRead ? 1 : 0);
   @visibleForTesting set isChapterRead(bool val) => _isChapterRead = val;
-  @visibleForTesting void nextChapter() {
+  @visibleForTesting nextChapter() {
     assert(_isChapterRead);
-    _index = ++_index % count;
+    _index = ++_index % chapterCount;
     isChapterRead = false;
   }
 
   // public
   int get chapter => 1 + _index;
-  int get count => _chapters.length;
   bool get isChapterRead => _isChapterRead;
 }

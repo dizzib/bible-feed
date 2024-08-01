@@ -9,7 +9,7 @@ class Books {
   final int totalChapters;
 
   Books(this.key, this.name, this._bookList) :
-    totalChapters = _bookList.fold(0, (t, b) => t + b.count),
+    totalChapters = _bookList.fold(0, (t, b) => t + b.chapterCount),
     count = _bookList.length;
 
   // state
@@ -21,10 +21,10 @@ class Books {
   @visibleForTesting nextBook() { _index = ++_index % count; }
 
   // public
-  operator [](int i) => _bookList[i];
-  chaptersTo(Book b, int chapter) => _bookList.sublist(0, indexOf(b)).fold(0, (t, b) => t + b.count) + chapter;
+  Book operator [](int i) => _bookList[i];
   Book get current => _bookList[_index];
-  indexOf(Book b) => _bookList.indexOf(b);
   get progress => progressTo(current, current.chaptersRead);
+  indexOf(Book b) => _bookList.indexOf(b);
+  chaptersTo(Book b, int chapter) => _bookList.sublist(0, indexOf(b)).fold(0, (t, b) => t + b.chapterCount) + chapter;
   progressTo(Book b, int chapter) => chaptersTo(b, chapter) / totalChapters;
 }
