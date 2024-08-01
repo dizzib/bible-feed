@@ -22,27 +22,26 @@ class Feed with ChangeNotifier {
   final Books books;
   final _StoreKeys _storeKeys;
 
-  Feed(this.books) : _storeKeys = _StoreKeys(books._key) {
-    _loadState();
-    notifyListeners();
-  }
+  Feed(this.books) : _storeKeys = _StoreKeys(books._key) { _loadStateAndNotifyListeners(); }
 
   /// private
-  void _loadState() {
+  void _loadStateAndNotifyListeners() {
     var bookKey = Store.getString(_storeKeys.book);
     if (bookKey == null) return;  // on first run, this will be null
     books.current = books.getBook(bookKey);
     books.current.chapter = Store.getInt(_storeKeys.chapter)!;
     books.current.isChapterRead = Store.getBool(_storeKeys.isChapterRead)!;
     dateLastSaved = DateTime.parse(Store.getString(_storeKeys.dateLastSaved)!);
+    notifyListeners();
   }
 
-  void _saveState() {
+  void _saveStateAndNotifyListeners() {
     dateLastSaved = DateTime.now();
     Store.setString(_storeKeys.book, books.current.key);
     Store.setInt(_storeKeys.chapter, books.current.chapter);
     Store.setBool(_storeKeys.isChapterRead, books.current.isChapterRead);
     Store.setString(_storeKeys.dateLastSaved, dateLastSaved.toIso8601String());
+    notifyListeners();
   }
 
   /// public
@@ -53,22 +52,19 @@ class Feed with ChangeNotifier {
   void nextChapter() {
     var b = books.current;
     b.nextChapter();
-    if (b.chapter == 1) { books.nextBook(); }
-    notifyListeners();
-    _saveState();
+    if (b.chapter == 1) books.nextBook();
+    _saveStateAndNotifyListeners();
   }
 
   void setBookAndChapter(Book book, int chapter) {
     books.current._reset();
     books.current = book;
     books.current.chapter = chapter;
-    notifyListeners();
-    _saveState();
+    _saveStateAndNotifyListeners();
   }
 
   void toggleIsChapterRead() {
     books.current.isChapterRead = !books.current.isChapterRead;
-    notifyListeners();
-    _saveState();
+    _saveStateAndNotifyListeners();
   }
 }
