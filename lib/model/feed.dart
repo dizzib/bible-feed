@@ -29,17 +29,12 @@ class Feed with ChangeNotifier {
   final _StoreKeys _storeKeys;
 
   void _loadState() {
-    String? bookKey = Store.getString(_storeKeys.book);
-    if (bookKey != null) books.current = books.getBook(bookKey);
-
-    int? chapter = Store.getInt(_storeKeys.chapter);
-    if (chapter != null) books.current.chapter = chapter;
-
-    bool? isChapterRead = Store.getBool(_storeKeys.isChapterRead);
-    if (isChapterRead != null) books.current.isChapterRead = isChapterRead;
-
-    String? dateIso8601 = Store.getString(_storeKeys.dateLastSaved);
-    if (dateIso8601 != null) dateLastSaved = DateTime.parse(dateIso8601);
+    var bookKey = Store.getString(_storeKeys.book);
+    if (bookKey == null) return;  // on first run, this will be null
+    books.current = books.getBook(bookKey);
+    books.current.chapter = Store.getInt(_storeKeys.chapter)!;
+    books.current.isChapterRead = Store.getBool(_storeKeys.isChapterRead)!;
+    dateLastSaved = DateTime.parse(Store.getString(_storeKeys.dateLastSaved)!);
   }
 
   void _saveState() {
