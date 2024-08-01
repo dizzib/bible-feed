@@ -3,12 +3,12 @@ part of '../feed.dart';
 // an individual book e.g. Matthew, with reading state
 class Book {
   final String key;  // e.g. mat
-  final String _name;  // e.g. Matthew
+  final String name;  // e.g. Matthew
   final List<int> _chapters;
 
   Book(
     this.key,
-    this._name,
+    this.name,
     int chapterCount
   ) : _chapters = List<int>.generate(chapterCount, (n) => n);
 
@@ -33,5 +33,4 @@ class Book {
   int get chapter => 1 + _index;
   int get count => _chapters.length;
   bool get isChapterRead => _isChapterRead;
-  get name => _name;
 }

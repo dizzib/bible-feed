@@ -3,13 +3,13 @@ part of '../feed.dart';
 // books in a reading list (e.g. Matthew, Mark, Luke and John) with state
 class Books {
   final String _key;  // e.g. gos
-  final String _name;  // e.g. Gospels
+  final String name;  // e.g. Gospels
   final List<Book> _bookList;
   final int _totalChapters;
 
   Books(
     this._key,
-    this._name,
+    this.name,
     this._bookList
   ) : _totalChapters = _bookList.fold(0, (t, b) => t + b.count);
 
@@ -27,7 +27,6 @@ class Books {
   int get count => _bookList.length;  // e.g. 4 books in The Gospels
   Book get current => _bookList[_index];
   indexOf(Book b) => _bookList.indexOf(b);
-  get name => _name;
   get progress => progressTo(current, current.chaptersRead);
   progressTo(Book b, int chapter) => chaptersTo(b, chapter) / _totalChapters;
   get totalChapters => _totalChapters;
