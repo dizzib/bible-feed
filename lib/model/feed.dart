@@ -10,7 +10,7 @@ class _StoreKeys {
   final String isChapterRead;
   final String dateLastSaved;
 
-  _StoreKeys(booksKey) :
+  const _StoreKeys(booksKey) :
     book = '$booksKey.book',
     chapter = '$booksKey.chapter',
     dateLastSaved = '$booksKey.dateLastSaved',
