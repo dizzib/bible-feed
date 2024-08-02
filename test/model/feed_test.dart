@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bible_feed/data/store.dart';
 import 'package:bible_feed/model/feed.dart';
 
+extension MyDateExtension on DateTime { DateTime get date { return DateTime(year, month, day); } }
+
 void main() {
   late Feed f;
   late Book b0, b1;
@@ -35,6 +37,7 @@ void main() {
       expect(b0.chapter, 1);
       expect(Store.getString('fd0.book'), 'b0');
       expect(Store.getInt('fd0.chapter'), 1);
+      expect(DateTime.parse(Store.getString('fd0.dateLastSaved')!).date, DateTime.now().date);
     });
   });
 
