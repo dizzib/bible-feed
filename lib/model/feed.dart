@@ -3,9 +3,6 @@ import '../data/store.dart';
 import 'book.dart';
 import 'books.dart';
 
-// part 'feed/book.dart';
-// part 'feed/books.dart';
-
 class _StoreKeys {
   final String book;
   final String chapter;
@@ -26,7 +23,6 @@ class Feed with ChangeNotifier {
 
   Feed(this.books) : _storeKeys = _StoreKeys(books.key) { _loadStateAndNotifyListeners(); }
 
-  /// private
   void _loadStateAndNotifyListeners() {
     var bookKey = Store.getString(_storeKeys.book);
     if (bookKey == null) return;  // on first run, this will be null
@@ -45,8 +41,6 @@ class Feed with ChangeNotifier {
     Store.setString(_storeKeys.dateLastSaved, dateLastSaved.toIso8601String());
     notifyListeners();
   }
-
-  /// public
 
   // state
   DateTime dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
