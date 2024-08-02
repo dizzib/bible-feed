@@ -1,5 +1,7 @@
 part of '../feed.dart';
 
+extension BookListHelper on List<Book> { int get totalChapters => fold(0, (t, b) => t + b.chapterCount); }
+
 // books in a reading list (e.g. Matthew, Mark, Luke and John) with state
 class Books {
   final String key;  // e.g. gos
@@ -9,7 +11,7 @@ class Books {
   final int totalChapters;
 
   Books(this.key, this.name, this._bookList) :
-    totalChapters = _bookList.fold(0, (t, b) => t + b.chapterCount),
+    totalChapters = _bookList.totalChapters,
     count = _bookList.length;
 
   // state
@@ -25,6 +27,6 @@ class Books {
   Book get current => _bookList[_index];
   get progress => progressTo(current, current.chaptersRead);
   indexOf(Book b) => _bookList.indexOf(b);
-  chaptersTo(Book b, int chapter) => _bookList.sublist(0, indexOf(b)).fold(0, (t, b) => t + b.chapterCount) + chapter;
+  chaptersTo(Book b, int chapter) => _bookList.sublist(0, indexOf(b)).totalChapters + chapter;
   progressTo(Book b, int chapter) => chaptersTo(b, chapter) / totalChapters;
 }
