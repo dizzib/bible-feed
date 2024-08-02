@@ -1,10 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../main.dart';
-// import '../data/feeds.dart';
 
 class AllDone extends StatelessWidget {
+  final Function() advance;
+  final bool? hasEverAdvanced;
+
+  const AllDone(this.advance, this.hasEverAdvanced);
+
   @override
   build(context) {
     void showAlert() {
@@ -29,7 +32,7 @@ class AllDone extends StatelessWidget {
                 child: getTextWidget('No'),
               ),
               TextButton(
-                onPressed: () { feeds.forceAdvance(); },  // dialog is dismissed in FeedsView
+                onPressed: () { advance(); },  // dialog is dismissed in FeedsView
                 child: getTextWidget('Yes'),
               ),
             ],
@@ -39,7 +42,7 @@ class AllDone extends StatelessWidget {
     }
 
     // auto-show dialog once only
-    if (feeds.hasEverAdvanced != true) {
+    if (hasEverAdvanced != true) {  // can be null
       Future.delayed(Duration.zero, () => showAlert());
     }
 

@@ -46,7 +46,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         themeMode: ThemeMode.system,
         home: ChangeNotifierProvider<Feeds>(
           create: (_) => feeds,
-          child: FeedsView(),
+          child: FeedsView(feeds),
         ),
       ),
     );

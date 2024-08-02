@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../main.dart';
 import '../model/feeds.dart';
 import 'all_done.dart';
 import 'feed_card.dart';
 
 class FeedsView extends StatelessWidget {
+  final Feeds feeds;
+
+  const FeedsView(this.feeds);
+
   @override
   build(context) {
     context.watch<Feeds>();
@@ -30,7 +33,10 @@ class FeedsView extends StatelessWidget {
           )
         ]
       ),
-      floatingActionButton: feeds.areChaptersRead ? AllDone() : null,  // null activates animation
+      floatingActionButton: feeds.areChaptersRead ? AllDone(
+        feeds.forceAdvance,
+        feeds.hasEverAdvanced
+      ) : null,  // null activates animation
       floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
     );
   }
