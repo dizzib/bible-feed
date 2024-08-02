@@ -5,7 +5,7 @@ import 'data/store.dart';
 import 'model/feeds.dart';
 import 'view/feeds_view.dart';
 
-final Feeds feeds = Feeds(booksList);
+final feeds = Feeds(booksList);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
