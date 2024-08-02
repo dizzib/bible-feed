@@ -9,7 +9,7 @@ class FeedCard extends StatelessWidget {
   @override
   build(context) {
     var feed = context.watch<Feed>();
-    var book = feed.books.current;
+    var book = feed.readingList.current;
 
     showBookChapterDialog() => showDialog(
       context: context,
@@ -28,7 +28,7 @@ class FeedCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(
-                feed.books.name,
+                feed.readingList.name,
                 style: const TextStyle(fontSize: 18),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -85,7 +85,7 @@ class FeedCard extends StatelessWidget {
                     visible: constraints.maxHeight > 99,
                     child: titleBar()
                   ),
-                  LinearProgressIndicator(value: feed.books.progress),
+                  LinearProgressIndicator(value: feed.readingList.progress),
                   bookChapter(
                     fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
                   )

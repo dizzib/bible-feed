@@ -24,7 +24,7 @@ void main() {
 
     b0 = Book('b0', 'Book1', 5);
     b1 = Book('b1', 'Book1', 3);
-    f = Feed(Books('fd0', 'Book list', [b0, b1]));
+    f = Feed(ReadingList('fd0', 'Book list', [b0, b1]));
   });
 
   // store helpers
@@ -35,15 +35,15 @@ void main() {
 
   // test helpers
   void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
-    expect(f.books.current, expectedBook);
-    expect(f.books.current.chapter, expectedChapter);
+    expect(f.readingList.current, expectedBook);
+    expect(f.readingList.current.chapter, expectedChapter);
     expect(getStoredBookKey(), expectedBook.key);
     expect(getStoredChapter(), expectedChapter);
     expect(getStoredDateLastSaved().date, DateTime.now().date);
   }
 
   test('constructor should load state from store', () {
-    expect(f.books.current, b1);
+    expect(f.readingList.current, b1);
     expect(f.dateLastSaved, getStoredDateLastSaved());
     expect(b1.chapter, 2);
     expect(b1.isChapterRead, true);

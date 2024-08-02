@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'data/books_list.dart';
+import 'data/reading_lists.dart';
 import 'data/store.dart';
 import 'model/feeds.dart';
 import 'view/feeds_view.dart';
 
-final feeds = Feeds(booksList);
+final feeds = Feeds(readingLists);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

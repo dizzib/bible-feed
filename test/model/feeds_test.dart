@@ -8,7 +8,7 @@ import 'package:bible_feed/model/feeds.dart';
 
 void main() {
   late Feeds fds;
-  late Books bks0, bks1;
+  late ReadingList bks0, bks1;
   late Book bk0, bk1, bk2;
 
   setUp(() async {
@@ -29,14 +29,14 @@ void main() {
     bk0 = Book('bk0', 'Book0', 5);
     bk1 = Book('bk1', 'Book1', 3);
     bk2 = Book('bk2', 'Book2', 2);
-    bks0 = Books('bks0', 'Reading List 0', [bk0]);
-    bks1 = Books('bks1', 'Reading List 1', [bk1, bk2]);
+    bks0 = ReadingList('bks0', 'Reading List 0', [bk0]);
+    bks1 = ReadingList('bks1', 'Reading List 1', [bk1, bk2]);
     fds = Feeds([bks0, bks1]);
   });
 
   test('[]', () {
-    expect(fds[0].books, bks0);
-    expect(fds[1].books, bks1);
+    expect(fds[0].readingList, bks0);
+    expect(fds[1].readingList, bks1);
   });
 
   test('areChaptersRead', () {

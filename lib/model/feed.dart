@@ -9,35 +9,35 @@ class _StoreKeys {
   final String isChapterRead;
   final String dateLastSaved;
 
-  const _StoreKeys(booksKey) :
-    bookKey = '$booksKey.book',
-    chapter = '$booksKey.chapter',
-    dateLastSaved = '$booksKey.dateLastSaved',
-    isChapterRead = '$booksKey.isChapterRead';
+  const _StoreKeys(readingListKey) :
+    bookKey = '$readingListKey.book',
+    chapter = '$readingListKey.chapter',
+    dateLastSaved = '$readingListKey.dateLastSaved',
+    isChapterRead = '$readingListKey.isChapterRead';
 }
 
-// Feed manipulates, dispenses and stores a reading list (Books)
+// Feed manipulates, dispenses and stores a reading-list
 class Feed with ChangeNotifier {
-  final Books books;
+  final ReadingList readingList;
   final _StoreKeys _storeKeys;
 
-  Feed(this.books) : _storeKeys = _StoreKeys(books.key) { _loadStateAndNotifyListeners(); }
+  Feed(this.readingList) : _storeKeys = _StoreKeys(readingList.key) { _loadStateAndNotifyListeners(); }
 
   void _loadStateAndNotifyListeners() {
     var bookKey = Store.getString(_storeKeys.bookKey);
     if (bookKey == null) return;  // on first run, this will be null
-    books.current = books.getBook(bookKey);
-    books.current.chapter = Store.getInt(_storeKeys.chapter)!;
-    books.current.isChapterRead = Store.getBool(_storeKeys.isChapterRead)!;
+    readingList.current = readingList.getBook(bookKey);
+    readingList.current.chapter = Store.getInt(_storeKeys.chapter)!;
+    readingList.current.isChapterRead = Store.getBool(_storeKeys.isChapterRead)!;
     dateLastSaved = DateTime.parse(Store.getString(_storeKeys.dateLastSaved)!);
     notifyListeners();
   }
 
   void _saveStateAndNotifyListeners() {
     dateLastSaved = DateTime.now();
-    Store.setString(_storeKeys.bookKey, books.current.key);
-    Store.setInt(_storeKeys.chapter, books.current.chapter);
-    Store.setBool(_storeKeys.isChapterRead, books.current.isChapterRead);
+    Store.setString(_storeKeys.bookKey, readingList.current.key);
+    Store.setInt(_storeKeys.chapter, readingList.current.chapter);
+    Store.setBool(_storeKeys.isChapterRead, readingList.current.isChapterRead);
     Store.setString(_storeKeys.dateLastSaved, dateLastSaved.toIso8601String());
     notifyListeners();
   }
@@ -46,21 +46,21 @@ class Feed with ChangeNotifier {
   DateTime dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
 
   void nextChapter() {
-    var b = books.current;
+    var b = readingList.current;
     b.nextChapter();
-    if (b.chapter == 1) books.nextBook();
+    if (b.chapter == 1) readingList.nextBook();
     _saveStateAndNotifyListeners();
   }
 
   void setBookAndChapter(Book book, int chapter) {
-    books.current.reset();
-    books.current = book;
-    books.current.chapter = chapter;
+    readingList.current.reset();
+    readingList.current = book;
+    readingList.current.chapter = chapter;
     _saveStateAndNotifyListeners();
   }
 
   void toggleIsChapterRead() {
-    books.current.isChapterRead = !books.current.isChapterRead;
+    readingList.current.isChapterRead = !readingList.current.isChapterRead;
     _saveStateAndNotifyListeners();
   }
 }

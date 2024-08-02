@@ -6,9 +6,9 @@ import '../view/list_wheel.dart';
 import '../view/list_wheel_state.dart';
 
 class BookChapterDialogWheels extends StatelessWidget {
-  final Books books;
+  final ReadingList readingList;
 
-  const BookChapterDialogWheels(this.books);
+  const BookChapterDialogWheels(this.readingList);
 
   @override
   build(context) {
@@ -25,9 +25,9 @@ class BookChapterDialogWheels extends StatelessWidget {
             SizedBox(
               width: constraints.maxWidth * 0.8,
               child: ListWheel<Book>(
-                indexToItem: (index) => books[index],
+                indexToItem: (index) => readingList[index],
                 itemToString: (Book b) => b.name,
-                maxIndex: books.count - 1,
+                maxIndex: readingList.count - 1,
                 textStyle: getTextStyle(constraints),
               )
             ),
@@ -35,7 +35,7 @@ class BookChapterDialogWheels extends StatelessWidget {
               child: ListWheel<int>(
                 indexToItem: (index) => index + 1,
                 itemToString: (int chapter) => chapter.toString(),
-                maxIndex: books[Provider.of<ListWheelState<Book>>(context).index].chapterCount - 1,
+                maxIndex: readingList[Provider.of<ListWheelState<Book>>(context).index].chapterCount - 1,
                 textStyle: getTextStyle(constraints),
               )
             ),

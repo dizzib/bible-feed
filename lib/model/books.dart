@@ -3,14 +3,14 @@ import 'book.dart';
 extension BookListHelper on List<Book> { int get totalChapters => fold(0, (t, b) => t + b.chapterCount); }
 
 // books in a reading list (e.g. Matthew, Mark, Luke and John) with state
-class Books {
+class ReadingList {
   final int count;  // e.g. 4 books in The Gospels
   final String key;  // e.g. gos
   final String name;  // e.g. Gospels
   final int totalChapters;
   final List<Book> _bookList;
 
-  Books(this.key, this.name, this._bookList) :
+  ReadingList(this.key, this.name, this._bookList) :
     totalChapters = _bookList.totalChapters,
     count = _bookList.length;
 

@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bible_feed/data/feeds.dart';
+import 'package:bible_feed/data/reading_lists.dart';
 
 void main() {
   test('total books', () {
-    expect(booksList.length, 10);
+    expect(readingLists.length, 10);
   });
 
   test('total chapters per list', () {
-    run(i, expectTotalChapters) => expect(booksList[i].totalChapters, expectTotalChapters);
+    run(i, expectTotalChapters) => expect(readingLists[i].totalChapters, expectTotalChapters);
 
     run(0, 89);
     run(1, 187);

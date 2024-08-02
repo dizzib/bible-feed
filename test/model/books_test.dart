@@ -3,13 +3,13 @@ import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/books.dart';
 
 void main() {
-  late Books bks;
+  late ReadingList bks;
   var b0 = Book('b0', 'Book0', 5);
   var b1 = Book('b1', 'Book1', 3);
   var b2 = Book('b2', 'Book2', 2);
 
   setUp(() {
-    bks = Books('bks0', 'My book list', [ b0, b1, b2 ]);
+    bks = ReadingList('bks0', 'My book list', [ b0, b1, b2 ]);
   });
 
   test('constructor', () {
