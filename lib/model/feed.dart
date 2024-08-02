@@ -4,13 +4,13 @@ import 'book.dart';
 import 'books.dart';
 
 class _StoreKeys {
-  final String book;
+  final String bookKey;
   final String chapter;
   final String isChapterRead;
   final String dateLastSaved;
 
   const _StoreKeys(booksKey) :
-    book = '$booksKey.book',
+    bookKey = '$booksKey.book',
     chapter = '$booksKey.chapter',
     dateLastSaved = '$booksKey.dateLastSaved',
     isChapterRead = '$booksKey.isChapterRead';
@@ -24,7 +24,7 @@ class Feed with ChangeNotifier {
   Feed(this.books) : _storeKeys = _StoreKeys(books.key) { _loadStateAndNotifyListeners(); }
 
   void _loadStateAndNotifyListeners() {
-    var bookKey = Store.getString(_storeKeys.book);
+    var bookKey = Store.getString(_storeKeys.bookKey);
     if (bookKey == null) return;  // on first run, this will be null
     books.current = books.getBook(bookKey);
     books.current.chapter = Store.getInt(_storeKeys.chapter)!;
@@ -35,7 +35,7 @@ class Feed with ChangeNotifier {
 
   void _saveStateAndNotifyListeners() {
     dateLastSaved = DateTime.now();
-    Store.setString(_storeKeys.book, books.current.key);
+    Store.setString(_storeKeys.bookKey, books.current.key);
     Store.setInt(_storeKeys.chapter, books.current.chapter);
     Store.setBool(_storeKeys.isChapterRead, books.current.isChapterRead);
     Store.setString(_storeKeys.dateLastSaved, dateLastSaved.toIso8601String());
