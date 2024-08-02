@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'data/feeds.dart';
+import 'data/books_list.dart';
 import 'data/store.dart';
 import 'model/feeds.dart';
 import 'view/feeds_view.dart';
