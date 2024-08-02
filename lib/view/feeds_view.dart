@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../data/feeds.dart';
+import '../main.dart';
 import '../model/feeds.dart';
 import 'all_done.dart';
 import 'feed_card.dart';

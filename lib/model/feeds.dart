@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:cron/cron.dart';
 import '../data/store.dart';
 import '../util/date.dart';
+import 'feed/books.dart';
 import 'feed.dart';
 
 class Feeds with ChangeNotifier {

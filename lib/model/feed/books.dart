@@ -1,4 +1,4 @@
-part of '../feed.dart';
+import 'book.dart';
 
 extension BookListHelper on List<Book> { int get totalChapters => fold(0, (t, b) => t + b.chapterCount); }
 
@@ -17,10 +17,9 @@ class Books {
   // state
   int _index = 0;
 
-  // testing
-  @visibleForTesting set current(Book b) => _index = indexOf(b);
-  @visibleForTesting Book getBook(String key) => _bookList.where((Book b) => b.key == key).single;
-  @visibleForTesting void nextBook() { _index = ++_index % count; }
+  set current(Book b) => _index = indexOf(b);
+  Book getBook(String key) => _bookList.where((Book b) => b.key == key).single;
+  void nextBook() { _index = ++_index % count; }
 
   // public
   Book operator [](int i) => _bookList[i];

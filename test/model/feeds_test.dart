@@ -2,7 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:clock/clock.dart';
 import 'package:bible_feed/data/store.dart';
-import 'package:bible_feed/model/feed.dart';
+import 'package:bible_feed/model/feed/book.dart';
+import 'package:bible_feed/model/feed/books.dart';
 import 'package:bible_feed/model/feeds.dart';
 
 void main() {

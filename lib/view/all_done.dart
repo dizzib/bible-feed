@@ -1,7 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../data/feeds.dart';
+import '../main.dart';
+// import '../data/feeds.dart';
 
 class AllDone extends StatelessWidget {
   @override

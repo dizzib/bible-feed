@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import '../data/store.dart';
+import 'feed/book.dart';
+import 'feed/books.dart';
 
-part 'feed/book.dart';
-part 'feed/books.dart';
+// part 'feed/book.dart';
+// part 'feed/books.dart';
 
 class _StoreKeys {
   final String book;
@@ -57,7 +59,7 @@ class Feed with ChangeNotifier {
   }
 
   void setBookAndChapter(Book book, int chapter) {
-    books.current._reset();
+    books.current.reset();
     books.current = book;
     books.current.chapter = chapter;
     _saveStateAndNotifyListeners();

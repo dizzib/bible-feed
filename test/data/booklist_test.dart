@@ -3,11 +3,12 @@ import 'package:bible_feed/data/feeds.dart';
 
 void main() {
   test('total books', () {
-    expect(bookList.length, 10);
+    expect(booksList.length, 10);
   });
 
   test('total chapters per list', () {
-    run(i, expectTotalChapters) => expect(bookList[i].totalChapters, expectTotalChapters);
+    run(i, expectTotalChapters) => expect(booksList[i].totalChapters, expectTotalChapters);
+
     run(0, 89);
     run(1, 187);
     run(2, 78);

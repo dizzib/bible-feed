@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bible_feed/model/feed.dart';
+import 'package:bible_feed/model/feed/book.dart';
+import 'package:bible_feed/model/feed/books.dart';
 
 void main() {
   late Books bks;

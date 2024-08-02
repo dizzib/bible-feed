@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
-import '../model/feed.dart';
-import '../model/feeds.dart';
+import '../model/feed/book.dart';
+import '../model/feed/books.dart';
+// import '../model/feeds.dart';
 
-@visibleForTesting var bookList = [
+@visibleForTesting var booksList = [
   Books('gos', 'Gospels', [
     Book('mat', 'Matthew', 28),
     Book('mar', 'Mark', 16),
@@ -90,5 +91,3 @@ import '../model/feeds.dart';
     Book('act', 'Acts', 28),
   ])
 ];
-
-final Feeds feeds = Feeds(bookList);
