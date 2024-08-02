@@ -8,22 +8,14 @@ class Book {
 
   // state
   int _index = 0;
-  bool _isChapterRead = false;
+  bool isChapterRead = false;
 
-  // private
-  void reset() { _index = 0; _isChapterRead = false; }
-
-  // testing
+  // properties
   set chapter(int val) => _index = val - 1;
-  int get chaptersRead => _index + (isChapterRead ? 1 : 0);
-  set isChapterRead(bool val) => _isChapterRead = val;
-  void nextChapter() {
-    assert(_isChapterRead);
-    _index = ++_index % chapterCount;
-    _isChapterRead = false;
-  }
-
-  // public
   int get chapter => 1 + _index;
-  bool get isChapterRead => _isChapterRead;
+  int get chaptersRead => _index + (isChapterRead ? 1 : 0);
+
+  // methods
+  void nextChapter() { assert(isChapterRead); _index = ++_index % chapterCount; isChapterRead = false; }
+  void reset() { _index = 0; isChapterRead = false; }
 }
