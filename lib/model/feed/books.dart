@@ -19,14 +19,14 @@ class Books {
 
   // testing
   @visibleForTesting set current(Book b) => _index = indexOf(b);
-  @visibleForTesting getBook(String key) => _bookList.where((Book b) => b.key == key).single;
-  @visibleForTesting nextBook() { _index = ++_index % count; }
+  @visibleForTesting Book getBook(String key) => _bookList.where((Book b) => b.key == key).single;
+  @visibleForTesting void nextBook() { _index = ++_index % count; }
 
   // public
   Book operator [](int i) => _bookList[i];
   Book get current => _bookList[_index];
-  get progress => progressTo(current, current.chaptersRead);
-  indexOf(Book b) => _bookList.indexOf(b);
-  chaptersTo(Book b, int chapter) => _bookList.sublist(0, indexOf(b)).totalChapters + chapter;
-  progressTo(Book b, int chapter) => chaptersTo(b, chapter) / totalChapters;
+  double get progress => progressTo(current, current.chaptersRead);
+  int indexOf(Book b) => _bookList.indexOf(b);
+  int chaptersTo(Book b, int chapter) => _bookList.sublist(0, indexOf(b)).totalChapters + chapter;
+  double progressTo(Book b, int chapter) => chaptersTo(b, chapter) / totalChapters;
 }

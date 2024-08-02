@@ -17,9 +17,9 @@ class Book {
 
   // testing
   @visibleForTesting set chapter(int val) => _index = val - 1;
-  @visibleForTesting get chaptersRead => _index + (isChapterRead ? 1 : 0);
+  @visibleForTesting int get chaptersRead => _index + (isChapterRead ? 1 : 0);
   @visibleForTesting set isChapterRead(bool val) => _isChapterRead = val;
-  @visibleForTesting nextChapter() {
+  @visibleForTesting void nextChapter() {
     assert(_isChapterRead);
     _index = ++_index % chapterCount;
     _isChapterRead = false;
