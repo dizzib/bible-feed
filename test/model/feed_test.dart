@@ -24,8 +24,12 @@ void main() {
     f = Feed(Books('fd0', 'Book list', [b0, b1]));
   });
 
+  // helpers
+  DateTime getDateLastSaved() => DateTime.parse(Store.getString('fd0.dateLastSaved')!);
+
   test('constructor should load state from store', () {
     expect(f.books.current, b1);
+    expect(f.dateLastSaved, getDateLastSaved());
     expect(b1.chapter, 3);
     expect(b1.isChapterRead, true);
   });
@@ -37,7 +41,7 @@ void main() {
       expect(b0.chapter, 1);
       expect(Store.getString('fd0.book'), 'b0');
       expect(Store.getInt('fd0.chapter'), 1);
-      expect(DateTime.parse(Store.getString('fd0.dateLastSaved')!).date, DateTime.now().date);
+      expect(getDateLastSaved().date, DateTime.now().date);
     });
   });
 
@@ -49,6 +53,7 @@ void main() {
     expect(b1.chapter, 1);
     expect(Store.getString('fd0.book'), 'b0');
     expect(Store.getInt('fd0.chapter'), 4);
+    expect(getDateLastSaved().date, DateTime.now().date);
   });
 
   test('toggleIsChapterRead should toggle and save state to store', () {
@@ -56,6 +61,7 @@ void main() {
       f.toggleIsChapterRead();
       expect(b1.isChapterRead, expectIsRead);
       expect(Store.getBool('fd0.isChapterRead'), expectIsRead);
+      expect(getDateLastSaved().date, DateTime.now().date);
     }
     run(false);
     run(true);
