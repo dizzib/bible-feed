@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-// import '../util/log.dart';
 
 class Store {
   static late SharedPreferences _sp;
