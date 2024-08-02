@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../model/feed/book.dart';
+import '../model/book.dart';
 import '../model/feed.dart';
 import '../view/book_chapter_dialog_footer.dart';
 import '../view/book_chapter_dialog_wheels.dart';

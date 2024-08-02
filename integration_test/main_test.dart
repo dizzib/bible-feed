@@ -1,6 +1,5 @@
 import 'dart:io' show Platform;
-import 'package:bible_feed/main.dart' as app;
-import 'package:bible_feed/data/feeds.dart';
+import 'package:bible_feed/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -51,7 +50,7 @@ void main() {
       await b.takeScreenshot('$platform/02-dark--$name');
     }
 
-    app.main();
+    main();
     await t.pumpAndSettle();
 
     setState();

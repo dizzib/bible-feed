@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import '../data/store.dart';
-import 'feed/book.dart';
-import 'feed/books.dart';
+import 'book.dart';
+import 'books.dart';
 
 // part 'feed/book.dart';
 // part 'feed/books.dart';
