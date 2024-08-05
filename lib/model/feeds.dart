@@ -10,7 +10,7 @@ class Feeds with ChangeNotifier {
   final List<Feed> _feeds;
 
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
-    for (var f in _feeds) { f.addListener(() => notifyListeners()); }
+    for (Feed f in _feeds) { f.addListener(() => notifyListeners()); }
     _cron.schedule(Schedule.parse('0 0 * * *'), () async { maybeAdvance(); });
     maybeAdvance();
   }
@@ -21,7 +21,7 @@ class Feeds with ChangeNotifier {
   bool? get hasEverAdvanced => Store.getBool('hasEverAdvanced');
 
   void forceAdvance() {
-    for (var f in _feeds) { f.nextChapter(); }
+    for (Feed f in _feeds) { f.nextChapter(); }
     Store.setBool('hasEverAdvanced', true);
   }
 
