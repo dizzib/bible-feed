@@ -3,11 +3,11 @@ import 'book.dart';
 import 'feed_store.dart';
 import 'reading_list.dart';
 
-// Feed manages the current reading state of a given reading-list of books
+// Feed manages the current reading state of a given list of books
 class Feed with ChangeNotifier {
   final ReadingList readingList;
 
-  Feed(this.readingList) {
+  Feed(this.readingList) : current = readingList[0] {
     loadState();
     notifyListeners();
   }
@@ -18,17 +18,19 @@ class Feed with ChangeNotifier {
   }
 
   // state
-  int _index = 0;  // current book index
+  Book current;
   DateTime dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
 
   /// properties
-  Book get current => readingList[_index];
-  set current(Book b) => _index = readingList.indexOf(b);
   double get progress => readingList.progressTo(current, current.chaptersRead);
 
   /// methods
 
-  void nextBook() { _index = ++_index % readingList.count; }
+  void nextBook() {
+    int index = readingList.indexOf(current);
+    index = ++index % readingList.count;
+    current = readingList[index];
+  }
 
   void nextChapter() {
     var b = current;
