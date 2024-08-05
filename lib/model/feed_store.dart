@@ -1,4 +1,4 @@
-import '../data/store.dart';
+import '../util/store.dart';
 import 'feed.dart';
 
 // load/save state of a feed from/to local store

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:cron/cron.dart';
-import '../data/store.dart';
 import '../util/date.dart';
+import '../util/store.dart';
 import 'feed.dart';
 import 'reading_list.dart';
 
