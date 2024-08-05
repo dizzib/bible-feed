@@ -3,7 +3,7 @@ import 'book.dart';
 import 'feed_store.dart';
 import 'reading_list.dart';
 
-// Feed manages the current reading state of a given list of books
+// Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
   final ReadingList readingList;
 
@@ -19,10 +19,13 @@ class Feed with ChangeNotifier {
 
   // state
   Book current;
+  int chapter = 1;
+  bool isChapterRead = false;
   DateTime dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
 
   /// properties
-  double get progress => readingList.progressTo(current, current.chaptersRead);
+  int get chaptersRead => chapter + (isChapterRead ? 1 : 0) - 1;
+  double get progress => readingList.progressTo(current, chaptersRead);
 
   /// methods
 
@@ -33,21 +36,22 @@ class Feed with ChangeNotifier {
   }
 
   void nextChapter() {
-    var b = current;
-    b.nextChapter();
-    if (b.chapter == 1) nextBook();
+    assert(isChapterRead);
+    if (++chapter > current.chapterCount) { chapter = 1; nextBook(); }
+    isChapterRead = false;
     _saveStateAndNotifyListeners();
   }
 
   void setBookAndChapter(Book book, int chapter) {
-    current.reset();
+    // current.reset();
     current = book;
-    current.chapter = chapter;
+    this.chapter = chapter;
+    isChapterRead = false;
     _saveStateAndNotifyListeners();
   }
 
   void toggleIsChapterRead() {
-    current.isChapterRead = !current.isChapterRead;
+    isChapterRead = !isChapterRead;
     _saveStateAndNotifyListeners();
   }
 }

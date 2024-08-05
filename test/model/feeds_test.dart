@@ -26,9 +26,9 @@ void main() {
 
     await Store.init();
 
-    bk0 = Book('bk0', 'Book0', 5);
-    bk1 = Book('bk1', 'Book1', 3);
-    bk2 = Book('bk2', 'Book2', 2);
+    bk0 = const Book('bk0', 'Book0', 5);
+    bk1 = const Book('bk1', 'Book1', 3);
+    bk2 = const Book('bk2', 'Book2', 2);
     rl0 = ReadingList('rl0', 'Reading List 0', [bk0]);
     rl1 = ReadingList('rl1', 'Reading List 1', [bk1, bk2]);
     fds = Feeds([rl0, rl1]);
@@ -60,14 +60,14 @@ void main() {
 
   group('Advance:', () {
     checkHasAdvanced(bool shouldAdvance) {
-      expect(fds[0].current.chapter, shouldAdvance ? 2 : 1);
-      expect(fds[1].current.chapter, shouldAdvance ? 2 : 1);
+      expect(fds[0].chapter, shouldAdvance ? 2 : 1);
+      expect(fds[1].chapter, shouldAdvance ? 2 : 1);
     }
 
     test('constructor should advance all feeds if new day', () {
       Store.setBool('rl1.isChapterRead', true);
       var tomorrow = Clock.fixed(DateTime.now().add(const Duration(days: 1)));
-      withClock(tomorrow, () => Feeds([rl0, rl1]));
+      withClock(tomorrow, () => fds = Feeds([rl0, rl1]));
       checkHasAdvanced(true);
     });
 

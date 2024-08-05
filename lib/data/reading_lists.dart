@@ -2,20 +2,20 @@ import '../model/book.dart';
 import '../model/reading_list.dart';
 
 var readingLists = [
-  ReadingList('gos', 'Gospels', [
+  ReadingList('gos', 'Gospels', const [
     Book('mat', 'Matthew', 28),
     Book('mar', 'Mark', 16),
     Book('luk', 'Luke', 24),
     Book('jhn', 'John', 21),
   ]),
-  ReadingList('pen', 'Pentateuch', [
+  ReadingList('pen', 'Pentateuch', const [
     Book('gen', 'Genesis', 50),
     Book('exo', 'Exodus', 40),
     Book('lev', 'Leviticus', 27),
     Book('num', 'Numbers', 36),
     Book('deu', 'Deuteronomy', 34),
   ]),
-  ReadingList('ep1', 'Epistles I', [
+  ReadingList('ep1', 'Epistles I', const [
     Book('rom', 'Romans', 16),
     Book('1co', '1 Corinthians', 16),
     Book('2co', '2 Corinthians', 13),
@@ -25,7 +25,7 @@ var readingLists = [
     Book('col', 'Colossians', 4),
     Book('heb', 'Hebrews', 13),
   ]),
-  ReadingList('ep2', 'Epistles II', [
+  ReadingList('ep2', 'Epistles II', const [
     Book('1th', '1 Thessalonians', 5),
     Book('2th', '2 Thessalonians', 3),
     Book('1ti', '1 Timothy', 6),
@@ -41,18 +41,18 @@ var readingLists = [
     Book('jud', 'Jude', 1),
     Book('rev', 'Revelation', 22),
   ]),
-  ReadingList('wis', 'Wisdom', [
+  ReadingList('wis', 'Wisdom', const [
     Book('job', 'Job', 42),
     Book('ecc', 'Ecclesiastes', 12),
     Book('sos', 'Song of Solomon', 8),
   ]),
-  ReadingList('psa', 'Psalms', [
+  ReadingList('psa', 'Psalms', const [
     Book('psa', 'Psalms', 150),
   ]),
-  ReadingList('prv', 'Proverbs', [
+  ReadingList('prv', 'Proverbs', const [
     Book('prv', 'Proverbs', 31),
   ]),
-  ReadingList('his', 'History', [
+  ReadingList('his', 'History', const [
     Book('jos', 'Joshua', 24),
     Book('jdg', 'Judges', 21),
     Book('rth', 'Ruth', 4),
@@ -66,7 +66,7 @@ var readingLists = [
     Book('neh', 'Nehemiah', 13),
     Book('est', 'Esther', 10),
   ]),
-  ReadingList('prp', 'Prophets', [
+  ReadingList('prp', 'Prophets', const [
     Book('isa', 'Isaiah', 66),
     Book('jer', 'Jeremiah', 52),
     Book('lam', 'Lamentations', 5),
@@ -85,7 +85,7 @@ var readingLists = [
     Book('zec', 'Zechariah', 14),
     Book('mal', 'Malachi', 4),
   ]),
-  ReadingList('act', 'Acts', [
+  ReadingList('act', 'Acts', const [
     Book('act', 'Acts', 28),
   ])
 ];

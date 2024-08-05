@@ -4,9 +4,9 @@ import 'package:bible_feed/model/reading_list.dart';
 
 void main() {
   late ReadingList rl;
-  var b0 = Book('b0', 'Book0', 5);
-  var b1 = Book('b1', 'Book1', 3);
-  var b2 = Book('b2', 'Book2', 2);
+  var b0 = const Book('b0', 'Book0', 5);
+  var b1 = const Book('b1', 'Book1', 3);
+  var b2 = const Book('b2', 'Book2', 2);
 
   setUp(() {
     rl = ReadingList('bks0', 'My book list', [ b0, b1, b2 ]);

@@ -12,16 +12,16 @@ extension StoreExtension on Feed {
     var bookKey = Store.getString(_storeKeyBookKey);
     if (bookKey == null) return;  // on first run, this will be null
     current = readingList.getBook(bookKey);
-    current.chapter = Store.getInt(_storeKeyChapter)!;
-    current.isChapterRead = Store.getBool(_storeKeyIsChapterRead)!;
+    chapter = Store.getInt(_storeKeyChapter)!;
+    isChapterRead = Store.getBool(_storeKeyIsChapterRead)!;
     dateLastSaved = DateTime.parse(Store.getString(_storeKeyDateLastSaved)!);
   }
 
   void saveState() {
     dateLastSaved = DateTime.now();
     Store.setString(_storeKeyBookKey, current.key);
-    Store.setInt(_storeKeyChapter, current.chapter);
-    Store.setBool(_storeKeyIsChapterRead, current.isChapterRead);
+    Store.setInt(_storeKeyChapter, chapter);
+    Store.setBool(_storeKeyIsChapterRead, isChapterRead);
     Store.setString(_storeKeyDateLastSaved, dateLastSaved.toIso8601String());
   }
 }

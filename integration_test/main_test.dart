@@ -34,7 +34,7 @@ void main() {
       for (int i = 0; i < 10; i++) {
         var feed = app.feeds[i];
         feed.setBookAndChapter(feed.readingList[bookChapterState[i][0]], bookChapterState[i][1]);
-        feed.current.isChapterRead = chaptersReadState[i] == 1 ? true : false;
+        feed.isChapterRead = chaptersReadState[i] == 1 ? true : false;
       }
     }
 

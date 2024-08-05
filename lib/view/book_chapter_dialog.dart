@@ -16,7 +16,7 @@ class BookChapterDialog extends StatelessWidget {
     // NOTE: keep this OUTSIDE the LayoutBuilder, otherwise *WheelStates get reset on device rotation
     final selectedBook = feed.current;
     final bookWheelState = ListWheelState<Book>(feed.readingList.indexOf(selectedBook));
-    final chapterWheelState = ListWheelState<int>(selectedBook.chapter - 1);
+    final chapterWheelState = ListWheelState<int>(feed.chapter - 1);
 
     return LayoutBuilder(
       builder: (_, constraints) {

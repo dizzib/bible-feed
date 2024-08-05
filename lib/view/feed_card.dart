@@ -59,7 +59,7 @@ class FeedCard extends StatelessWidget {
                 ),
               ),
               AutoSizeText(
-                book.chapter.toString(),
+                feed.chapter.toString(),
                 style: TextStyle(fontSize: fontSize),
                 maxLines: 1,
               ),
@@ -69,9 +69,9 @@ class FeedCard extends StatelessWidget {
       );
 
     return Opacity(
-      opacity: book.isChapterRead ? 0.2 : 1,
+      opacity: feed.isChapterRead ? 0.2 : 1,
       child: Card(
-        elevation: book.isChapterRead ? 0 : 12,
+        elevation: feed.isChapterRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           onLongPress: showBookChapterDialog,
