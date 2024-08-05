@@ -9,7 +9,7 @@ class Feed with ChangeNotifier {
 
   Feed(this.readingList) : book = readingList[0] { loadState(); notifyListeners(); }
 
-  // state
+  /// state
   Book book;
   int chapter = 1;
   bool isChapterRead = false;
@@ -21,7 +21,6 @@ class Feed with ChangeNotifier {
   double get progress => readingList.progressTo(bookIndex, chaptersRead);
 
   /// methods
-
   void nextBook() {
     int index = readingList.indexOf(book);
     index = ++index % readingList.count;

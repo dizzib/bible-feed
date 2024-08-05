@@ -15,11 +15,12 @@ class Feeds with ChangeNotifier {
     maybeAdvance();
   }
 
-  /// public
+  /// properties
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
   bool? get hasEverAdvanced => Store.getBool('hasEverAdvanced');
 
+  /// methods
   void forceAdvance() {
     for (Feed f in _feeds) { f.nextChapter(); }
     Store.setBool('hasEverAdvanced', true);
