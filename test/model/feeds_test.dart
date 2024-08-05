@@ -5,7 +5,7 @@ import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_list.dart';
-import 'package:bible_feed/util/date.dart';
+import 'package:bible_feed/util/clock.dart';
 import 'package:bible_feed/util/store.dart';
 
 void main() {
@@ -66,8 +66,6 @@ void main() {
   });
 
   group('Advance:', () {
-    final tomorrow = Clock.fixed(DateTime.now().addDays(1));
-
     checkHasAdvanced(bool shouldAdvance) {
       expect(f0.chapter, shouldAdvance ? 2 : 1);
       expect(f1.chapter, shouldAdvance ? 2 : 1);
@@ -75,7 +73,7 @@ void main() {
 
     test('constructor should advance all feeds if new day', () {
       f1.toggleIsChapterRead();
-      withClock(tomorrow, initFeeds);
+      withClock(clock.tomorrow, initFeeds);
       checkHasAdvanced(true);
     });
 
@@ -87,7 +85,7 @@ void main() {
 
     group('maybeAdvance', () {
       test('if not all read, on next day, should not advance', () {
-        withClock(tomorrow, fds.maybeAdvance);
+        withClock(clock.tomorrow, fds.maybeAdvance);
         checkHasAdvanced(false);
       });
 
@@ -100,13 +98,13 @@ void main() {
 
         test('yesterday, should advance', () {
           f1.toggleIsChapterRead();
-          withClock(tomorrow, fds.maybeAdvance);
+          withClock(clock.tomorrow, fds.maybeAdvance);
           checkHasAdvanced(true);
         });
 
         test('7 days ago, should advance', () {
           f1.toggleIsChapterRead();
-          withClock(Clock.fixed(DateTime.now().addDays(7)), fds.maybeAdvance);
+          withClock(clock.addDays(7), fds.maybeAdvance);
           checkHasAdvanced(true);
         });
       });
