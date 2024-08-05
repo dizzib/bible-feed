@@ -111,9 +111,7 @@ void main() {
       });
 
       test('last chapter, should move to next book and save state to store', () {
-        f.nextChapter();
-        f.toggleIsChapterRead();
-        f.nextChapter();
+        f.nextChapter(); f.toggleIsChapterRead(); f.nextChapter();
         checkBookChapterAndStore(b2, 1);
       });
     });
