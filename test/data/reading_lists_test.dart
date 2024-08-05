@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:bible_feed/data/reading_lists.dart';
 
 void main() {
-  test('total books', () {
+  test('total reading lists should be 10', () {
     expect(readingLists.length, 10);
   });
 
