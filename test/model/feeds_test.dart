@@ -4,6 +4,7 @@ import 'package:clock/clock.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_list.dart';
+import 'package:bible_feed/util/date.dart';
 import 'package:bible_feed/util/store.dart';
 
 void main() {
@@ -78,8 +79,8 @@ void main() {
     });
 
     group('maybeAdvance', () {
-      test('if not all read, should not advance', () {
-        fds.maybeAdvance();
+      test('if not all read on next day, should not advance', () {
+        withClock(Clock.fixed(DateTime.now().addDays(1)), fds.maybeAdvance);
         checkHasAdvanced(false);
       });
 
@@ -87,7 +88,7 @@ void main() {
         run(String desc, int dayDiff, bool shouldAdvance) {
           test(desc, () {
             fds[1].toggleIsChapterRead();
-            withClock(Clock.fixed(DateTime.now().add(Duration(days: dayDiff))), fds.maybeAdvance);
+            withClock(Clock.fixed(DateTime.now().addDays(dayDiff)), fds.maybeAdvance);
             checkHasAdvanced(shouldAdvance);
           });
         }
