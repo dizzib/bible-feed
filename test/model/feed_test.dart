@@ -43,9 +43,9 @@ void main() {
 
   test('constructor should load state from store', () {
     expect(f.book, b1);
-    expect(f.dateLastSaved, getStoredDateLastSaved());
     expect(f.chapter, 2);
     expect(f.isChapterRead, true);
+    expect(f.dateLastSaved, getStoredDateLastSaved());
   });
 
   group('property', () {
@@ -80,12 +80,7 @@ void main() {
       f.nextBook(); expect(f.book, b1);
     });
 
-    group('nextChapter, if read', () {
-      test('non-last chapter, should remain on current book and save state to store', () {
-        f.nextChapter();
-        checkBookChapterAndStore(b1, 3);
-      });
-
+    group('nextChapter', () {
       next() { f.isChapterRead = true; f.nextChapter(); }
 
       test('should fail assertion if not read', () {
@@ -93,10 +88,10 @@ void main() {
         expect(f.nextChapter, throwsAssertionError);
       });
 
-      test('should +1 chapter and cycle', () {
-        next(); expect(f.chapter, 3);
-        next(); expect(f.chapter, 1);
-        next(); expect(f.chapter, 2);
+      test('should +1 chapter +0 book, or +1 book and reset chapter if last chapter, and store', () {
+        next(); checkBookChapterAndStore(b1, 3);
+        next(); checkBookChapterAndStore(b2, 1);
+        next(); checkBookChapterAndStore(b2, 2);
       });
 
       test('should +0 chaptersRead', () {
@@ -107,20 +102,15 @@ void main() {
       test('should reset isChapterRead', () {
         next(); expect(f.isChapterRead, false);
       });
-
-      test('last chapter, should move to next book and save state to store', () {
-        f.nextChapter(); f.toggleIsChapterRead(); f.nextChapter();
-        checkBookChapterAndStore(b2, 1);
-      });
     });
 
-    test('setBookAndChapter should reset current and save state to store', () {
+    test('setBookAndChapter should set book/chapter and store', () {
       f.setBookAndChapter(0, 4);
       checkBookChapterAndStore(b0, 4);
       expect(f.isChapterRead, false);
     });
 
-    test('toggleIsChapterRead should toggle and save state to store', () {
+    test('toggleIsChapterRead should toggle and store', () {
       f.toggleIsChapterRead(); expect(f.isChapterRead, false); expect(getStoredIsChapterRead(), false);
       f.toggleIsChapterRead(); expect(f.isChapterRead, true); expect(getStoredIsChapterRead(), true);
       expect(getStoredDateLastSaved().date, DateTime.now().date);
