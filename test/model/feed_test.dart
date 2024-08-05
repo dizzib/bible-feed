@@ -28,13 +28,13 @@ void main() {
     f = Feed(ReadingList('rl0', 'Book list', [b0, b1, b2]));
   });
 
-  // store helpers
+  /// helpers
+
   String getStoredBookKey() => Store.getString('rl0.book')!;
   int getStoredChapter() => Store.getInt('rl0.chapter')!;
   bool getStoredIsChapterRead() => Store.getBool('rl0.isChapterRead')!;
   DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('rl0.dateLastSaved')!);
 
-  // test helpers
   void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
     expect(f.current, expectedBook);
     expect(f.current.chapter, expectedChapter);
@@ -42,6 +42,8 @@ void main() {
     expect(getStoredChapter(), expectedChapter);
     expect(getStoredDateLastSaved().date, DateTime.now().date);
   }
+
+  /// tests
 
   test('constructor should load state from store', () {
     expect(f.current, b1);
