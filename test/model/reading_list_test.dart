@@ -28,7 +28,7 @@ void main() {
   });
 
   test('getBook', () {
-    expect(rl.getBook('b1').name, b1.name);
+    expect(rl.getBook('b1'), b1);
   });
 
   test('indexOf', () {
