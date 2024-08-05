@@ -50,45 +50,49 @@ void main() {
     expect(b1.isChapterRead, true);
   });
 
-  test('current get/set', () {
-    expect(f.current, b1); f.current = b2;
-    expect(f.current, b2);
-  });
-
-  test('progress', () {
-    f.current.nextChapter(); expect(f.progress, 0.7);
-  });
-
-  test('nextBook should +1 and cycle', () {
-    f.nextBook(); expect(f.current, b2);
-    f.nextBook(); expect(f.current, b0);
-    f.nextBook(); expect(f.current, b1);
-  });
-
-  group('nextChapter, if read', () {
-    test('non-last chapter, should remain on current book and save state to store', () {
-      f.nextChapter();
-      checkBookChapterAndStore(b1, 3);
+  group('property', () {
+    test('current get/set', () {
+      expect(f.current, b1); f.current = b2;
+      expect(f.current, b2);
     });
 
-    test('last chapter, should move to next book and save state to store', () {
-      f.nextChapter();
-      f.toggleIsChapterRead();
-      f.nextChapter();
-      checkBookChapterAndStore(b2, 1);
+    test('progress', () {
+      f.current.nextChapter(); expect(f.progress, 0.7);
     });
   });
 
-  test('setBookAndChapter should reset current and save state to store', () {
-    f.setBookAndChapter(b0, 4);
-    checkBookChapterAndStore(b0, 4);
-    expect(b1.isChapterRead, false);
-    expect(b1.chapter, 1);
-  });
+  group('method', () {
+    test('nextBook should +1 and cycle', () {
+      f.nextBook(); expect(f.current, b2);
+      f.nextBook(); expect(f.current, b0);
+      f.nextBook(); expect(f.current, b1);
+    });
 
-  test('toggleIsChapterRead should toggle and save state to store', () {
-    f.toggleIsChapterRead(); expect(b1.isChapterRead, false); expect(getStoredIsChapterRead(), false);
-    f.toggleIsChapterRead(); expect(b1.isChapterRead, true); expect(getStoredIsChapterRead(), true);
-    expect(getStoredDateLastSaved().date, DateTime.now().date);
+    group('nextChapter, if read', () {
+      test('non-last chapter, should remain on current book and save state to store', () {
+        f.nextChapter();
+        checkBookChapterAndStore(b1, 3);
+      });
+
+      test('last chapter, should move to next book and save state to store', () {
+        f.nextChapter();
+        f.toggleIsChapterRead();
+        f.nextChapter();
+        checkBookChapterAndStore(b2, 1);
+      });
+    });
+
+    test('setBookAndChapter should reset current and save state to store', () {
+      f.setBookAndChapter(b0, 4);
+      checkBookChapterAndStore(b0, 4);
+      expect(b1.isChapterRead, false);
+      expect(b1.chapter, 1);
+    });
+
+    test('toggleIsChapterRead should toggle and save state to store', () {
+      f.toggleIsChapterRead(); expect(b1.isChapterRead, false); expect(getStoredIsChapterRead(), false);
+      f.toggleIsChapterRead(); expect(b1.isChapterRead, true); expect(getStoredIsChapterRead(), true);
+      expect(getStoredDateLastSaved().date, DateTime.now().date);
+    });
   });
 }
