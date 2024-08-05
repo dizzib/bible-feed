@@ -121,7 +121,7 @@ void main() {
     });
 
     test('setBookAndChapter should reset current and save state to store', () {
-      f.setBookAndChapter(b0, 4);
+      f.setBookAndChapter(0, 4);
       checkBookChapterAndStore(b0, 4);
       expect(f.isChapterRead, false);
     });

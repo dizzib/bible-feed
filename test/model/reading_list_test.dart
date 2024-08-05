@@ -22,9 +22,9 @@ void main() {
   });
 
   test('chaptersTo', () {
-    expect(rl.chaptersTo(b0, 0), 0);
-    expect(rl.chaptersTo(b1, 1), 6);
-    expect(rl.chaptersTo(b2, 2), 10);
+    expect(rl.chaptersTo(0, 0), 0);
+    expect(rl.chaptersTo(1, 1), 6);
+    expect(rl.chaptersTo(2, 2), 10);
   });
 
   test('getBook', () {
@@ -36,6 +36,6 @@ void main() {
   });
 
   test('progressTo', () {
-    expect(rl.progressTo(b1, 1), 0.6);
+    expect(rl.progressTo(1, 1), 0.6);
   });
 }

@@ -13,19 +13,19 @@ class BookChapterDialogFooter extends StatelessWidget {
 
   @override
   build(context) {
-    var book = readingList[Provider.of<ListWheelState<Book>>(context).index];
+    var bookIndex = Provider.of<ListWheelState<Book>>(context).index;
     var chapter = Provider.of<ListWheelState<int>>(context).index + 1;
 
     return Column(
       children: [
-        LinearProgressIndicator(value: readingList.progressTo(book, chapter)),
+        LinearProgressIndicator(value: readingList.progressTo(bookIndex, chapter)),
         Row(
           children: [
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: AutoSizeText(
-                  '${readingList.chaptersTo(book, chapter)} of ${readingList.totalChapters}',
+                  '${readingList.chaptersTo(bookIndex, chapter)} of ${readingList.totalChapters}',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -33,7 +33,7 @@ class BookChapterDialogFooter extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                setBookAndChapter(book, chapter);
+                setBookAndChapter(bookIndex, chapter);
                 Navigator.pop(context);
               },
               child: const Padding(

@@ -20,8 +20,8 @@ final class ReadingList {
   Book operator [](int i) => _books[i];
 
   /// methods
-  int chaptersTo(Book b, int chapter) => _books.sublist(0, indexOf(b)).totalChapters + chapter;
+  int chaptersTo(int bookIndex, int chapter) => _books.sublist(0, bookIndex).totalChapters + chapter;
   Book getBook(String key) => _books.where((Book b) => b.key == key).single;
   int indexOf(Book b) => _books.indexOf(b);
-  double progressTo(Book b, int chapter) => chaptersTo(b, chapter) / totalChapters;
+  double progressTo(int bookIndex, int chapter) => chaptersTo(bookIndex, chapter) / totalChapters;
 }

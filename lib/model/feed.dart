@@ -26,7 +26,7 @@ class Feed with ChangeNotifier {
   /// properties
   int get bookIndex => readingList.indexOf(book);
   int get chaptersRead => chapter + (isChapterRead ? 1 : 0) - 1;
-  double get progress => readingList.progressTo(book, chaptersRead);
+  double get progress => readingList.progressTo(bookIndex, chaptersRead);
 
   /// methods
 
@@ -43,8 +43,8 @@ class Feed with ChangeNotifier {
     _saveStateAndNotifyListeners();
   }
 
-  void setBookAndChapter(Book book, int chapter) {
-    this.book = book;
+  void setBookAndChapter(int bookIndex, int chapter) {
+    book = readingList[bookIndex];
     this.chapter = chapter;
     isChapterRead = false;
     _saveStateAndNotifyListeners();
