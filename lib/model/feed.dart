@@ -3,7 +3,7 @@ import 'book.dart';
 import 'feed_store.dart';
 import 'reading_list.dart';
 
-// Feed manipulates and persists state of a reading-list
+// Feed manages the current reading state of a given reading-list of books
 class Feed with ChangeNotifier {
   final ReadingList readingList;
 

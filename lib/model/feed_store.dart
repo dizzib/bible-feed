@@ -1,6 +1,7 @@
 import '../data/store.dart';
 import 'feed.dart';
 
+// load/save state of a feed from/to local store
 extension StoreExtension on Feed {
   String get _storeKeyBookKey => '${readingList.key}.book';
   String get _storeKeyChapter => '${readingList.key}.chapter';
