@@ -6,11 +6,7 @@ void main() {
   var b0 = const Book('b0', 'Book0', 5);
   var b1 = const Book('b1', 'Book1', 3);
   var b2 = const Book('b2', 'Book2', 2);
-  late ReadingList l;
-
-  setUp(() {
-    l = ReadingList('bks0', 'My book list', [b0, b1, b2]);
-  });
+  var l = ReadingList('bks0', 'My book list', [b0, b1, b2]);
 
   test('constructor', () {
     expect(l.count, 3);
