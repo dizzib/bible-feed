@@ -12,12 +12,11 @@ class FeedCard extends StatelessWidget {
 
     showBookChapterDialog() => showDialog(
       context: context,
-      builder: (_) {
-        return BackdropFilter(
+      builder: (_) =>
+        BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
           child: BookChapterDialog(feed)
-        );
-      },
+        )
     );
 
     titleBar() =>
