@@ -36,7 +36,7 @@ void main() {
   DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('rl0.dateLastSaved')!);
 
   void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
-    expect(f.current, expectedBook);
+    expect(f.book, expectedBook);
     expect(f.chapter, expectedChapter);
     expect(getStoredBookKey(), expectedBook.key);
     expect(getStoredChapter(), expectedChapter);
@@ -46,21 +46,25 @@ void main() {
   /// tests
 
   test('constructor should load state from store', () {
-    expect(f.current, b1);
+    expect(f.book, b1);
     expect(f.dateLastSaved, getStoredDateLastSaved());
     expect(f.chapter, 2);
     expect(f.isChapterRead, true);
   });
 
   group('property', () {
+    test('bookIndex get', () {
+      expect(f.bookIndex, 1);
+    });
+
     test('chapter get/set', () {
       f.chapter = 2;
       expect(f.chapter, 2);
     });
 
     test('current get/set', () {
-      expect(f.current, b1); f.current = b2;
-      expect(f.current, b2);
+      expect(f.book, b1); f.book = b2;
+      expect(f.book, b2);
     });
 
     test('isChapterRead get/set should affect chaptersRead', () {
@@ -75,9 +79,9 @@ void main() {
 
   group('method', () {
     test('nextBook should +1 and cycle', () {
-      f.nextBook(); expect(f.current, b2);
-      f.nextBook(); expect(f.current, b0);
-      f.nextBook(); expect(f.current, b1);
+      f.nextBook(); expect(f.book, b2);
+      f.nextBook(); expect(f.book, b0);
+      f.nextBook(); expect(f.book, b1);
     });
 
     group('nextChapter, if read', () {

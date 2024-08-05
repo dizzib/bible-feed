@@ -11,7 +11,7 @@ extension StoreExtension on Feed {
   void loadState() {
     var bookKey = Store.getString(_storeKeyBookKey);
     if (bookKey == null) return;  // on first run, this will be null
-    current = readingList.getBook(bookKey);
+    book = readingList.getBook(bookKey);
     chapter = Store.getInt(_storeKeyChapter)!;
     isChapterRead = Store.getBool(_storeKeyIsChapterRead)!;
     dateLastSaved = DateTime.parse(Store.getString(_storeKeyDateLastSaved)!);
@@ -19,7 +19,7 @@ extension StoreExtension on Feed {
 
   void saveState() {
     dateLastSaved = DateTime.now();
-    Store.setString(_storeKeyBookKey, current.key);
+    Store.setString(_storeKeyBookKey, book.key);
     Store.setInt(_storeKeyChapter, chapter);
     Store.setBool(_storeKeyIsChapterRead, isChapterRead);
     Store.setString(_storeKeyDateLastSaved, dateLastSaved.toIso8601String());

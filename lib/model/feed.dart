@@ -7,7 +7,7 @@ import 'reading_list.dart';
 class Feed with ChangeNotifier {
   final ReadingList readingList;
 
-  Feed(this.readingList) : current = readingList[0] {
+  Feed(this.readingList) : book = readingList[0] {
     loadState();
     notifyListeners();
   }
@@ -18,33 +18,33 @@ class Feed with ChangeNotifier {
   }
 
   // state
-  Book current;
+  Book book;
   int chapter = 1;
   bool isChapterRead = false;
   DateTime dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
 
   /// properties
+  int get bookIndex => readingList.indexOf(book);
   int get chaptersRead => chapter + (isChapterRead ? 1 : 0) - 1;
-  double get progress => readingList.progressTo(current, chaptersRead);
+  double get progress => readingList.progressTo(book, chaptersRead);
 
   /// methods
 
   void nextBook() {
-    int index = readingList.indexOf(current);
+    int index = readingList.indexOf(book);
     index = ++index % readingList.count;
-    current = readingList[index];
+    book = readingList[index];
   }
 
   void nextChapter() {
     assert(isChapterRead);
-    if (++chapter > current.chapterCount) { chapter = 1; nextBook(); }
+    if (++chapter > book.chapterCount) { chapter = 1; nextBook(); }
     isChapterRead = false;
     _saveStateAndNotifyListeners();
   }
 
   void setBookAndChapter(Book book, int chapter) {
-    // current.reset();
-    current = book;
+    this.book = book;
     this.chapter = chapter;
     isChapterRead = false;
     _saveStateAndNotifyListeners();

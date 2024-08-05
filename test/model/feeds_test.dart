@@ -7,9 +7,9 @@ import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_list.dart';
 
 void main() {
+  late Book bk0, bk1, bk2;
   late Feeds fds;
   late ReadingList rl0, rl1;
-  late Book bk0, bk1, bk2;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({
