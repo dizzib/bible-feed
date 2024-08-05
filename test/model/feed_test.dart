@@ -87,13 +87,8 @@ void main() {
   });
 
   test('toggleIsChapterRead should toggle and save state to store', () {
-    run(bool expectIsRead) {
-      f.toggleIsChapterRead();
-      expect(b1.isChapterRead, expectIsRead);
-      expect(getStoredIsChapterRead(), expectIsRead);
-      expect(getStoredDateLastSaved().date, DateTime.now().date);
-    }
-    run(false);
-    run(true);
+    f.toggleIsChapterRead(); expect(b1.isChapterRead, false); expect(getStoredIsChapterRead(), false);
+    f.toggleIsChapterRead(); expect(b1.isChapterRead, true); expect(getStoredIsChapterRead(), true);
+    expect(getStoredDateLastSaved().date, DateTime.now().date);
   });
 }
