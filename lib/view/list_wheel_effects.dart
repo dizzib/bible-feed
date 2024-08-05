@@ -38,8 +38,8 @@ class ListWheelGradient extends StatelessWidget {
     return Align(
       alignment: begin,
       child: LayoutBuilder(
-        builder: (_, constraints) {
-          return Container(
+        builder: (_, constraints) =>
+          Container(
             height: constraints.maxHeight * 0.5,
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -48,8 +48,7 @@ class ListWheelGradient extends StatelessWidget {
                 colors: [surfaceColor, surfaceColor.withOpacity(0.0)]
               )
             ),
-          );
-        }
+          )
       )
     );
   }

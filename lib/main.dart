@@ -38,8 +38,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 
   @override
-  build(context) {
-    return SafeArea(
+  build(_) =>
+    SafeArea(
       child: MaterialApp(
         title: 'Bible Feed',
         darkTheme: ThemeData.dark(),
@@ -50,5 +50,4 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         ),
       ),
     );
-  }
 }

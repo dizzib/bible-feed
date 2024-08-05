@@ -19,8 +19,8 @@ class BookChapterDialogWheels extends StatelessWidget {
     );
 
     return LayoutBuilder(
-      builder: (_, constraints) {
-        return Row(
+      builder: (_, constraints) =>
+        Row(
           children: [
             SizedBox(
               width: constraints.maxWidth * 0.8,
@@ -40,8 +40,7 @@ class BookChapterDialogWheels extends StatelessWidget {
               )
             ),
           ],
-        );
-      }
+        )
     );
   }
 }

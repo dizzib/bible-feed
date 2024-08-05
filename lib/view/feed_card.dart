@@ -75,8 +75,8 @@ class FeedCard extends StatelessWidget {
           onLongPress: showBookChapterDialog,
           onTap: feed.toggleIsChapterRead,
           child: LayoutBuilder(
-            builder: (_, constraints) {
-              return Column(
+            builder: (_, constraints) =>
+              Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Visibility(
@@ -88,8 +88,7 @@ class FeedCard extends StatelessWidget {
                     fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
                   )
                 ],
-              );
-            }
+              )
           ),
         ),
       ),

@@ -18,8 +18,8 @@ class BookChapterDialog extends StatelessWidget {
     final chapterWheelState = ListWheelState<int>(feed.chapter - 1);
 
     return LayoutBuilder(
-      builder: (_, constraints) {
-        return Dialog(
+      builder: (_, constraints) =>
+        Dialog(
           child: Container(
             constraints: BoxConstraints(
               maxHeight: constraints.maxHeight * 0.8,
@@ -50,8 +50,7 @@ class BookChapterDialog extends StatelessWidget {
               )
             )
           )
-        );
-      }
+        )
     );
   }
 }

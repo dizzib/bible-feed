@@ -8,12 +8,12 @@ void main() {
   final b = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   const screenshotsEnabled = true;
 
-  setUpAll(() {
-    return Future(() async {
+  setUpAll(() =>
+    Future(() async {
       WidgetsApp.debugAllowBannerOverride = false;  // hide the debug banner
       if (screenshotsEnabled == true) await b.convertFlutterSurfaceToImage();  // req'd for screenshots on android only
-    });
-  });
+    })
+  );
 
   testWidgets('main', (t) async {
     void setState() {
