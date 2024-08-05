@@ -60,6 +60,8 @@ void main() {
   });
 
   group('Advance:', () {
+    final tomorrow = Clock.fixed(DateTime.now().addDays(1));
+
     checkHasAdvanced(bool shouldAdvance) {
       expect(fds[0].chapter, shouldAdvance ? 2 : 1);
       expect(fds[1].chapter, shouldAdvance ? 2 : 1);
@@ -67,7 +69,6 @@ void main() {
 
     test('constructor should advance all feeds if new day', () {
       Store.setBool('rl1.isChapterRead', true);
-      var tomorrow = Clock.fixed(DateTime.now().add(const Duration(days: 1)));
       withClock(tomorrow, () => fds = Feeds([rl0, rl1]));
       checkHasAdvanced(true);
     });
@@ -80,7 +81,7 @@ void main() {
 
     group('maybeAdvance', () {
       test('if not all read on next day, should not advance', () {
-        withClock(Clock.fixed(DateTime.now().addDays(1)), fds.maybeAdvance);
+        withClock(tomorrow, fds.maybeAdvance);
         checkHasAdvanced(false);
       });
 
