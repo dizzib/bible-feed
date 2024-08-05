@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:cron/cron.dart';
 import '../data/store.dart';
 import '../util/date.dart';
-import 'books.dart';
 import 'feed.dart';
+import 'reading_list.dart';
 
 class Feeds with ChangeNotifier {
   final _cron = Cron();

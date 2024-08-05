@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/book.dart';
-import '../model/books.dart';
+import '../model/reading_list.dart';
 import '../view/list_wheel.dart';
 import '../view/list_wheel_state.dart';
 
