@@ -4,10 +4,7 @@ class Store {
   static late SharedPreferences _sp;
 
   // call this method from main() function
-  static init() async {
-    _sp = await SharedPreferences.getInstance();
-    return _sp;
-  }
+  static init() async { _sp = await SharedPreferences.getInstance(); }
 
   // gets
   static bool? getBool(String key) => _sp.getBool(key);
