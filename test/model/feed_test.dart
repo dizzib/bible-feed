@@ -3,10 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_list.dart';
+import 'package:bible_feed/util/date.dart';
 import 'package:bible_feed/util/store.dart';
-
-// helpers
-extension MyDateExtension on DateTime { DateTime get date { return DateTime(year, month, day); } }
 
 void main() {
   late Feed f;
