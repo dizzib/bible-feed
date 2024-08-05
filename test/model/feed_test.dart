@@ -7,8 +7,10 @@ import 'package:bible_feed/util/date.dart';
 import 'package:bible_feed/util/store.dart';
 
 void main() {
+  var b0 = const Book('b0', 'Book1', 5);
+  var b1 = const Book('b1', 'Book1', 3);
+  var b2 = const Book('b2', 'Book1', 2);
   late Feed f;
-  late Book b0, b1, b2;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({
@@ -19,10 +21,6 @@ void main() {
     });
 
     await Store.init();
-
-    b0 = const Book('b0', 'Book1', 5);
-    b1 = const Book('b1', 'Book1', 3);
-    b2 = const Book('b2', 'Book1', 2);
     f = Feed(ReadingList('rl0', 'Book list', [b0, b1, b2]));
   });
 
