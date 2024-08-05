@@ -54,8 +54,8 @@ void main() {
     });
 
     test('chapter get/set', () {
-      f.chapter = 2;
-      expect(f.chapter, 2);
+      expect(f.chapter, 2); f.chapter = 1;
+      expect(f.chapter, 1);
     });
 
     test('current get/set', () {
