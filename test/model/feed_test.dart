@@ -10,43 +10,59 @@ extension MyDateExtension on DateTime { DateTime get date { return DateTime(year
 
 void main() {
   late Feed f;
-  late Book b0, b1;
+  late Book b0, b1, b2;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({
-      'fd0.book': 'b1',
-      'fd0.chapter': 2,
-      'fd0.isChapterRead': true,
-      'fd0.dateLastSaved': '2024-05-10T14:33:25.470094',
+      'rl0.book': 'b1',
+      'rl0.chapter': 2,
+      'rl0.isChapterRead': true,
+      'rl0.dateLastSaved': '2024-05-10T14:33:25.470094',
     });
 
     await Store.init();
 
     b0 = Book('b0', 'Book1', 5);
     b1 = Book('b1', 'Book1', 3);
-    f = Feed(ReadingList('fd0', 'Book list', [b0, b1]));
+    b2 = Book('b2', 'Book1', 2);
+    f = Feed(ReadingList('rl0', 'Book list', [b0, b1, b2]));
   });
 
   // store helpers
-  String getStoredBookKey() => Store.getString('fd0.book')!;
-  int getStoredChapter() => Store.getInt('fd0.chapter')!;
-  bool getStoredIsChapterRead() => Store.getBool('fd0.isChapterRead')!;
-  DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('fd0.dateLastSaved')!);
+  String getStoredBookKey() => Store.getString('rl0.book')!;
+  int getStoredChapter() => Store.getInt('rl0.chapter')!;
+  bool getStoredIsChapterRead() => Store.getBool('rl0.isChapterRead')!;
+  DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('rl0.dateLastSaved')!);
 
   // test helpers
   void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
-    expect(f.readingList.current, expectedBook);
-    expect(f.readingList.current.chapter, expectedChapter);
+    expect(f.current, expectedBook);
+    expect(f.current.chapter, expectedChapter);
     expect(getStoredBookKey(), expectedBook.key);
     expect(getStoredChapter(), expectedChapter);
     expect(getStoredDateLastSaved().date, DateTime.now().date);
   }
 
   test('constructor should load state from store', () {
-    expect(f.readingList.current, b1);
+    expect(f.current, b1);
     expect(f.dateLastSaved, getStoredDateLastSaved());
     expect(b1.chapter, 2);
     expect(b1.isChapterRead, true);
+  });
+
+  test('current get/set', () {
+    expect(f.current, b1); f.current = b2;
+    expect(f.current, b2);
+  });
+
+  test('progress', () {
+    f.current.nextChapter(); expect(f.progress, 0.7);
+  });
+
+  test('nextBook should +1 and cycle', () {
+    f.nextBook(); expect(f.current, b2);
+    f.nextBook(); expect(f.current, b0);
+    f.nextBook(); expect(f.current, b1);
   });
 
   group('nextChapter, if read', () {
@@ -59,7 +75,7 @@ void main() {
       f.nextChapter();
       f.toggleIsChapterRead();
       f.nextChapter();
-      checkBookChapterAndStore(b0, 1);
+      checkBookChapterAndStore(b2, 1);
     });
   });
 

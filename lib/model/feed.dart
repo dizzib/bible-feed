@@ -3,13 +3,11 @@ import 'book.dart';
 import 'feed_store.dart';
 import 'reading_list.dart';
 
-// Feed manipulates, dispenses and stores a reading-list
+// Feed manipulates and persists state of a reading-list
 class Feed with ChangeNotifier {
   final ReadingList readingList;
 
-  Feed(this.readingList) { _loadStateAndNotifyListeners(); }
-
-  void _loadStateAndNotifyListeners() {
+  Feed(this.readingList) {
     loadState();
     notifyListeners();
   }
@@ -20,24 +18,34 @@ class Feed with ChangeNotifier {
   }
 
   // state
+  int _index = 0;  // current book index
   DateTime dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
 
+  /// properties
+  Book get current => readingList[_index];
+  set current(Book b) => _index = readingList.indexOf(b);
+  double get progress => readingList.progressTo(current, current.chaptersRead);
+
+  /// methods
+
+  void nextBook() { _index = ++_index % readingList.count; }
+
   void nextChapter() {
-    var b = readingList.current;
+    var b = current;
     b.nextChapter();
-    if (b.chapter == 1) readingList.nextBook();
+    if (b.chapter == 1) nextBook();
     _saveStateAndNotifyListeners();
   }
 
   void setBookAndChapter(Book book, int chapter) {
-    readingList.current.reset();
-    readingList.current = book;
-    readingList.current.chapter = chapter;
+    current.reset();
+    current = book;
+    current.chapter = chapter;
     _saveStateAndNotifyListeners();
   }
 
   void toggleIsChapterRead() {
-    readingList.current.isChapterRead = !readingList.current.isChapterRead;
+    current.isChapterRead = !current.isChapterRead;
     _saveStateAndNotifyListeners();
   }
 }

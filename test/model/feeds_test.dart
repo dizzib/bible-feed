@@ -8,19 +8,19 @@ import 'package:bible_feed/model/reading_list.dart';
 
 void main() {
   late Feeds fds;
-  late ReadingList bks0, bks1;
+  late ReadingList rl0, rl1;
   late Book bk0, bk1, bk2;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({
-      'bks0.book': 'bk0',
-      'bks0.chapter': 1,
-      'bks0.isChapterRead': true,
-      'bks0.dateLastSaved': DateTime.now().toIso8601String(),
-      'bks1.book': 'bk1',
-      'bks1.chapter': 1,
-      'bks1.isChapterRead': false,
-      'bks1.dateLastSaved': DateTime.now().toIso8601String(),
+      'rl0.book': 'bk0',
+      'rl0.chapter': 1,
+      'rl0.isChapterRead': true,
+      'rl0.dateLastSaved': DateTime.now().toIso8601String(),
+      'rl1.book': 'bk1',
+      'rl1.chapter': 1,
+      'rl1.isChapterRead': false,
+      'rl1.dateLastSaved': DateTime.now().toIso8601String(),
       'hasEverAdvanced': false,
     });
 
@@ -29,14 +29,14 @@ void main() {
     bk0 = Book('bk0', 'Book0', 5);
     bk1 = Book('bk1', 'Book1', 3);
     bk2 = Book('bk2', 'Book2', 2);
-    bks0 = ReadingList('bks0', 'Reading List 0', [bk0]);
-    bks1 = ReadingList('bks1', 'Reading List 1', [bk1, bk2]);
-    fds = Feeds([bks0, bks1]);
+    rl0 = ReadingList('rl0', 'Reading List 0', [bk0]);
+    rl1 = ReadingList('rl1', 'Reading List 1', [bk1, bk2]);
+    fds = Feeds([rl0, rl1]);
   });
 
   test('[]', () {
-    expect(fds[0].readingList, bks0);
-    expect(fds[1].readingList, bks1);
+    expect(fds[0].readingList, rl0);
+    expect(fds[1].readingList, rl1);
   });
 
   test('areChaptersRead', () {
@@ -60,14 +60,14 @@ void main() {
 
   group('Advance:', () {
     checkHasAdvanced(bool shouldAdvance) {
-      expect(bks0.current.chapter, shouldAdvance ? 2 : 1);
-      expect(bks1.current.chapter, shouldAdvance ? 2 : 1);
+      expect(fds[0].current.chapter, shouldAdvance ? 2 : 1);
+      expect(fds[1].current.chapter, shouldAdvance ? 2 : 1);
     }
 
     test('constructor should advance all feeds if new day', () {
-      Store.setBool('bks1.isChapterRead', true);
+      Store.setBool('rl1.isChapterRead', true);
       var tomorrow = Clock.fixed(DateTime.now().add(const Duration(days: 1)));
-      withClock(tomorrow, () => Feeds([bks0, bks1]));
+      withClock(tomorrow, () => Feeds([rl0, rl1]));
       checkHasAdvanced(true);
     });
 

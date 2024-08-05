@@ -14,8 +14,6 @@ void main() {
 
   test('constructor', () {
     expect(rl.count, 3);
-    expect(rl.current, b0);
-    expect(rl.progress, 0);
     expect(rl.totalChapters, 10);
   });
 
@@ -29,28 +27,12 @@ void main() {
     expect(rl.chaptersTo(b2, 2), 10);
   });
 
-  test('current get/set', () {
-    rl.current = b2;
-    expect(rl.current, b2);
-  });
-
   test('getBook', () {
     expect(rl.getBook('b1').name, b1.name);
   });
 
   test('indexOf', () {
     expect(rl.indexOf(b2), 2);
-  });
-
-  test('nextBook should +1 and cycle', () {
-    rl.nextBook(); expect(rl.current, b1);
-    rl.nextBook(); expect(rl.current, b2);
-    rl.nextBook(); expect(rl.current, b0);
-  });
-
-  test('progress', () {
-    rl.current.isChapterRead = true;
-    rl.current.nextChapter(); expect(rl.progress, 0.1);
   });
 
   test('progressTo', () {
