@@ -32,6 +32,7 @@ class Feed with ChangeNotifier {
   }
 
   void setBookAndChapter(int bookIndex, int chapter) {
+    assert(bookIndex >= 0); assert(bookIndex < readingList.count);
     book = readingList[bookIndex];
     this.chapter = chapter;
     isChapterRead = false;

@@ -8,6 +8,11 @@ extension StoreExtension on Feed {
   String get _storeKeyDateLastSaved => '${readingList.key}.dateLastSaved';
   String get _storeKeyIsChapterRead => '${readingList.key}.isChapterRead';
 
+  void _assertChapter() {
+    assert(chapter > 0);
+    assert(chapter <= book.chapterCount);
+  }
+
   void loadState() {
     var bookKey = Store.getString(_storeKeyBookKey);
     if (bookKey == null) return;  // on first run, this will be null
@@ -15,9 +20,11 @@ extension StoreExtension on Feed {
     chapter = Store.getInt(_storeKeyChapter)!;
     isChapterRead = Store.getBool(_storeKeyIsChapterRead)!;
     dateLastSaved = DateTime.parse(Store.getString(_storeKeyDateLastSaved)!);
+    _assertChapter();
   }
 
   void saveState() {
+    _assertChapter();
     dateLastSaved = DateTime.now();
     Store.setString(_storeKeyBookKey, book.key);
     Store.setInt(_storeKeyChapter, chapter);
