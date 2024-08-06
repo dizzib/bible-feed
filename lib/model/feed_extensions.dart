@@ -7,11 +7,9 @@ extension StateProperties on Feed {
   DateTime get dateLastSaved => _dateLastSaved;
 
   @visibleForTesting set book(Book b) => _book = b;
-  @visibleForTesting set chapter(int chapter) { _assertChapter(); _chapter = chapter; }
+  @visibleForTesting set chapter(int c) { assert(c > 0); assert(c <= book.chapterCount); _chapter = c; }
   @visibleForTesting set isChapterRead(bool val) => _isChapterRead = val;
   @visibleForTesting set dateLastSaved(DateTime d) => _dateLastSaved = d;
-
-  void _assertChapter() { assert(chapter > 0); assert(chapter <= book.chapterCount); }
 }
 
 extension StatePersistance on Feed {
