@@ -74,12 +74,6 @@ void main() {
   });
 
   group('method', () {
-    test('nextBook should +1 and cycle', () {
-      f.nextBook(); expect(f.book, b2);
-      f.nextBook(); expect(f.book, b0);
-      f.nextBook(); expect(f.book, b1);
-    });
-
     group('nextChapter', () {
       next() { f.isChapterRead = true; f.nextChapter(); }
 
@@ -92,6 +86,14 @@ void main() {
         next(); checkBookChapterAndStore(b1, 3);
         next(); checkBookChapterAndStore(b2, 1);
         next(); checkBookChapterAndStore(b2, 2);
+        next(); checkBookChapterAndStore(b0, 1);
+        next(); checkBookChapterAndStore(b0, 2);
+        next(); checkBookChapterAndStore(b0, 3);
+        next(); checkBookChapterAndStore(b0, 4);
+        next(); checkBookChapterAndStore(b0, 5);
+        next(); checkBookChapterAndStore(b1, 1);
+        next(); checkBookChapterAndStore(b1, 2);
+        next(); checkBookChapterAndStore(b1, 3);
       });
 
       test('should +0 chaptersRead', () {
