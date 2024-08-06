@@ -21,13 +21,12 @@ class Feed with ChangeNotifier {
   double get progress => readingList.progressTo(bookIndex, chaptersRead);
 
   /// methods
-  void _nextBook() {
-    book = readingList[(readingList.indexOf(book) + 1) % readingList.count];
-  }
-
   void nextChapter() {
     assert(isChapterRead);
-    if (++chapter > book.chapterCount) { chapter = 1; _nextBook(); }
+    if (++chapter > book.chapterCount) {
+      book = readingList[(bookIndex + 1) % readingList.count];
+      chapter = 1;
+    }
     isChapterRead = false;
     saveState(); notifyListeners();
   }
