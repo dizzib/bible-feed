@@ -22,9 +22,7 @@ class Feed with ChangeNotifier {
 
   /// methods
   void nextBook() {
-    int index = readingList.indexOf(book);
-    index = ++index % readingList.count;
-    book = readingList[index];
+    book = readingList[(readingList.indexOf(book) + 1) % readingList.count];
   }
 
   void nextChapter() {
