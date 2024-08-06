@@ -40,6 +40,8 @@ platform :android do
       mapping_paths: [ENV['SYMBOLS_FILE_PATH'], ENV['MAPPING_FILE_PATH']],
       release_status: 'draft',
       skip_upload_aab: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
       track: 'internal',
       version_code: $vcode,
     )
