@@ -82,7 +82,7 @@ void main() {
         expect(f.nextChapter, throwsAssertionError);
       });
 
-      test('should +1 chapter +0 book, or +1 book and reset chapter if last chapter, and store', () {
+      test('full cycle: should advance/reset chapter and book, and store', () {
         next(); checkBookChapterAndStore(b1, 3);
         next(); checkBookChapterAndStore(b2, 1);
         next(); checkBookChapterAndStore(b2, 2);
