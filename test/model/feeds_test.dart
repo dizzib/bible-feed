@@ -1,20 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:clock/clock.dart';
-import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
-import 'package:bible_feed/model/reading_list.dart';
 import 'package:bible_feed/util/clock.dart';
 import 'package:bible_feed/util/store.dart';
+import '_test_data.dart';
 
 void main() {
-  var b0 = const Book('b0', 'Book0', 5);
-  var b1 = const Book('b1', 'Book1', 3);
-  var b2 = const Book('b2', 'Book2', 2);
-  var l0 = ReadingList('l0', 'Reading List 0', [b0]);
-  var l1 = ReadingList('l1', 'Reading List 1', [b1, b2]);
-
   late Feed f0, f1;
   late Feeds fds;
 

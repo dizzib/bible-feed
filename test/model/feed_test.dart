@@ -2,34 +2,31 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/model/reading_list.dart';
 import 'package:bible_feed/util/date.dart';
 import 'package:bible_feed/util/store.dart';
+import '_test_data.dart';
 
 void main() {
-  var b0 = const Book('b0', 'Book1', 5);
-  var b1 = const Book('b1', 'Book1', 3);
-  var b2 = const Book('b2', 'Book1', 2);
   late Feed f;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({
-      'rl0.book': 'b1',
-      'rl0.chapter': 2,
-      'rl0.isChapterRead': true,
-      'rl0.dateLastSaved': '2024-05-10T14:33:25.470094',
+      'l2.book': 'b1',
+      'l2.chapter': 2,
+      'l2.isChapterRead': true,
+      'l2.dateLastSaved': '2024-05-10T14:33:25.470094',
     });
 
     await Store.init();
-    f = Feed(ReadingList('rl0', 'Book list', [b0, b1, b2]));
+    f = Feed(l2);
   });
 
   /// helpers
 
-  String getStoredBookKey() => Store.getString('rl0.book')!;
-  int getStoredChapter() => Store.getInt('rl0.chapter')!;
-  bool getStoredIsChapterRead() => Store.getBool('rl0.isChapterRead')!;
-  DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('rl0.dateLastSaved')!);
+  String getStoredBookKey() => Store.getString('l2.book')!;
+  int getStoredChapter() => Store.getInt('l2.chapter')!;
+  bool getStoredIsChapterRead() => Store.getBool('l2.isChapterRead')!;
+  DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('l2.dateLastSaved')!);
 
   void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
     expect(f.book, expectedBook);
