@@ -96,7 +96,7 @@ void main() {
       });
     });
 
-    test('setBookAndChapter should set book/chapter and store', () {
+    test('setBookAndChapter should set book/chapter, reset isChapterRead, and store', () {
       f.setBookAndChapter(0, 4);
       checkBookChapterAndStore(b0, 4);
       expect(f.isChapterRead, false);
