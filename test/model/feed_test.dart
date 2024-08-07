@@ -21,22 +21,7 @@ void main() {
     f = Feed(l2);
   });
 
-  /// helpers
-
-  String getStoredBookKey() => Store.getString('l2.book')!;
-  int getStoredChapter() => Store.getInt('l2.chapter')!;
-  bool getStoredIsChapterRead() => Store.getBool('l2.isChapterRead')!;
   DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('l2.dateLastSaved')!);
-
-  void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
-    expect(f.book, expectedBook);
-    expect(f.chapter, expectedChapter);
-    expect(getStoredBookKey(), expectedBook.key);
-    expect(getStoredChapter(), expectedChapter);
-    expect(getStoredDateLastSaved().date, DateTime.now().date);
-  }
-
-  /// tests
 
   test('constructor should load state from store', () {
     expect(f.book, b1);
@@ -71,6 +56,14 @@ void main() {
   });
 
   group('method', () {
+    void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
+      expect(f.book, expectedBook);
+      expect(f.chapter, expectedChapter);
+      expect(Store.getString('l2.book')!, expectedBook.key);
+      expect(Store.getInt('l2.chapter')!, expectedChapter);
+      expect(getStoredDateLastSaved().date, DateTime.now().date);
+    }
+
     group('nextChapter', () {
       next() { f.isChapterRead = true; f.nextChapter(); }
 
@@ -110,8 +103,13 @@ void main() {
     });
 
     test('toggleIsChapterRead should toggle and store', () {
-      f.toggleIsChapterRead(); expect(f.isChapterRead, false); expect(getStoredIsChapterRead(), false);
-      f.toggleIsChapterRead(); expect(f.isChapterRead, true); expect(getStoredIsChapterRead(), true);
+      void checkIsChapterRead(bool expected) {
+        expect(f.isChapterRead, expected);
+        expect(Store.getBool('l2.isChapterRead')!, expected);
+      }
+
+      f.toggleIsChapterRead(); checkIsChapterRead(false);
+      f.toggleIsChapterRead(); checkIsChapterRead(true);
       checkBookChapterAndStore(b1, 2);  // ensure no side effects
     });
   });
