@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../util/build_context.dart';
 
 // highlight selected item
 class ListWheelHighlight extends StatelessWidget {
@@ -8,13 +9,12 @@ class ListWheelHighlight extends StatelessWidget {
 
   @override
   build(context) {
-    var isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Align(
       alignment: Alignment.center,
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: isDarkMode ? Colors.red : Colors.amber,
+          color: context.isDarkMode ? Colors.red : Colors.amber,
           borderRadius: BorderRadius.circular(8.0),
         ),
       )
