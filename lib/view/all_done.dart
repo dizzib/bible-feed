@@ -43,13 +43,13 @@ class AllDone extends StatelessWidget {
 
     // auto-show dialog once only
     if (hasEverAdvanced != true) {  // can be null
-      Future.delayed(Duration.zero, () => showAlert());
+      Future.delayed(Duration.zero, showAlert);
     }
 
     return FloatingActionButton(
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
-      onPressed: () => showAlert(),
+      onPressed: showAlert,
       shape: const CircleBorder(),
       child: const Icon(Icons.done, size: 35, ),
     );
