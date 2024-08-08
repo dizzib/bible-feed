@@ -34,7 +34,7 @@ class ListWheelGradient extends StatelessWidget {
 
   @override
   build(context) {
-    var surfaceColor = context.surface;
+    var surfaceColor = context.theme.colorScheme.surfaceContainer;
     return Align(
       alignment: begin,
       child: LayoutBuilder(
@@ -45,7 +45,7 @@ class ListWheelGradient extends StatelessWidget {
               gradient: LinearGradient(
                 begin: begin,
                 end: end,
-                colors: [surfaceColor, surfaceColor.withOpacity(0.0)]
+                colors: [surfaceColor.withOpacity(0.0), surfaceColor.withOpacity(1.0)]
               )
             ),
           )
