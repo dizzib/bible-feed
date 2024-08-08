@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../util/build_context.dart';
 
 class AllDone extends StatelessWidget {
   final Function() advance;
@@ -11,51 +12,46 @@ class AllDone extends StatelessWidget {
 
   @override
   build(context) {
-    void showAlert() {
-      HapticFeedback.lightImpact();
+    void showAllDoneDialog() {
       Text getText(String text, [double size = 16]) => Text(text, style: TextStyle(fontSize: size));
-      showDialog(
-        context: context,
-        builder: (_) => BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-          child: CupertinoAlertDialog(
-            title: getText('All done!', 22),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: [
-                  getText('Lists advance at midnight.'),
-                  getText('Advance now?'),
-                ],
-              ),
+      context.showBlurBackgroundDialog(
+        CupertinoAlertDialog(
+          title: getText('All done!', 22),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                getText('Lists advance at midnight.'),
+                getText('Advance now?'),
+              ],
             ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  HapticFeedback.lightImpact();
-                  Navigator.pop(context);
-                },
-                child: getText('No'),
-              ),
-              TextButton(
-                onPressed: () {
-                  HapticFeedback.lightImpact();
-                  advance();
-                },  // dialog is dismissed in FeedsView
-                child: getText('Yes'),
-              ),
-            ],
-          )
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                Navigator.pop(context);
+              },
+              child: getText('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                advance();
+              },  // dialog is dismissed in FeedsView
+              child: getText('Yes'),
+            ),
+          ],
         )
       );
     }
 
     // auto-show dialog once only
-    if (!hasEverAdvanced) Future.delayed(Duration.zero, showAlert);
+    if (!hasEverAdvanced) Future.delayed(Duration.zero, showAllDoneDialog);
 
     return FloatingActionButton(
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
-      onPressed: showAlert,
+      onPressed: showAllDoneDialog,
       shape: const CircleBorder(),
       child: const Icon(Icons.done, size: 35, ),
     );

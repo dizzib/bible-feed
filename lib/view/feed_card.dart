@@ -4,24 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../model/feed.dart';
+import '../util/build_context.dart';
 import 'book_chapter_dialog.dart';
 
 class FeedCard extends StatelessWidget {
   @override
   build(context) {
     var feed = context.watch<Feed>();
-
-    showBookChapterDialog() {
-      HapticFeedback.lightImpact();
-      showDialog(
-        context: context,
-        builder: (_) =>
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-            child: BookChapterDialog(feed)
-          )
-      );
-    }
 
     titleBar() =>
       Row(
@@ -38,7 +27,7 @@ class FeedCard extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.unfold_more),
-            onPressed: showBookChapterDialog,
+            onPressed: () => context.showBlurBackgroundDialog(BookChapterDialog(feed))
           ),
         ],
       );
@@ -77,7 +66,7 @@ class FeedCard extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           enableFeedback: false,
-          onLongPress: showBookChapterDialog,
+          onLongPress: () => context.showBlurBackgroundDialog(BookChapterDialog(feed)),
           onTap: () {
             HapticFeedback.lightImpact();
             feed.toggleIsChapterRead();

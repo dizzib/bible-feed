@@ -1,4 +1,6 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 extension BuildContextEntension<T> on BuildContext {
   ThemeData get theme => Theme.of(this);
@@ -9,4 +11,16 @@ extension BuildContextEntension<T> on BuildContext {
   Color get primaryColorLight => theme.primaryColorLight;
   Color get primaryColorByMode => _isDarkMode ? primaryColorDark : primaryColorLight;
   Color get backgroundColor => theme.colorScheme.background;
+
+  // dialog
+  Future<T?> showBlurBackgroundDialog(Widget child) {
+    HapticFeedback.lightImpact();
+    return showDialog(
+      context: this,
+      builder: (_) => BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: child,
+      )
+    );
+  }
 }
