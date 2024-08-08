@@ -59,8 +59,9 @@ class FeedCard extends StatelessWidget {
       );
 
     return Opacity(
-      opacity: feed.isChapterRead ? 0.2 : 1,
+      opacity: feed.isChapterRead ? 0.25 : 1,
       child: Card(
+        color: feed.isChapterRead ? context.surfaceContainerLowest : context.surfaceContainerLow,
         elevation: feed.isChapterRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
@@ -79,7 +80,10 @@ class FeedCard extends StatelessWidget {
                     visible: constraints.maxHeight > 99,
                     child: titleBar()
                   ),
-                  LinearProgressIndicator(value: feed.progress),
+                  LinearProgressIndicator(
+                    backgroundColor: context.surface,
+                    value: feed.progress
+                  ),
                   bookChapter(
                     fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
                   )

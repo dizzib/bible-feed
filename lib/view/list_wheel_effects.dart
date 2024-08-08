@@ -14,7 +14,7 @@ class ListWheelHighlight extends StatelessWidget {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: context.primaryColorByMode,
+          color: context.theme.colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(8.0),
         ),
       )
@@ -34,7 +34,7 @@ class ListWheelGradient extends StatelessWidget {
 
   @override
   build(context) {
-    var surfaceColor = Theme.of(context).colorScheme.surface;
+    var surfaceColor = context.surface;
     return Align(
       alignment: begin,
       child: LayoutBuilder(

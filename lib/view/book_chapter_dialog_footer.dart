@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../model/book.dart';
 import '../model/reading_list.dart';
 import '../view/list_wheel_state.dart';
+import '../util/build_context.dart';
 
 class BookChapterDialogFooter extends StatelessWidget {
   final ReadingList readingList;
@@ -19,7 +20,10 @@ class BookChapterDialogFooter extends StatelessWidget {
 
     return Column(
       children: [
-        LinearProgressIndicator(value: readingList.progressTo(bookIndex, chapter)),
+        LinearProgressIndicator(
+          backgroundColor: context.surface,
+          value: readingList.progressTo(bookIndex, chapter)
+        ),
         Row(
           children: [
             Expanded(

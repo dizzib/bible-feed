@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/feeds.dart';
-import '../util/build_context.dart';
 import 'all_done.dart';
 import 'feed_card.dart';
 
@@ -24,18 +23,15 @@ class FeedsView extends StatelessWidget {
       );
 
     return Scaffold(
-      body: ProgressIndicatorTheme(
-        data: ProgressIndicatorThemeData(linearTrackColor: context.backgroundColor),
-        child: Column(  // Columns and Rows work better than a GridView
-          children: [
-            for (int index in [0, 2, 4, 6, 8])
-            Expanded(
-              child: Row(
-                children: [feedCard(index), feedCard(index + 1)]
-              )
+      body: Column(  // Columns and Rows work better than a GridView
+        children: [
+          for (int index in [0, 2, 4, 6, 8])
+          Expanded(
+            child: Row(
+              children: [feedCard(index), feedCard(index + 1)]
             )
-          ]
-        ),
+          )
+        ]
       ),
       floatingActionButton: feeds.areChaptersRead ? AllDone(
         feeds.forceAdvance,

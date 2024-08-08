@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'data/reading_lists.dart';
 import 'model/feeds.dart';
+import 'util/build_context.dart';
 import 'util/store.dart';
 import 'view/feeds_view.dart';
 
@@ -38,16 +39,29 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 
   @override
-  build(_) =>
-    SafeArea(
+  build(context) {
+    theme(Brightness brightness) =>
+      ThemeData(
+        useMaterial3: true,
+        cardTheme: CardTheme(surfaceTintColor: context.surfaceTint),
+        // progressIndicatorTheme:ProgressIndicatorThemeData(linearTrackColor: context.surface),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xffbb86fc),
+          brightness: brightness,
+        ),
+      );
+
+    return SafeArea(
       child: MaterialApp(
         title: 'Bible Feed',
-        darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
+        theme: theme(Brightness.light),
+        darkTheme: theme(Brightness.dark),
         home: ChangeNotifierProvider<Feeds>(
           create: (_) => feeds,
           child: FeedsView(feeds),
         ),
       ),
     );
+  }
 }
