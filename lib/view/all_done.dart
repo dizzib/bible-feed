@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 class AllDone extends StatelessWidget {
   final Function() advance;
-  final bool? hasEverAdvanced;
+  final bool hasEverAdvanced;
 
   const AllDone(this.advance, this.hasEverAdvanced);
 
@@ -50,9 +50,7 @@ class AllDone extends StatelessWidget {
     }
 
     // auto-show dialog once only
-    if (hasEverAdvanced != true) {  // can be null
-      Future.delayed(Duration.zero, showAlert);
-    }
+    if (!hasEverAdvanced) Future.delayed(Duration.zero, showAlert);
 
     return FloatingActionButton(
       backgroundColor: Colors.green,
