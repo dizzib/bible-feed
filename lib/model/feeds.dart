@@ -28,7 +28,7 @@ class Feeds with ChangeNotifier {
 
   void maybeAdvance() {
     if (!areChaptersRead) return;
-    var savedDates = _feeds.map((f) => f.dateLastSaved).toList();
+    var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
     var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
     if (!latestSavedDate.isToday) forceAdvance();
   }

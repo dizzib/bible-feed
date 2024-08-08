@@ -15,7 +15,7 @@ class Feed with ChangeNotifier {
   late Book _book;
   late int _chapter;
   late bool _isChapterRead;
-  late DateTime _dateLastSaved;  // making this non-nullable simplifies things in feeds.dart
+  late DateTime? _dateLastSaved;
 
   /// calculated getters
   int get bookIndex => readingList.indexOf(book);

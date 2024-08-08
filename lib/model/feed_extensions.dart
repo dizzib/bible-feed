@@ -4,12 +4,12 @@ extension StateProperties on Feed {
   Book get book => _book;
   int get chapter => _chapter;
   bool get isChapterRead => _isChapterRead;
-  DateTime get dateLastSaved => _dateLastSaved;
+  DateTime? get dateLastSaved => _dateLastSaved;
 
   @visibleForTesting set book(Book b) => _book = b;
   @visibleForTesting set chapter(int c) { assert(c > 0); assert(c <= book.chapterCount); _chapter = c; }
   @visibleForTesting set isChapterRead(bool val) => _isChapterRead = val;
-  @visibleForTesting set dateLastSaved(DateTime d) => _dateLastSaved = d;
+  @visibleForTesting set dateLastSaved(DateTime? d) => _dateLastSaved = d;
 }
 
 extension StatePersistance on Feed {
@@ -22,7 +22,7 @@ extension StatePersistance on Feed {
     book = readingList.getBook(Store.getString(_storeKeyBookKey) ?? readingList[0].key);
     chapter = Store.getInt(_storeKeyChapter) ?? 1;
     isChapterRead = Store.getBool(_storeKeyIsChapterRead) ?? false;
-    dateLastSaved = DateTime.parse(Store.getString(_storeKeyDateLastSaved) ?? DateTime(0).toIso8601String());
+    dateLastSaved = DateTime.tryParse(Store.getString(_storeKeyDateLastSaved) ?? '');
   }
 
   void saveState() {
@@ -30,6 +30,6 @@ extension StatePersistance on Feed {
     Store.setString(_storeKeyBookKey, book.key);
     Store.setInt(_storeKeyChapter, chapter);
     Store.setBool(_storeKeyIsChapterRead, isChapterRead);
-    Store.setString(_storeKeyDateLastSaved, dateLastSaved.toIso8601String());
+    Store.setString(_storeKeyDateLastSaved, dateLastSaved!.toIso8601String());
   }
 }

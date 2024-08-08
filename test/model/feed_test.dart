@@ -32,7 +32,7 @@ void main() {
       expect(f.book, b0);
       expect(f.chapter, 1);
       expect(f.isChapterRead, false);
-      expect(f.dateLastSaved, DateTime(0));
+      expect(f.dateLastSaved, null);
     });
 
     test('should load state from non-empty store', () {
