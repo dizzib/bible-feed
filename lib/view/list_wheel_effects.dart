@@ -14,7 +14,7 @@ class ListWheelHighlight extends StatelessWidget {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: context.isDarkMode ? context.primaryColorDark : context.primaryColorLight,
+          color: context.primaryColorByMode,
           borderRadius: BorderRadius.circular(8.0),
         ),
       )
