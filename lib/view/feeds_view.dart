@@ -25,7 +25,7 @@ class FeedsView extends StatelessWidget {
 
     return Scaffold(
       body: ProgressIndicatorTheme(
-        data: ProgressIndicatorThemeData(linearTrackColor: context.background),
+        data: ProgressIndicatorThemeData(linearTrackColor: context.backgroundColor),
         child: Column(  // Columns and Rows work better than a GridView
           children: [
             for (int index in [0, 2, 4, 6, 8])
