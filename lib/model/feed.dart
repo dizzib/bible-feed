@@ -9,13 +9,13 @@ part 'feed_extensions.dart';
 class Feed with ChangeNotifier {
   final ReadingList readingList;
 
-  Feed(this.readingList) : _book = readingList[0] { loadState(); notifyListeners(); }
+  Feed(this.readingList) { loadStateOrDefaults(); notifyListeners(); }
 
   /// state
-  Book _book;
-  int _chapter = 1;
-  bool _isChapterRead = false;
-  DateTime _dateLastSaved = DateTime(0);  // making this non-nullable simplifies things in feeds.dart
+  late Book _book;
+  late int _chapter;
+  late bool _isChapterRead;
+  late DateTime _dateLastSaved;  // making this non-nullable simplifies things in feeds.dart
 
   /// calculated getters
   int get bookIndex => readingList.indexOf(book);

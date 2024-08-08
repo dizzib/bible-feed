@@ -18,13 +18,11 @@ extension StatePersistance on Feed {
   String get _storeKeyDateLastSaved => '${readingList.key}.dateLastSaved';
   String get _storeKeyIsChapterRead => '${readingList.key}.isChapterRead';
 
-  void loadState() {
-    var bookKey = Store.getString(_storeKeyBookKey);
-    if (bookKey == null) return;  // on first run, this will be null
-    book = readingList.getBook(bookKey);
-    chapter = Store.getInt(_storeKeyChapter)!;
-    isChapterRead = Store.getBool(_storeKeyIsChapterRead)!;
-    dateLastSaved = DateTime.parse(Store.getString(_storeKeyDateLastSaved)!);
+  void loadStateOrDefaults() {
+    book = readingList.getBook(Store.getString(_storeKeyBookKey) ?? readingList[0].key);
+    chapter = Store.getInt(_storeKeyChapter) ?? 1;
+    isChapterRead = Store.getBool(_storeKeyIsChapterRead) ?? false;
+    dateLastSaved = DateTime.parse(Store.getString(_storeKeyDateLastSaved) ?? DateTime(0).toIso8601String());
   }
 
   void saveState() {
