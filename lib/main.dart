@@ -42,9 +42,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   build(context) {
     theme(Brightness brightness) =>
       ThemeData(
-        useMaterial3: true,
         cardTheme: CardTheme(surfaceTintColor: context.surfaceTint),
-        // progressIndicatorTheme:ProgressIndicatorThemeData(linearTrackColor: context.surface),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xffbb86fc),
           brightness: brightness,
