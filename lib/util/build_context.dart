@@ -12,6 +12,10 @@ extension BuildContextEntension<T> on BuildContext {
   Color get primaryColorByMode => _isDarkMode ? primaryColorDark : primaryColorLight;
   Color get backgroundColor => theme.colorScheme.background;
 
+  // text styles
+  TextStyle? get titleLarge => theme.textTheme.titleLarge;
+  TextStyle? get bodyLarge => theme.textTheme.bodyLarge;
+
   // dialog
   Future<T?> showBlurBackgroundDialog(Widget child) {
     HapticFeedback.lightImpact();

@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,15 +12,14 @@ class AllDone extends StatelessWidget {
   @override
   build(context) {
     void showAllDoneDialog() {
-      Text getText(String text, [double size = 16]) => Text(text, style: TextStyle(fontSize: size));
       context.showBlurBackgroundDialog(
         CupertinoAlertDialog(
-          title: getText('All done!', 22),
+          title: Text('All done!', style: context.titleLarge),
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                getText('Lists advance at midnight.'),
-                getText('Advance now?'),
+                Text('Lists advance at midnight.', style: context.bodyLarge),
+                Text('Advance now?', style: context.bodyLarge),
               ],
             ),
           ),
@@ -31,14 +29,14 @@ class AllDone extends StatelessWidget {
                 HapticFeedback.lightImpact();
                 Navigator.pop(context);
               },
-              child: getText('No'),
+              child: Text('No', style: context.bodyLarge),
             ),
             TextButton(
               onPressed: () {
                 HapticFeedback.lightImpact();
                 advance();
               },  // dialog is dismissed in FeedsView
-              child: getText('Yes'),
+              child: Text('Yes', style: context.bodyLarge),
             ),
           ],
         )
