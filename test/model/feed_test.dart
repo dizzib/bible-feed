@@ -9,25 +9,38 @@ import '_test_data.dart';
 void main() {
   late Feed f;
 
+  initFeed(Map<String, Object> storeValues) async {
+    SharedPreferences.setMockInitialValues(storeValues);
+    await Store.init();
+    f = Feed(l2);
+  }
+
+  DateTime yesterday = DateTime.now().addDays(-1);
+
   setUp(() async {
-    SharedPreferences.setMockInitialValues({
+    await initFeed({
       'l2.book': 'b1',
       'l2.chapter': 2,
       'l2.isChapterRead': true,
-      'l2.dateLastSaved': '2024-05-10T14:33:25.470094',
+      'l2.dateLastSaved': yesterday.toIso8601String(),
     });
-
-    await Store.init();
-    f = Feed(l2);
   });
 
-  DateTime getStoredDateLastSaved() => DateTime.parse(Store.getString('l2.dateLastSaved')!);
+  group('constructor', () {
+    test('should load defaults if store is empty', () async {
+      await initFeed({});
+      expect(f.book, b0);
+      expect(f.chapter, 1);
+      expect(f.isChapterRead, false);
+      expect(f.dateLastSaved, DateTime(0));
+    });
 
-  test('constructor should load state from store', () {
-    expect(f.book, b1);
-    expect(f.chapter, 2);
-    expect(f.isChapterRead, true);
-    expect(f.dateLastSaved, getStoredDateLastSaved());
+    test('should load state from non-empty store', () {
+      expect(f.book, b1);
+      expect(f.chapter, 2);
+      expect(f.isChapterRead, true);
+      expect(f.dateLastSaved, yesterday);
+    });
   });
 
   group('property', () {
@@ -61,7 +74,7 @@ void main() {
       expect(f.chapter, expectedChapter);
       expect(Store.getString('l2.book')!, expectedBook.key);
       expect(Store.getInt('l2.chapter')!, expectedChapter);
-      expect(getStoredDateLastSaved().date, DateTime.now().date);
+      expect(DateTime.parse(Store.getString('l2.dateLastSaved')!).date, DateTime.now().date);
     }
 
     group('nextChapter', () {
