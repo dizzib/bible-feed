@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../model/feed.dart';
@@ -10,14 +11,17 @@ class FeedCard extends StatelessWidget {
   build(context) {
     var feed = context.watch<Feed>();
 
-    showBookChapterDialog() => showDialog(
-      context: context,
-      builder: (_) =>
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-          child: BookChapterDialog(feed)
-        )
-    );
+    showBookChapterDialog() {
+      HapticFeedback.lightImpact();
+      showDialog(
+        context: context,
+        builder: (_) =>
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+            child: BookChapterDialog(feed)
+          )
+      );
+    }
 
     titleBar() =>
       Row(
@@ -72,8 +76,12 @@ class FeedCard extends StatelessWidget {
         elevation: feed.isChapterRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
+          enableFeedback: false,
           onLongPress: showBookChapterDialog,
-          onTap: feed.toggleIsChapterRead,
+          onTap: () {
+            HapticFeedback.lightImpact();
+            feed.toggleIsChapterRead();
+          },
           child: LayoutBuilder(
             builder: (_, constraints) =>
               Column(
