@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AllDone extends StatelessWidget {
   final Function() advance;
@@ -11,29 +12,36 @@ class AllDone extends StatelessWidget {
   @override
   build(context) {
     void showAlert() {
-      Text getTextWidget(String text, [double size = 16]) { return Text(text, style: TextStyle(fontSize: size)); }
+      HapticFeedback.lightImpact();
+      Text getText(String text, [double size = 16]) => Text(text, style: TextStyle(fontSize: size));
       showDialog(
         context: context,
         builder: (_) => BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
           child: CupertinoAlertDialog(
-            title: getTextWidget('All done!', 22),
+            title: getText('All done!', 22),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
-                  getTextWidget('Lists advance at midnight.'),
-                  getTextWidget('Advance now?'),
+                  getText('Lists advance at midnight.'),
+                  getText('Advance now?'),
                 ],
               ),
             ),
             actions: [
               TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: getTextWidget('No'),
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  Navigator.pop(context);
+                },
+                child: getText('No'),
               ),
               TextButton(
-                onPressed: () { advance(); },  // dialog is dismissed in FeedsView
-                child: getTextWidget('Yes'),
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  advance();
+                },  // dialog is dismissed in FeedsView
+                child: getText('Yes'),
               ),
             ],
           )
