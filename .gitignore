@@ -39,6 +39,7 @@ devtools_options.yaml
 .puro.json
 .test/
 build/
+flutter_jank_metrics_*.json
 #
 # build artifacts
 .dart_tool
