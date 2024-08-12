@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../view/list_wheel_effects.dart';
 import '../view/list_wheel_state.dart';
+import '../util/build_context.dart';
 
 // known issues with various wheel pickers...
 //
@@ -29,8 +30,7 @@ class ListWheel<T> extends StatelessWidget {
   @override
   build(context) {
     const magnification = 1.1;
-    var deviceTextScale = MediaQuery.of(context).textScaler.scale(1);  // from device settings
-    var itemExtent = textStyle.fontSize! * 1.4 * deviceTextScale;  // accomodate various text sizes
+    var itemExtent = textStyle.fontSize! * 1.4 * context.deviceTextScale;  // accomodate various text sizes
     var wheelState = Provider.of<ListWheelState<T>>(context, listen:false);
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
