@@ -5,6 +5,7 @@ import '../model/feed.dart';
 import '../view/book_chapter_dialog_footer.dart';
 import '../view/book_chapter_dialog_wheels.dart';
 import '../view/list_wheel_state.dart';
+import '../util/build_context.dart';
 
 class BookChapterDialog extends StatelessWidget {
   final Feed feed;
@@ -17,9 +18,18 @@ class BookChapterDialog extends StatelessWidget {
     final bookWheelState = ListWheelState<Book>(feed.bookIndex);
     final chapterWheelState = ListWheelState<int>(feed.chapter - 1);
 
+    // fix 3.19 -> 3.22 background color regression
+    Widget coloriseBackground(Widget child) =>
+      Container(
+        alignment: Alignment.center,
+        color: context.theme.colorScheme.surfaceContainerHigh,
+        child: child
+      );
+
     return LayoutBuilder(
       builder: (_, constraints) =>
         Dialog(
+          clipBehavior: Clip.hardEdge,
           child: Container(
             constraints: BoxConstraints(
               maxHeight: constraints.maxHeight * 0.8,
@@ -34,18 +44,20 @@ class BookChapterDialog extends StatelessWidget {
                 children: [
                   Visibility(
                     visible: constraints.maxHeight > 280,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        feed.readingList.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold
+                    child: coloriseBackground(
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          feed.readingList.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     )
                   ),
                   Expanded(child: BookChapterDialogWheels(feed.readingList)),
-                  BookChapterDialogFooter(feed.readingList, feed.setBookAndChapter)
+                  coloriseBackground(BookChapterDialogFooter(feed.readingList, feed.setBookAndChapter))
                 ],
               )
             )

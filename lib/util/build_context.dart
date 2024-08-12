@@ -8,6 +8,7 @@ extension BuildContextEntension<T> on BuildContext {
   // colors
   Color get surface => theme.colorScheme.surface;
   Color get surfaceTint => theme.colorScheme.surfaceTint;
+  Color get surfaceContainer => theme.colorScheme.surfaceContainer;
   Color get surfaceContainerLow => theme.colorScheme.surfaceContainerLow;
   Color get surfaceContainerLowest => theme.colorScheme.surfaceContainerLowest;
 
