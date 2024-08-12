@@ -18,19 +18,17 @@ class ListWheel<T> extends StatelessWidget {
   final T Function(int index) indexToItem;
   final String Function(T item) itemToString;
   final int maxIndex;
-  final TextStyle textStyle;
 
   const ListWheel({
     required this.indexToItem,
     required this.itemToString,
     required this.maxIndex,
-    required this.textStyle,
   });
 
   @override
   build(context) {
     const magnification = 1.1;
-    var itemExtent = textStyle.fontSize! * 1.4 * context.deviceTextScale;  // accomodate various text sizes
+    var itemExtent = DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale;  // accomodate various text sizes
     var wheelState = Provider.of<ListWheelState<T>>(context, listen:false);
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
@@ -64,7 +62,7 @@ class ListWheel<T> extends StatelessWidget {
             childDelegate: ListWheelChildBuilderDelegate(
               builder: (_, int index) {
                 if (index < 0 || index > maxIndex) return null;
-                return Text(itemToString(indexToItem(index)), style: textStyle);
+                return Text(itemToString(indexToItem(index)));
               },
             ),
             controller: controller,

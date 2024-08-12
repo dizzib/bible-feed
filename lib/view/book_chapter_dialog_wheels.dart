@@ -20,26 +20,31 @@ class BookChapterDialogWheels extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (_, constraints) =>
-        Row(
-          children: [
-            SizedBox(
-              width: constraints.maxWidth * 0.8,
-              child: ListWheel<Book>(
-                indexToItem: (index) => readingList[index],
-                itemToString: (Book b) => b.name,
-                maxIndex: readingList.count - 1,
-                textStyle: getTextStyle(constraints),
-              )
-            ),
-            Flexible(
-              child: ListWheel<int>(
-                indexToItem: (index) => index + 1,
-                itemToString: (int chapter) => chapter.toString(),
-                maxIndex: readingList[Provider.of<ListWheelState<Book>>(context).index].chapterCount - 1,
-                textStyle: getTextStyle(constraints),
-              )
-            ),
-          ],
+        DefaultTextStyle(
+          style: TextStyle(
+            fontSize: (constraints.maxWidth < 200 || constraints.maxHeight < 190) ? 16 : 23,
+            fontWeight: FontWeight.w600,
+            overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: constraints.maxWidth * 0.8,
+                child: ListWheel<Book>(
+                  indexToItem: (index) => readingList[index],
+                  itemToString: (Book b) => b.name,
+                  maxIndex: readingList.count - 1,
+                )
+              ),
+              Flexible(
+                child: ListWheel<int>(
+                  indexToItem: (index) => index + 1,
+                  itemToString: (int chapter) => chapter.toString(),
+                  maxIndex: readingList[Provider.of<ListWheelState<Book>>(context).index].chapterCount - 1,
+                )
+              ),
+            ],
+          ),
         )
     );
   }
