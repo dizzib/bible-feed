@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 extension BuildContextEntension<T> on BuildContext {
+  // helper property getters
   bool get isDarkMode => MediaQuery.of(this).platformBrightness == Brightness.dark;
-
-  // themes and schemes
-  ThemeData get theme => Theme.of(this);
-  ColorScheme get colorScheme => theme.colorScheme;
-  TextTheme get textTheme => theme.textTheme;
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+  TextTheme get textTheme => Theme.of(this).textTheme;
 
   // dialog
   Future<T?> showBlurBackgroundDialog(Widget child) {
