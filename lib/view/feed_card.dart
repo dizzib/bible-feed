@@ -31,7 +31,7 @@ class FeedCard extends StatelessWidget {
         ],
       );
 
-    bookChapter({required double fontSize}) =>
+    bookChapter() =>
       Expanded(
         child: Padding(
           padding: const EdgeInsets.all(2.0),
@@ -43,14 +43,12 @@ class FeedCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: AutoSizeText(
                     feed.book.name,
-                    style: TextStyle(fontSize: fontSize),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
               AutoSizeText(
                 feed.chapter.toString(),
-                style: TextStyle(fontSize: fontSize),
                 maxLines: 1,
               ),
             ],
@@ -84,8 +82,11 @@ class FeedCard extends StatelessWidget {
                     backgroundColor: context.colorScheme.surface,
                     value: feed.progress
                   ),
-                  bookChapter(
-                    fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
+                  DefaultTextStyle(
+                    style: TextStyle(
+                      fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
+                    ),
+                    child: bookChapter(),
                   )
                 ],
               )
