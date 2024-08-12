@@ -8,19 +8,18 @@ class ListWheelHighlight extends StatelessWidget {
   const ListWheelHighlight({ required this.height, });
 
   @override
-  build(context) {
-    return Align(
+  build(context) =>
+    Align(
       alignment: Alignment.center,
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: context.colorScheme.primaryContainer,
+          color: context.colorScheme.tertiary,
           borderRadius: BorderRadius.circular(8.0),
         ),
       )
     );
   }
-}
 
 // background fade effect
 class ListWheelGradient extends StatelessWidget {
