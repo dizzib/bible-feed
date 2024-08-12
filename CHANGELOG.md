@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - haptic feedback
 
+### Changed
+- upgrade to flutter 3.22
+- match selector wheel highlight color with theme
+
 
 ## [1.1.2] - 2024-08-05
 
