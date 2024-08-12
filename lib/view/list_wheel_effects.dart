@@ -24,13 +24,9 @@ class ListWheelHighlight extends StatelessWidget {
 
 // background fade effect
 class ListWheelGradient extends StatelessWidget {
-  final Alignment begin;
-  final Alignment end;
+  final Alignment begin, end;
 
-  const ListWheelGradient({
-    required this.begin,
-    required this.end,
-  });
+  const ListWheelGradient({required this.begin, required this.end});
 
   @override
   build(context) {
@@ -44,7 +40,10 @@ class ListWheelGradient extends StatelessWidget {
               gradient: LinearGradient(
                 begin: begin,
                 end: end,
-                colors: [context.surfaceContainer.withOpacity(0.0), context.surfaceContainer]
+                colors: [
+                  context.surfaceContainerHigh.withOpacity(context.isDarkMode ? 0.0 : 1.0),
+                  context.surfaceContainerHigh.withOpacity(context.isDarkMode ? 1.0 : 0.0),
+                ]
               )
             ),
           )

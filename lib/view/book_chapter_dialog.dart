@@ -19,12 +19,8 @@ class BookChapterDialog extends StatelessWidget {
     final chapterWheelState = ListWheelState<int>(feed.chapter - 1);
 
     // fix 3.19 -> 3.22 background color regression
-    Widget coloriseBackground(Widget child) =>
-      Container(
-        alignment: Alignment.center,
-        color: context.theme.colorScheme.surfaceContainerHigh,
-        child: child
-      );
+    withBackground(Widget child) =>
+      Container(alignment: Alignment.center, color: context.surfaceContainerHigh, child: child);
 
     return LayoutBuilder(
       builder: (_, constraints) =>
@@ -44,7 +40,7 @@ class BookChapterDialog extends StatelessWidget {
                 children: [
                   Visibility(
                     visible: constraints.maxHeight > 280,
-                    child: coloriseBackground(
+                    child: withBackground(
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -57,7 +53,7 @@ class BookChapterDialog extends StatelessWidget {
                     )
                   ),
                   Expanded(child: BookChapterDialogWheels(feed.readingList)),
-                  coloriseBackground(BookChapterDialogFooter(feed.readingList, feed.setBookAndChapter))
+                  withBackground(BookChapterDialogFooter(feed.readingList, feed.setBookAndChapter))
                 ],
               )
             )
