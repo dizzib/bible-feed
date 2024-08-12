@@ -82,7 +82,7 @@ class FeedCard extends StatelessWidget {
                     backgroundColor: context.colorScheme.surface,
                     value: feed.progress
                   ),
-                  DefaultTextStyle(
+                  DefaultTextStyle.merge(
                     style: TextStyle(
                       fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
                     ),

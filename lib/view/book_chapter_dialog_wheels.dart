@@ -14,7 +14,7 @@ class BookChapterDialogWheels extends StatelessWidget {
   build(context) {
     return LayoutBuilder(
       builder: (_, constraints) =>
-        DefaultTextStyle(
+        DefaultTextStyle.merge(
           style: TextStyle(
             fontSize: (constraints.maxWidth < 200 || constraints.maxHeight < 190) ? 16 : 23,
             fontWeight: FontWeight.w600,
