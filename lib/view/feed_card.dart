@@ -69,27 +69,24 @@ class FeedCard extends StatelessWidget {
             HapticFeedback.lightImpact();
             feed.toggleIsChapterRead();
           },
-          child: LayoutBuilder(
-            builder: (_, constraints) =>
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Visibility(
-                    visible: constraints.maxHeight > 99,
-                    child: titleBar()
-                  ),
-                  LinearProgressIndicator(
-                    backgroundColor: context.colorScheme.surface,
-                    value: feed.progress
-                  ),
-                  DefaultTextStyle.merge(
-                    style: TextStyle(
-                      fontSize: (constraints.maxWidth < 300 || constraints.maxHeight < 80) ? 24 : 30
-                    ),
-                    child: bookChapter(),
-                  )
-                ],
-              )
+          child: LayoutBuilder(builder: (_, BoxConstraints c) =>
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Visibility(
+                  visible: c.maxHeight > 99,
+                  child: titleBar()
+                ),
+                LinearProgressIndicator(
+                  backgroundColor: context.colorScheme.surface,
+                  value: feed.progress
+                ),
+                DefaultTextStyle.merge(
+                  style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
+                  child: bookChapter(),
+                )
+              ],
+            )
           ),
         ),
       ),
