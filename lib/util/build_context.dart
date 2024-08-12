@@ -4,19 +4,11 @@ import 'package:flutter/services.dart';
 
 extension BuildContextEntension<T> on BuildContext {
   bool get isDarkMode => MediaQuery.of(this).platformBrightness == Brightness.dark;
+
+  // themes and schemes
   ThemeData get theme => Theme.of(this);
-
-  // colors
-  Color get surface => theme.colorScheme.surface;
-  Color get surfaceTint => theme.colorScheme.surfaceTint;
-  Color get surfaceContainer => theme.colorScheme.surfaceContainer;
-  Color get surfaceContainerHigh => theme.colorScheme.surfaceContainerHigh;
-  Color get surfaceContainerLow => theme.colorScheme.surfaceContainerLow;
-  Color get surfaceContainerLowest => theme.colorScheme.surfaceContainerLowest;
-
-  // text styles
-  TextStyle? get titleLarge => theme.textTheme.titleLarge;
-  TextStyle? get bodyLarge => theme.textTheme.bodyLarge;
+  ColorScheme get colorScheme => theme.colorScheme;
+  TextTheme get textTheme => theme.textTheme;
 
   // dialog
   Future<T?> showBlurBackgroundDialog(Widget child) {

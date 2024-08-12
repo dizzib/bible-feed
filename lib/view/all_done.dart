@@ -14,12 +14,12 @@ class AllDone extends StatelessWidget {
     void showAllDoneDialog() {
       context.showBlurBackgroundDialog(
         CupertinoAlertDialog(
-          title: Text('All done!', style: context.titleLarge),
+          title: Text('All done!', style: context.textTheme.titleLarge),
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                Text('Lists advance at midnight.', style: context.bodyLarge),
-                Text('Advance now?', style: context.bodyLarge),
+                Text('Lists advance at midnight.', style: context.textTheme.bodyLarge),
+                Text('Advance now?', style: context.textTheme.bodyLarge),
               ],
             ),
           ),

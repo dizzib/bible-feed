@@ -20,7 +20,7 @@ class BookChapterDialog extends StatelessWidget {
 
     // fix 3.19 -> 3.22 background color regression
     withBackground(Widget child) =>
-      Container(alignment: Alignment.center, color: context.surfaceContainerHigh, child: child);
+      Container(alignment: Alignment.center, color: context.colorScheme.surfaceContainerHigh, child: child);
 
     return LayoutBuilder(
       builder: (_, constraints) =>

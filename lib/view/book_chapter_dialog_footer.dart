@@ -21,7 +21,7 @@ class BookChapterDialogFooter extends StatelessWidget {
     return Column(
       children: [
         LinearProgressIndicator(
-          backgroundColor: context.surface,
+          backgroundColor: context.colorScheme.surface,
           value: readingList.progressTo(bookIndex, chapter)
         ),
         Row(

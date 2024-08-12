@@ -41,8 +41,8 @@ class ListWheelGradient extends StatelessWidget {
                 begin: begin,
                 end: end,
                 colors: [
-                  context.surfaceContainerHigh.withOpacity(context.isDarkMode ? 0.0 : 1.0),
-                  context.surfaceContainerHigh.withOpacity(context.isDarkMode ? 1.0 : 0.0),
+                  context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 0.0 : 1.0),
+                  context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 1.0 : 0.0),
                 ]
               )
             ),
