@@ -29,14 +29,14 @@ class AllDone extends StatelessWidget {
                 HapticFeedback.lightImpact();
                 Navigator.pop(context);
               },
-              child: Text('No', style: context.bodyLarge),
+              child: const Text('No'),
             ),
             TextButton(
               onPressed: () {
                 HapticFeedback.lightImpact();
                 advance();
               },  // dialog is dismissed in FeedsView
-              child: Text('Yes', style: context.bodyLarge),
+              child: const Text('Yes'),
             ),
           ],
         )
