@@ -44,8 +44,9 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       ThemeData(
         cardTheme: CardTheme(surfaceTintColor: context.colorScheme.surfaceTint),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xffbb86fc),
           brightness: brightness,
+          seedColor: const Color(0xffbb86fc),
+          tertiary: brightness == Brightness.dark ? Colors.red : Colors.amber,
         ),
       );
 
