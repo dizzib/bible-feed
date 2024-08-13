@@ -7,8 +7,6 @@ import 'util/store.dart';
 import 'view/feeds_view.dart';
 import 'on_resume_widget.dart';
 
-final feeds = Feeds(readingLists);
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Store.init();
@@ -16,6 +14,7 @@ void main() async {
 }
 
 class App extends StatelessWidget {
+  @visibleForTesting static final feeds = Feeds(readingLists);
   @override
   build(context) {
     theme(Brightness brightness) =>

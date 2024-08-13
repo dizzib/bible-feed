@@ -6,7 +6,6 @@ import 'feed_card.dart';
 
 class FeedsView extends StatelessWidget {
   final Feeds feeds;
-
   const FeedsView(this.feeds);
 
   @override

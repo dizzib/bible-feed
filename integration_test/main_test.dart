@@ -33,7 +33,7 @@ void main() {
         1, 0
       ];
       for (int i = 0; i < 10; i++) {
-        var feed = bible_feed.feeds[i];
+        var feed = bible_feed.App.feeds[i];
         feed.setBookAndChapter(bookChapterState[i][0], bookChapterState[i][1]);
         feed.isChapterRead = chaptersReadState[i] == 1 ? true : false;
       }
