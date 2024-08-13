@@ -2,7 +2,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:bible_feed/main.dart' as app;
+import 'package:bible_feed/main.dart' as bible_feed;
 import 'package:bible_feed/model/feed.dart';
 
 void main() {
@@ -33,7 +33,7 @@ void main() {
         1, 0
       ];
       for (int i = 0; i < 10; i++) {
-        var feed = app.feeds[i];
+        var feed = bible_feed.feeds[i];
         feed.setBookAndChapter(bookChapterState[i][0], bookChapterState[i][1]);
         feed.isChapterRead = chaptersReadState[i] == 1 ? true : false;
       }
@@ -51,7 +51,7 @@ void main() {
       await b.takeScreenshot('$platform/02-dark--$name');
     }
 
-    app.main();
+    bible_feed.main();
     await t.pumpAndSettle();
 
     setState();
