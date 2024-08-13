@@ -15,12 +15,7 @@ void main() async {
   runApp(App());
 }
 
-class App extends StatefulWidget {
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
+class App extends StatelessWidget {
   @override
   build(context) {
     theme(Brightness brightness) =>
