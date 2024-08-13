@@ -5,6 +5,7 @@ import 'model/feeds.dart';
 import 'util/build_context.dart';
 import 'util/store.dart';
 import 'view/feeds_view.dart';
+import 'on_resume_widget.dart';
 
 final feeds = Feeds(readingLists);
 
@@ -19,25 +20,7 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> with WidgetsBindingObserver {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.resumed) feeds.maybeAdvance();
-  }
-
+class _AppState extends State<App> {
   @override
   build(context) {
     theme(Brightness brightness) =>
@@ -56,11 +39,14 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         themeMode: ThemeMode.system,
         theme: theme(Brightness.light),
         darkTheme: theme(Brightness.dark),
-        home: ChangeNotifierProvider<Feeds>(
-          create: (_) => feeds,
-          child: FeedsView(feeds),
+        home: OnResumeWidget(
+          onResume: feeds.maybeAdvance,
+          child: ChangeNotifierProvider<Feeds>(
+            create: (_) => feeds,
+            child: FeedsView(feeds),
+            ),
+          ),
         ),
-      ),
-    );
+      );
   }
 }
