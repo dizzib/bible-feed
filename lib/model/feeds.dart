@@ -11,7 +11,7 @@ class Feeds with ChangeNotifier {
 
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
     for (Feed f in _feeds) { f.addListener(() => notifyListeners()); }
-    _cron.schedule(Schedule.parse('0 0 * * *'), () async { maybeAdvance(); });
+    _cron.schedule(Schedule.parse('0 0 * * *'), () async => maybeAdvance());
     maybeAdvance();
   }
 
