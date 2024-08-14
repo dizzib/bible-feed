@@ -1,0 +1,5 @@
+Added
+- haptic feedback
+
+Changed
+- upgrade to flutter 3.24.0
