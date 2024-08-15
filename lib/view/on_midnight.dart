@@ -29,8 +29,8 @@ class _OnMidnightState extends State<OnMidnight> {
   }
 
   @override
-  build(context) {
-    return Stack(
+  build(context) =>
+    Stack(
       children: [
         widget.child,
         Visibility(
@@ -52,5 +52,4 @@ class _OnMidnightState extends State<OnMidnight> {
         ),
       ],
     );
-  }
 }
