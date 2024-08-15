@@ -5,12 +5,10 @@ import 'all_done.dart';
 import 'feed_card.dart';
 
 class FeedsView extends StatelessWidget {
-  final Feeds feeds;
-  const FeedsView(this.feeds);
-
   @override
   build(context) {
-    context.watch<Feeds>();
+    final feeds = context.watch<Feeds>();
+
     Navigator.maybePop(context);  // dismiss possible dialog (originator might be cron)
 
     feedCard(index) =>

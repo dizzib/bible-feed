@@ -40,7 +40,7 @@ class App extends StatelessWidget {
             onResume: feeds.maybeAdvance,
             child: ChangeNotifierProvider<Feeds>(
               create: (_) => feeds,
-              child: FeedsView(feeds),
+              child: FeedsView(),
             ),
           ),
         ),
