@@ -14,12 +14,7 @@ class BookChapterDialog extends StatelessWidget {
 
   @override
   build(context) {
-    // NOTE: keep this OUTSIDE the LayoutBuilder, otherwise *WheelStates get reset on device rotation
-    final bookWheelState = ListWheelState<Book>(feed.bookIndex);
-    final chapterWheelState = ListWheelState<int>(feed.chapter - 1);
-
-    // fix 3.19 -> 3.22 background color regression
-    withBackground(Widget child) =>
+    withBackground(Widget child) =>  // fix 3.19 -> 3.22 background color regression
       Container(alignment: Alignment.center, color: context.colorScheme.surfaceContainerHigh, child: child);
 
     return LayoutBuilder(
@@ -33,8 +28,8 @@ class BookChapterDialog extends StatelessWidget {
             ),
             child: MultiProvider(
               providers: [
-                ChangeNotifierProvider.value(value: bookWheelState),
-                ChangeNotifierProvider.value(value: chapterWheelState)
+                ChangeNotifierProvider(create: (_) => ListWheelState<Book>(feed.bookIndex)),
+                ChangeNotifierProvider(create: (_) => ListWheelState<int>(feed.chapter - 1))
               ],
               child: Column(
                 children: [
