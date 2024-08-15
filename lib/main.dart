@@ -5,6 +5,7 @@ import 'model/feeds.dart';
 import 'util/build_context.dart';
 import 'util/store.dart';
 import 'view/feeds_view.dart';
+import 'on_midnight_widget.dart';
 import 'on_resume_widget.dart';
 
 void main() async {
@@ -33,14 +34,17 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: theme(Brightness.light),
         darkTheme: theme(Brightness.dark),
-        home: OnResumeWidget(
-          onResume: feeds.maybeAdvance,
-          child: ChangeNotifierProvider<Feeds>(
-            create: (_) => feeds,
-            child: FeedsView(feeds),
+        home: OnMidnightWidget(
+          onMidnight: feeds.maybeAdvance,
+          child: OnResumeWidget(
+            onResume: feeds.maybeAdvance,
+            child: ChangeNotifierProvider<Feeds>(
+              create: (_) => feeds,
+              child: FeedsView(feeds),
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }

@@ -1,17 +1,14 @@
 import 'package:flutter/foundation.dart';
-import 'package:cron/cron.dart';
 import '../util/date.dart';
 import '../util/store.dart';
 import 'feed.dart';
 import 'reading_list.dart';
 
 class Feeds with ChangeNotifier {
-  final _cron = Cron();
   final List<Feed> _feeds;
 
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
     for (Feed f in _feeds) { f.addListener(() => notifyListeners()); }
-    _cron.schedule(Schedule.parse('0 0 * * *'), () async => maybeAdvance());
     maybeAdvance();
   }
 
@@ -26,10 +23,15 @@ class Feeds with ChangeNotifier {
     Store.setBool('hasEverAdvanced', true);
   }
 
-  void maybeAdvance() {
-    if (!areChaptersRead) return;
+  // return codes for debugging:
+  //   1 - not all chapters read
+  //   2 - all chapters read but still today
+  //   3 - advanced lists
+  int maybeAdvance() {
+    if (!areChaptersRead) return 1;
     var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
     var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
-    if (!latestSavedDate.isToday) forceAdvance();
+    if (!latestSavedDate.isToday) { forceAdvance(); return 3; }
+    return 2;
   }
 }
