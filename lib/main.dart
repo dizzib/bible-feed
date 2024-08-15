@@ -5,8 +5,8 @@ import 'model/feeds.dart';
 import 'util/build_context.dart';
 import 'util/store.dart';
 import 'view/feeds_view.dart';
-import 'on_midnight_widget.dart';
-import 'on_resume_widget.dart';
+import 'view/on_midnight.dart';
+import 'view/on_resume.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,9 +34,9 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: theme(Brightness.light),
         darkTheme: theme(Brightness.dark),
-        home: OnMidnightWidget(
+        home: OnMidnight(
           onMidnight: feeds.maybeAdvance,
-          child: OnResumeWidget(
+          child: OnResume(
             onResume: feeds.maybeAdvance,
             child: ChangeNotifierProvider<Feeds>(
               create: (_) => feeds,

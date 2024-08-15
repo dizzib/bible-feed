@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:cron/cron.dart';
 
-class OnMidnightWidget extends StatefulWidget {
+class OnMidnight extends StatefulWidget {
   final Function onMidnight;
   final Widget child;
 
-  const OnMidnightWidget({
+  const OnMidnight({
     required this.onMidnight,
     required this.child,
   });
 
   @override
-  State<OnMidnightWidget> createState() => _OnMidnightWidgetState();
+  State<OnMidnight> createState() => _OnMidnightState();
 }
 
-class _OnMidnightWidgetState extends State<OnMidnightWidget> {
+class _OnMidnightState extends State<OnMidnight> {
   final _cron = Cron();
   int? _retval;
 
-  _OnMidnightWidgetState() {
+  _OnMidnightState() {
     _cron.schedule(
       Schedule.parse('0 0 * * *'), () async {
         setState(() {

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class OnResumeWidget extends StatefulWidget {
-  final Widget child;
+class OnResume extends StatefulWidget {
   final Function onResume;
+  final Widget child;
 
-  const OnResumeWidget({
+  const OnResume({
     required this.onResume,
     required this.child,
   });
 
   @override
-  State<OnResumeWidget> createState() => _OnResumeWidgetState();
+  State<OnResume> createState() => _OnResumeState();
 }
 
-class _OnResumeWidgetState extends State<OnResumeWidget> with WidgetsBindingObserver {
+class _OnResumeState extends State<OnResume> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
