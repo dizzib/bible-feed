@@ -3,12 +3,6 @@ import 'package:watch_it/watch_it.dart';
 import '../model/feeds.dart';
 
 class OnResume extends StatefulWidget {
-  final Widget child;
-
-  const OnResume({
-    required this.child,
-  });
-
   @override
   State<OnResume> createState() => _OnResumeState();
 }
@@ -29,5 +23,5 @@ class _OnResumeState extends State<OnResume> {
   }
 
   @override
-  build(_) => widget.child;
+  build(_) => const Placeholder();
 }

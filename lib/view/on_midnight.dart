@@ -4,12 +4,6 @@ import 'package:cron/cron.dart';
 import '../model/feeds.dart';
 
 class OnMidnight extends StatefulWidget {
-  final Widget child;
-
-  const OnMidnight({
-    required this.child,
-  });
-
   @override
   State<OnMidnight> createState() => _OnMidnightState();
 }
@@ -30,26 +24,21 @@ class _OnMidnightState extends State<OnMidnight> {
 
   @override
   build(context) =>
-    Stack(
-      children: [
-        widget.child,
-        Visibility(
-          visible: false,  // set to true for debugging
-          child: DefaultTextStyle.merge(
-            style: const TextStyle(fontSize: 24),
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(DateTime.now().toString()),
-                  if (_retval == null) const Text('waiting...'),
-                  if (_retval != null) Text('retval = $_retval'),
-                ],
-              ),
-            ),
+    Visibility(
+      visible: false,  // set to true for debugging
+      child: DefaultTextStyle.merge(
+        style: const TextStyle(fontSize: 24),
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(DateTime.now().toString()),
+              if (_retval == null) const Text('waiting...'),
+              if (_retval != null) Text('retval = $_retval'),
+            ],
           ),
         ),
-      ],
+      ),
     );
 }

@@ -30,10 +30,12 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: theme(Brightness.light),
         darkTheme: theme(Brightness.dark),
-        home: OnMidnight(
-          child: OnResume(
-            child: FeedsView(),
-          ),
+        home: Stack(
+          children: [
+            OnResume(),
+            FeedsView(),
+            OnMidnight(),  // last, for debugging
+          ],
         ),
       ),
     );
