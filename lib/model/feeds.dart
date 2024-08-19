@@ -8,7 +8,7 @@ class Feeds with ChangeNotifier {
   final List<Feed> _feeds;
 
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
-    for (Feed f in _feeds) { f.addListener(() => notifyListeners()); }
+    for (Feed f in _feeds) { f.addListener(notifyListeners); }
     maybeAdvance();
   }
 
