@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:cron/cron.dart';
+import '../model/feeds.dart';
 
 class OnMidnight extends StatefulWidget {
-  final Function onMidnight;
   final Widget child;
 
   const OnMidnight({
-    required this.onMidnight,
     required this.child,
   });
 
@@ -22,7 +22,7 @@ class _OnMidnightState extends State<OnMidnight> {
     _cron.schedule(
       Schedule.parse('0 * * * *'), () async {
         setState(() {
-          _retval = widget.onMidnight();
+          _retval = di<Feeds>().maybeAdvance();
         });
       }
     );
@@ -34,7 +34,7 @@ class _OnMidnightState extends State<OnMidnight> {
       children: [
         widget.child,
         Visibility(
-          visible: true,  // set to true for debugging
+          visible: false,  // set to true for debugging
           child: DefaultTextStyle.merge(
             style: const TextStyle(fontSize: 24),
             child: Container(

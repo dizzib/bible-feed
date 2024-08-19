@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
+import '../model/feeds.dart';
 
 class OnResume extends StatefulWidget {
-  final Function onResume;
   final Widget child;
 
   const OnResume({
-    required this.onResume,
     required this.child,
   });
 
@@ -29,7 +29,7 @@ class _OnResumeState extends State<OnResume> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.resumed) widget.onResume;
+    if (state == AppLifecycleState.resumed) di<Feeds>().maybeAdvance;
   }
 
   @override

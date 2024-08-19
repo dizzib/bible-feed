@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import 'data/reading_lists.dart';
 import 'model/feeds.dart';
 import 'util/build_context.dart';
@@ -11,11 +11,11 @@ import 'view/on_resume.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Store.init();
+  di.registerSingleton(Feeds(readingLists));
   runApp(App());
 }
 
 class App extends StatelessWidget {
-  @visibleForTesting static final feeds = Feeds(readingLists);
   @override
   build(context) {
     theme(Brightness brightness) =>
@@ -35,13 +35,8 @@ class App extends StatelessWidget {
         theme: theme(Brightness.light),
         darkTheme: theme(Brightness.dark),
         home: OnMidnight(
-          onMidnight: feeds.maybeAdvance,
           child: OnResume(
-            onResume: feeds.maybeAdvance,
-            child: ChangeNotifierProvider<Feeds>(
-              create: (_) => feeds,
-              child: FeedsView(),
-            ),
+            child: FeedsView(),
           ),
         ),
       ),

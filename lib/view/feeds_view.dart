@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import '../model/feeds.dart';
 import 'all_done.dart';
 import 'feed_card.dart';
 
-class FeedsView extends StatelessWidget {
+class FeedsView extends WatchingWidget {
   @override
   build(context) {
-    final feeds = context.watch<Feeds>();
+    final feeds = watchIt<Feeds>();
 
     Navigator.maybePop(context);  // dismiss possible dialog (originator might be cron)
 
     feedCard(index) =>
       Expanded(
-        child: ChangeNotifierProvider.value(
-          value: feeds[index],
-          child: FeedCard()
-        ),
+        child: FeedCard(feeds[index]),
       );
 
     return Scaffold(

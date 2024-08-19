@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../model/feed.dart';
 import '../util/build_context.dart';
 import 'book_chapter_dialog.dart';
 
-class FeedCard extends StatelessWidget {
+class FeedCard extends WatchingWidget {
+  final Feed feed;
+  const FeedCard(this.feed);
+
   @override
   build(context) {
-    final feed = context.watch<Feed>();
+    watch<Feed>(feed);
 
     titleBar() =>
       Row(

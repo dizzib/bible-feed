@@ -16,6 +16,7 @@ class Feeds with ChangeNotifier {
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
   bool get hasEverAdvanced => Store.getBool('hasEverAdvanced') ?? false;
+  int get length => _feeds.length;
 
   /// methods
   void forceAdvance() {
