@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:watch_it/watch_it.dart';
-import 'data/reading_lists.dart';
-import 'model/book.dart';
-import 'model/feeds.dart';
 import 'util/build_context.dart';
-import 'util/store.dart';
 import 'view/feeds_view.dart';
 import 'view/on_midnight.dart';
 import 'view/on_resume.dart';
-import 'view/list_wheel_state.dart';
+import 'init.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Store.init();
-  di.registerSingleton(Feeds(readingLists));
-  di.registerSingleton(ListWheelState<Book>());
-  di.registerSingleton(ListWheelState<int>());
+  init();
   runApp(App());
 }
 
