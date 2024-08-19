@@ -20,7 +20,7 @@ class _OnMidnightState extends State<OnMidnight> {
 
   _OnMidnightState() {
     _cron.schedule(
-      Schedule.parse('0 0 * * *'), () async {
+      Schedule.parse('0 * * * *'), () async {
         setState(() {
           _retval = widget.onMidnight();
         });
