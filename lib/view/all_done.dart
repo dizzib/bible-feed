@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:watch_it/watch_it.dart';
+import '../model/feeds.dart';
 import '../util/build_context.dart';
 
-class AllDone extends StatelessWidget {
-  final Function() advance;
-  final bool hasEverAdvanced;
-
-  const AllDone(this.advance, this.hasEverAdvanced);
-
+class AllDone extends WatchingWidget {
   @override
   build(context) {
+    final feeds = watchIt<Feeds>();
+
     void showAllDoneDialog() {
       context.showBlurBackgroundDialog(
         CupertinoAlertDialog(
@@ -34,7 +33,7 @@ class AllDone extends StatelessWidget {
             TextButton(
               onPressed: () {
                 HapticFeedback.lightImpact();
-                advance();
+                feeds.forceAdvance();
               },  // dialog is dismissed in FeedsView
               child: const Text('Yes'),
             ),
@@ -44,14 +43,22 @@ class AllDone extends StatelessWidget {
     }
 
     // auto-show dialog once only
-    if (!hasEverAdvanced) Future.delayed(Duration.zero, showAllDoneDialog);
+    if (!feeds.hasEverAdvanced) Future.delayed(Duration.zero, showAllDoneDialog);
 
-    return FloatingActionButton(
-      backgroundColor: Colors.green,
-      foregroundColor: Colors.white,
-      onPressed: showAllDoneDialog,
-      shape: const CircleBorder(),
-      child: const Icon(Icons.done, size: 35, ),
+    return AnimatedScale(
+      curve: Curves.fastEaseInToSlowEaseOut,
+      duration: const Duration(milliseconds: 500),
+      scale: feeds.areChaptersRead ? 1 : 0,
+      child: FloatingActionButton(
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+        onPressed: showAllDoneDialog,
+        shape: const CircleBorder(),
+        child: const Icon(
+          Icons.done,
+          size: 35,
+        ),
+      ),
     );
   }
 }

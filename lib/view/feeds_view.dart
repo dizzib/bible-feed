@@ -7,30 +7,21 @@ import 'feed_card.dart';
 class FeedsView extends WatchingWidget {
   @override
   build(context) {
-    final feeds = watchIt<Feeds>();
-
     Navigator.maybePop(context);  // dismiss possible dialog (originator might be cron)
 
-    feedCard(index) =>
-      Expanded(
-        child: FeedCard(feeds[index]),
-      );
+    feedCard(index) => Expanded(child: FeedCard(di<Feeds>()[index]));
 
     return Scaffold(
       body: Column(  // Columns and Rows work better than a GridView
         children: [
-          for (int index in [0, 2, 4, 6, 8])
-          Expanded(
+          for (int index in [0, 2, 4, 6, 8]) Expanded(
             child: Row(
               children: [feedCard(index), feedCard(index + 1)]
             )
           )
         ]
       ),
-      floatingActionButton: feeds.areChaptersRead ? AllDone(
-        feeds.forceAdvance,
-        feeds.hasEverAdvanced
-      ) : null,  // null activates animation
+      floatingActionButton: AllDone(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
     );
   }
