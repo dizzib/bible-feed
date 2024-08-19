@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import '../model/book.dart';
 import '../model/reading_list.dart';
 import '../view/list_wheel_state.dart';
 import '../util/build_context.dart';
 
-class BookChapterDialogFooter extends StatelessWidget {
+class BookChapterDialogFooter extends WatchingWidget {
   final ReadingList readingList;
   final Function setBookAndChapter;
 
@@ -15,8 +15,8 @@ class BookChapterDialogFooter extends StatelessWidget {
 
   @override
   build(context) {
-    var bookIndex = Provider.of<ListWheelState<Book>>(context).index;
-    var chapter = Provider.of<ListWheelState<int>>(context).index + 1;
+    var bookIndex = watchIt<ListWheelState<Book>>().index;
+    var chapter = watchIt<ListWheelState<int>>().index + 1;
 
     return Column(
       children: [

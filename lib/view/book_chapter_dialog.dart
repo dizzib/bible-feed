@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import '../model/book.dart';
 import '../model/feed.dart';
 import '../view/book_chapter_dialog_footer.dart';
@@ -10,7 +10,10 @@ import '../util/build_context.dart';
 class BookChapterDialog extends StatelessWidget {
   final Feed feed;
 
-  const BookChapterDialog(this.feed);
+  BookChapterDialog(this.feed) {
+    di<ListWheelState<Book>>().index = feed.bookIndex;
+    di<ListWheelState<int>>().index = feed.chapter - 1;
+  }
 
   @override
   build(context) {
@@ -26,31 +29,25 @@ class BookChapterDialog extends StatelessWidget {
               maxHeight: constraints.maxHeight * 0.8,
               maxWidth: 300,
             ),
-            child: MultiProvider(
-              providers: [
-                ChangeNotifierProvider(create: (_) => ListWheelState<Book>(feed.bookIndex)),
-                ChangeNotifierProvider(create: (_) => ListWheelState<int>(feed.chapter - 1))
-              ],
-              child: Column(
-                children: [
-                  Visibility(
-                    visible: constraints.maxHeight > 280,
-                    child: withBackground(
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          feed.readingList.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold
-                          ),
+            child: Column(
+              children: [
+                Visibility(
+                  visible: constraints.maxHeight > 280,
+                  child: withBackground(
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        feed.readingList.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
                         ),
                       ),
-                    )
-                  ),
-                  Expanded(child: BookChapterDialogWheels(feed.readingList)),
-                  withBackground(BookChapterDialogFooter(feed.readingList, feed.setBookAndChapter))
-                ],
-              )
+                    ),
+                  )
+                ),
+                Expanded(child: BookChapterDialogWheels(feed.readingList)),
+                withBackground(BookChapterDialogFooter(feed.readingList, feed.setBookAndChapter))
+              ],
             )
           )
         )

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import '../view/list_wheel_effects.dart';
 import '../view/list_wheel_state.dart';
 import '../util/build_context.dart';
@@ -29,7 +29,7 @@ class ListWheel<T> extends StatelessWidget {
   build(context) {
     const magnification = 1.1;
     var itemExtent = DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale;  // accomodate various text sizes
-    var wheelState = Provider.of<ListWheelState<T>>(context, listen:false);
+    var wheelState = di<ListWheelState<T>>();
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude

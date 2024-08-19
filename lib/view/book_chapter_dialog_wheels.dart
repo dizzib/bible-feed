@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:watch_it/watch_it.dart';
 import '../model/book.dart';
 import '../model/reading_list.dart';
 import '../view/list_wheel.dart';
 import '../view/list_wheel_state.dart';
 
-class BookChapterDialogWheels extends StatelessWidget {
+class BookChapterDialogWheels extends WatchingWidget {
   final ReadingList readingList;
 
   const BookChapterDialogWheels(this.readingList);
 
   @override
   build(context) {
+    var bookIndex = watchIt<ListWheelState<Book>>().index;
     return LayoutBuilder(
       builder: (_, constraints) =>
         DefaultTextStyle.merge(
@@ -34,7 +35,7 @@ class BookChapterDialogWheels extends StatelessWidget {
                 child: ListWheel<int>(
                   indexToItem: (index) => index + 1,
                   itemToString: (int chapter) => chapter.toString(),
-                  maxIndex: readingList[Provider.of<ListWheelState<Book>>(context).index].chapterCount - 1,
+                  maxIndex: readingList[bookIndex].chapterCount - 1,
                 )
               ),
             ],

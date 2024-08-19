@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ListWheelState<T> extends ChangeNotifier {
-  int _index;
-
-  ListWheelState(int index) : _index = index;
+  late int _index;
 
   // get/set index
   int get index => _index;
