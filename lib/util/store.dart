@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Store {
   static late SharedPreferences _sp;
 
-  // call this method from main() function
+  // call this method from main init() function
   static init() async { _sp = await SharedPreferences.getInstance(); }
 
   // gets

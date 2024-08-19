@@ -5,7 +5,7 @@ import 'model/feeds.dart';
 import 'util/store.dart';
 import 'view/list_wheel_state.dart';
 
-void init() async {
+Future init() async {
   await Store.init();
   di.registerSingleton(Feeds(readingLists));
   di.registerSingleton(ListWheelState<Book>());

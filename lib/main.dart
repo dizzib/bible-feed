@@ -5,9 +5,9 @@ import 'view/on_midnight.dart';
 import 'view/on_resume.dart';
 import 'init.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  init();
+  await init();
   runApp(App());
 }
 
