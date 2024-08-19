@@ -13,23 +13,19 @@ class OnResume extends StatefulWidget {
   State<OnResume> createState() => _OnResumeState();
 }
 
-class _OnResumeState extends State<OnResume> with WidgetsBindingObserver {
+class _OnResumeState extends State<OnResume> {
+  late final AppLifecycleListener _listener;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    _listener = AppLifecycleListener(onResume: di<Feeds>().maybeAdvance);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    _listener.dispose();
     super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.resumed) di<Feeds>().maybeAdvance;
   }
 
   @override
