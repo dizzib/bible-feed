@@ -4,11 +4,9 @@ import '../model/feeds.dart';
 import 'all_done_fab.dart';
 import 'feed_card.dart';
 
-class FeedsView extends WatchingWidget {
+class FeedsView extends StatelessWidget {
   @override
   build(context) {
-    Navigator.maybePop(context);  // dismiss possible dialog (originator might be cron)
-
     feedCard(index) => Expanded(child: FeedCard(di<Feeds>()[index]));
 
     return Scaffold(
