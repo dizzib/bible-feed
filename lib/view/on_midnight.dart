@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:cron/cron.dart';
 import '../model/feeds.dart';
+import '../util/log.dart';
 
 class OnMidnight extends StatefulWidget {
   @override
@@ -15,9 +16,8 @@ class _OnMidnightState extends State<OnMidnight> {
   _OnMidnightState() {
     _cron.schedule(
       Schedule.parse('0 * * * *'), () async {
-        setState(() {
-          _retval = di<Feeds>().maybeAdvance();
-        });
+        'cron'.log();
+        setState(() { _retval = di<Feeds>().maybeAdvance(); });
       }
     );
   }

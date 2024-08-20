@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '../model/feeds.dart';
+import '../util/log.dart';
 
 class OnResume extends StatefulWidget {
   @override
@@ -13,7 +14,10 @@ class _OnResumeState extends State<OnResume> {
   @override
   void initState() {
     super.initState();
-    _listener = AppLifecycleListener(onResume: di<Feeds>().maybeAdvance);
+    _listener = AppLifecycleListener(onResume: () {
+      'onResume'.log();
+      di<Feeds>().maybeAdvance;
+    });
   }
 
   @override
