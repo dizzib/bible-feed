@@ -20,11 +20,9 @@ class BackgroundService {
     _service.configure(
       androidConfiguration: AndroidConfiguration(
         onStart: onStart,
-        autoStart: true,
         isForegroundMode: false,
       ),
       iosConfiguration: IosConfiguration(
-        autoStart: true,
         onForeground: onStart,
       )
     );
