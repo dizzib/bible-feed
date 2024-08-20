@@ -10,10 +10,10 @@ import 'util/log.dart';
 import 'util/store.dart';
 
 void main() async {
-  'starting bible_feed app...'.log();
+  'starting app'.log();
   await initApp();
   runApp(App());
-  '...app started'.log();
+  'started app'.log();
 }
 
 Future initApp() async {
