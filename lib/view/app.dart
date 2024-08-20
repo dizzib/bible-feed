@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../util/build_context.dart';
 import 'feeds_view.dart';
-import 'on_resume.dart';
 
 class App extends StatelessWidget {
   @override
@@ -22,12 +21,7 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: theme(Brightness.light),
         darkTheme: theme(Brightness.dark),
-        home: Stack(
-          children: [
-            OnResume(),
-            FeedsView(),
-          ],
-        ),
+        home: FeedsView(),
       ),
     );
   }
