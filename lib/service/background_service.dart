@@ -48,6 +48,7 @@ class BackgroundService with ChangeNotifier {
   }
 
   void handleOnListsAdvanced() async {
+    // when b/g service updates feeds, reload from Store so UI gets refreshed
     await for(var e in service.on('listsAdvanced')) {
       await Store.reload();
       di<Feeds>().reload();
