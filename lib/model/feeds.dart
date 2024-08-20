@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../util/date.dart';
+import '../util/log.dart';
 import '../util/store.dart';
 import 'feed.dart';
 import 'reading_list.dart';
@@ -29,10 +30,11 @@ class Feeds with ChangeNotifier {
   //   2 - all chapters read but still today
   //   3 - advanced lists
   int maybeAdvance() {
-    if (!areChaptersRead) return 1;
+    'maybeAdvance'.log();
+    if (!areChaptersRead) return 1.log();
     var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
     var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
-    if (!latestSavedDate.isToday) { forceAdvance(); return 3; }
-    return 2;
+    if (!latestSavedDate.isToday) { forceAdvance(); return 3.log(); }
+    return 2.log();
   }
 }
