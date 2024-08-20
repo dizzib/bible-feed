@@ -6,9 +6,8 @@ import '../util/log.dart';
 
 // https://stackoverflow.com/questions/74397262/flutter-background-service-onstart-method-must-be-a-top-level-or-static-functio
 void onStart(ServiceInstance service) {
-  'onStart'.log();
   Cron().schedule(
-    Schedule.parse('* * * * *'), () async {
+    Schedule.parse('0,1 0 * * *'), () async {
       'cron'.log();
       di<Feeds>().maybeAdvance();
     }
@@ -18,7 +17,6 @@ void onStart(ServiceInstance service) {
 class BackgroundService {
   final _service = FlutterBackgroundService();
   BackgroundService() {
-    'BackgroundService'.log();
     _service.configure(
       androidConfiguration: AndroidConfiguration(
         onStart: onStart,
