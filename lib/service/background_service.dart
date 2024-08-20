@@ -12,8 +12,9 @@ import '../util/store.dart';
 void onStart(ServiceInstance service) async {
   await Store.init();
   var schedule = Schedule(
-    minutes: '0',  // hourly
-    // seconds: '*/5',  // every 5 seconds (for debugging)
+    hours: '0',  // at midnight
+    minutes: '0',  // in the 1st minute. BUG: sometimes seems to skip 00 seconds!?
+    seconds: '*/5',  // every 5 seconds, in an attempt to fix issue #1.
   );
   schedule.toCronString(hasSecond: true).log();
   Cron().schedule(schedule, () async {
