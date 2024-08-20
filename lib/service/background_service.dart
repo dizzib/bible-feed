@@ -24,7 +24,7 @@ void onStart(ServiceInstance service) async {
     var result = Feeds(readingLists).maybeAdvance();
     // HACK: allow time for updates to asynchronously save to Store in background,
     // otherwise UI will update before all changes are written to Store.
-    Future.delayed(const Duration(seconds: 2), () => service.invoke(result.toString()));
+    Future.delayed(const Duration(seconds: 5), () => service.invoke(result.toString()));
   });
 }
 
