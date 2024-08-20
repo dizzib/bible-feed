@@ -15,9 +15,8 @@ void onStart(ServiceInstance service) {
 }
 
 class BackgroundService {
-  final _service = FlutterBackgroundService();
   BackgroundService() {
-    _service.configure(
+    FlutterBackgroundService()..configure(
       androidConfiguration: AndroidConfiguration(
         onStart: onStart,
         isForegroundMode: false,
@@ -25,7 +24,6 @@ class BackgroundService {
       iosConfiguration: IosConfiguration(
         onForeground: onStart,
       )
-    );
-    _service.startService();
+    )..startService();
   }
 }
