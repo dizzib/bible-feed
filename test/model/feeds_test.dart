@@ -64,12 +64,6 @@ void main() {
       expect(f1.chapter, shouldAdvance ? 2 : 1);
     }
 
-    test('constructor should advance all feeds if new day', () {
-      f1.toggleIsChapterRead();
-      withClock(clock.tomorrow, initFeeds);
-      checkHasAdvanced(true);
-    });
-
     test('forceAdvance should advance all feeds', () {
       f1.toggleIsChapterRead();
       fds.forceAdvance();

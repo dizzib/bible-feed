@@ -25,4 +25,5 @@ Future initApp() async {
   di.registerSingleton(BackgroundService());
   di.registerSingleton(ListWheelState<Book>());
   di.registerSingleton(ListWheelState<int>());
+  di<Feeds>().maybeAdvance();
 }

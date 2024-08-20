@@ -9,7 +9,7 @@ part 'feed_extensions.dart';
 class Feed with ChangeNotifier {
   final ReadingList readingList;
 
-  Feed(this.readingList) { loadStateOrDefaults(); notifyListeners(); }
+  Feed(this.readingList) { loadState(); }
 
   /// state
   late Book _book;
@@ -24,23 +24,24 @@ class Feed with ChangeNotifier {
 
   /// methods
   void _nextBook() => _book = readingList[(bookIndex + 1) % readingList.count];
+  void loadState() { _loadStateOrDefaults(); notifyListeners(); }
 
   void nextChapter() {
     assert(_isChapterRead);
     if (++_chapter > _book.chapterCount) { _nextBook(); _chapter = 1; }
     _isChapterRead = false;
-    saveState(); notifyListeners();
+    _saveState(); notifyListeners();
   }
 
   void setBookAndChapter(int bookIndex, int chapter) {
     _book = readingList[bookIndex];
     this.chapter = chapter;
     _isChapterRead = false;
-    saveState(); notifyListeners();
+    _saveState(); notifyListeners();
   }
 
   void toggleIsChapterRead() {
     _isChapterRead = !_isChapterRead;
-    saveState(); notifyListeners();
+    _saveState(); notifyListeners();
   }
 }

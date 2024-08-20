@@ -5,14 +5,13 @@ import '../util/store.dart';
 import 'feed.dart';
 import 'reading_list.dart';
 
-enum AdvanceState { notAllRead, allReadAwaitingTomorrow, advancedLists }
+enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 
 class Feeds with ChangeNotifier {
   final List<Feed> _feeds;
 
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
     for (Feed f in _feeds) { f.addListener(notifyListeners); }
-    maybeAdvance();
   }
 
   /// properties
@@ -31,7 +30,9 @@ class Feeds with ChangeNotifier {
     if (!areChaptersRead) return AdvanceState.notAllRead.log();
     var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
     var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
-    if (!latestSavedDate.isToday) { forceAdvance(); return AdvanceState.advancedLists.log(); }
+    if (!latestSavedDate.isToday) { forceAdvance(); return AdvanceState.listsAdvanced.log(); }
     return AdvanceState.allReadAwaitingTomorrow.log();
   }
+
+  void reload() async {for (Feed f in _feeds) { f.loadState(); }}
 }
