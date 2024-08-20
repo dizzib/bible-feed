@@ -10,8 +10,6 @@ import '../util/store.dart';
 // https://stackoverflow.com/questions/74397262/flutter-background-service-onstart-method-must-be-a-top-level-or-static-functio
 @pragma("vm:entry-point")
 void onStart(ServiceInstance service) async {
-  // this runs in its own isolate and cannot access memory from main() isolate,
-  // therefore we must use a separate instance of Feeds
   await Store.init();
   var schedule = Schedule(
     minutes: '0',  // hourly
@@ -20,14 +18,12 @@ void onStart(ServiceInstance service) async {
   schedule.toCronString(hasSecond: true).log();
   Cron().schedule(schedule, () async {
     await Store.reload();
-    if (Feeds(readingLists).maybeAdvance() == AdvanceState.listsAdvanced) {
-      // HACK: allow time for updates to asynchronously save in background, otherwise UI will update
-      // before all changes are written.
-      Future.delayed(const Duration(seconds: 2), () {
-        'listsAdvanced'.log();
-        service.invoke('listsAdvanced');
-      });
-    }
+    // this runs in its own isolate and cannot access memory from main() isolate,
+    // therefore we must use a separate instance of Feeds
+    var result = Feeds(readingLists).maybeAdvance();
+    // HACK: allow time for updates to asynchronously save to Store in background,
+    // otherwise UI will update before all changes are written to Store.
+    Future.delayed(const Duration(seconds: 2), () => service.invoke(result.toString()));
   });
 }
 
@@ -36,20 +32,15 @@ class BackgroundService with ChangeNotifier {
 
   BackgroundService() {
     service.configure(
-      androidConfiguration: AndroidConfiguration(
-        onStart: onStart,
-        isForegroundMode: false,
-      ),
-      iosConfiguration: IosConfiguration(
-        onForeground: onStart,
-      )
+      androidConfiguration: AndroidConfiguration(onStart: onStart, isForegroundMode: false),
+      iosConfiguration: IosConfiguration(onForeground: onStart,)
     );
     handleOnListsAdvanced();
   }
 
   void handleOnListsAdvanced() async {
     // when b/g service updates feeds, reload from Store so UI gets refreshed
-    await for(var e in service.on('listsAdvanced')) {
+    await for(var e in service.on(AdvanceState.listsAdvanced.toString())) {
       await Store.reload();
       di<Feeds>().reload();
     }
