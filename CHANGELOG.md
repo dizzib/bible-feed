@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.1] - 2024-08-21
 
 ### Fixed
-- fix issue #1 by running cron hourly in a background service
+- fix issue #1 by running cron multiple times at midnight in a background service
 
 
 ## [1.2.0] - 2024-08-14
