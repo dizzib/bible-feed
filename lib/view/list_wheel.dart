@@ -8,11 +8,9 @@ import '../util/build_context.dart';
 //
 // - selector_wheel (https://github.com/AlexLomm/selector_wheel)
 //    - non standard grab behaviour (see https://github.com/AlexLomm/selector_wheel/issues/2)
-//    - poor performance on Moto E5 plus
 //
 // - wheel_picker (https://pub.dev/packages/wheel_picker)
 //    - does not seem to rebuild as expected
-//    - cannot set the width (https://github.com/stavgafny/wheel_picker/issues/4)
 //
 class ListWheel<T> extends StatelessWidget {
   final T Function(int index) indexToItem;
