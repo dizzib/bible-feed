@@ -1,44 +1,26 @@
 import 'package:flutter/material.dart';
-import 'util/build_context.dart';
-import 'view/feeds_view.dart';
-import 'view/on_resume.dart';
-import 'init.dart';
+import 'package:watch_it/watch_it.dart';
+import 'view/app.dart';
+import 'data/reading_lists.dart';
+import 'model/book.dart';
+import 'model/feeds.dart';
+import 'model/list_wheel_state.dart';
+import 'service/background_service.dart';
 import 'util/log.dart';
+import 'util/store.dart';
 
 void main() async {
   'starting bible_feed app...'.log();
-  WidgetsFlutterBinding.ensureInitialized();
-  await init();
+  await initApp();
   runApp(App());
-  '...started'.log();
+  '...app started'.log();
 }
 
-class App extends StatelessWidget {
-  @override
-  build(context) {
-    theme(Brightness brightness) =>
-      ThemeData(
-        cardTheme: CardTheme(surfaceTintColor: context.colorScheme.surfaceTint),
-        colorScheme: ColorScheme.fromSeed(
-          brightness: brightness,
-          seedColor: const Color(0xffbb86fc),
-          tertiary: brightness == Brightness.dark ? Colors.red : Colors.amber,
-        ),
-      );
-
-    return SafeArea(
-      child: MaterialApp(
-        title: 'Bible Feed',
-        themeMode: ThemeMode.system,
-        theme: theme(Brightness.light),
-        darkTheme: theme(Brightness.dark),
-        home: Stack(
-          children: [
-            OnResume(),
-            FeedsView(),
-          ],
-        ),
-      ),
-    );
-  }
+Future initApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Store.init();
+  di.registerSingleton(Feeds(readingLists));
+  di.registerSingleton(BackgroundService());
+  di.registerSingleton(ListWheelState<Book>());
+  di.registerSingleton(ListWheelState<int>());
 }
