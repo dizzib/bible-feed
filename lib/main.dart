@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'util/build_context.dart';
 import 'view/feeds_view.dart';
-import 'view/on_midnight.dart';
 import 'view/on_resume.dart';
 import 'init.dart';
 import 'util/log.dart';
@@ -37,7 +36,6 @@ class App extends StatelessWidget {
           children: [
             OnResume(),
             FeedsView(),
-            OnMidnight(),  // last, for debugging
           ],
         ),
       ),

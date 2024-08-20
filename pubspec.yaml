@@ -34,6 +34,7 @@ dependencies:
   auto_size_text: ^3.0.0
   clock: ^1.1.1
   cron: ^0.6.0
+  flutter_background_service: ^5.0.7
   shared_preferences: ^2.2.3
   watch_it: ^1.4.2
 
