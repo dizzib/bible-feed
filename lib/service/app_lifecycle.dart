@@ -4,8 +4,6 @@ import '../model/feeds.dart';
 
 class AppLifecycle {
   AppLifecycle() {
-    AppLifecycleListener(onResume: () {
-      di<Feeds>().maybeAdvance();
-    });
+    AppLifecycleListener(onResume: di<Feeds>().maybeAdvance);
   }
 }
