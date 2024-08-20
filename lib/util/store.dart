@@ -3,8 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Store {
   static late SharedPreferences _sp;
 
-  // call this method from main init() function
-  static init() async { _sp = await SharedPreferences.getInstance(); }
+  // methods
+  static init() async { _sp = await SharedPreferences.getInstance(); }  // CALL THIS METHOD FIRST!!!
+  static reload() async { await _sp.reload(); }
 
   // gets
   static bool? getBool(String key) => _sp.getBool(key);
