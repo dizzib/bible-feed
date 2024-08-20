@@ -10,9 +10,10 @@ class AnsiColor {
 }
 
 extension LogObjExt on Object {
-  void log() {
+  log() {
     if(kDebugMode) {
       debugPrint('${AnsiColor.yellow}${DateTime.now().toString()} ${AnsiColor.cyan}${toString()}${AnsiColor.reset}');
     }
+    return this;
   }
 }
