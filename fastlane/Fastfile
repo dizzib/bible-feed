@@ -41,7 +41,7 @@ platform :android do
       release_status: 'draft',
       skip_upload_aab: false,
       skip_upload_images: true,
-      skip_upload_screenshots: false,
+      skip_upload_screenshots: true,
       track: 'internal',
       version_code: $vcode,
     )
