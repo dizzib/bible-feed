@@ -4,11 +4,14 @@ import 'view/feeds_view.dart';
 import 'view/on_midnight.dart';
 import 'view/on_resume.dart';
 import 'init.dart';
+import 'util/log.dart';
 
 void main() async {
+  'starting bible_feed app...'.log();
   WidgetsFlutterBinding.ensureInitialized();
   await init();
   runApp(App());
+  '...started'.log();
 }
 
 class App extends StatelessWidget {
