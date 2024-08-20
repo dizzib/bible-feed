@@ -5,6 +5,8 @@ import '../util/store.dart';
 import 'feed.dart';
 import 'reading_list.dart';
 
+enum AdvanceState { notAllRead, allReadAwaitingTomorrow, advancedLists }
+
 class Feeds with ChangeNotifier {
   final List<Feed> _feeds;
 
@@ -25,16 +27,11 @@ class Feeds with ChangeNotifier {
     Store.setBool('hasEverAdvanced', true);
   }
 
-  // return codes for debugging:
-  //   1 - not all chapters read
-  //   2 - all chapters read but still today
-  //   3 - advanced lists
-  int maybeAdvance() {
-    'maybeAdvance'.log();
-    if (!areChaptersRead) return 1.log();
+  AdvanceState maybeAdvance() {
+    if (!areChaptersRead) return AdvanceState.notAllRead.log();
     var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
     var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
-    if (!latestSavedDate.isToday) { forceAdvance(); return 3.log(); }
-    return 2.log();
+    if (!latestSavedDate.isToday) { forceAdvance(); return AdvanceState.advancedLists.log(); }
+    return AdvanceState.allReadAwaitingTomorrow.log();
   }
 }
