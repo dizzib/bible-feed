@@ -1,0 +1,2 @@
+Fixed
+- fix issue #1 by running cron multiple times at midnight in a background service
