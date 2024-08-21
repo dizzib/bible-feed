@@ -28,7 +28,7 @@ void onStart(ServiceInstance service) async {
   });
 }
 
-class BackgroundService with ChangeNotifier {
+class BackgroundService {
   var service = FlutterBackgroundService();
 
   BackgroundService() {
