@@ -10,7 +10,7 @@ void main() {
     await t.tapNo(); expectChapters(1);
     await t.tapFab();
     await t.tapYes(); expectChapters(2);
-    await t.tapAllLists(); expect(find.text('All done!'), findsNothing);  // 2nd time
+    await t.tapAllLists(); expectNoText('All done!');  // 2nd time
     await t.tapFab();
     await t.tapYes(); expectChapters(3);
     await t.selectLastBookAndChapter('Gospels');

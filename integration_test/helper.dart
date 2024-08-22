@@ -13,7 +13,15 @@ expectChapters(int expectedValue, {int count = 10}) {
   expect(find.text(expectedValue.toString()), findsExactly(count));
 }
 
-extension Helper on WidgetTester {
+expectNoText(String expectText) {
+  expect(find.text(expectText), findsNothing);
+}
+
+expectText(String expectText) {
+  expect(find.text(expectText), findsOneWidget);
+}
+
+extension AppTestHelper on WidgetTester {
   initialiseApp() async {
     await bible_feed.main();
     await pumpAndSettle();
