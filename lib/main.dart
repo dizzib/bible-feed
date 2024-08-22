@@ -10,7 +10,7 @@ import 'view/app.dart';
 import 'util/log.dart';
 import 'util/store.dart';
 
-void main() async {
+Future<void> main() async {
   'starting app'.log();
   await initApp();
   runApp(App());
