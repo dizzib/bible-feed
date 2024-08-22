@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bible_feed/main.dart' as bible_feed;
 import 'package:bible_feed/view/feed_card.dart';
-import 'package:bible_feed/util/log.dart';
 
 expectBookAndChapter(String expectedBookName, int expectedChapter) {
-  expect(find.text(expectedBookName), findsOneWidget);
+  expectText(expectedBookName);
   expectChapters(expectedChapter, count:1);
 }
 
@@ -13,13 +12,10 @@ expectChapters(int expectedValue, {int count = 10}) {
   expect(find.text(expectedValue.toString()), findsExactly(count));
 }
 
-expectNoText(String expectText) {
-  expect(find.text(expectText), findsNothing);
-}
-
-expectText(String expectText) {
-  expect(find.text(expectText), findsOneWidget);
-}
+// text helpers
+expectAtLeast1Text(String expectedText) => expectText(expectedText, matcher:findsAtLeast(1));
+expectNoText(String expectedText) => expectText(expectedText, matcher:findsNothing);
+expectText(String expectedText, {matcher = findsOneWidget}) => expect(find.text(expectedText), matcher);
 
 extension AppTestHelper on WidgetTester {
   initialiseApp() async {
@@ -38,14 +34,13 @@ extension AppTestHelper on WidgetTester {
   }
 
   tapAllDoneButton(String text) async {
-    expect(find.text('All done!'), findsOneWidget);
+    expectText('All done!');
     await tap(find.text(text));
     await pumpAndSettle();
   }
 
   tapAllLists() async {
     var feedCards = find.byType(FeedCard).evaluate();
-    feedCards.length.log();
     for (var el in feedCards) { await tapAt(getCenter(find.byWidget(el.widget))); }
     await pumpAndSettle();
   }
