@@ -1,5 +1,4 @@
 import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter/foundation.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:cron/cron.dart';
 import '../data/reading_lists.dart';
