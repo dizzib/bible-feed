@@ -53,7 +53,7 @@ void main() {
       await b.takeScreenshot('$platform/02-dark--$name');
     }
 
-    bible_feed.main();
+    await bible_feed.main();
     await t.pumpAndSettle();
 
     setState();
