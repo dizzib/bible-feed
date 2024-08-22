@@ -17,13 +17,11 @@ void onStart(ServiceInstance service) async {
   );
   schedule.toCronString(hasSecond: true).log();
   Cron().schedule(schedule, () async {
-    await Store.reload();
     // this runs in its own isolate and cannot access memory from main() isolate,
-    // therefore we must use a separate instance of Feeds
-    var result = Feeds(readingLists).maybeAdvance();
-    // HACK: allow time for updates to asynchronously save to Store in background,
-    // otherwise UI will update before all changes are written to Store.
-    Future.delayed(const Duration(seconds: 5), () => service.invoke(result.toString()));
+    // therefore we must use a new instance of Feeds
+    await Store.reload();
+    var result = await Feeds(readingLists).maybeAdvance();
+    service.invoke(result.toString());
   });
 }
 
@@ -40,7 +38,7 @@ class BackgroundService {
 
   void handleOnListsAdvanced() async {
     // when b/g service updates feeds, reload from Store so UI gets refreshed
-    await for(var e in service.on(AdvanceState.listsAdvanced.toString())) {
+    await for(var _ in service.on(AdvanceState.listsAdvanced.toString())) {
       await Store.reload();
       di<Feeds>().reload();
     }
