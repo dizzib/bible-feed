@@ -50,9 +50,9 @@ void main() {
       expect(fds.hasEverAdvanced, false);
     });
 
-    test('should be stored true after advance', () {
+    test('should be stored true after advance', () async {
       f1.toggleIsChapterRead();
-      fds.forceAdvance();
+      await fds.forceAdvance();
       expect(Store.getBool('hasEverAdvanced'), true);
       expect(fds.hasEverAdvanced, true);
     });
@@ -64,9 +64,9 @@ void main() {
       expect(f1.chapter, shouldAdvance ? 2 : 1);
     }
 
-    test('forceAdvance should advance all feeds', () {
+    test('forceAdvance should advance all feeds', () async {
       f1.toggleIsChapterRead();
-      fds.forceAdvance();
+      await fds.forceAdvance();
       checkHasAdvanced(true);
     });
 
@@ -77,21 +77,21 @@ void main() {
       });
 
       group('if all read and latest saved day is', () {
-        test('today, should not advance', () {
+        test('today, should not advance', () async {
           f1.toggleIsChapterRead();
-          fds.maybeAdvance();
+          await fds.maybeAdvance();
           checkHasAdvanced(false);
         });
 
-        test('yesterday, should advance', () {
+        test('yesterday, should advance', () async {
           f1.toggleIsChapterRead();
-          withClock(clock.tomorrow, fds.maybeAdvance);
+          await withClock(clock.tomorrow, fds.maybeAdvance);
           checkHasAdvanced(true);
         });
 
-        test('7 days ago, should advance', () {
+        test('7 days ago, should advance', () async {
           f1.toggleIsChapterRead();
-          withClock(clock.addDays(7), fds.maybeAdvance);
+          await withClock(clock.addDays(7), fds.maybeAdvance);
           checkHasAdvanced(true);
         });
       });

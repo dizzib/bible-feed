@@ -20,16 +20,16 @@ class Feeds with ChangeNotifier {
   bool get hasEverAdvanced => Store.getBool('hasEverAdvanced') ?? false;
 
   /// methods
-  void forceAdvance() {
-    for (Feed f in _feeds) { f.nextChapter(); }
+  Future<void> forceAdvance() async {
+    for (Feed f in _feeds) { await f.nextChapter(); }
     Store.setBool('hasEverAdvanced', true);
   }
 
-  AdvanceState maybeAdvance() {
+  Future<AdvanceState> maybeAdvance() async {
     if (!areChaptersRead) return AdvanceState.notAllRead.log();
     var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
     var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
-    if (!latestSavedDate.isToday) { forceAdvance(); return AdvanceState.listsAdvanced.log(); }
+    if (!latestSavedDate.isToday) { await forceAdvance(); return AdvanceState.listsAdvanced.log(); }
     return AdvanceState.allReadAwaitingTomorrow.log();
   }
 
