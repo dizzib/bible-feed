@@ -11,7 +11,7 @@ class Feeds with ChangeNotifier {
   final List<Feed> _feeds;
 
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
-    for (Feed f in _feeds) { f.addListener(notifyListeners); }
+    for (Feed f in _feeds) { f.persister.addListener(notifyListeners); }
   }
 
   /// properties
@@ -33,5 +33,5 @@ class Feeds with ChangeNotifier {
     return AdvanceState.allReadAwaitingTomorrow.log();
   }
 
-  void reload() async {for (Feed f in _feeds) { f.loadState(); }}
+  void reload() async {for (Feed f in _feeds) { f.persister.loadStateOrDefaults(); }}
 }

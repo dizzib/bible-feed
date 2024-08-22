@@ -12,7 +12,7 @@ class FeedCard extends WatchingWidget {
 
   @override
   build(context) {
-    watch<Feed>(feed);
+    watch(feed.persister);
 
     titleBar() =>
       Row(
