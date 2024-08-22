@@ -18,7 +18,7 @@ void main() {
     })
   );
 
-  testWidgets('main', (t) async {
+  testWidgets('generate_screenshots', (t) async {
     void setState() {
       var bookChapterState = [
       [0, 5], [1, 12],
