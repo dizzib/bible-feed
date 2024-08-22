@@ -26,6 +26,7 @@ class BookChapterDialogWheels extends WatchingWidget {
               SizedBox(
                 width: constraints.maxWidth * 0.8,
                 child: ListWheel<Book>(
+                  key: const Key('book_wheel'),
                   indexToItem: (index) => readingList[index],
                   itemToString: (Book b) => b.name,
                   maxIndex: readingList.count - 1,
@@ -33,6 +34,7 @@ class BookChapterDialogWheels extends WatchingWidget {
               ),
               Flexible(
                 child: ListWheel<int>(
+                  key: const Key('chapter_wheel'),
                   indexToItem: (index) => index + 1,
                   itemToString: (int chapter) => chapter.toString(),
                   maxIndex: readingList[bookIndex].chapterCount - 1,

@@ -18,10 +18,11 @@ class ListWheel<T> extends StatelessWidget {
   final int maxIndex;
 
   const ListWheel({
+    required Key key,
     required this.indexToItem,
     required this.itemToString,
     required this.maxIndex,
-  });
+  }) : super(key: key);
 
   @override
   build(context) {
