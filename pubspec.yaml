@@ -39,12 +39,12 @@ dependencies:
   watch_it: ^1.4.2
 
 dev_dependencies:
-  integration_test:
-    sdk: flutter
   flutter_driver:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
