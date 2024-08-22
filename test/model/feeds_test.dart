@@ -71,27 +71,27 @@ void main() {
     });
 
     group('maybeAdvance', () {
-      test('if not all read, on next day, should not advance', () {
-        withClock(clock.tomorrow, fds.maybeAdvance);
+      test('if not all read, on next day, should not advance', () async {
+        expect(await withClock(clock.tomorrow, fds.maybeAdvance), AdvanceState.notAllRead);
         checkHasAdvanced(false);
       });
 
       group('if all read and latest saved day is', () {
         test('today, should not advance', () async {
           f1.toggleIsChapterRead();
-          await fds.maybeAdvance();
+          expect(await fds.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
           checkHasAdvanced(false);
         });
 
         test('yesterday, should advance', () async {
           f1.toggleIsChapterRead();
-          await withClock(clock.tomorrow, fds.maybeAdvance);
+          expect(await withClock(clock.tomorrow, fds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
 
         test('7 days ago, should advance', () async {
           f1.toggleIsChapterRead();
-          await withClock(clock.addDays(7), fds.maybeAdvance);
+          expect(await withClock(clock.addDays(7), fds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
       });
