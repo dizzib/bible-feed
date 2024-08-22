@@ -1,5 +1,7 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_background_service_ios (0.0.3):
+    - Flutter
   - integration_test (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -8,12 +10,15 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_background_service_ios (from `.symlinks/plugins/flutter_background_service_ios/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_background_service_ios:
+    :path: ".symlinks/plugins/flutter_background_service_ios/ios"
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
   shared_preferences_foundation:
@@ -21,6 +26,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_background_service_ios: e30e0d3ee69e4cee66272d0c78eacd48c2e94aac
   integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
 
