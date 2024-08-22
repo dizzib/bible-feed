@@ -25,12 +25,12 @@ class FeedPersister with ChangeNotifier {
     notifyListeners();
   }
 
-  void saveState() {
+  Future<void> saveState() async {
     feed.dateLastSaved = DateTime.now();
-    Store.setString(_storeKeyBookKey, feed.book.key);
-    Store.setInt(_storeKeyChapter, feed.chapter);
-    Store.setBool(_storeKeyIsChapterRead, feed.isChapterRead);
-    Store.setString(_storeKeyDateLastSaved, feed.dateLastSaved!.toIso8601String());
+    await Store.setString(_storeKeyBookKey, feed.book.key);
+    await Store.setInt(_storeKeyChapter, feed.chapter);
+    await Store.setBool(_storeKeyIsChapterRead, feed.isChapterRead);
+    await Store.setString(_storeKeyDateLastSaved, feed.dateLastSaved!.toIso8601String());
     notifyListeners();
   }
 }

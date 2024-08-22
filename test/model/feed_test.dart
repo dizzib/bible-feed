@@ -78,51 +78,51 @@ void main() {
     }
 
     group('nextChapter', () {
-      next() { f.isChapterRead = true; f.nextChapter(); }
+      next() async { f.isChapterRead = true; await f.nextChapter(); }
 
       test('should fail assertion if not read', () {
         f.isChapterRead = false;
         expect(f.nextChapter, throwsAssertionError);
       });
 
-      test('full cycle: should advance/reset chapter and book, and store', () {
-        next(); checkBookChapterAndStore(b1, 3);
-        next(); checkBookChapterAndStore(b2, 1);
-        next(); checkBookChapterAndStore(b2, 2);
-        next(); checkBookChapterAndStore(b0, 1);
-        next(); checkBookChapterAndStore(b0, 2);
-        next(); checkBookChapterAndStore(b0, 3);
-        next(); checkBookChapterAndStore(b0, 4);
-        next(); checkBookChapterAndStore(b0, 5);
-        next(); checkBookChapterAndStore(b1, 1);
-        next(); checkBookChapterAndStore(b1, 2);
-        next(); checkBookChapterAndStore(b1, 3);
+      test('full cycle: should advance/reset chapter and book, and store', () async {
+        await next(); checkBookChapterAndStore(b1, 3);
+        await next(); checkBookChapterAndStore(b2, 1);
+        await next(); checkBookChapterAndStore(b2, 2);
+        await next(); checkBookChapterAndStore(b0, 1);
+        await next(); checkBookChapterAndStore(b0, 2);
+        await next(); checkBookChapterAndStore(b0, 3);
+        await next(); checkBookChapterAndStore(b0, 4);
+        await next(); checkBookChapterAndStore(b0, 5);
+        await next(); checkBookChapterAndStore(b1, 1);
+        await next(); checkBookChapterAndStore(b1, 2);
+        await next(); checkBookChapterAndStore(b1, 3);
       });
 
-      test('should +0 chaptersRead', () {
-        expect(f.chaptersRead, 2); next();
+      test('should +0 chaptersRead', () async {
+        expect(f.chaptersRead, 2); await next();
         expect(f.chaptersRead, 2);
       });
 
-      test('should reset isChapterRead', () {
-        next(); expect(f.isChapterRead, false);
+      test('should reset isChapterRead', () async {
+        await next(); expect(f.isChapterRead, false);
       });
     });
 
-    test('setBookAndChapter should set book/chapter, reset isChapterRead, and store', () {
-      f.setBookAndChapter(0, 4);
+    test('setBookAndChapter should set book/chapter, reset isChapterRead, and store', () async {
+      await f.setBookAndChapter(0, 4);
       checkBookChapterAndStore(b0, 4);
       expect(f.isChapterRead, false);
     });
 
-    test('toggleIsChapterRead should toggle and store', () {
+    test('toggleIsChapterRead should toggle and store', () async {
       void checkIsChapterRead(bool expected) {
         expect(f.isChapterRead, expected);
         expect(Store.getBool('l2.isChapterRead')!, expected);
       }
 
-      f.toggleIsChapterRead(); checkIsChapterRead(false);
-      f.toggleIsChapterRead(); checkIsChapterRead(true);
+      await f.toggleIsChapterRead(); checkIsChapterRead(false);
+      await f.toggleIsChapterRead(); checkIsChapterRead(true);
       checkBookChapterAndStore(b1, 2);  // ensure no side effects
     });
   });

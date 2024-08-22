@@ -7,23 +7,23 @@ extension CalculatedGetters on Feed {
 }
 
 extension PublicMethods on Feed {
-  void nextChapter() {
+  Future<void> nextChapter() async {
     assert(isChapterRead);
     void nextBook() => book = readingList[(bookIndex + 1) % readingList.count];
     if (++_chapter > book.chapterCount) { nextBook(); _chapter = 1; }
     isChapterRead = false;
-    persister.saveState();
+    await persister.saveState();
   }
 
-  void setBookAndChapter(int bookIndex, int chapter) {
+  Future<void> setBookAndChapter(int bookIndex, int chapter) async {
     book = readingList[bookIndex];
     this.chapter = chapter;
     isChapterRead = false;
-    persister.saveState();
+    await persister.saveState();
   }
 
-  void toggleIsChapterRead() {
+  Future<void> toggleIsChapterRead() async {
     isChapterRead = !isChapterRead;
-    persister.saveState();
+    await persister.saveState();
   }
 }
