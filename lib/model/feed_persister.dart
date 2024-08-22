@@ -4,15 +4,18 @@ import 'feed.dart';
 
 class FeedPersister with ChangeNotifier {
   final Feed feed;
+  late final String _storeKeyBookKey;
+  late final String _storeKeyChapter;
+  late final String _storeKeyDateLastSaved;
+  late final String _storeKeyIsChapterRead;
 
   FeedPersister(this.feed) {
+    _storeKeyBookKey = '${feed.readingList.key}.book';
+    _storeKeyChapter = '${feed.readingList.key}.chapter';
+    _storeKeyDateLastSaved = '${feed.readingList.key}.dateLastSaved';
+    _storeKeyIsChapterRead = '${feed.readingList.key}.isChapterRead';
     loadStateOrDefaults();
   }
-
-  String get _storeKeyBookKey => '${feed.readingList.key}.book';
-  String get _storeKeyChapter => '${feed.readingList.key}.chapter';
-  String get _storeKeyDateLastSaved => '${feed.readingList.key}.dateLastSaved';
-  String get _storeKeyIsChapterRead => '${feed.readingList.key}.isChapterRead';
 
   void loadStateOrDefaults() {
     feed.book = feed.readingList.getBook(Store.getString(_storeKeyBookKey) ?? feed.readingList[0].key);
