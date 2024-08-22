@@ -33,5 +33,5 @@ class Feeds with ChangeNotifier {
     return AdvanceState.allReadAwaitingTomorrow.log();
   }
 
-  void reload() async {for (Feed f in _feeds) { f.persister.loadStateOrDefaults(); }}
+  reload() { for (Feed f in _feeds) { f.persister.loadStateOrDefaults(); }}
 }
