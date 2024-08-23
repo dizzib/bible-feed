@@ -26,12 +26,16 @@ extension AppTestHelper on WidgetTester {
   selectLastBookAndChapter(String feedName) async {
     await longPress(find.text(feedName));
     await pumpAndSettle();
-    await drag(find.byKey(const Key('book_wheel')), const Offset(0, -999));  // last book
-    await drag(find.byKey(const Key('chapter_wheel')), const Offset(0, -999));  // last chapter
+    await scrollToLastBook();
+    await scrollToLastChapter();
     await pumpAndSettle();
     await tap(find.text('Update'));
     await pumpAndSettle();
   }
+
+  scrollToLastBook() async { await scrollToLastItem('book_wheel'); }
+  scrollToLastChapter() async { await scrollToLastItem('chapter_wheel'); }
+  scrollToLastItem(String keyVal) async { await drag(find.byKey(Key(keyVal)), const Offset(0, -999)); }
 
   tapAllDoneButton(String text) async {
     expectText('All done!');

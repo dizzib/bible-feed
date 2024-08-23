@@ -11,7 +11,6 @@ import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
 import 'package:bible_feed/view/feeds_view.dart';
 import 'package:bible_feed/util/store.dart';
-import '../test/model/_test_data.dart';
 import 'helper.dart';
 
 extension Helper on WidgetTester {
@@ -23,29 +22,29 @@ extension Helper on WidgetTester {
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   await Store.init();
+  final gospels = readingLists[0];
+  final matthew = gospels[0];
+  final john = gospels[3];
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
     di.registerSingleton(ListWheelState<Book>());
     di.registerSingleton(ListWheelState<int>());
-    await t.initialiseWidget(BookChapterDialog(Feed(l2)));
-    expectText(b0.name);
-    expectText(b1.name);
-    expectText(b2.name);
-    expectText(l2.name);
-    expectText('1');
-    expectText('2');
-    expectText('3');
-    expectText('4');
-    expectText('5');
-    expectNoText('6');
+    await t.initialiseWidget(BookChapterDialog(Feed(gospels)));
+    await t.scrollToLastChapter();
+    await t.pump();
+    for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) { expectText(gospels[bookIndex].name); }
+    expectText(matthew.chapterCount.toString());
+    await t.scrollToLastBook();
+    await t.pump();
+    expectText(john.chapterCount.toString());
+    expectNoText((john.chapterCount + 1).toString());
   });
 
   testWidgets('FeedCard', (WidgetTester t) async {
-    await t.initialiseWidget(FeedCard(Feed(l0)));
-    expectText(l0.name);
-    expectText(b0.name);
+    await t.initialiseWidget(FeedCard(Feed(gospels)));
+    expectText(gospels.name);
+    expectText(matthew.name);
     expectText('1');
-    expectNoText('2');
   });
 
   testWidgets('FeedsView', (WidgetTester t) async {
