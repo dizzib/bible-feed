@@ -24,7 +24,6 @@ void main() async {
   await Store.init();
   final gospels = readingLists[0];
   final matthew = gospels[0];
-  final john = gospels[3];
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
     di.registerSingleton(ListWheelState<Book>());
@@ -36,8 +35,10 @@ void main() async {
     expectText(matthew.chapterCount.toString());
     await t.scrollToLastBook();
     await t.pump();
+    final john = gospels[3];
     expectText(john.chapterCount.toString());
-    expectNoText((john.chapterCount + 1).toString());
+    expectNoText((john.chapterCount + 1).toString());  // matthew 22-28 should disappear
+    expectNoText(matthew.chapterCount.toString());
   });
 
   testWidgets('FeedCard', (WidgetTester t) async {
