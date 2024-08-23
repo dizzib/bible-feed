@@ -11,11 +11,10 @@ void main() {
   final b = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   const screenshotsEnabled = true;
 
-  setUpAll(() =>
-    Future(() async {
+  setUp(() async {
       WidgetsApp.debugAllowBannerOverride = false;  // hide the debug banner
       if (screenshotsEnabled == true) await b.convertFlutterSurfaceToImage();  // req'd for screenshots on android only
-    })
+    }
   );
 
   testWidgets('generate_screenshots', (t) async {
