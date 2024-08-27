@@ -46,7 +46,7 @@ class BookChapterDialog extends StatelessWidget {
                   )
                 ),
                 Expanded(child: BookChapterDialogWheels(feed.readingList)),
-                withBackground(BookChapterDialogFooter(feed.readingList, feed.setBookAndChapter))
+                withBackground(BookChapterDialogFooter(feed))
               ],
             )
           )
