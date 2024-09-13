@@ -5,5 +5,8 @@ class ListWheelState<T> with ChangeNotifier {
 
   // get/set index
   int get index => _index;
-  set index(int index) { _index = index; notifyListeners(); }
+  set index(int index) {
+    _index = index;
+    notifyListeners();
+  }
 }

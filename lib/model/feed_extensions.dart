@@ -10,7 +10,10 @@ extension PublicMethods on Feed {
   Future<void> nextChapter() async {
     assert(isChapterRead);
     void nextBook() => book = readingList[(bookIndex + 1) % readingList.count];
-    if (++_chapter > book.chapterCount) { nextBook(); _chapter = 1; }
+    if (++_chapter > book.chapterCount) {
+      nextBook();
+      _chapter = 1;
+    }
     isChapterRead = false;
     await persister.saveState();
   }

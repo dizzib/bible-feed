@@ -14,11 +14,17 @@ class Feed {
 
   // chapter get/set
   int get chapter => _chapter;
-  set chapter(int c) { assert(c > 0); assert(c <= book.chapterCount); _chapter = c; }
+  set chapter(int c) {
+    assert(c > 0);
+    assert(c <= book.chapterCount);
+    _chapter = c;
+  }
 
   // public properties
   late final FeedPersister persister;
   final ReadingList readingList;
 
-  Feed(this.readingList) { persister = FeedPersister(this); }
+  Feed(this.readingList) {
+    persister = FeedPersister(this);
+  }
 }
