@@ -12,31 +12,39 @@ void main() {
   const screenshotsEnabled = true;
 
   setUp(() async {
-      WidgetsApp.debugAllowBannerOverride = false;  // hide the debug banner
-      if (screenshotsEnabled == true) await b.convertFlutterSurfaceToImage();  // req'd for screenshots on android only
-    }
-  );
+    WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
+    if (screenshotsEnabled == true) await b.convertFlutterSurfaceToImage(); // req'd for screenshots on android only
+  });
 
   testWidgets('generate_screenshots', (t) async {
     void setState() {
-      var bookChapterState = [
-      [0, 5], [1, 12],
-      [4, 4], [6, 2],
-      [0, 40], [0, 144],
-      [0, 15], [5, 17],
-      [0, 40], [0, 8]
+      var bookState = [
+        [0, 1],
+        [4, 6],
+        [0, 0],
+        [0, 5],
+        [0, 0]
       ];
-      var chaptersReadState = [
-        0, 1,
-        0, 0,
-        1, 1,
-        0, 1,
-        1, 0
+      var chapterState = [
+        [5, 12],
+        [4, 2],
+        [40, 144],
+        [15, 17],
+        [40, 8]
       ];
-      for (int i = 0; i < 10; i++) {
-        var feed = di<Feeds>()[i];
-        feed.setBookAndChapter(bookChapterState[i][0], bookChapterState[i][1]);
-        feed.isChapterRead = chaptersReadState[i] == 1 ? true : false;
+      var chapterReadState = [
+        [0, 1],
+        [0, 0],
+        [1, 1],
+        [0, 1],
+        [1, 0]
+      ];
+      for (int row = 0; row < 5; row++) {
+        for (int col = 0; col < 2; col++) {
+          var feed = di<Feeds>()[row * 2 + col];
+          feed.setBookAndChapter(bookState[row][col], chapterState[row][col]);
+          feed.isChapterRead = chapterReadState[row][col] == 1 ? true : false;
+        }
       }
     }
 
