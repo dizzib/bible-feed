@@ -11,9 +11,9 @@ import '../util/store.dart';
 void onStart(ServiceInstance service) async {
   await Store.init();
   var schedule = Schedule(
-    hours: '0',  // at midnight
-    minutes: '0',  // in the 1st minute. BUG: sometimes seems to skip 00 seconds!?
-    seconds: '*/5',  // every 5 seconds, in an attempt to fix issue #1.
+    hours: '0', // at midnight
+    minutes: '0', // in the 1st minute. BUG: sometimes seems to skip 00 seconds!?
+    seconds: '*/5', // every 5 seconds, in an attempt to fix issue #1.
   );
   schedule.toCronString(hasSecond: true).log();
   Cron().schedule(schedule, () async {
@@ -32,14 +32,16 @@ class BackgroundService {
   BackgroundService() {
     service.configure(
       androidConfiguration: AndroidConfiguration(onStart: onStart, isForegroundMode: false),
-      iosConfiguration: IosConfiguration(onForeground: onStart,)
+      iosConfiguration: IosConfiguration(
+        onForeground: onStart,
+      ),
     );
     handleOnListsAdvanced();
   }
 
   void handleOnListsAdvanced() async {
     // when b/g service updates feeds, reload from Store so UI gets (implicitly) refreshed
-    await for(var _ in service.on(AdvanceState.listsAdvanced.toString())) {
+    await for (var _ in service.on(AdvanceState.listsAdvanced.toString())) {
       await Store.reload();
       di<Feeds>().reload();
     }
