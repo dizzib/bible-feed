@@ -15,12 +15,13 @@ void main() {
 
   testWidgets('auto advance at midnight', (t) async {
     await withClock(mockClock, () async {
-      await t.initialiseApp(); expectChapters(1);
+      await t.initialiseApp();
+      expectChapters(1);
       await t.tapAllLists();
       await t.tapNo();
       // the following should auto-advance but does not, probably because mockClock does not
       // reach the isolate where cron is running. This failing test is disabled for now.
-      await t.pump(const Duration(seconds:7));
+      await t.pump(const Duration(seconds: 7));
       expectChapters(2);
     });
   });

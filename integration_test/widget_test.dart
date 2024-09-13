@@ -15,7 +15,7 @@ import 'helper.dart';
 
 extension Helper on WidgetTester {
   initialiseWidget(Widget widget) async {
-    await pumpWidget(MaterialApp(home:widget));
+    await pumpWidget(MaterialApp(home: widget));
   }
 }
 
@@ -31,13 +31,15 @@ void main() async {
     await t.initialiseWidget(BookChapterDialog(Feed(gospels)));
     await t.scrollToLastChapter();
     await t.pump();
-    for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) { expectText(gospels[bookIndex].name); }
+    for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) {
+      expectText(gospels[bookIndex].name);
+    }
     expectText(matthew.chapterCount.toString());
     await t.scrollToLastBook();
     await t.pump();
     final john = gospels[3];
     expectText(john.chapterCount.toString());
-    expectNoText((john.chapterCount + 1).toString());  // matthew 22-28 should disappear
+    expectNoText((john.chapterCount + 1).toString()); // matthew 22-28 should disappear
     expectNoText(matthew.chapterCount.toString());
   });
 
@@ -52,6 +54,8 @@ void main() async {
     di.registerSingleton(Feeds(readingLists));
     await t.initialiseWidget(FeedsView());
     expectChapters(1);
-    for (var l in readingLists) { expectAtLeast1Text(l.name); }
+    for (var l in readingLists) {
+      expectAtLeast1Text(l.name);
+    }
   });
 }

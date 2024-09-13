@@ -5,7 +5,7 @@ import 'package:bible_feed/view/feed_card.dart';
 
 expectBookAndChapter(String expectedBookName, int expectedChapter) {
   expectText(expectedBookName);
-  expectChapters(expectedChapter, count:1);
+  expectChapters(expectedChapter, count: 1);
 }
 
 expectChapters(int expectedValue, {int count = 10}) {
@@ -13,8 +13,8 @@ expectChapters(int expectedValue, {int count = 10}) {
 }
 
 // text helpers
-expectAtLeast1Text(String expectedText) => expectText(expectedText, matcher:findsAtLeast(1));
-expectNoText(String expectedText) => expectText(expectedText, matcher:findsNothing);
+expectAtLeast1Text(String expectedText) => expectText(expectedText, matcher: findsAtLeast(1));
+expectNoText(String expectedText) => expectText(expectedText, matcher: findsNothing);
 expectText(String expectedText, {matcher = findsOneWidget}) => expect(find.text(expectedText), matcher);
 
 extension AppTestHelper on WidgetTester {
@@ -33,9 +33,17 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  scrollToLastBook() async { await scrollToLastItem('book_wheel'); }
-  scrollToLastChapter() async { await scrollToLastItem('chapter_wheel'); }
-  scrollToLastItem(String keyVal) async { await drag(find.byKey(Key(keyVal)), const Offset(0, -999)); }
+  scrollToLastBook() async {
+    await scrollToLastItem('book_wheel');
+  }
+
+  scrollToLastChapter() async {
+    await scrollToLastItem('chapter_wheel');
+  }
+
+  scrollToLastItem(String keyVal) async {
+    await drag(find.byKey(Key(keyVal)), const Offset(0, -999));
+  }
 
   tapAllDoneButton(String text) async {
     expectText('All done!');
@@ -45,7 +53,9 @@ extension AppTestHelper on WidgetTester {
 
   tapAllLists() async {
     var feedCards = find.byType(FeedCard).evaluate();
-    for (var el in feedCards) { await tapAt(getCenter(find.byWidget(el.widget))); }
+    for (var el in feedCards) {
+      await tapAt(getCenter(find.byWidget(el.widget)));
+    }
     await pumpAndSettle();
   }
 
