@@ -10,14 +10,11 @@ class FeedsView extends StatelessWidget {
     feedCard(index) => Expanded(child: FeedCard(di<Feeds>()[index]));
 
     return Scaffold(
-      body: Column(  // Columns and Rows work better than a GridView
+      body: Column(
+        // Columns and Rows work better than a GridView
         children: [
-          for (int index in [0, 2, 4, 6, 8]) Expanded(
-            child: Row(
-              children: [feedCard(index), feedCard(index + 1)]
-            )
-          )
-        ]
+          for (int index in [0, 2, 4, 6, 8]) Expanded(child: Row(children: [feedCard(index), feedCard(index + 1)]))
+        ],
       ),
       floatingActionButton: AllDoneFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,

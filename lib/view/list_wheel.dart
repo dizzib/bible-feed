@@ -27,14 +27,14 @@ class ListWheel<T> extends StatelessWidget {
   @override
   build(context) {
     const magnification = 1.1;
-    var itemExtent = DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale;  // accomodate various text sizes
+    var itemExtent = DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale; // accomodate various text sizes
     var wheelState = di<ListWheelState<T>>();
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
     if (wheelState.index > maxIndex) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        controller.jumpToItem(0);  // hack: without this, ListWheelScrollView sometimes partially renders
+        controller.jumpToItem(0); // hack: without this, ListWheelScrollView sometimes partially renders
         controller.jumpToItem(maxIndex);
         wheelState.index = maxIndex;
       });
@@ -42,39 +42,33 @@ class ListWheel<T> extends StatelessWidget {
 
     // workaround bug in ListWheelScrollView where a changing textStyle.fontSize -> itemExtent
     // renders badly. In this case jumpToItem on next frame
-    workaroundItemExtentBug(child) =>
-      NotificationListener(
+    workaroundItemExtentBug(child) => NotificationListener(
         onNotification: (SizeChangedLayoutNotification notification) {
           WidgetsBinding.instance.addPostFrameCallback((_) => controller.jumpToItem(wheelState.index));
-          return true;  // cancel bubbling
+          return true; // cancel bubbling
         },
-        child: SizeChangedLayoutNotifier(child: child)
-      );
+        child: SizeChangedLayoutNotifier(child: child));
 
-    return Stack(
-      children: [
-        const ListWheelGradient(begin: Alignment.topCenter, end:Alignment.bottomCenter),
-        const ListWheelGradient(begin: Alignment.bottomCenter, end:Alignment.topCenter),
-        ListWheelHighlight(height: itemExtent * magnification),
-        workaroundItemExtentBug(
-          ListWheelScrollView.useDelegate(
-            childDelegate: ListWheelChildBuilderDelegate(
-              builder: (_, int index) {
-                if (index < 0 || index > maxIndex) return null;
-                return Text(itemToString(indexToItem(index)));
-              },
-            ),
-            controller: controller,
-            diameterRatio: 1.1,
-            itemExtent: itemExtent,
-            magnification: magnification,
-            onSelectedItemChanged: (index) => wheelState.index = index,
-            overAndUnderCenterOpacity: 0.7,
-            physics: const FixedExtentScrollPhysics(),
-            useMagnifier: true,
-          )
+    return Stack(children: [
+      const ListWheelGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter),
+      const ListWheelGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter),
+      ListWheelHighlight(height: itemExtent * magnification),
+      workaroundItemExtentBug(ListWheelScrollView.useDelegate(
+        childDelegate: ListWheelChildBuilderDelegate(
+          builder: (_, int index) {
+            if (index < 0 || index > maxIndex) return null;
+            return Text(itemToString(indexToItem(index)));
+          },
         ),
-      ]
-    );
+        controller: controller,
+        diameterRatio: 1.1,
+        itemExtent: itemExtent,
+        magnification: magnification,
+        onSelectedItemChanged: (index) => wheelState.index = index,
+        overAndUnderCenterOpacity: 0.7,
+        physics: const FixedExtentScrollPhysics(),
+        useMagnifier: true,
+      )),
+    ]);
   }
 }

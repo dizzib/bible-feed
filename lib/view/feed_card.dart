@@ -14,8 +14,8 @@ class FeedCard extends WatchingWidget {
   build(context) {
     watch(feed.persister);
 
-    titleBar() =>
-      Row(
+    titleBar() {
+      return Row(
         children: [
           Expanded(
             child: Padding(
@@ -29,13 +29,14 @@ class FeedCard extends WatchingWidget {
           ),
           IconButton(
             icon: const Icon(Icons.unfold_more),
-            onPressed: () => context.showBlurBackgroundDialog(BookChapterDialog(feed))
+            onPressed: () => context.showBlurBackgroundDialog(BookChapterDialog(feed)),
           ),
         ],
       );
+    }
 
-    bookChapter() =>
-      Expanded(
+    bookChapter() {
+      return Expanded(
         child: Padding(
           padding: const EdgeInsets.all(2.0),
           child: Row(
@@ -58,11 +59,13 @@ class FeedCard extends WatchingWidget {
           ),
         ),
       );
+    }
 
     return Opacity(
       opacity: feed.isChapterRead ? 0.25 : 1,
       child: Card(
-        color: feed.isChapterRead ? context.colorScheme.surfaceContainerLowest : context.colorScheme.surfaceContainerLow,
+        color:
+            feed.isChapterRead ? context.colorScheme.surfaceContainerLowest : context.colorScheme.surfaceContainerLow,
         elevation: feed.isChapterRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
@@ -72,24 +75,18 @@ class FeedCard extends WatchingWidget {
             HapticFeedback.lightImpact();
             feed.toggleIsChapterRead();
           },
-          child: LayoutBuilder(builder: (_, BoxConstraints c) =>
-            Column(
+          child: LayoutBuilder(
+            builder: (_, BoxConstraints c) => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Visibility(
-                  visible: c.maxHeight > 99,
-                  child: titleBar()
-                ),
-                LinearProgressIndicator(
-                  backgroundColor: context.colorScheme.surface,
-                  value: feed.progress
-                ),
+                Visibility(visible: c.maxHeight > 99, child: titleBar()),
+                LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
                 DefaultTextStyle.merge(
                   style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
                   child: bookChapter(),
                 )
               ],
-            )
+            ),
           ),
         ),
       ),

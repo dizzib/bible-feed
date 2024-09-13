@@ -5,11 +5,13 @@ import '../util/build_context.dart';
 class ListWheelHighlight extends StatelessWidget {
   final double height;
 
-  const ListWheelHighlight({ required this.height, });
+  const ListWheelHighlight({
+    required this.height,
+  });
 
   @override
-  build(context) =>
-    Align(
+  build(context) {
+    return Align(
       alignment: Alignment.center,
       child: Container(
         height: height,
@@ -17,9 +19,10 @@ class ListWheelHighlight extends StatelessWidget {
           color: context.colorScheme.tertiary,
           borderRadius: BorderRadius.circular(8.0),
         ),
-      )
+      ),
     );
   }
+}
 
 // background fade effect
 class ListWheelGradient extends StatelessWidget {
@@ -32,21 +35,16 @@ class ListWheelGradient extends StatelessWidget {
     return Align(
       alignment: begin,
       child: LayoutBuilder(
-        builder: (_, constraints) =>
-          Container(
-            height: constraints.maxHeight * 0.5,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: begin,
-                end: end,
-                colors: [
-                  context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 0.0 : 1.0),
-                  context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 1.0 : 0.0),
-                ]
-              )
-            ),
-          )
-      )
+        builder: (_, constraints) => Container(
+          height: constraints.maxHeight * 0.5,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(begin: begin, end: end, colors: [
+              context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 0.0 : 1.0),
+              context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 1.0 : 0.0),
+            ]),
+          ),
+        ),
+      ),
     );
   }
 }

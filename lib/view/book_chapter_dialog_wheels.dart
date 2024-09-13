@@ -14,35 +14,33 @@ class BookChapterDialogWheels extends WatchingWidget {
   build(context) {
     var bookIndex = watchIt<ListWheelState<Book>>().index;
     return LayoutBuilder(
-      builder: (_, constraints) =>
-        DefaultTextStyle.merge(
-          style: TextStyle(
-            fontSize: (constraints.maxWidth < 200 || constraints.maxHeight < 190) ? 16 : 23,
-            fontWeight: FontWeight.w600,
-            overflow: TextOverflow.ellipsis,  // without this, large text wraps and disappears
-          ),
-          child: Row(
-            children: [
-              SizedBox(
+      builder: (_, constraints) => DefaultTextStyle.merge(
+        style: TextStyle(
+          fontSize: (constraints.maxWidth < 200 || constraints.maxHeight < 190) ? 16 : 23,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis, // without this, large text wraps and disappears
+        ),
+        child: Row(
+          children: [
+            SizedBox(
                 width: constraints.maxWidth * 0.8,
                 child: ListWheel<Book>(
                   key: const Key('book_wheel'),
                   indexToItem: (index) => readingList[index],
                   itemToString: (Book b) => b.name,
                   maxIndex: readingList.count - 1,
-                )
+                )),
+            Flexible(
+              child: ListWheel<int>(
+                key: const Key('chapter_wheel'),
+                indexToItem: (index) => index + 1,
+                itemToString: (int chapter) => chapter.toString(),
+                maxIndex: readingList[bookIndex].chapterCount - 1,
               ),
-              Flexible(
-                child: ListWheel<int>(
-                  key: const Key('chapter_wheel'),
-                  indexToItem: (index) => index + 1,
-                  itemToString: (int chapter) => chapter.toString(),
-                  maxIndex: readingList[bookIndex].chapterCount - 1,
-                )
-              ),
-            ],
-          ),
-        )
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

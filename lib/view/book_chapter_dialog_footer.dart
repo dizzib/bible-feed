@@ -20,21 +20,18 @@ class BookChapterDialogFooter extends WatchingWidget {
     return Column(
       children: [
         LinearProgressIndicator(
-          backgroundColor: context.colorScheme.surface,
-          value: feed.readingList.progressTo(bookIndex, chapter)
-        ),
+            backgroundColor: context.colorScheme.surface, value: feed.readingList.progressTo(bookIndex, chapter)),
         Row(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: AutoSizeText(
-                  '${feed.readingList.chaptersTo(bookIndex, chapter)} of ${feed.readingList.totalChapters}',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
-            ),
+                child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: AutoSizeText(
+                '${feed.readingList.chaptersTo(bookIndex, chapter)} of ${feed.readingList.totalChapters}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            )),
             TextButton(
               onPressed: () {
                 HapticFeedback.lightImpact();
