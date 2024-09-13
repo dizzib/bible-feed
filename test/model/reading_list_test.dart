@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import '_test_data.dart';
 
 void main() {
-
   test('constructor', () {
     expect(l2.count, 3);
     expect(l2.totalChapters, 10);

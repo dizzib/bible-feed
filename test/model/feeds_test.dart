@@ -99,7 +99,8 @@ void main() {
 
     test('reload should refresh from store updated in background', () async {
       Store.setInt('l0.chapter', 2);
-      expect(f0.chapter, 1); fds.reload();
+      expect(f0.chapter, 1);
+      fds.reload();
       expect(f0.chapter, 2);
     });
   });
