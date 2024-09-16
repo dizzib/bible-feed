@@ -27,7 +27,8 @@ class ListWheel<T> extends StatelessWidget {
   @override
   build(context) {
     const magnification = 1.1;
-    var itemExtent = DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale; // accomodate various text sizes
+    var itemExtent =
+        DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale; // accomodate various text sizes
     var wheelState = di<ListWheelState<T>>();
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
@@ -42,12 +43,15 @@ class ListWheel<T> extends StatelessWidget {
 
     // workaround bug in ListWheelScrollView where a changing textStyle.fontSize -> itemExtent
     // renders badly. In this case jumpToItem on next frame
-    workaroundItemExtentBug(child) => NotificationListener(
+    workaroundItemExtentBug(child) {
+      return NotificationListener(
         onNotification: (SizeChangedLayoutNotification notification) {
           WidgetsBinding.instance.addPostFrameCallback((_) => controller.jumpToItem(wheelState.index));
           return true; // cancel bubbling
         },
-        child: SizeChangedLayoutNotifier(child: child));
+        child: SizeChangedLayoutNotifier(child: child),
+      );
+    }
 
     return Stack(children: [
       const ListWheelGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter),
