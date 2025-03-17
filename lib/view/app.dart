@@ -5,15 +5,14 @@ import 'feeds_view.dart';
 class App extends StatelessWidget {
   @override
   build(context) {
-    theme(Brightness brightness) =>
-      ThemeData(
-        cardTheme: CardTheme(surfaceTintColor: context.colorScheme.surfaceTint),
-        colorScheme: ColorScheme.fromSeed(
-          brightness: brightness,
-          seedColor: const Color(0xffbb86fc),
-          tertiary: brightness == Brightness.dark ? Colors.red : Colors.amber,
-        ),
-      );
+    theme(Brightness brightness) => ThemeData(
+          cardTheme: CardTheme(surfaceTintColor: context.colorScheme.surfaceTint),
+          colorScheme: ColorScheme.fromSeed(
+            brightness: brightness,
+            seedColor: const Color(0xffbb86fc),
+            tertiary: brightness == Brightness.dark ? Colors.red : Colors.amber,
+          ),
+        );
 
     return SafeArea(
       child: MaterialApp(
