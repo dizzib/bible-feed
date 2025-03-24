@@ -86,3 +86,8 @@ flutter {
 }
 
 dependencies {}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
+    options.deprecation = true
+}
