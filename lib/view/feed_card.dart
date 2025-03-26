@@ -87,7 +87,10 @@ class FeedCard extends WatchingWidget {
                 ),
                 Visibility(
                   visible: feed.tip?.isNotEmpty ?? false,
-                  child: Text(feed.tip ?? ''),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(feed.tip ?? ''),
+                  ),
                 )
               ],
             ),
