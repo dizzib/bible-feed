@@ -47,7 +47,7 @@ var readingLists = [
     Book('sos', 'Song of Solomon', 8),
   ]),
   ReadingList('psa', 'Psalms', const [
-    Book('psa', 'Psalms', 150),
+    Book('psa', 'Psalm', 150),
   ]),
   ReadingList('prv', 'Proverbs', const [
     Book('prv', 'Proverbs', 31),
