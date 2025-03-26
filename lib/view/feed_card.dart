@@ -84,6 +84,10 @@ class FeedCard extends WatchingWidget {
                 DefaultTextStyle.merge(
                   style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
                   child: bookChapter(),
+                ),
+                Visibility(
+                  visible: feed.tip?.isNotEmpty ?? false,
+                  child: Text(feed.tip ?? ''),
                 )
               ],
             ),

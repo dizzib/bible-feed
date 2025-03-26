@@ -3,6 +3,7 @@ import 'feed_persister.dart';
 import 'reading_list.dart';
 
 part 'feed_extensions.dart';
+part 'feed_tip.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed {
