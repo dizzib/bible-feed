@@ -67,7 +67,7 @@ class FeedCard extends WatchingWidget {
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: AutoSizeText(
-              '${feed.book.name} ${feed.chapter}${feed.tip}',
+              '${feed.book.name}\u00A0${feed.chapter}${feed.tip}',
               maxLines: 2,
               textAlign: TextAlign.center,
             ),
