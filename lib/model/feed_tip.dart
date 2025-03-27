@@ -19,7 +19,6 @@ extension FeedTip on Feed {
       129: 'ע AYIN',
       130: 'פ PE',
       131: 'צ TSADDE',
-      132: null,
       133: 'ק QOPH ר RESH',
       134: 'ש SHIN ת TAU',
     };
