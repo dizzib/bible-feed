@@ -6,26 +6,26 @@ extension FeedTip on Feed {
     if (book.key != 'psa') return '';
     // split PSALM 119 over several days
     const tips = {
-      117: 'ℵ Aleph ℶ Beth',
-      119: 'ג Gimel ד Daleth',
-      120: 'ה He ו Waw',
-      121: 'ז Zayin ח Heth',
-      122: 'ט Teth',
-      123: 'י Yod',
-      124: 'כ Kaph',
-      125: 'ל Lamed',
-      126: 'מ Mem',
-      127: 'נ Nun',
-      128: 'ס Samek',
-      129: 'ע Ayin',
-      130: 'פ Pe',
-      131: 'צ Tsadde',
-      133: 'ק Qoph ר Resh',
-      134: 'ש Shin ת Tau',
+      117: 'ℵ_Aleph_ℶ_Beth',
+      119: 'ג_Gimel_ד_Daleth',
+      120: 'ה_He_ו_Waw',
+      121: 'ז_Zayin_ח_Heth',
+      122: 'ט_Teth',
+      123: 'י_Yod',
+      124: 'כ_Kaph',
+      125: 'ל_Lamed',
+      126: 'מ_Mem',
+      127: 'נ_Nun',
+      128: 'ס_Samek',
+      129: 'ע_Ayin',
+      130: 'פ_Pe',
+      131: 'צ_Tsadde',
+      133: 'ק_Qoph_ר_Resh',
+      134: 'ש_Shin_ת_Tau',
     };
     var tip = tips[chapter];
     if (tip == null) return '';
-    tip = '${(chapter == 119) ? '' : '119 '}$tip';
-    return tip.replaceAll(' ', String.fromCharCode(0x00A0));
+    tip = '${(chapter == 119) ? ' ' : ', 119_'}$tip';
+    return tip.replaceAll('_', String.fromCharCode(0x00A0));
   }
 }
