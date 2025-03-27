@@ -5,7 +5,7 @@ extension FeedTip on Feed {
   String get tip {
     if (book.key != 'psa') return '';
     // split PSALM 119 over several days
-    var tips = const {
+    const tips = {
       117: 'ℵ ALEPH ℶ BETH',
       119: 'ג GIMEL ד DALETH',
       120: 'ה HE ו WAW',
@@ -23,7 +23,7 @@ extension FeedTip on Feed {
       133: 'ק QOPH ר RESH',
       134: 'ש SHIN ת TAU',
     };
-    var tip = tips[chapter];
+    final tip = tips[chapter];
     return tip == null ? '' : '${(chapter != 119) ? '119' : ''} $tip';
   }
 }
