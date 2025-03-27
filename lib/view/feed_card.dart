@@ -35,6 +35,7 @@ class FeedCard extends WatchingWidget {
       );
     }
 
+    // hypenation does not work well or look good, so stick with overflow ellipses
     bookChapterNoTip() {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -56,6 +57,7 @@ class FeedCard extends WatchingWidget {
       );
     }
 
+    // for Psalms 119 only
     bookChapterTip() {
       return Center(
         child: AutoSizeText(
