@@ -35,43 +35,42 @@ class FeedCard extends WatchingWidget {
       );
     }
 
-    bookChapter() {
-      return Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: AutoSizeText(
-                    feed.book.name,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
+    bookChapterNoTip() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: AutoSizeText(
+                feed.book.name,
+                overflow: TextOverflow.ellipsis,
               ),
-              AutoSizeText(
-                feed.chapter.toString(),
-                maxLines: 1,
-              ),
-            ],
+            ),
           ),
-        ),
+          AutoSizeText(
+            feed.chapter.toString(),
+            maxLines: 1,
+          ),
+        ],
       );
     }
 
     bookChapterTip() {
+      return Center(
+        child: AutoSizeText(
+          '${feed.book.name}\u00A0${feed.chapter}${feed.tip}',
+          maxLines: 2,
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
+    bookChapter() {
       return Expanded(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: AutoSizeText(
-              '${feed.book.name}\u00A0${feed.chapter}${feed.tip}',
-              maxLines: 2,
-              textAlign: TextAlign.center,
-            ),
-          ),
+          child: feed.hasTip ? bookChapterTip() : bookChapterNoTip(),
         ),
       );
     }
@@ -96,16 +95,10 @@ class FeedCard extends WatchingWidget {
               children: [
                 Visibility(visible: c.maxHeight > 99, child: titleBar()),
                 LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
-                if (feed.hasTip)
-                  DefaultTextStyle.merge(
-                    style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
-                    child: bookChapterTip(),
-                  )
-                else
-                  DefaultTextStyle.merge(
-                    style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
-                    child: bookChapter(),
-                  )
+                DefaultTextStyle.merge(
+                  style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
+                  child: bookChapter(),
+                )
               ],
             ),
           ),
