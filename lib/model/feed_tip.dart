@@ -1,8 +1,9 @@
 part of 'feed.dart';
 
 extension FeedTip on Feed {
-  String? get tip {
-    if (book.key != 'psa') return null;
+  bool get hasTip => tip.isNotEmpty;
+  String get tip {
+    if (book.key != 'psa') return '';
     // split PSALM 119 over several days
     var tips = const {
       117: 'ℵ ALEPH ℶ BETH',
@@ -23,6 +24,6 @@ extension FeedTip on Feed {
       134: 'ש SHIN ת TAU',
     };
     var tip = tips[chapter];
-    return tip == null ? null : '${(chapter != 119) ? '119' : ''} $tip';
+    return tip == null ? '' : '${(chapter != 119) ? '119' : ''} $tip';
   }
 }
