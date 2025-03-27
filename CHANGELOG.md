@@ -1,4 +1,4 @@
-<!-- markdownlint-configure-file { "MD022": false, "MD024": false, "MD030": false, "MD032": false} -->
+<!-- markdownlint-configure-file { "MD012":false, "MD022":false, "MD024":false, "MD030":false, "MD032":false} -->
 
 # Bible Feed changelog
 
