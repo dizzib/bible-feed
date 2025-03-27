@@ -61,6 +61,21 @@ class FeedCard extends WatchingWidget {
       );
     }
 
+    bookChapterTip() {
+      return Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: AutoSizeText(
+              '${feed.book.name} ${feed.chapter}, ${feed.tip}',
+              maxLines: 2,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    }
+
     return Opacity(
       opacity: feed.isChapterRead ? 0.25 : 1,
       child: Card(
@@ -81,17 +96,16 @@ class FeedCard extends WatchingWidget {
               children: [
                 Visibility(visible: c.maxHeight > 99, child: titleBar()),
                 LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
-                DefaultTextStyle.merge(
-                  style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
-                  child: bookChapter(),
-                ),
-                Visibility(
-                  visible: feed.hasTip,
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Text(feed.tip),
-                  ),
-                )
+                if (feed.hasTip)
+                  DefaultTextStyle.merge(
+                    style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
+                    child: bookChapterTip(),
+                  )
+                else
+                  DefaultTextStyle.merge(
+                    style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
+                    child: bookChapter(),
+                  )
               ],
             ),
           ),
