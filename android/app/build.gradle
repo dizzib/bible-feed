@@ -31,7 +31,6 @@ if(project.hasProperty("signing") && new File(project.property("signing") + ".gr
 android {
     namespace "com.me2christ.bible_feed"
     compileSdk 34
-    ndkVersion "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
