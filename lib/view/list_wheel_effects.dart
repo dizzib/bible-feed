@@ -39,8 +39,8 @@ class ListWheelGradient extends StatelessWidget {
           height: constraints.maxHeight * 0.5,
           decoration: BoxDecoration(
             gradient: LinearGradient(begin: begin, end: end, colors: [
-              context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 0.0 : 1.0),
-              context.colorScheme.surfaceContainerHigh.withOpacity(context.isDarkMode ? 1.0 : 0.0),
+              context.colorScheme.surfaceContainerHigh.withValues(alpha: context.isDarkMode ? 0.0 : 1.0),
+              context.colorScheme.surfaceContainerHigh.withValues(alpha: context.isDarkMode ? 1.0 : 0.0),
             ]),
           ),
         ),
