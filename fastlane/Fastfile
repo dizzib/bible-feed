@@ -34,7 +34,7 @@ platform :android do
   ensure_env_vars(env_vars: ['SYMBOLS_FILE_PATH', 'MAPPING_FILE_PATH'])
 
   desc "Deploy to Google Play internal"
-  lane :internal do
+  lane :gplay_internal do
     populate_changelog
     upload_to_play_store(
       mapping_paths: [ENV['SYMBOLS_FILE_PATH'], ENV['MAPPING_FILE_PATH']],
@@ -48,7 +48,7 @@ platform :android do
   end
 
   desc "Promote internal test to closed"
-  lane :promote_internal_to_closed do
+  lane :gplay_promote_internal_to_closed do
     upload_to_play_store(
       skip_upload_aab: true,
       skip_upload_metadata: true,
