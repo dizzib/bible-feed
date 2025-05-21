@@ -16,6 +16,8 @@ Builds:
     versionCode: 10
     commit: 1.2.1
     output: build/app/outputs/flutter-apk/app-release.apk
+    rm:
+      - ios
     srclibs:
       - flutter@3.27.4
     prebuild:
