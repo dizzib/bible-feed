@@ -12,7 +12,7 @@ RepoType: git
 Repo: https://github.com/dizzib/bible-feed
 
 Builds:
-  - versionName: "1.2.1"
+  - versionName: 1.2.1
     versionCode: 10
     commit: 1.2.1
     output: build/app/outputs/flutter-apk/app-release.apk
@@ -31,4 +31,5 @@ Builds:
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
 UpdateCheckData: pubspec.yaml|version:\s.+\+(\d+)|.|version:\s(.+)\+
-CurrentVersion: Unknown
+CurrentVersion: 1.2.1
+CurrentVersionCode: 10
