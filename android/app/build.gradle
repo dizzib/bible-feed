@@ -62,21 +62,21 @@ android {
             versionNameSuffix '-DEBUG'
             resValue "string", "app_name", "DEBUG Bible Feed"
         }
-        release {
-            minifyEnabled true
-            ndk {
-                // Note: There is a 300 MB limit for the native debug symbols file.
-                // If your debug symbols footprint is too large, use SYMBOL_TABLE
-                // instead of FULL to decrease the file size.
-                // https://developer.android.com/studio/build/shrink-code#native-crash-support
-                debugSymbolLevel 'FULL'
-            }
-            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "app_name", "Bible Feed"
-            signingConfig signingConfigs.release
-            shrinkResources true
-            zipAlignEnabled true
-        }
+        // release {
+        //     minifyEnabled true
+        //     ndk {
+        //         // Note: There is a 300 MB limit for the native debug symbols file.
+        //         // If your debug symbols footprint is too large, use SYMBOL_TABLE
+        //         // instead of FULL to decrease the file size.
+        //         // https://developer.android.com/studio/build/shrink-code#native-crash-support
+        //         debugSymbolLevel 'FULL'
+        //     }
+        //     // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        //     resValue "string", "app_name", "Bible Feed"
+        //     signingConfig signingConfigs.release
+        //     shrinkResources true
+        //     zipAlignEnabled true
+        // }
     }
 }
 
