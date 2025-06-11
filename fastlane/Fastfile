@@ -33,9 +33,13 @@ platform :android do
 
   ensure_env_vars(env_vars: ['SYMBOLS_FILE_PATH', 'MAPPING_FILE_PATH'])
 
+  desc "Populate changelog"
+  lane :populate_changelog do
+    populate_changelog
+  end
+
   desc "Deploy to Google Play internal"
   lane :gplay_internal do
-    populate_changelog
     upload_to_play_store(
       mapping_paths: [ENV['SYMBOLS_FILE_PATH'], ENV['MAPPING_FILE_PATH']],
       release_status: 'draft',
