@@ -1,0 +1,5 @@
+Added
+- add tips for reading Psalms 119 over multiple days
+
+Changed
+- upgrade to flutter 3.27.4
