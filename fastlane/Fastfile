@@ -31,12 +31,13 @@ platform :android do
     File.open(file, 'w') do |f| f << changelog end
   end
 
-  # ensure_env_vars(env_vars: ['SYMBOLS_FILE_PATH', 'MAPPING_FILE_PATH'])
-
   desc "Populate changelog"
   lane :populate_changelog do
     populate_changelog
   end
+
+
+  # ensure_env_vars(env_vars: ['SYMBOLS_FILE_PATH', 'MAPPING_FILE_PATH'])
 
   # desc "Deploy to Google Play internal"
   # lane :gplay_internal do
