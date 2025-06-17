@@ -32,6 +32,10 @@ android {
     namespace "com.me2christ.bible_feed"
     compileSdk 35
 
+    aaptOptions {
+        cruncherEnabled = false // fix fdroid reproducible build errors
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
