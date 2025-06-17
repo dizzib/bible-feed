@@ -101,5 +101,5 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path_android: 'asset/app-icon-android.png'
-  image_path_ios: 'asset/app-icon-ios.png'
+  image_path_android: '/tmp/app-icon-android.png'
+  image_path_ios: '/tmp/app-icon-ios.png'
