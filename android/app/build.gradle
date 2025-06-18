@@ -81,6 +81,15 @@ android {
             zipAlignEnabled true
         }
     }
+
+    // fix fdroid 'DEBUG: Problem: found extra signing block 'Dependency metadata'
+    //
+    // https://forum.f-droid.org/t/build-fails-with-found-extra-signing-block/29220
+    //
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
 }
 
 flutter {
