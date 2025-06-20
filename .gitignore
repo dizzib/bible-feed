@@ -14,9 +14,6 @@ coverage/
 migrate_working_dir/
 devtools_options.yaml
 
-# package manager
-mise.toml
-
 # IntelliJ related
 *.iml
 *.ipr
