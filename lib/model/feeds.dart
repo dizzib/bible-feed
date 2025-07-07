@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
-import '../util/date.dart';
-import '../util/log.dart';
-import '../util/store.dart';
+import '/util/date.dart';
+import '/util/log.dart';
 import 'feed.dart';
 import 'reading_list.dart';
 
