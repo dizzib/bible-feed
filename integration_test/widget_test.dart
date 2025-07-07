@@ -10,7 +10,6 @@ import 'package:bible_feed/model/list_wheel_state.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
 import 'package:bible_feed/view/feeds_view.dart';
-import 'package:bible_feed/util/store.dart';
 import 'helper.dart';
 
 extension Helper on WidgetTester {
@@ -21,7 +20,6 @@ extension Helper on WidgetTester {
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  await Store.init();
   final gospels = readingLists[0];
   final matthew = gospels[0];
 

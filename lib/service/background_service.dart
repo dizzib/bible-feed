@@ -9,7 +9,6 @@ import '../util/store.dart';
 // https://stackoverflow.com/questions/74397262/flutter-background-service-onstart-method-must-be-a-top-level-or-static-functio
 @pragma("vm:entry-point")
 void onStart(ServiceInstance service) async {
-  await Store.init();
   var schedule = Schedule(
     hours: '0', // at midnight
     minutes: '0', // in the 1st minute. BUG: sometimes seems to skip 00 seconds!?

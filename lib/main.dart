@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'data/reading_lists.dart';
 import 'model/book.dart';
@@ -8,7 +9,6 @@ import 'service/app_lifecycle.dart';
 import 'service/background_service.dart';
 import 'view/app.dart';
 import 'util/log.dart';
-import 'util/store.dart';
 
 Future<void> main() async {
   'starting app'.log();
@@ -19,7 +19,7 @@ Future<void> main() async {
 
 Future initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Store.init();
+  sl.registerSingleton(await SharedPreferences.getInstance());
   di.registerSingleton(Feeds(readingLists));
   di.registerSingleton(AppLifecycle());
   di.registerSingleton(BackgroundService());

@@ -1,17 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/util/date.dart';
 import 'package:bible_feed/util/store.dart';
 import '_test_data.dart';
 
-void main() {
+void main() async {
   late Feed f;
 
   initFeed(Map<String, Object> storeValues) async {
     SharedPreferences.setMockInitialValues(storeValues);
-    await Store.init();
+    sl.pushNewScope();
+    sl.registerSingleton(await SharedPreferences.getInstance());
     f = Feed(l2);
   }
 

@@ -1,13 +1,15 @@
+import 'package:clock/clock.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:clock/clock.dart';
+import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/util/clock.dart';
 import 'package:bible_feed/util/store.dart';
 import '_test_data.dart';
 
-void main() {
+void main() async {
   late Feed f0, f1;
   late Feeds fds;
 
@@ -29,8 +31,8 @@ void main() {
       'l1.dateLastSaved': DateTime.now().toIso8601String(),
       'hasEverAdvanced': false,
     });
-
-    await Store.init();
+    sl.pushNewScope();
+    sl.registerSingleton(await SharedPreferences.getInstance());
     initFeeds();
   });
 
@@ -42,6 +44,8 @@ void main() {
   test('areChaptersRead', () {
     expect(fds.areChaptersRead, false);
     f1.toggleIsChapterRead();
+    debugPrint(f0.isChapterRead.toString());
+    debugPrint(f1.isChapterRead.toString());
     expect(fds.areChaptersRead, true);
   });
 
