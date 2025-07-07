@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/data/reading_lists.dart';
 import 'package:bible_feed/model/book.dart';
@@ -20,6 +21,8 @@ extension Helper on WidgetTester {
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  sl.registerSingleton(await SharedPreferences.getInstance());
+
   final gospels = readingLists[0];
   final matthew = gospels[0];
 
