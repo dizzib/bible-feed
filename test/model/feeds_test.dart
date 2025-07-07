@@ -43,8 +43,6 @@ void main() async {
   test('areChaptersRead', () {
     expect(fds.areChaptersRead, false);
     f1.toggleIsChapterRead();
-    debugPrint(f0.isChapterRead.toString());
-    debugPrint(f1.isChapterRead.toString());
     expect(fds.areChaptersRead, true);
   });
 
