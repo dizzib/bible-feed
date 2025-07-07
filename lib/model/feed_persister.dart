@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
-import '../util/store.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:watch_it/watch_it.dart';
 import 'feed.dart';
 
 class FeedPersister with ChangeNotifier {
@@ -18,19 +19,19 @@ class FeedPersister with ChangeNotifier {
   }
 
   void loadStateOrDefaults() {
-    feed.book = feed.readingList.getBook(Store.getString(_storeKeyBookKey) ?? feed.readingList[0].key);
-    feed.chapter = Store.getInt(_storeKeyChapter) ?? 1;
-    feed.isChapterRead = Store.getBool(_storeKeyIsChapterRead) ?? false;
-    feed.dateLastSaved = DateTime.tryParse(Store.getString(_storeKeyDateLastSaved) ?? '');
+    feed.book = feed.readingList.getBook(sl<SharedPreferences>().getString(_storeKeyBookKey) ?? feed.readingList[0].key);
+    feed.chapter = sl<SharedPreferences>().getInt(_storeKeyChapter) ?? 1;
+    feed.isChapterRead = sl<SharedPreferences>().getBool(_storeKeyIsChapterRead) ?? false;
+    feed.dateLastSaved = DateTime.tryParse(sl<SharedPreferences>().getString(_storeKeyDateLastSaved) ?? '');
     notifyListeners();
   }
 
   Future<void> saveState() async {
     feed.dateLastSaved = DateTime.now();
-    await Store.setString(_storeKeyBookKey, feed.book.key);
-    await Store.setInt(_storeKeyChapter, feed.chapter);
-    await Store.setBool(_storeKeyIsChapterRead, feed.isChapterRead);
-    await Store.setString(_storeKeyDateLastSaved, feed.dateLastSaved!.toIso8601String());
+    await sl<SharedPreferences>().setString(_storeKeyBookKey, feed.book.key);
+    await sl<SharedPreferences>().setInt(_storeKeyChapter, feed.chapter);
+    await sl<SharedPreferences>().setBool(_storeKeyIsChapterRead, feed.isChapterRead);
+    await sl<SharedPreferences>().setString(_storeKeyDateLastSaved, feed.dateLastSaved!.toIso8601String());
     notifyListeners();
   }
 }

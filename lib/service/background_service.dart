@@ -1,10 +1,10 @@
 import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:cron/cron.dart';
 import '../data/reading_lists.dart';
 import '../model/feeds.dart';
 import '../util/log.dart';
-import '../util/store.dart';
 
 // https://stackoverflow.com/questions/74397262/flutter-background-service-onstart-method-must-be-a-top-level-or-static-functio
 @pragma("vm:entry-point")
@@ -19,7 +19,7 @@ void onStart(ServiceInstance service) async {
     // this runs in its own isolate and cannot access memory from main() isolate,
     // therefore we must use a new instance of Feeds and wait for any writes to
     // the Store to finish before signalling the main() isolate to update the UI.
-    await Store.reload();
+    await sl<SharedPreferences>().reload();
     var result = await Feeds(readingLists).maybeAdvance();
     service.invoke(result.toString());
   });
@@ -41,7 +41,7 @@ class BackgroundService {
   void handleOnListsAdvanced() async {
     // when b/g service updates feeds, reload from Store so UI gets (implicitly) refreshed
     await for (var _ in service.on(AdvanceState.listsAdvanced.toString())) {
-      await Store.reload();
+      await sl<SharedPreferences>().reload();
       di<Feeds>().reload();
     }
   }

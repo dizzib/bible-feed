@@ -4,7 +4,6 @@ import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/util/date.dart';
-import 'package:bible_feed/util/store.dart';
 import '_test_data.dart';
 
 void main() async {
@@ -80,9 +79,9 @@ void main() async {
     void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
       expect(f.book, expectedBook);
       expect(f.chapter, expectedChapter);
-      expect(Store.getString('l2.book')!, expectedBook.key);
-      expect(Store.getInt('l2.chapter')!, expectedChapter);
-      expect(DateTime.parse(Store.getString('l2.dateLastSaved')!).date, DateTime.now().date);
+      expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
+      expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);
+      expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateLastSaved')!).date, DateTime.now().date);
     }
 
     group('nextChapter', () {
@@ -142,7 +141,7 @@ void main() async {
     test('toggleIsChapterRead should toggle and store', () async {
       void checkIsChapterRead(bool expected) {
         expect(f.isChapterRead, expected);
-        expect(Store.getBool('l2.isChapterRead')!, expected);
+        expect(sl<SharedPreferences>().getBool('l2.isChapterRead')!, expected);
       }
 
       await f.toggleIsChapterRead();

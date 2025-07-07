@@ -6,7 +6,6 @@ import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/util/clock.dart';
-import 'package:bible_feed/util/store.dart';
 import '_test_data.dart';
 
 void main() async {
@@ -57,7 +56,7 @@ void main() async {
     test('should be stored true after advance', () async {
       f1.toggleIsChapterRead();
       await fds.forceAdvance();
-      expect(Store.getBool('hasEverAdvanced'), true);
+      expect(sl<SharedPreferences>().getBool('hasEverAdvanced'), true);
       expect(fds.hasEverAdvanced, true);
     });
   });
@@ -102,7 +101,7 @@ void main() async {
     });
 
     test('reload should refresh from store updated in background', () async {
-      Store.setInt('l0.chapter', 2);
+      sl<SharedPreferences>().setInt('l0.chapter', 2);
       expect(f0.chapter, 1);
       fds.reload();
       expect(f0.chapter, 2);

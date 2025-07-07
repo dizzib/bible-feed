@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:watch_it/watch_it.dart';
 import '../util/date.dart';
 import '../util/log.dart';
 import '../util/store.dart';
@@ -19,14 +21,14 @@ class Feeds with ChangeNotifier {
   /// properties
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
-  bool get hasEverAdvanced => Store.getBool('hasEverAdvanced') ?? false;
+  bool get hasEverAdvanced => sl<SharedPreferences>().getBool('hasEverAdvanced') ?? false;
 
   /// methods
   Future<void> forceAdvance() async {
     for (Feed f in _feeds) {
       await f.nextChapter();
     }
-    Store.setBool('hasEverAdvanced', true);
+    sl<SharedPreferences>().setBool('hasEverAdvanced', true);
   }
 
   Future<AdvanceState> maybeAdvance() async {
