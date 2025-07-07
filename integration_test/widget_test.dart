@@ -27,8 +27,8 @@ void main() async {
   final matthew = gospels[0];
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
-    di.registerSingleton(ListWheelState<Book>());
-    di.registerSingleton(ListWheelState<int>());
+    sl.registerSingleton(ListWheelState<Book>());
+    sl.registerSingleton(ListWheelState<int>());
     await t.initialiseWidget(BookChapterDialog(Feed(gospels)));
     await t.scrollToLastChapter();
     await t.pump();
@@ -52,7 +52,7 @@ void main() async {
   });
 
   testWidgets('FeedsView', (WidgetTester t) async {
-    di.registerSingleton(Feeds(readingLists));
+    sl.registerSingleton(Feeds(readingLists));
     await t.initialiseWidget(FeedsView());
     expectChapters(1);
     for (var l in readingLists) {

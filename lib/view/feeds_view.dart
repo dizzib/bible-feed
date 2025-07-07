@@ -7,7 +7,7 @@ import 'feed_card.dart';
 class FeedsView extends StatelessWidget {
   @override
   build(context) {
-    feedCard(index) => Expanded(child: FeedCard(di<Feeds>()[index]));
+    feedCard(index) => Expanded(child: FeedCard(sl<Feeds>()[index]));
 
     return Scaffold(
       body: Column(

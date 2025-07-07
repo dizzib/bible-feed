@@ -29,7 +29,7 @@ class ListWheel<T> extends StatelessWidget {
     const magnification = 1.1;
     var itemExtent =
         DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale; // accomodate various text sizes
-    var wheelState = di<ListWheelState<T>>();
+    var wheelState = sl<ListWheelState<T>>();
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude

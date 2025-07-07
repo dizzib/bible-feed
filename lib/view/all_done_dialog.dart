@@ -29,7 +29,7 @@ class AllDoneDialog extends StatelessWidget {
         TextButton(
           onPressed: () {
             HapticFeedback.lightImpact();
-            di<Feeds>().forceAdvance();
+            sl<Feeds>().forceAdvance();
           }, // dialog is dismissed in FeedsView
           child: const Text('Yes'),
         ),

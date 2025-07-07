@@ -42,7 +42,7 @@ class BackgroundService {
     // when b/g service updates feeds, reload from Store so UI gets (implicitly) refreshed
     await for (var _ in service.on(AdvanceState.listsAdvanced.toString())) {
       await sl<SharedPreferences>().reload();
-      di<Feeds>().reload();
+      sl<Feeds>().reload();
     }
   }
 }

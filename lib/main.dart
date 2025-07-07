@@ -20,10 +20,10 @@ Future<void> main() async {
 Future initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   sl.registerSingleton(await SharedPreferences.getInstance());
-  di.registerSingleton(Feeds(readingLists));
-  di.registerSingleton(AppLifecycle());
-  di.registerSingleton(BackgroundService());
-  di.registerSingleton(ListWheelState<Book>());
-  di.registerSingleton(ListWheelState<int>());
-  di<Feeds>().maybeAdvance();
+  sl.registerSingleton(Feeds(readingLists));
+  sl.registerSingleton(AppLifecycle());
+  sl.registerSingleton(BackgroundService());
+  sl.registerSingleton(ListWheelState<Book>());
+  sl.registerSingleton(ListWheelState<int>());
+  sl<Feeds>().maybeAdvance();
 }
