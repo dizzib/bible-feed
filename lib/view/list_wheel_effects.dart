@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../util/build_context.dart';
+import '/util/build_context.dart';
 
 // highlight selected item
 class ListWheelHighlight extends StatelessWidget {

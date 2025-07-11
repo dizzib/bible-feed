@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
-import '../model/feeds.dart';
-import '../util/build_context.dart';
+import '/model/feeds.dart';
+import '/util/build_context.dart';
 import 'all_done_dialog.dart';
 
 class AllDoneFab extends WatchingWidget {

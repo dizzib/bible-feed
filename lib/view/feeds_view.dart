@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
-import '../model/feeds.dart';
+import '/model/feeds.dart';
 import 'all_done_fab.dart';
 import 'feed_card.dart';
 

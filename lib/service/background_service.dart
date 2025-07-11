@@ -2,9 +2,9 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:cron/cron.dart';
-import '../data/reading_lists.dart';
-import '../model/feeds.dart';
-import '../util/log.dart';
+import '/data/reading_lists.dart';
+import '/model/feeds.dart';
+import '/util/log.dart';
 
 // https://stackoverflow.com/questions/74397262/flutter-background-service-onstart-method-must-be-a-top-level-or-static-functio
 @pragma("vm:entry-point")

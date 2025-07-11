@@ -1,5 +1,5 @@
-import '../model/book.dart';
-import '../model/reading_list.dart';
+import '/model/book.dart';
+import '/model/reading_list.dart';
 
 var readingLists = [
   ReadingList('gos', 'Gospels', const [
