@@ -28,15 +28,15 @@ class FeedCard extends WatchingWidget {
             ),
           ),
           Row(
-            spacing: -16,
             children: [
               FutureBuilder<bool>(
                   future: feed.canLaunchBibleApp(),
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
-                      return IconButton(
-                        icon: const Icon(Icons.article_outlined),
-                        onPressed: feed.launchBibleApp,
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.data == true) {
+                      return GestureDetector(
+                        // GestureDetector has no padding, unlike IconButton
+                        onTap: feed.launchBibleApp,
+                        child: const Icon(Icons.article_outlined),
                       );
                     } else {
                       return Container();
