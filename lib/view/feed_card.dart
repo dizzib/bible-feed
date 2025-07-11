@@ -27,9 +27,26 @@ class FeedCard extends WatchingWidget {
               ),
             ),
           ),
-          IconButton(
-            icon: const Icon(Icons.unfold_more),
-            onPressed: () => context.showBlurBackgroundDialog(BookChapterDialog(feed)),
+          Row(
+            spacing: -16,
+            children: [
+              FutureBuilder<bool>(
+                  future: feed.canLaunchBibleApp(),
+                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                      return IconButton(
+                        icon: const Icon(Icons.article_outlined),
+                        onPressed: feed.launchBibleApp,
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }),
+              IconButton(
+                icon: const Icon(Icons.unfold_more),
+                onPressed: () => context.showBlurBackgroundDialog(BookChapterDialog(feed)),
+              ),
+            ],
           ),
         ],
       );

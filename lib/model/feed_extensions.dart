@@ -6,6 +6,16 @@ extension CalculatedGetters on Feed {
   double get progress => readingList.progressTo(bookIndex, chaptersRead);
 }
 
+extension DeepLinkMethods on Feed {
+  Uri get _deeplinkUri => Uri.parse('youversion://bible?reference=JHN.$_chapter');
+
+  Future<bool> canLaunchBibleApp() async => await canLaunchUrl(_deeplinkUri);
+
+  Future<void> launchBibleApp() async {
+    if (await launchUrl(_deeplinkUri)) toggleIsChapterRead();
+  }
+}
+
 extension PublicMethods on Feed {
   Future<void> nextChapter() async {
     assert(isChapterRead);
