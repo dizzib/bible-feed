@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/util/build_context.dart';
 import 'feeds_view.dart';
+import 'settings_fab.dart';
 
 class App extends StatelessWidget {
   @override
@@ -20,7 +21,10 @@ class App extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: theme(Brightness.light),
         darkTheme: theme(Brightness.dark),
-        home: FeedsView(),
+        home: Scaffold(
+          body: FeedsView(),
+          floatingActionButton: SettingsFab(),
+        ),
       ),
     );
   }

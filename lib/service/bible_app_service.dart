@@ -1,21 +1,26 @@
-import '../model/bible_app.dart';
+import 'package:flutter/widgets.dart';
+import '/model/bible_app.dart';
 
 enum BibleAppKey { none, youVersion, weDevote }
 
-class BibleAppService {
+class BibleAppService with ChangeNotifier {
+  BibleAppService() : _bibleAppKey = BibleAppKey.none;
+
   static final _bibleApps = {
     BibleAppKey.none: NoBibleApp(),
     BibleAppKey.youVersion: YouVersionBibleApp(),
     BibleAppKey.weDevote: WeDevoteBibleApp()
   };
 
-  late BibleAppKey _bibleAppKey = BibleAppKey.none;
-  // late BibleAppKey _bibleAppKey = BibleAppKey.youVersion;
-  // late BibleAppKey _bibleAppKey = BibleAppKey.weDevote;
+  BibleAppKey _bibleAppKey;
 
-  BibleApp get bibleApp => _bibleApps[_bibleAppKey]!;
+  List<BibleApp> get bibleAppList => _bibleApps.values.toList();
+  BibleApp get selectedBibleApp => _bibleApps[_bibleAppKey]!;
+  int get selectedBibleAppIndex => bibleAppList.indexOf(selectedBibleApp);
 
-  set bibleAppKey(BibleAppKey key) {
-    _bibleAppKey = key;
+  set selectedBibleAppIndex(int idx) {
+    if (idx == selectedBibleAppIndex) return;
+    _bibleAppKey = _bibleApps.keys.elementAt(idx);
+    notifyListeners();
   }
 }
