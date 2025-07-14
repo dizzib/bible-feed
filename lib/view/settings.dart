@@ -10,13 +10,20 @@ class Settings extends WatchingWidget {
 
     choiceChipList() => List.generate(bas.bibleAppList.length, (idx) {
           var bibleApp = bas.bibleAppList[idx];
-          return ChoiceChip(
-            label: Text(bibleApp.name),
-            onSelected: (bool selected) {
-              if (selected) bas.selectedBibleAppIndex = idx;
-            },
-            selected: idx == bas.selectedBibleAppIndex,
-          );
+
+          return FutureBuilder<bool>(
+              future: bibleApp.isSelectable(),
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                return ChoiceChip(
+                  label: Text(bibleApp.name),
+                  onSelected: snapshot.data == true
+                      ? (bool selected) {
+                          if (selected) bas.selectedBibleAppIndex = idx;
+                        }
+                      : null,
+                  selected: idx == bas.selectedBibleAppIndex,
+                );
+              });
         });
 
     return Scaffold(
@@ -28,7 +35,7 @@ class Settings extends WatchingWidget {
             tiles: [
               SettingsTile(
                 leading: const Icon(Icons.link),
-                title: const Text('App'),
+                title: const Text('Link App'),
                 value: Wrap(spacing: 16, children: choiceChipList()),
               )
             ],
