@@ -1,5 +1,3 @@
-import 'package:url_launcher/url_launcher.dart';
-
 import 'book.dart';
 import 'feed_persister.dart';
 import 'reading_list.dart';

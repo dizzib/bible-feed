@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 import '/model/feed.dart';
+import '/service/bible_app_service.dart';
 import '/util/build_context.dart';
 import 'book_chapter_dialog.dart';
 
@@ -24,12 +26,14 @@ class FeedCardTitleBar extends StatelessWidget {
         Row(
           children: [
             FutureBuilder<bool>(
-                future: feed.canLaunchBibleApp(),
+                future: sl<BibleAppService>().bibleApp.canLaunch(feed),
                 builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done && snapshot.data == true) {
                     return GestureDetector(
                       // GestureDetector has no padding, unlike IconButton
-                      onTap: feed.launchBibleApp,
+                      onTap: () {
+                        sl<BibleAppService>().bibleApp.launch(feed);
+                      },
                       child: const Icon(Icons.article_outlined),
                     );
                   } else {
