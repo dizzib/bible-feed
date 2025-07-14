@@ -35,7 +35,7 @@ class FeedCardTitleBar extends WatchingWidget {
                       onTap: () {
                         sl<BibleAppService>().selectedBibleApp.launch(feed);
                       },
-                      child: const Icon(Icons.article_outlined),
+                      child: const Icon(Icons.link),
                     );
                   } else {
                     return Container();
