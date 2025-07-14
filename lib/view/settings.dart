@@ -10,7 +10,6 @@ class Settings extends WatchingWidget {
 
     choiceChipList() => List.generate(bas.bibleAppList.length, (idx) {
           var bibleApp = bas.bibleAppList[idx];
-
           return FutureBuilder<bool>(
               future: bibleApp.isSelectable(),
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
