@@ -15,6 +15,7 @@ class BibleAppService with ChangeNotifier {
   BibleAppKey _bibleAppKey;
 
   List<BibleApp> get bibleAppList => _bibleApps.values.toList();
+  bool get isLinked => _bibleAppKey != BibleAppKey.none;
   BibleApp get selectedBibleApp => _bibleApps[_bibleAppKey]!;
   int get selectedBibleAppIndex => bibleAppList.indexOf(selectedBibleApp);
 

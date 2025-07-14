@@ -34,7 +34,7 @@ class Settings extends WatchingWidget {
             title: const Text('Tap behaviour'),
             tiles: [
               SettingsTile(
-                leading: const Icon(Icons.link),
+                leading: Icon(bas.isLinked ? Icons.link : Icons.link_off),
                 title: const Text('Link App'),
                 value: Wrap(spacing: 16, children: choiceChipList()),
               )
