@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:watch_it/watch_it.dart';
 import '/model/feed.dart';
+import '/service/bible_app_service.dart';
 import '/util/build_context.dart';
 import 'book_chapter_dialog.dart';
 import 'feed_card_book_chapter.dart';
@@ -27,6 +28,7 @@ class FeedCard extends WatchingWidget {
           onLongPress: () => context.showBlurBackgroundDialog(BookChapterDialog(feed)),
           onTap: () {
             HapticFeedback.lightImpact();
+            sl<BibleAppService>().launchLinkedBibleApp(feed);
             feed.toggleIsChapterRead();
           },
           child: LayoutBuilder(

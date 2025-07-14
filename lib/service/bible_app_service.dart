@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import '/model/bible_app.dart';
+import '/model/feed.dart';
 
 enum BibleAppKey { none, youVersion, weDevote }
 
@@ -18,6 +19,10 @@ class BibleAppService with ChangeNotifier {
   bool get isLinked => _bibleAppKey != BibleAppKey.none;
   BibleApp get selectedBibleApp => _bibleApps[_bibleAppKey]!;
   int get selectedBibleAppIndex => bibleAppList.indexOf(selectedBibleApp);
+
+  void launchLinkedBibleApp(Feed f) {
+    if (isLinked && !f.isChapterRead) selectedBibleApp.launch(f);
+  }
 
   set selectedBibleAppIndex(int idx) {
     if (idx == selectedBibleAppIndex) return;

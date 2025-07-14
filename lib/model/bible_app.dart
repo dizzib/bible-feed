@@ -10,12 +10,9 @@ abstract class BibleApp {
   Uri getDeeplinkUri(Feed f);
 
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
-  Future<void> launch(Feed f) async {
-    if (await launchUrl(getDeeplinkUri(f))) f.toggleIsChapterRead();
-  }
-
   Future<bool> isSelectable() async =>
       isAlwaysSelectable ? Future.value(true) : canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
+  Future<bool> launch(Feed f) async => await launchUrl(getDeeplinkUri(f));
 }
 
 @immutable
