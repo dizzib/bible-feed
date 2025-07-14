@@ -11,8 +11,6 @@ class SettingsFab extends WatchingWidget {
     void showSettingsDialog() => context.showBlurBackgroundDialog(Settings());
 
     return FloatingActionButton(
-      backgroundColor: Colors.blue.withValues(alpha: 0.5),
-      foregroundColor: Colors.white,
       onPressed: showSettingsDialog,
       shape: const CircleBorder(),
       child: const Icon(
