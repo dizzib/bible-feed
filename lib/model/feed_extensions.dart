@@ -8,6 +8,7 @@ extension CalculatedGetters on Feed {
 
 extension DeepLinkMethods on Feed {
   Uri get _deeplinkUri => Uri.parse('youversion://bible?reference=${book.osisParatextAbbrev}.$_chapter');
+  // Uri get _deeplinkUri => Uri.parse('wdbible://bible/${book.osisParatextAbbrev}.$_chapter.1');
 
   Future<bool> canLaunchBibleApp() async => await canLaunchUrl(_deeplinkUri);
 
