@@ -5,7 +5,7 @@ import '/model/feed.dart';
 enum BibleAppKey { none, youVersion, weDevote }
 
 class BibleAppService with ChangeNotifier {
-  BibleAppService() : _bibleAppKey = BibleAppKey.none;
+  BibleAppService() : _linkedBibleAppKey = BibleAppKey.none;
 
   static final _bibleApps = {
     BibleAppKey.none: NoBibleApp(),
@@ -13,20 +13,20 @@ class BibleAppService with ChangeNotifier {
     BibleAppKey.weDevote: WeDevoteBibleApp()
   };
 
-  BibleAppKey _bibleAppKey;
+  BibleAppKey _linkedBibleAppKey;
 
   List<BibleApp> get bibleAppList => _bibleApps.values.toList();
-  bool get isLinked => _bibleAppKey != BibleAppKey.none;
-  BibleApp get selectedBibleApp => _bibleApps[_bibleAppKey]!;
-  int get selectedBibleAppIndex => bibleAppList.indexOf(selectedBibleApp);
+  bool get isLinked => _linkedBibleAppKey != BibleAppKey.none;
+  BibleApp get linkedBibleApp => _bibleApps[_linkedBibleAppKey]!;
+  int get linkedBibleAppIndex => bibleAppList.indexOf(linkedBibleApp);
 
   void launchLinkedBibleApp(Feed f) {
-    if (isLinked && !f.isChapterRead) selectedBibleApp.launch(f);
+    if (isLinked && !f.isChapterRead) linkedBibleApp.launch(f);
   }
 
-  set selectedBibleAppIndex(int idx) {
-    if (idx == selectedBibleAppIndex) return;
-    _bibleAppKey = _bibleApps.keys.elementAt(idx);
+  set linkedBibleAppIndex(int idx) {
+    if (idx == linkedBibleAppIndex) return;
+    _linkedBibleAppKey = _bibleApps.keys.elementAt(idx);
     notifyListeners();
   }
 }

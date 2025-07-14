@@ -17,10 +17,10 @@ class Settings extends WatchingWidget {
                   label: Text(bibleApp.name),
                   onSelected: snapshot.data == true
                       ? (bool selected) {
-                          if (selected) bas.selectedBibleAppIndex = idx;
+                          if (selected) bas.linkedBibleAppIndex = idx;
                         }
                       : null,
-                  selected: idx == bas.selectedBibleAppIndex,
+                  selected: idx == bas.linkedBibleAppIndex,
                 );
               });
         });
