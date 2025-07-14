@@ -24,6 +24,7 @@ class App extends StatelessWidget {
         home: Scaffold(
           body: FeedsView(),
           floatingActionButton: SettingsFab(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         ),
       ),
     );
