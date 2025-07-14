@@ -13,9 +13,10 @@ class Settings extends WatchingWidget {
           return FutureBuilder<bool>(
               future: bibleApp.isSelectable(),
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                final isSelectable = snapshot.data == true;
                 return ChoiceChip(
-                  label: Text(bibleApp.name),
-                  onSelected: snapshot.data == true
+                  label: Text('${bibleApp.name}${isSelectable ? "":" is not detected"}'),
+                  onSelected: isSelectable
                       ? (bool selected) {
                           if (selected) bas.linkedBibleAppIndex = idx;
                         }
@@ -35,11 +36,11 @@ class Settings extends WatchingWidget {
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: const Text('Tap behaviour'),
+            title: const Text('You can configure a bible reading app to open whenever an unread chapter is tapped. To do so, first install the app then select it below.'),
             tiles: [
               SettingsTile(
                 leading: Icon(bas.isLinked ? Icons.link : Icons.link_off),
-                title: const Text('Link App'),
+                title: const Text('Linked App'),
                 value: Wrap(spacing: 16, children: choiceChipList()),
               )
             ],
