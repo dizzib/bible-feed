@@ -13,6 +13,13 @@ abstract class BibleApp {
 }
 
 @immutable
+class NoBibleApp extends BibleApp {
+  @override
+  String get name => 'None';
+  @override
+  Uri getDeeplinkUri(Feed f) => Uri.parse('');
+}
+
 class YouVersionBibleApp extends BibleApp {
   @override
   String get name => 'You Version';
