@@ -6,12 +6,8 @@ import 'settings.dart';
 class SettingsFab extends WatchingWidget {
   @override
   build(context) {
-    // Navigator.maybePop(context); // dismiss possible dialog (originator might be cron)
-
-    void showSettingsDialog() => context.showBlurBackgroundDialog(Settings());
-
     return FloatingActionButton(
-      onPressed: showSettingsDialog,
+      onPressed: () => context.showBlurBackgroundDialog(Settings()),
       shape: const CircleBorder(),
       child: const Icon(
         Icons.settings,
