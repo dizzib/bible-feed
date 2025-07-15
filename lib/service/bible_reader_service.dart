@@ -8,32 +8,50 @@ enum BibleReaderKey { none, youVersion, weDevote }
 
 class BibleReaderService with ChangeNotifier {
   BibleReaderService() {
-    final fromStore = sl<SharedPreferences>().getString(_linkedBibleReaderStoreKey);
-    _linkedBibleReaderKey = (fromStore == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(fromStore);
+    final sp = sl<SharedPreferences>();
+    final linkedReader = sp.getString(_linkedBibleReaderStoreKey);
+    _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
+    _isEnabled = sp.getBool(_isReaderEnabledStoreKey) ?? false;
   }
 
-  static final _bibleApps = {
+  //// list of readers
+  static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
     BibleReaderKey.youVersion: YouVersionBibleReader(),
     BibleReaderKey.weDevote: WeDevoteBibleReader()
   };
 
+  List<BibleReader> get bibleReaderList => _bibleReaders.values.toList();
+
+  //// reader enabled/disabled
+  late bool _isEnabled;
+  final _isReaderEnabledStoreKey = 'bibleReaderEnabled';
+
+  bool get isEnabled => _isEnabled;
+
+  set isEnabled(bool isEnabled) {
+    _isEnabled = isEnabled;
+    sl<SharedPreferences>().setBool(_isReaderEnabledStoreKey, _isEnabled);
+    notifyListeners();
+  }
+
+  //// linked reader
   late BibleReaderKey _linkedBibleReaderKey;
   final _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
-  List<BibleReader> get bibleAppList => _bibleApps.values.toList();
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
-  BibleReader get linkedBibleReader => _bibleApps[_linkedBibleReaderKey]!;
-  int get linkedBibleReaderIndex => bibleAppList.indexOf(linkedBibleReader);
-
-  void launchLinkedBibleReader(Feed f) {
-    if (isLinked && !f.isChapterRead) linkedBibleReader.launch(f);
-  }
+  BibleReader get linkedBibleReader => _bibleReaders[_linkedBibleReaderKey]!;
+  int get linkedBibleReaderIndex => bibleReaderList.indexOf(linkedBibleReader);
 
   set linkedBibleReaderIndex(int idx) {
     if (idx == linkedBibleReaderIndex) return;
-    _linkedBibleReaderKey = _bibleApps.keys.elementAt(idx);
+    _linkedBibleReaderKey = _bibleReaders.keys.elementAt(idx);
     sl<SharedPreferences>().setString(_linkedBibleReaderStoreKey, _linkedBibleReaderKey.name);
     notifyListeners();
+  }
+
+  //// misc
+  void launchLinkedBibleReader(Feed f) {
+    if (isLinked && !f.isChapterRead) linkedBibleReader.launch(f);
   }
 }
