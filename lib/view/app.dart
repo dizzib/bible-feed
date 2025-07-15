@@ -7,7 +7,7 @@ import 'all_done_dialog_closer.dart';
 import 'feeds_view.dart';
 import 'settings.dart';
 
-class App extends StatelessWidget with WatchItMixin {
+class App extends WatchingWidget {
   @override
   build(context) {
     final bas = watchIt<BibleAppService>();
