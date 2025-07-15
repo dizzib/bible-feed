@@ -5,7 +5,7 @@ import '/service/bible_app_service.dart';
 class BibleReaderLink extends WatchingWidget {
   @override
   build(context) {
-    final bas = sl<BibleAppService>();
+    final bas = watchIt<BibleAppService>();
     return Icon(bas.isLinked ? Icons.link : Icons.link_off);
   }
 }
