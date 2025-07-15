@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/extension/build_context.dart';
+import 'all_done_fab.dart';
 import 'feeds_view.dart';
 import 'settings.dart';
 
@@ -20,6 +21,8 @@ class App extends StatelessWidget {
               ],
             ),
       body: FeedsView(),
+      floatingActionButton: AllDoneFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
     );
   }
 }
