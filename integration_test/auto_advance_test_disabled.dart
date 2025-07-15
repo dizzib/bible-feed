@@ -1,7 +1,7 @@
 import 'package:integration_test/integration_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:clock/clock.dart';
-import 'package:bible_feed/extension/date.dart';
+import 'package:bible_feed/extension/datetime.dart';
 import 'package:bible_feed/extension/log.dart';
 import 'helper.dart';
 

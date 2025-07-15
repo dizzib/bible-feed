@@ -1,5 +1,5 @@
 import 'package:clock/clock.dart';
-import 'date.dart';
+import 'datetime.dart';
 
 extension ClockHelper on Clock {
   Clock get tomorrow => addDays(1);
