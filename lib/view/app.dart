@@ -33,7 +33,7 @@ class _AppState extends State<App> {
               title: AllDoneFab(),
               actions: [
                 IconButton(
-                    onPressed: () => context.showDialogNormal(Settings()),
+                    onPressed: () => context.navigateTo(Settings()),
                     icon: const Icon(
                       Icons.settings,
                       size: 35,
