@@ -11,9 +11,12 @@ class AppBarMain extends WatchingWidget implements PreferredSizeWidget {
     final bas = watchIt<BibleReaderService>();
 
     return AppBar(
-      leading: Icon(
-        bas.isLinked ? Icons.link : Icons.link_off,
-        size: 32,
+      leading: IconButton(
+        onPressed: bas.isLinked ? bas.toggleEnabled : null,
+        icon: Icon(
+          bas.isEnabled ? Icons.link : Icons.link_off,
+          size: 32,
+        ),
       ),
       centerTitle: true,
       clipBehavior: Clip.none, // do not clip fab drop shadow

@@ -29,8 +29,8 @@ class BibleReaderService with ChangeNotifier {
 
   bool get isEnabled => _isEnabled;
 
-  set isEnabled(bool isEnabled) {
-    _isEnabled = isEnabled;
+  void toggleEnabled() {
+    _isEnabled = !_isEnabled;
     sl<SharedPreferences>().setBool(_isReaderEnabledStoreKey, _isEnabled);
     notifyListeners();
   }
@@ -47,11 +47,12 @@ class BibleReaderService with ChangeNotifier {
     if (idx == linkedBibleReaderIndex) return;
     _linkedBibleReaderKey = _bibleReaders.keys.elementAt(idx);
     sl<SharedPreferences>().setString(_linkedBibleReaderStoreKey, _linkedBibleReaderKey.name);
+    _isEnabled = isLinked;
     notifyListeners();
   }
 
   //// misc
   void launchLinkedBibleReader(Feed f) {
-    if (isLinked && !f.isChapterRead) linkedBibleReader.launch(f);
+    if (isLinked && isEnabled && !f.isChapterRead) linkedBibleReader.launch(f);
   }
 }
