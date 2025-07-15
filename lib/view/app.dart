@@ -17,6 +17,8 @@ class App extends StatelessWidget {
             ? null
             : AppBar(
                 leading: BibleReaderLink(),
+                centerTitle: true,
+                title: AllDoneFab(),
                 actions: [
                   IconButton(
                       onPressed: () => context.showDialogNormal(Settings()),
@@ -27,7 +29,7 @@ class App extends StatelessWidget {
                 ],
               ),
         body: FeedsView(),
-        floatingActionButton: AllDoneFab(),
+        floatingActionButton: context.isOrientationLandscape ? AllDoneFab() : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       ),
     ]);
