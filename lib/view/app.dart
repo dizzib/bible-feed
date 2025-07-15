@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
+import '/service/bible_app_service.dart';
 import 'all_done_fab.dart';
 import 'all_done_dialog_closer.dart';
-import 'bible_reader_link.dart';
 import 'feeds_view.dart';
 import 'settings.dart';
 
-// NOTE: if this widget watches the BibleReaderService the dialog closes on update. Solved by the BibleReaderLink widget.
-class App extends StatelessWidget {
+class App extends StatelessWidget with WatchItMixin {
   @override
   build(context) {
+    final bas = watchIt<BibleAppService>();
     return Stack(textDirection: TextDirection.ltr, children: [
       AllDoneDialogCloser(),
       Scaffold(
         appBar: context.isOrientationLandscape
             ? null
             : AppBar(
-                leading: BibleReaderLink(),
+                leading: Icon(bas.isLinked ? Icons.link : Icons.link_off),
                 centerTitle: true,
                 clipBehavior: Clip.none, // do not clip drop shadow
                 title: AllDoneFab(),
