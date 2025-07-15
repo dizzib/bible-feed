@@ -19,7 +19,7 @@ class BibleReaderService with ChangeNotifier {
   };
 
   late BibleReaderKey _linkedBibleReaderKey;
-  final _linkedBibleReaderStoreKey = 'linkedBibleReaderKey';
+  final _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
   List<BibleReader> get bibleAppList => _bibleApps.values.toList();
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
