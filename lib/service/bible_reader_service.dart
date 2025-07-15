@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
-import '/model/bible_app.dart';
+import '/model/bible_reader.dart';
 import '/model/feed.dart';
 
 enum BibleReaderKey { none, youVersion, weDevote }
