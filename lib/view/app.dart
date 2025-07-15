@@ -29,7 +29,7 @@ class _AppState extends State<App> {
           : AppBar(
               leading: Icon(bas.isLinked ? Icons.link : Icons.link_off),
               centerTitle: true,
-              clipBehavior: Clip.none, // do not clip drop shadow
+              clipBehavior: Clip.none, // do not clip fab drop shadow
               title: AllDoneFab(),
               actions: [
                 IconButton(
