@@ -9,8 +9,6 @@ class AllDoneFab extends WatchingWidget {
   build(context) {
     final feeds = watchIt<Feeds>();
 
-    Navigator.maybePop(context); // dismiss possible dialog (originator might be cron)
-
     void showAllDoneDialog() => context.showDialogWithBlurBackground(AllDoneDialog());
 
     // auto-show dialog once only
