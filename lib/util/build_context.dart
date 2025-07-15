@@ -6,11 +6,18 @@ extension BuildContextEntension<T> on BuildContext {
   // helper property getters
   double get deviceTextScale => MediaQuery.of(this).textScaler.scale(1); // from device settings
   bool get isDarkMode => MediaQuery.of(this).platformBrightness == Brightness.dark;
+  bool get isOrientationLandscape => MediaQuery.of(this).orientation == Orientation.landscape;
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
   TextTheme get textTheme => Theme.of(this).textTheme;
 
-  // dialog
-  Future<T?> showBlurBackgroundDialog(Widget child) {
+  Future<T?> showDialogNormal(Widget child) {
+    return showDialog(
+      context: this,
+      builder: (_) => child,
+    );
+  }
+
+  Future<T?> showDialogWithBlurBackground(Widget child) {
     HapticFeedback.lightImpact();
     return showDialog(
       context: this,

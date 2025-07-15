@@ -29,9 +29,6 @@ class Settings extends WatchingWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-        ],
       ),
       body: SettingsList(
         sections: [

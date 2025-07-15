@@ -8,13 +8,13 @@ import 'model/list_wheel_state.dart';
 import 'service/app_lifecycle.dart';
 import 'service/background_service.dart';
 import 'service/bible_app_service.dart';
-import 'view/app.dart';
 import 'util/log.dart';
+import 'view/app_base.dart';
 
 Future<void> main() async {
   'starting app'.log();
   await initApp();
-  runApp(App());
+  runApp(AppBase());
   'started app'.log();
 }
 

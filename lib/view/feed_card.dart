@@ -25,7 +25,7 @@ class FeedCard extends WatchingWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           enableFeedback: false,
-          onLongPress: () => context.showBlurBackgroundDialog(BookChapterDialog(feed)),
+          onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
           onTap: () {
             HapticFeedback.lightImpact();
             sl<BibleAppService>().launchLinkedBibleApp(feed);
