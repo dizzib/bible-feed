@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
 import '/model/feed.dart';
-import '/service/bible_app_service.dart';
+import '/service/bible_reader_service.dart';
 import 'book_chapter_dialog.dart';
 
 class FeedCardTitleBar extends WatchingWidget {
@@ -11,7 +11,7 @@ class FeedCardTitleBar extends WatchingWidget {
 
   @override
   build(context) {
-    watchIt<BibleAppService>();
+    watchIt<BibleReaderService>();
     return Row(
       children: [
         Expanded(

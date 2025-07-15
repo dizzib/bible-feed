@@ -4,7 +4,7 @@ import 'package:watch_it/watch_it.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
 
-abstract class BibleApp {
+abstract class BibleReader {
   String get name;
   bool get isAlwaysSelectable => false;
   Uri getDeeplinkUri(Feed f);
@@ -16,7 +16,7 @@ abstract class BibleApp {
 }
 
 @immutable
-class NoBibleApp extends BibleApp {
+class NoBibleReader extends BibleReader {
   @override
   bool get isAlwaysSelectable => true;
   @override
@@ -25,7 +25,7 @@ class NoBibleApp extends BibleApp {
   Uri getDeeplinkUri(Feed f) => Uri.parse('');
 }
 
-class YouVersionBibleApp extends BibleApp {
+class YouVersionBibleReader extends BibleReader {
   @override
   String get name => 'You Version';
   @override
@@ -33,7 +33,7 @@ class YouVersionBibleApp extends BibleApp {
 }
 
 @immutable
-class WeDevoteBibleApp extends BibleApp {
+class WeDevoteBibleReader extends BibleReader {
   @override
   String get name => 'We Devote';
   @override

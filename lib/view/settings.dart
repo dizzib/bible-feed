@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:watch_it/watch_it.dart';
-import '/service/bible_app_service.dart';
+import '/service/bible_reader_service.dart';
 
 class Settings extends WatchingWidget {
   @override
   build(context) {
-    final bas = watchIt<BibleAppService>();
+    final bas = watchIt<BibleReaderService>();
 
     choiceChipList() => List.generate(bas.bibleAppList.length, (idx) {
           var bibleApp = bas.bibleAppList[idx];
@@ -18,10 +18,10 @@ class Settings extends WatchingWidget {
                   label: Text('${bibleApp.name}${isSelectable ? "" : " is not detected"}'),
                   onSelected: isSelectable
                       ? (bool selected) {
-                          if (selected) bas.linkedBibleAppIndex = idx;
+                          if (selected) bas.linkedBibleReaderIndex = idx;
                         }
                       : null,
-                  selected: idx == bas.linkedBibleAppIndex,
+                  selected: idx == bas.linkedBibleReaderIndex,
                 );
               });
         });

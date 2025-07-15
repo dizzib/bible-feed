@@ -8,7 +8,7 @@ import 'model/feeds.dart';
 import 'model/list_wheel_state.dart';
 import 'service/app_lifecycle.dart';
 import 'service/background_service.dart';
-import 'service/bible_app_service.dart';
+import 'service/bible_reader_service.dart';
 import 'view/app_base.dart';
 
 Future<void> main() async {
@@ -24,7 +24,7 @@ Future initApp() async {
   sl.registerSingleton(Feeds(readingLists));
   sl.registerSingleton(AppLifecycle());
   sl.registerSingleton(BackgroundService());
-  sl.registerSingleton(BibleAppService());
+  sl.registerSingleton(BibleReaderService());
   sl.registerSingleton(ListWheelState<Book>());
   sl.registerSingleton(ListWheelState<int>());
   sl<Feeds>().maybeAdvance();

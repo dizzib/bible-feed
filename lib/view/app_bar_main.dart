@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
-import '/service/bible_app_service.dart';
+import '/service/bible_reader_service.dart';
 import 'all_done_fab.dart';
 import 'settings.dart';
 
 class AppBarMain extends WatchingWidget implements PreferredSizeWidget {
   @override
   build(context) {
-    final bas = watchIt<BibleAppService>();
+    final bas = watchIt<BibleReaderService>();
 
     return AppBar(
       leading: Icon(
