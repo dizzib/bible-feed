@@ -24,28 +24,9 @@ class FeedCardTitleBar extends WatchingWidget {
             ),
           ),
         ),
-        Row(
-          children: [
-            FutureBuilder<bool>(
-                future: sl<BibleAppService>().linkedBibleApp.canLaunch(feed),
-                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done && snapshot.data == true) {
-                    return GestureDetector(
-                      // GestureDetector has no padding, unlike IconButton
-                      onTap: () {
-                        sl<BibleAppService>().linkedBibleApp.launch(feed);
-                      },
-                      child: const Icon(Icons.link),
-                    );
-                  } else {
-                    return Container();
-                  }
-                }),
-            IconButton(
-              icon: const Icon(Icons.unfold_more),
-              onPressed: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
-            ),
-          ],
+        IconButton(
+          icon: const Icon(Icons.unfold_more),
+          onPressed: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
         ),
       ],
     );

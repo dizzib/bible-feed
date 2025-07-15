@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '/extension/build_context.dart';
 import 'all_done_fab.dart';
+import 'bible_reader_link.dart';
 import 'feeds_view.dart';
 import 'settings.dart';
 
+// NOTE: if this widget watches the BibleReaderService the dialog closes immediately. Solved by the BibleReaderLink widget.
 class App extends StatelessWidget {
   @override
   build(context) {
@@ -11,6 +13,7 @@ class App extends StatelessWidget {
       appBar: context.isOrientationLandscape
           ? null
           : AppBar(
+              leading: BibleReaderLink(),
               actions: [
                 IconButton(
                     onPressed: () => context.showDialogNormal(Settings()),
