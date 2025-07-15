@@ -25,7 +25,7 @@ void onStart(ServiceInstance service) async {
     // the Store to finish before signalling the main() isolate to update the UI.
     await sl<SharedPreferences>().reload();
     var result = await Feeds(readingLists).maybeAdvance();
-    service.invoke(result.toString());
+    service.invoke(result.name);
   });
 }
 
@@ -44,7 +44,7 @@ class BackgroundService with ChangeNotifier {
 
   void handleOnListsAdvanced() async {
     // when b/g service updates feeds, reload from Store so UI gets (implicitly) refreshed
-    await for (var _ in service.on(AdvanceState.listsAdvanced.toString())) {
+    await for (var _ in service.on(AdvanceState.listsAdvanced.name)) {
       await sl<SharedPreferences>().reload();
       sl<Feeds>().reload();
       notifyListeners();
