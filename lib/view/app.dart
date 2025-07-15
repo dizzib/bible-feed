@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
 import '/service/background_service.dart';
-import '/service/bible_app_service.dart';
 import 'all_done_fab.dart';
+import 'app_bar_main.dart';
 import 'feeds_view.dart';
-import 'settings.dart';
 
-class App extends WatchingStatefulWidget {
+class App extends StatefulWidget {
   @override
   State<App> createState() => _AppState();
 }
@@ -22,27 +21,8 @@ class _AppState extends State<App> {
 
   @override
   build(context) {
-    final bas = watchIt<BibleAppService>();
     return Scaffold(
-      appBar: context.isOrientationLandscape
-          ? null
-          : AppBar(
-              leading: Icon(
-                bas.isLinked ? Icons.link : Icons.link_off,
-                size: 35,
-              ),
-              centerTitle: true,
-              clipBehavior: Clip.none, // do not clip fab drop shadow
-              title: AllDoneFab(),
-              actions: [
-                IconButton(
-                    onPressed: () => context.navigateTo(Settings()),
-                    icon: const Icon(
-                      Icons.settings,
-                      size: 35,
-                    )),
-              ],
-            ),
+      appBar: context.isOrientationLandscape ? null : AppBarMain(),
       body: FeedsView(),
       floatingActionButton: context.isOrientationLandscape ? AllDoneFab() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
