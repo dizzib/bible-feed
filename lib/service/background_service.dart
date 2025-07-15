@@ -26,8 +26,6 @@ void onStart(ServiceInstance service) async {
 }
 
 class BackgroundService {
-  var service = FlutterBackgroundService();
-
   BackgroundService() {
     service.configure(
       androidConfiguration: AndroidConfiguration(onStart: onStart, isForegroundMode: false),
@@ -37,6 +35,8 @@ class BackgroundService {
     );
     handleOnListsAdvanced();
   }
+
+  var service = FlutterBackgroundService();
 
   void handleOnListsAdvanced() async {
     // when b/g service updates feeds, reload from Store so UI gets (implicitly) refreshed
