@@ -1,5 +1,5 @@
-import 'package:bible_feed/util/build_context.dart';
 import 'package:flutter/material.dart';
+import '/extension/build_context.dart';
 import 'feeds_view.dart';
 import 'settings.dart';
 

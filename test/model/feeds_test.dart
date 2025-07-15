@@ -2,9 +2,9 @@ import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
+import 'package:bible_feed/extension/clock.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
-import 'package:bible_feed/util/clock.dart';
 import '_test_data.dart';
 
 void main() async {
