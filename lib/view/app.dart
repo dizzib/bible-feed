@@ -27,7 +27,10 @@ class _AppState extends State<App> {
       appBar: context.isOrientationLandscape
           ? null
           : AppBar(
-              leading: Icon(bas.isLinked ? Icons.link : Icons.link_off),
+              leading: Icon(
+                bas.isLinked ? Icons.link : Icons.link_off,
+                size: 35,
+              ),
               centerTitle: true,
               clipBehavior: Clip.none, // do not clip fab drop shadow
               title: AllDoneFab(),
