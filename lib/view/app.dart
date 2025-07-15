@@ -18,6 +18,7 @@ class App extends StatelessWidget {
             : AppBar(
                 leading: BibleReaderLink(),
                 centerTitle: true,
+                clipBehavior: Clip.none, // do not clip drop shadow
                 title: AllDoneFab(),
                 actions: [
                   IconButton(
