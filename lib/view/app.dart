@@ -16,6 +16,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
+    // this must come beneath MaterialApp Navigator
     sl<BackgroundService>().addListener(() => Navigator.maybePop(context)); // dismiss all-done dialog
   }
 
