@@ -49,7 +49,7 @@ class BlueLetterBibleReader extends BibleReader {
           'rut': 'rth',
         }[f.book.osisParatextAbbrev] ??
         f.book.osisParatextAbbrev;
-    return 'www.blueletterbible.org/nkjv/$bookRef/${f.chapter}/1/p1/';
+    return 'blueletterbible.org/nkjv/$bookRef/${f.chapter}/1/p1/';
   }
 }
 
