@@ -16,6 +16,8 @@ abstract class BibleReader {
   Future<bool> launch(Feed f) async => await launchUrl(getDeeplinkUri(f).log());
 }
 
+//// working...
+
 @immutable
 class NoBibleReader extends BibleReader {
   @override
@@ -25,6 +27,15 @@ class NoBibleReader extends BibleReader {
   @override
   Uri getDeeplinkUri(Feed f) => Uri();
 }
+
+class YouVersionBibleReader extends BibleReader {
+  @override
+  String get name => 'YouVersion app';
+  @override
+  Uri getDeeplinkUri(Feed f) => Uri.parse('youversion://bible?reference=${f.book.osisParatextAbbrev}.${f.chapter}');
+}
+
+//// the following readers have issues and are not working 100%...
 
 @immutable
 class BibleHubBibleReader extends BibleReader {
@@ -48,13 +59,6 @@ class OliveTreeBibleReader extends BibleReader {
   String get name => 'Olive Tree app';
   @override
   Uri getDeeplinkUri(Feed f) => Uri.parse('olivetree://bible/${f.book.osisParatextAbbrev}.${f.chapter}');
-}
-
-class YouVersionBibleReader extends BibleReader {
-  @override
-  String get name => 'YouVersion app';
-  @override
-  Uri getDeeplinkUri(Feed f) => Uri.parse('youversion://bible?reference=${f.book.osisParatextAbbrev}.${f.chapter}');
 }
 
 @immutable
