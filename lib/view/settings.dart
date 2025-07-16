@@ -16,7 +16,7 @@ class Settings extends WatchingWidget {
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                 final isSelectable = snapshot.data == true;
                 return ChoiceChip(
-                  label: Text('${bibleApp.name}${isSelectable ? "" : " is not detected"}'),
+                  label: Text('${bibleApp.displayName}${isSelectable ? "" : " is not detected"}'),
                   onSelected: isSelectable
                       ? (bool selected) {
                           if (selected) bas.linkedBibleReaderIndex = idx;
