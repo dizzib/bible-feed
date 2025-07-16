@@ -39,7 +39,7 @@ class BlueLetterBibleReader extends BibleReader {
   @override
   String get displayName => 'Blue Letter Bible';
   @override
-  String get uriScheme => 'http://';
+  String get uriScheme => 'https://';
   @override
   String getUriPath(f) {
     final bookRef = {
