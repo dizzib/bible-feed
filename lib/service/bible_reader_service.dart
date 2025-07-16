@@ -9,6 +9,7 @@ enum BibleReaderKey {
   andBible,
   bibleHub,
   blueLetter,
+  lifeBible,
   oliveTreeApp,
   youVersionApp,
   weDevoteApp,
@@ -30,10 +31,11 @@ class BibleReaderService with ChangeNotifier {
   //// list of readers
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
-    BibleReaderKey.youVersionApp: YouVersionBibleReader(),
     BibleReaderKey.blueLetter: BlueLetterBibleReader(), // bug: ezekiel
+    BibleReaderKey.youVersionApp: YouVersionBibleReader(),
     // BibleReaderKey.andBible: AndBibleReader(), // bug: back button does not return to bible feed
     // BibleReaderKey.bibleHub: BibleHubBibleReader(),
+    // BibleReaderKey.lifeBible: LifeBibleReader(),
     // BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(), // bug: back button does not return to bible feed
     // BibleReaderKey.weDevoteApp: WeDevoteBibleReader(), // bug: does not open ref
   };

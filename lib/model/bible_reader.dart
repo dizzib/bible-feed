@@ -6,6 +6,7 @@ import '/extension/log.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
 
+@immutable
 abstract class BibleReader {
   String get displayName => 'None';
   String get uriScheme => '';
@@ -25,6 +26,7 @@ class NoBibleReader extends BibleReader {
   Future<bool> isSelectable() async => Future.value(true);
 }
 
+@immutable
 class YouVersionBibleReader extends BibleReader {
   @override
   String get displayName => 'YouVersion app';
@@ -78,6 +80,14 @@ class BlueLetterBibleReader extends BibleReader {
 //   @override
 //   Uri getDeeplinkUri(Feed f) =>
 //       Uri.parse('https://www.blueletterbible.org/kjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/');
+// }
+// class LifeBibleReader extends BibleReader {
+//   @override
+//   String get displayName => 'Life Bible app';
+//   @override
+//   String get uriScheme => 'tecartabible://';
+//   @override
+//   String getUriPath(f) => '${f.book.osisParatextAbbrev}.${f.chapter}';
 // }
 //
 // class OliveTreeBibleReader extends BibleReader {
