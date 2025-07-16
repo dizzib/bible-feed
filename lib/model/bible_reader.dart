@@ -27,7 +27,7 @@ class NoBibleReader extends BibleReader {
 
 class YouVersionBibleReader extends BibleReader {
   @override
-  String get name => 'You Version';
+  String get name => 'YouVersion app';
   @override
   Uri getDeeplinkUri(Feed f) => Uri.parse('youversion://bible?reference=${f.book.osisParatextAbbrev}.${f.chapter}');
 }
@@ -35,7 +35,7 @@ class YouVersionBibleReader extends BibleReader {
 @immutable
 class WeDevoteBibleReader extends BibleReader {
   @override
-  String get name => 'We Devote';
+  String get name => 'We Devote app';
   @override
   Uri getDeeplinkUri(Feed f) => Uri.parse('wdbible://bible/${f.book.osisParatextAbbrev}.${f.chapter}');
 }

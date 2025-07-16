@@ -35,11 +35,11 @@ class Settings extends WatchingWidget {
         sections: [
           SettingsSection(
             title: const Text(
-                'You can configure a bible reading app to open whenever an unread chapter is tapped. To do so, first install the app then select it below.'),
+                'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
             tiles: [
               SettingsTile(
                 leading: BibleReaderLinkIcon(),
-                title: const Text('Linked App'),
+                title: const Text('Bible Reader'),
                 value: Wrap(spacing: 16, children: choiceChipList()),
               )
             ],
