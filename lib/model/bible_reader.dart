@@ -8,12 +8,10 @@ import '/model/feeds.dart';
 
 abstract class BibleReader {
   String get name;
-  bool get isAlwaysSelectable => false;
   Uri getDeeplinkUri(Feed f);
 
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
-  Future<bool> isSelectable() async =>
-      isAlwaysSelectable ? Future.value(true) : canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
+  Future<bool> isSelectable() async => canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
   Future<bool> launch(Feed f) async => await launchUrl(getDeeplinkUri(f).log());
 }
 
@@ -22,7 +20,7 @@ abstract class BibleReader {
 @immutable
 class NoBibleReader extends BibleReader {
   @override
-  bool get isAlwaysSelectable => true;
+  Future<bool> isSelectable() async => Future.value(true);
   @override
   String get name => 'None';
   @override
