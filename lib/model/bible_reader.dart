@@ -36,28 +36,10 @@ class YouVersionBibleReader extends BibleReader {
   String getUriPath(f) => 'bible?reference=${f.book.osisParatextAbbrev}.${f.chapter}';
 }
 
-@immutable
-class BlueLetterBibleReader extends BibleReader {
-  @override
-  String get displayName => 'Blue Letter Bible';
-  @override
-  String get uriScheme => 'https://';
-  @override
-  String getUriPath(f) {
-    final bookRef = {
-          'ezk': 'eze',
-          'jol': 'joe',
-          'nam': 'nah',
-          'rut': 'rth',
-        }[f.book.osisParatextAbbrev] ??
-        f.book.osisParatextAbbrev;
-    return 'blueletterbible.org/nkjv/$bookRef/${f.chapter}/1/p1/';
-  }
-}
-
 //// the following readers have issues and are not working 100%...
 
 // https://github.com/AndBible/and-bible/issues/3210
+// @immutable
 // class AndBibleReader extends BibleReader {
 //   @override
 //   String get displayName => 'AndBible app';
@@ -78,9 +60,21 @@ class BlueLetterBibleReader extends BibleReader {
 //   @override
 //   String get displayName => 'Blue Letter Bible';
 //   @override
-//   Uri getDeeplinkUri(Feed f) =>
-//       Uri.parse('https://www.blueletterbible.org/kjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/');
+//   String get uriScheme => 'https://';
+//   @override
+//   String getUriPath(f) {
+//     final bookRef = {
+//           'ezk': 'eze',
+//           'jol': 'joe',
+//           'nam': 'nah',
+//           'rut': 'rth',
+//         }[f.book.osisParatextAbbrev] ??
+//         f.book.osisParatextAbbrev;
+//     return 'blueletterbible.org/nkjv/$bookRef/${f.chapter}/1/p1/';
+//   }
 // }
+//
+// @immutable
 // class LifeBibleReader extends BibleReader {
 //   @override
 //   String get displayName => 'Life Bible app';
@@ -90,6 +84,7 @@ class BlueLetterBibleReader extends BibleReader {
 //   String getUriPath(f) => '${f.book.osisParatextAbbrev}.${f.chapter}';
 // }
 //
+// @immutable
 // class OliveTreeBibleReader extends BibleReader {
 //   @override
 //   String get displayName => 'Olive Tree app';

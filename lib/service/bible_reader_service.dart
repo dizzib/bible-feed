@@ -31,8 +31,8 @@ class BibleReaderService with ChangeNotifier {
   //// list of readers
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
-    BibleReaderKey.blueLetter: BlueLetterBibleReader(), // bug: ezekiel
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
+    // BibleReaderKey.blueLetter: BlueLetterBibleReader(), // bug: ezekiel
     // BibleReaderKey.andBible: AndBibleReader(), // bug: back button does not return to bible feed
     // BibleReaderKey.bibleHub: BibleHubBibleReader(),
     // BibleReaderKey.lifeBible: LifeBibleReader(),
