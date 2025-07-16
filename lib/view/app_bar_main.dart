@@ -3,6 +3,7 @@ import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
 import '/service/bible_reader_service.dart';
 import 'all_done_fab.dart';
+import 'bible_reader_link_icon.dart';
 import 'settings.dart';
 
 class AppBarMain extends WatchingWidget implements PreferredSizeWidget {
@@ -11,11 +12,21 @@ class AppBarMain extends WatchingWidget implements PreferredSizeWidget {
     final bas = watchIt<BibleReaderService>();
 
     return AppBar(
-      leading: IconButton(
-        onPressed: bas.isLinked ? bas.toggleEnabled : null,
-        icon: Icon(
-          bas.isEnabled ? Icons.link : Icons.link_off,
-          size: 32,
+      // automaticallyImplyLeading: false,
+      leadingWidth: 120,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          spacing: 8,
+          children: [
+            BibleReaderLinkIcon(),
+            bas.isLinked
+                ? Switch(
+                    onChanged: (value) => bas.isEnabled = value,
+                    value: bas.isEnabled,
+                  )
+                : Container(),
+          ],
         ),
       ),
       centerTitle: true,

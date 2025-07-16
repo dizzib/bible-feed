@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:watch_it/watch_it.dart';
 import '/service/bible_reader_service.dart';
+import 'bible_reader_link_icon.dart';
 
 class Settings extends WatchingWidget {
   @override
@@ -37,10 +38,7 @@ class Settings extends WatchingWidget {
                 'You can configure a bible reading app to open whenever an unread chapter is tapped. To do so, first install the app then select it below.'),
             tiles: [
               SettingsTile(
-                leading: Icon(
-                  bas.isLinked ? Icons.link : Icons.link_off,
-                  size: 32,
-                ),
+                leading: BibleReaderLinkIcon(),
                 title: const Text('Linked App'),
                 value: Wrap(spacing: 16, children: choiceChipList()),
               )

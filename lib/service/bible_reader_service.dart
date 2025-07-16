@@ -29,8 +29,8 @@ class BibleReaderService with ChangeNotifier {
 
   bool get isEnabled => _isEnabled;
 
-  void toggleEnabled() {
-    _isEnabled = !_isEnabled;
+  set isEnabled(bool value) {
+    _isEnabled = value;
     sl<SharedPreferences>().setBool(_isReaderEnabledStoreKey, _isEnabled);
     notifyListeners();
   }
