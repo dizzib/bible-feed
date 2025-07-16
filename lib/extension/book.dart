@@ -6,6 +6,7 @@ extension OsisBookAbbreviations on Book {
       const {
         'mar': 'mrk',
         'jam': 'jas',
+        'rth': 'rut',
         'sos': 'sng',
         'prv': 'pro',
         '1cr': '1ch',
