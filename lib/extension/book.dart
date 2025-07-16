@@ -4,17 +4,17 @@ import '/model/book.dart';
 extension OsisBookAbbreviations on Book {
   String get osisParatextAbbrev =>
       const {
-        'mar': 'mrk',
-        'jam': 'jas',
-        'rth': 'rut',
-        'sos': 'sng',
-        'prv': 'pro',
         '1cr': '1ch',
         '2cr': '2ch',
         'eze': 'ezk',
+        'jam': 'jas',
         'joe': 'jol',
-        'odb': 'oba',
+        'mar': 'mrk',
         'nah': 'nam',
+        'odb': 'oba',
+        'prv': 'pro',
+        'rth': 'rut',
+        'sos': 'sng',
       }[key] ??
       key;
 }
