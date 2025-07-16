@@ -41,7 +41,16 @@ class BlueLetterBibleReader extends BibleReader {
   @override
   String get uriScheme => 'http://';
   @override
-  String getUriPath(f) => 'www.blueletterbible.org/nkjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/p1/';
+  String getUriPath(f) {
+    final bookRef = {
+          'ezk': 'eze',
+          'jol': 'joe',
+          'nam': 'nah',
+          'rut': 'rth',
+        }[f.book.osisParatextAbbrev] ??
+        f.book.osisParatextAbbrev;
+    return 'www.blueletterbible.org/nkjv/$bookRef/${f.chapter}/1/p1/';
+  }
 }
 
 //// the following readers have issues and are not working 100%...
