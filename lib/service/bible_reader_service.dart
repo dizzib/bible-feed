@@ -19,6 +19,7 @@ class BibleReaderService with ChangeNotifier {
     final linkedReader = sp.getString(_linkedBibleReaderStoreKey);
     try {
       _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
+      assert(_bibleReaders.keys.contains(_linkedBibleReaderKey));
     } catch (e) {
       _linkedBibleReaderKey = BibleReaderKey.none;
     }
@@ -30,7 +31,7 @@ class BibleReaderService with ChangeNotifier {
     BibleReaderKey.none: NoBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
     // BibleReaderKey.bibleHub: BibleHubBibleReader(),
-    // BibleReaderKey.blueLetterWeb: BlueLetterBibleReader(), // bug: ezekiel
+    // BibleReaderKey.blueLetter: BlueLetterBibleReader(), // bug: ezekiel
     // BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(), // bug: back button does not return to bible feed
     // BibleReaderKey.weDevoteApp: WeDevoteBibleReader(), // bug: does not open ref
   };
