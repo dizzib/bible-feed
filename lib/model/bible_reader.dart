@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
+import '/extension/log.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
 
@@ -12,7 +13,7 @@ abstract class BibleReader {
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
   Future<bool> isSelectable() async =>
       isAlwaysSelectable ? Future.value(true) : canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
-  Future<bool> launch(Feed f) async => await launchUrl(getDeeplinkUri(f));
+  Future<bool> launch(Feed f) async => await launchUrl(getDeeplinkUri(f).log());
 }
 
 @immutable
@@ -30,7 +31,8 @@ class BlueLetterWebBibleReader extends BibleReader {
   @override
   String get name => 'Blue Letter Bible';
   @override
-  Uri getDeeplinkUri(Feed f) => Uri.parse('https://www.blueletterbible.org/kjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/');
+  Uri getDeeplinkUri(Feed f) =>
+      Uri.parse('https://www.blueletterbible.org/kjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/');
 }
 
 class YouVersionBibleReader extends BibleReader {
