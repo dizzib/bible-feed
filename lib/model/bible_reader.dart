@@ -60,7 +60,7 @@ class YouVersionBibleReader extends BibleReader {
 @immutable
 class WeDevoteBibleReader extends BibleReader {
   @override
-  String get name => 'We Devote app';
+  String get name => 'WeDevote app';
   @override
   Uri getDeeplinkUri(Feed f) => Uri.parse('wdbible://bible/${f.book.osisParatextAbbrev}.${f.chapter}');
 }
