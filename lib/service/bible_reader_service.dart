@@ -32,7 +32,7 @@ class BibleReaderService with ChangeNotifier {
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
-    // BibleReaderKey.blueLetter: BlueLetterBibleReader(), // bug: ezekiel
+    // BibleReaderKey.blueLetter: BlueLetterBibleReader(), // bug: cannot open app, only web
     // BibleReaderKey.andBible: AndBibleReader(), // bug: back button does not return to bible feed
     // BibleReaderKey.bibleHub: BibleHubBibleReader(),
     // BibleReaderKey.lifeBible: LifeBibleReader(),
