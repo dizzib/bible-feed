@@ -35,6 +35,13 @@ class BlueLetterBibleReader extends BibleReader {
       Uri.parse('https://www.blueletterbible.org/kjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/');
 }
 
+class OliveTreeBibleReader extends BibleReader {
+  @override
+  String get name => 'Olive Tree app';
+  @override
+  Uri getDeeplinkUri(Feed f) => Uri.parse('olivetree://bible/${f.book.osisParatextAbbrev}.${f.chapter}');
+}
+
 class YouVersionBibleReader extends BibleReader {
   @override
   String get name => 'YouVersion app';

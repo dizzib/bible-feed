@@ -7,6 +7,7 @@ import '/model/feed.dart';
 enum BibleReaderKey {
   none,
   blueLetterWeb,
+  oliveTreeApp,
   youVersionApp,
   weDevoteApp,
 }
@@ -27,6 +28,7 @@ class BibleReaderService with ChangeNotifier {
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
     BibleReaderKey.blueLetterWeb: BlueLetterBibleReader(),
+    BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
     BibleReaderKey.weDevoteApp: WeDevoteBibleReader(),
   };
