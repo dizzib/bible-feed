@@ -6,7 +6,8 @@ import '/model/feed.dart';
 
 enum BibleReaderKey {
   none,
-  blueLetterWeb,
+  bibleHub,
+  blueLetter,
   oliveTreeApp,
   youVersionApp,
   weDevoteApp,
@@ -28,6 +29,7 @@ class BibleReaderService with ChangeNotifier {
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
+    // BibleReaderKey.bibleHub: BibleHubBibleReader(),
     // BibleReaderKey.blueLetterWeb: BlueLetterBibleReader(), // bug: ezekiel
     // BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(), // bug: back button does not return to bible feed
     // BibleReaderKey.weDevoteApp: WeDevoteBibleReader(), // bug: does not open ref

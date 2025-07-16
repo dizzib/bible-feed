@@ -27,6 +27,14 @@ class NoBibleReader extends BibleReader {
 }
 
 @immutable
+class BibleHubBibleReader extends BibleReader {
+  @override
+  String get name => 'BibleHub web';
+  @override
+  Uri getDeeplinkUri(Feed f) => Uri.parse('https://biblehub.com/${f.book.osisParatextAbbrev}/${f.chapter}.htm');
+}
+
+@immutable
 class BlueLetterBibleReader extends BibleReader {
   @override
   String get name => 'Blue Letter Bible';
