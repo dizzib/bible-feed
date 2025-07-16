@@ -27,10 +27,10 @@ class BibleReaderService with ChangeNotifier {
   //// list of readers
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
-    BibleReaderKey.blueLetterWeb: BlueLetterBibleReader(),
-    BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
-    BibleReaderKey.weDevoteApp: WeDevoteBibleReader(),
+    // BibleReaderKey.blueLetterWeb: BlueLetterBibleReader(), // bug: ezekiel
+    // BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(), // bug: back button does not return to bible feed
+    // BibleReaderKey.weDevoteApp: WeDevoteBibleReader(), // bug: does not open ref
   };
 
   List<BibleReader> get bibleReaderList => _bibleReaders.values.toList();
