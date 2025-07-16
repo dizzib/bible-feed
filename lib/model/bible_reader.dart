@@ -22,7 +22,15 @@ class NoBibleReader extends BibleReader {
   @override
   String get name => 'None';
   @override
-  Uri getDeeplinkUri(Feed f) => Uri.parse('');
+  Uri getDeeplinkUri(Feed f) => Uri();
+}
+
+@immutable
+class BlueLetterWebBibleReader extends BibleReader {
+  @override
+  String get name => 'Blue Letter Bible';
+  @override
+  Uri getDeeplinkUri(Feed f) => Uri.parse('https://www.blueletterbible.org/kjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/');
 }
 
 class YouVersionBibleReader extends BibleReader {

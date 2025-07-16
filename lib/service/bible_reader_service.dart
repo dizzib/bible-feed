@@ -4,21 +4,31 @@ import 'package:watch_it/watch_it.dart';
 import '/model/bible_reader.dart';
 import '/model/feed.dart';
 
-enum BibleReaderKey { none, youVersion, weDevote }
+enum BibleReaderKey {
+  none,
+  blueLetterWeb,
+  youVersionApp,
+  weDevoteApp,
+}
 
 class BibleReaderService with ChangeNotifier {
   BibleReaderService() {
     final sp = sl<SharedPreferences>();
     final linkedReader = sp.getString(_linkedBibleReaderStoreKey);
-    _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
+    try {
+      _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
+    } catch (e) {
+      _linkedBibleReaderKey = BibleReaderKey.none;
+    }
     _isEnabled = sp.getBool(_isReaderEnabledStoreKey) ?? false;
   }
 
   //// list of readers
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
-    BibleReaderKey.youVersion: YouVersionBibleReader(),
-    BibleReaderKey.weDevote: WeDevoteBibleReader()
+    BibleReaderKey.blueLetterWeb: BlueLetterWebBibleReader(),
+    BibleReaderKey.youVersionApp: YouVersionBibleReader(),
+    BibleReaderKey.weDevoteApp: WeDevoteBibleReader(),
   };
 
   List<BibleReader> get bibleReaderList => _bibleReaders.values.toList();
