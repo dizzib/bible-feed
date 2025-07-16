@@ -34,6 +34,16 @@ class YouVersionBibleReader extends BibleReader {
   String getUriPath(f) => 'bible?reference=${f.book.osisParatextAbbrev}.${f.chapter}';
 }
 
+@immutable
+class BlueLetterBibleReader extends BibleReader {
+  @override
+  String get displayName => 'Blue Letter Bible';
+  @override
+  String get uriScheme => 'http://';
+  @override
+  String getUriPath(f) => 'www.blueletterbible.org/nkjv/${f.book.osisParatextAbbrev}/${f.chapter}/1/p1/';
+}
+
 //// the following readers have issues and are not working 100%...
 
 // https://github.com/AndBible/and-bible/issues/3210
