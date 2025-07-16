@@ -26,7 +26,7 @@ class BibleReaderService with ChangeNotifier {
   //// list of readers
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
-    BibleReaderKey.blueLetterWeb: BlueLetterWebBibleReader(),
+    BibleReaderKey.blueLetterWeb: BlueLetterBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
     BibleReaderKey.weDevoteApp: WeDevoteBibleReader(),
   };

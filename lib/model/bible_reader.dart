@@ -27,7 +27,7 @@ class NoBibleReader extends BibleReader {
 }
 
 @immutable
-class BlueLetterWebBibleReader extends BibleReader {
+class BlueLetterBibleReader extends BibleReader {
   @override
   String get name => 'Blue Letter Bible';
   @override
