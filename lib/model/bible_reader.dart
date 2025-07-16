@@ -36,6 +36,15 @@ class YouVersionBibleReader extends BibleReader {
 
 //// the following readers have issues and are not working 100%...
 
+// https://github.com/AndBible/and-bible/issues/3210
+class AndBibleReader extends BibleReader {
+  @override
+  String get name => 'AndBible app';
+  @override
+  // Uri getDeeplinkUri(Feed f) => Uri.parse('https://read.andbible.org/${f.book.osisParatextAbbrev}.${f.chapter}.1');
+  Uri getDeeplinkUri(Feed f) => Uri.parse('https://read.andbible.org/1Sam.1.2');
+}
+
 @immutable
 class BibleHubBibleReader extends BibleReader {
   @override
