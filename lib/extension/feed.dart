@@ -1,4 +1,4 @@
-part of 'feed.dart';
+part of '/model/feed.dart';
 
 extension CalculatedGetters on Feed {
   int get bookIndex => readingList.indexOf(book);
