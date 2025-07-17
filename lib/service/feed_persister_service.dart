@@ -1,6 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watch_it/watch_it.dart';
-import '/model/feed.dart';
+part of '/model/feed.dart';
 
 class FeedPersisterService {
   String _getStoreKeyBookKey(Feed f) => '${f.readingList.key}.book';
@@ -10,7 +8,7 @@ class FeedPersisterService {
 
   void loadStateOrDefaults(Feed f) {
     f.book = f.readingList.getBook(sl<SharedPreferences>().getString(_getStoreKeyBookKey(f)) ?? f.readingList[0].key);
-    f.chapter = sl<SharedPreferences>().getInt(_getStoreKeyChapter(f)) ?? 1;
+    f._chapter = sl<SharedPreferences>().getInt(_getStoreKeyChapter(f)) ?? 1;
     f.isChapterRead = sl<SharedPreferences>().getBool(_getStoreKeyIsChapterRead(f)) ?? false;
     f.dateLastSaved = DateTime.tryParse(sl<SharedPreferences>().getString(_getStoreKeyDateLastSaved(f)) ?? '');
   }

@@ -15,21 +15,18 @@ extension PublicMethods on Feed {
       _chapter = 1;
     }
     isChapterRead = false;
-    _notifyListeners();
-    await sl<FeedPersisterService>().saveState(this);
+    await _notifyListenersAndSave();
   }
 
   Future<void> setBookAndChapter(int bookIndex, int chapter) async {
     book = readingList[bookIndex];
     this.chapter = chapter;
     isChapterRead = false;
-    _notifyListeners();
-    await sl<FeedPersisterService>().saveState(this);
+    await _notifyListenersAndSave();
   }
 
   Future<void> toggleIsChapterRead() async {
     isChapterRead = !isChapterRead;
-    _notifyListeners();
-    await sl<FeedPersisterService>().saveState(this);
+    await _notifyListenersAndSave();
   }
 }

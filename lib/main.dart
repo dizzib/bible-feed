@@ -4,11 +4,11 @@ import 'package:watch_it/watch_it.dart';
 import 'data/reading_lists.dart';
 import 'extension/object.dart';
 import 'model/book.dart';
+import 'model/feed.dart';
 import 'model/feeds.dart';
 import 'model/list_wheel_state.dart';
 import 'service/background_service.dart';
 import 'service/bible_reader_service.dart';
-import 'service/feed_persister_service.dart';
 import 'view/app_base.dart';
 
 Future<void> main() async {
@@ -16,10 +16,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   sl.registerSingleton(await SharedPreferences.getInstance());
-  sl.registerSingleton(Feeds(readingLists));
+  sl.registerSingleton(FeedPersisterService());
+  sl.registerSingleton(Feeds(readingLists)); // depends on FeedPersisterService
   sl.registerSingleton(BackgroundService());
   sl.registerSingleton(BibleReaderService());
-  sl.registerSingleton(FeedPersisterService());
   sl.registerSingleton(ListWheelState<Book>());
   sl.registerSingleton(ListWheelState<int>());
 

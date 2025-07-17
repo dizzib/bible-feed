@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/service/feed_persister_service.dart';
 import 'book.dart';
 import 'reading_list.dart';
 
 part '/extension/feed.dart';
+part '/service/feed_persister_service.dart';
 part 'feed_tip.dart';
 
 // Feed manages the reading state of a given list of books
@@ -16,7 +17,10 @@ class Feed with ChangeNotifier {
   late bool isChapterRead;
   late DateTime? dateLastSaved;
 
-  void _notifyListeners() => notifyListeners(); // extensions cannot call notifyListeners directly
+  Future<void> _notifyListenersAndSave() async {
+    notifyListeners(); // note: extensions cannot call notifyListeners directly
+    await sl<FeedPersisterService>().saveState(this);
+  }
 
   // chapter get/set
   int get chapter => _chapter;

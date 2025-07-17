@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/datetime.dart';
 import '/extension/object.dart';
-import '/service/feed_persister_service.dart';
 import 'feed.dart';
 import 'reading_list.dart';
 

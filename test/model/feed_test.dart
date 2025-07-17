@@ -4,7 +4,6 @@ import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/extension/datetime.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/service/feed_persister_service.dart';
 import '_test_data.dart';
 
 void main() async {
