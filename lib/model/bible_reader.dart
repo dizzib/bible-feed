@@ -11,10 +11,13 @@ abstract class BibleReader {
   String get displayName => 'None';
   String get uriScheme => '';
   String getUriPath(Feed f) => '';
-
-  Uri getDeeplinkUri(Feed f) => Uri.parse('$uriScheme${getUriPath(f)}');
-  Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
   Future<bool> isSelectable() async => canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
+
+  @nonVirtual
+  Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
+  @nonVirtual
+  Uri getDeeplinkUri(Feed f) => Uri.parse('$uriScheme${getUriPath(f)}');
+  @nonVirtual
   Future<bool> launch(Feed f) async => await launchUrl(getDeeplinkUri(f).log());
 }
 
