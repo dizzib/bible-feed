@@ -16,9 +16,14 @@ class Feed with ChangeNotifier {
     notifyListeners();
   }
 
-  // state
-  late Book book;
+  // date last saved
   late DateTime? dateLastSaved;
+
+  // book
+  late Book _book;
+  Book get book => _book;
+  @visibleForTesting
+  set book(Book b) => _book = b;
 
   // chapter
   late int _chapter;

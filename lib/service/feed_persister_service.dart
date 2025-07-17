@@ -7,7 +7,7 @@ class FeedPersisterService {
   String _getStoreKeyIsChapterRead(Feed f) => '${f.readingList.key}.isChapterRead';
 
   void loadStateOrDefaults(Feed f) {
-    f.book = f.readingList.getBook(sl<SharedPreferences>().getString(_getStoreKeyBookKey(f)) ?? f.readingList[0].key);
+    f._book = f.readingList.getBook(sl<SharedPreferences>().getString(_getStoreKeyBookKey(f)) ?? f.readingList[0].key);
     f._chapter = sl<SharedPreferences>().getInt(_getStoreKeyChapter(f)) ?? 1;
     f._isChapterRead = sl<SharedPreferences>().getBool(_getStoreKeyIsChapterRead(f)) ?? false;
     f.dateLastSaved = DateTime.tryParse(sl<SharedPreferences>().getString(_getStoreKeyDateLastSaved(f)) ?? '');

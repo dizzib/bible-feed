@@ -1,7 +1,7 @@
 part of '/model/feed.dart';
 
 extension CalculatedGetters on Feed {
-  int get bookIndex => readingList.indexOf(book);
+  int get bookIndex => readingList.indexOf(_book);
   int get chaptersRead => chapter + (_isChapterRead ? 1 : 0) - 1;
   double get progress => readingList.progressTo(bookIndex, chaptersRead);
 }
@@ -9,8 +9,8 @@ extension CalculatedGetters on Feed {
 extension PublicMethods on Feed {
   Future<void> nextChapter() async {
     assert(isChapterRead);
-    void nextBook() => book = readingList[(bookIndex + 1) % readingList.count];
-    if (++_chapter > book.chapterCount) {
+    void nextBook() => _book = readingList[(bookIndex + 1) % readingList.count];
+    if (++_chapter > _book.chapterCount) {
       nextBook();
       _chapter = 1;
     }
@@ -19,7 +19,7 @@ extension PublicMethods on Feed {
   }
 
   Future<void> setBookAndChapter(int bookIndex, int chapter) async {
-    book = readingList[bookIndex];
+    _book = readingList[bookIndex];
     this.chapter = chapter;
     _isChapterRead = false;
     await _notifyListenersAndSave();
