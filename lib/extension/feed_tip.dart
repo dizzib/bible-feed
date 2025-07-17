@@ -1,4 +1,4 @@
-part of 'feed.dart';
+part of '/model/feed.dart';
 
 extension FeedTip on Feed {
   bool get hasTip => tip.isNotEmpty;

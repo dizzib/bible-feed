@@ -6,8 +6,8 @@ import 'book.dart';
 import 'reading_list.dart';
 
 part '/extension/feed.dart';
+part '/extension/feed_tip.dart';
 part '/service/feed_persister_service.dart';
-part 'feed_tip.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
