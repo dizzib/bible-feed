@@ -16,9 +16,6 @@ class Feed with ChangeNotifier {
     notifyListeners();
   }
 
-  // date last saved
-  late DateTime? dateLastSaved;
-
   // book
   late Book _book;
   Book get book => _book;
@@ -39,6 +36,10 @@ class Feed with ChangeNotifier {
   bool get isChapterRead => _isChapterRead;
   @visibleForTesting
   set isChapterRead(bool val) => _isChapterRead = val;
+
+  // date last saved
+  late DateTime? _dateLastSaved;
+  DateTime? get dateLastSaved => _dateLastSaved;
 
   // public properties
   final ReadingList readingList;

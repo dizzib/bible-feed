@@ -10,14 +10,14 @@ class FeedPersisterService {
     f._book = f.readingList.getBook(sl<SharedPreferences>().getString(_getStoreKeyBookKey(f)) ?? f.readingList[0].key);
     f._chapter = sl<SharedPreferences>().getInt(_getStoreKeyChapter(f)) ?? 1;
     f._isChapterRead = sl<SharedPreferences>().getBool(_getStoreKeyIsChapterRead(f)) ?? false;
-    f.dateLastSaved = DateTime.tryParse(sl<SharedPreferences>().getString(_getStoreKeyDateLastSaved(f)) ?? '');
+    f._dateLastSaved = DateTime.tryParse(sl<SharedPreferences>().getString(_getStoreKeyDateLastSaved(f)) ?? '');
   }
 
   Future<void> saveState(Feed f) async {
-    f.dateLastSaved = DateTime.now();
-    await sl<SharedPreferences>().setString(_getStoreKeyBookKey(f), f.book.key);
-    await sl<SharedPreferences>().setInt(_getStoreKeyChapter(f), f.chapter);
-    await sl<SharedPreferences>().setBool(_getStoreKeyIsChapterRead(f), f.isChapterRead);
-    await sl<SharedPreferences>().setString(_getStoreKeyDateLastSaved(f), f.dateLastSaved!.toIso8601String());
+    f._dateLastSaved = DateTime.now();
+    await sl<SharedPreferences>().setString(_getStoreKeyBookKey(f), f._book.key);
+    await sl<SharedPreferences>().setInt(_getStoreKeyChapter(f), f._chapter);
+    await sl<SharedPreferences>().setBool(_getStoreKeyIsChapterRead(f), f._isChapterRead);
+    await sl<SharedPreferences>().setString(_getStoreKeyDateLastSaved(f), f._dateLastSaved!.toIso8601String());
   }
 }
