@@ -13,7 +13,7 @@ class Feeds with ChangeNotifier {
 
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
     for (Feed f in _feeds) {
-      f.persister.addListener(notifyListeners);
+      f.addListener(notifyListeners);
     }
   }
 

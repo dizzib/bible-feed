@@ -14,7 +14,7 @@ class FeedCard extends WatchingWidget {
 
   @override
   build(context) {
-    watch(feed.persister);
+    watch(feed);
 
     return Opacity(
       opacity: feed.isChapterRead ? 0.25 : 1,

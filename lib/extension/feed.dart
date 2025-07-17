@@ -15,6 +15,7 @@ extension PublicMethods on Feed {
       _chapter = 1;
     }
     isChapterRead = false;
+    _notifyListeners();
     await persister.saveState();
   }
 
@@ -22,11 +23,13 @@ extension PublicMethods on Feed {
     book = readingList[bookIndex];
     this.chapter = chapter;
     isChapterRead = false;
+    _notifyListeners();
     await persister.saveState();
   }
 
   Future<void> toggleIsChapterRead() async {
     isChapterRead = !isChapterRead;
+    _notifyListeners();
     await persister.saveState();
   }
 }

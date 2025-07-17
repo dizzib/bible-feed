@@ -1,9 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'feed.dart';
 
-class FeedPersister with ChangeNotifier {
+class FeedPersister {
   final Feed feed;
   late final String _storeKeyBookKey;
   late final String _storeKeyChapter;
@@ -23,7 +22,6 @@ class FeedPersister with ChangeNotifier {
     feed.chapter = sl<SharedPreferences>().getInt(_storeKeyChapter) ?? 1;
     feed.isChapterRead = sl<SharedPreferences>().getBool(_storeKeyIsChapterRead) ?? false;
     feed.dateLastSaved = DateTime.tryParse(sl<SharedPreferences>().getString(_storeKeyDateLastSaved) ?? '');
-    notifyListeners();
   }
 
   Future<void> saveState() async {
@@ -32,6 +30,5 @@ class FeedPersister with ChangeNotifier {
     await sl<SharedPreferences>().setInt(_storeKeyChapter, feed.chapter);
     await sl<SharedPreferences>().setBool(_storeKeyIsChapterRead, feed.isChapterRead);
     await sl<SharedPreferences>().setString(_storeKeyDateLastSaved, feed.dateLastSaved!.toIso8601String());
-    notifyListeners();
   }
 }
