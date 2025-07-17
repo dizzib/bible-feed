@@ -13,8 +13,6 @@ part 'feed_tip.dart';
 class Feed with ChangeNotifier {
   // state
   late Book book;
-  late int _chapter;
-  late bool isChapterRead;
   late DateTime? dateLastSaved;
 
   Future<void> _notifyListenersAndSave() async {
@@ -22,13 +20,20 @@ class Feed with ChangeNotifier {
     await sl<FeedPersisterService>().saveState(this);
   }
 
-  // chapter get/set
+  // chapter
+  late int _chapter;
   int get chapter => _chapter;
   set chapter(int c) {
     assert(c > 0);
     assert(c <= book.chapterCount);
     _chapter = c;
   }
+
+  // isChapterRead
+  late bool _isChapterRead;
+  bool get isChapterRead => _isChapterRead;
+  @visibleForTesting
+  set isChapterRead(bool val) => _isChapterRead = val;
 
   // public properties
   final ReadingList readingList;

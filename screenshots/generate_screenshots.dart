@@ -43,7 +43,7 @@ void main() {
         for (int col = 0; col < 2; col++) {
           var feed = sl<Feeds>()[row * 2 + col];
           feed.setBookAndChapter(bookState[row][col], chapterState[row][col]);
-          feed.isChapterRead = chapterReadState[row][col] == 1 ? true : false;
+          if (chapterReadState[row][col] == 1) feed.toggleIsChapterRead();
         }
       }
     }
