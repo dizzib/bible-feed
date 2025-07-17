@@ -3,7 +3,7 @@ part of '/model/feed.dart';
 extension FeedTip on Feed {
   bool get hasTip => tip.isNotEmpty;
   String get tip {
-    if (book.key != 'psa') return '';
+    if (_book.key != 'psa') return '';
     // split PSALM 119 over several days
     const tips = {
       117: 'ℵ_Aleph_ℶ_Beth',
@@ -23,9 +23,9 @@ extension FeedTip on Feed {
       133: 'ק_Qoph_ר_Resh',
       134: 'ש_Shin_ת_Tau',
     };
-    var tip = tips[chapter];
+    var tip = tips[_chapter];
     if (tip == null) return '';
-    tip = '${(chapter == 119) ? ' ' : ', 119_'}$tip';
+    tip = '${(_chapter == 119) ? ' ' : ', 119_'}$tip';
     return tip.replaceAll('_', String.fromCharCode(0x00A0));
   }
 }
