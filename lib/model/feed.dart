@@ -11,7 +11,7 @@ part '/service/feed_persister_service.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
-  Feed(this.readingList) {
+  Feed(this._readingList) {
     sl<FeedPersisterService>().loadStateOrDefaults(this);
     notifyListeners();
   }
@@ -41,8 +41,9 @@ class Feed with ChangeNotifier {
   late DateTime? _dateLastSaved;
   DateTime? get dateLastSaved => _dateLastSaved;
 
-  // public properties
-  final ReadingList readingList;
+  // reading list
+  final ReadingList _readingList;
+  ReadingList get readingList => _readingList;
 
   Future<void> _notifyListenersAndSave() async {
     notifyListeners(); // note: extensions cannot call notifyListeners directly
