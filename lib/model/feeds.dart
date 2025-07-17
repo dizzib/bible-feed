@@ -41,9 +41,10 @@ class Feeds with ChangeNotifier {
     return AdvanceState.allReadAwaitingTomorrow.log();
   }
 
-  reload() {
+  void reload() {
     for (Feed f in _feeds) {
       sl<FeedPersisterService>().loadStateOrDefaults(f);
     }
+    notifyListeners();
   }
 }
