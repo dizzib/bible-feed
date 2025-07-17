@@ -14,19 +14,19 @@ extension PublicMethods on Feed {
       nextBook();
       _chapter = 1;
     }
-    _isChapterRead = false;
-    await _notifyListenersAndSave();
+    isChapterRead = false; // invoke notifyListeners by calling public setter rather than setting private field
+    await sl<FeedPersisterService>().saveState(this);
   }
 
   Future<void> setBookAndChapter(int bookIndex, int chapter) async {
     _book = readingList[bookIndex];
-    this.chapter = chapter;
-    _isChapterRead = false;
-    await _notifyListenersAndSave();
+    _chapter = chapter;
+    isChapterRead = false; // invoke notifyListeners
+    await sl<FeedPersisterService>().saveState(this);
   }
 
   Future<void> toggleIsChapterRead() async {
-    _isChapterRead = !isChapterRead;
-    await _notifyListenersAndSave();
+    isChapterRead = !isChapterRead; // invoke notifyListeners
+    await sl<FeedPersisterService>().saveState(this);
   }
 }

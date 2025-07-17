@@ -20,11 +20,14 @@ class Feed with ChangeNotifier {
   late Book _book;
   Book get book => _book;
   @visibleForTesting
-  set book(Book b) => _book = b;
+  set book(Book b) {
+    _book = b;
+  }
 
   // chapter
   late int _chapter;
   int get chapter => _chapter;
+  @visibleForTesting
   set chapter(int c) {
     assert(c > 0);
     assert(c <= book.chapterCount);
@@ -35,7 +38,10 @@ class Feed with ChangeNotifier {
   late bool _isChapterRead;
   bool get isChapterRead => _isChapterRead;
   @visibleForTesting
-  set isChapterRead(bool val) => _isChapterRead = val;
+  set isChapterRead(bool val) {
+    _isChapterRead = val;
+    notifyListeners();
+  }
 
   // date last saved
   late DateTime? _dateLastSaved;
@@ -44,9 +50,4 @@ class Feed with ChangeNotifier {
   // reading list
   final ReadingList _readingList;
   ReadingList get readingList => _readingList;
-
-  Future<void> _notifyListenersAndSave() async {
-    notifyListeners(); // note: extensions cannot call notifyListeners directly
-    await sl<FeedPersisterService>().saveState(this);
-  }
 }
