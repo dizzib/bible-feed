@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+part '/extension/book.dart';
+
 // an individual book e.g. Matthew
 @immutable
 final class Book {

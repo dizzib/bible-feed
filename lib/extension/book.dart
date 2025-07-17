@@ -1,4 +1,4 @@
-import '/model/book.dart';
+part of '/model/book.dart';
 
 // see https://wiki.crosswire.org/OSIS_Book_Abbreviations
 extension OsisBookAbbreviations on Book {
