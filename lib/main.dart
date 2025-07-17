@@ -8,6 +8,7 @@ import 'model/feeds.dart';
 import 'model/list_wheel_state.dart';
 import 'service/background_service.dart';
 import 'service/bible_reader_service.dart';
+import 'service/feed_persister_service.dart';
 import 'view/app_base.dart';
 
 Future<void> main() async {
@@ -18,6 +19,7 @@ Future<void> main() async {
   sl.registerSingleton(Feeds(readingLists));
   sl.registerSingleton(BackgroundService());
   sl.registerSingleton(BibleReaderService());
+  sl.registerSingleton(FeedPersisterService());
   sl.registerSingleton(ListWheelState<Book>());
   sl.registerSingleton(ListWheelState<int>());
 

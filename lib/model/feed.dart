@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:watch_it/watch_it.dart';
+
+import '/service/feed_persister_service.dart';
 import 'book.dart';
-import 'feed_persister.dart';
 import 'reading_list.dart';
 
 part '/extension/feed.dart';
@@ -25,11 +27,10 @@ class Feed with ChangeNotifier {
   }
 
   // public properties
-  late final FeedPersister persister;
   final ReadingList readingList;
 
   Feed(this.readingList) {
-    persister = FeedPersister(this);
+    sl<FeedPersisterService>().loadStateOrDefaults(this);
     notifyListeners();
   }
 }
