@@ -9,13 +9,13 @@ import 'reading_list.dart';
 enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 
 class Feeds with ChangeNotifier {
-  final List<Feed> _feeds;
-
   Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
     for (Feed f in _feeds) {
       f.addListener(notifyListeners);
     }
   }
+
+  final List<Feed> _feeds;
 
   /// properties
   Feed operator [](int i) => _feeds[i];
