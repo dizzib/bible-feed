@@ -9,7 +9,7 @@ class _AnsiColor {
   // static const red = '\x1B[31m';
 }
 
-extension LogObjExt on Object {
+extension ObjectLog on Object {
   log() {
     if (kDebugMode) {
       debugPrint('${_AnsiColor.yellow}${DateTime.now().toString()} ${_AnsiColor.cyan}${toString()}${_AnsiColor.reset}');

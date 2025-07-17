@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'data/reading_lists.dart';
-import 'extension/log.dart';
+import 'extension/object.dart';
 import 'model/book.dart';
 import 'model/feeds.dart';
 import 'model/list_wheel_state.dart';

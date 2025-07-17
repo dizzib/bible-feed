@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
-import '/extension/log.dart';
+import '/extension/object.dart';
 import '/model/book.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
