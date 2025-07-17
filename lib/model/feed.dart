@@ -11,14 +11,14 @@ part 'feed_tip.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
+  Feed(this.readingList) {
+    sl<FeedPersisterService>().loadStateOrDefaults(this);
+    notifyListeners();
+  }
+
   // state
   late Book book;
   late DateTime? dateLastSaved;
-
-  Future<void> _notifyListenersAndSave() async {
-    notifyListeners(); // note: extensions cannot call notifyListeners directly
-    await sl<FeedPersisterService>().saveState(this);
-  }
 
   // chapter
   late int _chapter;
@@ -38,8 +38,8 @@ class Feed with ChangeNotifier {
   // public properties
   final ReadingList readingList;
 
-  Feed(this.readingList) {
-    sl<FeedPersisterService>().loadStateOrDefaults(this);
-    notifyListeners();
+  Future<void> _notifyListenersAndSave() async {
+    notifyListeners(); // note: extensions cannot call notifyListeners directly
+    await sl<FeedPersisterService>().saveState(this);
   }
 }
