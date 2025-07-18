@@ -33,10 +33,10 @@ class Feeds with ChangeNotifier {
   Future<AdvanceState> maybeAdvance() async {
     if (!areChaptersRead) return AdvanceState.notAllRead.log();
 
-    var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
-    var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
+    var dateLastSavedList = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
+    var latestDateLastSaved = dateLastSavedList.reduce((a, b) => a.isAfter(b) ? a : b);
     final now = clock.now(); // use clock (not DateTime) for unit testing
-    if (now.day != latestSavedDate.day || now.month != latestSavedDate.month || now.year != latestSavedDate.year) {
+    if (now.day != latestDateLastSaved.day || now.month != latestDateLastSaved.month || now.year != latestDateLastSaved.year) {
       await forceAdvance();
       return AdvanceState.listsAdvanced.log();
     }
