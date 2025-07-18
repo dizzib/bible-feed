@@ -24,7 +24,7 @@ void main() async {
       'l2.book': 'b1',
       'l2.chapter': 2,
       'l2.isChapterRead': true,
-      'l2.dateLastSaved': yesterday.toIso8601String(),
+      'l2.dateModified': yesterday.toIso8601String(),
     });
   });
 
@@ -34,14 +34,14 @@ void main() async {
       expect(f.book, b0);
       expect(f.chapter, 1);
       expect(f.isChapterRead, false);
-      expect(f.dateLastSaved, null);
+      expect(f.dateModified, null);
     });
 
     test('should load state from non-empty store', () {
       expect(f.book, b1);
       expect(f.chapter, 2);
       expect(f.isChapterRead, true);
-      expect(f.dateLastSaved, yesterday);
+      expect(f.dateModified, yesterday);
     });
   });
 
@@ -82,7 +82,7 @@ void main() async {
       expect(f.chapter, expectedChapter);
       expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
       expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);
-      expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateLastSaved')!).date, DateTime.now().date);
+      expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateModified')!).date, DateTime.now().date);
     }
 
     group('nextChapter', () {

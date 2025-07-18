@@ -43,9 +43,9 @@ class Feed with ChangeNotifier {
     notifyListeners();
   }
 
-  // date last saved
-  late DateTime? _dateLastSaved;
-  DateTime? get dateLastSaved => _dateLastSaved;
+  // date modified
+  late DateTime? _dateModified;
+  DateTime? get dateModified => _dateModified;
 
   // reading list
   final ReadingList _readingList;
