@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
@@ -31,16 +32,16 @@ class BibleReaderService with ChangeNotifier {
   //// list of readers
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
+    BibleReaderKey.andBible: AndBibleReader(),
+    BibleReaderKey.blueLetter: BlueLetterBibleReader(),
+    BibleReaderKey.bibleHub: BibleHubBibleReader(),
+    BibleReaderKey.lifeBible: LifeBibleReader(),
+    BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(),
+    BibleReaderKey.weDevoteApp: WeDevoteBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
-    // BibleReaderKey.blueLetter: BlueLetterBibleReader(), // bug: cannot open app, only web
-    // BibleReaderKey.andBible: AndBibleReader(), // bug: back button does not return to bible feed
-    // BibleReaderKey.bibleHub: BibleHubBibleReader(),
-    // BibleReaderKey.lifeBible: LifeBibleReader(),
-    // BibleReaderKey.oliveTreeApp: OliveTreeBibleReader(), // bug: back button does not return to bible feed
-    // BibleReaderKey.weDevoteApp: WeDevoteBibleReader(), // bug: does not open ref
   };
-
-  List<BibleReader> get bibleReaderList => _bibleReaders.values.toList();
+  final _certifiedBibleReaders = _bibleReaders.filter((entry) => entry.value.isCertified);
+  List<BibleReader> get certifiedBibleReaderList => _certifiedBibleReaders.values.toList();
 
   //// reader enabled/disabled
   late bool _isEnabled;
@@ -60,11 +61,11 @@ class BibleReaderService with ChangeNotifier {
 
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
   BibleReader get linkedBibleReader => _bibleReaders[_linkedBibleReaderKey]!;
-  int get linkedBibleReaderIndex => bibleReaderList.indexOf(linkedBibleReader);
+  int get linkedBibleReaderIndex => certifiedBibleReaderList.indexOf(linkedBibleReader);
 
   set linkedBibleReaderIndex(int idx) {
     if (idx == linkedBibleReaderIndex) return;
-    _linkedBibleReaderKey = _bibleReaders.keys.elementAt(idx);
+    _linkedBibleReaderKey = _certifiedBibleReaders.keys.elementAt(idx);
     sl<SharedPreferences>().setString(_linkedBibleReaderStoreKey, _linkedBibleReaderKey.name);
     _isEnabled = isLinked;
     notifyListeners();

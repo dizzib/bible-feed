@@ -10,8 +10,8 @@ class Settings extends WatchingWidget {
   build(context) {
     final brs = watchIt<BibleReaderService>();
 
-    choiceChipList() => List.generate(brs.bibleReaderList.length, (idx) {
-          final BibleReader br = brs.bibleReaderList[idx];
+    choiceChipList() => List.generate(brs.certifiedBibleReaderList.length, (idx) {
+          final BibleReader br = brs.certifiedBibleReaderList[idx];
           return FutureBuilder<bool>(
               future: br.isSelectable(),
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
