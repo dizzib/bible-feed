@@ -29,8 +29,8 @@ void main() async {
       'hasEverAdvanced': false,
     });
     sl.pushNewScope();
-    sl.registerSingleton(FeedPersisterService());
     sl.registerSingleton(await SharedPreferences.getInstance());
+    sl.registerSingleton(FeedPersisterService());
     initFeeds();
   });
 

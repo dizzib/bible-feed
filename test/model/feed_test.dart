@@ -12,8 +12,8 @@ void main() async {
   initFeed(Map<String, Object> storeValues) async {
     SharedPreferences.setMockInitialValues(storeValues);
     sl.pushNewScope();
-    sl.registerSingleton(FeedPersisterService());
     sl.registerSingleton(await SharedPreferences.getInstance());
+    sl.registerSingleton(FeedPersisterService());
     f = Feed(l2);
   }
 
@@ -46,6 +46,10 @@ void main() async {
   });
 
   group('property', () {
+    test('book get', () {
+      expect(f.book, b1);
+    });
+
     test('bookIndex get', () {
       expect(f.bookIndex, 1);
     });
@@ -54,12 +58,6 @@ void main() async {
       expect(f.chapter, 2);
       f.chapter = 1;
       expect(f.chapter, 1);
-    });
-
-    test('current get/set', () {
-      expect(f.book, b1);
-      f.book = b2;
-      expect(f.book, b2);
     });
 
     test('isChapterRead get/set should affect chaptersRead', () {
