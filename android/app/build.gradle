@@ -69,7 +69,7 @@ android {
         release {
             minifyEnabled true
             ndk {
-                // Note: There is a 300 MB limit for the native debug symbols file.
+                // There is a 300 MB limit for the native debug symbols file.
                 // If your debug symbols footprint is too large, use SYMBOL_TABLE
                 // instead of FULL to decrease the file size.
                 // https://developer.android.com/studio/build/shrink-code#native-crash-support
