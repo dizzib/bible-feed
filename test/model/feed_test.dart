@@ -2,7 +2,6 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
-import 'package:bible_feed/extension/datetime.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import '_test_data.dart';
@@ -18,7 +17,7 @@ void main() async {
     f = Feed(l2);
   }
 
-  DateTime yesterday = DateTime.now().addDays(-1);
+  DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
   setUp(() async {
     await initFeed({
