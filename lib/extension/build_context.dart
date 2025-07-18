@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 extension BuildContextEntension<T> on BuildContext {
-  // helper property getters
-  ColorScheme get colorScheme => Theme.of(this).colorScheme;
-  double get deviceTextScale => MediaQuery.of(this).textScaler.scale(1); // from device settings
-  bool get isDarkMode => MediaQuery.of(this).platformBrightness == Brightness.dark;
-  bool get isOrientationLandscape => MediaQuery.of(this).orientation == Orientation.landscape;
-  TextTheme get textTheme => Theme.of(this).textTheme;
+  // device
+  MediaQueryData get mediaQuery => MediaQuery.of(this);
+  double get deviceTextScale => mediaQuery.textScaler.scale(1); // from device settings
+  bool get isDarkMode => mediaQuery.platformBrightness == Brightness.dark;
+  bool get isOrientationLandscape => mediaQuery.orientation == Orientation.landscape;
+
+  // theme
+  ThemeData get theme => Theme.of(this);
+  ColorScheme get colorScheme => theme.colorScheme;
+  TextTheme get textTheme => theme.textTheme;
 
   void navigateTo(Widget page) => Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
 
