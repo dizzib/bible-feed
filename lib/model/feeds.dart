@@ -16,18 +16,19 @@ class Feeds with ChangeNotifier {
   }
 
   final List<Feed> _feeds;
+  final _hasEverAdvancedStoreKey = 'hasEverAdvanced';
 
   /// properties
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
-  bool get hasEverAdvanced => sl<SharedPreferences>().getBool('hasEverAdvanced') ?? false;
+  bool get hasEverAdvanced => sl<SharedPreferences>().getBool(_hasEverAdvancedStoreKey) ?? false;
 
   /// methods
   Future<void> forceAdvance() async {
     for (Feed f in _feeds) {
       await f.nextChapter();
     }
-    sl<SharedPreferences>().setBool('hasEverAdvanced', true);
+    sl<SharedPreferences>().setBool(_hasEverAdvancedStoreKey, true);
   }
 
   Future<AdvanceState> maybeAdvance() async {
@@ -36,7 +37,9 @@ class Feeds with ChangeNotifier {
     final dateModifiedList = _feeds.map((f) => f.dateModified ?? DateTime(0)).toList();
     final latestDateModified = dateModifiedList.reduce((a, b) => a.isAfter(b) ? a : b);
     final now = clock.now(); // use clock (not DateTime) for unit testing
-    if (now.day != latestDateModified.day || now.month != latestDateModified.month || now.year != latestDateModified.year) {
+    if (now.day != latestDateModified.day ||
+        now.month != latestDateModified.month ||
+        now.year != latestDateModified.year) {
       await forceAdvance();
       return AdvanceState.listsAdvanced.log();
     }
