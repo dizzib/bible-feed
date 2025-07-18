@@ -1,7 +1,7 @@
+import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
-import '/extension/datetime.dart';
 import '/extension/object.dart';
 import 'feed.dart';
 import 'reading_list.dart';
@@ -32,12 +32,15 @@ class Feeds with ChangeNotifier {
 
   Future<AdvanceState> maybeAdvance() async {
     if (!areChaptersRead) return AdvanceState.notAllRead.log();
+
     var savedDates = _feeds.map((f) => f.dateLastSaved ?? DateTime(0)).toList();
     var latestSavedDate = savedDates.reduce((a, b) => a.isAfter(b) ? a : b);
-    if (!latestSavedDate.isToday) {
+    final now = clock.now(); // use clock (not DateTime) for unit testing
+    if (now.day != latestSavedDate.day || now.month != latestSavedDate.month || now.year != latestSavedDate.year) {
       await forceAdvance();
       return AdvanceState.listsAdvanced.log();
     }
+
     return AdvanceState.allReadAwaitingTomorrow.log();
   }
 
