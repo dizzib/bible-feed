@@ -54,10 +54,8 @@ void main() async {
       expect(f.bookIndex, 1);
     });
 
-    test('chapter get/set', () {
+    test('chapter get', () {
       expect(f.chapter, 2);
-      f.chapter = 1;
-      expect(f.chapter, 1);
     });
 
     test('isChapterRead get/set should affect chaptersRead', () {

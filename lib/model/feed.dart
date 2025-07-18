@@ -19,20 +19,10 @@ class Feed with ChangeNotifier {
   // book
   late Book _book;
   Book get book => _book;
-  @visibleForTesting
-  set book(Book value) {
-    _book = value;
-  }
 
   // chapter
   late int _chapter;
   int get chapter => _chapter;
-  @visibleForTesting
-  set chapter(int value) {
-    assert(value > 0);
-    assert(value <= book.chapterCount);
-    _chapter = value;
-  }
 
   // isChapterRead
   late bool _isChapterRead;
