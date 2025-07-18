@@ -2,7 +2,6 @@ import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
-import 'package:bible_feed/extension/clock.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import '_test_data.dart';
@@ -71,7 +70,7 @@ void main() async {
       checkHasAdvanced(true);
     });
 
-    final tomorrow = clock.addDays(1);
+    final tomorrow = Clock.fixed(const Clock().daysFromNow(1));
 
     group('maybeAdvance', () {
       test('if not all read, on next day, should not advance', () async {
@@ -92,9 +91,10 @@ void main() async {
           checkHasAdvanced(true);
         });
 
-        test('7 days ago, should advance', () async {
+        test('1 week ago, should advance', () async {
           f1.toggleIsChapterRead();
-          expect(await withClock(clock.addDays(7), fds.maybeAdvance), AdvanceState.listsAdvanced);
+          final nextWeek = Clock.fixed(const Clock().weeksFromNow(1));
+          expect(await withClock(nextWeek, fds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
       });
