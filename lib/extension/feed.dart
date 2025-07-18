@@ -19,6 +19,7 @@ extension PublicMethods on Feed {
   }
 
   Future<void> setBookAndChapter(int bookIndex, int chapter) async {
+    if (bookIndex == this.bookIndex && chapter == this.chapter) return;
     _book = readingList[bookIndex];
     _chapter = chapter;
     isChapterRead = false; // invoke notifyListeners
