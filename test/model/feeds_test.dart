@@ -71,9 +71,11 @@ void main() async {
       checkHasAdvanced(true);
     });
 
+    final tomorrow = clock.addDays(1);
+
     group('maybeAdvance', () {
       test('if not all read, on next day, should not advance', () async {
-        expect(await withClock(clock.tomorrow, fds.maybeAdvance), AdvanceState.notAllRead);
+        expect(await withClock(tomorrow, fds.maybeAdvance), AdvanceState.notAllRead);
         checkHasAdvanced(false);
       });
 
@@ -86,7 +88,7 @@ void main() async {
 
         test('yesterday, should advance', () async {
           f1.toggleIsChapterRead();
-          expect(await withClock(clock.tomorrow, fds.maybeAdvance), AdvanceState.listsAdvanced);
+          expect(await withClock(tomorrow, fds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
 
