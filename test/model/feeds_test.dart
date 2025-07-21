@@ -11,12 +11,6 @@ void main() async {
   late Feed f0, f1;
   late Feeds fds;
 
-  void initFeeds() {
-    fds = Feeds();
-    f0 = fds[0];
-    f1 = fds[1];
-  }
-
   setUp(() async {
     SharedPreferences.setMockInitialValues({
       'l0.book': 'b0',
@@ -32,7 +26,9 @@ void main() async {
     sl.pushNewScope();
     sl.registerSingleton(await SharedPreferences.getInstance());
     registerMockReadingLists();
-    initFeeds();
+    fds = Feeds();
+    f0 = fds[0];
+    f1 = fds[1];
   });
 
   test('[]', () {
