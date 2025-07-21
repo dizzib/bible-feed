@@ -15,7 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   sl.registerSingleton(await SharedPreferences.getInstance());
-  sl.registerSingleton(Feeds(readingLists)); // depends on FeedPersisterService
+  sl.registerSingleton(Feeds(readingLists));
   sl.registerSingleton(BibleReaderService());
   sl.registerSingleton(ListWheelState<Book>());
   sl.registerSingleton(ListWheelState<int>());
