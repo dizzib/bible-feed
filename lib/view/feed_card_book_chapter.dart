@@ -3,8 +3,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '/model/feed.dart';
 
 class FeedCardBookChapter extends StatelessWidget {
-  final Feed feed;
   const FeedCardBookChapter(this.feed);
+
+  final Feed feed;
 
   @override
   build(context) {

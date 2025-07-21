@@ -8,12 +8,12 @@ import '/view/book_chapter_dialog_footer.dart';
 import '/view/book_chapter_dialog_wheels.dart';
 
 class BookChapterDialog extends StatelessWidget {
-  final Feed feed;
-
   BookChapterDialog(this.feed) {
     sl<ListWheelState<Book>>().index = feed.bookIndex;
     sl<ListWheelState<int>>().index = feed.chapter - 1;
   }
+
+  final Feed feed;
 
   @override
   build(context) {

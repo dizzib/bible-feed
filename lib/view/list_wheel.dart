@@ -13,16 +13,16 @@ import '/view/list_wheel_effects.dart';
 //    - does not seem to rebuild as expected
 //
 class ListWheel<T> extends StatelessWidget {
-  final T Function(int index) indexToItem;
-  final String Function(T item) itemToString;
-  final int maxIndex;
-
   const ListWheel({
     required Key key,
     required this.indexToItem,
     required this.itemToString,
     required this.maxIndex,
   }) : super(key: key);
+
+  final T Function(int index) indexToItem;
+  final String Function(T item) itemToString;
+  final int maxIndex;
 
   @override
   build(context) {

@@ -8,9 +8,9 @@ import '/model/feed.dart';
 import '/model/list_wheel_state.dart';
 
 class BookChapterDialogFooter extends WatchingWidget {
-  final Feed feed;
-
   const BookChapterDialogFooter(this.feed);
+
+  final Feed feed;
 
   @override
   build(context) {

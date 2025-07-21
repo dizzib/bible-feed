@@ -3,11 +3,11 @@ import '/extension/build_context.dart';
 
 // highlight selected item
 class ListWheelHighlight extends StatelessWidget {
-  final double height;
-
   const ListWheelHighlight({
     required this.height,
   });
+
+  final double height;
 
   @override
   build(context) {
@@ -26,9 +26,9 @@ class ListWheelHighlight extends StatelessWidget {
 
 // background fade effect
 class ListWheelGradient extends StatelessWidget {
-  final Alignment begin, end;
-
   const ListWheelGradient({required this.begin, required this.end});
+
+  final Alignment begin, end;
 
   @override
   build(context) {

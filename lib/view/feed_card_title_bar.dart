@@ -6,8 +6,9 @@ import '/service/bible_reader_service.dart';
 import 'book_chapter_dialog.dart';
 
 class FeedCardTitleBar extends WatchingWidget {
-  final Feed feed;
   const FeedCardTitleBar(this.feed);
+
+  final Feed feed;
 
   @override
   build(context) {
