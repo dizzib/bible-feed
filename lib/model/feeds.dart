@@ -47,7 +47,7 @@ class Feeds with ChangeNotifier {
 
   void reload() {
     for (Feed f in _feeds) {
-      sl<FeedPersisterService>().loadStateOrDefaults(f);
+      f.loadStateOrDefaults();
     }
     notifyListeners();
   }

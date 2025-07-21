@@ -30,7 +30,6 @@ void main() async {
     });
     sl.pushNewScope();
     sl.registerSingleton(await SharedPreferences.getInstance());
-    sl.registerSingleton(FeedPersisterService());
     initFeeds();
   });
 

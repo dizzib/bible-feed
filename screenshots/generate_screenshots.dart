@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/main.dart' as bible_feed;
-import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 
 void main() {

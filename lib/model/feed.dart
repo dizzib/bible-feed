@@ -5,13 +5,13 @@ import 'package:watch_it/watch_it.dart';
 import 'book.dart';
 import 'reading_list.dart';
 
+part '/extension/feed.dart';
 part '/extension/feed_tip.dart';
-part '/service/feed_persister_service.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
   Feed(this._readingList) {
-    sl<FeedPersisterService>().loadStateOrDefaults(this);
+    loadStateOrDefaults();
     notifyListeners();
   }
 
@@ -34,7 +34,7 @@ class Feed with ChangeNotifier {
 
   Future _notifyListenersAndSave() async {
     notifyListeners();
-    await sl<FeedPersisterService>().saveState(this);
+    await _saveState();
   }
 
   Future nextChapter() async {

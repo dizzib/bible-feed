@@ -13,7 +13,6 @@ void main() async {
     SharedPreferences.setMockInitialValues(storeValues);
     sl.pushNewScope();
     sl.registerSingleton(await SharedPreferences.getInstance());
-    sl.registerSingleton(FeedPersisterService());
     f = Feed(l2);
   }
 
