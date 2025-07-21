@@ -3,13 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/object.dart';
+import '/model/reading_lists.dart';
 import 'feed.dart';
-import 'reading_list.dart';
 
 enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 
 class Feeds with ChangeNotifier {
-  Feeds(List<ReadingList> readingLists) : _feeds = readingLists.map((rl) => Feed(rl)).toList() {
+  Feeds() : _feeds = sl<ReadingLists>().items.map((rl) => Feed(rl)).toList() {
     for (Feed f in _feeds) {
       f.addListener(notifyListeners);
     }
