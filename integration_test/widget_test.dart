@@ -8,6 +8,7 @@ import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/list_wheel_state.dart';
+import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
 import 'package:bible_feed/view/feeds_view.dart';
@@ -27,6 +28,7 @@ void main() async {
   final matthew = gospels[0];
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
+    sl.registerSingleton(BibleReaderService());
     sl.registerSingleton(ListWheelState<Book>());
     sl.registerSingleton(ListWheelState<int>());
     await t.initialiseWidget(BookChapterDialog(Feed(gospels)));
