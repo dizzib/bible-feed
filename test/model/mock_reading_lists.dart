@@ -1,7 +1,7 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/reading_lists.dart';
-import '_test_data.dart';
+import 'mock_reading_list.dart';
 
 class MockReadingLists extends Mock implements ReadingLists {}
 

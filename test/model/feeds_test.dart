@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/feeds.dart';
-import '_test_data.dart';
+import 'mock_reading_list.dart';
 import 'mock_reading_lists.dart';
 
 void main() async {
