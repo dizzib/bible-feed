@@ -8,9 +8,9 @@ import '/model/feed.dart';
 import '/model/list_wheel_state.dart';
 
 class BookChapterDialogFooter extends WatchingWidget {
-  const BookChapterDialogFooter(this.feed);
+  const BookChapterDialogFooter(this._feed);
 
-  final Feed feed;
+  final Feed _feed;
 
   @override
   build(context) {
@@ -20,14 +20,14 @@ class BookChapterDialogFooter extends WatchingWidget {
     return Column(
       children: [
         LinearProgressIndicator(
-            backgroundColor: context.colorScheme.surface, value: feed.readingList.progressTo(bookIndex, chapter)),
+            backgroundColor: context.colorScheme.surface, value: _feed.readingList.progressTo(bookIndex, chapter)),
         Row(
           children: [
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: AutoSizeText(
-                '${feed.readingList.chaptersTo(bookIndex, chapter)} of ${feed.readingList.totalChapters}',
+                '${_feed.readingList.chaptersTo(bookIndex, chapter)} of ${_feed.readingList.totalChapters}',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -35,7 +35,7 @@ class BookChapterDialogFooter extends WatchingWidget {
             TextButton(
               onPressed: () {
                 HapticFeedback.lightImpact();
-                feed.setBookAndChapter(bookIndex, chapter);
+                _feed.setBookAndChapter(bookIndex, chapter);
                 Navigator.pop(context);
               },
               child: const Padding(

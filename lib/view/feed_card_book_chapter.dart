@@ -3,9 +3,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '/model/feed.dart';
 
 class FeedCardBookChapter extends StatelessWidget {
-  const FeedCardBookChapter(this.feed);
+  const FeedCardBookChapter(this._feed);
 
-  final Feed feed;
+  final Feed _feed;
 
   @override
   build(context) {
@@ -18,13 +18,13 @@ class FeedCardBookChapter extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: AutoSizeText(
-                feed.book.name,
+                _feed.book.name,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
           AutoSizeText(
-            feed.chapter.toString(),
+            _feed.chapter.toString(),
             maxLines: 1,
           ),
         ],
@@ -35,7 +35,7 @@ class FeedCardBookChapter extends StatelessWidget {
     bookChapterTip() {
       return Center(
         child: AutoSizeText(
-          '${feed.book.name}\u00A0${feed.chapter}${feed.tip}',
+          '${_feed.book.name}\u00A0${_feed.chapter}${_feed.tip}',
           maxLines: 2,
           textAlign: TextAlign.center,
         ),
@@ -45,7 +45,7 @@ class FeedCardBookChapter extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: feed.hasTip ? bookChapterTip() : bookChapterNoTip(),
+        child: _feed.hasTip ? bookChapterTip() : bookChapterNoTip(),
       ),
     );
   }

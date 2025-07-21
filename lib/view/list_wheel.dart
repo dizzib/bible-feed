@@ -15,14 +15,14 @@ import '/view/list_wheel_effects.dart';
 class ListWheel<T> extends StatelessWidget {
   const ListWheel({
     required Key key,
-    required this.indexToItem,
-    required this.itemToString,
-    required this.maxIndex,
-  }) : super(key: key);
+    required T Function(int) indexToItem,
+    required String Function(T) itemToString,
+    required int maxIndex,
+  }) : _maxIndex = maxIndex, _itemToString = itemToString, _indexToItem = indexToItem, super(key: key);
 
-  final T Function(int index) indexToItem;
-  final String Function(T item) itemToString;
-  final int maxIndex;
+  final T Function(int index) _indexToItem;
+  final String Function(T item) _itemToString;
+  final int _maxIndex;
 
   @override
   build(context) {
@@ -33,11 +33,11 @@ class ListWheel<T> extends StatelessWidget {
     var controller = FixedExtentScrollController(initialItem: wheelState.index);
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
-    if (wheelState.index > maxIndex) {
+    if (wheelState.index > _maxIndex) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         controller.jumpToItem(0); // hack: without this, ListWheelScrollView sometimes partially renders
-        controller.jumpToItem(maxIndex);
-        wheelState.index = maxIndex;
+        controller.jumpToItem(_maxIndex);
+        wheelState.index = _maxIndex;
       });
     }
 
@@ -60,8 +60,8 @@ class ListWheel<T> extends StatelessWidget {
       workaroundItemExtentBug(ListWheelScrollView.useDelegate(
         childDelegate: ListWheelChildBuilderDelegate(
           builder: (_, int index) {
-            if (index < 0 || index > maxIndex) return null;
-            return Text(itemToString(indexToItem(index)));
+            if (index < 0 || index > _maxIndex) return null;
+            return Text(_itemToString(_indexToItem(index)));
           },
         ),
         controller: controller,
