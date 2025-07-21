@@ -18,13 +18,11 @@ class Feeds with ChangeNotifier {
   final List<Feed> _feeds;
   final _hasEverAdvancedStoreKey = 'hasEverAdvanced';
 
-  /// properties
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
   bool get hasEverAdvanced => sl<SharedPreferences>().getBool(_hasEverAdvancedStoreKey) ?? false;
 
-  /// methods
-  Future<void> forceAdvance() async {
+  Future forceAdvance() async {
     for (Feed f in _feeds) {
       await f.nextChapter();
     }
