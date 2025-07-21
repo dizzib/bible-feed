@@ -1,20 +1,15 @@
-import 'package:bible_feed/model/reading_lists.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import '_test_data.dart';
-
-class MockReadingLists extends Mock implements ReadingLists {}
+import 'mock_reading_lists.dart';
 
 void main() async {
   late Feed f0, f1;
   late Feeds fds;
-  final mockReadingLists = MockReadingLists();
-  when(() => mockReadingLists.items).thenReturn([l0, l1]);
 
   void initFeeds() {
     fds = Feeds();
@@ -35,8 +30,8 @@ void main() async {
       'hasEverAdvanced': false,
     });
     sl.pushNewScope();
-    sl.registerSingleton<ReadingLists>(mockReadingLists);
     sl.registerSingleton(await SharedPreferences.getInstance());
+    registerMockReadingLists();
     initFeeds();
   });
 
