@@ -5,7 +5,7 @@ import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'mock_book.dart';
-import '_test_data.dart';
+import 'mock_feed.dart';
 
 void main() async {
   initFeed(Map<String, Object> storeValues) async {
