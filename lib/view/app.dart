@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
-import '/service/background_service.dart';
+import '/service/auto_advance_service.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
 import 'feeds_view.dart';
@@ -16,7 +16,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     // this must come beneath MaterialApp Navigator
-    sl<BackgroundService>().addListener(() => Navigator.maybePop(context)); // dismiss all-done dialog
+    sl<AutoAdvanceService>().addListener(() => Navigator.maybePop(context)); // dismiss all-done dialog
   }
 
   @override

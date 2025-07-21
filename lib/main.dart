@@ -6,7 +6,7 @@ import 'extension/object.dart';
 import 'model/book.dart';
 import 'model/feeds.dart';
 import 'model/list_wheel_state.dart';
-import 'service/background_service.dart';
+import 'service/auto_advance_service.dart';
 import 'service/bible_reader_service.dart';
 import 'view/app_base.dart';
 
@@ -16,13 +16,10 @@ Future<void> main() async {
 
   sl.registerSingleton(await SharedPreferences.getInstance());
   sl.registerSingleton(Feeds(readingLists)); // depends on FeedPersisterService
-  sl.registerSingleton(BackgroundService());
   sl.registerSingleton(BibleReaderService());
   sl.registerSingleton(ListWheelState<Book>());
   sl.registerSingleton(ListWheelState<int>());
-
-  sl<Feeds>().maybeAdvance();
-  AppLifecycleListener(onResume: sl<Feeds>().maybeAdvance);
+  sl.registerSingleton(AutoAdvanceService()); // last of all, for maybeAdvance()
 
   runApp(AppBase());
   'started app'.log();

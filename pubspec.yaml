@@ -36,7 +36,6 @@ dependencies:
   clock: ^1.1.1
   cron: ^0.6.0
   dartx: ^1.2.0
-  flutter_background_service: ^5.1.0
   settings_ui: ^2.0.2
   shared_preferences: ^2.5.2
   url_launcher: ^6.3.2
