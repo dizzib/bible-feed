@@ -31,7 +31,7 @@ void onStart(ServiceInstance service) async {
 
 class BackgroundService with ChangeNotifier {
   BackgroundService() {
-    service.configure(
+    fbs.configure(
       androidConfiguration: AndroidConfiguration(onStart: onStart, isForegroundMode: false),
       iosConfiguration: IosConfiguration(
         onForeground: onStart,
@@ -40,11 +40,11 @@ class BackgroundService with ChangeNotifier {
     handleOnListsAdvanced();
   }
 
-  var service = FlutterBackgroundService();
+  final fbs = FlutterBackgroundService();
 
   void handleOnListsAdvanced() async {
     // when b/g service updates feeds, reload from Store so UI gets (implicitly) refreshed
-    await for (var _ in service.on(AdvanceState.listsAdvanced.name)) {
+    await for (var _ in fbs.on(AdvanceState.listsAdvanced.name)) {
       await sl<SharedPreferences>().reload();
       sl<Feeds>().reload();
       notifyListeners();
