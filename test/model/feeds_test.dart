@@ -2,14 +2,12 @@ import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
-import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import '_test_data.dart';
 import 'mock_reading_lists.dart';
 
 void main() async {
-  late Feed f0, f1;
-  late Feeds fds;
+  late Feeds feeds;
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({
@@ -26,44 +24,42 @@ void main() async {
     sl.pushNewScope();
     sl.registerSingleton(await SharedPreferences.getInstance());
     registerMockReadingLists();
-    fds = Feeds();
-    f0 = fds[0];
-    f1 = fds[1];
+    feeds = Feeds();
   });
 
   test('[]', () {
-    expect(f0.readingList, l0);
-    expect(f1.readingList, l1);
+    expect(feeds[0].readingList, l0);
+    expect(feeds[1].readingList, l1);
   });
 
   test('areChaptersRead', () {
-    expect(fds.areChaptersRead, false);
-    f1.toggleIsChapterRead();
-    expect(fds.areChaptersRead, true);
+    expect(feeds.areChaptersRead, false);
+    feeds[1].toggleIsChapterRead();
+    expect(feeds.areChaptersRead, true);
   });
 
   group('hasEverAdvanced', () {
     test('should initialise from store', () {
-      expect(fds.hasEverAdvanced, false);
+      expect(feeds.hasEverAdvanced, false);
     });
 
     test('should be stored true after advance', () async {
-      f1.toggleIsChapterRead();
-      await fds.forceAdvance();
+      feeds[1].toggleIsChapterRead();
+      await feeds.forceAdvance();
       expect(sl<SharedPreferences>().getBool('hasEverAdvanced'), true);
-      expect(fds.hasEverAdvanced, true);
+      expect(feeds.hasEverAdvanced, true);
     });
   });
 
   group('Advance:', () {
     checkHasAdvanced(bool shouldAdvance) {
-      expect(f0.chapter, shouldAdvance ? 2 : 1);
-      expect(f1.chapter, shouldAdvance ? 2 : 1);
+      expect(feeds[0].chapter, shouldAdvance ? 2 : 1);
+      expect(feeds[1].chapter, shouldAdvance ? 2 : 1);
     }
 
     test('forceAdvance should advance all feeds', () async {
-      f1.toggleIsChapterRead();
-      await fds.forceAdvance();
+      feeds[1].toggleIsChapterRead();
+      await feeds.forceAdvance();
       checkHasAdvanced(true);
     });
 
@@ -71,27 +67,27 @@ void main() async {
 
     group('maybeAdvance', () {
       test('if not all read, on next day, should not advance', () async {
-        expect(await withClock(tomorrow, fds.maybeAdvance), AdvanceState.notAllRead);
+        expect(await withClock(tomorrow, feeds.maybeAdvance), AdvanceState.notAllRead);
         checkHasAdvanced(false);
       });
 
       group('if all read and latest saved day is', () {
         test('today, should not advance', () async {
-          f1.toggleIsChapterRead();
-          expect(await fds.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
+          feeds[1].toggleIsChapterRead();
+          expect(await feeds.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
           checkHasAdvanced(false);
         });
 
         test('yesterday, should advance', () async {
-          f1.toggleIsChapterRead();
-          expect(await withClock(tomorrow, fds.maybeAdvance), AdvanceState.listsAdvanced);
+          feeds[1].toggleIsChapterRead();
+          expect(await withClock(tomorrow, feeds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
 
         test('1 week ago, should advance', () async {
-          f1.toggleIsChapterRead();
+          feeds[1].toggleIsChapterRead();
           final nextWeek = Clock.fixed(const Clock().weeksFromNow(1));
-          expect(await withClock(nextWeek, fds.maybeAdvance), AdvanceState.listsAdvanced);
+          expect(await withClock(nextWeek, feeds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
       });
@@ -99,9 +95,9 @@ void main() async {
 
     test('reload should refresh from store updated in background', () async {
       sl<SharedPreferences>().setInt('l0.chapter', 2);
-      expect(f0.chapter, 1);
-      fds.reload();
-      expect(f0.chapter, 2);
+      expect(feeds[0].chapter, 1);
+      feeds.reload();
+      expect(feeds[0].chapter, 2);
     });
   });
 }
