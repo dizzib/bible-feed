@@ -33,7 +33,6 @@ devtools_options.yaml
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-.puro.json
 .test/
 build/
 flutter_jank_metrics_*.json
