@@ -3,15 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/object.dart';
-import '/model/book.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
+import 'bible_reader_keymap.dart';
 
 @immutable
 abstract class BibleReader {
   String get displayName;
   String get uri => '';
-  Map<String, String> get bookAbbrevNonStandardTweaks => {}; // needed because some readers deviate from the standard
+  BibleReaderKeyMap get bibleReaderKeyMap => IdentityBibleReaderKeyMap();
   List<TargetPlatform> get certifiedPlatforms => []; // platforms confirmed working with no issues
   Future<bool> isSelectable() async => canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
 
@@ -20,8 +20,8 @@ abstract class BibleReader {
 
   @nonVirtual
   Uri getDeeplinkUri(Feed f) {
-    final bookAbbrev = bookAbbrevNonStandardTweaks[f.book.osisParatextAbbrev] ?? f.book.osisParatextAbbrev;
-    return Uri.parse(uri.replaceAll('BOOK', bookAbbrev).replaceAll('CHAPTER', f.chapter.toString())).log();
+    final bookId = bibleReaderKeyMap.apply(f.book);
+    return Uri.parse(uri.replaceAll('BOOK', bookId).replaceAll('CHAPTER', f.chapter.toString())).log();
   }
 
   @nonVirtual
@@ -59,12 +59,7 @@ class BlueLetterBibleReader extends BibleReader {
   @override
   String get displayName => 'Blue Letter Bible';
   @override
-  Map<String, String> get bookAbbrevNonStandardTweaks => {
-        'ezk': 'eze',
-        'jol': 'joe',
-        'nam': 'nah',
-        'rut': 'rth',
-      };
+  BibleReaderKeyMap get bibleReaderKeyMap => BlueLetterBibleReaderKeyMap();
   @override
   String get uri => 'https://blueletterbible.org/nkjv/BOOK/CHAPTER/1/p1/';
 }
@@ -95,12 +90,7 @@ class OliveTreeBibleReader extends BibleReader {
   @override
   List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: back doesn't return to bible feed
   @override
-  Map<String, String> get bookAbbrevNonStandardTweaks => {
-        'jhn': 'jn',
-        'rut': 'rth',
-        'nam': 'nah',
-        'oba': 'obd',
-      };
+  BibleReaderKeyMap get bibleReaderKeyMap => OliveTreeBibleReaderKeyMap();
   @override
   String get uri => 'olivetree://bible/BOOK.CHAPTER';
 }
@@ -120,6 +110,8 @@ class YouVersionBibleReader extends BibleReader {
   String get displayName => 'YouVersion app';
   @override
   List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.android, TargetPlatform.iOS];
+  @override
+  BibleReaderKeyMap get bibleReaderKeyMap => OsisParatextBibleReaderKeyMap();
   @override
   String get uri => 'youversion://bible?reference=BOOK.CHAPTER';
 }
