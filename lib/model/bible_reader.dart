@@ -56,8 +56,7 @@ class BibleHubBibleReader extends BibleReader {
 class BlueLetterBibleReader extends BibleReader {
   @override
   String get displayName => 'Blue Letter Bible';
-  @override
-  // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
+  @override // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
   List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS];
   @override
   BibleReaderKeyMap get bibleReaderKeyMap => BlueLetterBibleReaderKeyMap();
@@ -65,8 +64,7 @@ class BlueLetterBibleReader extends BibleReader {
   String get uri => 'blb://BOOK/CHAPTER';
 }
 
-@immutable
-// unknown path does not work
+@immutable // unknown path does not work
 class LifeBibleReader extends BibleReader {
   @override
   String get displayName => 'Life Bible app';
@@ -96,8 +94,7 @@ class OliveTreeBibleReader extends BibleReader {
   String get uri => 'olivetree://bible/BOOK.CHAPTER';
 }
 
-@immutable
-// see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
+@immutable // see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
 class WeDevoteBibleReader extends BibleReader {
   @override
   String get displayName => 'WeDevote app';
@@ -109,8 +106,7 @@ class WeDevoteBibleReader extends BibleReader {
   String get uri => 'wdbible://bible/BOOK.CHAPTER';
 }
 
-@immutable
-// see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
+@immutable // see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
 class YouVersionBibleReader extends BibleReader {
   @override
   String get displayName => 'YouVersion app';
