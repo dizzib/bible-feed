@@ -32,6 +32,7 @@
 	<true/>
   <key>LSApplicationQueriesSchemes</key>
   <array>
+    <string>olivetree</string>
     <string>youversion</string>
   </array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

@@ -100,11 +100,17 @@ class OliveTreeBibleReader extends BibleReader {
   @override
   String get displayName => 'Olive Tree app';
   @override
-  bool get isCertified => false; // back button does not return to bible feed
+  bool get isCertified => true; // android: back button does not return to bible feed
   @override
   String get uriScheme => 'olivetree://';
   @override
-  String getUriPath(f) => 'bible/${f.book.osisParatextAbbrev}.${f.chapter}';
+  String getUriPath(f) {
+    final bookRef = {
+          'jhn': 'john',
+        }[f.book.osisParatextAbbrev] ??
+        f.book.osisParatextAbbrev;
+    return 'bible/$bookRef.${f.chapter}';
+  }
 }
 
 @immutable
