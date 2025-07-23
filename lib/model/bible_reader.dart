@@ -96,7 +96,10 @@ class OliveTreeBibleReader extends BibleReader {
   List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: back doesn't return to bible feed
   @override
   Map<String, String> get bookAbbrevNonStandardTweaks => {
-        'jhn': 'john',
+        'jhn': 'jn',
+        'rut': 'rth',
+        'nam': 'nah',
+        'oba': 'obd',
       };
   @override
   String get uri => 'olivetree://bible/BOOK.CHAPTER';

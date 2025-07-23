@@ -11,7 +11,7 @@ extension OsisBookAbbreviations on Book {
         'joe': 'jol',
         'mar': 'mrk',
         'nah': 'nam',
-        'odb': 'oba',
+        'obd': 'oba',
         'prv': 'pro',
         'rth': 'rut',
         'sos': 'sng',
