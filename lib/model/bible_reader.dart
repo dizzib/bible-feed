@@ -59,7 +59,8 @@ class BlueLetterBibleReader extends BibleReader {
   @override
   String get displayName => 'Blue Letter Bible';
   @override
-  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: does not launch app, only web
+  // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
+  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS];
   @override
   BibleReaderKeyMap get bibleReaderKeyMap => BlueLetterBibleReaderKeyMap();
   @override
