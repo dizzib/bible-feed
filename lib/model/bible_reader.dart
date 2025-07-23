@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
@@ -9,15 +10,22 @@ import '/model/feeds.dart';
 @immutable
 abstract class BibleReader {
   String get displayName;
-  bool get isCertified; // true if confirmed working with no issues
   String get uriScheme;
   String getUriPath(Feed f);
+  List<TargetPlatform> get certifiedPlatforms => []; // platforms confirmed working with no issues
   Future<bool> isSelectable() async => canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
 
   @nonVirtual
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
+
   @nonVirtual
   Uri getDeeplinkUri(Feed f) => Uri.parse('$uriScheme${getUriPath(f)}');
+
+  @nonVirtual
+  bool get isCertifiedForThisPlatform =>
+      (Platform.isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
+      (Platform.isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
+
   @nonVirtual
   Future<bool> launch(Feed f) async => await launchUrl(getDeeplinkUri(f).log());
 }
@@ -25,11 +33,10 @@ abstract class BibleReader {
 //// implementations
 
 @immutable
+// https://github.com/AndBible/and-bible/issues/3210
 class AndBibleReader extends BibleReader {
   @override
   String get displayName => 'AndBible app';
-  @override
-  bool get isCertified => false; // https://github.com/AndBible/and-bible/issues/3210
   @override
   String get uriScheme => 'https://';
   @override
@@ -37,11 +44,10 @@ class AndBibleReader extends BibleReader {
 }
 
 @immutable
+// todo: allow select version
 class BibleHubBibleReader extends BibleReader {
   @override
   String get displayName => 'BibleHub web';
-  @override
-  bool get isCertified => false; // todo: allow select version
   @override
   String get uriScheme => 'https://';
   @override
@@ -49,11 +55,10 @@ class BibleHubBibleReader extends BibleReader {
 }
 
 @immutable
+// does not launch app, only web
 class BlueLetterBibleReader extends BibleReader {
   @override
   String get displayName => 'Blue Letter Bible';
-  @override
-  bool get isCertified => false; // does not launch app, only web
   @override
   String get uriScheme => 'https://';
   @override
@@ -70,11 +75,10 @@ class BlueLetterBibleReader extends BibleReader {
 }
 
 @immutable
+// unknown path does not work
 class LifeBibleReader extends BibleReader {
   @override
   String get displayName => 'Life Bible app';
-  @override
-  bool get isCertified => false; // unknown path does not work
   @override
   String get uriScheme => 'tecartabible://';
   @override
@@ -86,7 +90,7 @@ class NoBibleReader extends BibleReader {
   @override
   String get displayName => 'None';
   @override
-  bool get isCertified => true;
+  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.android, TargetPlatform.iOS];
   @override
   String get uriScheme => '';
   @override
@@ -100,7 +104,7 @@ class OliveTreeBibleReader extends BibleReader {
   @override
   String get displayName => 'Olive Tree app';
   @override
-  bool get isCertified => true; // android: back button does not return to bible feed
+  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: back doesn't return to bible feed
   @override
   String get uriScheme => 'olivetree://';
   @override
@@ -114,11 +118,10 @@ class OliveTreeBibleReader extends BibleReader {
 }
 
 @immutable
+// does not open ref
 class WeDevoteBibleReader extends BibleReader {
   @override
   String get displayName => 'WeDevote app';
-  @override
-  bool get isCertified => false; // does not open ref
   @override
   String get uriScheme => 'wdbible://';
   @override
@@ -130,7 +133,7 @@ class YouVersionBibleReader extends BibleReader {
   @override
   String get displayName => 'YouVersion app';
   @override
-  bool get isCertified => true;
+  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.android, TargetPlatform.iOS];
   @override
   String get uriScheme => 'youversion://';
   @override

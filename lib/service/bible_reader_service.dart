@@ -40,7 +40,7 @@ class BibleReaderService with ChangeNotifier {
     BibleReaderKey.weDevoteApp: WeDevoteBibleReader(),
     BibleReaderKey.youVersionApp: YouVersionBibleReader(),
   };
-  final _certifiedBibleReaders = _bibleReaders.filter((entry) => entry.value.isCertified);
+  final _certifiedBibleReaders = _bibleReaders.filter((entry) => entry.value.isCertifiedForThisPlatform);
   List<BibleReader> get certifiedBibleReaderList => _certifiedBibleReaders.values.toList();
 
   //// reader enabled/disabled
