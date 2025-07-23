@@ -8,6 +8,7 @@ import '/model/feeds.dart';
 import 'bible_reader_keymap.dart';
 
 @immutable
+// for ios, scheme must be added to info.plist!!!
 abstract class BibleReader {
   String get displayName;
   String get uri => '';
@@ -96,15 +97,20 @@ class OliveTreeBibleReader extends BibleReader {
 }
 
 @immutable
-// does not open ref
+// see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
 class WeDevoteBibleReader extends BibleReader {
   @override
   String get displayName => 'WeDevote app';
+  @override
+  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: does not open ref
+  @override
+  BibleReaderKeyMap get bibleReaderKeyMap => OsisParatextBibleReaderKeyMap();
   @override
   String get uri => 'wdbible://bible/BOOK.CHAPTER';
 }
 
 @immutable
+// see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
 class YouVersionBibleReader extends BibleReader {
   @override
   String get displayName => 'YouVersion app';
