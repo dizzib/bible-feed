@@ -36,8 +36,7 @@ abstract class BibleReader {
 
 //// implementations
 
-@immutable
-// https://github.com/AndBible/and-bible/issues/3210
+@immutable // https://github.com/AndBible/and-bible/issues/3210
 class AndBibleReader extends BibleReader {
   @override
   String get displayName => 'AndBible app';
@@ -45,13 +44,12 @@ class AndBibleReader extends BibleReader {
   String get uri => 'https://read.andbible.org/BOOK.CHAPTER';
 }
 
-@immutable
-// todo: allow select version
+@immutable // biblehub app not detected on android or ios
 class BibleHubBibleReader extends BibleReader {
   @override
-  String get displayName => 'BibleHub web';
+  String get displayName => 'BibleHub';
   @override
-  String get uri => 'https://biblehub.com/BOOK/CHAPTER.htm';
+  String get uri => 'biblehub://BOOK/CHAPTER';
 }
 
 @immutable
