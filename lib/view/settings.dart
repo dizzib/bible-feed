@@ -1,6 +1,5 @@
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
 import 'package:watch_it/watch_it.dart';
 import '/service/bible_reader_service.dart';
 import 'bible_reader_link_icon.dart';
@@ -32,20 +31,27 @@ class Settings extends WatchingWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: SettingsList(
-        sections: [
-          SettingsSection(
-            title: const Text(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 16,
+          children: [
+            Row(
+              spacing: 8,
+              children: [
+                const Text(
+                  'Bible Reader',
+                  style: TextStyle(fontSize: 20),
+                ),
+                BibleReaderLinkIcon(),
+              ],
+            ),
+            const Text(
                 'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
-            tiles: [
-              SettingsTile(
-                leading: BibleReaderLinkIcon(),
-                title: const Text('Bible Reader'),
-                value: Wrap(spacing: 16, children: choiceChipList()),
-              )
-            ],
-          )
-        ],
+            Wrap(spacing: 16, children: choiceChipList()),
+          ],
+        ),
       ),
     );
   }
