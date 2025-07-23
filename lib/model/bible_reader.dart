@@ -10,8 +10,7 @@ import '/model/feeds.dart';
 @immutable
 abstract class BibleReader {
   String get displayName;
-  String get uriScheme => '';
-  String get uriPath => '';
+  String get uri => '';
   Map<String, String> get bookAbbrevNonStandardTweaks => {}; // needed because some readers deviate from the standard
   List<TargetPlatform> get certifiedPlatforms => []; // platforms confirmed working with no issues
   Future<bool> isSelectable() async => canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
@@ -22,8 +21,7 @@ abstract class BibleReader {
   @nonVirtual
   Uri getDeeplinkUri(Feed f) {
     final bookAbbrev = bookAbbrevNonStandardTweaks[f.book.osisParatextAbbrev] ?? f.book.osisParatextAbbrev;
-    return Uri.parse(
-        '$uriScheme://${uriPath.replaceAll('BOOK', bookAbbrev).replaceAll('CHAPTER', f.chapter.toString())}');
+    return Uri.parse(uri.replaceAll('BOOK', bookAbbrev).replaceAll('CHAPTER', f.chapter.toString())).log();
   }
 
   @nonVirtual
@@ -43,9 +41,7 @@ class AndBibleReader extends BibleReader {
   @override
   String get displayName => 'AndBible app';
   @override
-  String get uriScheme => 'https';
-  @override
-  String get uriPath => 'read.andbible.org/BOOK.CHAPTER';
+  String get uri => 'https://read.andbible.org/BOOK.CHAPTER';
 }
 
 @immutable
@@ -54,9 +50,7 @@ class BibleHubBibleReader extends BibleReader {
   @override
   String get displayName => 'BibleHub web';
   @override
-  String get uriScheme => 'https';
-  @override
-  String get uriPath => 'biblehub.com/BOOK/CHAPTER.htm';
+  String get uri => 'https://biblehub.com/BOOK/CHAPTER.htm';
 }
 
 @immutable
@@ -65,8 +59,6 @@ class BlueLetterBibleReader extends BibleReader {
   @override
   String get displayName => 'Blue Letter Bible';
   @override
-  String get uriScheme => 'https';
-  @override
   Map<String, String> get bookAbbrevNonStandardTweaks => {
         'ezk': 'eze',
         'jol': 'joe',
@@ -74,7 +66,7 @@ class BlueLetterBibleReader extends BibleReader {
         'rut': 'rth',
       };
   @override
-  String get uriPath => 'blueletterbible.org/nkjv/BOOK/CHAPTER/1/p1/';
+  String get uri => 'https://blueletterbible.org/nkjv/BOOK/CHAPTER/1/p1/';
 }
 
 @immutable
@@ -83,9 +75,7 @@ class LifeBibleReader extends BibleReader {
   @override
   String get displayName => 'Life Bible app';
   @override
-  String get uriScheme => 'tecartabible';
-  @override
-  String get uriPath => 'BOOK.CHAPTER';
+  String get uri => 'tecartabible://BOOK.CHAPTER';
 }
 
 @immutable
@@ -105,13 +95,11 @@ class OliveTreeBibleReader extends BibleReader {
   @override
   List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: back doesn't return to bible feed
   @override
-  String get uriScheme => 'olivetree';
-  @override
   Map<String, String> get bookAbbrevNonStandardTweaks => {
         'jhn': 'john',
       };
   @override
-  String get uriPath => 'bible/BOOK.CHAPTER';
+  String get uri => 'olivetree://bible/BOOK.CHAPTER';
 }
 
 @immutable
@@ -120,9 +108,7 @@ class WeDevoteBibleReader extends BibleReader {
   @override
   String get displayName => 'WeDevote app';
   @override
-  String get uriScheme => 'wdbible';
-  @override
-  String get uriPath => 'bible/BOOK.CHAPTER';
+  String get uri => 'wdbible://bible/BOOK.CHAPTER';
 }
 
 @immutable
@@ -132,7 +118,5 @@ class YouVersionBibleReader extends BibleReader {
   @override
   List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.android, TargetPlatform.iOS];
   @override
-  String get uriScheme => 'youversion';
-  @override
-  String get uriPath => 'bible?reference=BOOK.CHAPTER';
+  String get uri => 'youversion://bible?reference=BOOK.CHAPTER';
 }
