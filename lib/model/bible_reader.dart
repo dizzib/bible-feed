@@ -55,14 +55,15 @@ class BibleHubBibleReader extends BibleReader {
 }
 
 @immutable
-// does not launch app, only web
 class BlueLetterBibleReader extends BibleReader {
   @override
   String get displayName => 'Blue Letter Bible';
   @override
+  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: does not launch app, only web
+  @override
   BibleReaderKeyMap get bibleReaderKeyMap => BlueLetterBibleReaderKeyMap();
   @override
-  String get uri => 'https://blueletterbible.org/nkjv/BOOK/CHAPTER/1/p1/';
+  String get uri => 'blb://BOOK/CHAPTER';
 }
 
 @immutable
