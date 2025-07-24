@@ -1,6 +1,7 @@
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
+import '/model/bible_readers.dart';
 import '/service/bible_reader_app_install_service.dart';
 import '/service/bible_reader_service.dart';
 import 'bible_reader_link_icon.dart';
@@ -11,8 +12,8 @@ class Settings extends WatchingWidget {
     watchIt<BibleReaderAppInstallService>();
     final brs = watchIt<BibleReaderService>();
 
-    choiceChipList() => List.generate(brs.certifiedBibleReaderList.length, (idx) {
-          final BibleReader br = brs.certifiedBibleReaderList[idx];
+    choiceChipList() => List.generate(sl<BibleReaders>().certifiedList.length, (idx) {
+          final BibleReader br = sl<BibleReaders>().certifiedList[idx];
           return FutureBuilder<bool>(
               future: br.isAvailable(),
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'extension/object.dart';
+import 'model/bible_readers.dart';
 import 'model/book.dart';
 import 'model/feeds.dart';
 import 'model/list_wheel_state.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   sl.registerSingleton(Feeds());
   sl.registerSingleton(BibleReaderAppInstallService());
   sl.registerSingleton(BibleReaderService());
+  sl.registerSingleton(BibleReaders());
   sl.registerSingleton(ListWheelState<Book>());
   sl.registerSingleton(ListWheelState<int>());
   sl.registerSingleton(AutoAdvanceService()); // last of all, for maybeAdvance()
