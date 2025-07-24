@@ -1,11 +1,13 @@
 import 'package:app_install_events/app_install_events.dart';
 import 'package:flutter/foundation.dart';
+import '/extension/object.dart';
 
 // android only
 class BibleReaderAppInstallService with ChangeNotifier {
   BibleReaderAppInstallService() {
-    _appIUEvents.appEvents.listen((_) => notifyListeners());
+    AppIUEvents().appEvents.listen((e) {
+      e.log();
+      notifyListeners();
+    });
   }
-
-  final _appIUEvents = AppIUEvents();
 }
