@@ -7,6 +7,7 @@ enum BibleReaderKey {
   none,
   andBibleApp,
   blueLetterApp,
+  blueLetterWeb,
   lifeBibleApp,
   logosBibleApp,
   oliveTreeApp,
@@ -36,6 +37,12 @@ class BibleReaders {
       'Blue Letter Bible app',
       'blb://BOOK/CHAPTER',
       [TargetPlatform.iOS],
+      BlueLetterBookKeyMap(),
+    ),
+    BibleReaderKey.blueLetterWeb: const BibleReader(
+      'Blue Letter Bible web',
+      'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
+      [TargetPlatform.android, TargetPlatform.iOS],
       BlueLetterBookKeyMap(),
     ),
     BibleReaderKey.lifeBibleApp: const BibleReader(
