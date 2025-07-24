@@ -27,10 +27,9 @@ class BibleReaders {
       [TargetPlatform.android, TargetPlatform.iOS],
     ),
     BibleReaderKey.andBibleApp: const BibleReader(
-      // https://github.com/AndBible/and-bible/issues/3210
       'AndBible app',
       'https://read.andbible.org/BOOK.CHAPTER',
-      [],
+      [], // https://github.com/AndBible/and-bible/issues/3210
     ),
     BibleReaderKey.blueLetterApp: const BibleReader(
       // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
