@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:dartx/dartx.dart';
-import '/model/bible_reader.dart';
+import 'package:flutter/foundation.dart';
+import 'bible_reader.dart';
 import 'bible_reader_book_keymap.dart';
 
 enum BibleReaderKey {

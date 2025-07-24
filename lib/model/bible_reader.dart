@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/object.dart';
-import '/model/feed.dart';
-import '/model/feeds.dart';
 import 'bible_reader_book_keymap.dart';
+import 'feed.dart';
+import 'feeds.dart';
 
 @immutable
 // for ios, scheme must be added to info.plist!!!
