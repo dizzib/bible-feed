@@ -14,7 +14,7 @@ abstract class BibleReader {
   String get uri => '';
   BibleReaderKeyMap get bibleReaderKeyMap => IdentityBibleReaderKeyMap();
   List<TargetPlatform> get certifiedPlatforms => []; // platforms confirmed working with no issues
-  Future<bool> isSelectable() async => canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
+  Future<bool> isAvailable() async => canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
 
   @nonVirtual
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
@@ -91,7 +91,7 @@ class NoBibleReader extends BibleReader {
   @override
   List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.android, TargetPlatform.iOS];
   @override
-  Future<bool> isSelectable() async => Future.value(true);
+  Future<bool> isAvailable() async => Future.value(true);
 }
 
 @immutable

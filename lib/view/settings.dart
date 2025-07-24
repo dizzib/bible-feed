@@ -12,12 +12,12 @@ class Settings extends WatchingWidget {
     choiceChipList() => List.generate(brs.certifiedBibleReaderList.length, (idx) {
           final BibleReader br = brs.certifiedBibleReaderList[idx];
           return FutureBuilder<bool>(
-              future: br.isSelectable(),
+              future: br.isAvailable(),
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                final isSelectable = snapshot.data == true;
+                final isAvailable = snapshot.data == true;
                 return ChoiceChip(
-                  label: Text('${br.displayName}${isSelectable ? "" : " is not detected"}'),
-                  onSelected: isSelectable
+                  label: Text('${br.displayName}${isAvailable ? "" : " is not detected"}'),
+                  onSelected: isAvailable
                       ? (bool selected) {
                           if (selected) brs.linkedBibleReaderIndex = idx;
                         }
