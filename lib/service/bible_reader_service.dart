@@ -4,9 +4,17 @@ import 'package:watch_it/watch_it.dart';
 import '/model/bible_reader.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
+import '/service/bible_reader_app_install_service.dart';
 
 class BibleReaderService with ChangeNotifier {
   BibleReaderService() {
+    sl<BibleReaderAppInstallService>().addListener(() async {
+      if (await linkedBibleReader.isAvailable()) {
+        notifyListeners();
+      } else {
+        _saveState(BibleReaderKey.none);
+      }
+    });
     _loadState();
   }
 

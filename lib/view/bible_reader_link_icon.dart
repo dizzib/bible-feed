@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
-import '/service/bible_reader_app_install_service.dart';
 import '/service/bible_reader_service.dart';
 
 class BibleReaderLinkIcon extends WatchingWidget {
   @override
   build(context) {
-    watchIt<BibleReaderAppInstallService>();
     final brs = watchIt<BibleReaderService>();
 
     return Tooltip(
