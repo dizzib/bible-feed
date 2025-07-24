@@ -5,15 +5,15 @@ import 'package:watch_it/watch_it.dart';
 import '/extension/object.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
-import 'bible_reader_keymap.dart';
+import 'bible_reader_book_keymap.dart';
 
 @immutable
 // for ios, scheme must be added to info.plist!!!
 class BibleReader {
   const BibleReader(this.displayName, this.uri, this.certifiedPlatforms,
-      [this.bookKeyMap = const IdentityBibleReaderKeyMap()]);
+      [this.bookKeyMap = const IdentityBookKeyMap()]);
 
-  final BibleReaderKeyMap bookKeyMap;
+  final BibleReaderBookKeyMap bookKeyMap;
   final List<TargetPlatform> certifiedPlatforms; // platforms confirmed working with no issues
   final String displayName;
   final String uri;

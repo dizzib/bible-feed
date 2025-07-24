@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:dartx/dartx.dart';
 import '/model/bible_reader.dart';
-import 'bible_reader_keymap.dart';
+import 'bible_reader_book_keymap.dart';
 
 enum BibleReaderKey {
   none,
@@ -45,7 +45,7 @@ class BibleReaders {
       'Blue Letter Bible',
       'blb://BOOK/CHAPTER',
       [TargetPlatform.iOS],
-      BlueLetterBibleReaderKeyMap(),
+      BlueLetterBookKeyMap(),
     ),
 
     BibleReaderKey.lifeBible: const BibleReader(
@@ -58,28 +58,28 @@ class BibleReaders {
       'Logos Bible app',
       'logosref:Bible.BOOK.CHAPTER',
       [TargetPlatform.iOS], // android: back doesn't return to bible feed
-      LogosBibleReaderKeyMap(),
+      LogosBookKeyMap(),
     ),
 
     BibleReaderKey.oliveTreeApp: const BibleReader(
       'Olive Tree app',
       'olivetree://bible/BOOK.CHAPTER',
       [TargetPlatform.iOS], // android: back doesn't return to bible feed
-      OliveTreeBibleReaderKeyMap(),
+      OliveTreeBookKeyMap(),
     ),
 
     BibleReaderKey.weDevoteApp: const BibleReader(
       'WeDevote app',
       'wdbible://bible/BOOK.CHAPTER', // see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
       [TargetPlatform.iOS], // android: does not open ref
-      OsisParatextBibleReaderKeyMap(),
+      OsisParatextBookKeyMap(),
     ),
 
     BibleReaderKey.youVersionApp: const BibleReader(
       'YouVersion app',
       'youversion://bible?reference=BOOK.CHAPTER', // see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
       [TargetPlatform.android, TargetPlatform.iOS],
-      OsisParatextBibleReaderKeyMap(),
+      OsisParatextBookKeyMap(),
     ),
   };
   late final Map<BibleReaderKey, BibleReader> certified;

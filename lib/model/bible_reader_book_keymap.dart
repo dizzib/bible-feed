@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import '/model/book.dart';
 
 @immutable
-abstract class BibleReaderKeyMap {
-  const BibleReaderKeyMap();
+abstract class BibleReaderBookKeyMap {
+  const BibleReaderBookKeyMap();
   Map<String, String> get keyMap => {};
 
   @nonVirtual
@@ -13,16 +13,16 @@ abstract class BibleReaderKeyMap {
 //// implementations
 
 @immutable
-class IdentityBibleReaderKeyMap extends BibleReaderKeyMap {
-  const IdentityBibleReaderKeyMap();
+class IdentityBookKeyMap extends BibleReaderBookKeyMap {
+  const IdentityBookKeyMap();
 
   @override
   Map<String, String> get keyMap => const {};
 }
 
 @immutable
-class BlueLetterBibleReaderKeyMap extends BibleReaderKeyMap {
-  const BlueLetterBibleReaderKeyMap();
+class BlueLetterBookKeyMap extends BibleReaderBookKeyMap {
+  const BlueLetterBookKeyMap();
 
   @override
   Map<String, String> get keyMap => const {
@@ -38,8 +38,8 @@ class BlueLetterBibleReaderKeyMap extends BibleReaderKeyMap {
 
 @immutable
 // osis paratext with manual testing
-class LogosBibleReaderKeyMap extends BibleReaderKeyMap {
-  const LogosBibleReaderKeyMap();
+class LogosBookKeyMap extends BibleReaderBookKeyMap {
+  const LogosBookKeyMap();
 
   @override
   Map<String, String> get keyMap => const {
@@ -56,8 +56,8 @@ class LogosBibleReaderKeyMap extends BibleReaderKeyMap {
 
 @immutable
 // see https://wiki.crosswire.org/OSIS_Book_Abbreviations
-class OsisParatextBibleReaderKeyMap extends BibleReaderKeyMap {
-  const OsisParatextBibleReaderKeyMap();
+class OsisParatextBookKeyMap extends BibleReaderBookKeyMap {
+  const OsisParatextBookKeyMap();
 
   @override
   Map<String, String> get keyMap => const {
@@ -76,8 +76,8 @@ class OsisParatextBibleReaderKeyMap extends BibleReaderKeyMap {
 }
 
 @immutable
-class OliveTreeBibleReaderKeyMap extends BibleReaderKeyMap {
-  const OliveTreeBibleReaderKeyMap();
+class OliveTreeBookKeyMap extends BibleReaderBookKeyMap {
+  const OliveTreeBookKeyMap();
 
   @override
   Map<String, String> get keyMap => const {
