@@ -12,7 +12,7 @@ class BibleReaderService with ChangeNotifier {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners();
       } else {
-        _saveState(BibleReaderKey.none);
+        _saveState(BibleReaderKey.none); // bible reader has been uninstalled
       }
     });
     _loadState();
