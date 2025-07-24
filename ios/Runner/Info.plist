@@ -33,6 +33,7 @@
   <key>LSApplicationQueriesSchemes</key>
   <array>
     <string>blb</string>
+    <string>https</string>
     <string>logosref</string>
     <string>olivetree</string>
     <string>wdbible</string>
