@@ -74,7 +74,10 @@ class BibleReaderService with ChangeNotifier {
   }
 
   //// misc
-  void launchLinkedBibleReader(Feed f) {
-    if (isLinked && isEnabled && !f.isChapterRead) linkedBibleReader.launch(f);
+  void launchLinkedBibleReader(Feed f) async {
+    if (isLinked && isEnabled && !f.isChapterRead) {
+      final ok = await linkedBibleReader.launch(f);
+      if (!ok) linkedBibleReaderIndex = 0;
+    }
   }
 }
