@@ -5,11 +5,11 @@ import 'bible_reader_book_keymap.dart';
 
 enum BibleReaderKey {
   none,
-  andBible,
+  andBibleApp,
   bibleHub,
-  blueLetter,
-  lifeBible,
-  logosBible,
+  blueLetterApp,
+  lifeBibleApp,
+  logosBibleApp,
   oliveTreeApp,
   youVersionApp,
   weDevoteApp,
@@ -27,7 +27,7 @@ class BibleReaders {
       [TargetPlatform.android, TargetPlatform.iOS],
     ),
 
-    BibleReaderKey.andBible: const BibleReader(
+    BibleReaderKey.andBibleApp: const BibleReader(
       // https://github.com/AndBible/and-bible/issues/3210
       'AndBible app',
       'https://read.andbible.org/BOOK.CHAPTER',
@@ -40,21 +40,21 @@ class BibleReaders {
       [], // biblehub app not detected on android or ios
     ),
 
-    BibleReaderKey.blueLetter: const BibleReader(
+    BibleReaderKey.blueLetterApp: const BibleReader(
       // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
-      'Blue Letter Bible',
+      'Blue Letter Bible app',
       'blb://BOOK/CHAPTER',
       [TargetPlatform.iOS],
       BlueLetterBookKeyMap(),
     ),
 
-    BibleReaderKey.lifeBible: const BibleReader(
+    BibleReaderKey.lifeBibleApp: const BibleReader(
       'Life Bible app',
       'tecartabible://BOOK.CHAPTER', // unknown path does not work
       [],
     ),
 
-    BibleReaderKey.logosBible: const BibleReader(
+    BibleReaderKey.logosBibleApp: const BibleReader(
       'Logos Bible app',
       'logosref:Bible.BOOK.CHAPTER',
       [TargetPlatform.iOS], // android: back doesn't return to bible feed
