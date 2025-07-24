@@ -19,8 +19,11 @@ enum BibleReaderKey {
 
 class BibleReaderService with ChangeNotifier {
   BibleReaderService() {
-    final sp = sl<SharedPreferences>();
-    final linkedReader = sp.getString(_linkedBibleReaderStoreKey);
+    _loadState();
+  }
+
+  void _loadState() {
+    final linkedReader = sl<SharedPreferences>().getString(_linkedBibleReaderStoreKey);
     try {
       _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
       assert(_bibleReaders.keys.contains(_linkedBibleReaderKey));
@@ -29,7 +32,7 @@ class BibleReaderService with ChangeNotifier {
     }
   }
 
-  void _setLinkedBibleReader(BibleReaderKey value) {
+  void _saveState(BibleReaderKey value) {
     if (value == _linkedBibleReaderKey) return;
     _linkedBibleReaderKey = value;
     sl<SharedPreferences>().setString(_linkedBibleReaderStoreKey, value.name);
@@ -58,13 +61,13 @@ class BibleReaderService with ChangeNotifier {
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
   BibleReader get linkedBibleReader => _bibleReaders[_linkedBibleReaderKey]!;
   int get linkedBibleReaderIndex => certifiedBibleReaderList.indexOf(linkedBibleReader);
-  set linkedBibleReaderIndex(int value) => _setLinkedBibleReader(_certifiedBibleReaders.keys.elementAt(value));
+  set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaders.keys.elementAt(value));
 
   //// misc
   void launchLinkedBibleReader(Feed f) async {
     if (isLinked && !f.isChapterRead) {
       final ok = await linkedBibleReader.launch(f);
-      if (!ok) _setLinkedBibleReader(BibleReaderKey.none);
+      if (!ok) _saveState(BibleReaderKey.none);
     }
   }
 }
