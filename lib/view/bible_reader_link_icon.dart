@@ -5,12 +5,12 @@ import '/service/bible_reader_service.dart';
 class BibleReaderLinkIcon extends WatchingWidget {
   @override
   build(context) {
-    final bas = watchIt<BibleReaderService>();
+    final brs = watchIt<BibleReaderService>();
     return Tooltip(
       message:
-          bas.isEnabled ? 'The ${bas.linkedBibleReader.displayName} is enabled' : 'The bible reader is disabled',
+          brs.isEnabled ? 'The ${brs.linkedBibleReader.displayName} is enabled' : 'The bible reader is disabled',
       child: Icon(
-        bas.isEnabled ? Icons.open_in_new : Icons.open_in_new_off,
+        brs.isEnabled ? Icons.open_in_new : Icons.open_in_new_off,
         color: Colors.grey.shade600,
         size: 32,
       ),
