@@ -32,7 +32,23 @@ class BlueLetterBibleReaderKeyMap extends BibleReaderKeyMap {
 }
 
 @immutable
-// taken from https://wiki.crosswire.org/OSIS_Book_Abbreviations
+// osis paratext with manual testing
+class LogosBibleReaderKeyMap extends BibleReaderKeyMap {
+  @override
+  Map<String, String> get keyMap => const {
+        '1cr': '1ch',
+        '2cr': '2ch',
+        'eze': 'ezk',
+        'jam': 'jas',
+        'mar': 'mrk',
+        'obd': 'oba',
+        'prv': 'pro',
+        'rth': 'rut',
+      };
+}
+
+@immutable
+// see https://wiki.crosswire.org/OSIS_Book_Abbreviations
 class OsisParatextBibleReaderKeyMap extends BibleReaderKeyMap {
   @override
   Map<String, String> get keyMap => const {

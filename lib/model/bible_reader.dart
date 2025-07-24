@@ -73,6 +73,18 @@ class LifeBibleReader extends BibleReader {
 }
 
 @immutable
+class LogosBibleReader extends BibleReader {
+  @override
+  String get displayName => 'Logos Bible app';
+  @override
+  List<TargetPlatform> get certifiedPlatforms => [TargetPlatform.iOS]; // android: back doesn't return to bible feed
+  @override
+  BibleReaderKeyMap get bibleReaderKeyMap => LogosBibleReaderKeyMap();
+  @override
+  String get uri => 'logosref:Bible.BOOK.CHAPTER';
+}
+
+@immutable
 class NoBibleReader extends BibleReader {
   @override
   String get displayName => 'None';
