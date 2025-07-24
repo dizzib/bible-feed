@@ -3,6 +3,7 @@ import '/model/book.dart';
 
 @immutable
 abstract class BibleReaderKeyMap {
+  const BibleReaderKeyMap();
   Map<String, String> get keyMap => {};
 
   @nonVirtual
@@ -13,12 +14,16 @@ abstract class BibleReaderKeyMap {
 
 @immutable
 class IdentityBibleReaderKeyMap extends BibleReaderKeyMap {
+  const IdentityBibleReaderKeyMap();
+
   @override
   Map<String, String> get keyMap => const {};
 }
 
 @immutable
 class BlueLetterBibleReaderKeyMap extends BibleReaderKeyMap {
+  const BlueLetterBibleReaderKeyMap();
+
   @override
   Map<String, String> get keyMap => const {
         '1cr': '1ch',
@@ -34,6 +39,8 @@ class BlueLetterBibleReaderKeyMap extends BibleReaderKeyMap {
 @immutable
 // osis paratext with manual testing
 class LogosBibleReaderKeyMap extends BibleReaderKeyMap {
+  const LogosBibleReaderKeyMap();
+
   @override
   Map<String, String> get keyMap => const {
         '1cr': '1ch',
@@ -50,6 +57,8 @@ class LogosBibleReaderKeyMap extends BibleReaderKeyMap {
 @immutable
 // see https://wiki.crosswire.org/OSIS_Book_Abbreviations
 class OsisParatextBibleReaderKeyMap extends BibleReaderKeyMap {
+  const OsisParatextBibleReaderKeyMap();
+
   @override
   Map<String, String> get keyMap => const {
         '1cr': '1ch',
@@ -68,6 +77,8 @@ class OsisParatextBibleReaderKeyMap extends BibleReaderKeyMap {
 
 @immutable
 class OliveTreeBibleReaderKeyMap extends BibleReaderKeyMap {
+  const OliveTreeBibleReaderKeyMap();
+
   @override
   Map<String, String> get keyMap => const {
         'jhn': 'jn',
