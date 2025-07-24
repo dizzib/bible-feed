@@ -8,9 +8,9 @@ class BibleReaderLinkIcon extends WatchingWidget {
     final brs = watchIt<BibleReaderService>();
     return Tooltip(
       message:
-          brs.isEnabled ? 'The ${brs.linkedBibleReader.displayName} is enabled' : 'The bible reader is disabled',
+          brs.isLinked ? 'The ${brs.linkedBibleReader.displayName} is enabled' : 'The bible reader is disabled',
       child: Icon(
-        brs.isEnabled ? Icons.open_in_new : Icons.open_in_new_off,
+        brs.isLinked ? Icons.open_in_new : Icons.open_in_new_off,
         color: Colors.grey.shade600,
         size: 32,
       ),

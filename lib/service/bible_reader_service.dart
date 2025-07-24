@@ -27,7 +27,6 @@ class BibleReaderService with ChangeNotifier {
     } catch (e) {
       _linkedBibleReaderKey = BibleReaderKey.none;
     }
-    _isEnabled = sp.getBool(_isReaderEnabledStoreKey) ?? false;
   }
 
   //// list of readers
@@ -45,18 +44,6 @@ class BibleReaderService with ChangeNotifier {
   final _certifiedBibleReaders = _bibleReaders.filter((entry) => entry.value.isCertifiedForThisPlatform);
   List<BibleReader> get certifiedBibleReaderList => _certifiedBibleReaders.values.toList();
 
-  //// reader enabled/disabled
-  late bool _isEnabled;
-  final _isReaderEnabledStoreKey = 'bibleReaderEnabled';
-
-  bool get isEnabled => _isEnabled;
-
-  set isEnabled(bool value) {
-    _isEnabled = value;
-    sl<SharedPreferences>().setBool(_isReaderEnabledStoreKey, _isEnabled);
-    notifyListeners();
-  }
-
   //// linked reader
   late BibleReaderKey _linkedBibleReaderKey;
   final _linkedBibleReaderStoreKey = 'linkedBibleReader';
@@ -69,13 +56,12 @@ class BibleReaderService with ChangeNotifier {
     if (idx == linkedBibleReaderIndex) return;
     _linkedBibleReaderKey = _certifiedBibleReaders.keys.elementAt(idx);
     sl<SharedPreferences>().setString(_linkedBibleReaderStoreKey, _linkedBibleReaderKey.name);
-    _isEnabled = isLinked;
     notifyListeners();
   }
 
   //// misc
   void launchLinkedBibleReader(Feed f) async {
-    if (isLinked && isEnabled && !f.isChapterRead) {
+    if (isLinked && !f.isChapterRead) {
       final ok = await linkedBibleReader.launch(f);
       if (!ok) linkedBibleReaderIndex = 0;
     }
