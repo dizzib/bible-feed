@@ -29,6 +29,13 @@ class BibleReaderService with ChangeNotifier {
     }
   }
 
+  void _setLinkedBibleReader(BibleReaderKey value) {
+    if (value == _linkedBibleReaderKey) return;
+    _linkedBibleReaderKey = value;
+    sl<SharedPreferences>().setString(_linkedBibleReaderStoreKey, value.name);
+    notifyListeners();
+  }
+
   //// list of readers
   static final _bibleReaders = {
     BibleReaderKey.none: NoBibleReader(),
@@ -51,19 +58,13 @@ class BibleReaderService with ChangeNotifier {
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
   BibleReader get linkedBibleReader => _bibleReaders[_linkedBibleReaderKey]!;
   int get linkedBibleReaderIndex => certifiedBibleReaderList.indexOf(linkedBibleReader);
-
-  set linkedBibleReaderIndex(int idx) {
-    if (idx == linkedBibleReaderIndex) return;
-    _linkedBibleReaderKey = _certifiedBibleReaders.keys.elementAt(idx);
-    sl<SharedPreferences>().setString(_linkedBibleReaderStoreKey, _linkedBibleReaderKey.name);
-    notifyListeners();
-  }
+  set linkedBibleReaderIndex(int value) => _setLinkedBibleReader(_certifiedBibleReaders.keys.elementAt(value));
 
   //// misc
   void launchLinkedBibleReader(Feed f) async {
     if (isLinked && !f.isChapterRead) {
       final ok = await linkedBibleReader.launch(f);
-      if (!ok) linkedBibleReaderIndex = 0;
+      if (!ok) _setLinkedBibleReader(BibleReaderKey.none);
     }
   }
 }
