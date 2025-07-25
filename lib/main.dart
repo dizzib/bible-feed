@@ -7,6 +7,7 @@ import '/model/book.dart';
 import '/model/feeds.dart';
 import '/model/list_wheel_state.dart';
 import '/model/reading_lists.dart';
+import '/service/all_done_dialog_service.dart';
 import '/service/auto_advance_service.dart';
 import '/service/bible_reader_app_install_service.dart';
 import '/service/bible_reader_service.dart';
@@ -19,6 +20,7 @@ Future<void> main() async {
   sl.registerSingleton(await SharedPreferences.getInstance());
   sl.registerSingleton(ReadingLists());
   sl.registerSingleton(Feeds());
+  sl.registerSingleton(AllDoneDialogService());
   sl.registerSingleton(BibleReaderAppInstallService());
   sl.registerSingleton(BibleReaderService());
   sl.registerSingleton(BibleReaders());
