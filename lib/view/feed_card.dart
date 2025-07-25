@@ -9,38 +9,38 @@ import 'feed_card_book_chapter.dart';
 import 'feed_card_title_bar.dart';
 
 class FeedCard extends WatchingWidget {
-  const FeedCard(this._feed);
+  const FeedCard(this.feed);
 
-  final Feed _feed;
+  final Feed feed;
 
   @override
   build(context) {
-    watch(_feed);
+    watch(feed);
 
     return Opacity(
-      opacity: _feed.isChapterRead ? 0.25 : 1,
+      opacity: feed.isChapterRead ? 0.25 : 1,
       child: Card(
         color:
-            _feed.isChapterRead ? context.colorScheme.surfaceContainerLowest : context.colorScheme.surfaceContainerLow,
-        elevation: _feed.isChapterRead ? 0 : 12,
+            feed.isChapterRead ? context.colorScheme.surfaceContainerLowest : context.colorScheme.surfaceContainerLow,
+        elevation: feed.isChapterRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           enableFeedback: false,
-          onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(_feed)),
+          onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
           onTap: () {
             HapticFeedback.lightImpact();
-            sl<BibleReaderService>().launchLinkedBibleReader(_feed);
-            _feed.toggleIsChapterRead();
+            sl<BibleReaderService>().launchLinkedBibleReader(feed);
+            feed.toggleIsChapterRead();
           },
           child: LayoutBuilder(
             builder: (_, BoxConstraints c) => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(_feed)),
-                LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: _feed.progress),
+                Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
+                LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
                 DefaultTextStyle.merge(
                   style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
-                  child: FeedCardBookChapter(_feed),
+                  child: FeedCardBookChapter(feed),
                 )
               ],
             ),
