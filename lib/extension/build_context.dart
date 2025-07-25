@@ -8,6 +8,7 @@ extension BuildContextEntension<T> on BuildContext {
   double get deviceTextScale => mediaQuery.textScaler.scale(1); // from device settings
   bool get isDarkMode => mediaQuery.platformBrightness == Brightness.dark;
   bool get isOrientationLandscape => mediaQuery.orientation == Orientation.landscape;
+  bool get isOrientationPortrait => mediaQuery.orientation == Orientation.portrait;
 
   // theme
   ThemeData get theme => Theme.of(this);

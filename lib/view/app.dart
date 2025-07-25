@@ -21,11 +21,14 @@ class _AppState extends State<App> {
 
   @override
   build(context) {
-    return Scaffold(
-      appBar: context.isOrientationLandscape ? null : AppBarMain(),
-      body: FeedsView(),
-      floatingActionButton: context.isOrientationLandscape ? AllDoneFab() : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
-    );
+    return LayoutBuilder(builder: (_, BoxConstraints bc) {
+      final isShowAppBar = context.isOrientationPortrait || bc.maxHeight > 500;
+      return Scaffold(
+        appBar: isShowAppBar ? AppBarMain() : null,
+        body: FeedsView(),
+        floatingActionButton: isShowAppBar ? null : AllDoneFab(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
+      );
+    });
   }
 }
