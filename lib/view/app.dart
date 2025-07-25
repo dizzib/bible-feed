@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
-import '/extension/build_context.dart';
 import '/service/auto_advance_service.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
 import 'feeds_view.dart';
-import 'settings.dart';
+import 'settings_icon_button.dart';
 
 class App extends StatefulWidget {
   @override
@@ -27,22 +26,19 @@ class _AppState extends State<App> {
       return Scaffold(
         appBar: isShowAppBar ? AppBarMain() : null,
         body: FeedsView(),
-        floatingActionButton: Column(children: [
-          IconButton(
-              onPressed: () => context.navigateTo(Settings()),
-              icon: const Icon(
-                Icons.settings,
-                size: 32,
-              )),
-          Visibility(
-            visible: !isShowAppBar,
-            // https://stackoverflow.com/questions/52786652/how-to-change-the-size-of-floatingactionbutton
-            child: SizedBox(
-              width: 32,
-              child: FittedBox(child: AllDoneFab()),
+        floatingActionButton: Column(
+          children: [
+            SettingsIconButton(),
+            Visibility(
+              visible: !isShowAppBar,
+              // https://stackoverflow.com/questions/52786652/how-to-change-the-size-of-floatingactionbutton
+              child: SizedBox(
+                width: 32,
+                child: FittedBox(child: AllDoneFab()),
+              ),
             ),
-          ),
-        ]),
+          ],
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       );
     });
