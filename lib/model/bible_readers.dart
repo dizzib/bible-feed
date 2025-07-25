@@ -32,9 +32,9 @@ class BibleReaders {
       [], // https://github.com/AndBible/and-bible/issues/3210
     ),
     BibleReaderKey.blueLetterApp: const BibleReader(
-      // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
       'Blue Letter Bible app',
       'blb://BOOK/CHAPTER',
+      // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
       [TargetPlatform.iOS],
       BlueLetterBookKeyMap(),
     ),
