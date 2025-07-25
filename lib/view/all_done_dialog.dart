@@ -11,11 +11,14 @@ class AllDoneDialog extends StatelessWidget {
     return CupertinoAlertDialog(
       title: Text('All done!', style: context.textTheme.titleLarge),
       content: SingleChildScrollView(
-        child: ListBody(
-          children: [
-            Text('Lists advance at midnight.', style: context.textTheme.bodyLarge),
-            Text('Advance now?', style: context.textTheme.bodyLarge),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListBody(
+            children: [
+              Text('Lists advance at midnight.', style: context.textTheme.bodyLarge),
+              Text('Advance now?', style: context.textTheme.bodyLarge),
+            ],
+          ),
         ),
       ),
       actions: [
