@@ -32,10 +32,7 @@ class _AppState extends State<App> {
             Visibility(
               visible: !isShowAppBar,
               // https://stackoverflow.com/questions/52786652/how-to-change-the-size-of-floatingactionbutton
-              child: SizedBox(
-                width: 32,
-                child: FittedBox(child: AllDoneFab()),
-              ),
+              child: SizedBox(width: 32, child: FittedBox(child: AllDoneFab())),
             ),
           ],
         ),
