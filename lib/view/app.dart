@@ -22,20 +22,16 @@ class _AppState extends State<App> {
   @override
   build(context) {
     return LayoutBuilder(builder: (_, BoxConstraints bc) {
-      final isShowAppBar = bc.maxHeight > 260;
+      final isShowAppBar = bc.maxHeight > 360;
       return Scaffold(
         appBar: isShowAppBar ? AppBarMain() : null,
         body: FeedsView(),
-        floatingActionButton: Column(
-          children: [
-            SettingsIconButton(),
-            Visibility(
-              visible: !isShowAppBar,
-              // https://stackoverflow.com/questions/52786652/how-to-change-the-size-of-floatingactionbutton
-              child: SizedBox(width: 32, child: FittedBox(child: AllDoneFab())),
-            ),
-          ],
-        ),
+        floatingActionButton: !isShowAppBar
+            ? Stack(children: [
+                SettingsIconButton(),
+                SizedBox(width: bc.maxHeight < 260 ? 44 : null, child: FittedBox(child: AllDoneFab())),
+              ])
+            : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       );
     });
