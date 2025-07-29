@@ -30,31 +30,41 @@ class Settings extends WatchingWidget {
         });
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+      appBar: AppBar(title: const Text('Settings')),
       body: RawScrollbar(
         thumbVisibility: true,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
             child: Column(
               spacing: 16,
               children: [
                 Card(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: BibleReaderLinkIcon(),
-                        title: const Text('Bible Reader'),
-                        subtitle: const Text(
-                            'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Wrap(spacing: 16, children: choiceChipList()),
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 12,
+                      children: [
+                        BibleReaderLinkIcon(),
+                        Expanded(
+                          // https://docs.flutter.dev/ui/layout/constraints example 24-25
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            spacing: 12,
+                            children: [
+                              const Text('Bible Reader',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                              const Text(
+                                  'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
+                              Wrap(spacing: 16, children: choiceChipList()),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const AppVersion(),
