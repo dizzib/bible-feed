@@ -24,8 +24,8 @@ Future<void> main() async {
   sl.registerSingleton(Feeds());
   sl.registerSingleton(AllDoneDialogService());
   sl.registerSingleton(BibleReaderAppInstallService());
-  sl.registerSingleton(BibleReaderService());
   sl.registerSingleton(BibleReaders());
+  sl.registerSingleton(BibleReaderService()); // depends on BibleReaders
   sl.registerSingleton(ListWheelState<Book>());
   sl.registerSingleton(ListWheelState<int>());
   sl.registerSingleton(AutoAdvanceService()); // last of all, for maybeAdvance()
