@@ -7,13 +7,6 @@ class AppVersion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: 8,
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text('Version:', style: TextStyle(fontWeight: FontWeight.normal)),
-        Text(sl<PackageInfo>().version),
-      ],
-    );
+    return Text('Version: ${sl<PackageInfo>().version} (build ${sl<PackageInfo>().buildNumber})');
   }
 }
