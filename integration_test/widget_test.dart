@@ -3,11 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
+import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/list_wheel_state.dart';
 import 'package:bible_feed/model/reading_lists.dart';
+import 'package:bible_feed/service/bible_reader_app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
@@ -22,15 +24,17 @@ extension Helper on WidgetTester {
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  sl.registerLazySingleton(() => BibleReaderAppInstallService());
+  sl.registerLazySingleton(() => BibleReaders());
+  sl.registerLazySingleton(() => BibleReaderService());
   sl.registerSingleton(await SharedPreferences.getInstance());
 
   final gospels = ReadingLists().items[0];
   final matthew = gospels[0];
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
-    sl.registerSingleton(BibleReaderService());
-    sl.registerSingleton(ListWheelState<Book>());
-    sl.registerSingleton(ListWheelState<int>());
+    sl.registerLazySingleton(() => ListWheelState<Book>());
+    sl.registerLazySingleton(() => ListWheelState<int>());
     await t.initialiseWidget(BookChapterDialog(Feed(gospels)));
     await t.scrollToLastChapter();
     await t.pump();
@@ -54,8 +58,8 @@ void main() async {
   });
 
   testWidgets('FeedsView', (WidgetTester t) async {
-    sl.registerSingleton(ReadingLists());
-    sl.registerSingleton(Feeds());
+    sl.registerLazySingleton(() => Feeds());
+    sl.registerLazySingleton(() => ReadingLists());
     await t.initialiseWidget(FeedsView());
     expectChapters(1);
     for (var l in sl<ReadingLists>().items) {
