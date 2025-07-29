@@ -37,7 +37,7 @@ class Settings extends WatchingWidget {
         thumbVisibility: true,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: Column(
               spacing: 16,
               children: [
