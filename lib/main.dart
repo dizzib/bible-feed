@@ -18,6 +18,7 @@ Future<void> main() async {
   'starting app'.log();
   WidgetsFlutterBinding.ensureInitialized();
 
+  // ORDER MATTERS!!!
   sl.registerSingleton(await PackageInfo.fromPlatform());
   sl.registerSingleton(await SharedPreferences.getInstance());
   sl.registerSingleton(ReadingLists());
