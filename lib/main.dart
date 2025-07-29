@@ -18,17 +18,16 @@ Future<void> main() async {
   'starting app'.log();
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ORDER MATTERS!!!
   sl.registerSingleton(await PackageInfo.fromPlatform());
   sl.registerSingleton(await SharedPreferences.getInstance());
-  sl.registerSingleton(ReadingLists());
-  sl.registerSingleton(Feeds());
-  sl.registerSingleton(AllDoneDialogService());
-  sl.registerSingleton(BibleReaderAppInstallService());
-  sl.registerSingleton(BibleReaders());
-  sl.registerSingleton(BibleReaderService()); // depends on BibleReaderAppInstallService and BibleReaders
-  sl.registerSingleton(ListWheelState<Book>());
-  sl.registerSingleton(ListWheelState<int>());
+  sl.registerLazySingleton(() => ReadingLists());
+  sl.registerLazySingleton(() => Feeds());
+  sl.registerLazySingleton(() => AllDoneDialogService());
+  sl.registerLazySingleton(() => BibleReaderAppInstallService());
+  sl.registerLazySingleton(() => BibleReaders());
+  sl.registerLazySingleton(() => BibleReaderService());
+  sl.registerLazySingleton(() => ListWheelState<Book>());
+  sl.registerLazySingleton(() => ListWheelState<int>());
   sl.registerSingleton(AutoAdvanceService()); // last of all, for maybeAdvance()
 
   runApp(AppBase());
