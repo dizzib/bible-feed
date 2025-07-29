@@ -24,6 +24,7 @@ class BibleReaderService with ChangeNotifier {
       _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
       assert(sl<BibleReaders>().items.keys.contains(_linkedBibleReaderKey));
     } catch (e) {
+      debugPrint('EXCEPTION: ${e.toString()}');
       _linkedBibleReaderKey = BibleReaderKey.none;
     }
   }
