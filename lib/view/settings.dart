@@ -33,27 +33,30 @@ class Settings extends WatchingWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: SingleChildScrollView(
-        child: Card(
+      body: RawScrollbar(
+        thumbVisibility: true,
+        child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
               children: [
-                Row(
-                  spacing: 8,
-                  children: [
-                    const Text(
-                      'Bible Reader',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    BibleReaderLinkIcon(),
-                  ],
+                Card(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: BibleReaderLinkIcon(),
+                        title: const Text('Bible Reader'),
+                        subtitle: const Text(
+                            'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(spacing: 16, children: choiceChipList()),
+                      ),
+                    ],
+                  ),
                 ),
-                const Text(
-                    'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
-                Wrap(spacing: 16, children: choiceChipList()),
                 const AppVersion(),
               ],
             ),
