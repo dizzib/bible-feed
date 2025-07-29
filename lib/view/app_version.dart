@@ -7,8 +7,9 @@ class AppVersion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Version ${sl<PackageInfo>().version} (${sl<PackageInfo>().buildNumber})',
+    return Opacity(
+      opacity: 0.5,
+      child: Text('Version ${sl<PackageInfo>().version} (${sl<PackageInfo>().buildNumber})'),
     );
   }
 }
