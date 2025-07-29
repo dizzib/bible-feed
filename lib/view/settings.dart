@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '/model/bible_readers.dart';
 import '/service/bible_reader_service.dart';
+import 'app_version.dart';
 import 'bible_reader_link_icon.dart';
 
 class Settings extends WatchingWidget {
@@ -33,26 +34,29 @@ class Settings extends WatchingWidget {
         title: const Text('Settings'),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 16,
-            children: [
-              Row(
-                spacing: 8,
-                children: [
-                  const Text(
-                    'Bible Reader',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  BibleReaderLinkIcon(),
-                ],
-              ),
-              const Text(
-                  'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
-              Wrap(spacing: 16, children: choiceChipList()),
-            ],
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 16,
+              children: [
+                Row(
+                  spacing: 8,
+                  children: [
+                    const Text(
+                      'Bible Reader',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    BibleReaderLinkIcon(),
+                  ],
+                ),
+                const Text(
+                    'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
+                Wrap(spacing: 16, children: choiceChipList()),
+                const AppVersion(),
+              ],
+            ),
           ),
         ),
       ),

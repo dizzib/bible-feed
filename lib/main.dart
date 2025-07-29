@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'extension/object.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   'starting app'.log();
   WidgetsFlutterBinding.ensureInitialized();
 
+  sl.registerSingleton(await PackageInfo.fromPlatform());
   sl.registerSingleton(await SharedPreferences.getInstance());
   sl.registerSingleton(ReadingLists());
   sl.registerSingleton(Feeds());
