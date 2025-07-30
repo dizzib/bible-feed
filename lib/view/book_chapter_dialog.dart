@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
-import '/model/book.dart';
 import '/model/feed.dart';
-import '/model/list_wheel_state.dart';
+import '/model/list_wheel/book_list_wheel_state.dart';
+import '/model/list_wheel/chapter_list_wheel_state.dart';
 import '/view/book_chapter_dialog_footer.dart';
 import '/view/book_chapter_dialog_wheels.dart';
 
 class BookChapterDialog extends StatelessWidget {
-  BookChapterDialog(this.feed) {
-    sl<ListWheelState<Book>>().index = feed.bookIndex;
-    sl<ListWheelState<int>>().index = feed.chapter - 1;
-  }
-
   final Feed feed;
+
+  BookChapterDialog(this.feed) {
+    sl<BookListWheelState>().index = feed.bookIndex;
+    sl<BookListWheelState>().readingList = feed.readingList;
+    sl<ChapterListWheelState>().index = feed.chapter - 1;
+  }
 
   @override
   build(context) {

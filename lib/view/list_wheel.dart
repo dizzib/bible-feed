@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
-import '/model/list_wheel_state.dart';
+import '/model/list_wheel/list_wheel_state.dart';
 import '/view/list_wheel_effects.dart';
 
 // known issues with various wheel pickers...
@@ -12,32 +11,25 @@ import '/view/list_wheel_effects.dart';
 // - wheel_picker (https://pub.dev/packages/wheel_picker)
 //    - does not seem to rebuild as expected
 //
-class ListWheel<T> extends StatelessWidget {
-  const ListWheel({
-    required Key key,
-    required T Function(int) indexToItem,
-    required String Function(T) itemToString,
-    required int maxIndex,
-  }) : _maxIndex = maxIndex, _itemToString = itemToString, _indexToItem = indexToItem, super(key: key);
+class ListWheel extends StatelessWidget {
+  final ListWheelState listWheelState;
+  final int maxIndex;
 
-  final T Function(int index) _indexToItem;
-  final String Function(T item) _itemToString;
-  final int _maxIndex;
+  const ListWheel(this.listWheelState, {required Key key, required this.maxIndex}) : super(key: key);
 
   @override
   build(context) {
     const magnification = 1.1;
     var itemExtent =
         DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale; // accomodate various text sizes
-    var wheelState = sl<ListWheelState<T>>();
-    var controller = FixedExtentScrollController(initialItem: wheelState.index);
+    var controller = FixedExtentScrollController(initialItem: listWheelState.index);
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
-    if (wheelState.index > _maxIndex) {
+    if (listWheelState.index > maxIndex) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         controller.jumpToItem(0); // hack: without this, ListWheelScrollView sometimes partially renders
-        controller.jumpToItem(_maxIndex);
-        wheelState.index = _maxIndex;
+        controller.jumpToItem(maxIndex);
+        listWheelState.index = maxIndex;
       });
     }
 
@@ -46,7 +38,7 @@ class ListWheel<T> extends StatelessWidget {
     workaroundItemExtentBug(child) {
       return NotificationListener(
         onNotification: (SizeChangedLayoutNotification notification) {
-          WidgetsBinding.instance.addPostFrameCallback((_) => controller.jumpToItem(wheelState.index));
+          WidgetsBinding.instance.addPostFrameCallback((_) => controller.jumpToItem(listWheelState.index));
           return true; // cancel bubbling
         },
         child: SizeChangedLayoutNotifier(child: child),
@@ -60,15 +52,15 @@ class ListWheel<T> extends StatelessWidget {
       workaroundItemExtentBug(ListWheelScrollView.useDelegate(
         childDelegate: ListWheelChildBuilderDelegate(
           builder: (_, int index) {
-            if (index < 0 || index > _maxIndex) return null;
-            return Text(_itemToString(_indexToItem(index)));
+            if (index < 0 || index > maxIndex) return null;
+            return Text(listWheelState.itemToString(listWheelState.indexToItem(index)));
           },
         ),
         controller: controller,
         diameterRatio: 1.1,
         itemExtent: itemExtent,
         magnification: magnification,
-        onSelectedItemChanged: (index) => wheelState.index = index,
+        onSelectedItemChanged: (index) => listWheelState.index = index,
         overAndUnderCenterOpacity: 0.7,
         physics: const FixedExtentScrollPhysics(),
         useMagnifier: true,

@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/feeds.dart';
+import 'package:bible_feed/model/reading_lists.dart';
 import 'mock_reading_list.dart';
 import 'mock_reading_lists.dart';
 
@@ -24,7 +25,7 @@ void main() async {
     sl.pushNewScope();
     sl.registerSingleton(await SharedPreferences.getInstance());
     registerMockReadingLists();
-    feeds = Feeds();
+    feeds = Feeds(di<ReadingLists>(), di<SharedPreferences>());
   });
 
   test('[]', () {

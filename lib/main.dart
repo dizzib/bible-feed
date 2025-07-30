@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'extension/object.dart';
 import '/model/bible_readers.dart';
-import '/model/book.dart';
 import '/model/feeds.dart';
-import '/model/list_wheel_state.dart';
+import '/model/list_wheel/book_list_wheel_state.dart';
+import '/model/list_wheel/chapter_list_wheel_state.dart';
 import '/model/reading_lists.dart';
 import '/service/all_done_dialog_service.dart';
 import '/service/auto_advance_service.dart';
@@ -21,10 +21,14 @@ Future<void> main() async {
   sl.registerLazySingleton(() => AllDoneDialogService(di<Feeds>()));
   sl.registerLazySingleton(() => BibleReaderAppInstallService());
   sl.registerLazySingleton(() => BibleReaders());
-  sl.registerLazySingleton(() => BibleReaderService(di<BibleReaderAppInstallService>(),di<BibleReaders>(),di<SharedPreferences>()));
+  sl.registerLazySingleton(() => BibleReaderService(
+        di<BibleReaderAppInstallService>(),
+        di<BibleReaders>(),
+        di<SharedPreferences>(),
+      ));
   sl.registerLazySingleton(() => Feeds(di<ReadingLists>(), di<SharedPreferences>()));
-  sl.registerLazySingleton(() => ListWheelState<Book>());
-  sl.registerLazySingleton(() => ListWheelState<int>());
+  sl.registerLazySingleton(() => BookListWheelState());
+  sl.registerLazySingleton(() => ChapterListWheelState());
   sl.registerLazySingleton(() => ReadingLists());
   sl.registerSingleton(await PackageInfo.fromPlatform());
   sl.registerSingleton(await SharedPreferences.getInstance());
