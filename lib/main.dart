@@ -18,7 +18,7 @@ Future<void> main() async {
   'starting app'.log();
   WidgetsFlutterBinding.ensureInitialized();
 
-  sl.registerLazySingleton(() => AllDoneDialogService());
+  sl.registerLazySingleton(() => AllDoneDialogService(di<Feeds>()));
   sl.registerLazySingleton(() => BibleReaderAppInstallService());
   sl.registerLazySingleton(() => BibleReaders());
   sl.registerLazySingleton(() => BibleReaderService());
