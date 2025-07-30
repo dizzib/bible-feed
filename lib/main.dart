@@ -28,7 +28,7 @@ Future<void> main() async {
   sl.registerLazySingleton(() => ReadingLists());
   sl.registerSingleton(await PackageInfo.fromPlatform());
   sl.registerSingleton(await SharedPreferences.getInstance());
-  sl.registerSingleton(AutoAdvanceService()); // last of all, not lazy for maybeAdvance()
+  sl.registerSingleton(AutoAdvanceService(di<Feeds>())); // last of all, not lazy for maybeAdvance()
 
   runApp(AppBase());
   'started app'.log();

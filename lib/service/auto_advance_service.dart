@@ -1,13 +1,14 @@
 import 'package:clock/clock.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter/widgets.dart';
-import 'package:watch_it/watch_it.dart';
 import '/extension/object.dart';
 import '/model/feeds.dart';
 
 class AutoAdvanceService with ChangeNotifier {
-  AutoAdvanceService() {
-    AppLifecycleListener(onResume: sl<Feeds>().maybeAdvance);
+  final Feeds feeds;
+
+  AutoAdvanceService(this.feeds) {
+    AppLifecycleListener(onResume: feeds.maybeAdvance);
 
     var schedule = Schedule(
       hours: '0', // at midnight
@@ -18,9 +19,9 @@ class AutoAdvanceService with ChangeNotifier {
 
     Cron().schedule(schedule, () async {
       clock.now().log();
-      if (await sl<Feeds>().maybeAdvance() == AdvanceState.listsAdvanced) notifyListeners();
+      if (await feeds.maybeAdvance() == AdvanceState.listsAdvanced) notifyListeners();
     });
 
-    sl<Feeds>().maybeAdvance();
+    feeds.maybeAdvance();
   }
 }
