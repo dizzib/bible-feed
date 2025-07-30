@@ -6,9 +6,9 @@ import '/model/list_wheel_state.dart';
 import '/view/list_wheel.dart';
 
 class BookChapterDialogWheels extends WatchingWidget {
-  const BookChapterDialogWheels(this.readingList);
-
   final ReadingList readingList;
+
+  const BookChapterDialogWheels(this.readingList);
 
   @override
   build(context) {
