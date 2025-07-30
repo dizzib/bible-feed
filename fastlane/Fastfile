@@ -56,7 +56,36 @@ platform :android do
     File.open(file, 'w') do |f| f << changelog end
   end
 
+platform :ios do
+  desc "Build and upload to TestFlight"
+  lane :build_and_upload do
 
+    # Configuration
+    $app_identifier = "com.me2christ.bible-feed" # Replace with your actual bundle ID
+    $profile_name = "YOUR PROJECT NAME - Prod Distribution" # Found in Xcode > Signing & Capabilities
+
+    build_ios_app(
+      workspace: "ios/Runner.xcworkspace",
+      # scheme: "YOUR_SCHEME", # Typically the same as your project name
+      export_method: "app-store",
+      clean: true,
+      export_options: {
+        provisioningProfiles: {
+          $app_identifier => $profile_name
+        },
+        method: "app-store"
+      },
+      output_directory: "./build",
+      output_name: "bible-feed.ipa"
+    )
+
+    upload_to_testflight(
+      ipa: "./build/bible-feed.ipa",
+      skip_waiting_for_build_processing: true,
+      changelog: File.read(File.expand_path("../../release_notes.txt", File.dirname(__FILE__)))
+    )
+  end
+end
   # ensure_env_vars(env_vars: ['SYMBOLS_FILE_PATH', 'MAPPING_FILE_PATH'])
 
   # desc "Deploy to Google Play internal"
