@@ -8,12 +8,12 @@ import '/view/book_chapter_dialog_footer.dart';
 import '/view/book_chapter_dialog_wheels.dart';
 
 class BookChapterDialog extends StatelessWidget {
-  BookChapterDialog(this._feed) {
-    sl<ListWheelState<Book>>().index = _feed.bookIndex;
-    sl<ListWheelState<int>>().index = _feed.chapter - 1;
+  BookChapterDialog(this.feed) {
+    sl<ListWheelState<Book>>().index = feed.bookIndex;
+    sl<ListWheelState<int>>().index = feed.chapter - 1;
   }
 
-  final Feed _feed;
+  final Feed feed;
 
   @override
   build(context) {
@@ -36,14 +36,14 @@ class BookChapterDialog extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      _feed.readingList.name,
+                      feed.readingList.name,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
               ),
-              Expanded(child: BookChapterDialogWheels(_feed.readingList)),
-              withBackground(BookChapterDialogFooter(_feed))
+              Expanded(child: BookChapterDialogWheels(feed.readingList)),
+              withBackground(BookChapterDialogFooter(feed))
             ],
           ),
         ),
