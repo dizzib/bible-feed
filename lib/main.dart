@@ -22,7 +22,7 @@ Future<void> main() async {
   sl.registerLazySingleton(() => BibleReaderAppInstallService());
   sl.registerLazySingleton(() => BibleReaders());
   sl.registerLazySingleton(() => BibleReaderService());
-  sl.registerLazySingleton(() => Feeds());
+  sl.registerLazySingleton(() => Feeds(di<ReadingLists>(), di<SharedPreferences>()));
   sl.registerLazySingleton(() => ListWheelState<Book>());
   sl.registerLazySingleton(() => ListWheelState<int>());
   sl.registerLazySingleton(() => ReadingLists());

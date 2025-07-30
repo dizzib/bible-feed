@@ -1,7 +1,6 @@
 import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watch_it/watch_it.dart';
 import '/extension/object.dart';
 import '/model/reading_lists.dart';
 import 'feed.dart';
@@ -9,7 +8,10 @@ import 'feed.dart';
 enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 
 class Feeds with ChangeNotifier {
-  Feeds() : _feeds = sl<ReadingLists>().items.map((rl) => Feed(rl)).toList() {
+  final ReadingLists readingLists;
+  final SharedPreferences sharedPreferences;
+
+  Feeds(this.readingLists, this.sharedPreferences) : _feeds = readingLists.items.map((rl) => Feed(rl)).toList() {
     for (Feed f in _feeds) {
       f.addListener(notifyListeners);
     }
@@ -20,13 +22,13 @@ class Feeds with ChangeNotifier {
 
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
-  bool get hasEverAdvanced => sl<SharedPreferences>().getBool(_hasEverAdvancedStoreKey) ?? false;
+  bool get hasEverAdvanced => sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
   Future forceAdvance() async {
     for (Feed f in _feeds) {
       await f.nextChapter();
     }
-    sl<SharedPreferences>().setBool(_hasEverAdvancedStoreKey, true);
+    sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
   }
 
   Future<AdvanceState> maybeAdvance() async {
