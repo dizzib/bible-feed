@@ -9,9 +9,8 @@ import 'feed_card_book_chapter.dart';
 import 'feed_card_title_bar.dart';
 
 class FeedCard extends WatchingWidget {
-  const FeedCard(this.feed);
-
   final Feed feed;
+  const FeedCard(this.feed);
 
   @override
   build(context) {

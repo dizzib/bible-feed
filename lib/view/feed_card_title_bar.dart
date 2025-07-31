@@ -5,9 +5,8 @@ import '/model/feed.dart';
 import 'book_chapter_dialog.dart';
 
 class FeedCardTitleBar extends WatchingWidget {
-  const FeedCardTitleBar(this.feed);
-
   final Feed feed;
+  const FeedCardTitleBar(this.feed);
 
   @override
   build(context) {
