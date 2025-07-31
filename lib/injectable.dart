@@ -4,14 +4,16 @@ import 'package:watch_it/watch_it.dart';
 import 'package:injectable/injectable.dart';
 import 'injectable.config.dart'; // AUTO-GENERATED
 
-@InjectableInit(
-  generateForDir: [
-    'lib/model',
-    'lib/service',
-  ],
-)
-Future configureDependencies() async {
-  sl.registerSingleton(await PackageInfo.fromPlatform());
-  sl.registerSingleton(await SharedPreferences.getInstance());
+@InjectableInit()
+void configureDependencies() {
   di.init();
+}
+
+@module // register third-party
+abstract class RegisterModule {
+  @preResolve
+  Future<PackageInfo> get packageInfo => PackageInfo.fromPlatform();
+
+  @preResolve
+  Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
 }
