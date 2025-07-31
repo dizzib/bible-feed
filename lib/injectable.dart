@@ -5,8 +5,8 @@ import 'package:injectable/injectable.dart';
 import 'injectable.config.dart'; // AUTO-GENERATED
 
 @InjectableInit()
-void configureDependencies() {
-  di.init();
+Future configureDependencies() async {
+  await di.init();
 }
 
 @module // register third-party

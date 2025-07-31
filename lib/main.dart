@@ -6,7 +6,7 @@ import 'injectable.dart';
 Future<void> main() async {
   'starting app'.log();
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
+  await configureDependencies();
   runApp(AppBase());
   'started app'.log();
 }
