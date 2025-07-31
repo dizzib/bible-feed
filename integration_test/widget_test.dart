@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:watch_it/watch_it.dart';
+import 'package:bible_feed/injectable.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/model/list_wheel_state.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
@@ -22,9 +22,9 @@ void main() async {
   final gospels = PghReadingLists().items[0];
   final matthew = gospels[0];
 
+  await configureDependencies();
+
   testWidgets('BookChapterDialog', (WidgetTester t) async {
-    sl.registerLazySingleton(() => BookListWheelState());
-    sl.registerLazySingleton(() => ChapterListWheelState());
     await t.initialiseWidget(BookChapterDialog(Feed(gospels)));
     await t.scrollToLastChapter();
     await t.pump();
