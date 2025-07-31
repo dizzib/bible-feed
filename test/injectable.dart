@@ -9,6 +9,7 @@ import 'injectable.config.dart'; // AUTO-GENERATED
     initializerName: 'initTest' // optional name to avoid confusion with the main init method
     )
 Future configureDependencies() async {
+  await di.reset();
   await di.initTest(environment: 'test');
 }
 

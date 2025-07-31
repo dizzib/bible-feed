@@ -22,7 +22,6 @@ void main() async {
       'l1.dateModified': DateTime.now().toIso8601String(),
       'hasEverAdvanced': false,
     });
-    sl.pushNewScope();
     await configureDependencies();
     feeds = Feeds(di<ReadingLists>(), di<SharedPreferences>());
   });

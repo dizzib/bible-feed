@@ -11,7 +11,6 @@ import '../stub/feed_stub.dart';
 void main() async {
   initFeed(Map<String, Object> storeValues) async {
     SharedPreferences.setMockInitialValues(storeValues);
-    sl.pushNewScope();
     await configureDependencies();
     f2.loadStateOrDefaults();
   }
