@@ -12,4 +12,5 @@ abstract class ListWheelState with ChangeNotifier {
 }
 
 class BookListWheelState extends ListWheelState {}
+
 class ChapterListWheelState extends ListWheelState {}
