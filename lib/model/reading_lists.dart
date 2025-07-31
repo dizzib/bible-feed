@@ -2,7 +2,7 @@ import '/model/book.dart';
 import '/model/reading_list.dart';
 
 class ReadingLists {
-  final _items = [
+  final items = [
     ReadingList('gos', 'Gospels', const [
       Book('mat', 'Matthew', 28),
       Book('mar', 'Mark', 16),
@@ -90,6 +90,4 @@ class ReadingLists {
       Book('act', 'Acts', 28),
     ])
   ];
-
-  List<ReadingList> get items => _items;
 }
