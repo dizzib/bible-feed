@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:bible_feed/model/reading_lists.dart';
-import 'reading_list_mock.dart';
+import 'reading_list_stub.dart';
 
 @LazySingleton(
   as: ReadingLists,

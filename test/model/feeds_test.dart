@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_lists.dart';
-import '../mock/reading_list_mock.dart';
+import '../stub/reading_list_stub.dart';
 import '../injectable.dart';
 
 void main() async {
