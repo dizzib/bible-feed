@@ -4,9 +4,11 @@ import 'package:watch_it/watch_it.dart';
 import 'package:injectable/injectable.dart';
 import 'injectable.config.dart'; // AUTO-GENERATED
 
-@InjectableInit()
+@InjectableInit(
+  generateForDir: ['lib'],
+)
 Future configureDependencies() async {
-  await di.init();
+  await di.init(environment: 'prod');
 }
 
 @module // register third-party

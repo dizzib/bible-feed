@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
+import '../injectable.dart';
 import 'mock_book.dart';
 import 'mock_feed.dart';
 
@@ -11,7 +12,7 @@ void main() async {
   initFeed(Map<String, Object> storeValues) async {
     SharedPreferences.setMockInitialValues(storeValues);
     sl.pushNewScope();
-    sl.registerSingleton(await SharedPreferences.getInstance());
+    await configureDependencies();
     f2.loadStateOrDefaults();
   }
 

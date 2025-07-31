@@ -6,3 +6,4 @@ targets:
       injectable_generator:injectable_builder:
         generate_for:
           - lib/**
+          - test/**
