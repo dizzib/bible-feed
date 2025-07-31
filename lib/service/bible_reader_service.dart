@@ -1,10 +1,12 @@
 import 'package:flutter/widgets.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '/model/bible_reader.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
 import '/service/bible_reader_app_install_service.dart';
 
+@lazySingleton
 class BibleReaderService with ChangeNotifier {
   final BibleReaderAppInstallService bibleReaderAppInstallService;
   final BibleReaders bibleReaders;

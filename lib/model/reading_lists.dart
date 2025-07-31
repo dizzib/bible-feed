@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import '/model/book.dart';
 import '/model/reading_list.dart';
 
+@lazySingleton
 class ReadingLists {
   final items = [
     ReadingList('gos', 'Gospels', const [

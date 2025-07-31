@@ -1,9 +1,11 @@
 import 'package:clock/clock.dart';
 import 'package:cron/cron.dart';
 import 'package:flutter/widgets.dart';
+import 'package:injectable/injectable.dart';
 import '/extension/object.dart';
 import '/model/feeds.dart';
 
+@singleton // not lazy, to run maybeAdvance on startup
 class AutoAdvanceService with ChangeNotifier {
   final Feeds feeds;
 

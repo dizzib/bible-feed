@@ -1,0 +1,8 @@
+targets:
+  $default:
+    builders:
+      # Sometimes the package name does not match the builder name.
+      # In such case, refer to builder by {package_name}:{builder_key}.
+      injectable_generator:injectable_builder:
+        generate_for:
+          - lib/**

@@ -1,5 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'bible_reader.dart';
 import 'bible_reader_book_keymap.dart';
 
@@ -15,6 +16,7 @@ enum BibleReaderKey {
   weDevoteApp,
 }
 
+@lazySingleton
 class BibleReaders {
   BibleReaders() {
     certified = items.filter((entry) => entry.value.isCertifiedForThisPlatform);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
 abstract class ListWheelState with ChangeNotifier {
   late int _index;
@@ -11,6 +12,8 @@ abstract class ListWheelState with ChangeNotifier {
   }
 }
 
+@lazySingleton
 class BookListWheelState extends ListWheelState {}
 
+@lazySingleton
 class ChapterListWheelState extends ListWheelState {}
