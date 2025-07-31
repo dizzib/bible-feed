@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'mock_book.dart';
-import 'mock_reading_list.dart';
+import '../mock/book_mock.dart';
+import '../mock/reading_list_mock.dart';
 
 void main() {
   test('constructor', () {

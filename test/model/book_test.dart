@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'mock_book.dart';
+import '../mock/book_mock.dart';
 
 void main() {
   test('constructor', () {

@@ -1,5 +1,5 @@
 import 'package:bible_feed/model/feed.dart';
-import 'mock_reading_list.dart';
+import 'reading_list_mock.dart';
 
 var f0 = Feed(l0);
 var f1 = Feed(l1);

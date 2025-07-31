@@ -5,8 +5,8 @@ import 'package:watch_it/watch_it.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import '../injectable.dart';
-import 'mock_book.dart';
-import 'mock_feed.dart';
+import '../mock/book_mock.dart';
+import '../mock/feed_mock.dart';
 
 void main() async {
   initFeed(Map<String, Object> storeValues) async {
