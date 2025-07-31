@@ -4,8 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
 import '/model/feed.dart';
-import '/model/list_wheel/book_list_wheel_state.dart';
-import '/model/list_wheel/chapter_list_wheel_state.dart';
+import '/model/list_wheel_state.dart';
 
 class BookChapterDialogFooter extends WatchingWidget {
   final Feed feed;

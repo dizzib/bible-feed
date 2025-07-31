@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class ListWheelState<T> with ChangeNotifier {
-  //// abstract
-
-  T indexToItem(int index);
-  String itemToString(T item);
-
-  //// concrete
-
+abstract class ListWheelState with ChangeNotifier {
   late int _index;
 
   int get index => _index;
@@ -17,3 +10,6 @@ abstract class ListWheelState<T> with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class BookListWheelState extends ListWheelState {}
+class ChapterListWheelState extends ListWheelState {}

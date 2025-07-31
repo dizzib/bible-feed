@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/extension/build_context.dart';
-import '/model/list_wheel/list_wheel_state.dart';
+import '/model/list_wheel_state.dart';
 import '/view/list_wheel_effects.dart';
 
 // known issues with various wheel pickers...
@@ -13,9 +13,15 @@ import '/view/list_wheel_effects.dart';
 //
 class ListWheel extends StatelessWidget {
   final ListWheelState listWheelState;
+  final String Function(int) indexToString;
   final int maxIndex;
 
-  const ListWheel(this.listWheelState, {required Key key, required this.maxIndex}) : super(key: key);
+  const ListWheel(
+    this.listWheelState, {
+    required Key key,
+    required this.indexToString,
+    required this.maxIndex,
+  }) : super(key: key);
 
   @override
   build(context) {
@@ -53,7 +59,7 @@ class ListWheel extends StatelessWidget {
         childDelegate: ListWheelChildBuilderDelegate(
           builder: (_, int index) {
             if (index < 0 || index > maxIndex) return null;
-            return Text(listWheelState.itemToString(listWheelState.indexToItem(index)));
+            return Text(indexToString(index));
           },
         ),
         controller: controller,

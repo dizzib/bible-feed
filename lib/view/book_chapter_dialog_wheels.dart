@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 import '/model/reading_list.dart';
-import '/model/list_wheel/book_list_wheel_state.dart';
-import '/model/list_wheel/chapter_list_wheel_state.dart';
+import '/model/list_wheel_state.dart';
 import '/view/list_wheel.dart';
 
 class BookChapterDialogWheels extends WatchingWidget {
   final ReadingList readingList;
-
   const BookChapterDialogWheels(this.readingList);
 
   @override
@@ -27,12 +25,14 @@ class BookChapterDialogWheels extends WatchingWidget {
                 child: ListWheel(
                   sl<BookListWheelState>(),
                   key: const Key('book_wheel'),
+                  indexToString: (index) => readingList[index].name,
                   maxIndex: readingList.count - 1,
                 )),
             Flexible(
               child: ListWheel(
                 sl<ChapterListWheelState>(),
                 key: const Key('chapter_wheel'),
+                indexToString: (index) => (index + 1).toString(),
                 maxIndex: readingList[bookIndex].chapterCount - 1,
               ),
             ),
