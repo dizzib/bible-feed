@@ -38,11 +38,11 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
-    await gh.factoryAsync<_i655.PackageInfo>(
+    await gh.singletonAsync<_i655.PackageInfo>(
       () => registerModule.packageInfo,
       preResolve: true,
     );
-    await gh.factoryAsync<_i460.SharedPreferences>(
+    await gh.singletonAsync<_i460.SharedPreferences>(
       () => registerModule.sharedPreferences,
       preResolve: true,
     );

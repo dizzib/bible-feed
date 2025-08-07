@@ -14,8 +14,10 @@ Future configureDependencies() async {
 @module // register third-party
 abstract class RegisterModule {
   @preResolve
+  @singleton
   Future<PackageInfo> get packageInfo => PackageInfo.fromPlatform();
 
   @preResolve
+  @singleton
   Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
 }
