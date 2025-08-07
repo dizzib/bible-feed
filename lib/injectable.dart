@@ -17,6 +17,8 @@ abstract class RegisterModule {
   @singleton
   Future<PackageInfo> get packageInfo => PackageInfo.fromPlatform();
 
+  // TODO replace with SharedPreferencesWithCache when it supports unit tests
+  // https://github.com/flutter/flutter/issues/159597
   @preResolve
   @singleton
   Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
