@@ -91,12 +91,5 @@ void main() async {
         });
       });
     });
-
-    test('reload should refresh from store updated in background', () async {
-      sl<SharedPreferences>().setInt('l0.chapter', 2);
-      expect(feeds[0].chapter, 1);
-      feeds.reload();
-      expect(feeds[0].chapter, 2);
-    });
   });
 }
