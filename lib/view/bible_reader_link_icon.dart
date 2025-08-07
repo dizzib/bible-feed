@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
+
 import '/service/bible_reader_service.dart';
 
 class BibleReaderLinkIcon extends WatchingWidget {

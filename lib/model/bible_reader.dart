@@ -1,7 +1,9 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
+
 import '/extension/object.dart';
 import 'bible_reader_book_keymap.dart';
 import 'feed.dart';

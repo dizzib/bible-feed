@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+
 import '/model/book.dart';
 import '/model/reading_list.dart';
 

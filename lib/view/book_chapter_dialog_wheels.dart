@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
-import '/model/reading_list.dart';
+
 import '/model/list_wheel_state.dart';
+import '/model/reading_list.dart';
 import '/view/list_wheel.dart';
 
 class BookChapterDialogWheels extends WatchingWidget {

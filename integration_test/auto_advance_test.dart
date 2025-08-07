@@ -1,8 +1,9 @@
-import 'package:dartx/dartx.dart';
-import 'package:integration_test/integration_test.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:clock/clock.dart';
 import 'package:bible_feed/extension/object.dart';
+import 'package:clock/clock.dart';
+import 'package:dartx/dartx.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+
 import 'helper.dart';
 
 void main() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:watch_it/watch_it.dart';
+
 import '/extension/build_context.dart';
 import '/model/feed.dart';
 import '/service/bible_reader_service.dart';

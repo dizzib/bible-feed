@@ -1,6 +1,7 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+
 import 'bible_reader.dart';
 import 'bible_reader_book_keymap.dart';
 

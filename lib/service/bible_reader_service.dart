@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '/model/bible_reader.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
