@@ -11,27 +11,28 @@ enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 
 @lazySingleton
 class Feeds with ChangeNotifier {
-  final ReadingLists readingLists;
-  final SharedPreferences sharedPreferences;
+  final ReadingLists _readingLists;
+  final SharedPreferences _sharedPreferences;
 
-  Feeds(this.readingLists, this.sharedPreferences) : _feeds = readingLists.items.map((rl) => Feed(rl)).toList() {
+  Feeds(this._readingLists, this._sharedPreferences) {
+    _feeds = _readingLists.items.map((rl) => Feed(rl)).toList();
     for (Feed f in _feeds) {
       f.addListener(notifyListeners);
     }
   }
 
-  final List<Feed> _feeds;
+  late List<Feed> _feeds;
   final _hasEverAdvancedStoreKey = 'hasEverAdvanced';
 
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
-  bool get hasEverAdvanced => sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
+  bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
   Future forceAdvance() async {
     for (Feed f in _feeds) {
       await f.nextChapter();
     }
-    sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
+    _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
   }
 
   Future<AdvanceState> maybeAdvance() async {

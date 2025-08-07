@@ -48,14 +48,14 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i25.ReadingListsMock(),
       registerFor: {_test},
     );
-    gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
-          gh<_i823.ReadingLists>(),
-          gh<_i460.SharedPreferences>(),
-        ));
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.PghReadingLists(),
       registerFor: {_prod},
     );
+    gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
+          gh<_i823.ReadingLists>(),
+          gh<_i460.SharedPreferences>(),
+        ));
     return this;
   }
 }
