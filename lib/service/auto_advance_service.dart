@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import '/extension/object.dart';
 import '/model/feeds.dart';
 
-@singleton // not lazy, to run maybeAdvance on startup
+@lazySingleton
 class AutoAdvanceService with ChangeNotifier {
   final Feeds feeds;
 
