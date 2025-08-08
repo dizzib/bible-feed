@@ -1,9 +1,20 @@
 targets:
   $default:
-    builders:
-      # Sometimes the package name does not match the builder name.
-      # In such case, refer to builder by {package_name}:{builder_key}.
-      injectable_generator:injectable_builder:
-        generate_for:
-          - lib/**
-          - test/**
+    sources:
+      - integration_test/**
+      - lib/**
+      - test/**
+      # - tool/**
+      # It is important to include these in the default target.
+      - pubspec.*
+      - $package$
+
+    # builders:
+    #   # Sometimes the package name does not match the builder name.
+    #   # In such case, refer to builder by {package_name}:{builder_key}.
+    #   injectable_generator:injectable_builder:
+    #     enabled: true
+    #     generate_for:
+    #       include:
+    #         - lib/**
+    #         - test/**
