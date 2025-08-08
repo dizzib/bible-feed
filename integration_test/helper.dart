@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:bible_feed/main.dart' as bible_feed;
 import 'package:bible_feed/view/feed_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 expectBookAndChapter(String expectedBookName, int expectedChapter) {
   expectText(expectedBookName);
