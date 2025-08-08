@@ -1,3 +1,4 @@
+import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 
 class _AnsiColor {
@@ -12,7 +13,7 @@ class _AnsiColor {
 extension ObjectLog on Object {
   log() {
     if (kDebugMode) {
-      debugPrint('${_AnsiColor.yellow}${DateTime.now().toString()} ${_AnsiColor.cyan}${toString()}${_AnsiColor.reset}');
+      debugPrint('${_AnsiColor.yellow}${clock.now().toString()} ${_AnsiColor.cyan}${toString()}${_AnsiColor.reset}');
     }
     return this;
   }
