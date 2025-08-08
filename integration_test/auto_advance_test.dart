@@ -11,8 +11,8 @@ void main() {
 
   var now = DateTime.now();
   var midnightTonight = DateTime(now.year, now.month, now.day + 1);
-  var durationToTonight = midnightTonight.difference(now).log();
-  var mockClock = Clock(() => DateTime.now() - const Duration(seconds: 2) + durationToTonight);
+  var durationToMidnight = midnightTonight.difference(now).log();
+  var mockClock = Clock(() => DateTime.now() - const Duration(seconds: 2) + durationToMidnight);
 
   testWidgets('auto advance at midnight', (t) async {
     await withClock(mockClock, () async {
@@ -20,8 +20,7 @@ void main() {
       expectChapters(1);
       await t.tapAllLists();
       await t.tapNo();
-      await t.pump(const Duration(seconds: 4));
-      await t.pumpAndSettle();
+      await t.pump(const Duration(seconds: 2));
       expectChapters(2);
     });
   });

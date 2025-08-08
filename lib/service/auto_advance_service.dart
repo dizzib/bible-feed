@@ -1,30 +1,37 @@
 import 'package:clock/clock.dart';
-import 'package:cron/cron.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
+import 'dart:async';
 
 import '/extension/object.dart';
 import '/model/feeds.dart';
 
-@lazySingleton
+@singleton // cannot be lazy, else https://github.com/dart-lang/tools/issues/705 manifests in integration test
 class AutoAdvanceService with ChangeNotifier {
   final Feeds feeds;
 
   AutoAdvanceService(this.feeds) {
-    AppLifecycleListener(onResume: feeds.maybeAdvance);
+    AppLifecycleListener(onResume: onResume);
+    onResume();
+  }
 
-    var schedule = Schedule(
-      hours: '0', // at midnight
-      minutes: '0', // in the 1st minute. BUG: sometimes seems to skip 00 seconds!?
-      seconds: '*/5', // every 5 seconds, in an attempt to fix issue #1.
-    );
-    schedule.toCronString(hasSecond: true).log();
+  Timer? _timer;
 
-    Cron().schedule(schedule, () async {
-      clock.now().log();
-      if (await feeds.maybeAdvance() == AdvanceState.listsAdvanced) notifyListeners();
-    });
-
+  void onResume() {
     feeds.maybeAdvance();
+    _setTimer();
+  }
+
+  void _run() async {
+    if (await feeds.maybeAdvance() == AdvanceState.listsAdvanced) notifyListeners();
+    _setTimer();
+  }
+
+  void _setTimer() {
+    final midnightTonight = DateTime(clock.now().year, clock.now().month, clock.now().day + 1);
+    final durationToMidnight = midnightTonight.difference(clock.now());
+    _timer?.cancel();
+    _timer = Timer(durationToMidnight, _run);
+    'AutoAdvanceService: timer will fire in ${durationToMidnight.toString()}'.log();
   }
 }
