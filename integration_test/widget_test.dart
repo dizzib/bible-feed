@@ -31,20 +31,20 @@ void main() async {
     for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) {
       expectText(gospels[bookIndex].name);
     }
-    expectText(matthew.chapterCount.toString());
+    expectText(matthew.chapterCount);
     await t.scrollToLastBook();
     await t.pumpAndSettle();
     final john = gospels[3];
-    expectText(john.chapterCount.toString());
-    expectNoText((john.chapterCount + 1).toString()); // matthew 22-28 should disappear
-    expectNoText(matthew.chapterCount.toString());
+    expectText(john.chapterCount);
+    expectNoText((john.chapterCount + 1)); // matthew 22-28 should disappear
+    expectNoText(matthew.chapterCount);
   });
 
   testWidgets('FeedCard', (WidgetTester t) async {
     await t.initialiseWidget(FeedCard(Feed(gospels)));
     expectText(gospels.name);
     expectText(matthew.name);
-    expectText('1');
+    expectText(1);
   });
 
   testWidgets('FeedsView', (WidgetTester t) async {

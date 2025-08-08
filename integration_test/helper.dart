@@ -13,9 +13,9 @@ expectChapters(int expectedValue, {int count = 10}) {
 }
 
 // text helpers
-expectAtLeast1Text(String expectedText) => expectText(expectedText, matcher: findsAtLeast(1));
-expectNoText(String expectedText) => expectText(expectedText, matcher: findsNothing);
-expectText(String expectedText, {matcher = findsOneWidget}) => expect(find.text(expectedText), matcher);
+expectAtLeast1Text(dynamic expected) => expectText(expected.toString(), matcher: findsAtLeast(1));
+expectNoText(dynamic expected) => expectText(expected.toString(), matcher: findsNothing);
+expectText(dynamic expected, {matcher = findsOneWidget}) => expect(find.text(expected.toString()), matcher);
 
 extension AppTestHelper on WidgetTester {
   initialiseApp() async {
