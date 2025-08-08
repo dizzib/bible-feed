@@ -33,7 +33,7 @@ void main() async {
     }
     expectText(matthew.chapterCount.toString());
     await t.scrollToLastBook();
-    await t.pump();
+    await t.pumpAndSettle();
     final john = gospels[3];
     expectText(john.chapterCount.toString());
     expectNoText((john.chapterCount + 1).toString()); // matthew 22-28 should disappear
