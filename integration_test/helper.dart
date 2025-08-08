@@ -1,4 +1,5 @@
-import 'package:bible_feed/main.dart' as bible_feed;
+import 'package:bible_feed/injectable.dart';
+import 'package:bible_feed/view/app_base.dart';
 import 'package:bible_feed/view/feed_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,7 +20,9 @@ expectText(dynamic expected, {matcher = findsOneWidget}) => expect(find.text(exp
 
 extension AppTestHelper on WidgetTester {
   initialiseApp() async {
-    await bible_feed.main();
+    WidgetsFlutterBinding.ensureInitialized();
+    await configureDependencies();
+    runApp(AppBase());
     await pumpAndSettle();
   }
 
