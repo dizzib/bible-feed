@@ -17,7 +17,7 @@ class AutoAdvanceService {}
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
 Future configureDependencies() async {
-  await di.init(environment: 'prod');
+  await di.init(environment: 'prod'); // use production reading lists
 }
 
 @module // register third-party
