@@ -4,13 +4,15 @@ import 'package:watch_it/watch_it.dart';
 import 'injectable.config.dart'; // AUTO-GENERATED
 
 @InjectableInit(
-    generateForDir: ['lib/model', 'test'],
-    preferRelativeImports: true, // because classes inside of the test folder can not be package-imports
-    initializerName: 'initTest' // optional name to avoid confusion with the main init method
-    )
+  generateForDir: [
+    'lib/model',
+    'test',
+  ],
+  preferRelativeImports: true, // because classes inside this folder can not be package-imports
+)
 Future configureDependencies() async {
   await di.reset();
-  await di.initTest(environment: 'test');
+  await di.init(environment: 'test'); // use test reading lists
 }
 
 @module // register third-party
