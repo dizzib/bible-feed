@@ -19,9 +19,10 @@ void main() {
       await t.initialiseApp();
       expectChapters(1);
       await t.tapAllLists();
-      await t.tapNo();
-      await t.pump(const Duration(seconds: 2));
+      expectText('All done!');
+      await t.pumpAndSettle(const Duration(seconds: 2));
       expectChapters(2);
+      expectNoText('All done!');
     });
   });
 }
