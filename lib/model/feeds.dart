@@ -28,6 +28,15 @@ class Feeds with ChangeNotifier {
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
+  Feed? get lastModifiedFeed {
+    _feeds.sort((a, b) {
+      final aDate = a.dateModified ?? DateTime.fromMillisecondsSinceEpoch(0);
+      final bDate = b.dateModified ?? DateTime.fromMillisecondsSinceEpoch(0);
+      return bDate.compareTo(aDate);
+    });
+    return _feeds.first;
+  }
+
   Future forceAdvance() async {
     for (Feed f in _feeds) {
       await f.nextChapter();
