@@ -3,6 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '/extension/build_context.dart';
 import '/model/feed.dart';
+import '/model/feeds.dart';
 import '/service/bible_reader_service.dart';
 import 'book_chapter_dialog.dart';
 
@@ -13,15 +14,19 @@ class FeedCardTitleBar extends WatchingWidget {
   @override
   build(context) {
     final brs = watchIt<BibleReaderService>();
+    final feeds = watchIt<Feeds>();
     return Row(
       children: [
-        if (brs.isLinked && feed.isChapterRead)
+        if (brs.isLinked && feed.isChapterRead && feed.readingList.key == feeds.lastModifiedFeed?.readingList.key)
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: Icon(
-              Icons.auto_stories,
-              size: 24.0,
-              color: Theme.of(context).iconTheme.color,
+            child: Tooltip(
+              message: 'This is the last chapter you read',
+              child: Icon(
+                Icons.auto_stories,
+                size: 24.0,
+                color: Theme.of(context).iconTheme.color,
+              ),
             ),
           ),
         Expanded(
