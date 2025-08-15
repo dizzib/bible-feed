@@ -15,7 +15,7 @@ class FeedCardTitleBar extends WatchingWidget {
     final brs = watchIt<BibleReaderService>();
     return Row(
       children: [
-        if (brs.isLinked)
+        if (brs.isLinked && feed.isChapterRead)
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Icon(
