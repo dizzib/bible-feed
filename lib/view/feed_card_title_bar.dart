@@ -3,6 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '/extension/build_context.dart';
 import '/model/feed.dart';
+import '/service/bible_reader_service.dart';
 import 'book_chapter_dialog.dart';
 
 class FeedCardTitleBar extends WatchingWidget {
@@ -11,8 +12,18 @@ class FeedCardTitleBar extends WatchingWidget {
 
   @override
   build(context) {
+    final brs = watchIt<BibleReaderService>();
     return Row(
       children: [
+        if (brs.isLinked)
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Icon(
+              Icons.auto_stories,
+              size: 24.0,
+              color: Theme.of(context).iconTheme.color,
+            ),
+          ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
