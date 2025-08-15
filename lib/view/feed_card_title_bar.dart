@@ -18,15 +18,11 @@ class FeedCardTitleBar extends WatchingWidget {
     return Row(
       children: [
         if (brs.isLinked && feed.isChapterRead && feed.readingList.key == feeds.lastModifiedFeed?.readingList.key)
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
             child: Tooltip(
               message: 'This is the last chapter you read',
-              child: Icon(
-                Icons.auto_stories,
-                size: 24.0,
-                color: Theme.of(context).iconTheme.color,
-              ),
+              child: Icon(Icons.auto_stories),
             ),
           ),
         Expanded(
