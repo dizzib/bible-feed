@@ -4,6 +4,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '/extension/build_context.dart';
 import '/model/feed.dart';
+import '/model/feeds.dart';
 import '/service/bible_reader_service.dart';
 import 'book_chapter_dialog.dart';
 import 'feed_card_book_chapter.dart';
@@ -15,13 +16,17 @@ class FeedCard extends WatchingWidget {
 
   @override
   build(context) {
+    final brs = watchIt<BibleReaderService>();
+    final feeds = watchIt<Feeds>();
     watch(feed);
 
     return Opacity(
-      opacity: feed.isChapterRead ? 0.25 : 1,
+      opacity: feed.isChapterRead
+          ? (brs.isLinked && feed.readingList.key == feeds.lastModifiedFeed.readingList.key ? 0.5 : 0.25)
+          : 1,
       child: Card(
-        color:
-            feed.isChapterRead ? context.colorScheme.surfaceContainerLowest : context.colorScheme.surfaceContainerLow,
+        // color:
+        //     feed.isChapterRead ? context.colorScheme.surfaceContainerLowest : context.colorScheme.surfaceContainerLow,
         elevation: feed.isChapterRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
