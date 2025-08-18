@@ -44,7 +44,7 @@ class BibleReaders {
     BibleReaderKey.blueLetterWeb: const BibleReader(
       'Blue Letter Bible web',
       'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
-      [TargetPlatform.android, TargetPlatform.iOS],
+      [TargetPlatform.android, TargetPlatform.iOS], // all good
       BlueLetterBookKeyMap(),
     ),
     BibleReaderKey.lifeBibleApp: const BibleReader(
@@ -55,13 +55,13 @@ class BibleReaders {
     BibleReaderKey.logosBibleApp: const BibleReader(
       'Logos Bible app',
       'logosref:Bible.BOOK.CHAPTER',
-      [TargetPlatform.iOS], // android: back doesn't return to bible feed
+      [TargetPlatform.android, TargetPlatform.iOS], // android: back doesn't return to bible feed
       LogosBookKeyMap(),
     ),
     BibleReaderKey.oliveTreeApp: const BibleReader(
       'Olive Tree app',
       'olivetree://bible/BOOK.CHAPTER',
-      [TargetPlatform.iOS], // android: back doesn't return to bible feed
+      [TargetPlatform.android, TargetPlatform.iOS], // android: back doesn't return to bible feed
       OliveTreeBookKeyMap(),
     ),
     BibleReaderKey.weDevoteApp: const BibleReader(
@@ -73,7 +73,7 @@ class BibleReaders {
     BibleReaderKey.youVersionApp: const BibleReader(
       'YouVersion app',
       'youversion://bible?reference=BOOK.CHAPTER', // see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
-      [TargetPlatform.android, TargetPlatform.iOS],
+      [TargetPlatform.android, TargetPlatform.iOS], // all good
       OsisParatextBookKeyMap(),
     ),
   };
