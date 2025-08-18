@@ -21,9 +21,7 @@ class FeedCard extends WatchingWidget {
     watch(feed);
 
     return Opacity(
-      opacity: feed.isChapterRead
-          ? (brs.isLinked && feed.readingList.key == feeds.lastModifiedFeed.readingList.key ? 0.5 : 0.25)
-          : 1,
+      opacity: feed.isChapterRead ? (brs.isLinked && feed.book.key == feeds.lastModifiedFeed.book.key ? 0.5 : 0.25) : 1,
       child: Card(
         // color:
         //     feed.isChapterRead ? context.colorScheme.surfaceContainerLowest : context.colorScheme.surfaceContainerLow,

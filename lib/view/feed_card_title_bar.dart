@@ -17,7 +17,7 @@ class FeedCardTitleBar extends WatchingWidget {
     final feeds = watchIt<Feeds>();
     return Row(
       children: [
-        if (brs.isLinked && feed.isChapterRead && feed.readingList.key == feeds.lastModifiedFeed.readingList.key)
+        if (feed.isChapterRead && brs.isLinked && feed.book.key == feeds.lastModifiedFeed.book.key)
           const Padding(
             padding: EdgeInsets.only(left: 8.0),
             child: Tooltip(
