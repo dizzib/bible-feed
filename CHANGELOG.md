@@ -1,14 +1,12 @@
 # Bible Feed changelog
 
-All notable changes to this project will be documented here.
+All notable changes to this project are documented here.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.4.0] - 2025-08-18
 
 ### Added
-- capability to open a chapter in a bible reader when tapped
+- capability to open a chapter in an external bible reader when tapped
 
 
 ## [1.3.0] - 2025-07-03
@@ -57,3 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - increase font size when space permits
+
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
