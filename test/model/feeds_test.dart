@@ -50,6 +50,16 @@ void main() async {
     });
   });
 
+  test('lastModifiedFeed', () {
+    feeds[0].toggleIsChapterRead();
+    expect(feeds.lastModifiedFeed.book.key, 'b0');
+    feeds[1].toggleIsChapterRead();
+    expect(feeds.lastModifiedFeed.book.key, 'b1');
+    // ensure no side effects
+    expect(feeds[0].readingList.key, 'l0');
+    expect(feeds[1].readingList.key, 'l1');
+  });
+
   group('Advance:', () {
     checkHasAdvanced(bool shouldAdvance) {
       expect(feeds[0].chapter, shouldAdvance ? 2 : 1);
