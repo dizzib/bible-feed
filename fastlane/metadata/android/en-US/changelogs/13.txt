@@ -1,0 +1,2 @@
+Added
+- capability to open a chapter in an external bible reader when tapped
