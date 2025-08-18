@@ -36,7 +36,7 @@ class FeedCardBookChapter extends StatelessWidget {
       return Center(
         child: AutoSizeText(
           '${feed.book.name}\u00A0${feed.chapter}${feed.tip}',
-          maxLines: 2,
+          maxLines: 3,
           textAlign: TextAlign.center,
         ),
       );
