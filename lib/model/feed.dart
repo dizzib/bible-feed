@@ -6,10 +6,13 @@ import 'book.dart';
 import 'reading_list.dart';
 
 part '/extension/feed.dart';
+part '/extension/feed_scope.dart';
 part '/extension/feed_tip.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
+  final ReadingList _readingList;
+
   Feed(this._readingList) {
     loadStateOrDefaults();
     notifyListeners();
@@ -18,20 +21,20 @@ class Feed with ChangeNotifier {
   late Book _book;
   late int _chapter;
   late DateTime? _dateModified;
-  late bool _isChapterRead;
-  final ReadingList _readingList;
+  late bool _isRead;
+  late int _verse;
 
   Book get book => _book;
   int get bookIndex => _readingList.indexOf(_book);
   int get chapter => _chapter;
-  int get chaptersRead => _chapter + (_isChapterRead ? 1 : 0) - 1;
+  int get chaptersRead => _chapter + (_isRead ? 1 : 0) - 1;
   DateTime? get dateModified => _dateModified;
-  bool get isChapterRead => _isChapterRead;
+  bool get isChapterRead => _isRead;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
 
   @visibleForTesting
-  set isChapterRead(bool value) => _isChapterRead = value;
+  set isChapterRead(bool value) => _isRead = value;
 
   Future _notifyListenersAndSave() async {
     notifyListeners();
@@ -39,13 +42,13 @@ class Feed with ChangeNotifier {
   }
 
   Future nextChapter() async {
-    assert(_isChapterRead);
+    assert(_isRead);
     void nextBook() => _book = readingList[(bookIndex + 1) % readingList.count];
     if (++_chapter > _book.chapterCount) {
       nextBook();
       _chapter = 1;
     }
-    _isChapterRead = false;
+    _isRead = false;
     await _notifyListenersAndSave();
   }
 
@@ -53,12 +56,12 @@ class Feed with ChangeNotifier {
     if (bookIndex == this.bookIndex && chapter == this.chapter) return;
     _book = readingList[bookIndex];
     _chapter = chapter;
-    _isChapterRead = false;
+    _isRead = false;
     await _notifyListenersAndSave();
   }
 
   Future toggleIsChapterRead() async {
-    _isChapterRead = !_isChapterRead;
+    _isRead = !_isRead;
     await _notifyListenersAndSave();
   }
 }
