@@ -1,6 +1,6 @@
 # Bible Feed
 
-This repository contains the open-source code for the Bible Feed app for Android.
+This repository contains the open-source code for the Bible Feed app for Android and iOS.
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
