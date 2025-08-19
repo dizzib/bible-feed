@@ -52,11 +52,11 @@ void main() async {
 
   test('lastModifiedFeed', () {
     feeds[0].toggleIsChapterRead();
-    expect(feeds.lastModifiedFeed?.book.key, 'b0');
+    expect(feeds.lastModifiedFeed, feeds[0]);
     feeds[1].toggleIsChapterRead();
-    expect(feeds.lastModifiedFeed?.book.key, 'b1');
+    expect(feeds.lastModifiedFeed, feeds[1]);
     feeds[0].toggleIsChapterRead();
-    expect(feeds.lastModifiedFeed?.book.key, 'b0');
+    expect(feeds.lastModifiedFeed, feeds[0]);
   });
 
   group('Advance:', () {
