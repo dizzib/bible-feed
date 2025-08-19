@@ -17,18 +17,19 @@ class Feed with ChangeNotifier {
 
   late Book _book;
   late int _chapter;
-  late bool _isChapterRead;
   late DateTime? _dateModified;
+  late bool _isChapterRead;
   final ReadingList _readingList;
 
   Book get book => _book;
-  int get chapter => _chapter;
-  bool get isChapterRead => _isChapterRead;
-  DateTime? get dateModified => _dateModified;
-  ReadingList get readingList => _readingList;
   int get bookIndex => _readingList.indexOf(_book);
+  int get chapter => _chapter;
   int get chaptersRead => _chapter + (_isChapterRead ? 1 : 0) - 1;
+  DateTime? get dateModified => _dateModified;
+  bool get isChapterRead => _isChapterRead;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
+  ReadingList get readingList => _readingList;
+
   @visibleForTesting
   set isChapterRead(bool value) => _isChapterRead = value;
 
