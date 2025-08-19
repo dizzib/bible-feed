@@ -21,7 +21,7 @@ class FeedCard extends WatchingWidget {
     watch(feed);
 
     return Opacity(
-      opacity: feed.isChapterRead ? (brs.isLinked && feed.book.key == feeds.lastModifiedFeed.book.key ? 0.5 : 0.25) : 1,
+      opacity: feed.isChapterRead ? (brs.isLinked && feed.book.key == feeds.lastModifiedFeed?.book.key ? 0.5 : 0.25) : 1,
       child: Card(
         elevation: feed.isChapterRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
