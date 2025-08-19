@@ -17,21 +17,21 @@ class Feeds with ChangeNotifier {
   Feeds(this._readingLists, this._sharedPreferences) {
     _feeds = _readingLists.items.map((rl) => Feed(rl)).toList();
     for (Feed f in _feeds) {
-      f.addListener(notifyListeners);
+      f.addListener(() {
+        _lastModifiedFeed = f;
+        notifyListeners();
+      });
     }
   }
 
-  late List<Feed> _feeds;
   final _hasEverAdvancedStoreKey = 'hasEverAdvanced';
+  late List<Feed> _feeds;
+  late Feed _lastModifiedFeed;
 
   Feed operator [](int i) => _feeds[i];
   bool get areChaptersRead => _feeds.where((feed) => !feed.isChapterRead).isEmpty;
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
-  Feed get lastModifiedFeed => _feeds.reduce((a, b) {
-        final aDate = a.dateModified ?? DateTime.fromMillisecondsSinceEpoch(0);
-        final bDate = b.dateModified ?? DateTime.fromMillisecondsSinceEpoch(0);
-        return aDate.isAfter(bDate) ? a : b;
-      });
+  Feed get lastModifiedFeed => _lastModifiedFeed;
 
   Future forceAdvance() async {
     for (Feed f in _feeds) {

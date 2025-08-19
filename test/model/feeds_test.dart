@@ -55,9 +55,8 @@ void main() async {
     expect(feeds.lastModifiedFeed.book.key, 'b0');
     feeds[1].toggleIsChapterRead();
     expect(feeds.lastModifiedFeed.book.key, 'b1');
-    // ensure no side effects
-    expect(feeds[0].readingList.key, 'l0');
-    expect(feeds[1].readingList.key, 'l1');
+    feeds[0].toggleIsChapterRead();
+    expect(feeds.lastModifiedFeed.book.key, 'b0');
   });
 
   group('Advance:', () {
