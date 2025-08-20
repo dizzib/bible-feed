@@ -59,7 +59,21 @@ class PghReadingLists implements ReadingLists {
           Book('sos', 'Song of Solomon', 8),
         ]),
         ReadingList('psa', 'Psalms', const [
-          Book('psa', 'Psalm', 150),
+          Book('psa', 'Psalm', 150, {
+            119: {
+              1: 'ℵ_Aleph__ℶ_Beth',
+              17: 'ג_Gimel__ד_Daleth',
+              33: 'ה_He__ו_Waw',
+              49: 'ז_Zayin__ח_Heth',
+              65: 'ט_Teth__י_Yod',
+              81: 'כ_Kaph__ל_Lamed',
+              97: 'מ_Mem__נ_Nun',
+              113: 'ס_Samek__ע_Ayin',
+              129: 'פ_Pe__צ_Tsadde',
+              145: 'ק_Qoph__ר_Resh',
+              161: 'ש_Shin__ת_Tau',
+            }
+          })
         ]),
         ReadingList('prv', 'Proverbs', const [
           Book('prv', 'Proverbs', 31),
