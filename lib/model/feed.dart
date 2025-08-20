@@ -7,7 +7,6 @@ import 'reading_list.dart';
 
 part '/extension/feed.dart';
 part '/extension/feed_scope.dart';
-part '/extension/feed_tip.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
@@ -41,6 +40,7 @@ class Feed with ChangeNotifier {
       _advanceBook();
       _chapter = 1;
     }
+    _verse = 1;
   }
 
   void _advanceBook() => _book = _readingList[(bookIndex + 1) % _readingList.count];
@@ -62,6 +62,7 @@ class Feed with ChangeNotifier {
     _book = readingList[bookIndex];
     _chapter = chapter;
     _isRead = false;
+    _verse = 1;
     await _notifyListenersAndSave();
   }
 

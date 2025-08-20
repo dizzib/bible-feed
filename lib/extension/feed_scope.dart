@@ -4,23 +4,27 @@ extension FeedScope on Feed {
   static const _scopes = {
     'psa': {
       119: {
-        1: 'ℵ_Aleph_ℶ_Beth',
-        17: 'ג_Gimel_ד_Daleth',
-        33: 'ה_He_ו_Waw',
-        49: 'ז_Zayin_ח_Heth',
-        65: 'ט_Teth_י_Yod',
-        81: 'כ_Kaph_ל_Lamed',
-        97: 'מ_Mem_נ_Nun',
-        113: 'ס_Samek_ע_Ayin',
-        129: 'פ_Pe_צ_Tsadde',
-        145: 'ק_Qoph_ר_Resh',
-        161: 'ש_Shin_ת_Tau',
+        1: 'ℵ_Aleph__ℶ_Beth',
+        17: 'ג_Gimel__ד_Daleth',
+        33: 'ה_He__ו_Waw',
+        49: 'ז_Zayin__ח_Heth',
+        65: 'ט_Teth__י_Yod',
+        81: 'כ_Kaph__ל_Lamed',
+        97: 'מ_Mem__נ_Nun',
+        113: 'ס_Samek__ע_Ayin',
+        129: 'פ_Pe__צ_Tsadde',
+        145: 'ק_Qoph__ר_Resh',
+        161: 'ש_Shin__ת_Tau',
       }
     }
   };
 
   bool get isInScope => _scopes[_book.key]?[_chapter] != null;
-  String get scopeName => isInScope ? _scopes[_book.key]![_chapter]![_verse]! : '';
+  String get scopeName {
+    if (!isInScope) return '';
+    var name = _scopes[_book.key]![_chapter]![_verse]!;
+    return name.replaceAll('_', String.fromCharCode(0x00A0));
+  }
 
   bool _advanceVerse() {
     assert(_isRead);
