@@ -33,7 +33,7 @@ void main() async {
 
   test('areChaptersRead', () {
     expect(feeds.areChaptersRead, false);
-    feeds[1].toggleIsChapterRead();
+    feeds[1].toggleIsRead();
     expect(feeds.areChaptersRead, true);
   });
 
@@ -43,7 +43,7 @@ void main() async {
     });
 
     test('should be stored true after advance', () async {
-      feeds[1].toggleIsChapterRead();
+      feeds[1].toggleIsRead();
       await feeds.forceAdvance();
       expect(sl<SharedPreferences>().getBool('hasEverAdvanced'), true);
       expect(feeds.hasEverAdvanced, true);
@@ -51,11 +51,11 @@ void main() async {
   });
 
   test('lastModifiedFeed', () {
-    feeds[0].toggleIsChapterRead();
+    feeds[0].toggleIsRead();
     expect(feeds.lastModifiedFeed, feeds[0]);
-    feeds[1].toggleIsChapterRead();
+    feeds[1].toggleIsRead();
     expect(feeds.lastModifiedFeed, feeds[1]);
-    feeds[0].toggleIsChapterRead();
+    feeds[0].toggleIsRead();
     expect(feeds.lastModifiedFeed, feeds[0]);
   });
 
@@ -66,7 +66,7 @@ void main() async {
     }
 
     test('forceAdvance should advance all feeds', () async {
-      feeds[1].toggleIsChapterRead();
+      feeds[1].toggleIsRead();
       await feeds.forceAdvance();
       checkHasAdvanced(true);
     });
@@ -81,19 +81,19 @@ void main() async {
 
       group('if all read and latest saved day is', () {
         test('today, should not advance', () async {
-          feeds[1].toggleIsChapterRead();
+          feeds[1].toggleIsRead();
           expect(await feeds.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
           checkHasAdvanced(false);
         });
 
         test('yesterday, should advance', () async {
-          feeds[1].toggleIsChapterRead();
+          feeds[1].toggleIsRead();
           expect(await withClock(tomorrow, feeds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
 
         test('1 week ago, should advance', () async {
-          feeds[1].toggleIsChapterRead();
+          feeds[1].toggleIsRead();
           final nextWeek = Clock.fixed(const Clock().weeksFromNow(1));
           expect(await withClock(nextWeek, feeds.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);

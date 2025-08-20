@@ -65,7 +65,7 @@ class Feed with ChangeNotifier {
     await _notifyListenersAndSave();
   }
 
-  Future toggleIsChapterRead() async {
+  Future toggleIsRead() async {
     _isRead = !_isRead;
     await _notifyListenersAndSave();
   }

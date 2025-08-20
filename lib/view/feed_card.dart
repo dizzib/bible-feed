@@ -31,7 +31,7 @@ class FeedCard extends WatchingWidget {
           onTap: () {
             HapticFeedback.lightImpact();
             sl<BibleReaderService>().launchLinkedBibleReader(feed);
-            feed.toggleIsChapterRead();
+            feed.toggleIsRead();
           },
           child: LayoutBuilder(
             builder: (_, BoxConstraints c) => Column(

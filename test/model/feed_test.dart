@@ -135,16 +135,16 @@ void main() async {
       expect(f2.isChapterRead, false);
     });
 
-    test('toggleIsChapterRead should toggle and store', () async {
-      void checkIsChapterRead(bool expected) {
+    test('toggleIsRead should toggle and store', () async {
+      void checkIsRead(bool expected) {
         expect(f2.isChapterRead, expected);
         expect(sl<SharedPreferences>().getBool('l2.isRead')!, expected);
       }
 
-      await f2.toggleIsChapterRead();
-      checkIsChapterRead(false);
-      await f2.toggleIsChapterRead();
-      checkIsChapterRead(true);
+      await f2.toggleIsRead();
+      checkIsRead(false);
+      await f2.toggleIsRead();
+      checkIsRead(true);
       checkBookChapterAndStore(b1, 2); // ensure no side effects
     });
   });
