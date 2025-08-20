@@ -12,23 +12,33 @@ import 'feeds.dart';
 @immutable
 // for ios, scheme must be added to info.plist!!!
 class BibleReader {
-  const BibleReader(this.displayName, this.uri, this.certifiedPlatforms,
-      [this.bookKeyMap = const IdentityBookKeyMap()]);
+  const BibleReader(
+    this.displayName,
+    this.uriTemplate,
+    this.certifiedPlatforms, {
+    this.bookKeyMap = const IdentityBookKeyMap(),
+    this.uriVersePath,
+  });
 
   final BibleReaderBookKeyMap bookKeyMap;
   final List<TargetPlatform> certifiedPlatforms; // platforms confirmed working with no issues
   final String displayName;
-  final String uri;
+  final String uriTemplate;
+  final String? uriVersePath;
 
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
 
   Uri getDeeplinkUri(Feed f) {
     final bookId = bookKeyMap.apply(f.book);
-    return Uri.parse(uri.replaceAll('BOOK', bookId).replaceAll('CHAPTER', f.chapter.toString())).log();
+    var uri = uriTemplate.replaceAll('BOOK', bookId).replaceAll('CHAPTER', f.chapter.toString());
+    if (uriVersePath != null && f.verse > 1) {
+      uri += uriVersePath!.replaceAll('VERSE', f.verse.toString());
+    }
+    return Uri.parse(uri).log();
   }
 
   Future<bool> isAvailable() async {
-    if (uri.isEmpty) return Future.value(true);
+    if (uriTemplate.isEmpty) return Future.value(true);
     return canLaunchUrl(getDeeplinkUri(sl<Feeds>()[0]));
   }
 
