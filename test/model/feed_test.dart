@@ -1,18 +1,22 @@
+import 'package:bible_feed/model/book.dart';
+import 'package:bible_feed/model/feed.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
-import 'package:bible_feed/model/book.dart';
-import 'package:bible_feed/model/feed.dart';
+
 import '../injectable.dart';
 import '../stub/book_stub.dart';
-import '../stub/feed_stub.dart';
+import '../stub/reading_list_stub.dart';
+
+late Feed feed;
 
 void main() async {
   initFeed(Map<String, Object> storeValues) async {
     SharedPreferences.setMockInitialValues(storeValues);
     await configureDependencies();
-    f2.loadStateOrDefaults();
+    feed = Feed(l2, sl<SharedPreferences>());
+    feed.loadStateOrDefaults();
   }
 
   DateTime yesterday = DateTime.now() - const Duration(days: 1);
@@ -29,56 +33,56 @@ void main() async {
   group('constructor', () {
     test('should load defaults if store is empty', () async {
       await initFeed({});
-      expect(f2.book, b0);
-      expect(f2.chapter, 1);
-      expect(f2.dateModified, null);
-      expect(f2.isRead, false);
-      expect(f2.verse, 1);
+      expect(feed.book, b0);
+      expect(feed.chapter, 1);
+      expect(feed.dateModified, null);
+      expect(feed.isRead, false);
+      expect(feed.verse, 1);
     });
 
     test('should load state from non-empty store', () {
-      expect(f2.book, b1);
-      expect(f2.chapter, 2);
-      expect(f2.dateModified, yesterday);
-      expect(f2.isRead, true);
-      expect(f2.verse, 1);
+      expect(feed.book, b1);
+      expect(feed.chapter, 2);
+      expect(feed.dateModified, yesterday);
+      expect(feed.isRead, true);
+      expect(feed.verse, 1);
     });
   });
 
   group('property', () {
     test('book get', () {
-      expect(f2.book, b1);
+      expect(feed.book, b1);
     });
 
     test('bookIndex get', () {
-      expect(f2.bookIndex, 1);
+      expect(feed.bookIndex, 1);
     });
 
     test('chapter get', () {
-      expect(f2.chapter, 2);
+      expect(feed.chapter, 2);
     });
 
     test('isChapterRead get/set should affect chaptersRead', () {
-      expect(f2.isRead, true);
-      expect(f2.chaptersRead, 2);
-      f2.isRead = false;
-      expect(f2.isRead, false);
-      expect(f2.chaptersRead, 1);
+      expect(feed.isRead, true);
+      expect(feed.chaptersRead, 2);
+      feed.isRead = false;
+      expect(feed.isRead, false);
+      expect(feed.chaptersRead, 1);
     });
 
     test('progress get', () {
-      f2.advance();
-      expect(f2.progress, 0.7);
+      feed.advance();
+      expect(feed.progress, 0.7);
     });
   });
 
   group('method', () {
     void checkStateAndStore(Book expectedBook, int expectedChapter,
         [int expectedVerse = 1, String expectedChapterSplitName = '']) {
-      expect(f2.book, expectedBook);
-      expect(f2.chapter, expectedChapter);
-      expect(f2.chapterSplitName, expectedChapterSplitName);
-      expect(f2.verse, expectedVerse);
+      expect(feed.book, expectedBook);
+      expect(feed.chapter, expectedChapter);
+      expect(feed.chapterSplitName, expectedChapterSplitName);
+      expect(feed.verse, expectedVerse);
       expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
       expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);
       expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateModified')!).date, DateTime.now().date);
@@ -86,13 +90,13 @@ void main() async {
 
     group('advance', () {
       advance() async {
-        f2.isRead = true;
-        await f2.advance();
+        feed.isRead = true;
+        await feed.advance();
       }
 
       test('should fail assertion if not read', () {
-        f2.isRead = false;
-        expect(f2.advance(), throwsAssertionError);
+        feed.isRead = false;
+        expect(feed.advance(), throwsAssertionError);
       });
 
       test('full cycle: should advance/reset chapter and book, and store', () async {
@@ -123,32 +127,32 @@ void main() async {
       });
 
       test('should +0 chaptersRead', () async {
-        expect(f2.chaptersRead, 2);
+        expect(feed.chaptersRead, 2);
         await advance();
-        expect(f2.chaptersRead, 2);
+        expect(feed.chaptersRead, 2);
       });
 
       test('should reset isRead', () async {
         await advance();
-        expect(f2.isRead, false);
+        expect(feed.isRead, false);
       });
     });
 
     test('setBookAndChapter should set book/chapter, reset isRead, and store', () async {
-      await f2.setBookAndChapter(0, 4);
+      await feed.setBookAndChapter(0, 4);
       checkStateAndStore(b0, 4);
-      expect(f2.isRead, false);
+      expect(feed.isRead, false);
     });
 
     test('toggleIsRead should toggle and store', () async {
       void checkIsRead(bool expected) {
-        expect(f2.isRead, expected);
+        expect(feed.isRead, expected);
         expect(sl<SharedPreferences>().getBool('l2.isRead')!, expected);
       }
 
-      await f2.toggleIsRead();
+      await feed.toggleIsRead();
       checkIsRead(false);
-      await f2.toggleIsRead();
+      await feed.toggleIsRead();
       checkIsRead(true);
       checkStateAndStore(b1, 2); // ensure no side effects
     });

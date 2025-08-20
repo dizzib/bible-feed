@@ -7,6 +7,7 @@ import 'package:bible_feed/view/feeds_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import 'helper.dart';
@@ -26,7 +27,7 @@ void main() async {
   await configureDependencies();
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
-    await t.initialiseWidget(BookChapterDialog(Feed(gospels)));
+    await t.initialiseWidget(BookChapterDialog(Feed(gospels, sl<SharedPreferences>())));
     await t.scrollToLastChapter();
     await t.pump();
     for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) {
@@ -42,7 +43,7 @@ void main() async {
   });
 
   testWidgets('FeedCard', (WidgetTester t) async {
-    await t.initialiseWidget(FeedCard(Feed(gospels)));
+    await t.initialiseWidget(FeedCard(Feed(gospels, sl<SharedPreferences>())));
     expectText(gospels.name);
     expectText(matthew.name);
     expectText(1);

@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watch_it/watch_it.dart';
 
 import 'book.dart';
 import 'reading_list.dart';
@@ -11,8 +10,9 @@ part '/extension/feed_chapter_split.dart';
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
   final ReadingList _readingList;
+  final SharedPreferences _sharedPreferences;
 
-  Feed(this._readingList) {
+  Feed(this._readingList, this._sharedPreferences) {
     loadStateOrDefaults();
     notifyListeners();
   }

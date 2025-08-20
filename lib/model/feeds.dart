@@ -15,7 +15,7 @@ class Feeds with ChangeNotifier {
   final SharedPreferences _sharedPreferences;
 
   Feeds(this._readingLists, this._sharedPreferences) {
-    _feeds = _readingLists.items.map((rl) => Feed(rl)).toList();
+    _feeds = _readingLists.items.map((rl) => Feed(rl, _sharedPreferences)).toList();
     for (Feed f in _feeds) {
       f.addListener(() {
         _lastModifiedFeed = f;
