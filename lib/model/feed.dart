@@ -29,12 +29,12 @@ class Feed with ChangeNotifier {
   int get chapter => _chapter;
   int get chaptersRead => _chapter + (_isRead ? 1 : 0) - 1;
   DateTime? get dateModified => _dateModified;
-  bool get isChapterRead => _isRead;
+  bool get isRead => _isRead;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   int get verse => _verse;
   @visibleForTesting
-  set isChapterRead(bool value) => _isRead = value;
+  set isRead(bool value) => _isRead = value;
 
   void _advanceChapter() {
     if (++_chapter > _book.chapterCount) {

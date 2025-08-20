@@ -32,7 +32,7 @@ void main() async {
       expect(f2.book, b0);
       expect(f2.chapter, 1);
       expect(f2.dateModified, null);
-      expect(f2.isChapterRead, false);
+      expect(f2.isRead, false);
       expect(f2.verse, 1);
     });
 
@@ -40,7 +40,7 @@ void main() async {
       expect(f2.book, b1);
       expect(f2.chapter, 2);
       expect(f2.dateModified, yesterday);
-      expect(f2.isChapterRead, true);
+      expect(f2.isRead, true);
       expect(f2.verse, 1);
     });
   });
@@ -59,10 +59,10 @@ void main() async {
     });
 
     test('isChapterRead get/set should affect chaptersRead', () {
-      expect(f2.isChapterRead, true);
+      expect(f2.isRead, true);
       expect(f2.chaptersRead, 2);
-      f2.isChapterRead = false;
-      expect(f2.isChapterRead, false);
+      f2.isRead = false;
+      expect(f2.isRead, false);
       expect(f2.chaptersRead, 1);
     });
 
@@ -83,12 +83,12 @@ void main() async {
 
     group('nextChapter', () {
       next() async {
-        f2.isChapterRead = true;
+        f2.isRead = true;
         await f2.advance();
       }
 
       test('should fail assertion if not read', () {
-        f2.isChapterRead = false;
+        f2.isRead = false;
         expect(f2.advance(), throwsAssertionError);
       });
 
@@ -125,19 +125,19 @@ void main() async {
 
       test('should reset isChapterRead', () async {
         await next();
-        expect(f2.isChapterRead, false);
+        expect(f2.isRead, false);
       });
     });
 
-    test('setBookAndChapter should set book/chapter, reset isChapterRead, and store', () async {
+    test('setBookAndChapter should set book/chapter, reset isRead, and store', () async {
       await f2.setBookAndChapter(0, 4);
       checkBookChapterAndStore(b0, 4);
-      expect(f2.isChapterRead, false);
+      expect(f2.isRead, false);
     });
 
     test('toggleIsRead should toggle and store', () async {
       void checkIsRead(bool expected) {
-        expect(f2.isChapterRead, expected);
+        expect(f2.isRead, expected);
         expect(sl<SharedPreferences>().getBool('l2.isRead')!, expected);
       }
 
