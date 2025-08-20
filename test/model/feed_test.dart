@@ -73,7 +73,7 @@ void main() async {
   });
 
   group('method', () {
-    void checkBookChapterAndStore(Book expectedBook, int expectedChapter) {
+    void checkStateAndStore(Book expectedBook, int expectedChapter) {
       expect(f2.book, expectedBook);
       expect(f2.chapter, expectedChapter);
       expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
@@ -94,27 +94,27 @@ void main() async {
 
       test('full cycle: should advance/reset chapter and book, and store', () async {
         await advance();
-        checkBookChapterAndStore(b1, 3);
+        checkStateAndStore(b1, 3);
         await advance();
-        checkBookChapterAndStore(b2, 1);
+        checkStateAndStore(b2, 1);
         await advance();
-        checkBookChapterAndStore(b2, 2);
+        checkStateAndStore(b2, 2);
         await advance();
-        checkBookChapterAndStore(b0, 1);
+        checkStateAndStore(b0, 1);
         await advance();
-        checkBookChapterAndStore(b0, 2);
+        checkStateAndStore(b0, 2);
         await advance();
-        checkBookChapterAndStore(b0, 3);
+        checkStateAndStore(b0, 3);
         await advance();
-        checkBookChapterAndStore(b0, 4);
+        checkStateAndStore(b0, 4);
         await advance();
-        checkBookChapterAndStore(b0, 5);
+        checkStateAndStore(b0, 5);
         await advance();
-        checkBookChapterAndStore(b1, 1);
+        checkStateAndStore(b1, 1);
         await advance();
-        checkBookChapterAndStore(b1, 2);
+        checkStateAndStore(b1, 2);
         await advance();
-        checkBookChapterAndStore(b1, 3);
+        checkStateAndStore(b1, 3);
       });
 
       test('should +0 chaptersRead', () async {
@@ -131,7 +131,7 @@ void main() async {
 
     test('setBookAndChapter should set book/chapter, reset isRead, and store', () async {
       await f2.setBookAndChapter(0, 4);
-      checkBookChapterAndStore(b0, 4);
+      checkStateAndStore(b0, 4);
       expect(f2.isRead, false);
     });
 
@@ -145,7 +145,7 @@ void main() async {
       checkIsRead(false);
       await f2.toggleIsRead();
       checkIsRead(true);
-      checkBookChapterAndStore(b1, 2); // ensure no side effects
+      checkStateAndStore(b1, 2); // ensure no side effects
     });
   });
 }
