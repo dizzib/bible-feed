@@ -123,7 +123,7 @@ void main() async {
         expect(f2.chaptersRead, 2);
       });
 
-      test('should reset isChapterRead', () async {
+      test('should reset isRead', () async {
         await advance();
         expect(f2.isRead, false);
       });
