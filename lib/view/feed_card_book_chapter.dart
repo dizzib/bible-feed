@@ -9,43 +9,17 @@ class FeedCardBookChapter extends StatelessWidget {
 
   @override
   build(context) {
-    // hypenation does not work well or look good, so stick with overflow ellipses
-    bookChapterNoTip() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: AutoSizeText(
-                feed.book.name,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ),
-          AutoSizeText(
-            feed.chapter.toString(),
-            maxLines: 1,
-          ),
-        ],
-      );
-    }
-
-    // for Psalms 119 only
-    bookChapterTip() {
-      return Center(
-        child: AutoSizeText(
-          '${feed.book.name}\u00A0${feed.chapter}${feed.tip}',
-          maxLines: 3,
-          textAlign: TextAlign.center,
-        ),
-      );
-    }
-
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: feed.hasTip ? bookChapterTip() : bookChapterNoTip(),
+        child: Center(
+          child: AutoSizeText(
+            '${feed.book.name} ${feed.chapter} ${feed.scopeName}',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
     );
   }

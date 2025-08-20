@@ -19,11 +19,12 @@ extension FeedScope on Feed {
     }
   };
 
-  String? get scopeName => _scopes[_book.key]?[_chapter]?[_verse];
+  bool get isInScope => _scopes[_book.key]?[_chapter] != null;
+  String get scopeName => isInScope ? _scopes[_book.key]![_chapter]![_verse]! : '';
 
   bool _advanceVerse() {
     assert(_isRead);
-    if (scopeName == null) return false;
+    if (!isInScope) return false;
     final verses = _scopes[_book.key]![_chapter]!.keys.toList();
     final index = verses.indexOf(_verse) + 1;
     if (index == verses.length) return false;
