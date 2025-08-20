@@ -32,22 +32,27 @@ class Feed with ChangeNotifier {
   bool get isChapterRead => _isRead;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
-
+  int get verse => _verse;
   @visibleForTesting
   set isChapterRead(bool value) => _isRead = value;
+
+  void _advanceChapter() {
+    if (++_chapter > _book.chapterCount) {
+      _advanceBook();
+      _chapter = 1;
+    }
+  }
+
+  void _advanceBook() => _book = _readingList[(bookIndex + 1) % _readingList.count];
 
   Future _notifyListenersAndSave() async {
     notifyListeners();
     await _saveState();
   }
 
-  Future nextChapter() async {
+  Future advance() async {
     assert(_isRead);
-    void nextBook() => _book = readingList[(bookIndex + 1) % readingList.count];
-    if (++_chapter > _book.chapterCount) {
-      nextBook();
-      _chapter = 1;
-    }
+    if (!_advanceVerse()) _advanceChapter();
     _isRead = false;
     await _notifyListenersAndSave();
   }

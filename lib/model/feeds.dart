@@ -35,7 +35,7 @@ class Feeds with ChangeNotifier {
 
   Future forceAdvance() async {
     for (Feed f in _feeds) {
-      await f.nextChapter();
+      await f.advance();
     }
     _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
   }

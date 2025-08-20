@@ -14,12 +14,12 @@ void main() async {
     SharedPreferences.setMockInitialValues({
       'l0.book': 'b0',
       'l0.chapter': 1,
-      'l0.isChapterRead': true,
       'l0.dateModified': DateTime.now().toIso8601String(),
+      'l0.isRead': true,
       'l1.book': 'b1',
       'l1.chapter': 1,
-      'l1.isChapterRead': false,
       'l1.dateModified': DateTime.now().toIso8601String(),
+      'l1.isRead': false,
       'hasEverAdvanced': false,
     });
     await configureDependencies();

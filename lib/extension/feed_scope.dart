@@ -1,7 +1,7 @@
 part of '/model/feed.dart';
 
 extension FeedScope on Feed {
-  static const scopes = {
+  static const _scopes = {
     'psa': {
       119: {
         1: 'ℵ_Aleph_ℶ_Beth',
@@ -18,4 +18,16 @@ extension FeedScope on Feed {
       }
     }
   };
+
+  String? get scopeName => _scopes[_book.key]?[_chapter]?[_verse];
+
+  bool _advanceVerse() {
+    assert(_isRead);
+    if (scopeName == null) return false;
+    final verses = _scopes[_book.key]![_chapter]!.keys.toList();
+    final index = verses.indexOf(_verse) + 1;
+    if (index == verses.length) return false;
+    _verse = verses[index];
+    return true;
+  }
 }

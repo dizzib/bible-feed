@@ -21,7 +21,7 @@ void main() async {
     await initFeed({
       'l2.book': 'b1',
       'l2.chapter': 2,
-      'l2.isChapterRead': true,
+      'l2.isRead': true,
       'l2.dateModified': yesterday.toIso8601String(),
     });
   });
@@ -31,15 +31,17 @@ void main() async {
       await initFeed({});
       expect(f2.book, b0);
       expect(f2.chapter, 1);
-      expect(f2.isChapterRead, false);
       expect(f2.dateModified, null);
+      expect(f2.isChapterRead, false);
+      expect(f2.verse, 1);
     });
 
     test('should load state from non-empty store', () {
       expect(f2.book, b1);
       expect(f2.chapter, 2);
-      expect(f2.isChapterRead, true);
       expect(f2.dateModified, yesterday);
+      expect(f2.isChapterRead, true);
+      expect(f2.verse, 1);
     });
   });
 
@@ -65,7 +67,7 @@ void main() async {
     });
 
     test('progress get', () {
-      f2.nextChapter();
+      f2.advance();
       expect(f2.progress, 0.7);
     });
   });
@@ -82,12 +84,12 @@ void main() async {
     group('nextChapter', () {
       next() async {
         f2.isChapterRead = true;
-        await f2.nextChapter();
+        await f2.advance();
       }
 
       test('should fail assertion if not read', () {
         f2.isChapterRead = false;
-        expect(f2.nextChapter, throwsAssertionError);
+        expect(f2.advance(), throwsAssertionError);
       });
 
       test('full cycle: should advance/reset chapter and book, and store', () async {
@@ -136,7 +138,7 @@ void main() async {
     test('toggleIsChapterRead should toggle and store', () async {
       void checkIsChapterRead(bool expected) {
         expect(f2.isChapterRead, expected);
-        expect(sl<SharedPreferences>().getBool('l2.isChapterRead')!, expected);
+        expect(sl<SharedPreferences>().getBool('l2.isRead')!, expected);
       }
 
       await f2.toggleIsChapterRead();
