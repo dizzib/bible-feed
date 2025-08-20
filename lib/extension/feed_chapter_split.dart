@@ -1,7 +1,7 @@
 part of '/model/feed.dart';
 
 extension ChapterSplits on Feed {
-  get _chapterSplitMap => _book.chapterSplitMaps?[_chapter];
+  Map<int, String>? get _chapterSplitMap => _book.chapterSplitMaps?[_chapter];
   bool get _isChapterSplit => _chapterSplitMap != null;
 
   bool _advanceVerse() {
@@ -14,5 +14,6 @@ extension ChapterSplits on Feed {
     return true;
   }
 
-  String get chapterSplitName => _isChapterSplit ? _chapterSplitMap![_verse]!.replaceAll('_', String.fromCharCode(0x00A0)) : '';
+  String get chapterSplitName =>
+      _isChapterSplit ? _chapterSplitMap![_verse]!.replaceAll('_', String.fromCharCode(0x00A0)) : '';
 }
