@@ -1,6 +1,6 @@
 part of '/model/feed.dart';
 
-extension ChapterSplits on Feed {
+extension ChapterSplit on Feed {
   Map<int, String>? get _chapterSplitMap => _book.chapterSplitMaps?[_chapter];
   bool get _isChapterSplit => _chapterSplitMap != null;
 
