@@ -19,20 +19,21 @@ extension FeedScope on Feed {
     }
   };
 
-  bool get isInScope => _scopes[_book.key]?[_chapter] != null;
-  String get scopeName {
-    if (!isInScope) return '';
-    var name = _scopes[_book.key]![_chapter]![_verse]!;
-    return name.replaceAll('_', String.fromCharCode(0x00A0));
-  }
+  bool get _isInScope => _scopes[_book.key]?[_chapter] != null;
 
   bool _advanceVerse() {
     assert(_isRead);
-    if (!isInScope) return false;
+    if (!_isInScope) return false;
     final verses = _scopes[_book.key]![_chapter]!.keys.toList();
     final index = verses.indexOf(_verse) + 1;
     if (index == verses.length) return false;
     _verse = verses[index];
     return true;
+  }
+
+  String get scopeName {
+    if (!_isInScope) return '';
+    var name = _scopes[_book.key]![_chapter]![_verse]!;
+    return name.replaceAll('_', String.fromCharCode(0x00A0));
   }
 }
