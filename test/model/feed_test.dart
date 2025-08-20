@@ -73,9 +73,11 @@ void main() async {
   });
 
   group('method', () {
-    void checkStateAndStore(Book expectedBook, int expectedChapter, [int expectedVerse = 1]) {
+    void checkStateAndStore(Book expectedBook, int expectedChapter,
+        [int expectedVerse = 1, String expectedChapterSplitName = '']) {
       expect(f2.book, expectedBook);
       expect(f2.chapter, expectedChapter);
+      expect(f2.chapterSplitName, expectedChapterSplitName);
       expect(f2.verse, expectedVerse);
       expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
       expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);
@@ -99,7 +101,9 @@ void main() async {
         await advance();
         checkStateAndStore(b2, 1);
         await advance();
-        checkStateAndStore(b2, 2);
+        checkStateAndStore(b2, 2, 1, 'split 1');
+        await advance();
+        checkStateAndStore(b2, 2, 7, 'split 2');
         await advance();
         checkStateAndStore(b0, 1);
         await advance();
