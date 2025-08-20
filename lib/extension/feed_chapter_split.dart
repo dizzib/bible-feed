@@ -14,9 +14,5 @@ extension ChapterSplits on Feed {
     return true;
   }
 
-  String get chapterSplitName {
-    if (!_isChapterSplit) return '';
-    var name = _chapterSplitMap![_verse]!;
-    return name.replaceAll('_', String.fromCharCode(0x00A0));
-  }
+  String get chapterSplitName => _isChapterSplit ? _chapterSplitMap![_verse]!.replaceAll('_', String.fromCharCode(0x00A0)) : '';
 }
