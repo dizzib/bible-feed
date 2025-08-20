@@ -73,9 +73,10 @@ void main() async {
   });
 
   group('method', () {
-    void checkStateAndStore(Book expectedBook, int expectedChapter) {
+    void checkStateAndStore(Book expectedBook, int expectedChapter, [int expectedVerse = 1]) {
       expect(f2.book, expectedBook);
       expect(f2.chapter, expectedChapter);
+      expect(f2.verse, expectedVerse);
       expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
       expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);
       expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateModified')!).date, DateTime.now().date);
