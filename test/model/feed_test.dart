@@ -81,8 +81,8 @@ void main() async {
       expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateModified')!).date, DateTime.now().date);
     }
 
-    group('nextChapter', () {
-      next() async {
+    group('advance', () {
+      advance() async {
         f2.isRead = true;
         await f2.advance();
       }
@@ -93,38 +93,38 @@ void main() async {
       });
 
       test('full cycle: should advance/reset chapter and book, and store', () async {
-        await next();
+        await advance();
         checkBookChapterAndStore(b1, 3);
-        await next();
+        await advance();
         checkBookChapterAndStore(b2, 1);
-        await next();
+        await advance();
         checkBookChapterAndStore(b2, 2);
-        await next();
+        await advance();
         checkBookChapterAndStore(b0, 1);
-        await next();
+        await advance();
         checkBookChapterAndStore(b0, 2);
-        await next();
+        await advance();
         checkBookChapterAndStore(b0, 3);
-        await next();
+        await advance();
         checkBookChapterAndStore(b0, 4);
-        await next();
+        await advance();
         checkBookChapterAndStore(b0, 5);
-        await next();
+        await advance();
         checkBookChapterAndStore(b1, 1);
-        await next();
+        await advance();
         checkBookChapterAndStore(b1, 2);
-        await next();
+        await advance();
         checkBookChapterAndStore(b1, 3);
       });
 
       test('should +0 chaptersRead', () async {
         expect(f2.chaptersRead, 2);
-        await next();
+        await advance();
         expect(f2.chaptersRead, 2);
       });
 
       test('should reset isChapterRead', () async {
-        await next();
+        await advance();
         expect(f2.isRead, false);
       });
     });
