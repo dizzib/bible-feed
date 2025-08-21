@@ -16,14 +16,14 @@ class BibleReaderSettings extends StatelessWidget {
         return FutureBuilder<bool>(
             future: br.isAvailable(),
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+              onSelected(bool selected) {
+                if (selected) brs.linkedBibleReaderIndex = idx;
+              }
+
               final isAvailable = snapshot.data == true;
               return ChoiceChip(
                 label: Text('${br.displayName}${isAvailable ? "" : " is not detected"}'),
-                onSelected: isAvailable
-                    ? (bool selected) {
-                        if (selected) brs.linkedBibleReaderIndex = idx;
-                      }
-                    : null,
+                onSelected: isAvailable ? onSelected : null,
                 selected: idx == brs.linkedBibleReaderIndex,
               );
             });
