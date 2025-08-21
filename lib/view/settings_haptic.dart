@@ -16,8 +16,14 @@ class HapticSettings extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(spacing),
         child: SwitchListTile(
-          title: const Text('Interaction', style: TextStyle(fontSize: 20),),
-          subtitle: const Text('Vibrate on tap or select.'),
+          title: const Text(
+            'Interaction',
+            style: TextStyle(fontSize: 20),
+          ),
+          subtitle: const Padding(
+            padding: EdgeInsets.only(top: spacing),
+            child: Text('Vibrate on tap or select.'),
+          ),
           value: hs.isEnabled,
           onChanged: (value) => hs.isEnabled = value,
         ),
