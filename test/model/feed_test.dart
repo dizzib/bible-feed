@@ -9,17 +9,16 @@ import '../injectable.dart';
 import '../stub/book_stub.dart';
 import '../stub/reading_list_stub.dart';
 
-late Feed feed;
-
 void main() async {
+  late Feed feed;
+  final DateTime yesterday = DateTime.now() - const Duration(days: 1);
+
   initFeed(Map<String, Object> storeValues) async {
     SharedPreferences.setMockInitialValues(storeValues);
     await configureDependencies();
     feed = Feed(l2, sl<SharedPreferences>());
     feed.loadStateOrDefaults();
   }
-
-  DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
   setUp(() async {
     await initFeed({
