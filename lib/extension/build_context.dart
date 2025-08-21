@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:watch_it/watch_it.dart';
+
+import '/service/haptic_service.dart';
 
 extension BuildContextEntension<T> on BuildContext {
   // device
@@ -19,7 +21,7 @@ extension BuildContextEntension<T> on BuildContext {
   void navigateTo(Widget page) => Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
 
   Future<T?> showDialogWithBlurBackground(Widget child) {
-    HapticFeedback.lightImpact();
+    sl<HapticService>().impact();
     return showDialog(
       context: this,
       builder: (_) => BackdropFilter(

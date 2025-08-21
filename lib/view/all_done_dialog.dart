@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '/extension/build_context.dart';
 import '/model/feeds.dart';
+import '/service/haptic_service.dart';
 
 class AllDoneDialog extends StatelessWidget {
   @override
@@ -25,14 +25,14 @@ class AllDoneDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            HapticFeedback.lightImpact();
+            sl<HapticService>().impact();
             Navigator.pop(context);
           },
           child: const Text('No'),
         ),
         TextButton(
           onPressed: () {
-            HapticFeedback.lightImpact();
+            sl<HapticService>().impact();
             sl<Feeds>().forceAdvance();
             Navigator.pop(context);
           }, // dialog is dismissed in FeedsView

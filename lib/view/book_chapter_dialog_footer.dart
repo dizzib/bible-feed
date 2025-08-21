@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '/extension/build_context.dart';
 import '/model/feed.dart';
 import '/model/list_wheel_state.dart';
+import '/service/haptic_service.dart';
 
 class BookChapterDialogFooter extends WatchingWidget {
   final Feed feed;
@@ -33,7 +33,7 @@ class BookChapterDialogFooter extends WatchingWidget {
             )),
             TextButton(
               onPressed: () {
-                HapticFeedback.lightImpact();
+                sl<HapticService>().impact();
                 feed.setBookAndChapter(bookIndex, chapter);
                 Navigator.pop(context);
               },
