@@ -38,8 +38,8 @@ class PghReadingLists implements ReadingLists {
           Book('heb', 'Hebrews', 13),
         ]),
         ReadingList('ep2', 'Epistles II', const [
-          Book('1th', '1 Thessalonians', 5),
-          Book('2th', '2 Thessalonians', 3),
+          Book('1th', '1 Thessalo...', 5),
+          Book('2th', '2 Thessalo...', 3),
           Book('1ti', '1 Timothy', 6),
           Book('2ti', '2 Timothy', 4),
           Book('tit', 'Titus', 3),
