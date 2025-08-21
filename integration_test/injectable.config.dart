@@ -19,6 +19,7 @@ import 'package:bible_feed/service/bible_reader_app_install_service.dart'
     as _i229;
 import 'package:bible_feed/service/bible_reader_service.dart' as _i283;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
+import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:package_info_plus/package_info_plus.dart' as _i655;
@@ -62,6 +63,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i229.BibleReaderAppInstallService>(),
           gh<_i1070.BibleReaders>(),
           gh<_i460.SharedPreferences>(),
+        ));
+    gh.singleton<_i969.HapticWireupService>(() => _i969.HapticWireupService(
+          gh<_i22.HapticService>(),
+          gh<_i283.BibleReaderService>(),
+          gh<_i1033.BookListWheelState>(),
+          gh<_i1033.ChapterListWheelState>(),
         ));
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.PghReadingLists(),
