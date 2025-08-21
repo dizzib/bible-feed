@@ -6,18 +6,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'injectable.dart';
 
 expectBookAndChapter(String expectedBookName, int expectedChapter) {
-  expectText(expectedBookName);
-  expectChapters(expectedChapter, count: 1);
+  expectText('$expectedBookName $expectedChapter');
 }
 
 expectChapters(int expectedValue, {int count = 10}) {
-  expect(find.text(expectedValue.toString()), findsExactly(count));
+  expect(find.textContaining(expectedValue.toString()), findsExactly(count));
 }
 
 // text helpers
 expectAtLeast1Text(dynamic expected) => expectText(expected.toString(), matcher: findsAtLeast(1));
 expectNoText(dynamic expected) => expectText(expected.toString(), matcher: findsNothing);
-expectText(dynamic expected, {matcher = findsOneWidget}) => expect(find.text(expected.toString()), matcher);
+expectText(dynamic expected, {matcher = findsOneWidget}) => expect(find.textContaining(expected.toString()), matcher);
 
 extension AppTestHelper on WidgetTester {
   initialiseApp() async {

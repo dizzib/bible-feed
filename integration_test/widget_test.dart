@@ -45,8 +45,7 @@ void main() async {
   testWidgets('FeedCard', (WidgetTester t) async {
     await t.initialiseWidget(FeedCard(Feed(gospels, sl<SharedPreferences>())));
     expectText(gospels.name);
-    expectText(matthew.name);
-    expectText(1);
+    expectBookAndChapter(matthew.name, 1);
   });
 
   testWidgets('FeedsView', (WidgetTester t) async {
