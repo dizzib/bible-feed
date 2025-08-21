@@ -7,15 +7,17 @@ import 'settings_bible_reader.dart';
 class Settings extends WatchingWidget {
   @override
   build(context) {
+    const spacing = 12.0;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
       body: RawScrollbar(
         thumbVisibility: true,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+            padding: const EdgeInsets.fromLTRB(spacing, 0, spacing, spacing),
             child: Column(
-              spacing: 12,
+              spacing: spacing,
               children: [
                 BibleReaderSettings(),
                 const AppVersion(),
