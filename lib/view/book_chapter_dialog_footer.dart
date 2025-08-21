@@ -5,7 +5,6 @@ import 'package:watch_it/watch_it.dart';
 import '/extension/build_context.dart';
 import '/model/feed.dart';
 import '/model/list_wheel_state.dart';
-import '/service/haptic_service.dart';
 
 class BookChapterDialogFooter extends WatchingWidget {
   final Feed feed;
@@ -33,7 +32,6 @@ class BookChapterDialogFooter extends WatchingWidget {
             )),
             TextButton(
               onPressed: () {
-                sl<HapticService>().impact();
                 feed.setBookAndChapter(bookIndex, chapter);
                 Navigator.pop(context);
               },
