@@ -9,12 +9,12 @@ import '/service/bible_reader_app_install_service.dart';
 
 @lazySingleton
 class BibleReaderService with ChangeNotifier {
-  final BibleReaderAppInstallService bibleReaderAppInstallService;
-  final BibleReaders bibleReaders;
-  final SharedPreferences sharedPreferences;
+  final BibleReaderAppInstallService _bibleReaderAppInstallService;
+  final BibleReaders _bibleReaders;
+  final SharedPreferences _sharedPreferences;
 
-  BibleReaderService(this.bibleReaderAppInstallService, this.bibleReaders, this.sharedPreferences) {
-    bibleReaderAppInstallService.addListener(() async {
+  BibleReaderService(this._bibleReaderAppInstallService, this._bibleReaders, this._sharedPreferences) {
+    _bibleReaderAppInstallService.addListener(() async {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners();
       } else {
@@ -25,10 +25,10 @@ class BibleReaderService with ChangeNotifier {
   }
 
   void _loadState() {
-    final linkedReader = sharedPreferences.getString(_linkedBibleReaderStoreKey);
+    final linkedReader = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
     try {
       _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
-      assert(bibleReaders.items.keys.contains(_linkedBibleReaderKey));
+      assert(_bibleReaders.items.keys.contains(_linkedBibleReaderKey));
     } catch (e) {
       debugPrint('EXCEPTION: ${e.toString()}');
       _linkedBibleReaderKey = BibleReaderKey.none;
@@ -38,7 +38,7 @@ class BibleReaderService with ChangeNotifier {
   void _saveState(BibleReaderKey value) {
     if (value == _linkedBibleReaderKey) return;
     _linkedBibleReaderKey = value;
-    sharedPreferences.setString(_linkedBibleReaderStoreKey, value.name);
+    _sharedPreferences.setString(_linkedBibleReaderStoreKey, value.name);
     notifyListeners();
   }
 
@@ -46,9 +46,9 @@ class BibleReaderService with ChangeNotifier {
   final _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
-  BibleReader get linkedBibleReader => bibleReaders.items[_linkedBibleReaderKey]!;
-  int get linkedBibleReaderIndex => bibleReaders.certifiedList.indexOf(linkedBibleReader);
-  set linkedBibleReaderIndex(int value) => _saveState(bibleReaders.certified.keys.elementAt(value));
+  BibleReader get linkedBibleReader => _bibleReaders.items[_linkedBibleReaderKey]!;
+  int get linkedBibleReaderIndex => _bibleReaders.certifiedList.indexOf(linkedBibleReader);
+  set linkedBibleReaderIndex(int value) => _saveState(_bibleReaders.certified.keys.elementAt(value));
 
   void launchLinkedBibleReader(Feed f) async {
     if (isLinked && !f.isRead) {
