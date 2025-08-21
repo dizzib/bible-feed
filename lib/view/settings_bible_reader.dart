@@ -51,7 +51,7 @@ class BibleReaderSettings extends StatelessWidget {
                       )),
                   const Text(
                       'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
-                  Wrap(spacing: 16, children: choiceChipList()),
+                  Wrap(spacing: 12, children: choiceChipList()),
                 ],
               ),
             ),

@@ -15,7 +15,7 @@ class Settings extends WatchingWidget {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
             child: Column(
-              spacing: 16,
+              spacing: 12,
               children: [
                 BibleReaderSettings(),
                 const AppVersion(),
