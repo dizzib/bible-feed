@@ -24,6 +24,9 @@ class BibleReaderService with ChangeNotifier {
     _loadState();
   }
 
+  late BibleReaderKey _linkedBibleReaderKey;
+  static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
+
   void _loadState() {
     final linkedReader = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
     try {
@@ -41,9 +44,6 @@ class BibleReaderService with ChangeNotifier {
     _sharedPreferences.setString(_linkedBibleReaderStoreKey, value.name);
     notifyListeners();
   }
-
-  late BibleReaderKey _linkedBibleReaderKey;
-  final _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
   BibleReader get linkedBibleReader => _bibleReaders.items[_linkedBibleReaderKey]!;
