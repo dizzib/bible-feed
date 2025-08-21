@@ -3,6 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import 'app_version.dart';
 import 'settings_bible_reader.dart';
+import 'settings_haptic.dart';
 
 class Settings extends WatchingWidget {
   @override
@@ -20,6 +21,7 @@ class Settings extends WatchingWidget {
               spacing: spacing,
               children: [
                 BibleReaderSettings(),
+                HapticSettings(),
                 const AppVersion(),
               ],
             ),
