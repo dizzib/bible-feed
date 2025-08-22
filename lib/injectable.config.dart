@@ -56,7 +56,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1070.BibleReaders>(() => _i1070.BibleReaders());
     gh.lazySingleton<_i229.BibleReaderAppInstallService>(
         () => _i229.BibleReaderAppInstallService());
-    gh.lazySingleton<_i109.VerseScopeService>(() => _i109.VerseScopeService());
+    gh.lazySingleton<_i109.VerseScopeService>(
+        () => _i109.VerseScopeService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i22.HapticService>(
         () => _i22.HapticService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(
