@@ -61,6 +61,7 @@ class Feed with ChangeNotifier {
     if (bookIndex == this.bookIndex && chapter == this.chapter) return;
     _book = readingList[bookIndex];
     _chapter = chapter;
+    _verse = 1;
     _isRead = false;
     await _notifyListenersAndSave();
   }
