@@ -17,12 +17,12 @@ class VerseScopeSettings extends StatelessWidget {
         padding: const EdgeInsets.all(spacing),
         child: SwitchListTile(
           title: const Text(
-            'Verse scopes',
+            'Psalm 119',
             style: TextStyle(fontSize: 20),
           ),
           subtitle: const Padding(
             padding: EdgeInsets.only(top: spacing),
-            child: Text('Psalm 119'),
+            child: Text('Read 2 Hebrew letters each day.'),
           ),
           value: vss.isEnabled,
           onChanged: (value) => vss.isEnabled = value,
