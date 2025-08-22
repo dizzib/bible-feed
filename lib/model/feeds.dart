@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '/extension/object.dart';
 import '/model/reading_lists.dart';
+import '/service/verse_scope_service.dart';
 import 'feed.dart';
 
 enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
@@ -13,8 +14,9 @@ enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 class Feeds with ChangeNotifier {
   final ReadingLists _readingLists;
   final SharedPreferences _sharedPreferences;
+  final VerseScopeService _verseScopeService;
 
-  Feeds(this._readingLists, this._sharedPreferences) {
+  Feeds(this._readingLists, this._sharedPreferences, this._verseScopeService) {
     _feeds = _readingLists.items.map((rl) => Feed(rl, _sharedPreferences)).toList();
     for (Feed f in _feeds) {
       f.addListener(() {
