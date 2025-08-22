@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '/service/verse_scope_service.dart';
 import 'book.dart';
 import 'reading_list.dart';
 
@@ -8,11 +9,13 @@ part '/extension/feed_persister.dart';
 part '/extension/feed_verse_scope.dart';
 
 // Feed manages the reading state of a given list of books
+
 class Feed with ChangeNotifier {
   final ReadingList _readingList;
   final SharedPreferences _sharedPreferences;
+  final VerseScopeService _verseScopeService;
 
-  Feed(this._readingList, this._sharedPreferences) {
+  Feed(this._readingList, this._sharedPreferences, this._verseScopeService) {
     loadStateOrDefaults();
     notifyListeners();
   }
