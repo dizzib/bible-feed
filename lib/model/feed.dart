@@ -35,14 +35,12 @@ class Feed with ChangeNotifier {
   @visibleForTesting
   set isRead(bool value) => _isRead = value;
 
-  void _advanceChapter() {
+  void _advanceChapterOrBook() {
     if (++_chapter > _book.chapterCount) {
-      _advanceBook();
+      _book = _readingList[(bookIndex + 1) % _readingList.count];
       _chapter = 1;
     }
   }
-
-  void _advanceBook() => _book = _readingList[(bookIndex + 1) % _readingList.count];
 
   Future _notifyListenersAndSave() async {
     notifyListeners();
@@ -52,7 +50,7 @@ class Feed with ChangeNotifier {
   Future advance() async {
     assert(_isRead);
     _verse = _getNextVerse();
-    if (_verse == 1) _advanceChapter();
+    if (_verse == 1) _advanceChapterOrBook();
     _isRead = false;
     await _notifyListenersAndSave();
   }
