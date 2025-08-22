@@ -15,7 +15,7 @@ class HapticService extends RouteObserver<PageRoute<dynamic>> with ChangeNotifie
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => impact();
 
-  static const _storeKey = 'isEnableHaptic';
+  static const _storeKey = 'isEnabledHaptic';
 
   bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? true;
 
