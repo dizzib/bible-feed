@@ -6,6 +6,7 @@ import 'dart:async';
 import '/extension/object.dart';
 import '/model/feeds.dart';
 
+@prod // disable log noise in unit tests
 @singleton // cannot be lazy, else https://github.com/dart-lang/tools/issues/705 manifests in integration test
 class AutoAdvanceService with ChangeNotifier {
   final Feeds feeds;
