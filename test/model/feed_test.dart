@@ -77,10 +77,10 @@ void main() async {
 
   group('method', () {
     void checkStateAndStore(Book expectedBook, int expectedChapter,
-        [int expectedVerse = 1, String expectedChapterSplitName = '']) {
+        [int expectedVerse = 1, String expectedVerseScopeName = '']) {
       expect(feed.book, expectedBook);
       expect(feed.chapter, expectedChapter);
-      expect(feed.chapterSplitName, expectedChapterSplitName);
+      expect(feed.verseScopeName, expectedVerseScopeName);
       expect(feed.verse, expectedVerse);
       expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
       expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);

@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'book.dart';
 import 'reading_list.dart';
 
-part '/extension/feed_chapter_split.dart';
 part '/extension/feed_persister.dart';
+part '/extension/feed_verse_scope.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
@@ -51,7 +51,7 @@ class Feed with ChangeNotifier {
 
   Future advance() async {
     assert(_isRead);
-    _verse = _advanceVerse();
+    _verse = _getNextVerse();
     if (_verse == 1) _advanceChapter();
     _isRead = false;
     await _notifyListenersAndSave();
