@@ -6,6 +6,7 @@ import '/model/feed.dart';
 import '/model/feeds.dart';
 import '/service/bible_reader_service.dart';
 import '/service/haptic_service.dart';
+import '/service/verse_scope_service.dart';
 import 'book_chapter_dialog.dart';
 import 'feed_card_book_chapter.dart';
 import 'feed_card_title_bar.dart';
@@ -18,6 +19,7 @@ class FeedCard extends WatchingWidget {
   build(context) {
     final brs = watchIt<BibleReaderService>();
     final feeds = watchIt<Feeds>();
+    watchIt<VerseScopeService>();
     watch(feed);
 
     return AnimatedOpacity(

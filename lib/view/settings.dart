@@ -4,6 +4,7 @@ import 'package:watch_it/watch_it.dart';
 import 'app_version.dart';
 import 'settings_bible_reader.dart';
 import 'settings_haptic.dart';
+import 'settings_verse_scope.dart';
 
 class Settings extends WatchingWidget {
   @override
@@ -22,6 +23,7 @@ class Settings extends WatchingWidget {
               children: [
                 BibleReaderSettings(),
                 HapticSettings(),
+                VerseScopeSettings(),
                 const AppVersion(),
               ],
             ),
