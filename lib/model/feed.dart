@@ -25,6 +25,9 @@ class Feed with ChangeNotifier {
   late bool _isRead;
   late int _verse;
 
+  @visibleForTesting
+  set isRead(bool value) => _isRead = value;
+
   Book get book => _book;
   int get bookIndex => _readingList.indexOf(_book);
   int get chapter => _chapter;
@@ -35,8 +38,6 @@ class Feed with ChangeNotifier {
   ReadingList get readingList => _readingList;
   int get verse => _verse;
   String get verseScopeName => _verseScopeService.verseScopeName(this);
-  @visibleForTesting
-  set isRead(bool value) => _isRead = value;
 
   void _advanceChapterOrBook() {
     if (++_chapter > _book.chapterCount) {
