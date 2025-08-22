@@ -34,6 +34,6 @@ class VerseScopeService extends ChangeNotifier {
   String verseScopeName(Feed f) {
     final vsm = _verseScopeMap(f);
     if (vsm == null) return '';
-    return vsm[f.verse] ?? '';
+    return vsm[f.verse]!.replaceAll('_', String.fromCharCode(0x00A0));
   }
 }
