@@ -22,8 +22,8 @@ class Settings extends WatchingWidget {
               spacing: spacing,
               children: [
                 BibleReaderSettings(),
-                HapticSettings(),
                 VerseScopeSettings(),
+                HapticSettings(),
                 const AppVersion(),
               ],
             ),
