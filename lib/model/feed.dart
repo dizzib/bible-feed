@@ -40,7 +40,6 @@ class Feed with ChangeNotifier {
       _advanceBook();
       _chapter = 1;
     }
-    _verse = 1;
   }
 
   void _advanceBook() => _book = _readingList[(bookIndex + 1) % _readingList.count];
@@ -52,7 +51,8 @@ class Feed with ChangeNotifier {
 
   Future advance() async {
     assert(_isRead);
-    if (!_advanceVerse()) _advanceChapter();
+    _verse = _advanceVerse();
+    if (_verse == 1) _advanceChapter();
     _isRead = false;
     await _notifyListenersAndSave();
   }
@@ -62,7 +62,6 @@ class Feed with ChangeNotifier {
     _book = readingList[bookIndex];
     _chapter = chapter;
     _isRead = false;
-    _verse = 1;
     await _notifyListenersAndSave();
   }
 
