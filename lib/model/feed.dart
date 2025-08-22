@@ -6,7 +6,6 @@ import 'book.dart';
 import 'reading_list.dart';
 
 part '/extension/feed_persister.dart';
-part '/extension/feed_verse_scope.dart';
 
 // Feed manages the reading state of a given list of books
 
@@ -35,6 +34,7 @@ class Feed with ChangeNotifier {
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   int get verse => _verse;
+  String get verseScopeName => _verseScopeService.verseScopeName(this);
   @visibleForTesting
   set isRead(bool value) => _isRead = value;
 
@@ -52,7 +52,7 @@ class Feed with ChangeNotifier {
 
   Future advance() async {
     assert(_isRead);
-    _verse = _getNextVerse();
+    _verse = _verseScopeService.nextVerse(this);
     if (_verse == 1) _advanceChapterOrBook();
     _isRead = false;
     await _notifyListenersAndSave();
