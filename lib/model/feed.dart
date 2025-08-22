@@ -15,7 +15,6 @@ class Feed with ChangeNotifier {
 
   Feed(this._readingList, this._sharedPreferences, this._verseScopeService) {
     loadStateOrDefaults();
-    notifyListeners();
   }
 
   late Book _book;
