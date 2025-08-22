@@ -13,6 +13,14 @@ import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
+import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
+import 'package:bible_feed/service/auto_advance_service.dart' as _i148;
+import 'package:bible_feed/service/bible_reader_app_install_service.dart'
+    as _i229;
+import 'package:bible_feed/service/bible_reader_service.dart' as _i283;
+import 'package:bible_feed/service/haptic_service.dart' as _i22;
+import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
+import 'package:bible_feed/service/verse_scope_service.dart' as _i109;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -44,10 +52,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.ChapterListWheelState>(
         () => _i1033.ChapterListWheelState());
     gh.lazySingleton<_i1070.BibleReaders>(() => _i1070.BibleReaders());
+    gh.lazySingleton<_i229.BibleReaderAppInstallService>(
+        () => _i229.BibleReaderAppInstallService());
+    gh.lazySingleton<_i109.VerseScopeService>(() => _i109.VerseScopeService());
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i25.ReadingListsMock(),
       registerFor: {_test},
     );
+    gh.lazySingleton<_i22.HapticService>(
+        () => _i22.HapticService(gh<_i460.SharedPreferences>()));
+    gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(
+          gh<_i229.BibleReaderAppInstallService>(),
+          gh<_i1070.BibleReaders>(),
+          gh<_i460.SharedPreferences>(),
+        ));
+    gh.singleton<_i969.HapticWireupService>(() => _i969.HapticWireupService(
+          gh<_i22.HapticService>(),
+          gh<_i283.BibleReaderService>(),
+          gh<_i1033.BookListWheelState>(),
+          gh<_i1033.ChapterListWheelState>(),
+        ));
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.PghReadingLists(),
       registerFor: {_prod},
@@ -55,7 +79,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
           gh<_i823.ReadingLists>(),
           gh<_i460.SharedPreferences>(),
+          gh<_i109.VerseScopeService>(),
         ));
+    gh.lazySingleton<_i136.AllDoneDialogService>(
+        () => _i136.AllDoneDialogService(gh<_i759.Feeds>()));
+    gh.singleton<_i148.AutoAdvanceService>(
+        () => _i148.AutoAdvanceService(gh<_i759.Feeds>()));
     return this;
   }
 }

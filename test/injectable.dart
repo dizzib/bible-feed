@@ -6,6 +6,7 @@ import 'injectable.config.dart'; // AUTO-GENERATED
 @InjectableInit(
   generateForDir: [
     'lib/model',
+    'lib/service',
     'test',
   ],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
