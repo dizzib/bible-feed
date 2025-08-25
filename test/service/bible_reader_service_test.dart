@@ -17,7 +17,7 @@ void main() async {
   });
 
   group('constructor', () {
-    test('should load as unlinked if store is empty', () async {
+    test('should load as unlinked if store is empty', () {
       expect(fixture.isLinked, false);
     });
 
@@ -29,6 +29,12 @@ void main() async {
     test('should load as linked if store is valid', () async {
       await init({'linkedBibleReader': 'blueLetterApp'});
       expect(fixture.isLinked, true);
+    });
+  });
+
+  group('linkedBibleReaderIndex', () {
+    test('should be zero if not linked', () {
+      // expect(fixture.linkedBibleReaderIndex, 0);
     });
   });
 }
