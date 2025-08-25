@@ -16,7 +16,7 @@ class Feed with ChangeNotifier {
   final FeedState _state;
 
   int get bookIndex => _readingList.indexOf(_state._book);
-  int get chaptersRead => _state._chapter + (_state._isRead ? 1 : 0) - 1;
+  int get chaptersRead => _state._chapter - (_state._isRead ? 0 : 1);
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   FeedState get state => _state;
