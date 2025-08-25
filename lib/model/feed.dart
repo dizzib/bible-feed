@@ -37,13 +37,6 @@ class Feed with ChangeNotifier {
   int get verse => _verse;
   String get verseScopeName => _verseScopeService.verseScopeName(this);
 
-  void _advanceChapterOrBook() {
-    if (++_chapter > _book.chapterCount) {
-      _book = _readingList[(bookIndex + 1) % _readingList.count];
-      _chapter = 1;
-    }
-  }
-
   Future _notifyListenersAndSave() async {
     notifyListeners();
     await _saveState();
@@ -52,7 +45,10 @@ class Feed with ChangeNotifier {
   Future advance() async {
     assert(_isRead);
     _verse = _verseScopeService.nextVerse(this);
-    if (_verse == 1) _advanceChapterOrBook();
+    if (_verse == 1 && ++_chapter > _book.chapterCount) {
+      _book = _readingList[(bookIndex + 1) % _readingList.count];
+      _chapter = 1;
+    }
     _isRead = false;
     await _notifyListenersAndSave();
   }
