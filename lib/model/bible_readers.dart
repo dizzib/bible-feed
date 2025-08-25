@@ -83,6 +83,7 @@ class BibleReaders {
       uriVersePath: '.VERSE',
     ),
   };
+
   late final Map<BibleReaderKey, BibleReader> certified;
 
   List<BibleReader> get certifiedList => certified.values.toList();
