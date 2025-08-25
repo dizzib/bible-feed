@@ -1,6 +1,7 @@
 import 'package:bible_feed/injectable.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
+import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
@@ -28,7 +29,12 @@ void main() async {
   await configureDependencies();
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
-    await t.initialiseWidget(BookChapterDialog(Feed(gospels, sl<SharedPreferences>(), sl<VerseScopeService>())));
+    await t.initialiseWidget(BookChapterDialog(Feed(
+      gospels,
+      sl<SharedPreferences>(),
+      sl<VerseScopeService>(),
+      sl<FeedStoreService>().loadState(gospels),
+    )));
     await t.scrollToLastChapter();
     await t.pump();
     for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) {
@@ -44,7 +50,12 @@ void main() async {
   });
 
   testWidgets('FeedCard', (WidgetTester t) async {
-    await t.initialiseWidget(FeedCard(Feed(gospels, sl<SharedPreferences>(), sl<VerseScopeService>())));
+    await t.initialiseWidget(FeedCard(Feed(
+      gospels,
+      sl<SharedPreferences>(),
+      sl<VerseScopeService>(),
+      sl<FeedStoreService>().loadState(gospels),
+    )));
     expectText(gospels.name);
     expectBookAndChapter(matthew.name, 1);
   });

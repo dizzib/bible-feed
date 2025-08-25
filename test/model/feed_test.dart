@@ -23,7 +23,13 @@ void main() async {
       l2,
       sl<SharedPreferences>(),
       sl<VerseScopeService>(),
-      FeedState(l2.getBook('b1'), 2, yesterday, true, 1),
+      FeedState(
+        book: l2.getBook('b1'),
+        chapter: 2,
+        dateModified: yesterday,
+        isRead: true,
+        verse: 1,
+      ),
     );
     feed.loadStateOrDefaults();
   }

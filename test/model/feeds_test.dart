@@ -1,5 +1,6 @@
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_lists.dart';
+import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,7 +28,12 @@ void main() async {
       'hasEverAdvanced': false,
     });
     await configureDependencies();
-    feeds = Feeds(di<ReadingLists>(), di<SharedPreferences>(), di<VerseScopeService>());
+    feeds = Feeds(
+      di<ReadingLists>(),
+      di<SharedPreferences>(),
+      di<FeedStoreService>(),
+      di<VerseScopeService>(),
+    );
   });
 
   test('[]', () {

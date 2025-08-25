@@ -26,12 +26,12 @@ class FeedStoreService {
     );
   }
 
-  Future saveState(ReadingList readingList, FeedState feedState) async {
-    await _sharedPreferences.setString(_getBookStoreKey(readingList), feedState.book.key);
-    await _sharedPreferences.setInt(_getChapterStoreKey(readingList), feedState.chapter);
+  Future saveState(Feed f) async {
+    await _sharedPreferences.setString(_getBookStoreKey(f.readingList), f.state.book.key);
+    await _sharedPreferences.setInt(_getChapterStoreKey(f.readingList), f.state.chapter);
     await _sharedPreferences.setString(
-        _getDateModifiedStoreKey(readingList), feedState.dateModified!.toIso8601String());
-    await _sharedPreferences.setBool(_getIsReadStoreKey(readingList), feedState.isRead);
-    await _sharedPreferences.setInt(_getVerseStoreKey(readingList), feedState.verse);
+        _getDateModifiedStoreKey(f.readingList), f.state.dateModified!.toIso8601String());
+    await _sharedPreferences.setBool(_getIsReadStoreKey(f.readingList), f.state.isRead);
+    await _sharedPreferences.setInt(_getVerseStoreKey(f.readingList), f.state.verse);
   }
 }
