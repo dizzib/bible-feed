@@ -15,8 +15,7 @@ void main() async {
   final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
   initFeed(Map<String, Object> storeValues) async {
-    SharedPreferences.setMockInitialValues(storeValues);
-    await configureDependencies();
+    await configureDependencies(storeValues);
     fss = sl<FeedStoreService>();
   }
 

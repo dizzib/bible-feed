@@ -3,7 +3,6 @@ import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
@@ -11,11 +10,12 @@ import '../stub/book_stub.dart';
 import '../stub/reading_list_stub.dart';
 
 void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late Feed feed;
   final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
   initFeed(Map<String, Object> storeValues) async {
-    SharedPreferences.setMockInitialValues(storeValues);
     await configureDependencies();
     feed = Feed(
       l2,

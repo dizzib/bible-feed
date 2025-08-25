@@ -14,7 +14,7 @@ void main() async {
   late Feeds feeds;
 
   setUp(() async {
-    SharedPreferences.setMockInitialValues({
+    await configureDependencies({
       'l0.book': 'b0',
       'l0.chapter': 1,
       'l0.dateModified': DateTime.now().toIso8601String(),
@@ -25,7 +25,6 @@ void main() async {
       'l1.isRead': false,
       'hasEverAdvanced': false,
     });
-    await configureDependencies();
     feeds = Feeds(
       di<ReadingLists>(),
       di<SharedPreferences>(),
