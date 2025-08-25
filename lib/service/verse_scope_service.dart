@@ -12,7 +12,7 @@ class VerseScopeService extends ChangeNotifier {
 
   static const _storeKey = 'isEnabledVerseScopes';
 
-  Map<int, String>? _verseScopeMap(Feed f) => f.state.book.verseScopeMaps?[f.chapter];
+  Map<int, String>? _verseScopeMap(Feed f) => f.state.book.verseScopeMaps?[f.state.chapter];
 
   bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? true;
 

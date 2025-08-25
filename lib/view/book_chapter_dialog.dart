@@ -12,7 +12,7 @@ class BookChapterDialog extends StatelessWidget {
 
   BookChapterDialog(this.feed) {
     sl<BookListWheelState>().index = feed.bookIndex;
-    sl<ChapterListWheelState>().index = feed.chapter - 1;
+    sl<ChapterListWheelState>().index = feed.state.chapter - 1;
   }
 
   @override
