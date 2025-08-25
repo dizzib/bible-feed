@@ -19,15 +19,13 @@ class Feed with ChangeNotifier {
     loadStateOrDefaults();
   }
 
-  late bool _isRead;
   late int _verse;
 
   @visibleForTesting
-  set isRead(bool value) => _isRead = value;
+  set isRead(bool value) => _feedState._isRead = value;
 
   int get bookIndex => _readingList.indexOf(_feedState._book);
-  int get chaptersRead => _feedState._chapter + (_isRead ? 1 : 0) - 1;
-  bool get isRead => _isRead;
+  int get chaptersRead => _feedState._chapter + (_feedState._isRead ? 1 : 0) - 1;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   FeedState get state => _feedState;
@@ -41,13 +39,13 @@ class Feed with ChangeNotifier {
   }
 
   Future advance() async {
-    assert(_isRead);
+    assert(_feedState._isRead);
     _verse = _verseScopeService.nextVerse(this);
     if (_verse == 1 && ++_feedState._chapter > _feedState._book.chapterCount) {
       _feedState._book = _readingList[(bookIndex + 1) % _readingList.count];
       _feedState._chapter = 1;
     }
-    _isRead = false;
+    _feedState._isRead = false;
     await _notifyListenersAndSave();
   }
 
@@ -56,12 +54,12 @@ class Feed with ChangeNotifier {
     _feedState._book = readingList[bookIndex];
     _feedState._chapter = chapter;
     _verse = 1;
-    _isRead = false;
+    _feedState._isRead = false;
     await _notifyListenersAndSave();
   }
 
   Future toggleIsRead() async {
-    _isRead = !_isRead;
+    _feedState._isRead = !_feedState._isRead;
     await _notifyListenersAndSave();
   }
 }

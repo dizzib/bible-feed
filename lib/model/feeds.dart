@@ -36,7 +36,7 @@ class Feeds with ChangeNotifier {
   Feed? _lastModifiedFeed;
 
   Feed operator [](int i) => _feeds[i];
-  bool get areChaptersRead => _feeds.where((feed) => !feed.isRead).isEmpty;
+  bool get areChaptersRead => _feeds.where((feed) => !feed.state.isRead).isEmpty;
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
   Feed? get lastModifiedFeed => _lastModifiedFeed;
 

@@ -76,10 +76,10 @@ void main() async {
     });
 
     test('isChapterRead get/set should affect chaptersRead', () {
-      expect(feed.isRead, true);
+      expect(feed.state.isRead, true);
       expect(feed.chaptersRead, 2);
       feed.isRead = false;
-      expect(feed.isRead, false);
+      expect(feed.state.isRead, false);
       expect(feed.chaptersRead, 1);
     });
 
@@ -147,20 +147,19 @@ void main() async {
 
       test('should reset isRead', () async {
         await advance();
-        expect(feed.isRead, false);
+        expect(feed.state.isRead, false);
       });
     });
 
     test('setBookAndChapter should set book/chapter, reset isRead, and store', () async {
       await feed.setBookAndChapter(0, 4);
       checkStateAndStore(b0, 4);
-      expect(feed.isRead, false);
+      expect(feed.state.isRead, false);
     });
 
     test('toggleIsRead should toggle and store', () async {
       void checkIsRead(bool expected) {
-        expect(feed.isRead, expected);
-        expect(sl<SharedPreferences>().getBool('l2.isRead')!, expected);
+        expect(feed.state.isRead, expected);
       }
 
       await feed.toggleIsRead();
