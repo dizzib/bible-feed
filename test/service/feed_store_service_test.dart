@@ -11,8 +11,6 @@ import '../stub/book_stub.dart';
 import '../stub/reading_list_stub.dart';
 
 void main() async {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   late FeedStoreService fss;
   final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
