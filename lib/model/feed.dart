@@ -19,7 +19,6 @@ class Feed with ChangeNotifier {
     loadStateOrDefaults();
   }
 
-  late DateTime? _dateModified;
   late bool _isRead;
   late int _verse;
 
@@ -28,7 +27,6 @@ class Feed with ChangeNotifier {
 
   int get bookIndex => _readingList.indexOf(_feedState._book);
   int get chaptersRead => _feedState._chapter + (_isRead ? 1 : 0) - 1;
-  DateTime? get dateModified => _dateModified;
   bool get isRead => _isRead;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
@@ -37,7 +35,7 @@ class Feed with ChangeNotifier {
   String get verseScopeName => _verseScopeService.verseScopeName(this);
 
   Future _notifyListenersAndSave() async {
-    _dateModified = DateTime.now();
+    _feedState._dateModified = DateTime.now();
     notifyListeners();
     await _saveState();
   }

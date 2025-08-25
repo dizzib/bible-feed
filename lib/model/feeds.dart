@@ -50,7 +50,7 @@ class Feeds with ChangeNotifier {
   Future<AdvanceState> maybeAdvance() async {
     if (!areChaptersRead) return AdvanceState.notAllRead.log();
 
-    final latestDateModified = _lastModifiedFeed?.dateModified;
+    final latestDateModified = _lastModifiedFeed?.state.dateModified;
     final now = clock.now(); // use clock (not DateTime) for unit testing
     if (now.day != latestDateModified?.day ||
         now.month != latestDateModified?.month ||
