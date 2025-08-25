@@ -17,12 +17,14 @@ void main() {
   late BibleReader fixture;
   late MockFeed mockFeed;
   late MockUrlLauncher mockUrlLauncher;
+  const book = Book('gen', 'Genesis', 50);
 
   setUp(() {
     fixture = const BibleReader(
       'Test Reader',
       'https://example.com/BOOK/CHAPTER',
       [TargetPlatform.android, TargetPlatform.iOS],
+      uriVersePath: '/VERSE',
     );
     mockFeed = MockFeed();
     mockUrlLauncher = MockUrlLauncher();
@@ -36,15 +38,25 @@ void main() {
     expect(fixture.uriTemplate, 'https://example.com/BOOK/CHAPTER');
     expect(fixture.certifiedPlatforms, contains(TargetPlatform.android));
     expect(fixture.certifiedPlatforms, contains(TargetPlatform.iOS));
+    expect(fixture.uriVersePath, '/VERSE');
   });
 
-  test('launch', () async {
-    const book = Book('gen', 'Genesis', 50);
-    when(() => mockFeed.state).thenReturn(
-      FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 1),
-    );
-    await fixture.launch(mockFeed);
-    verify(() => mockUrlLauncher.launchUrl('https://example.com/gen/1', any())).called(1);
+  group('launch', () {
+    test('not in verse scope, should launch without verse path', () async {
+      when(() => mockFeed.state).thenReturn(
+        FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 1),
+      );
+      await fixture.launch(mockFeed);
+      verify(() => mockUrlLauncher.launchUrl('https://example.com/gen/1', any())).called(1);
+    });
+
+    test('in verse scope, should launch with verse path', () async {
+      when(() => mockFeed.state).thenReturn(
+        FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 2),
+      );
+      await fixture.launch(mockFeed);
+      verify(() => mockUrlLauncher.launchUrl('https://example.com/gen/1/2', any())).called(1);
+    });
   });
 
   // test('getDeeplinkUri returns correct Uri', () {
