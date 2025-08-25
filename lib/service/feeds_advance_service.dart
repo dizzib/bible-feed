@@ -2,9 +2,9 @@ import 'package:clock/clock.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../model/feeds.dart';
 import '/extension/object.dart';
 import '/model/feed.dart';
+import '/model/feeds.dart';
 
 enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 
