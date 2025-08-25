@@ -59,15 +59,6 @@ void main() {
     });
   });
 
-  // test('getDeeplinkUri returns correct Uri', () {
-  //   const book = Book('gen', 'Genesis', 50);
-  //   when(() => mockFeed.state).thenReturn(
-  //     FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 1),
-  //   );
-  //   final uri = fixture.getDeeplinkUri(mockFeed);
-  //   expect(uri.toString(), 'https://example.com/gen/1');
-  // });
-
   // test('isCertifiedForThisPlatform returns true for supported platform', () {
   //   bool result = false;
   //   if (Platform.isAndroid) {
@@ -81,6 +72,4 @@ void main() {
   //     expect(result, false);
   //   }
   // });
-
-  // Note: canLaunch, isAvailable, and launch require integration or widget tests with platform channels
 }
