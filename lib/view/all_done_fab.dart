@@ -19,7 +19,7 @@ class AllDoneFab extends WatchingWidget {
     if (sl<AllDoneDialogService>().isAutoShowAllDoneDialog) Future.delayed(Duration.zero, showAllDoneDialog);
 
     return AnimatedScale(
-      duration: const Duration(milliseconds: 120),
+      duration: const Duration(milliseconds: 200),
       scale: feeds.areChaptersRead ? 1 : 0,
       child: FloatingActionButton(
         backgroundColor: Colors.green,
