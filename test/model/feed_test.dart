@@ -76,7 +76,7 @@ void main() async {
     test('isChapterRead get/set should affect chaptersRead', () {
       expect(feed.state.isRead, true);
       expect(feed.chaptersRead, 2);
-      feed.isRead = false;
+      feed.toggleIsRead();
       expect(feed.state.isRead, false);
       expect(feed.chaptersRead, 1);
     });
@@ -101,12 +101,12 @@ void main() async {
 
     group('advance', () {
       advance() async {
-        feed.isRead = true;
+        if (!feed.state.isRead) feed.toggleIsRead();
         await feed.advance();
       }
 
       test('should fail assertion if not read', () {
-        feed.isRead = false;
+        feed.toggleIsRead();
         expect(feed.advance(), throwsAssertionError);
       });
 

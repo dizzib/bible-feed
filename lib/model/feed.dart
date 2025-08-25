@@ -14,9 +14,6 @@ class Feed with ChangeNotifier {
 
   Feed(this._readingList, this._verseScopeService, this._feedState);
 
-  @visibleForTesting
-  set isRead(bool value) => _feedState._isRead = value;
-
   int get bookIndex => _readingList.indexOf(_feedState._book);
   int get chaptersRead => _feedState._chapter + (_feedState._isRead ? 1 : 0) - 1;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
