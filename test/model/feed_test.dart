@@ -1,7 +1,6 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
-import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -10,10 +9,7 @@ import '../stub/book_stub.dart';
 import '../stub/reading_list_stub.dart';
 
 void main() async {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   late Feed feed;
-  final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
   setUp(() async {
     await configureDependencies();
@@ -23,7 +19,7 @@ void main() async {
       FeedState(
         book: l2.getBook('b1'),
         chapter: 2,
-        dateModified: yesterday,
+        dateModified: DateTime.now(),
         isRead: true,
         verse: 1,
       ),
