@@ -11,12 +11,6 @@ class FeedStoreService {
 
   FeedStoreService(this._sharedPreferences);
 
-  String _getBookStoreKey(readingList) => '${readingList.key}.book';
-  String _getChapterStoreKey(readingList) => '${readingList.key}.chapter';
-  String _getDateModifiedStoreKey(readingList) => '${readingList.key}.dateModified';
-  String _getIsReadStoreKey(readingList) => '${readingList.key}.isRead';
-  String _getVerseStoreKey(readingList) => '${readingList.key}.verse';
-
   FeedState loadState(ReadingList readingList) {
     return FeedState(
       book: readingList.getBook(_sharedPreferences.getBook(readingList.key) ?? readingList[0].key),
@@ -28,11 +22,10 @@ class FeedStoreService {
   }
 
   Future saveState(Feed f) async {
-    await _sharedPreferences.setString(_getBookStoreKey(f.readingList), f.state.book.key);
-    await _sharedPreferences.setInt(_getChapterStoreKey(f.readingList), f.state.chapter);
-    await _sharedPreferences.setString(
-        _getDateModifiedStoreKey(f.readingList), f.state.dateModified!.toIso8601String());
-    await _sharedPreferences.setBool(_getIsReadStoreKey(f.readingList), f.state.isRead);
-    await _sharedPreferences.setInt(_getVerseStoreKey(f.readingList), f.state.verse);
+    await _sharedPreferences.setBook(f.readingList.key, f.state.book.key);
+    await _sharedPreferences.setChapter(f.readingList.key, f.state.chapter);
+    await _sharedPreferences.setDateModified(f.readingList.key, f.state.dateModified);
+    await _sharedPreferences.setIsRead(f.readingList.key, f.state.isRead);
+    await _sharedPreferences.setVerse(f.readingList.key, f.state.verse);
   }
 }
