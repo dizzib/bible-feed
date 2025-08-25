@@ -11,12 +11,12 @@ import '../stub/book_stub.dart';
 import '../stub/reading_list_stub.dart';
 
 void main() async {
-  late FeedStoreService fss;
+  late FeedStoreService fixture;
   final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
   initFeed(Map<String, Object> storeValues) async {
     await configureDependencies(storeValues);
-    fss = sl<FeedStoreService>();
+    fixture = sl<FeedStoreService>();
   }
 
   setUp(() async {
@@ -32,7 +32,7 @@ void main() async {
   group('loadState', () {
     test('should load defaults if store is empty', () async {
       await initFeed({});
-      final state = fss.loadState(l2);
+      final state = fixture.loadState(l2);
       expect(state.book, b0);
       expect(state.chapter, 1);
       expect(state.dateModified, null);
@@ -41,7 +41,7 @@ void main() async {
     });
 
     test('should load from store if store is populated', () async {
-      final state = fss.loadState(l2);
+      final state = fixture.loadState(l2);
       expect(state.book, b1);
       expect(state.chapter, 2);
       expect(state.dateModified, yesterday);
@@ -53,7 +53,7 @@ void main() async {
   group('saveState', () {
     test('should save to store', () async {
       await initFeed({});
-      await fss.saveState(Feed(
+      await fixture.saveState(Feed(
           l2,
           sl<VerseScopeService>(),
           FeedState(
