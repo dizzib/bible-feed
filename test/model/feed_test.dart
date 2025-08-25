@@ -15,7 +15,7 @@ void main() async {
   late Feed feed;
   final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
-  initFeed(Map<String, Object> storeValues) async {
+  setUp(() async {
     await configureDependencies();
     feed = Feed(
       l2,
@@ -28,15 +28,6 @@ void main() async {
         verse: 1,
       ),
     );
-  }
-
-  setUp(() async {
-    await initFeed({
-      'l2.book': 'b1',
-      'l2.chapter': 2,
-      'l2.isRead': true,
-      'l2.dateModified': yesterday.toIso8601String(),
-    });
   });
 
   group('property', () {
