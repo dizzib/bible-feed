@@ -19,25 +19,21 @@ class FeedsAdvanceService {
 
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
-  Future forceAdvance() async {
+  Future<AdvanceState> forceAdvance() async {
     for (Feed f in _feeds) {
       await f.advance();
     }
-    _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
+    await _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
+    return AdvanceState.listsAdvanced.log();
   }
 
   Future<AdvanceState> maybeAdvance() async {
     if (!_feeds.areChaptersRead) return AdvanceState.notAllRead.log();
-
+    // use clock (not DateTime) for unit testing
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
-    final now = clock.now(); // use clock (not DateTime) for unit testing
-    if (now.day != lastDateModified?.day ||
-        now.month != lastDateModified?.month ||
-        now.year != lastDateModified?.year) {
-      await forceAdvance();
-      return AdvanceState.listsAdvanced.log();
-    }
-
+    if (clock.now().day != lastDateModified?.day) return await forceAdvance();
+    if (clock.now().month != lastDateModified?.month) return await forceAdvance();
+    if (clock.now().year != lastDateModified?.year) return await forceAdvance();
     return AdvanceState.allReadAwaitingTomorrow.log();
   }
 }
