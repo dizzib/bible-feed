@@ -22,7 +22,7 @@ class Feed with ChangeNotifier {
   FeedState get state => _state;
   String get verseScopeName => _verseScopeService.verseScopeName(this);
 
-  void _notifyListenersAndSave() {
+  void _notifyListeners() {
     _state._dateModified = DateTime.now();
     notifyListeners();
   }
@@ -35,7 +35,7 @@ class Feed with ChangeNotifier {
       _state._chapter = 1;
     }
     _state._isRead = false;
-    _notifyListenersAndSave();
+    _notifyListeners();
   }
 
   Future setBookAndChapter(int bookIndex, int chapter) async {
@@ -44,11 +44,11 @@ class Feed with ChangeNotifier {
     _state._chapter = chapter;
     _state._verse = 1;
     _state._isRead = false;
-    _notifyListenersAndSave();
+    _notifyListeners();
   }
 
   Future toggleIsRead() async {
     _state._isRead = !_state._isRead;
-    _notifyListenersAndSave();
+    _notifyListeners();
   }
 }
