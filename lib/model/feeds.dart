@@ -20,7 +20,7 @@ class Feeds with ChangeNotifier {
 
   Feeds(this._readingLists, this._sharedPreferences, this._feedStoreService, this._verseScopeService) {
     _feeds = _readingLists.items
-        .map((rl) => Feed(rl, _sharedPreferences, _verseScopeService, _feedStoreService.loadState(rl)))
+        .map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl)))
         .toList();
     for (Feed f in _feeds) {
       f.addListener(() {

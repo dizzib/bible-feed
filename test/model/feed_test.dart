@@ -21,7 +21,6 @@ void main() async {
     await configureDependencies();
     feed = Feed(
       l2,
-      sl<SharedPreferences>(),
       sl<VerseScopeService>(),
       FeedState(
         book: l2.getBook('b1'),

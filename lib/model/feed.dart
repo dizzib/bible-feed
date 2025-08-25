@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '/service/verse_scope_service.dart';
 import 'book.dart';
@@ -11,11 +10,10 @@ part 'feed_state.dart';
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
   final ReadingList _readingList;
-  final SharedPreferences _sharedPreferences;
   final VerseScopeService _verseScopeService;
   final FeedState _feedState;
 
-  Feed(this._readingList, this._sharedPreferences, this._verseScopeService, this._feedState) {
+  Feed(this._readingList, this._verseScopeService, this._feedState) {
     loadStateOrDefaults();
   }
 
@@ -29,10 +27,9 @@ class Feed with ChangeNotifier {
   FeedState get state => _feedState;
   String get verseScopeName => _verseScopeService.verseScopeName(this);
 
-  Future _notifyListenersAndSave() async {
+  void _notifyListenersAndSave() {
     _feedState._dateModified = DateTime.now();
     notifyListeners();
-    await _saveState();
   }
 
   Future advance() async {
@@ -43,7 +40,7 @@ class Feed with ChangeNotifier {
       _feedState._chapter = 1;
     }
     _feedState._isRead = false;
-    await _notifyListenersAndSave();
+    _notifyListenersAndSave();
   }
 
   Future setBookAndChapter(int bookIndex, int chapter) async {
@@ -52,11 +49,11 @@ class Feed with ChangeNotifier {
     _feedState._chapter = chapter;
     _feedState._verse = 1;
     _feedState._isRead = false;
-    await _notifyListenersAndSave();
+    _notifyListenersAndSave();
   }
 
   Future toggleIsRead() async {
     _feedState._isRead = !_feedState._isRead;
-    await _notifyListenersAndSave();
+    _notifyListenersAndSave();
   }
 }

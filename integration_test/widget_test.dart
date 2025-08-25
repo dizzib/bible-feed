@@ -9,7 +9,6 @@ import 'package:bible_feed/view/feeds_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import 'helper.dart';
@@ -31,7 +30,6 @@ void main() async {
   testWidgets('BookChapterDialog', (WidgetTester t) async {
     await t.initialiseWidget(BookChapterDialog(Feed(
       gospels,
-      sl<SharedPreferences>(),
       sl<VerseScopeService>(),
       sl<FeedStoreService>().loadState(gospels),
     )));
@@ -52,7 +50,6 @@ void main() async {
   testWidgets('FeedCard', (WidgetTester t) async {
     await t.initialiseWidget(FeedCard(Feed(
       gospels,
-      sl<SharedPreferences>(),
       sl<VerseScopeService>(),
       sl<FeedStoreService>().loadState(gospels),
     )));
