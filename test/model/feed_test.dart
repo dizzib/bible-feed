@@ -90,7 +90,7 @@ void main() async {
   });
 
   group('method', () {
-    void checkStateAndStore(Book expectedBook, int expectedChapter,
+    void checkState(Book expectedBook, int expectedChapter,
         [int expectedVerse = 1, String expectedVerseScopeName = '']) {
       expect(feed.state.book, expectedBook);
       expect(feed.state.chapter, expectedChapter);
@@ -114,29 +114,29 @@ void main() async {
 
       test('full cycle: should advance/reset chapter and book, and store', () async {
         await advance();
-        checkStateAndStore(b1, 3);
+        checkState(b1, 3);
         await advance();
-        checkStateAndStore(b2, 1);
+        checkState(b2, 1);
         await advance();
-        checkStateAndStore(b2, 2, 1, 'split 1');
+        checkState(b2, 2, 1, 'split 1');
         await advance();
-        checkStateAndStore(b2, 2, 7, 'split 2');
+        checkState(b2, 2, 7, 'split 2');
         await advance();
-        checkStateAndStore(b0, 1);
+        checkState(b0, 1);
         await advance();
-        checkStateAndStore(b0, 2);
+        checkState(b0, 2);
         await advance();
-        checkStateAndStore(b0, 3);
+        checkState(b0, 3);
         await advance();
-        checkStateAndStore(b0, 4);
+        checkState(b0, 4);
         await advance();
-        checkStateAndStore(b0, 5);
+        checkState(b0, 5);
         await advance();
-        checkStateAndStore(b1, 1);
+        checkState(b1, 1);
         await advance();
-        checkStateAndStore(b1, 2);
+        checkState(b1, 2);
         await advance();
-        checkStateAndStore(b1, 3);
+        checkState(b1, 3);
       });
 
       test('should +0 chaptersRead', () async {
@@ -153,7 +153,7 @@ void main() async {
 
     test('setBookAndChapter should set book/chapter, reset isRead, and store', () async {
       await feed.setBookAndChapter(0, 4);
-      checkStateAndStore(b0, 4);
+      checkState(b0, 4);
       expect(feed.state.isRead, false);
     });
 
@@ -166,7 +166,7 @@ void main() async {
       checkIsRead(false);
       await feed.toggleIsRead();
       checkIsRead(true);
-      checkStateAndStore(b1, 2); // ensure no side effects
+      checkState(b1, 2); // ensure no side effects
     });
   });
 }
