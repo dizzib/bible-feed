@@ -79,17 +79,17 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_prod},
     );
     gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
-          gh<_i823.ReadingLists>(),
-          gh<_i460.SharedPreferences>(),
           gh<_i119.FeedStoreService>(),
           gh<_i109.VerseScopeService>(),
+          gh<_i460.SharedPreferences>(),
+          gh<_i823.ReadingLists>(),
         ));
-    gh.lazySingleton<_i136.AllDoneDialogService>(
-        () => _i136.AllDoneDialogService(gh<_i759.Feeds>()));
     gh.singleton<_i148.AutoAdvanceService>(
       () => _i148.AutoAdvanceService(gh<_i759.Feeds>()),
       registerFor: {_prod},
     );
+    gh.lazySingleton<_i136.AllDoneDialogService>(
+        () => _i136.AllDoneDialogService(gh<_i759.Feeds>()));
     return this;
   }
 }

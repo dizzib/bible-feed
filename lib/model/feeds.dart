@@ -13,15 +13,12 @@ enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
 
 @lazySingleton
 class Feeds with ChangeNotifier {
-  final ReadingLists _readingLists;
-  final SharedPreferences _sharedPreferences;
   final FeedStoreService _feedStoreService;
+  final SharedPreferences _sharedPreferences;
   final VerseScopeService _verseScopeService;
 
-  Feeds(this._readingLists, this._sharedPreferences, this._feedStoreService, this._verseScopeService) {
-    _feeds = _readingLists.items
-        .map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl)))
-        .toList();
+  Feeds(this._feedStoreService, this._verseScopeService, this._sharedPreferences, this._readingLists) {
+    _feeds = _readingLists.items.map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl))).toList();
     for (Feed f in _feeds) {
       f.addListener(() {
         _lastModifiedFeed = f;
@@ -30,6 +27,8 @@ class Feeds with ChangeNotifier {
       });
     }
   }
+
+  final ReadingLists _readingLists;
 
   late List<Feed> _feeds;
   final _hasEverAdvancedStoreKey = 'hasEverAdvanced';

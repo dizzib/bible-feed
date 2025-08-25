@@ -26,10 +26,10 @@ void main() async {
       'hasEverAdvanced': false,
     });
     feeds = Feeds(
-      di<ReadingLists>(),
-      di<SharedPreferences>(),
       di<FeedStoreService>(),
       di<VerseScopeService>(),
+      di<SharedPreferences>(),
+      di<ReadingLists>(),
     );
   });
 
