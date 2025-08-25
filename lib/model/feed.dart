@@ -9,9 +9,9 @@ part 'feed_state.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
+  final FeedState _feedState;
   final ReadingList _readingList;
   final VerseScopeService _verseScopeService;
-  final FeedState _feedState;
 
   Feed(this._readingList, this._verseScopeService, this._feedState) {
     loadStateOrDefaults();
