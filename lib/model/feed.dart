@@ -8,46 +8,47 @@ part 'feed_state.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
-  final FeedState _feedState;
   final ReadingList _readingList;
   final VerseScopeService _verseScopeService;
 
-  Feed(this._readingList, this._verseScopeService, this._feedState);
+  Feed(this._readingList, this._verseScopeService, this._state);
 
-  int get bookIndex => _readingList.indexOf(_feedState._book);
-  int get chaptersRead => _feedState._chapter + (_feedState._isRead ? 1 : 0) - 1;
+  final FeedState _state;
+
+  int get bookIndex => _readingList.indexOf(_state._book);
+  int get chaptersRead => _state._chapter + (_state._isRead ? 1 : 0) - 1;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
-  FeedState get state => _feedState;
+  FeedState get state => _state;
   String get verseScopeName => _verseScopeService.verseScopeName(this);
 
   void _notifyListenersAndSave() {
-    _feedState._dateModified = DateTime.now();
+    _state._dateModified = DateTime.now();
     notifyListeners();
   }
 
   Future advance() async {
-    assert(_feedState._isRead);
-    _feedState._verse = _verseScopeService.nextVerse(this);
-    if (_feedState._verse == 1 && ++_feedState._chapter > _feedState._book.chapterCount) {
-      _feedState._book = _readingList[(bookIndex + 1) % _readingList.count];
-      _feedState._chapter = 1;
+    assert(_state._isRead);
+    _state._verse = _verseScopeService.nextVerse(this);
+    if (_state._verse == 1 && ++_state._chapter > _state._book.chapterCount) {
+      _state._book = _readingList[(bookIndex + 1) % _readingList.count];
+      _state._chapter = 1;
     }
-    _feedState._isRead = false;
+    _state._isRead = false;
     _notifyListenersAndSave();
   }
 
   Future setBookAndChapter(int bookIndex, int chapter) async {
-    if (bookIndex == this.bookIndex && chapter == _feedState._chapter) return;
-    _feedState._book = readingList[bookIndex];
-    _feedState._chapter = chapter;
-    _feedState._verse = 1;
-    _feedState._isRead = false;
+    if (bookIndex == this.bookIndex && chapter == _state._chapter) return;
+    _state._book = readingList[bookIndex];
+    _state._chapter = chapter;
+    _state._verse = 1;
+    _state._isRead = false;
     _notifyListenersAndSave();
   }
 
   Future toggleIsRead() async {
-    _feedState._isRead = !_feedState._isRead;
+    _state._isRead = !_state._isRead;
     _notifyListenersAndSave();
   }
 }
