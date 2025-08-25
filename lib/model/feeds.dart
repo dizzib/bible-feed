@@ -15,10 +15,10 @@ class Feeds extends Iterable<Feed> with ChangeNotifier {
   Feeds(this._feedStoreService, this._verseScopeService, this._readingLists) {
     _feedList = _readingLists.items.map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl))).toList();
     for (Feed f in _feedList) {
-      f.addListener(() {
-        _lastModifiedFeed = f;
-        _feedStoreService.saveState(f);
+      f.addListener(() async {
         notifyListeners();
+        _lastModifiedFeed = f;
+        await _feedStoreService.saveState(f);
       });
     }
   }
