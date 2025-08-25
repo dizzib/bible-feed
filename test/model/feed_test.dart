@@ -30,7 +30,6 @@ void main() async {
         verse: 1,
       ),
     );
-    feed.loadStateOrDefaults();
   }
 
   setUp(() async {

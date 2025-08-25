@@ -4,7 +4,6 @@ import '/service/verse_scope_service.dart';
 import 'book.dart';
 import 'reading_list.dart';
 
-part '/extension/feed_persister.dart';
 part 'feed_state.dart';
 
 // Feed manages the reading state of a given list of books
@@ -13,9 +12,7 @@ class Feed with ChangeNotifier {
   final ReadingList _readingList;
   final VerseScopeService _verseScopeService;
 
-  Feed(this._readingList, this._verseScopeService, this._feedState) {
-    loadStateOrDefaults();
-  }
+  Feed(this._readingList, this._verseScopeService, this._feedState);
 
   @visibleForTesting
   set isRead(bool value) => _feedState._isRead = value;
