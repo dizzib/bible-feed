@@ -26,7 +26,7 @@ class VerseScopeService extends ChangeNotifier {
     final vsm = _verseScopeMap(f);
     if (vsm == null) return 1;
     final verses = vsm.keys.toList();
-    final index = verses.indexOf(f.verse) + 1;
+    final index = verses.indexOf(f.state.verse) + 1;
     if (index == verses.length) return 1;
     return verses[index];
   }
@@ -35,6 +35,6 @@ class VerseScopeService extends ChangeNotifier {
     if (!isEnabled) return '';
     final vsm = _verseScopeMap(f);
     if (vsm == null) return '';
-    return vsm[f.verse]!.replaceAll('_', String.fromCharCode(0x00A0));
+    return vsm[f.state.verse]!.replaceAll('_', String.fromCharCode(0x00A0));
   }
 }

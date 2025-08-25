@@ -95,7 +95,7 @@ void main() async {
       expect(feed.state.book, expectedBook);
       expect(feed.state.chapter, expectedChapter);
       expect(feed.verseScopeName, expectedVerseScopeName);
-      expect(feed.verse, expectedVerse);
+      expect(feed.state.verse, expectedVerse);
       // expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
       // expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);
       // expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateModified')!).date, DateTime.now().date);

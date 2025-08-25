@@ -31,8 +31,8 @@ class BibleReader {
   Uri getDeeplinkUri(Feed f) {
     final bookId = bookKeyMap.apply(f.state.book);
     var uri = uriTemplate.replaceAll('BOOK', bookId).replaceAll('CHAPTER', f.state.chapter.toString());
-    if (uriVersePath != null && f.verse > 1) {
-      uri += uriVersePath!.replaceAll('VERSE', f.verse.toString());
+    if (uriVersePath != null && f.state.verse > 1) {
+      uri += uriVersePath!.replaceAll('VERSE', f.state.verse.toString());
     }
     return Uri.parse(uri).log();
   }
