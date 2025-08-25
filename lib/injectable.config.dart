@@ -20,6 +20,7 @@ import 'package:bible_feed/service/bible_reader_app_install_service.dart'
     as _i229;
 import 'package:bible_feed/service/bible_reader_service.dart' as _i283;
 import 'package:bible_feed/service/feed_store_service.dart' as _i119;
+import 'package:bible_feed/service/feeds_advance_service.dart' as _i307;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
 import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
 import 'package:bible_feed/service/verse_scope_service.dart' as _i109;
@@ -81,15 +82,21 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
           gh<_i119.FeedStoreService>(),
           gh<_i109.VerseScopeService>(),
-          gh<_i460.SharedPreferences>(),
           gh<_i823.ReadingLists>(),
         ));
+    gh.lazySingleton<_i307.FeedsAdvanceService>(() => _i307.FeedsAdvanceService(
+          gh<_i460.SharedPreferences>(),
+          gh<_i759.Feeds>(),
+        ));
+    gh.lazySingleton<_i136.AllDoneDialogService>(
+        () => _i136.AllDoneDialogService(
+              gh<_i307.FeedsAdvanceService>(),
+              gh<_i759.Feeds>(),
+            ));
     gh.singleton<_i148.AutoAdvanceService>(
-      () => _i148.AutoAdvanceService(gh<_i759.Feeds>()),
+      () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
       registerFor: {_prod},
     );
-    gh.lazySingleton<_i136.AllDoneDialogService>(
-        () => _i136.AllDoneDialogService(gh<_i759.Feeds>()));
     return this;
   }
 }

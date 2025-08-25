@@ -2,9 +2,7 @@ import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
-import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
@@ -23,12 +21,10 @@ void main() async {
       'l1.chapter': 1,
       'l1.dateModified': DateTime.now().toIso8601String(),
       'l1.isRead': false,
-      'hasEverAdvanced': false,
     });
     feeds = Feeds(
       di<FeedStoreService>(),
       di<VerseScopeService>(),
-      di<SharedPreferences>(),
       di<ReadingLists>(),
     );
   });
@@ -44,19 +40,6 @@ void main() async {
     expect(feeds.areChaptersRead, true);
   });
 
-  group('hasEverAdvanced', () {
-    test('should initialise from store', () {
-      expect(feeds.hasEverAdvanced, false);
-    });
-
-    test('should be stored true after advance', () async {
-      feeds[1].toggleIsRead();
-      await feeds.forceAdvance();
-      expect(sl<SharedPreferences>().getBool('hasEverAdvanced'), true);
-      expect(feeds.hasEverAdvanced, true);
-    });
-  });
-
   test('lastModifiedFeed', () {
     feeds[0].toggleIsRead();
     expect(feeds.lastModifiedFeed, feeds[0]);
@@ -64,48 +47,5 @@ void main() async {
     expect(feeds.lastModifiedFeed, feeds[1]);
     feeds[0].toggleIsRead();
     expect(feeds.lastModifiedFeed, feeds[0]);
-  });
-
-  group('Advance:', () {
-    checkHasAdvanced(bool shouldAdvance) {
-      expect(feeds[0].state.chapter, shouldAdvance ? 2 : 1);
-      expect(feeds[1].state.chapter, shouldAdvance ? 2 : 1);
-    }
-
-    test('forceAdvance should advance all feeds', () async {
-      feeds[1].toggleIsRead();
-      await feeds.forceAdvance();
-      checkHasAdvanced(true);
-    });
-
-    final tomorrow = Clock.fixed(const Clock().daysFromNow(1));
-
-    group('maybeAdvance', () {
-      test('if not all read, on next day, should not advance', () async {
-        expect(await withClock(tomorrow, feeds.maybeAdvance), AdvanceState.notAllRead);
-        checkHasAdvanced(false);
-      });
-
-      group('if all read and latest saved day is', () {
-        test('today, should not advance', () async {
-          feeds[1].toggleIsRead();
-          expect(await feeds.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
-          checkHasAdvanced(false);
-        });
-
-        test('yesterday, should advance', () async {
-          feeds[1].toggleIsRead();
-          expect(await withClock(tomorrow, feeds.maybeAdvance), AdvanceState.listsAdvanced);
-          checkHasAdvanced(true);
-        });
-
-        test('1 week ago, should advance', () async {
-          feeds[1].toggleIsRead();
-          final nextWeek = Clock.fixed(const Clock().weeksFromNow(1));
-          expect(await withClock(nextWeek, feeds.maybeAdvance), AdvanceState.listsAdvanced);
-          checkHasAdvanced(true);
-        });
-      });
-    });
   });
 }

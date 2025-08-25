@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '/extension/build_context.dart';
-import '/model/feeds.dart';
+import '/service/feeds_advance_service.dart';
 
 class AllDoneDialog extends StatelessWidget {
   @override
@@ -30,7 +30,7 @@ class AllDoneDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            sl<Feeds>().forceAdvance();
+            sl<FeedsAdvanceService>().forceAdvance();
             Navigator.pop(context);
           }, // dialog is dismissed in FeedsView
           child: const Text('Yes'),

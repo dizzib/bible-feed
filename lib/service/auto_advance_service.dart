@@ -1,17 +1,18 @@
+import 'dart:async';
+
 import 'package:clock/clock.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
-import 'dart:async';
 
 import '/extension/object.dart';
-import '/model/feeds.dart';
+import 'feeds_advance_service.dart';
 
 @prod // disable log noise in unit tests
 @singleton // cannot be lazy, else https://github.com/dart-lang/tools/issues/705 manifests in integration test
 class AutoAdvanceService with ChangeNotifier {
-  final Feeds feeds;
+  final FeedsAdvanceService _feedsAdvanceService;
 
-  AutoAdvanceService(this.feeds) {
+  AutoAdvanceService(this._feedsAdvanceService) {
     AppLifecycleListener(onResume: onResume);
     onResume();
   }
@@ -19,12 +20,12 @@ class AutoAdvanceService with ChangeNotifier {
   Timer? _timer;
 
   void onResume() {
-    feeds.maybeAdvance();
+    _feedsAdvanceService.maybeAdvance();
     _setTimer();
   }
 
   void _run() async {
-    if (await feeds.maybeAdvance() == AdvanceState.listsAdvanced) notifyListeners();
+    if (await _feedsAdvanceService.maybeAdvance() == AdvanceState.listsAdvanced) notifyListeners();
     _setTimer();
   }
 
