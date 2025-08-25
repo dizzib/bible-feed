@@ -42,20 +42,20 @@ void main() {
   });
 
   group('launch', () {
-    test('not in verse scope, should launch without verse path', () async {
+    run(bool isVerseScope, String expectedUrl) async {
       when(() => mockFeed.state).thenReturn(
-        FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 1),
+        FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: isVerseScope ? 2 : 1),
       );
       await fixture.launch(mockFeed);
-      verify(() => mockUrlLauncher.launchUrl('https://example.com/gen/1', any())).called(1);
+      verify(() => mockUrlLauncher.launchUrl(expectedUrl, any())).called(1);
+    }
+
+    test('not in verse scope, should launch without verse path', () async {
+      await run(false, 'https://example.com/gen/1');
     });
 
     test('in verse scope, should launch with verse path', () async {
-      when(() => mockFeed.state).thenReturn(
-        FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 2),
-      );
-      await fixture.launch(mockFeed);
-      verify(() => mockUrlLauncher.launchUrl('https://example.com/gen/1/2', any())).called(1);
+      await run(true, 'https://example.com/gen/1/2');
     });
   });
 
