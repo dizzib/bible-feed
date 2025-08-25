@@ -29,7 +29,7 @@ class BibleReader {
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(getDeeplinkUri(f));
 
   Uri getDeeplinkUri(Feed f) {
-    final bookId = bookKeyMap.apply(f.book);
+    final bookId = bookKeyMap.apply(f.state.book);
     var uri = uriTemplate.replaceAll('BOOK', bookId).replaceAll('CHAPTER', f.chapter.toString());
     if (uriVersePath != null && f.verse > 1) {
       uri += uriVersePath!.replaceAll('VERSE', f.verse.toString());

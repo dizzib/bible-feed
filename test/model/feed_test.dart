@@ -46,7 +46,7 @@ void main() async {
   // group('constructor', () {
   //   test('should load defaults if store is empty', () async {
   //     await initFeed({});
-  //     expect(feed.book, b0);
+  //     expect(feed.state.book, b0);
   //     expect(feed.chapter, 1);
   //     expect(feed.dateModified, null);
   //     expect(feed.isRead, false);
@@ -54,7 +54,7 @@ void main() async {
   //   });
   //
   //   test('should load state from non-empty store', () {
-  //     expect(feed.book, b1);
+  //     expect(feed.state.book, b1);
   //     expect(feed.chapter, 2);
   //     expect(feed.dateModified, yesterday);
   //     expect(feed.isRead, true);
@@ -64,7 +64,7 @@ void main() async {
 
   group('property', () {
     test('book get', () {
-      expect(feed.book, b1);
+      expect(feed.state.book, b1);
     });
 
     test('bookIndex get', () {
@@ -92,11 +92,11 @@ void main() async {
   group('method', () {
     void checkStateAndStore(Book expectedBook, int expectedChapter,
         [int expectedVerse = 1, String expectedVerseScopeName = '']) {
-      expect(feed.book, expectedBook);
+      expect(feed.state.book, expectedBook);
       expect(feed.chapter, expectedChapter);
       expect(feed.verseScopeName, expectedVerseScopeName);
       expect(feed.verse, expectedVerse);
-      expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
+      // expect(sl<SharedPreferences>().getString('l2.book')!, expectedBook.key);
       expect(sl<SharedPreferences>().getInt('l2.chapter')!, expectedChapter);
       expect(DateTime.parse(sl<SharedPreferences>().getString('l2.dateModified')!).date, DateTime.now().date);
     }

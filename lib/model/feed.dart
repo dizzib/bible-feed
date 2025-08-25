@@ -19,7 +19,6 @@ class Feed with ChangeNotifier {
     loadStateOrDefaults();
   }
 
-  late Book _book;
   late int _chapter;
   late DateTime? _dateModified;
   late bool _isRead;
@@ -28,8 +27,7 @@ class Feed with ChangeNotifier {
   @visibleForTesting
   set isRead(bool value) => _isRead = value;
 
-  Book get book => _book;
-  int get bookIndex => _readingList.indexOf(_book);
+  int get bookIndex => _readingList.indexOf(_feedState._book);
   int get chapter => _chapter;
   int get chaptersRead => _chapter + (_isRead ? 1 : 0) - 1;
   DateTime? get dateModified => _dateModified;
@@ -41,7 +39,7 @@ class Feed with ChangeNotifier {
   String get verseScopeName => _verseScopeService.verseScopeName(this);
 
   Future _notifyListenersAndSave() async {
-    // _dateModified = DateTime.now();
+    _dateModified = DateTime.now();
     notifyListeners();
     await _saveState();
   }
@@ -49,8 +47,8 @@ class Feed with ChangeNotifier {
   Future advance() async {
     assert(_isRead);
     _verse = _verseScopeService.nextVerse(this);
-    if (_verse == 1 && ++_chapter > _book.chapterCount) {
-      _book = _readingList[(bookIndex + 1) % _readingList.count];
+    if (_verse == 1 && ++_chapter > _feedState._book.chapterCount) {
+      _feedState._book = _readingList[(bookIndex + 1) % _readingList.count];
       _chapter = 1;
     }
     _isRead = false;
@@ -59,7 +57,7 @@ class Feed with ChangeNotifier {
 
   Future setBookAndChapter(int bookIndex, int chapter) async {
     if (bookIndex == this.bookIndex && chapter == this.chapter) return;
-    _book = readingList[bookIndex];
+    _feedState._book = readingList[bookIndex];
     _chapter = chapter;
     _verse = 1;
     _isRead = false;
