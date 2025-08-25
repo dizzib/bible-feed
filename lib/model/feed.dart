@@ -6,14 +6,16 @@ import 'book.dart';
 import 'reading_list.dart';
 
 part '/extension/feed_persister.dart';
+part 'feed_state.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
   final ReadingList _readingList;
   final SharedPreferences _sharedPreferences;
   final VerseScopeService _verseScopeService;
+  final FeedState _feedState;
 
-  Feed(this._readingList, this._sharedPreferences, this._verseScopeService) {
+  Feed(this._readingList, this._sharedPreferences, this._verseScopeService, this._feedState) {
     loadStateOrDefaults();
   }
 
@@ -34,10 +36,12 @@ class Feed with ChangeNotifier {
   bool get isRead => _isRead;
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
+  FeedState get state => _feedState;
   int get verse => _verse;
   String get verseScopeName => _verseScopeService.verseScopeName(this);
 
   Future _notifyListenersAndSave() async {
+    // _dateModified = DateTime.now();
     notifyListeners();
     await _saveState();
   }

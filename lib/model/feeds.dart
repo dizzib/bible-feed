@@ -17,7 +17,13 @@ class Feeds with ChangeNotifier {
   final VerseScopeService _verseScopeService;
 
   Feeds(this._readingLists, this._sharedPreferences, this._verseScopeService) {
-    _feeds = _readingLists.items.map((rl) => Feed(rl, _sharedPreferences, _verseScopeService)).toList();
+    _feeds = _readingLists.items
+        .map((rl) => Feed(
+              rl,
+              _sharedPreferences,
+              _verseScopeService,
+            ))
+        .toList();
     for (Feed f in _feeds) {
       f.addListener(() {
         _lastModifiedFeed = f;
