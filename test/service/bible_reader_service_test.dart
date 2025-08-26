@@ -66,7 +66,6 @@ void main() {
     });
 
     test('set should update and save to store', () {
-      WidgetsFlutterBinding.ensureInitialized();
       when(() => emptyMockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
       unlinkedFixture.linkedBibleReaderIndex = 1;
       verify(() => emptyMockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
