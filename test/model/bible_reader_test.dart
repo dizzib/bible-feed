@@ -67,12 +67,7 @@ void main() {
     });
 
     test('should attempt to launch first feed uri if not None', () async {
-      await configureDependencies({
-        'rl0.book': 'b0',
-        'rl0.chapter': 1,
-        'rl0.dateModified': DateTime.now().toIso8601String(),
-        'rl0.isRead': true,
-      });
+      await configureDependencies();
       when(() => mockFeed.state).thenReturn(
         FeedState(book: const Book('gen', 'Genesis', 50), chapter: 1, dateModified: null, isRead: false, verse: 1),
       );
