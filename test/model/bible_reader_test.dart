@@ -51,7 +51,7 @@ void main() {
             isRead: false,
             verse: isVerseScope ? 2 : 1),
       );
-      await fixture.launch(mockFeed);
+      await fixture.launch(mockFeed.state);
       verify(() => mockUrlLauncher.launchUrl(expectedUrl, any())).called(1);
     }
 

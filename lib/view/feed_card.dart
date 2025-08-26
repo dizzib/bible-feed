@@ -34,7 +34,7 @@ class FeedCard extends WatchingWidget {
           onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
           onTap: () {
             sl<HapticService>().impact();
-            sl<BibleReaderService>().launchLinkedBibleReader(feed);
+            sl<BibleReaderService>().launchLinkedBibleReader(feed.state);
             feed.toggleIsRead();
           },
           child: LayoutBuilder(

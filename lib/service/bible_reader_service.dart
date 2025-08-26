@@ -50,9 +50,9 @@ class BibleReaderService with ChangeNotifier {
   int get linkedBibleReaderIndex => _bibleReaders.certifiedList.indexOf(linkedBibleReader);
   set linkedBibleReaderIndex(int value) => _saveState(_bibleReaders.certified.keys.elementAt(value));
 
-  Future launchLinkedBibleReader(Feed f) async {
-    if (isLinked && !f.state.isRead) {
-      final ok = await linkedBibleReader.launch(f);
+  Future launchLinkedBibleReader(FeedState state) async {
+    if (isLinked && !state.isRead) {
+      final ok = await linkedBibleReader.launch(state);
       if (!ok) _saveState(BibleReaderKey.none);
     }
   }
