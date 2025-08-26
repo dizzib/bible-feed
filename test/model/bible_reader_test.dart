@@ -7,6 +7,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 
+import '../injectable.dart';
+
 class MockFeed extends Mock implements Feed {}
 
 class MockUrlLauncher extends Mock with MockPlatformInterfaceMixin implements UrlLauncherPlatform {}
@@ -26,6 +28,7 @@ void main() {
     mockFeed = MockFeed();
     mockUrlLauncher = MockUrlLauncher();
     registerFallbackValue(const LaunchOptions());
+    when(() => mockUrlLauncher.canLaunch(any())).thenAnswer((_) async => true);
     when(() => mockUrlLauncher.launchUrl(any(), any())).thenAnswer((_) async => true);
     UrlLauncherPlatform.instance = mockUrlLauncher;
   });
@@ -61,17 +64,23 @@ void main() {
     });
   });
 
-  // test('isCertifiedForThisPlatform returns true for supported platform', () {
-  //   bool result = false;
-  //   if (Platform.isAndroid) {
-  //     result = fixture.isCertifiedForThisPlatform;
-  //     expect(result, true);
-  //   } else if (Platform.isIOS) {
-  //     result = fixture.isCertifiedForThisPlatform;
-  //     expect(result, true);
-  //   } else {
-  //     result = fixture.isCertifiedForThisPlatform;
-  //     expect(result, false);
-  //   }
-  // });
+  group('isAvailable', () {
+    test('should return true if None', () async {
+      expect(await const BibleReader('None', '', []).isAvailable(), true);
+    });
+
+    test('should attempt to launch first feed uri if not None', () async {
+      await configureDependencies({
+        'rl0.book': 'b0',
+        'rl0.chapter': 1,
+        'rl0.dateModified': DateTime.now().toIso8601String(),
+        'rl0.isRead': true,
+      });
+      when(() => mockFeed.state).thenReturn(
+        FeedState(book: const Book('gen', 'Genesis', 50), chapter: 1, dateModified: null, isRead: false, verse: 1),
+      );
+      await fixture.isAvailable();
+      verify(() => mockUrlLauncher.canLaunch(any())).called(1);
+    });
+  });
 }
