@@ -69,9 +69,9 @@ void main() async {
 
   group('launchLinkedBibleReader', () {
     const book = Book('gen', 'Genesis', 50);
-    test('if not linked, should not launch', () async {
+    test('if read but not linked, should not launch', () async {
       await init({});
-      final state = FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 1);
+      final state = FeedState(book: book, chapter: 1, isRead: true);
       fixture.launchLinkedBibleReader(state);
       verifyNever(() => blbMockBibleReader.launch(state));
     });
