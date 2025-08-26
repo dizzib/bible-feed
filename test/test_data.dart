@@ -32,11 +32,7 @@ class TestBibleReaders extends BibleReaders {
 
   @override
   get items => {
-        BibleReaderKey.none: const BibleReader(
-          'None',
-          '',
-          [TargetPlatform.android, TargetPlatform.iOS],
-        ),
+        BibleReaderKey.none: const BibleReader('None', '', [TargetPlatform.android, TargetPlatform.iOS]),
         BibleReaderKey.blueLetterApp: blbMockBibleReader,
       };
 }
