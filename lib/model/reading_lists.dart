@@ -3,15 +3,18 @@ import 'package:injectable/injectable.dart';
 import '/model/book.dart';
 import '/model/reading_list.dart';
 
-abstract class ReadingLists {
+abstract class ReadingLists extends Iterable<ReadingList> {
   List<ReadingList> get items;
+
+  @override
+  Iterator<ReadingList> get iterator => items.iterator;
 }
 
 @LazySingleton(
   as: ReadingLists,
   env: [Environment.prod],
 )
-class PghReadingLists implements ReadingLists {
+class PghReadingLists extends ReadingLists {
   @override
   get items => [
         ReadingList('gos', 'Gospels', const [

@@ -22,7 +22,7 @@ extension Helper on WidgetTester {
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  final gospels = PghReadingLists().items[0];
+  final gospels = PghReadingLists().elementAt(0);
   final matthew = gospels[0];
 
   await configureDependencies();
@@ -60,7 +60,7 @@ void main() async {
   testWidgets('FeedsView', (WidgetTester t) async {
     await t.initialiseWidget(FeedsView());
     expectChapters(1);
-    for (var l in sl<ReadingLists>().items) {
+    for (var l in sl<ReadingLists>()) {
       expectAtLeast1Text(l.name);
     }
   });

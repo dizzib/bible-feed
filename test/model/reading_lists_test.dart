@@ -3,11 +3,11 @@ import 'package:bible_feed/model/reading_lists.dart';
 
 void main() {
   test('total reading lists should be 10', () {
-    expect(PghReadingLists().items.length, 10);
+    expect(PghReadingLists().length, 10);
   });
 
   test('total chapters per list', () {
-    run(i, expectTotalChapters) => expect(PghReadingLists().items[i].totalChapters, expectTotalChapters);
+    run(i, expectTotalChapters) => expect(PghReadingLists().elementAt(i).totalChapters, expectTotalChapters);
 
     run(0, 89);
     run(1, 187);

@@ -6,7 +6,7 @@ import 'reading_list_stub.dart';
   as: ReadingLists,
   env: [Environment.test],
 )
-class ReadingListsMock implements ReadingLists {
+class ReadingListsMock extends ReadingLists {
   @override
   final items = [l0, l1];
 }
