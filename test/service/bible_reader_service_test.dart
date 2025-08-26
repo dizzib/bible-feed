@@ -1,78 +1,82 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
+import 'package:bible_feed/service/bible_reader_app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
 import '../test_data.dart';
 
-void main() async {
-  late BibleReaderService fixture;
+class MockSharedPreferences extends Mock implements SharedPreferences {}
 
-  init(Map<String, Object> storeValues) async {
-    await configureDependencies(storeValues);
-    fixture = sl<BibleReaderService>();
-  }
+void main() {
+  late BibleReaderService linkedFixture;
+  late BibleReaderService unlinkedFixture;
+  late MockSharedPreferences blbMockSharedPreferences;
+  late MockSharedPreferences emptyMockSharedPreferences;
+
+  setUp(() async {
+    await configureDependencies();
+    blbMockSharedPreferences = MockSharedPreferences();
+    emptyMockSharedPreferences = MockSharedPreferences();
+    when(() => blbMockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
+    when(() => emptyMockSharedPreferences.getString('linkedBibleReader')).thenReturn(null);
+    linkedFixture = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), blbMockSharedPreferences);
+    unlinkedFixture =
+        BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), emptyMockSharedPreferences,);
+  });
 
   group('isLinked', () {
-    test('should be false if store is empty', () async {
-      await init({});
-      expect(fixture.isLinked, false);
+    test('should be false if store is empty', () {
+      expect(unlinkedFixture.isLinked, false);
     });
 
-    test('should be false if store is invalid', () async {
-      await init({'linkedBibleReader': 'nonsense'});
-      expect(fixture.isLinked, false);
+    test('should be false if store is nonsense', () {
+      when(() => emptyMockSharedPreferences.getString('linkedBibleReader')).thenReturn('nonsense');
+      expect(unlinkedFixture.isLinked, false);
     });
 
-    test('should be true if store is valid', () async {
-      await init({'linkedBibleReader': 'blueLetterApp'});
-      expect(fixture.isLinked, true);
+    test('should be true if store is blb', () {
+      expect(linkedFixture.isLinked, true);
     });
   });
 
   group('linkedBibleReader', () {
-    test('should be none if not linked', () async {
-      await init({});
-      expect(fixture.linkedBibleReader.displayName, 'None');
+    test('should be none if not linked', () {
+      expect(unlinkedFixture.linkedBibleReader.displayName, 'None');
     });
 
-    test('should be blb if linked to blb', () async {
-      await init({'linkedBibleReader': 'blueLetterApp'});
-      expect(fixture.linkedBibleReader.displayName, 'Blue Letter Bible app');
+    test('should be blb if linked to blb', () {
+      expect(linkedFixture.linkedBibleReader.displayName, 'Blue Letter Bible app');
     });
   });
 
   group('linkedBibleReaderIndex', () {
-    test('get should be zero if not linked', () async {
-      await init({});
-      expect(fixture.linkedBibleReaderIndex, 0);
+    test('get should be zero if not linked', () {
+      expect(unlinkedFixture.linkedBibleReaderIndex, 0);
     });
 
-    test('get should be 1 if linked to blb', () async {
-      await init({'linkedBibleReader': 'blueLetterApp'});
-      expect(fixture.linkedBibleReaderIndex, 1);
+    test('get should be 1 if linked to blb', () {
+      expect(linkedFixture.linkedBibleReaderIndex, 1);
     });
 
-    test('set should update and save to store', () async {
+    test('set should update and save to store', () {
       WidgetsFlutterBinding.ensureInitialized();
-      await init({});
-      fixture.linkedBibleReaderIndex = 1;
-      expect(sl<SharedPreferences>().getString('linkedBibleReader'), 'blueLetterApp');
-      expect(fixture.linkedBibleReaderIndex, 1);
+      when(() => emptyMockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
+      unlinkedFixture.linkedBibleReaderIndex = 1;
+      verify(() => emptyMockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
+      expect(unlinkedFixture.linkedBibleReaderIndex, 1);
     });
   });
 
   group('launchLinkedBibleReader', () {
     const book = Book('gen', 'Genesis', 50);
-    test('if read but not linked, should not launch', () async {
-      await init({});
+    test('if read but not linked, should not launch', () {
       final state = FeedState(book: book, chapter: 1, isRead: true);
-      fixture.launchLinkedBibleReader(state);
+      unlinkedFixture.launchLinkedBibleReader(state);
       verifyNever(() => blbMockBibleReader.launch(state));
     });
   });
