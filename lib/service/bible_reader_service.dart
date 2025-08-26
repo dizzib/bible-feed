@@ -28,7 +28,7 @@ class BibleReaderService with ChangeNotifier {
   static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
   void _loadState() {
-    final linkedReader = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
+    final String? linkedReader = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
     try {
       _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
       assert(_bibleReaders.items.keys.contains(_linkedBibleReaderKey));
