@@ -2,7 +2,6 @@ import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
