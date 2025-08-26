@@ -13,13 +13,13 @@ class AutoAdvanceService with ChangeNotifier {
   final FeedsAdvanceService _feedsAdvanceService;
 
   AutoAdvanceService(this._feedsAdvanceService) {
-    AppLifecycleListener(onResume: onResume);
-    onResume();
+    AppLifecycleListener(onResume: _onResume);
+    _onResume();
   }
 
   Timer? _timer;
 
-  void onResume() {
+  void _onResume() {
     _feedsAdvanceService.maybeAdvance();
     _setTimer();
   }
