@@ -10,10 +10,8 @@ abstract class ReadingLists extends Iterable<ReadingList> {
   Iterator<ReadingList> get iterator => items.iterator;
 }
 
-@LazySingleton(
-  as: ReadingLists,
-  env: [Environment.prod],
-)
+@prod
+@LazySingleton(as: ReadingLists)
 class PghReadingLists extends ReadingLists {
   @override
   get items => [
