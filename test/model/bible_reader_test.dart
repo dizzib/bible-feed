@@ -30,7 +30,7 @@ void main() {
     UrlLauncherPlatform.instance = mockUrlLauncher;
   });
 
-  test('constructor initializes properties', () {
+  test('constructor: should initialise properties', () {
     expect(fixture.displayName, 'Test Reader');
     expect(fixture.uriTemplate, 'https://example.com/BOOK/CHAPTER');
     expect(fixture.certifiedPlatforms, contains(TargetPlatform.android));
