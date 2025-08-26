@@ -3,10 +3,12 @@ import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
+import '../test_data.dart';
 
 void main() async {
   late BibleReaderService fixture;
@@ -66,10 +68,12 @@ void main() async {
   });
 
   group('launchLinkedBibleReader', () {
+    const book = Book('gen', 'Genesis', 50);
     test('if not linked, should not launch', () async {
       await init({});
-      fixture.launchLinkedBibleReader(
-          FeedState(book: const Book('gen', 'Genesis', 50), chapter: 1, dateModified: null, isRead: false, verse: 1));
+      final state = FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: 1);
+      fixture.launchLinkedBibleReader(state);
+      verifyNever(() => blbMockBibleReader.launch(state));
     });
   });
 }
