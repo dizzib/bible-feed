@@ -43,15 +43,12 @@ void main() {
 
   group('launch', () {
     run(bool isVerseScope, String expectedUrl) async {
-      when(() => mockFeed.state).thenReturn(
-        FeedState(
-            book: const Book('gen', 'Genesis', 50),
-            chapter: 1,
-            dateModified: null,
-            isRead: false,
-            verse: isVerseScope ? 2 : 1),
-      );
-      await fixture.launch(mockFeed.state);
+      await fixture.launch(FeedState(
+          book: const Book('gen', 'Genesis', 50),
+          chapter: 1,
+          dateModified: null,
+          isRead: false,
+          verse: isVerseScope ? 2 : 1));
       verify(() => mockUrlLauncher.launchUrl(expectedUrl, any())).called(1);
     }
 
