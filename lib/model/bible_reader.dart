@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
@@ -36,8 +35,8 @@ class BibleReader {
   }
 
   bool get isCertifiedForThisPlatform =>
-      (Platform.isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
-      (Platform.isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
+      (sl<PlatformService>().isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
+      (sl<PlatformService>().isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
 
   Future<bool> canLaunch(Feed f) async => await canLaunchUrl(_getDeeplinkUri(f.state));
 

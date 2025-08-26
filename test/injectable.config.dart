@@ -22,6 +22,7 @@ import 'package:bible_feed/service/feed_store_service.dart' as _i119;
 import 'package:bible_feed/service/feeds_advance_service.dart' as _i307;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
 import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
+import 'package:bible_feed/service/platform_service.dart' as _i578;
 import 'package:bible_feed/service/verse_scope_service.dart' as _i109;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -29,6 +30,7 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
 import 'stub/reading_lists_stub.dart' as _i25;
+import 'test_data.dart' as _i505;
 
 const String _test = 'test';
 const String _prod = 'prod';
@@ -60,6 +62,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i25.ReadingListsMock(),
       registerFor: {_test},
     );
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i505.ProdPlatformService(),
+      registerFor: {_test},
+    );
     gh.lazySingleton<_i109.VerseScopeService>(
         () => _i109.VerseScopeService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i22.HapticService>(
@@ -71,6 +77,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i1070.BibleReaders>(),
           gh<_i460.SharedPreferences>(),
         ));
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i578.ProdPlatformService(),
+      registerFor: {_prod},
+    );
     gh.singleton<_i969.HapticWireupService>(() => _i969.HapticWireupService(
           gh<_i22.HapticService>(),
           gh<_i283.BibleReaderService>(),
