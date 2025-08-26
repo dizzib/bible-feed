@@ -62,4 +62,10 @@ void main() async {
       expect(fixture.linkedBibleReaderIndex, 1);
     });
   });
+
+  group('launchLinkedBibleReader', () {
+    test('if not linked, should not launch', () async {
+      await init({});
+    });
+  });
 }
