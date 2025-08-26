@@ -25,11 +25,8 @@ void main() {
     when(() => blbMockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
     when(() => emptyMockSharedPreferences.getString('linkedBibleReader')).thenReturn(null);
     linkedFixture = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), blbMockSharedPreferences);
-    unlinkedFixture = BibleReaderService(
-      BibleReaderAppInstallService(),
-      TestBibleReaders(),
-      emptyMockSharedPreferences,
-    );
+    unlinkedFixture =
+        BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), emptyMockSharedPreferences);
   });
 
   group('isLinked', () {
