@@ -1,6 +1,8 @@
 import 'package:bible_feed/service/bible_reader_service.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../injectable.dart';
 
@@ -42,13 +44,21 @@ void main() async {
   });
 
   group('linkedBibleReaderIndex', () {
-    test('should be zero if not linked', () async {
+    test('get should be zero if not linked', () async {
       await init({});
       expect(fixture.linkedBibleReaderIndex, 0);
     });
 
-    test('should be 1 if linked to blb', () async {
+    test('get should be 1 if linked to blb', () async {
       await init({'linkedBibleReader': 'blueLetterApp'});
+      expect(fixture.linkedBibleReaderIndex, 1);
+    });
+
+    test('set should update and save to store', () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await init({});
+      fixture.linkedBibleReaderIndex = 1;
+      expect(sl<SharedPreferences>().getString('linkedBibleReader'), 'blueLetterApp');
       expect(fixture.linkedBibleReaderIndex, 1);
     });
   });
