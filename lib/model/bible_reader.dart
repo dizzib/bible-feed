@@ -38,8 +38,6 @@ class BibleReader {
       (sl<PlatformService>().isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
       (sl<PlatformService>().isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
 
-  Future<bool> canLaunch(Feed f) async => await canLaunchUrl(_getDeeplinkUri(f.state));
-
   Future<bool> isAvailable() async {
     if (uriTemplate.isEmpty) return Future.value(true); // 'None' is always available
     return canLaunchUrl(_getDeeplinkUri(sl<Feeds>()[0].state)); // attempt to launch first feed uri
