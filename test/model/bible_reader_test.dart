@@ -7,15 +7,14 @@ import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 
-class MockUrlLauncher extends Mock with MockPlatformInterfaceMixin implements UrlLauncherPlatform {}
-
 class MockFeed extends Mock implements Feed {}
+
+class MockUrlLauncher extends Mock with MockPlatformInterfaceMixin implements UrlLauncherPlatform {}
 
 void main() {
   late BibleReader fixture;
   late MockFeed mockFeed;
   late MockUrlLauncher mockUrlLauncher;
-  const book = Book('gen', 'Genesis', 50);
 
   setUp(() {
     fixture = const BibleReader(
@@ -42,7 +41,12 @@ void main() {
   group('launch', () {
     run(bool isVerseScope, String expectedUrl) async {
       when(() => mockFeed.state).thenReturn(
-        FeedState(book: book, chapter: 1, dateModified: null, isRead: false, verse: isVerseScope ? 2 : 1),
+        FeedState(
+            book: const Book('gen', 'Genesis', 50),
+            chapter: 1,
+            dateModified: null,
+            isRead: false,
+            verse: isVerseScope ? 2 : 1),
       );
       await fixture.launch(mockFeed);
       verify(() => mockUrlLauncher.launchUrl(expectedUrl, any())).called(1);
