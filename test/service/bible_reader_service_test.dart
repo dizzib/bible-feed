@@ -12,24 +12,32 @@ void main() async {
     fixture = sl<BibleReaderService>();
   }
 
-  group('constructor initialisation:', () {
-    test('should load as unlinked if store is empty', () async {
+  group('isLinked', () {
+    test('should be false if store is empty', () async {
       await init({});
       expect(fixture.isLinked, false);
-      expect(fixture.linkedBibleReader.displayName, 'None');
     });
 
-    test('should load unlinked if store is invalid', () async {
+    test('should be false if store is invalid', () async {
       await init({'linkedBibleReader': 'nonsense'});
       expect(fixture.isLinked, false);
+    });
+
+    test('should be true if store is valid', () async {
+      await init({'linkedBibleReader': 'blueLetterApp'});
+      expect(fixture.isLinked, true);
+    });
+  });
+
+  group('linkedBibleReader', () {
+    test('should be none if not linked', () async {
+      await init({});
       expect(fixture.linkedBibleReader.displayName, 'None');
     });
 
-    test('should load linked if store is valid', () async {
+    test('should be blb if linked to blb', () async {
       await init({'linkedBibleReader': 'blueLetterApp'});
-      expect(fixture.isLinked, true);
       expect(fixture.linkedBibleReader.displayName, 'Blue Letter Bible app');
-      expect(fixture.linkedBibleReaderIndex, 1);
     });
   });
 
@@ -37,6 +45,11 @@ void main() async {
     test('should be zero if not linked', () async {
       await init({});
       expect(fixture.linkedBibleReaderIndex, 0);
+    });
+
+    test('should be 1 if linked to blb', () async {
+      await init({'linkedBibleReader': 'blueLetterApp'});
+      expect(fixture.linkedBibleReaderIndex, 1);
     });
   });
 }
