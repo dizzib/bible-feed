@@ -1,3 +1,5 @@
+import 'package:bible_feed/model/book.dart';
+import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -66,6 +68,8 @@ void main() async {
   group('launchLinkedBibleReader', () {
     test('if not linked, should not launch', () async {
       await init({});
+      fixture.launchLinkedBibleReader(
+          FeedState(book: const Book('gen', 'Genesis', 50), chapter: 1, dateModified: null, isRead: false, verse: 1));
     });
   });
 }
