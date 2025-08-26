@@ -23,25 +23,21 @@ void main() {
     final now = DateTime.now();
     final midnightTonight = DateTime(now.year, now.month, now.day + 1);
     final durationToMidnight = midnightTonight.difference(now);
-    final mockClock = Clock(() => DateTime.now() - const Duration(seconds: 1) + durationToMidnight);
+    final mockClock = Clock(() => DateTime.now() - const Duration(milliseconds: 10) + durationToMidnight);
 
     await withClock(mockClock, () async {
       fixture = AutoAdvanceService(mockFeedsAdvanceService);
     });
   });
 
-  test('constructor should call maybeAdvance and sets timer on resume', () async {
+  test('constructor should call maybeAdvance', () async {
     verify(() => mockFeedsAdvanceService.maybeAdvance()).called(1);
   });
 
-  test('_run calls maybeAdvance and notifies listeners if advanced', () async {
-    final completer = Completer<void>();
+  test('_run should call maybeAdvance and notify listeners if advanced', () async {
     when(() => mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => AdvanceState.listsAdvanced);
-
-    fixture.addListener(() {
-      completer.complete();
-    });
-
+    final completer = Completer<void>();
+    fixture.addListener(completer.complete);
     await completer.future;
     verify(() => mockFeedsAdvanceService.maybeAdvance()).called(greaterThanOrEqualTo(1));
   });
