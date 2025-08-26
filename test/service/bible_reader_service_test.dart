@@ -17,7 +17,6 @@ void main() async {
       await init({});
       expect(fixture.isLinked, false);
       expect(fixture.linkedBibleReader.displayName, 'None');
-      // expect(fixture.linkedBibleReaderIndex, 0);
     });
 
     test('should load unlinked if store is invalid', () async {
@@ -30,12 +29,14 @@ void main() async {
       await init({'linkedBibleReader': 'blueLetterApp'});
       expect(fixture.isLinked, true);
       expect(fixture.linkedBibleReader.displayName, 'Blue Letter Bible app');
+      expect(fixture.linkedBibleReaderIndex, 1);
     });
   });
 
   group('linkedBibleReaderIndex', () {
-    test('should be zero if not linked', () {
-      // expect(fixture.linkedBibleReaderIndex, 0);
+    test('should be zero if not linked', () async {
+      await init({});
+      expect(fixture.linkedBibleReaderIndex, 0);
     });
   });
 }
