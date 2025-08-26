@@ -15,7 +15,6 @@ class MockUrlLauncher extends Mock with MockPlatformInterfaceMixin implements Ur
 
 void main() {
   late BibleReader fixture;
-  late MockFeed mockFeed;
   late MockUrlLauncher mockUrlLauncher;
 
   setUp(() {
@@ -25,7 +24,6 @@ void main() {
       [TargetPlatform.android, TargetPlatform.iOS],
       uriVersePath: '/VERSE',
     );
-    mockFeed = MockFeed();
     mockUrlLauncher = MockUrlLauncher();
     registerFallbackValue(const LaunchOptions());
     when(() => mockUrlLauncher.canLaunch(any())).thenAnswer((_) async => true);
@@ -68,6 +66,7 @@ void main() {
 
     test('should attempt to launch first feed uri if not None', () async {
       await configureDependencies();
+      final mockFeed = MockFeed();
       when(() => mockFeed.state).thenReturn(
         FeedState(book: const Book('gen', 'Genesis', 50), chapter: 1, dateModified: null, isRead: false, verse: 1),
       );
