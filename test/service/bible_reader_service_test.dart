@@ -35,8 +35,10 @@ void main() {
     });
 
     test('should be false if store is nonsense', () {
-      when(() => emptyMockSharedPreferences.getString('linkedBibleReader')).thenReturn('nonsense');
-      expect(unlinkedFixture.isLinked, false);
+      final mockSharedPreferences = MockSharedPreferences();
+      when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn('nonsense');
+      final fixture = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
+      expect(fixture.isLinked, false);
     });
 
     test('should be true if store is blb', () {
