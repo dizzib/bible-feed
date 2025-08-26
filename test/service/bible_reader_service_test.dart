@@ -25,8 +25,11 @@ void main() {
     when(() => blbMockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
     when(() => emptyMockSharedPreferences.getString('linkedBibleReader')).thenReturn(null);
     linkedFixture = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), blbMockSharedPreferences);
-    unlinkedFixture =
-        BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), emptyMockSharedPreferences,);
+    unlinkedFixture = BibleReaderService(
+      BibleReaderAppInstallService(),
+      TestBibleReaders(),
+      emptyMockSharedPreferences,
+    );
   });
 
   group('isLinked', () {
@@ -74,9 +77,23 @@ void main() {
 
   group('launchLinkedBibleReader', () {
     const book = Book('gen', 'Genesis', 50);
-    test('if read but not linked, should not launch', () {
-      final state = FeedState(book: book, chapter: 1, isRead: true);
+
+    test('if linked and unread, should launch', () async {
+      final state = FeedState(book: book, chapter: 1, isRead: false);
+      when(() => blbMockBibleReader.launch(state)).thenAnswer((_) async => true);
+      await linkedFixture.launchLinkedBibleReader(state);
+      verify(() => blbMockBibleReader.launch(state)).called(1);
+    });
+
+    test('if not linked and unread, should not launch', () {
+      final state = FeedState(book: book, chapter: 1, isRead: false);
       unlinkedFixture.launchLinkedBibleReader(state);
+      verifyNever(() => blbMockBibleReader.launch(state));
+    });
+
+    test('if linked and read, should not launch', () {
+      final state = FeedState(book: book, chapter: 1, isRead: true);
+      linkedFixture.launchLinkedBibleReader(state);
       verifyNever(() => blbMockBibleReader.launch(state));
     });
   });
