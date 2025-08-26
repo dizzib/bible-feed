@@ -9,7 +9,7 @@ abstract class TogglerService with ChangeNotifier {
 
   get _storeKey;
 
-  bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? false;
+  bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? true;
 
   set isEnabled(bool value) {
     _sharedPreferences.setBool(_storeKey, value);

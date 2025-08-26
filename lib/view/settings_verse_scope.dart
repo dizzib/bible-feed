@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/service/verse_scope_service.dart';
+import '../service/toggler_service.dart';
 
 class VerseScopeSettings extends StatelessWidget {
   VerseScopeSettings({super.key});
 
-  final vss = watchIt<VerseScopeService>();
+  final vsts = watchIt<VerseScopeTogglerService>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class VerseScopeSettings extends StatelessWidget {
             padding: EdgeInsets.only(top: spacing),
             child: Text('Read 2 Hebrew letters each day.'),
           ),
-          value: vss.isEnabled,
-          onChanged: (value) => vss.isEnabled = value,
+          value: vsts.isEnabled,
+          onChanged: (value) => vsts.isEnabled = value,
         ),
       ),
     );

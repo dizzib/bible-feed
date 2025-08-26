@@ -59,8 +59,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1033.ChapterListWheelState());
     gh.lazySingleton<_i229.BibleReaderAppInstallService>(
         () => _i229.BibleReaderAppInstallService());
-    gh.lazySingleton<_i109.VerseScopeService>(
-        () => _i109.VerseScopeService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i22.HapticService>(
         () => _i22.HapticService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i119.FeedStoreService>(
@@ -81,25 +79,27 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i823.PghReadingLists(),
       registerFor: {_prod},
     );
-    gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
-          gh<_i119.FeedStoreService>(),
-          gh<_i109.VerseScopeService>(),
-          gh<_i823.ReadingLists>(),
-        ));
     gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(
           gh<_i229.BibleReaderAppInstallService>(),
           gh<_i1070.BibleReaders>(),
           gh<_i460.SharedPreferences>(),
         ));
-    gh.lazySingleton<_i307.FeedsAdvanceService>(() => _i307.FeedsAdvanceService(
-          gh<_i460.SharedPreferences>(),
-          gh<_i759.Feeds>(),
-        ));
+    gh.lazySingleton<_i109.VerseScopeService>(
+        () => _i109.VerseScopeService(gh<_i849.VerseScopeTogglerService>()));
     gh.singleton<_i969.HapticWireupService>(() => _i969.HapticWireupService(
           gh<_i22.HapticService>(),
           gh<_i283.BibleReaderService>(),
           gh<_i1033.BookListWheelState>(),
           gh<_i1033.ChapterListWheelState>(),
+        ));
+    gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
+          gh<_i119.FeedStoreService>(),
+          gh<_i109.VerseScopeService>(),
+          gh<_i823.ReadingLists>(),
+        ));
+    gh.lazySingleton<_i307.FeedsAdvanceService>(() => _i307.FeedsAdvanceService(
+          gh<_i460.SharedPreferences>(),
+          gh<_i759.Feeds>(),
         ));
     gh.lazySingleton<_i136.AllDoneDialogService>(
         () => _i136.AllDoneDialogService(

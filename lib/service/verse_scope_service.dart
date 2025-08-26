@@ -1,28 +1,18 @@
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/feed.dart';
+import 'toggler_service.dart';
 
 @lazySingleton
-class VerseScopeService extends ChangeNotifier {
-  final SharedPreferences _sharedPreferences;
+class VerseScopeService {
+  final VerseScopeTogglerService _verseScopeTogglerService;
 
-  VerseScopeService(this._sharedPreferences);
-
-  static const _storeKey = 'isEnabledVerseScopes';
+  VerseScopeService(this._verseScopeTogglerService);
 
   Map<int, String>? _verseScopeMap(Feed f) => f.state.book.verseScopeMaps?[f.state.chapter];
 
-  bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? true;
-
-  set isEnabled(bool value) {
-    _sharedPreferences.setBool(_storeKey, value);
-    notifyListeners();
-  }
-
   int nextVerse(Feed f) {
-    if (!isEnabled) return 1;
+    if (!_verseScopeTogglerService.isEnabled) return 1;
     final vsm = _verseScopeMap(f);
     if (vsm == null) return 1;
     final verses = vsm.keys.toList();
@@ -32,7 +22,7 @@ class VerseScopeService extends ChangeNotifier {
   }
 
   String verseScopeName(Feed f) {
-    if (!isEnabled) return '';
+    if (!_verseScopeTogglerService.isEnabled) return '';
     final vsm = _verseScopeMap(f);
     if (vsm == null) return '';
     return vsm[f.state.verse]!.replaceAll('_', String.fromCharCode(0x00A0));
