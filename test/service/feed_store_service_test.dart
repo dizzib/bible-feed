@@ -21,18 +21,18 @@ void main() async {
 
   setUp(() async {
     await initFeed({
-      'l2.book': 'b1',
-      'l2.chapter': 2,
-      'l2.dateModified': yesterday.toIso8601String(),
-      'l2.isRead': true,
-      'l2.verse': 7,
+      'rl2.book': 'b1',
+      'rl2.chapter': 2,
+      'rl2.dateModified': yesterday.toIso8601String(),
+      'rl2.isRead': true,
+      'rl2.verse': 7,
     });
   });
 
   group('loadState', () {
     test('should load defaults if store is empty', () async {
       await initFeed({});
-      final state = fixture.loadState(l2);
+      final state = fixture.loadState(rl2);
       expect(state.book, b0);
       expect(state.chapter, 1);
       expect(state.dateModified, null);
@@ -41,7 +41,7 @@ void main() async {
     });
 
     test('should load from store if store is populated', () async {
-      final state = fixture.loadState(l2);
+      final state = fixture.loadState(rl2);
       expect(state.book, b1);
       expect(state.chapter, 2);
       expect(state.dateModified, yesterday);
@@ -54,7 +54,7 @@ void main() async {
     test('should save to store', () async {
       await initFeed({});
       await fixture.saveState(Feed(
-          l2,
+          rl2,
           sl<VerseScopeService>(),
           FeedState(
             book: b2,
@@ -63,11 +63,11 @@ void main() async {
             isRead: true,
             verse: 5,
           )));
-      expect(sl<SharedPreferences>().getString('l2.book'), 'b2');
-      expect(sl<SharedPreferences>().getInt('l2.chapter'), 3);
-      expect(sl<SharedPreferences>().getString('l2.dateModified'), yesterday.toIso8601String());
-      expect(sl<SharedPreferences>().getBool('l2.isRead'), true);
-      expect(sl<SharedPreferences>().getInt('l2.verse'), 5);
+      expect(sl<SharedPreferences>().getString('rl2.book'), 'b2');
+      expect(sl<SharedPreferences>().getInt('rl2.chapter'), 3);
+      expect(sl<SharedPreferences>().getString('rl2.dateModified'), yesterday.toIso8601String());
+      expect(sl<SharedPreferences>().getBool('rl2.isRead'), true);
+      expect(sl<SharedPreferences>().getInt('rl2.verse'), 5);
     });
   });
 }

@@ -8,5 +8,5 @@ import 'reading_list_stub.dart';
 )
 class ReadingListsMock extends ReadingLists {
   @override
-  final items = [l0, l1];
+  final items = [rl0, rl1];
 }

@@ -13,14 +13,14 @@ void main() async {
 
   setUp(() async {
     await configureDependencies({
-      'l0.book': 'b0',
-      'l0.chapter': 1,
-      'l0.dateModified': DateTime.now().toIso8601String(),
-      'l0.isRead': true,
-      'l1.book': 'b1',
-      'l1.chapter': 1,
-      'l1.dateModified': DateTime.now().toIso8601String(),
-      'l1.isRead': false,
+      'rl0.book': 'b0',
+      'rl0.chapter': 1,
+      'rl0.dateModified': DateTime.now().toIso8601String(),
+      'rl0.isRead': true,
+      'rl1.book': 'b1',
+      'rl1.chapter': 1,
+      'rl1.dateModified': DateTime.now().toIso8601String(),
+      'rl1.isRead': false,
     });
     feeds = Feeds(
       di<FeedStoreService>(),
@@ -30,8 +30,8 @@ void main() async {
   });
 
   test('[]', () {
-    expect(feeds[0].readingList, l0);
-    expect(feeds[1].readingList, l1);
+    expect(feeds[0].readingList, rl0);
+    expect(feeds[1].readingList, rl1);
   });
 
   test('areChaptersRead', () {

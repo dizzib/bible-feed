@@ -14,10 +14,10 @@ void main() async {
   setUp(() async {
     await configureDependencies();
     feed = Feed(
-      l2,
+      rl2,
       sl<VerseScopeService>(),
       FeedState(
-        book: l2.getBook('b1'),
+        book: rl2.getBook('b1'),
         chapter: 2,
         dateModified: DateTime.now(),
         isRead: true,
