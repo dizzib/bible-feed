@@ -12,18 +12,19 @@ import 'feeds.dart';
 // for ios, scheme must be added to info.plist!!!
 class BibleReader {
   const BibleReader(
-    this.displayName,
-    this.uriTemplate,
-    this.certifiedPlatforms, {
-    this.bookKeyMap = const IdentityBookKeyMap(),
-    this.uriVersePath,
-  });
+    this._displayName,
+    this._uriTemplate,
+    this._certifiedPlatforms, {
+    bookKeyMap = const IdentityBookKeyMap(),
+    uriVersePath,
+  })  : _bookKeyMap = bookKeyMap,
+        _uriVersePath = uriVersePath;
 
-  final BibleReaderBookKeyMap bookKeyMap;
-  final List<TargetPlatform> certifiedPlatforms; // platforms confirmed working with no issues
-  final String displayName;
-  final String uriTemplate;
-  final String? uriVersePath;
+  final BibleReaderBookKeyMap _bookKeyMap;
+  final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
+  final String _displayName;
+  final String _uriTemplate;
+  final String? _uriVersePath;
 
   Uri _getDeeplinkUri(FeedState state) {
     final bookId = bookKeyMap.apply(state.book);
@@ -33,6 +34,12 @@ class BibleReader {
     }
     return Uri.parse(uri).log();
   }
+
+  BibleReaderBookKeyMap get bookKeyMap => _bookKeyMap;
+  List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
+  String get displayName => _displayName;
+  String get uriTemplate => _uriTemplate;
+  String? get uriVersePath => _uriVersePath;
 
   bool get isCertifiedForThisPlatform =>
       (sl<PlatformService>().isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||

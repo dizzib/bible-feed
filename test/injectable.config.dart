@@ -55,15 +55,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1033.BookListWheelState());
     gh.lazySingleton<_i1033.ChapterListWheelState>(
         () => _i1033.ChapterListWheelState());
-    gh.lazySingleton<_i1070.BibleReaders>(() => _i1070.BibleReaders());
     gh.lazySingleton<_i229.BibleReaderAppInstallService>(
         () => _i229.BibleReaderAppInstallService());
-    gh.lazySingleton<_i823.ReadingLists>(
-      () => _i25.ReadingListsMock(),
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => _i505.TestBibleReaders(),
       registerFor: {_test},
     );
     gh.lazySingleton<_i578.PlatformService>(
-      () => _i505.ProdPlatformService(),
+      () => _i505.TestPlatformService(),
+      registerFor: {_test},
+    );
+    gh.lazySingleton<_i823.ReadingLists>(
+      () => _i25.ReadingListsMock(),
       registerFor: {_test},
     );
     gh.lazySingleton<_i109.VerseScopeService>(
@@ -77,6 +80,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i1070.BibleReaders>(),
           gh<_i460.SharedPreferences>(),
         ));
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => _i1070.ProdBibleReaders(),
+      registerFor: {_prod},
+    );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProdPlatformService(),
       registerFor: {_prod},
