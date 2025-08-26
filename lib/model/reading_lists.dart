@@ -1,8 +1,10 @@
+import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 import '/model/book.dart';
 import '/model/reading_list.dart';
 
+@immutable
 abstract class ReadingLists extends Iterable<ReadingList> {
   List<ReadingList> get items;
 
