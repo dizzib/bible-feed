@@ -1,6 +1,5 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/service/toggler_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -8,21 +7,18 @@ import 'package:mocktail/mocktail.dart';
 import '../injectable.dart';
 import '../test_data.dart';
 
-class MockVerseScopeTogglerService extends Mock implements VerseScopeTogglerService {}
+class MockVerseScopeService extends Mock implements VerseScopeService {}
 
 void main() async {
   await configureDependencies();
 
   late Feed testee;
-  final mockVerseScopeTogglerService = MockVerseScopeTogglerService();
+  final mockVerseScopeService = MockVerseScopeService();
 
   setUp(() {
-    when(() => mockVerseScopeTogglerService.isEnabled).thenReturn(false);
-    testee = Feed(
-      rl1,
-      VerseScopeService(mockVerseScopeTogglerService),
-      FeedState(book: b1, chapter: 1, dateModified: DateTime.now(), isRead: false, verse: 1),
-    );
+    final state = FeedState(book: b1, chapter: 1, isRead: false);
+    when(() => mockVerseScopeService.nextVerse(state)).thenReturn(1);
+    testee = Feed(rl1, mockVerseScopeService, state);
   });
 
   group('property', () {
