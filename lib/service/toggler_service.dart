@@ -41,8 +41,8 @@ class VerseScopeTogglerService extends TogglerService {
   get _storeKey => 'isEnabled.verseScopes';
 
   @override
-  String get title => 'Long chapters';
+  String get title => 'Split Chapters';
 
   @override
-  String get subtitle => 'Split long chapters into smaller daily sections.';
+  String get subtitle => 'Split long chapters, such as Psalm 119, into smaller sections.';
 }
