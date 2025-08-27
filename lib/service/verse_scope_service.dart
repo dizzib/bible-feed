@@ -25,10 +25,14 @@ class VerseScopeService {
     if (!_verseScopeTogglerService.isEnabled) return '';
     final vsm = _verseScopeMap(state);
     if (vsm == null) return '';
-    final name = vsm[state.verse] as String;
-    var toVerse = int.tryParse(name);
-    if (name.isNotEmpty && toVerse == null) return name.replaceAll('_', String.fromCharCode(0x00A0));
-    toVerse ??= nextVerse(state) - 1;
-    return 'verses\u00A0${state.verse}-$toVerse';
+    var name = vsm[state.verse] as String;
+    if (name.isEmpty) {
+      if (state.verse == 1) {
+        name = 'to_verse_${nextVerse(state) - 1}';
+      } else {
+        name = 'from_verse_${state.verse}';
+      }
+    }
+    return name.replaceAll('_', String.fromCharCode(0x00A0));
   }
 }

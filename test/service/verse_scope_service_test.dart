@@ -21,7 +21,7 @@ void main() {
     state = FeedState(
       book: const Book('b2', 'Book 2', 3, {
         1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
-        2: {1: '', 3: '5'},
+        2: {1: '', 3: ''},
       }),
       chapter: 1,
       isRead: false,
@@ -64,13 +64,13 @@ void main() {
       expect(testee.verseScopeName(state), 'ℵ\u00A0Aleph');
     });
 
-    group('returns generated name', () {
-      test('not last verse scope', () {
-        expect(testee.verseScopeName(copyStateWith(chapter: 2)), 'verses\u00A01-2');
+    group('returns calculated name', () {
+      test('to verse', () {
+        expect(testee.verseScopeName(copyStateWith(chapter: 2)), 'to\u00A0verse\u00A02');
       });
 
-      test('last verse scope', () {
-        expect(testee.verseScopeName(copyStateWith(chapter: 2, verse: 3)), 'verses\u00A03-5');
+      test('from verse', () {
+        expect(testee.verseScopeName(copyStateWith(chapter: 2, verse: 3)), 'from\u00A0verse\u00A03');
       });
     });
   });
