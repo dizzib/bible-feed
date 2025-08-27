@@ -20,7 +20,7 @@ void main() {
     testee = VerseScopeService(mockTogglerService);
     state = FeedState(
       book: const Book('b2', 'Book 2', 3, {
-        1: {1: 'a_', 2: 'b'},
+        1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
       }),
       chapter: 1,
       isRead: false,
@@ -56,7 +56,7 @@ void main() {
     });
 
     test('returns name with underscores replaced', () {
-      expect(testee.verseScopeName(state), 'a\u00A0');
+      expect(testee.verseScopeName(state), 'ℵ\u00A0Aleph');
     });
 
     test('returns empty if no verse scope map', () {
