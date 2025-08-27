@@ -70,8 +70,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i25.ReadingListsMock(),
       registerFor: {_test},
     );
-    gh.lazySingleton<_i22.HapticService>(
-        () => _i22.HapticService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i119.FeedStoreService>(
         () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(
@@ -91,18 +89,21 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i849.HapticTogglerService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i849.VerseScopeTogglerService>(
         () => _i849.VerseScopeTogglerService(gh<_i460.SharedPreferences>()));
-    gh.singleton<_i969.HapticWireupService>(() => _i969.HapticWireupService(
-          gh<_i22.HapticService>(),
-          gh<_i283.BibleReaderService>(),
-          gh<_i1033.BookListWheelState>(),
-          gh<_i1033.ChapterListWheelState>(),
-        ));
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.PghReadingLists(),
       registerFor: {_prod},
     );
+    gh.lazySingleton<_i22.HapticService>(
+        () => _i22.HapticService(gh<_i849.HapticTogglerService>()));
     gh.lazySingleton<_i109.VerseScopeService>(
         () => _i109.VerseScopeService(gh<_i849.VerseScopeTogglerService>()));
+    gh.singleton<_i969.HapticWireupService>(() => _i969.HapticWireupService(
+          gh<_i22.HapticService>(),
+          gh<_i849.HapticTogglerService>(),
+          gh<_i283.BibleReaderService>(),
+          gh<_i1033.BookListWheelState>(),
+          gh<_i1033.ChapterListWheelState>(),
+        ));
     gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
           gh<_i119.FeedStoreService>(),
           gh<_i109.VerseScopeService>(),

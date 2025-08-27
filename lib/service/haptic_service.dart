@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'toggler_service.dart';
 
 @lazySingleton
-class HapticService extends RouteObserver<PageRoute<dynamic>> with ChangeNotifier {
-  final SharedPreferences _sharedPreferences;
+class HapticService extends RouteObserver<PageRoute<dynamic>> {
+  final HapticTogglerService _hapticTogglerService;
 
-  HapticService(this._sharedPreferences);
+  HapticService(this._hapticTogglerService);
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) => impact();
@@ -15,16 +16,7 @@ class HapticService extends RouteObserver<PageRoute<dynamic>> with ChangeNotifie
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => impact();
 
-  static const _storeKey = 'isEnabledHaptic';
-
-  bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? true;
-
-  set isEnabled(bool value) {
-    _sharedPreferences.setBool(_storeKey, value);
-    notifyListeners();
-  }
-
   void impact() {
-    if (isEnabled) HapticFeedback.lightImpact();
+    if (_hapticTogglerService.isEnabled) HapticFeedback.lightImpact();
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/service/haptic_service.dart';
+import '/service/toggler_service.dart';
 
 class HapticSettings extends StatelessWidget {
   HapticSettings({super.key});
 
-  final hs = watchIt<HapticService>();
+  final hts = watchIt<HapticTogglerService>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class HapticSettings extends StatelessWidget {
             padding: EdgeInsets.only(top: spacing),
             child: Text('Vibrate on tap or select.'),
           ),
-          value: hs.isEnabled,
-          onChanged: (value) => hs.isEnabled = value,
+          value: hts.isEnabled,
+          onChanged: (value) => hts.isEnabled = value,
         ),
       ),
     );
