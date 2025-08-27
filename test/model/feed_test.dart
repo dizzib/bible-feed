@@ -17,13 +17,7 @@ void main() async {
     testee = Feed(
       rl2,
       sl<VerseScopeService>(),
-      FeedState(
-        book: rl2.getBook('b1'),
-        chapter: 2,
-        dateModified: DateTime.now(),
-        isRead: true,
-        verse: 1,
-      ),
+      FeedState(book: b1, chapter: 2, dateModified: DateTime.now(), isRead: true, verse: 1),
     );
   });
 
@@ -55,12 +49,10 @@ void main() async {
   });
 
   group('method', () {
-    void checkState(Book expectedBook, int expectedChapter,
-        [int expectedVerse = 1, String expectedVerseScopeName = '']) {
+    void checkState(Book expectedBook, int expectedChapter) {
       expect(testee.state.book, expectedBook);
       expect(testee.state.chapter, expectedChapter);
-      expect(testee.verseScopeName, expectedVerseScopeName);
-      expect(testee.state.verse, expectedVerse);
+      expect(testee.state.verse, 1);
     }
 
     group('advance', () {
@@ -74,15 +66,13 @@ void main() async {
         expect(testee.advance(), throwsAssertionError);
       });
 
-      test('full cycle: should advance/reset chapter and book, and store', () async {
+      test('full cycle: should advance/reset chapter and book', () async {
         await advance();
         checkState(b1, 3);
         await advance();
         checkState(b2, 1);
         await advance();
-        checkState(b2, 2, 1, 'split 1');
-        await advance();
-        checkState(b2, 2, 7, 'split 2');
+        checkState(b2, 2);
         await advance();
         checkState(b0, 1);
         await advance();

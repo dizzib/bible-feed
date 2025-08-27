@@ -11,7 +11,7 @@ abstract class TogglerService with ChangeNotifier {
   String get title;
   String get subtitle;
 
-  bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? true;
+  bool get isEnabled => _sharedPreferences.getBool(_storeKey) ?? false;
 
   set isEnabled(bool value) {
     _sharedPreferences.setBool(_storeKey, value);
