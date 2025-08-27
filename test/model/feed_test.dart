@@ -1,22 +1,27 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
+import 'package:bible_feed/service/toggler_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:watch_it/watch_it.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../injectable.dart';
 import '../stub/book_stub.dart';
 import '../stub/reading_list_stub.dart';
 
-void main() async {
-  late Feed testee;
+class MockVerseScopeTogglerService extends Mock implements VerseScopeTogglerService {}
 
+void main() async {
   await configureDependencies();
 
+  late Feed testee;
+  final mockVerseScopeTogglerService = MockVerseScopeTogglerService();
+
   setUp(() {
+    when(() => mockVerseScopeTogglerService.isEnabled).thenReturn(false);
     testee = Feed(
       rl2,
-      sl<VerseScopeService>(),
+      VerseScopeService(mockVerseScopeTogglerService),
       FeedState(book: b1, chapter: 2, dateModified: DateTime.now(), isRead: true, verse: 1),
     );
   });
