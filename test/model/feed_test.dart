@@ -49,10 +49,10 @@ void main() async {
   });
 
   group('method', () {
-    void checkState(Book expectedBook, int expectedChapter) {
+    void checkState(Book expectedBook, int expectedChapter, [int expectedVerse = 1]) {
       expect(testee.state.book, expectedBook);
       expect(testee.state.chapter, expectedChapter);
-      expect(testee.state.verse, 1);
+      expect(testee.state.verse, expectedVerse);
     }
 
     group('advance', () {
@@ -88,6 +88,14 @@ void main() async {
         checkState(b0, 1);
         await advance();
         checkState(b1, 1);
+      });
+
+      test('with verse scope, should advance verse only', () async {
+        when(() => mockVerseScopeService.nextVerse(state)).thenReturn(3);
+        checkState(b1, 1, 1);
+        testee.toggleIsRead();
+        await testee.advance();
+        checkState(b1, 1, 3);
       });
     });
 
