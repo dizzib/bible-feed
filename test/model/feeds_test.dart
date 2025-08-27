@@ -11,17 +11,18 @@ import '../stub/reading_list_stub.dart';
 void main() async {
   late Feeds feeds;
 
+  await configureDependencies({
+    'rl0.book': 'b0',
+    'rl0.chapter': 1,
+    'rl0.dateModified': DateTime.now().toIso8601String(),
+    'rl0.isRead': true,
+    'rl1.book': 'b1',
+    'rl1.chapter': 1,
+    'rl1.dateModified': DateTime.now().toIso8601String(),
+    'rl1.isRead': false,
+  });
+
   setUp(() async {
-    await configureDependencies({
-      'rl0.book': 'b0',
-      'rl0.chapter': 1,
-      'rl0.dateModified': DateTime.now().toIso8601String(),
-      'rl0.isRead': true,
-      'rl1.book': 'b1',
-      'rl1.chapter': 1,
-      'rl1.dateModified': DateTime.now().toIso8601String(),
-      'rl1.isRead': false,
-    });
     feeds = Feeds(
       di<FeedStoreService>(),
       di<VerseScopeService>(),

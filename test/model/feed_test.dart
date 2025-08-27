@@ -11,8 +11,9 @@ import '../stub/reading_list_stub.dart';
 void main() async {
   late Feed feed;
 
+  await configureDependencies();
+
   setUp(() async {
-    await configureDependencies();
     feed = Feed(
       rl2,
       sl<VerseScopeService>(),
