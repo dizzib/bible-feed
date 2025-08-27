@@ -6,8 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../injectable.dart';
-import '../stub/book_stub.dart';
-import '../stub/reading_list_stub.dart';
+import '../test_data.dart';
 
 class MockVerseScopeTogglerService extends Mock implements VerseScopeTogglerService {}
 

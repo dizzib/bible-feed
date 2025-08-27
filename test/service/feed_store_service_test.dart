@@ -7,8 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
-import '../stub/book_stub.dart';
-import '../stub/reading_list_stub.dart';
+import '../test_data.dart';
 
 void main() async {
   late FeedStoreService testee;

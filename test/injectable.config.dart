@@ -30,7 +30,6 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
-import 'stub/reading_lists_stub.dart' as _i25;
 import 'test_data.dart' as _i505;
 
 const String _test = 'test';
@@ -67,7 +66,7 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_test},
     );
     gh.lazySingleton<_i823.ReadingLists>(
-      () => _i25.ReadingListsMock(),
+      () => _i505.ReadingListsMock(),
       registerFor: {_test},
     );
     gh.lazySingleton<_i119.FeedStoreService>(

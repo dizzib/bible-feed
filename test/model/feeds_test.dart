@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
-import '../stub/reading_list_stub.dart';
+import '../test_data.dart';
 
 void main() async {
   late Feeds testee;
