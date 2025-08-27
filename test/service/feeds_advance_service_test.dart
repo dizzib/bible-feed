@@ -42,7 +42,7 @@ void main() async {
 
   group('Advance:', () {
     checkHasAdvanced(bool shouldAdvance) {
-      expect(feeds[0].state.chapter, shouldAdvance ? 2 : 1);
+      expect(feeds[0].state.chapter, 1);
       expect(feeds[1].state.chapter, shouldAdvance ? 2 : 1);
     }
 

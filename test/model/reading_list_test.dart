@@ -4,37 +4,35 @@ import '../test_data.dart';
 
 void main() {
   test('constructor', () {
-    expect(rl2.count, 3);
-    expect(rl2.totalChapters, 10);
+    expect(rl1.count, 2);
+    expect(rl1.totalChapters, 4);
   });
 
   test('[]', () {
-    expect(rl2[0], b0);
-    expect(rl2[1], b1);
-    expect(rl2[2], b2);
+    expect(rl1[0], b0);
+    expect(rl1[1], b1);
   });
 
   test('chaptersTo', () {
-    expect(rl2.chaptersTo(0, 0), 0);
-    expect(rl2.chaptersTo(1, 1), 6);
-    expect(rl2.chaptersTo(2, 2), 10);
+    expect(rl1.chaptersTo(0, 0), 0);
+    expect(rl1.chaptersTo(1, 2), 3);
   });
 
   test('getBook', () {
-    expect(rl2.getBook('b0'), b0);
-    expect(rl2.getBook('b1'), b1);
-    expect(rl2.getBook('b2'), b2);
+    expect(rl1.getBook('b0'), b0);
+    expect(rl1.getBook('b1'), b1);
   });
 
   test('indexOf', () {
-    expect(rl2.indexOf(b0), 0);
-    expect(rl2.indexOf(b1), 1);
-    expect(rl2.indexOf(b2), 2);
+    expect(rl1.indexOf(b0), 0);
+    expect(rl1.indexOf(b1), 1);
   });
 
   test('progressTo', () {
-    expect(rl2.progressTo(0, 0), 0.0);
-    expect(rl2.progressTo(1, 1), 0.6);
-    expect(rl2.progressTo(2, 2), 1.0);
+    expect(rl1.progressTo(0, 0), 0.0);
+    expect(rl1.progressTo(1, 0), 0.25);
+    expect(rl1.progressTo(1, 1), 0.5);
+    expect(rl1.progressTo(1, 2), 0.75);
+    expect(rl1.progressTo(1, 3), 1.0);
   });
 }

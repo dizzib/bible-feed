@@ -4,8 +4,8 @@ import '../test_data.dart';
 
 void main() {
   test('constructor', () {
-    expect(b0.chapterCount, 5);
-    expect(b0.key, 'b0');
-    expect(b0.name, 'Book 0');
+    expect(b1.chapterCount, 3);
+    expect(b1.key, 'b1');
+    expect(b1.name, 'Book 1');
   });
 }
