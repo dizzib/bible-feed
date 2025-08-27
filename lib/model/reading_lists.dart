@@ -18,17 +18,29 @@ class PghReadingLists extends ReadingLists {
   @override
   get items => [
         ReadingList('gos', 'Gospels', const [
-          Book('mat', 'Matthew', 28),
+          Book('mat', 'Matthew', 28, {
+            26: {1: 'verses_1-35', 36: 'verses_36-75'}
+          }),
           Book('mar', 'Mark', 16),
-          Book('luk', 'Luke', 24),
-          Book('jhn', 'John', 21),
+          Book('luk', 'Luke', 24, {
+            1: {1: 'verses_1-38', 39: 'verses_39-80'}
+          }),
+          Book('jhn', 'John', 21, {
+            6: {1: 'verses_1-40', 41: 'verses_41-71'}
+          }),
         ]),
         ReadingList('pen', 'Pentateuch', const [
           Book('gen', 'Genesis', 50),
           Book('exo', 'Exodus', 40),
-          Book('lev', 'Leviticus', 27),
-          Book('num', 'Numbers', 36),
-          Book('deu', 'Deuteronomy', 34),
+          Book('lev', 'Leviticus', 27, {
+            13: {1: 'verses_1-28', 29: 'verses_29-59'}
+          }),
+          Book('num', 'Numbers', 36, {
+            7: {1: 'verses_1-47', 48: 'verses_48-89'}
+          }),
+          Book('deu', 'Deuteronomy', 34, {
+            28: {1: 'verses_1-35', 36: 'verses_36-68'}
+          }),
         ]),
         ReadingList('ep1', 'Epistles I', const [
           Book('rom', 'Romans', 16),
@@ -87,17 +99,23 @@ class PghReadingLists extends ReadingLists {
           Book('rth', 'Ruth', 4),
           Book('1sa', '1 Samuel', 31),
           Book('2sa', '2 Samuel', 24),
-          Book('1ki', '1 Kings', 22),
+          Book('1ki', '1 Kings', 22, {
+            8: {1: 'verses_1-32', 33: 'verses_33-66'}
+          }),
           Book('2ki', '2 Kings', 25),
           Book('1cr', '1 Chronicles', 29),
           Book('2cr', '2 Chronicles', 36),
           Book('ezr', 'Ezra', 10),
-          Book('neh', 'Nehemiah', 13),
+          Book('neh', 'Nehemiah', 13, {
+            7: {1: 'verses_1-36', 37: 'verses_37-73'}
+          }),
           Book('est', 'Esther', 10),
         ]),
         ReadingList('prp', 'Prophets', const [
           Book('isa', 'Isaiah', 66),
-          Book('jer', 'Jeremiah', 52),
+          Book('jer', 'Jeremiah', 52, {
+            51: {1: 'verses_1-32', 33: 'verses_33-64'}
+          }),
           Book('lam', 'Lamentations', 5),
           Book('eze', 'Ezekiel', 48),
           Book('dan', 'Daniel', 12),
@@ -115,7 +133,9 @@ class PghReadingLists extends ReadingLists {
           Book('mal', 'Malachi', 4),
         ]),
         ReadingList('act', 'Acts', const [
-          Book('act', 'Acts', 28),
+          Book('act', 'Acts', 28, {
+            7: {1: 'verses_1-29', 30: 'verses_30-60'}
+          }),
         ])
       ];
 }
