@@ -11,14 +11,15 @@ import '../test_data.dart';
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
-void main() {
+void main() async {
   late BibleReaderService linkedFixture;
   late BibleReaderService unlinkedFixture;
   late MockSharedPreferences blbMockSharedPreferences;
   late MockSharedPreferences emptyMockSharedPreferences;
 
-  setUp(() async {
-    await configureDependencies();
+  await configureDependencies();
+
+  setUp(() {
     blbMockSharedPreferences = MockSharedPreferences();
     emptyMockSharedPreferences = MockSharedPreferences();
     when(() => blbMockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
