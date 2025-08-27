@@ -1,6 +1,5 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
-import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,16 +51,7 @@ void main() async {
   group('saveState', () {
     test('should save to store', () async {
       await initFeed({});
-      await testee.saveState(Feed(
-          rl1,
-          sl<VerseScopeService>(),
-          FeedState(
-            book: b1,
-            chapter: 2,
-            dateModified: yesterday,
-            isRead: true,
-            verse: 3,
-          )));
+      await testee.saveState(rl1, FeedState(book: b1, chapter: 2, dateModified: yesterday, isRead: true, verse: 3));
       expect(sl<SharedPreferences>().getString('rl1.book'), 'b1');
       expect(sl<SharedPreferences>().getInt('rl1.chapter'), 2);
       expect(sl<SharedPreferences>().getString('rl1.dateModified'), yesterday.toIso8601String());

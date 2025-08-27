@@ -21,11 +21,11 @@ class FeedStoreService {
     );
   }
 
-  Future saveState(Feed f) async {
-    await _sharedPreferences.setBook(f.readingList.key, f.state.book.key);
-    await _sharedPreferences.setChapter(f.readingList.key, f.state.chapter);
-    await _sharedPreferences.setDateModified(f.readingList.key, f.state.dateModified);
-    await _sharedPreferences.setIsRead(f.readingList.key, f.state.isRead);
-    await _sharedPreferences.setVerse(f.readingList.key, f.state.verse);
+  Future saveState(ReadingList readingList, FeedState state) async {
+    await _sharedPreferences.setBook(readingList.key, state.book.key);
+    await _sharedPreferences.setChapter(readingList.key, state.chapter);
+    await _sharedPreferences.setDateModified(readingList.key, state.dateModified);
+    await _sharedPreferences.setIsRead(readingList.key, state.isRead);
+    await _sharedPreferences.setVerse(readingList.key, state.verse);
   }
 }

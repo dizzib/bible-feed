@@ -18,7 +18,7 @@ class Feeds extends Iterable<Feed> with ChangeNotifier {
       f.addListener(() async {
         notifyListeners();
         _lastModifiedFeed = f;
-        await _feedStoreService.saveState(f);
+        await _feedStoreService.saveState(f.readingList, f.state);
       });
     }
   }
