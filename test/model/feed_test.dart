@@ -65,18 +65,6 @@ void main() async {
         expect(testee.advance(), throwsAssertionError);
       });
 
-      test('full cycle: should advance/reset chapter and book', () async {
-        checkState(b1, 1);
-        await advance();
-        checkState(b1, 2);
-        await advance();
-        checkState(b1, 3);
-        await advance();
-        checkState(b0, 1);
-        await advance();
-        checkState(b1, 1);
-      });
-
       test('should +0 chaptersRead', () async {
         testee.toggleIsRead();
         expect(testee.chaptersRead, 1);
@@ -88,6 +76,18 @@ void main() async {
         testee.toggleIsRead();
         await testee.advance();
         expect(testee.state.isRead, false);
+      });
+
+      test('full cycle: should advance/reset chapter and book', () async {
+        checkState(b1, 1);
+        await advance();
+        checkState(b1, 2);
+        await advance();
+        checkState(b1, 3);
+        await advance();
+        checkState(b0, 1);
+        await advance();
+        checkState(b1, 1);
       });
     });
 
