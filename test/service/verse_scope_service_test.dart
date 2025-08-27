@@ -21,14 +21,15 @@ void main() {
     state = FeedState(
       book: const Book('b2', 'Book 2', 3, {
         1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
+        2: {1: '', 3: '5'},
       }),
       chapter: 1,
       isRead: false,
     );
   });
 
-  FeedState copyStateWith({Book? book, int? verse}) =>
-      FeedState(book: book ?? state.book, chapter: state.chapter, isRead: state.isRead, verse: verse ?? state.verse);
+  FeedState copyStateWith({Book? book, int? chapter, int? verse}) => FeedState(
+      book: book ?? state.book, chapter: chapter ?? state.chapter, isRead: state.isRead, verse: verse ?? state.verse);
 
   group('nextVerse', () {
     test('returns 1 if toggler disabled', () {
@@ -55,12 +56,22 @@ void main() {
       expect(testee.verseScopeName(state), '');
     });
 
-    test('returns name with underscores replaced', () {
+    test('returns empty if no verse scope map', () {
+      expect(testee.verseScopeName(copyStateWith(book: b0)), '');
+    });
+
+    test('returns static name with underscores replaced', () {
       expect(testee.verseScopeName(state), 'ℵ\u00A0Aleph');
     });
 
-    test('returns empty if no verse scope map', () {
-      expect(testee.verseScopeName(copyStateWith(book: b0)), '');
+    group('returns generated name', () {
+      test('not last verse scope', () {
+        expect(testee.verseScopeName(copyStateWith(chapter: 2)), 'verses\u00A01-2');
+      });
+
+      test('last verse scope', () {
+        expect(testee.verseScopeName(copyStateWith(chapter: 2, verse: 3)), 'verses\u00A03-5');
+      });
     });
   });
 }

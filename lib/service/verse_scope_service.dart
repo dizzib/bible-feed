@@ -25,6 +25,10 @@ class VerseScopeService {
     if (!_verseScopeTogglerService.isEnabled) return '';
     final vsm = _verseScopeMap(state);
     if (vsm == null) return '';
-    return vsm[state.verse]!.replaceAll('_', String.fromCharCode(0x00A0));
+    final name = vsm[state.verse] as String;
+    var toVerse = int.tryParse(name);
+    if (name.isNotEmpty && toVerse == null) return name.replaceAll('_', String.fromCharCode(0x00A0));
+    toVerse ??= nextVerse(state) - 1;
+    return 'verses\u00A0${state.verse}-$toVerse';
   }
 }
