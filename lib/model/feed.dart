@@ -20,7 +20,7 @@ class Feed with ChangeNotifier {
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   FeedState get state => _state;
-  String get verseScopeName => _verseScopeService.verseScopeName(this);
+  String get verseScopeName => _verseScopeService.verseScopeName(_state);
 
   void _notifyListeners() {
     _state._dateModified = DateTime.now();
@@ -29,7 +29,7 @@ class Feed with ChangeNotifier {
 
   Future advance() async {
     assert(_state._isRead);
-    _state._verse = _verseScopeService.nextVerse(this);
+    _state._verse = _verseScopeService.nextVerse(_state);
     if (_state._verse == 1 && ++_state._chapter > _state._book.chapterCount) {
       _state._book = _readingList[(bookIndex + 1) % _readingList.count];
       _state._chapter = 1;

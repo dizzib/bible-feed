@@ -9,22 +9,22 @@ class VerseScopeService {
 
   VerseScopeService(this._verseScopeTogglerService);
 
-  Map<int, String>? _verseScopeMap(Feed f) => f.state.book.verseScopeMaps?[f.state.chapter];
+  Map<int, String>? _verseScopeMap(FeedState state) => state.book.verseScopeMaps?[state.chapter];
 
-  int nextVerse(Feed f) {
+  int nextVerse(FeedState state) {
     if (!_verseScopeTogglerService.isEnabled) return 1;
-    final vsm = _verseScopeMap(f);
+    final vsm = _verseScopeMap(state);
     if (vsm == null) return 1;
     final verses = vsm.keys.toList();
-    final index = verses.indexOf(f.state.verse) + 1;
+    final index = verses.indexOf(state.verse) + 1;
     if (index == verses.length) return 1;
     return verses[index];
   }
 
-  String verseScopeName(Feed f) {
+  String verseScopeName(FeedState state) {
     if (!_verseScopeTogglerService.isEnabled) return '';
-    final vsm = _verseScopeMap(f);
+    final vsm = _verseScopeMap(state);
     if (vsm == null) return '';
-    return vsm[f.state.verse]!.replaceAll('_', String.fromCharCode(0x00A0));
+    return vsm[state.verse]!.replaceAll('_', String.fromCharCode(0x00A0));
   }
 }
