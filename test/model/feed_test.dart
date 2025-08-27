@@ -9,12 +9,12 @@ import '../stub/book_stub.dart';
 import '../stub/reading_list_stub.dart';
 
 void main() async {
-  late Feed feed;
+  late Feed testee;
 
   await configureDependencies();
 
   setUp(() async {
-    feed = Feed(
+    testee = Feed(
       rl2,
       sl<VerseScopeService>(),
       FeedState(
@@ -29,49 +29,49 @@ void main() async {
 
   group('property', () {
     test('book get', () {
-      expect(feed.state.book, b1);
+      expect(testee.state.book, b1);
     });
 
     test('bookIndex get', () {
-      expect(feed.bookIndex, 1);
+      expect(testee.bookIndex, 1);
     });
 
     test('chapter get', () {
-      expect(feed.state.chapter, 2);
+      expect(testee.state.chapter, 2);
     });
 
     test('isChapterRead get/set should affect chaptersRead', () {
-      expect(feed.state.isRead, true);
-      expect(feed.chaptersRead, 2);
-      feed.toggleIsRead();
-      expect(feed.state.isRead, false);
-      expect(feed.chaptersRead, 1);
+      expect(testee.state.isRead, true);
+      expect(testee.chaptersRead, 2);
+      testee.toggleIsRead();
+      expect(testee.state.isRead, false);
+      expect(testee.chaptersRead, 1);
     });
 
     test('progress get', () {
-      feed.advance();
-      expect(feed.progress, 0.7);
+      testee.advance();
+      expect(testee.progress, 0.7);
     });
   });
 
   group('method', () {
     void checkState(Book expectedBook, int expectedChapter,
         [int expectedVerse = 1, String expectedVerseScopeName = '']) {
-      expect(feed.state.book, expectedBook);
-      expect(feed.state.chapter, expectedChapter);
-      expect(feed.verseScopeName, expectedVerseScopeName);
-      expect(feed.state.verse, expectedVerse);
+      expect(testee.state.book, expectedBook);
+      expect(testee.state.chapter, expectedChapter);
+      expect(testee.verseScopeName, expectedVerseScopeName);
+      expect(testee.state.verse, expectedVerse);
     }
 
     group('advance', () {
       advance() async {
-        if (!feed.state.isRead) feed.toggleIsRead();
-        await feed.advance();
+        if (!testee.state.isRead) testee.toggleIsRead();
+        await testee.advance();
       }
 
       test('should fail assertion if not read', () {
-        feed.toggleIsRead();
-        expect(feed.advance(), throwsAssertionError);
+        testee.toggleIsRead();
+        expect(testee.advance(), throwsAssertionError);
       });
 
       test('full cycle: should advance/reset chapter and book, and store', () async {
@@ -102,31 +102,31 @@ void main() async {
       });
 
       test('should +0 chaptersRead', () async {
-        expect(feed.chaptersRead, 2);
+        expect(testee.chaptersRead, 2);
         await advance();
-        expect(feed.chaptersRead, 2);
+        expect(testee.chaptersRead, 2);
       });
 
       test('should reset isRead', () async {
         await advance();
-        expect(feed.state.isRead, false);
+        expect(testee.state.isRead, false);
       });
     });
 
     test('setBookAndChapter should set book/chapter, reset isRead, and store', () async {
-      await feed.setBookAndChapter(0, 4);
+      await testee.setBookAndChapter(0, 4);
       checkState(b0, 4);
-      expect(feed.state.isRead, false);
+      expect(testee.state.isRead, false);
     });
 
     test('toggleIsRead should toggle and store', () async {
       void checkIsRead(bool expected) {
-        expect(feed.state.isRead, expected);
+        expect(testee.state.isRead, expected);
       }
 
-      await feed.toggleIsRead();
+      await testee.toggleIsRead();
       checkIsRead(false);
-      await feed.toggleIsRead();
+      await testee.toggleIsRead();
       checkIsRead(true);
       checkState(b1, 2); // ensure no side effects
     });

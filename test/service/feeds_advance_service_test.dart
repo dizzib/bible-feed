@@ -8,7 +8,7 @@ import 'package:watch_it/watch_it.dart';
 import '../injectable.dart';
 
 void main() async {
-  late FeedsAdvanceService fixture;
+  late FeedsAdvanceService testee;
   late Feeds feeds;
 
   setUp(() async {
@@ -23,20 +23,20 @@ void main() async {
       'rl1.isRead': false,
       'hasEverAdvanced': false,
     });
-    fixture = sl<FeedsAdvanceService>();
+    testee = sl<FeedsAdvanceService>();
     feeds = sl<Feeds>();
   });
 
   group('hasEverAdvanced', () {
     test('should initialise from store', () {
-      expect(fixture.hasEverAdvanced, false);
+      expect(testee.hasEverAdvanced, false);
     });
 
     test('should be stored true after advance', () async {
       feeds[1].toggleIsRead();
-      await fixture.forceAdvance();
+      await testee.forceAdvance();
       expect(sl<SharedPreferences>().getBool('hasEverAdvanced'), true);
-      expect(fixture.hasEverAdvanced, true);
+      expect(testee.hasEverAdvanced, true);
     });
   });
 
@@ -48,7 +48,7 @@ void main() async {
 
     test('forceAdvance should advance all feeds', () async {
       feeds[1].toggleIsRead();
-      await fixture.forceAdvance();
+      await testee.forceAdvance();
       checkHasAdvanced(true);
     });
 
@@ -56,27 +56,27 @@ void main() async {
 
     group('maybeAdvance', () {
       test('if not all read, on next day, should not advance', () async {
-        expect(await withClock(tomorrow, fixture.maybeAdvance), AdvanceState.notAllRead);
+        expect(await withClock(tomorrow, testee.maybeAdvance), AdvanceState.notAllRead);
         checkHasAdvanced(false);
       });
 
       group('if all read and latest saved day is', () {
         test('today, should not advance', () async {
           feeds[1].toggleIsRead();
-          expect(await fixture.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
+          expect(await testee.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
           checkHasAdvanced(false);
         });
 
         test('yesterday, should advance', () async {
           feeds[1].toggleIsRead();
-          expect(await withClock(tomorrow, fixture.maybeAdvance), AdvanceState.listsAdvanced);
+          expect(await withClock(tomorrow, testee.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
 
         test('1 week ago, should advance', () async {
           feeds[1].toggleIsRead();
           final nextWeek = Clock.fixed(const Clock().weeksFromNow(1));
-          expect(await withClock(nextWeek, fixture.maybeAdvance), AdvanceState.listsAdvanced);
+          expect(await withClock(nextWeek, testee.maybeAdvance), AdvanceState.listsAdvanced);
           checkHasAdvanced(true);
         });
       });

@@ -12,8 +12,8 @@ import '../test_data.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() async {
-  late BibleReaderService linkedFixture;
-  late BibleReaderService unlinkedFixture;
+  late BibleReaderService linkedTestee;
+  late BibleReaderService unlinkedTestee;
   late MockSharedPreferences blbMockSharedPreferences;
   late MockSharedPreferences emptyMockSharedPreferences;
 
@@ -24,52 +24,52 @@ void main() async {
     emptyMockSharedPreferences = MockSharedPreferences();
     when(() => blbMockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
     when(() => emptyMockSharedPreferences.getString('linkedBibleReader')).thenReturn(null);
-    linkedFixture = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), blbMockSharedPreferences);
-    unlinkedFixture =
+    linkedTestee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), blbMockSharedPreferences);
+    unlinkedTestee =
         BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), emptyMockSharedPreferences);
   });
 
   group('isLinked', () {
     test('should be false if store is empty', () {
-      expect(unlinkedFixture.isLinked, false);
+      expect(unlinkedTestee.isLinked, false);
     });
 
     test('should be false if store is nonsense', () {
       final mockSharedPreferences = MockSharedPreferences();
       when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn('nonsense');
-      final fixture = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
-      expect(fixture.isLinked, false);
+      final testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
+      expect(testee.isLinked, false);
     });
 
     test('should be true if store is blb', () {
-      expect(linkedFixture.isLinked, true);
+      expect(linkedTestee.isLinked, true);
     });
   });
 
   group('linkedBibleReader', () {
     test('should be none if not linked', () {
-      expect(unlinkedFixture.linkedBibleReader.displayName, 'None');
+      expect(unlinkedTestee.linkedBibleReader.displayName, 'None');
     });
 
     test('should be blb if linked to blb', () {
-      expect(linkedFixture.linkedBibleReader.displayName, 'Blue Letter Bible app');
+      expect(linkedTestee.linkedBibleReader.displayName, 'Blue Letter Bible app');
     });
   });
 
   group('linkedBibleReaderIndex', () {
     test('get should be zero if not linked', () {
-      expect(unlinkedFixture.linkedBibleReaderIndex, 0);
+      expect(unlinkedTestee.linkedBibleReaderIndex, 0);
     });
 
     test('get should be 1 if linked to blb', () {
-      expect(linkedFixture.linkedBibleReaderIndex, 1);
+      expect(linkedTestee.linkedBibleReaderIndex, 1);
     });
 
     test('set should update and save to store', () {
       when(() => emptyMockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
-      unlinkedFixture.linkedBibleReaderIndex = 1;
+      unlinkedTestee.linkedBibleReaderIndex = 1;
       verify(() => emptyMockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
-      expect(unlinkedFixture.linkedBibleReaderIndex, 1);
+      expect(unlinkedTestee.linkedBibleReaderIndex, 1);
     });
   });
 
@@ -79,19 +79,19 @@ void main() async {
     test('if linked and unread, should launch', () async {
       final state = FeedState(book: book, chapter: 1, isRead: false);
       when(() => blbMockBibleReader.launch(state)).thenAnswer((_) async => true);
-      await linkedFixture.launchLinkedBibleReader(state);
+      await linkedTestee.launchLinkedBibleReader(state);
       verify(() => blbMockBibleReader.launch(state)).called(1);
     });
 
     test('if not linked and unread, should not launch', () {
       final state = FeedState(book: book, chapter: 1, isRead: false);
-      unlinkedFixture.launchLinkedBibleReader(state);
+      unlinkedTestee.launchLinkedBibleReader(state);
       verifyNever(() => blbMockBibleReader.launch(state));
     });
 
     test('if linked and read, should not launch', () {
       final state = FeedState(book: book, chapter: 1, isRead: true);
-      linkedFixture.launchLinkedBibleReader(state);
+      linkedTestee.launchLinkedBibleReader(state);
       verifyNever(() => blbMockBibleReader.launch(state));
     });
   });

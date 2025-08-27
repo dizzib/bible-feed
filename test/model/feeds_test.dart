@@ -9,7 +9,7 @@ import '../injectable.dart';
 import '../stub/reading_list_stub.dart';
 
 void main() async {
-  late Feeds feeds;
+  late Feeds testee;
 
   await configureDependencies({
     'rl0.book': 'b0',
@@ -23,7 +23,7 @@ void main() async {
   });
 
   setUp(() async {
-    feeds = Feeds(
+    testee = Feeds(
       di<FeedStoreService>(),
       di<VerseScopeService>(),
       di<ReadingLists>(),
@@ -31,22 +31,22 @@ void main() async {
   });
 
   test('[]', () {
-    expect(feeds[0].readingList, rl0);
-    expect(feeds[1].readingList, rl1);
+    expect(testee[0].readingList, rl0);
+    expect(testee[1].readingList, rl1);
   });
 
   test('areChaptersRead', () {
-    expect(feeds.areChaptersRead, false);
-    feeds[1].toggleIsRead();
-    expect(feeds.areChaptersRead, true);
+    expect(testee.areChaptersRead, false);
+    testee[1].toggleIsRead();
+    expect(testee.areChaptersRead, true);
   });
 
   test('lastModifiedFeed', () {
-    feeds[0].toggleIsRead();
-    expect(feeds.lastModifiedFeed, feeds[0]);
-    feeds[1].toggleIsRead();
-    expect(feeds.lastModifiedFeed, feeds[1]);
-    feeds[0].toggleIsRead();
-    expect(feeds.lastModifiedFeed, feeds[0]);
+    testee[0].toggleIsRead();
+    expect(testee.lastModifiedFeed, testee[0]);
+    testee[1].toggleIsRead();
+    expect(testee.lastModifiedFeed, testee[1]);
+    testee[0].toggleIsRead();
+    expect(testee.lastModifiedFeed, testee[0]);
   });
 }

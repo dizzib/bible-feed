@@ -11,7 +11,7 @@ import 'package:mocktail/mocktail.dart';
 class MockFeedsAdvanceService extends Mock implements FeedsAdvanceService {}
 
 void main() {
-  late AutoAdvanceService fixture;
+  late AutoAdvanceService testee;
   late MockFeedsAdvanceService mockFeedsAdvanceService;
 
   setUp(() async {
@@ -26,7 +26,7 @@ void main() {
     final mockClock = Clock(() => DateTime.now() - const Duration(milliseconds: 10) + durationToMidnight);
 
     await withClock(mockClock, () async {
-      fixture = AutoAdvanceService(mockFeedsAdvanceService);
+      testee = AutoAdvanceService(mockFeedsAdvanceService);
     });
   });
 
@@ -37,7 +37,7 @@ void main() {
   test('_run should call maybeAdvance and notify listeners if advanced', () async {
     when(() => mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => AdvanceState.listsAdvanced);
     final completer = Completer<void>();
-    fixture.addListener(completer.complete);
+    testee.addListener(completer.complete);
     await completer.future;
     verify(() => mockFeedsAdvanceService.maybeAdvance()).called(greaterThanOrEqualTo(1));
   });

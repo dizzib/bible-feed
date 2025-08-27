@@ -14,11 +14,11 @@ class MockFeed extends Mock implements Feed {}
 class MockUrlLauncher extends Mock with MockPlatformInterfaceMixin implements UrlLauncherPlatform {}
 
 void main() {
-  late BibleReader fixture;
+  late BibleReader testee;
   late MockUrlLauncher mockUrlLauncher;
 
   setUp(() {
-    fixture = const BibleReader(
+    testee = const BibleReader(
       'Test Reader',
       'https://example.com/BOOK/CHAPTER',
       [TargetPlatform.android, TargetPlatform.iOS],
@@ -32,16 +32,16 @@ void main() {
   });
 
   test('constructor: should initialise properties', () {
-    expect(fixture.displayName, 'Test Reader');
-    expect(fixture.uriTemplate, 'https://example.com/BOOK/CHAPTER');
-    expect(fixture.certifiedPlatforms, contains(TargetPlatform.android));
-    expect(fixture.certifiedPlatforms, contains(TargetPlatform.iOS));
-    expect(fixture.uriVersePath, '/VERSE');
+    expect(testee.displayName, 'Test Reader');
+    expect(testee.uriTemplate, 'https://example.com/BOOK/CHAPTER');
+    expect(testee.certifiedPlatforms, contains(TargetPlatform.android));
+    expect(testee.certifiedPlatforms, contains(TargetPlatform.iOS));
+    expect(testee.uriVersePath, '/VERSE');
   });
 
   group('launch', () {
     run(bool isVerseScope, String expectedUrl) async {
-      await fixture.launch(FeedState(
+      await testee.launch(FeedState(
           book: const Book('gen', 'Genesis', 50),
           chapter: 1,
           dateModified: null,
@@ -70,7 +70,7 @@ void main() {
       when(() => mockFeed.state).thenReturn(
         FeedState(book: const Book('gen', 'Genesis', 50), chapter: 1, dateModified: null, isRead: false, verse: 1),
       );
-      await fixture.isAvailable();
+      await testee.isAvailable();
       verify(() => mockUrlLauncher.canLaunch(any())).called(1);
     });
   });
