@@ -34,23 +34,41 @@ void main() async {
     testee = Feeds(mockFeedStoreService, mockVerseScopeService, di<ReadingLists>());
   });
 
-  test('[]', () {
-    expect(testee[0].readingList, rl0);
-    expect(testee[1].readingList, rl1);
+  group('property', () {
+    test('[]', () {
+      expect(testee[0].readingList, rl0);
+      expect(testee[1].readingList, rl1);
+    });
+
+    test('areChaptersRead', () {
+      expect(testee.areChaptersRead, false);
+      testee[1].toggleIsRead();
+      expect(testee.areChaptersRead, true);
+    });
+
+    test('lastModifiedFeed', () {
+      testee[0].toggleIsRead();
+      expect(testee.lastModifiedFeed, testee[0]);
+      testee[1].toggleIsRead();
+      expect(testee.lastModifiedFeed, testee[1]);
+      testee[0].toggleIsRead();
+      expect(testee.lastModifiedFeed, testee[0]);
+    });
   });
 
-  test('areChaptersRead', () {
-    expect(testee.areChaptersRead, false);
-    testee[1].toggleIsRead();
-    expect(testee.areChaptersRead, true);
-  });
+  group('updating a feed', () {
+    test('should update lastModifiedFeed', () {
+      testee[0].toggleIsRead();
+      expect(testee.lastModifiedFeed, testee[0]);
+      testee[1].toggleIsRead();
+      expect(testee.lastModifiedFeed, testee[1]);
+    });
 
-  test('lastModifiedFeed', () {
-    testee[0].toggleIsRead();
-    expect(testee.lastModifiedFeed, testee[0]);
-    testee[1].toggleIsRead();
-    expect(testee.lastModifiedFeed, testee[1]);
-    testee[0].toggleIsRead();
-    expect(testee.lastModifiedFeed, testee[0]);
+    test('should store the feed', () {
+      // testee[0].toggleIsRead();
+      // verify(()=> mockFeedStoreService.saveState())
+      // testee[1].toggleIsRead();
+      // expect(testee.lastModifiedFeed, testee[1]);
+    });
   });
 }
