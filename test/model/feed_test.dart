@@ -13,7 +13,7 @@ void main() async {
 
   await configureDependencies();
 
-  setUp(() async {
+  setUp(() {
     testee = Feed(
       rl2,
       sl<VerseScopeService>(),
