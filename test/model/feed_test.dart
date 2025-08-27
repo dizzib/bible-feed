@@ -13,10 +13,11 @@ void main() async {
   await configureDependencies();
 
   late Feed testee;
+  late FeedState state;
   final mockVerseScopeService = MockVerseScopeService();
 
   setUp(() {
-    final state = FeedState(book: b1, chapter: 1, isRead: false);
+    state = FeedState(book: b1, chapter: 1, isRead: false);
     when(() => mockVerseScopeService.nextVerse(state)).thenReturn(1);
     testee = Feed(rl1, mockVerseScopeService, state);
   });
