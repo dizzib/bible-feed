@@ -19,19 +19,19 @@ void main() async {
 
   late Feeds testee;
   final mockFeedStoreService = MockFeedStoreService();
+  final mockVerseScopeService = MockVerseScopeService();
+  final state0 = FeedState(book: b0, chapter: 1, isRead: true);
+  final state1 = FeedState(book: b1, chapter: 1, isRead: false);
+
+  setUpAll(() {
+    registerFallbackValue(Feed(rl0, mockVerseScopeService, state0));
+  });
 
   setUp(() {
-    final state0 = FeedState(book: b0, chapter: 1, isRead: true);
-    final state1 = FeedState(book: b1, chapter: 1, isRead: false);
-    registerFallbackValue(Feed(rl0, MockVerseScopeService(), state0));
     when(() => mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(() => mockFeedStoreService.loadState(rl1)).thenReturn(state1);
     when(() => mockFeedStoreService.saveState(any())).thenAnswer((_) async => true);
-    testee = Feeds(
-      mockFeedStoreService,
-      MockVerseScopeService(),
-      di<ReadingLists>(),
-    );
+    testee = Feeds(mockFeedStoreService, mockVerseScopeService, di<ReadingLists>());
   });
 
   test('[]', () {
