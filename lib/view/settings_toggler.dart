@@ -12,20 +12,26 @@ class SettingsToggler<T extends TogglerService> extends StatelessWidget {
   Widget build(BuildContext context) {
     const spacing = 12.0;
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(spacing),
-        child: SwitchListTile(
-          title: Text(
-            ts.title,
-            style: const TextStyle(fontSize: 20),
+    return Opacity(
+      opacity: ts.isAvailable ? 1.0 : 0.5,
+      child: IgnorePointer(
+        ignoring: !ts.isAvailable,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(spacing),
+            child: SwitchListTile(
+              title: Text(
+                ts.title,
+                style: const TextStyle(fontSize: 20),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: spacing),
+                child: Text(ts.subtitle),
+              ),
+              value: ts.isEnabled,
+              onChanged: (value) => ts.isEnabled = value,
+            ),
           ),
-          subtitle: Padding(
-            padding: const EdgeInsets.only(top: spacing),
-            child: Text(ts.subtitle),
-          ),
-          value: ts.isEnabled,
-          onChanged: (value) => ts.isEnabled = value,
         ),
       ),
     );
