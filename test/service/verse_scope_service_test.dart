@@ -35,42 +35,46 @@ void main() {
   }
 
   group('VerseScopeService tests', () {
-    test('nextVerse returns 1 if toggler disabled', () {
-      when(() => mockTogglerService.isEnabled).thenReturn(false);
-      expect(testee.nextVerse(state), 1);
+    group('nextVerse', () {
+      test('returns 1 if toggler disabled', () {
+        when(() => mockTogglerService.isEnabled).thenReturn(false);
+        expect(testee.nextVerse(state), 1);
+      });
+
+      test('returns next verse in map if toggler enabled', () {
+        when(() => mockTogglerService.isEnabled).thenReturn(true);
+        expect(testee.nextVerse(state), 2);
+      });
+
+      test('returns 1 if at last verse', () {
+        when(() => mockTogglerService.isEnabled).thenReturn(true);
+        final newState = copyStateWith(verse: 2);
+        expect(testee.nextVerse(newState), 1);
+      });
+
+      test('returns 1 if no verse scope map', () {
+        when(() => mockTogglerService.isEnabled).thenReturn(true);
+        final newState = copyStateWith(book: const Book('b1', 'Book 1', 3));
+        expect(testee.nextVerse(newState), 1);
+      });
     });
 
-    test('nextVerse returns next verse in map if toggler enabled', () {
-      when(() => mockTogglerService.isEnabled).thenReturn(true);
-      expect(testee.nextVerse(state), 2);
-    });
+    group('verseScopeName', () {
+      test('returns empty if toggler disabled', () {
+        when(() => mockTogglerService.isEnabled).thenReturn(false);
+        expect(testee.verseScopeName(state), '');
+      });
 
-    test('nextVerse returns 1 if at last verse', () {
-      when(() => mockTogglerService.isEnabled).thenReturn(true);
-      final newState = copyStateWith(verse: 2);
-      expect(testee.nextVerse(newState), 1);
-    });
+      test('returns name with underscores replaced if toggler enabled', () {
+        when(() => mockTogglerService.isEnabled).thenReturn(true);
+        expect(testee.verseScopeName(state), 'a\u00A0');
+      });
 
-    test('nextVerse returns 1 if no verse scope map', () {
-      when(() => mockTogglerService.isEnabled).thenReturn(true);
-      final newState = copyStateWith(book: const Book('b1', 'Book 1', 3));
-      expect(testee.nextVerse(newState), 1);
-    });
-
-    test('verseScopeName returns empty if toggler disabled', () {
-      when(() => mockTogglerService.isEnabled).thenReturn(false);
-      expect(testee.verseScopeName(state), '');
-    });
-
-    test('verseScopeName returns name with underscores replaced if toggler enabled', () {
-      when(() => mockTogglerService.isEnabled).thenReturn(true);
-      expect(testee.verseScopeName(state), 'a\u00A0');
-    });
-
-    test('verseScopeName returns empty if no verse scope map', () {
-      when(() => mockTogglerService.isEnabled).thenReturn(true);
-      final newState = copyStateWith(book: const Book('b1', 'Book 1', 3));
-      expect(testee.verseScopeName(newState), '');
+      test('returns empty if no verse scope map', () {
+        when(() => mockTogglerService.isEnabled).thenReturn(true);
+        final newState = copyStateWith(book: const Book('b1', 'Book 1', 3));
+        expect(testee.verseScopeName(newState), '');
+      });
     });
   });
 }
