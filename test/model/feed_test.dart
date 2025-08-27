@@ -10,7 +10,7 @@ import '../test_data.dart';
 class MockVerseScopeService extends Mock implements VerseScopeService {}
 
 void main() async {
-  await configureDependencies();
+  configureDependencies();
 
   late Feed testee;
   late FeedState state;
@@ -56,37 +56,37 @@ void main() async {
     }
 
     group('advance', () {
-      advance() async {
+      advance() {
         if (!testee.state.isRead) testee.toggleIsRead();
-        await testee.advance();
+        testee.advance();
       }
 
       test('should fail assertion if not read', () {
-        expect(testee.advance(), throwsAssertionError);
+        expect(() => testee.advance(), throwsAssertionError);
       });
 
       test('should +0 chaptersRead', () async {
         testee.toggleIsRead();
         expect(testee.chaptersRead, 1);
-        await advance();
+        advance();
         expect(testee.chaptersRead, 1);
       });
 
       test('should reset isRead', () async {
         testee.toggleIsRead();
-        await testee.advance();
+        testee.advance();
         expect(testee.state.isRead, false);
       });
 
       test('full cycle: should advance/reset chapter and book', () async {
         checkState(b1, 1);
-        await advance();
+        advance();
         checkState(b1, 2);
-        await advance();
+        advance();
         checkState(b1, 3);
-        await advance();
+        advance();
         checkState(b0, 1);
-        await advance();
+        advance();
         checkState(b1, 1);
       });
 
@@ -94,22 +94,22 @@ void main() async {
         when(() => mockVerseScopeService.nextVerse(state)).thenReturn(3);
         checkState(b1, 1, 1);
         testee.toggleIsRead();
-        await testee.advance();
+        testee.advance();
         checkState(b1, 1, 3);
       });
     });
 
-    test('setBookAndChapter should set book/chapter, reset isRead, and store', () async {
-      await testee.toggleIsRead();
-      await testee.setBookAndChapter(1, 2);
+    test('setBookAndChapter should set book/chapter, reset isRead, and store', () {
+      testee.toggleIsRead();
+      testee.setBookAndChapter(1, 2);
       checkState(b1, 2);
       expect(testee.state.isRead, false);
     });
 
-    test('toggleIsRead should toggle', () async {
-      await testee.toggleIsRead();
+    test('toggleIsRead should toggle', () {
+      testee.toggleIsRead();
       expect(testee.state.isRead, true);
-      await testee.toggleIsRead();
+      testee.toggleIsRead();
       expect(testee.state.isRead, false);
       checkState(b1, 1); // ensure no side effects
     });
