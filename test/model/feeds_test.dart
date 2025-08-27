@@ -18,16 +18,14 @@ void main() async {
   await configureDependencies();
 
   late Feeds testee;
-  final mockFeedStoreService = MockFeedStoreService();
-  final mockVerseScopeService = MockVerseScopeService();
+  late MockFeedStoreService mockFeedStoreService;
+  late MockVerseScopeService mockVerseScopeService;
   final state0 = FeedState(book: b0, chapter: 1, isRead: true);
   final state1 = FeedState(book: b1, chapter: 1, isRead: false);
 
-  setUpAll(() {
-    registerFallbackValue(Feed(rl0, mockVerseScopeService, state0));
-  });
-
   setUp(() {
+    mockFeedStoreService = MockFeedStoreService();
+    mockVerseScopeService = MockVerseScopeService();
     when(() => mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(() => mockFeedStoreService.loadState(rl1)).thenReturn(state1);
     when(() => mockFeedStoreService.saveState(rl0, state0)).thenAnswer((_) async => true);
@@ -66,10 +64,12 @@ void main() async {
     });
 
     test('should store the feed', () {
-      // testee[0].toggleIsRead();
-      // verify(()=> mockFeedStoreService.saveState())
-      // testee[1].toggleIsRead();
-      // expect(testee.lastModifiedFeed, testee[1]);
+      testee[0].toggleIsRead();
+      verify(() => mockFeedStoreService.saveState(rl0, state0)).called(1);
+      verifyNever(() => mockFeedStoreService.saveState(rl1, state1));
+      testee[1].toggleIsRead();
+      verifyNever(() => mockFeedStoreService.saveState(rl0, state0));
+      verify(() => mockFeedStoreService.saveState(rl1, state1)).called(1);
     });
   });
 }
