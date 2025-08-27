@@ -1,31 +1,35 @@
+import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
 import '../test_data.dart';
 
+class MockFeedStoreService extends Mock implements FeedStoreService {}
+
+class MockVerseScopeService extends Mock implements VerseScopeService {}
+
 void main() async {
+  await configureDependencies();
+
   late Feeds testee;
+  final mockFeedStoreService = MockFeedStoreService();
 
-  await configureDependencies({
-    'rl0.book': 'b0',
-    'rl0.chapter': 1,
-    'rl0.dateModified': DateTime.now().toIso8601String(),
-    'rl0.isRead': true,
-    'rl1.book': 'b1',
-    'rl1.chapter': 1,
-    'rl1.dateModified': DateTime.now().toIso8601String(),
-    'rl1.isRead': false,
-  });
-
-  setUp(() async {
+  setUp(() {
+    final state0 = FeedState(book: b0, chapter: 1, isRead: true);
+    final state1 = FeedState(book: b1, chapter: 1, isRead: false);
+    registerFallbackValue(Feed(rl0, MockVerseScopeService(), state0));
+    when(() => mockFeedStoreService.loadState(rl0)).thenReturn(state0);
+    when(() => mockFeedStoreService.loadState(rl1)).thenReturn(state1);
+    when(() => mockFeedStoreService.saveState(any())).thenAnswer((_) async => true);
     testee = Feeds(
-      di<FeedStoreService>(),
-      di<VerseScopeService>(),
+      mockFeedStoreService,
+      MockVerseScopeService(),
       di<ReadingLists>(),
     );
   });
