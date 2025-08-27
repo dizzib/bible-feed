@@ -22,7 +22,7 @@ class HapticTogglerService extends TogglerService {
   HapticTogglerService(super.sharedPreferences);
 
   @override
-  get _storeKey => 'isEnabledHaptic';
+  get _storeKey => 'isEnabled.haptic';
 }
 
 @lazySingleton
@@ -30,5 +30,5 @@ class VerseScopeTogglerService extends TogglerService {
   VerseScopeTogglerService(super.sharedPreferences);
 
   @override
-  get _storeKey => 'isEnabledVerseScopes';
+  get _storeKey => 'isEnabled.verseScopes';
 }
