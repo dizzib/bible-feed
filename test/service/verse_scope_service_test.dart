@@ -27,11 +27,8 @@ void main() {
     );
   });
 
-  FeedState copyStateWith({Book? book, int? chapter, bool? isRead, int? verse}) => FeedState(
-      book: book ?? state.book,
-      chapter: chapter ?? state.chapter,
-      isRead: isRead ?? state.isRead,
-      verse: verse ?? state.verse);
+  FeedState copyStateWith({Book? book, int? verse}) =>
+      FeedState(book: book ?? state.book, chapter: state.chapter, isRead: state.isRead, verse: verse ?? state.verse);
 
   group('nextVerse', () {
     test('returns 1 if toggler disabled', () {
