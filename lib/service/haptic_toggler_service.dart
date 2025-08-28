@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'toggler_service.dart';
 
+@prod // else Haptics.canVibrate yields errors in unit tests
 @lazySingleton
 class HapticTogglerService extends TogglerService {
   HapticTogglerService(super.sharedPreferences);
