@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import 'bible_reader_service.dart';
 import 'haptic_service.dart';
-import 'toggler_service.dart';
+import 'haptic_toggler_service.dart';
 
 @singleton
 class HapticWireupService {

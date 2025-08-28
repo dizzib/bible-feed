@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
-import 'toggler_service.dart';
+import 'haptic_toggler_service.dart';
 
 @lazySingleton
 class HapticService extends RouteObserver<PageRoute<dynamic>> {

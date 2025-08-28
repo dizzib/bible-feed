@@ -1,11 +1,13 @@
-part of 'toggler_service.dart';
+import 'package:injectable/injectable.dart';
+
+import 'toggler_service.dart';
 
 @lazySingleton
 class VerseScopeTogglerService extends TogglerService {
   VerseScopeTogglerService(super.sharedPreferences);
 
   @override
-  get _storeKey => 'isEnabled.verseScopes';
+  get storeKey => 'isEnabled.verseScopes';
 
   @override
   bool get isAvailable => true;

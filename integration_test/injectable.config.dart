@@ -21,10 +21,11 @@ import 'package:bible_feed/service/bible_reader_service.dart' as _i283;
 import 'package:bible_feed/service/feed_store_service.dart' as _i119;
 import 'package:bible_feed/service/feeds_advance_service.dart' as _i307;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
+import 'package:bible_feed/service/haptic_toggler_service.dart' as _i513;
 import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
-import 'package:bible_feed/service/toggler_service.dart' as _i849;
 import 'package:bible_feed/service/verse_scope_service.dart' as _i109;
+import 'package:bible_feed/service/verse_scope_toggler_service.dart' as _i430;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:package_info_plus/package_info_plus.dart' as _i655;
@@ -71,40 +72,40 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i578.ProdPlatformService(),
       registerFor: {_prod},
     );
-    gh.lazySingletonAsync<_i849.HapticTogglerService>(
-        () => _i849.HapticTogglerService.create(gh<_i460.SharedPreferences>()));
-    gh.lazySingleton<_i849.VerseScopeTogglerService>(
-        () => _i849.VerseScopeTogglerService(gh<_i460.SharedPreferences>()));
+    gh.lazySingleton<_i430.VerseScopeTogglerService>(
+        () => _i430.VerseScopeTogglerService(gh<_i460.SharedPreferences>()));
+    gh.lazySingletonAsync<_i513.HapticTogglerService>(
+        () => _i513.HapticTogglerService.create(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.PghReadingLists(),
       registerFor: {_prod},
     );
     gh.lazySingletonAsync<_i22.HapticService>(() async =>
-        _i22.HapticService(await getAsync<_i849.HapticTogglerService>()));
-    gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(
-          gh<_i229.BibleReaderAppInstallService>(),
-          gh<_i1070.BibleReaders>(),
-          gh<_i460.SharedPreferences>(),
-        ));
+        _i22.HapticService(await getAsync<_i513.HapticTogglerService>()));
     gh.lazySingleton<_i109.VerseScopeService>(
-        () => _i109.VerseScopeService(gh<_i849.VerseScopeTogglerService>()));
-    gh.singletonAsync<_i969.HapticWireupService>(
-        () async => _i969.HapticWireupService(
-              await getAsync<_i22.HapticService>(),
-              await getAsync<_i849.HapticTogglerService>(),
-              gh<_i283.BibleReaderService>(),
-              gh<_i1033.BookListWheelState>(),
-              gh<_i1033.ChapterListWheelState>(),
-            ));
+        () => _i109.VerseScopeService(gh<_i430.VerseScopeTogglerService>()));
     gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
           gh<_i119.FeedStoreService>(),
           gh<_i109.VerseScopeService>(),
           gh<_i823.ReadingLists>(),
         ));
+    gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(
+          gh<_i229.BibleReaderAppInstallService>(),
+          gh<_i1070.BibleReaders>(),
+          gh<_i460.SharedPreferences>(),
+        ));
     gh.lazySingleton<_i307.FeedsAdvanceService>(() => _i307.FeedsAdvanceService(
           gh<_i460.SharedPreferences>(),
           gh<_i759.Feeds>(),
         ));
+    gh.singletonAsync<_i969.HapticWireupService>(
+        () async => _i969.HapticWireupService(
+              await getAsync<_i22.HapticService>(),
+              await getAsync<_i513.HapticTogglerService>(),
+              gh<_i283.BibleReaderService>(),
+              gh<_i1033.BookListWheelState>(),
+              gh<_i1033.ChapterListWheelState>(),
+            ));
     gh.lazySingleton<_i136.AllDoneDialogService>(
         () => _i136.AllDoneDialogService(
               gh<_i307.FeedsAdvanceService>(),

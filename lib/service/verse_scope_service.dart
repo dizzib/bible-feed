@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '/model/feed.dart';
-import 'toggler_service.dart';
+import 'verse_scope_toggler_service.dart';
 
 @lazySingleton
 class VerseScopeService {

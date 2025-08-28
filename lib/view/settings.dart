@@ -1,7 +1,8 @@
-import 'package:bible_feed/service/toggler_service.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '/service/haptic_toggler_service.dart';
+import '/service/verse_scope_toggler_service.dart';
 import 'app_version.dart';
 import 'settings_bible_reader.dart';
 import 'settings_toggler.dart';
@@ -22,8 +23,8 @@ class Settings extends WatchingWidget {
               spacing: spacing,
               children: [
                 BibleReaderSettings(),
-                SettingsToggler<VerseScopeTogglerService>() ,
-                SettingsToggler<HapticTogglerService>() ,
+                SettingsToggler<VerseScopeTogglerService>(),
+                SettingsToggler<HapticTogglerService>(),
                 const AppVersion(),
               ],
             ),
