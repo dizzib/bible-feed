@@ -3,13 +3,11 @@ import 'package:watch_it/watch_it.dart';
 
 import '/service/toggler_service.dart';
 
-class SettingsToggler<T extends TogglerService> extends StatelessWidget {
-  SettingsToggler({super.key});
-
-  final ts = watchIt<T>();
-
+class SettingsToggler<T extends TogglerService> extends WatchingWidget {
   @override
   Widget build(BuildContext context) {
+    final ts = watchIt<T>();
+
     const spacing = 12.0;
 
     return Opacity(

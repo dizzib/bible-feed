@@ -6,9 +6,7 @@ import '/model/bible_readers.dart';
 import '/service/bible_reader_service.dart';
 import 'bible_reader_link_icon.dart';
 
-class BibleReaderSettings extends StatelessWidget {
-  BibleReaderSettings({super.key});
-
+class BibleReaderSettings extends WatchingWidget {
   final brs = watchIt<BibleReaderService>();
 
   choiceChipList() => List.generate(sl<BibleReaders>().certifiedList.length, (idx) {
