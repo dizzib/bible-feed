@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+part 'haptic_toggler_service.dart';
+part 'verse_scope_toggler_service.dart';
+
 abstract class TogglerService with ChangeNotifier {
   final SharedPreferences _sharedPreferences;
 
@@ -18,38 +21,4 @@ abstract class TogglerService with ChangeNotifier {
     _sharedPreferences.setBool(_storeKey, value);
     notifyListeners();
   }
-}
-
-@lazySingleton
-class HapticTogglerService extends TogglerService {
-  HapticTogglerService(super.sharedPreferences);
-
-  @override
-  get _storeKey => 'isEnabled.haptic';
-
-  @override
-  bool get isAvailable => true;
-
-  @override
-  String get title => 'Interaction';
-
-  @override
-  String get subtitle => isAvailable ? 'Vibrate on tap or scroll.' : 'Vibration is not available on this device.';
-}
-
-@lazySingleton
-class VerseScopeTogglerService extends TogglerService {
-  VerseScopeTogglerService(super.sharedPreferences);
-
-  @override
-  get _storeKey => 'isEnabled.verseScopes';
-
-  @override
-  bool get isAvailable => true;
-
-  @override
-  String get title => 'Split Chapters';
-
-  @override
-  String get subtitle => 'Split long chapters, such as Psalm 119, into smaller sections.';
 }
