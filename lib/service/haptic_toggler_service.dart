@@ -4,11 +4,20 @@ part of 'toggler_service.dart';
 class HapticTogglerService extends TogglerService {
   HapticTogglerService(super.sharedPreferences);
 
+  @factoryMethod
+  static Future<HapticTogglerService> create(SharedPreferences sharedPreferences) async {
+    final hapticTogglerService = HapticTogglerService(sharedPreferences);
+    hapticTogglerService._isAvailable = true;
+    return hapticTogglerService;
+  }
+
+  late bool _isAvailable;
+
   @override
   get _storeKey => 'isEnabled.haptic';
 
   @override
-  bool get isAvailable => true;
+  bool get isAvailable => _isAvailable;
 
   @override
   String get title => 'Interaction';
