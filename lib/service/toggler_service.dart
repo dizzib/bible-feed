@@ -14,6 +14,7 @@ abstract class TogglerService with ChangeNotifier {
   bool get isEnabled => canEnable && (_sharedPreferences.getBool(storeKey) ?? false);
 
   set isEnabled(bool value) {
+    assert(canEnable || !value);
     _sharedPreferences.setBool(storeKey, value);
     notifyListeners();
   }
