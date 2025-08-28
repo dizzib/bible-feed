@@ -25,8 +25,8 @@ class HapticTogglerService extends TogglerService {
   get storeKey => 'isEnabled.haptic';
 
   @override
-  String get title => 'Interaction';
+  String get title => 'Haptic Feedback';
 
   @override
-  String get subtitle => canEnable ? 'Vibrate on tap or scroll.' : 'Vibration is not available on this device.';
+  String get subtitle => canEnable ? 'Vibrate on tap or select.' : 'This device is unable to vibrate.';
 }
