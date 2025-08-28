@@ -12,21 +12,21 @@ class HapticTogglerService extends TogglerService {
   @preResolve
   static Future<HapticTogglerService> create(SharedPreferences sharedPreferences) async {
     final hapticTogglerService = HapticTogglerService(sharedPreferences);
-    hapticTogglerService._isAvailable = await Haptics.canVibrate();
+    hapticTogglerService._canEnable = await Haptics.canVibrate();
     return hapticTogglerService;
   }
 
-  late bool _isAvailable;
+  late bool _canEnable;
+
+  @override
+  bool get canEnable => _canEnable;
 
   @override
   get storeKey => 'isEnabled.haptic';
 
   @override
-  bool get isAvailable => _isAvailable;
-
-  @override
   String get title => 'Interaction';
 
   @override
-  String get subtitle => isAvailable ? 'Vibrate on tap or scroll.' : 'Vibration is not available on this device.';
+  String get subtitle => canEnable ? 'Vibrate on tap or scroll.' : 'Vibration is not available on this device.';
 }

@@ -6,7 +6,7 @@ abstract class TogglerService with ChangeNotifier {
 
   TogglerService(this._sharedPreferences);
 
-  bool get isAvailable;
+  bool get canEnable;
   String get storeKey;
   String get subtitle;
   String get title;

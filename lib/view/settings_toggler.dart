@@ -11,9 +11,9 @@ class SettingsToggler<T extends TogglerService> extends WatchingWidget {
     const spacing = 12.0;
 
     return Opacity(
-      opacity: ts.isAvailable ? 1.0 : 0.5,
+      opacity: ts.canEnable ? 1.0 : 0.5,
       child: IgnorePointer(
-        ignoring: !ts.isAvailable,
+        ignoring: !ts.canEnable,
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(spacing),

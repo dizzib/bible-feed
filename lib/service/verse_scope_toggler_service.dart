@@ -7,10 +7,10 @@ class VerseScopeTogglerService extends TogglerService {
   VerseScopeTogglerService(super.sharedPreferences);
 
   @override
-  get storeKey => 'isEnabled.verseScopes';
+  bool get canEnable => true;
 
   @override
-  bool get isAvailable => true;
+  get storeKey => 'isEnabled.verseScopes';
 
   @override
   String get title => 'Split Chapters';
