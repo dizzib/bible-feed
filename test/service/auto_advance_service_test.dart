@@ -23,7 +23,7 @@ void main() {
     final now = DateTime.now();
     final midnightTonight = DateTime(now.year, now.month, now.day + 1);
     final durationToMidnight = midnightTonight.difference(now);
-    final mockClock = Clock(() => DateTime.now() - const Duration(milliseconds: 10) + durationToMidnight);
+    final mockClock = Clock(() => DateTime.now() - const Duration(milliseconds: 100) + durationToMidnight);
 
     await withClock(mockClock, () async {
       testee = AutoAdvanceService(mockFeedsAdvanceService);
