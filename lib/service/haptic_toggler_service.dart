@@ -9,6 +9,7 @@ class HapticTogglerService extends TogglerService {
   HapticTogglerService(super.sharedPreferences);
 
   @factoryMethod
+  @preResolve
   static Future<HapticTogglerService> create(SharedPreferences sharedPreferences) async {
     final hapticTogglerService = HapticTogglerService(sharedPreferences);
     hapticTogglerService._isAvailable = await Haptics.canVibrate();
