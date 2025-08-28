@@ -21,6 +21,13 @@ class TestTogglerService extends TogglerService {
   String get title => 'Test Title';
 }
 
+class TestUnavailableTogglerService extends TestTogglerService {
+  TestUnavailableTogglerService(super.sharedPreferences);
+
+  @override
+  bool get canEnable => false;
+}
+
 void main() {
   late MockSharedPreferences mockSharedPreferences;
   late TestTogglerService testee;
@@ -51,5 +58,9 @@ void main() {
 
     verify(() => mockSharedPreferences.setBool('test.key', true)).called(1);
     expect(notified, true);
+  });
+
+  test('isEnabled setter to true throws error if unavailable', () {
+    expect(() => TestUnavailableTogglerService(mockSharedPreferences).isEnabled = true, throwsAssertionError);
   });
 }
