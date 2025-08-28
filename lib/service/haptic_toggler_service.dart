@@ -1,26 +1,16 @@
-import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import 'haptic_availability_service.dart';
 import 'toggler_service.dart';
 
-@prod // else Haptics.canVibrate yields errors in unit tests
 @lazySingleton
 class HapticTogglerService extends TogglerService {
-  HapticTogglerService(super.sharedPreferences);
+  HapticTogglerService(super.sharedPreferences, this._hapticAvailabilityService);
 
-  @factoryMethod
-  @preResolve
-  static Future<HapticTogglerService> create(SharedPreferences sharedPreferences) async {
-    final hapticTogglerService = HapticTogglerService(sharedPreferences);
-    hapticTogglerService._canEnable = await Haptics.canVibrate();
-    return hapticTogglerService;
-  }
-
-  late bool _canEnable;
+  final HapticAvailabilityService _hapticAvailabilityService;
 
   @override
-  bool get canEnable => _canEnable;
+  bool get canEnable => _hapticAvailabilityService.isAvailable;
 
   @override
   get storeKey => 'isEnabled.haptic';
