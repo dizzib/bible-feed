@@ -20,12 +20,14 @@ void main() async {
   late Feeds testee;
   late MockFeedStoreService mockFeedStoreService;
   late MockVerseScopeService mockVerseScopeService;
-  final state0 = FeedState(book: b0, chapter: 1, isRead: true);
-  final state1 = FeedState(book: b1, chapter: 1, isRead: false);
+  late FeedState state0;
+  late FeedState state1;
 
   setUp(() {
     mockFeedStoreService = MockFeedStoreService();
     mockVerseScopeService = MockVerseScopeService();
+    state0 = FeedState(book: b0, chapter: 1, isRead: true);
+    state1 = FeedState(book: b1, chapter: 1, isRead: false);
     when(() => mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(() => mockFeedStoreService.loadState(rl1)).thenReturn(state1);
     when(() => mockFeedStoreService.saveState(rl0, state0)).thenAnswer((_) async => true);
