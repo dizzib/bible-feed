@@ -58,6 +58,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1033.BookListWheelState());
     gh.lazySingleton<_i1033.ChapterListWheelState>(
         () => _i1033.ChapterListWheelState());
+    gh.lazySingleton<_i823.ReadingLists>(() => _i823.ReadingLists());
     gh.lazySingleton<_i967.VerseScopes>(() => _i967.VerseScopes());
     gh.lazySingleton<_i229.BibleReaderAppInstallService>(
         () => _i229.BibleReaderAppInstallService());
@@ -90,10 +91,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i729.HapticAvailabilityService.create(),
       registerFor: {_prod},
       preResolve: true,
-    );
-    gh.lazySingleton<_i823.ReadingLists>(
-      () => _i823.PghReadingLists(),
-      registerFor: {_prod},
     );
     gh.lazySingleton<_i513.HapticTogglerService>(
         () => _i513.HapticTogglerService(

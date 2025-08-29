@@ -15,7 +15,7 @@ class MockVerseScopeService extends Mock implements VerseScopeService {}
 
 class TestReadingLists extends ReadingLists {
   @override
-  final items = [rl0, rl1];
+  get iterator => [rl0, rl1].iterator;
 }
 
 void main() async {
