@@ -1,31 +1,32 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/book.dart';
+import 'package:bible_feed/model/verse_scopes.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:bible_feed/service/verse_scope_toggler_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../test_data.dart';
+class MockVerseScopes extends Mock implements VerseScopes {}
 
 class MockVerseScopeTogglerService extends Mock implements VerseScopeTogglerService {}
 
 void main() {
+  late MockVerseScopes mockVerseScopes;
   late MockVerseScopeTogglerService mockTogglerService;
   late FeedState state;
   late VerseScopeService testee;
 
   setUp(() {
+    mockVerseScopes = MockVerseScopes();
     mockTogglerService = MockVerseScopeTogglerService();
+    when(() => mockVerseScopes.containsKey('b2')).thenReturn(true);
+    when(() => mockVerseScopes['b2']).thenReturn({
+      1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
+      2: 3,
+    });
     when(() => mockTogglerService.isEnabled).thenReturn(true);
-    testee = VerseScopeService(mockTogglerService);
-    state = FeedState(
-      book: const Book('b2', 'Book 2', 3, {
-        1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
-        2: {1: '', 3: ''},
-      }),
-      chapter: 1,
-      isRead: false,
-    );
+    testee = VerseScopeService(mockVerseScopes, mockTogglerService);
+    state = FeedState(book: const Book('b2', 'Book 2', 3), chapter: 1, isRead: false);
   });
 
   FeedState copyStateWith({Book? book, int? chapter, int? verse}) => FeedState(
@@ -45,8 +46,13 @@ void main() {
       expect(testee.nextVerse(copyStateWith(verse: 2)), 1);
     });
 
-    test('returns 1 if no verse scope map', () {
-      expect(testee.nextVerse(copyStateWith(book: b0)), 1);
+    test('returns 1 if scope not applicable to chapter', () {
+      expect(testee.nextVerse(copyStateWith(chapter: 3)), 1);
+    });
+
+    test('returns 1 if no verse scopes', () {
+      when(() => mockVerseScopes.containsKey('b2')).thenReturn(false);
+      expect(testee.nextVerse(state), 1);
     });
   });
 
@@ -57,7 +63,12 @@ void main() {
     });
 
     test('returns empty if no verse scope map', () {
-      expect(testee.verseScopeName(copyStateWith(book: b0)), '');
+      when(() => mockVerseScopes.containsKey('b2')).thenReturn(false);
+      expect(testee.verseScopeName(state), '');
+    });
+
+    test('returns empty if scope not applicable to chapter', () {
+      expect(testee.verseScopeName(copyStateWith(chapter: 3)), '');
     });
 
     test('returns static name with underscores replaced', () {
