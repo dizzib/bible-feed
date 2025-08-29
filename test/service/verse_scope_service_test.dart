@@ -51,7 +51,7 @@ void main() {
     });
 
     test('returns 1 if no verse scopes', () {
-      when(() => mockVerseScopes.containsKey('b2')).thenReturn(false);
+      when(() => mockVerseScopes['b2']).thenReturn(null);
       expect(testee.nextVerse(state), 1);
     });
   });
@@ -63,7 +63,7 @@ void main() {
     });
 
     test('returns empty if no verse scope map', () {
-      when(() => mockVerseScopes.containsKey('b2')).thenReturn(false);
+      when(() => mockVerseScopes['b2']).thenReturn(null);
       expect(testee.verseScopeName(state), '');
     });
 
