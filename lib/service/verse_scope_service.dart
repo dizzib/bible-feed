@@ -11,28 +11,29 @@ class VerseScopeService {
 
   VerseScopeService(this._verseScopes, this._verseScopeTogglerService);
 
+  _getVerseScope(FeedState state) {
+    if (!_verseScopeTogglerService.isEnabled) return null;
+    return _verseScopes[state.book.key]?[state.chapter]; // null, or int, or a map<int, string>
+  }
+
+  _toNonBreakingWhitespace(String label) => label.replaceAll('_', String.fromCharCode(0x00A0));
+
   int nextVerse(FeedState state) {
-    if (!_verseScopeTogglerService.isEnabled) return 1;
-    final intOrMap = _verseScopes[state.book.key]?[state.chapter];
-    if (intOrMap == null) return 1;
-    if (intOrMap is int) return (state.verse == 1) ? intOrMap : 1;
-    assert(intOrMap is Map<int, String>);
-    final verses = intOrMap.keys.toList();
+    final verseScope = _getVerseScope(state);
+    if (verseScope == null) return 1;
+    if (verseScope is int) return (state.verse == 1) ? verseScope : 1;
+    assert(verseScope is Map<int, String>);
+    final verses = verseScope.keys.toList();
     final index = verses.indexOf(state.verse) + 1;
     if (index == verses.length) return 1;
     return verses[index];
   }
 
   String verseScopeName(FeedState state) {
-    if (!_verseScopeTogglerService.isEnabled) return '';
-    final intOrMap = _verseScopes[state.book.key]?[state.chapter];
-    if (intOrMap == null) return '';
-    String name;
-    if (intOrMap is int) {
-      name = (state.verse == 1) ? 'to_verse_${nextVerse(state) - 1}' : 'from_verse_${state.verse}';
-    } else {
-      name = intOrMap[state.verse] as String;
-    }
-    return name.replaceAll('_', String.fromCharCode(0x00A0));
+    final verseScope = _getVerseScope(state);
+    if (verseScope == null) return '';
+    if (verseScope is Map<int, String>) return _toNonBreakingWhitespace(verseScope[state.verse]!);
+    return _toNonBreakingWhitespace(
+        (state.verse == 1) ? 'to_verse_${nextVerse(state) - 1}' : 'from_verse_${state.verse}');
   }
 }
