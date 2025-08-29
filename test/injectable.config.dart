@@ -69,10 +69,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i505.TestPlatformService(),
       registerFor: {_test},
     );
-    gh.lazySingleton<_i823.ReadingLists>(
-      () => _i505.TestReadingLists(),
-      registerFor: {_test},
-    );
     gh.lazySingleton<_i119.FeedStoreService>(
         () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(

@@ -1,5 +1,6 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
+import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,6 +12,11 @@ import '../test_data.dart';
 class MockFeedStoreService extends Mock implements FeedStoreService {}
 
 class MockVerseScopeService extends Mock implements VerseScopeService {}
+
+class TestReadingLists extends ReadingLists {
+  @override
+  final items = [rl0, rl1];
+}
 
 void main() async {
   await configureDependencies();
