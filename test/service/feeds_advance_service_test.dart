@@ -76,23 +76,23 @@ void main() async {
           when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
         });
 
-        getLastModifiedState(Duration offset) =>
-            FeedState(book: b0, chapter: 1, isRead: true, dateModified: DateTime.now() + offset);
+        setMockFeedState(Duration offset) => when(() => mockFeed0.state)
+            .thenReturn(FeedState(book: b0, chapter: 1, isRead: true, dateModified: DateTime.now() + offset));
 
         test('today, should not advance', () async {
-          when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration()));
+          setMockFeedState(const Duration());
           expect(await testee.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
           verifyNoneAdvanced();
         });
 
         test('yesterday, should advance', () async {
-          when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration(days: -1)));
+          setMockFeedState(const Duration(days: -1));
           expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
           verifyAllAdvanced();
         });
 
         test('1 week ago, should advance', () async {
-          when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration(days: -7)));
+          setMockFeedState(const Duration(days: -7));
           expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
           verifyAllAdvanced();
         });
