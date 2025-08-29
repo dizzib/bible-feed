@@ -29,7 +29,7 @@ class Feed with ChangeNotifier {
 
   advance() {
     assert(_state._isRead);
-    _state._verse = _verseScopeService.nextVerse(_state);
+    _state._verse = _verseScopeService.getNextVerse(_state);
     if (_state._verse == 1 && ++_state._chapter > _state._book.chapterCount) {
       _state._book = _readingList[(bookIndex + 1) % _readingList.count];
       _state._chapter = 1;

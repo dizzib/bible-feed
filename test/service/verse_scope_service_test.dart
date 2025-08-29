@@ -32,27 +32,27 @@ void main() {
   FeedState copyStateWith({Book? book, int? chapter, int? verse}) => FeedState(
       book: book ?? state.book, chapter: chapter ?? state.chapter, isRead: state.isRead, verse: verse ?? state.verse);
 
-  group('nextVerse', () {
+  group('getNextVerse', () {
     test('returns 1 if toggler disabled', () {
       when(() => mockTogglerService.isEnabled).thenReturn(false);
-      expect(testee.nextVerse(state), 1);
+      expect(testee.getNextVerse(state), 1);
     });
 
     test('returns next verse in map', () {
-      expect(testee.nextVerse(state), 2);
+      expect(testee.getNextVerse(state), 2);
     });
 
     test('returns 1 if at last verse', () {
-      expect(testee.nextVerse(copyStateWith(verse: 2)), 1);
+      expect(testee.getNextVerse(copyStateWith(verse: 2)), 1);
     });
 
     test('returns 1 if scope not applicable to chapter', () {
-      expect(testee.nextVerse(copyStateWith(chapter: 3)), 1);
+      expect(testee.getNextVerse(copyStateWith(chapter: 3)), 1);
     });
 
     test('returns 1 if no verse scopes', () {
       when(() => mockVerseScopes['b2']).thenReturn(null);
-      expect(testee.nextVerse(state), 1);
+      expect(testee.getNextVerse(state), 1);
     });
   });
 

@@ -18,7 +18,7 @@ class VerseScopeService {
 
   _toNonBreakingWhitespace(String label) => label.replaceAll('_', String.fromCharCode(0x00A0));
 
-  int nextVerse(FeedState state) {
+  int getNextVerse(FeedState state) {
     final verseScope = _getVerseScope(state);
     if (verseScope == null) return 1;
     if (verseScope is int) return (state.verse == 1) ? verseScope : 1;
@@ -34,6 +34,6 @@ class VerseScopeService {
     if (verseScope == null) return '';
     if (verseScope is Map<int, String>) return _toNonBreakingWhitespace(verseScope[state.verse]!);
     return _toNonBreakingWhitespace(
-        (state.verse == 1) ? 'to_verse_${nextVerse(state) - 1}' : 'from_verse_${state.verse}');
+        (state.verse == 1) ? 'to_verse_${getNextVerse(state) - 1}' : 'from_verse_${state.verse}');
   }
 }

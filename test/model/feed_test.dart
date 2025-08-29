@@ -18,7 +18,7 @@ void main() async {
 
   setUp(() {
     state = FeedState(book: b1, chapter: 1, isRead: false);
-    when(() => mockVerseScopeService.nextVerse(state)).thenReturn(1);
+    when(() => mockVerseScopeService.getNextVerse(state)).thenReturn(1);
     testee = Feed(rl1, mockVerseScopeService, state);
   });
 
@@ -91,7 +91,7 @@ void main() async {
       });
 
       test('with verse scope, should advance verse only', () async {
-        when(() => mockVerseScopeService.nextVerse(state)).thenReturn(3);
+        when(() => mockVerseScopeService.getNextVerse(state)).thenReturn(3);
         checkState(b1, 1, 1);
         testee.toggleIsRead();
         testee.advance();
