@@ -18,9 +18,8 @@ class VerseScopeService {
     if (verseScope == null) return 1;
     if (verseScope is int) return (state.verse == 1) ? verseScope : 1;
     final verses = verseScope.keys.toList();
-    final index = verses.indexOf(state.verse) + 1;
-    if (index == verses.length) return 1;
-    return verses[index];
+    final nextIndex = verses.indexOf(state.verse) + 1;
+    return (nextIndex == verses.length) ? 1 : verses[nextIndex];
   }
 
   String getVerseScopeLabel(FeedState state) {
