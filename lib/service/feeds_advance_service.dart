@@ -28,7 +28,7 @@ class FeedsAdvanceService {
 
   Future<AdvanceState> maybeAdvance() async {
     if (!_feeds.areChaptersRead) return AdvanceState.notAllRead; //.log();
-    // use clock (not DateTime) for unit testing
+    // use clock (not DateTime) for integration tests
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
     if (clock.now().day != lastDateModified?.day) return await forceAdvance();
     if (clock.now().month != lastDateModified?.month) return await forceAdvance();
