@@ -15,7 +15,7 @@ var rl1 = ReadingList('rl1', 'Reading List 1', const [b0, b1]);
 
 @test
 @LazySingleton(as: ReadingLists)
-class ReadingListsMock extends ReadingLists {
+class TestReadingLists extends ReadingLists {
   @override
   final items = [rl0, rl1];
 }

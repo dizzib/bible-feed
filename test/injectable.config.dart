@@ -70,7 +70,7 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_test},
     );
     gh.lazySingleton<_i823.ReadingLists>(
-      () => _i505.ReadingListsMock(),
+      () => _i505.TestReadingLists(),
       registerFor: {_test},
     );
     gh.lazySingleton<_i119.FeedStoreService>(
