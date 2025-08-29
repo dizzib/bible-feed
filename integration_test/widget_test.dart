@@ -22,7 +22,7 @@ extension Helper on WidgetTester {
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  final gospels = PghReadingLists().elementAt(0);
+  final gospels = ReadingLists().elementAt(0);
   final matthew = gospels[0];
 
   await configureDependencies();
