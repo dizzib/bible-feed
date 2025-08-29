@@ -20,7 +20,7 @@ class FeedsAdvanceService {
 
   Future<AdvanceState> forceAdvance() async {
     for (Feed f in _feeds) {
-      await f.advance();
+      f.advance();
     }
     await _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
     return AdvanceState.listsAdvanced; //.log();

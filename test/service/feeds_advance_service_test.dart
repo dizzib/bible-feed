@@ -1,15 +1,26 @@
+import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
-import 'package:clock/clock.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
+import '../test_data.dart';
+
+class MockFeed extends Mock implements Feed {}
+
+class MockFeeds extends Mock implements Feeds {}
+
+class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() async {
+  late MockFeed mockFeed0;
+  late MockFeed mockFeed1;
+  late MockFeeds mockFeeds;
+  late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceService testee;
-  late Feeds feeds;
 
   setUp(() async {
     await configureDependencies({
@@ -23,8 +34,15 @@ void main() async {
       'rl1.isRead': false,
       'hasEverAdvanced': false,
     });
-    testee = sl<FeedsAdvanceService>();
-    feeds = sl<Feeds>();
+    mockFeed0 = MockFeed();
+    mockFeed1 = MockFeed();
+    mockFeeds = MockFeeds();
+    mockSharedPreferences = MockSharedPreferences();
+    when(() => mockFeeds.iterator).thenReturn([mockFeed0, mockFeed1].iterator);
+    when(() => mockSharedPreferences.getBool('hasEverAdvanced')).thenReturn(false);
+    when(() => mockSharedPreferences.setBool('hasEverAdvanced', any())).thenAnswer((_) async => true);
+    when(() => mockFeed0.advance()).thenAnswer((_) async => null);
+    testee = FeedsAdvanceService(mockSharedPreferences, mockFeeds);
   });
 
   group('hasEverAdvanced', () {
@@ -33,51 +51,60 @@ void main() async {
     });
 
     test('should be stored true after advance', () async {
-      feeds[1].toggleIsRead();
       await testee.forceAdvance();
-      expect(sl<SharedPreferences>().getBool('hasEverAdvanced'), true);
-      expect(testee.hasEverAdvanced, true);
+      verify(() => mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
     });
   });
 
   group('Advance:', () {
-    checkHasAdvanced(bool shouldAdvance) {
-      expect(feeds[0].state.chapter, 1);
-      expect(feeds[1].state.chapter, shouldAdvance ? 2 : 1);
+    verifyAllAdvanced() {
+      verify(() => mockFeed0.advance()).called(1);
+      verify(() => mockFeed1.advance()).called(1);
+    }
+
+    verifyNoneAdvanced() {
+      verifyNever(() => mockFeed0.advance());
+      verifyNever(() => mockFeed1.advance());
     }
 
     test('forceAdvance should advance all feeds', () async {
-      feeds[1].toggleIsRead();
       await testee.forceAdvance();
-      checkHasAdvanced(true);
+      verifyAllAdvanced();
     });
 
-    final tomorrow = Clock.fixed(const Clock().daysFromNow(1));
-
     group('maybeAdvance', () {
-      test('if not all read, on next day, should not advance', () async {
-        expect(await withClock(tomorrow, testee.maybeAdvance), AdvanceState.notAllRead);
-        checkHasAdvanced(false);
+      test('if not all read, should not advance', () async {
+        when(() => mockFeeds.areChaptersRead).thenReturn(false);
+        expect(await testee.maybeAdvance(), AdvanceState.notAllRead);
+        verifyNoneAdvanced();
       });
 
       group('if all read and latest saved day is', () {
+        getLastModifiedState(Duration offset) =>
+            FeedState(book: b0, chapter: 1, isRead: true, dateModified: DateTime.now() + offset);
+
         test('today, should not advance', () async {
-          feeds[1].toggleIsRead();
+          when(() => mockFeeds.areChaptersRead).thenReturn(true);
+          when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
+          when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration()));
           expect(await testee.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
-          checkHasAdvanced(false);
+          verifyNoneAdvanced();
         });
 
         test('yesterday, should advance', () async {
-          feeds[1].toggleIsRead();
-          expect(await withClock(tomorrow, testee.maybeAdvance), AdvanceState.listsAdvanced);
-          checkHasAdvanced(true);
+          when(() => mockFeeds.areChaptersRead).thenReturn(true);
+          when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
+          when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration(days: -1)));
+          expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
+          verifyAllAdvanced();
         });
 
         test('1 week ago, should advance', () async {
-          feeds[1].toggleIsRead();
-          final nextWeek = Clock.fixed(const Clock().weeksFromNow(1));
-          expect(await withClock(nextWeek, testee.maybeAdvance), AdvanceState.listsAdvanced);
-          checkHasAdvanced(true);
+          when(() => mockFeeds.areChaptersRead).thenReturn(true);
+          when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
+          when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration(days: -7)));
+          expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
+          verifyAllAdvanced();
         });
       });
     });
