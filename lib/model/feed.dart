@@ -20,7 +20,7 @@ class Feed with ChangeNotifier {
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   FeedState get state => _state;
-  String get verseScopeName => _verseScopeService.verseScopeName(_state);
+  String get verseScopeLabel => _verseScopeService.getVerseScopeLabel(_state);
 
   void _notifyListeners() {
     _state._dateModified = DateTime.now();

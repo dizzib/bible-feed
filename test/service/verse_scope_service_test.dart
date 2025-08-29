@@ -56,32 +56,32 @@ void main() {
     });
   });
 
-  group('verseScopeName', () {
+  group('getVerseScopeLabel', () {
     test('returns empty if toggler disabled', () {
       when(() => mockTogglerService.isEnabled).thenReturn(false);
-      expect(testee.verseScopeName(state), '');
+      expect(testee.getVerseScopeLabel(state), '');
     });
 
     test('returns empty if no verse scope map', () {
       when(() => mockVerseScopes['b2']).thenReturn(null);
-      expect(testee.verseScopeName(state), '');
+      expect(testee.getVerseScopeLabel(state), '');
     });
 
     test('returns empty if scope not applicable to chapter', () {
-      expect(testee.verseScopeName(copyStateWith(chapter: 3)), '');
+      expect(testee.getVerseScopeLabel(copyStateWith(chapter: 3)), '');
     });
 
     test('returns static name with underscores replaced', () {
-      expect(testee.verseScopeName(state), 'ℵ\u00A0Aleph');
+      expect(testee.getVerseScopeLabel(state), 'ℵ\u00A0Aleph');
     });
 
     group('returns calculated name', () {
       test('to verse', () {
-        expect(testee.verseScopeName(copyStateWith(chapter: 2)), 'to\u00A0verse\u00A02');
+        expect(testee.getVerseScopeLabel(copyStateWith(chapter: 2)), 'to\u00A0verse\u00A02');
       });
 
       test('from verse', () {
-        expect(testee.verseScopeName(copyStateWith(chapter: 2, verse: 3)), 'from\u00A0verse\u00A03');
+        expect(testee.getVerseScopeLabel(copyStateWith(chapter: 2, verse: 3)), 'from\u00A0verse\u00A03');
       });
     });
   });

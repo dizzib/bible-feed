@@ -29,7 +29,7 @@ class VerseScopeService {
     return verses[index];
   }
 
-  String verseScopeName(FeedState state) {
+  String getVerseScopeLabel(FeedState state) {
     final verseScope = _getVerseScope(state);
     if (verseScope == null) return '';
     if (verseScope is Map<int, String>) return _toNonBreakingWhitespace(verseScope[state.verse]!);

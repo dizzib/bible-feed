@@ -14,7 +14,7 @@ class FeedCardBookChapter extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: AutoSizeText(
-            '${feed.state.book.name} ${feed.state.chapter} ${feed.verseScopeName}'.trim(),
+            '${feed.state.book.name} ${feed.state.chapter} ${feed.verseScopeLabel}'.trim(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
