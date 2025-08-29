@@ -17,9 +17,8 @@ class VerseScopeService {
     final verseScope = _verseScopeTogglerService.isEnabled ? (_verseScopes[state.book.key]?[state.chapter]) : null;
     if (verseScope == null) return 1;
     if (verseScope is int) return (state.verse == 1) ? verseScope : 1;
-    final verses = verseScope.keys.toList();
-    final nextIndex = verses.indexOf(state.verse) + 1;
-    return (nextIndex == verses.length) ? 1 : verses[nextIndex];
+    List<int> verses = verseScope.keys.toList();
+    return verses.elementAtOrNull(verses.indexOf(state.verse) + 1) ?? 1;
   }
 
   String getVerseScopeLabel(FeedState state) {
