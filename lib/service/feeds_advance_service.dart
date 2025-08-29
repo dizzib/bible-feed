@@ -2,7 +2,6 @@ import 'package:clock/clock.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/extension/object.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
 
@@ -24,16 +23,16 @@ class FeedsAdvanceService {
       await f.advance();
     }
     await _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
-    return AdvanceState.listsAdvanced.log();
+    return AdvanceState.listsAdvanced; //.log();
   }
 
   Future<AdvanceState> maybeAdvance() async {
-    if (!_feeds.areChaptersRead) return AdvanceState.notAllRead.log();
+    if (!_feeds.areChaptersRead) return AdvanceState.notAllRead; //.log();
     // use clock (not DateTime) for unit testing
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
     if (clock.now().day != lastDateModified?.day) return await forceAdvance();
     if (clock.now().month != lastDateModified?.month) return await forceAdvance();
     if (clock.now().year != lastDateModified?.year) return await forceAdvance();
-    return AdvanceState.allReadAwaitingTomorrow.log();
+    return AdvanceState.allReadAwaitingTomorrow; //.log();
   }
 }

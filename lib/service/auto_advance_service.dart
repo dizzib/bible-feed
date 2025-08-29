@@ -4,7 +4,6 @@ import 'package:clock/clock.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
-import '/extension/object.dart';
 import 'feeds_advance_service.dart';
 
 @prod // disable log noise in unit tests
@@ -34,6 +33,6 @@ class AutoAdvanceService with ChangeNotifier {
     final durationToMidnight = midnightTonight.difference(clock.now());
     _timer?.cancel();
     _timer = Timer(durationToMidnight, _run);
-    'AutoAdvanceService: timer will fire in ${durationToMidnight.toString()}'.log();
+    // 'AutoAdvanceService: timer will fire in ${durationToMidnight.toString()}'.log();
   }
 }

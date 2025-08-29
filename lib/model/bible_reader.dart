@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/extension/object.dart';
 import 'bible_reader_book_keymap.dart';
 import 'feed.dart';
 import 'feeds.dart';
@@ -32,7 +31,7 @@ class BibleReader {
     if (uriVersePath != null && state.verse > 1) {
       uri += uriVersePath!.replaceAll('VERSE', state.verse.toString());
     }
-    return Uri.parse(uri).log();
+    return Uri.parse(uri); //.log();
   }
 
   BibleReaderBookKeyMap get bookKeyMap => _bookKeyMap;
@@ -50,5 +49,5 @@ class BibleReader {
     return canLaunchUrl(_getDeeplinkUri(sl<Feeds>()[0].state)); // attempt to launch first feed uri
   }
 
-  Future<bool> launch(FeedState state) async => await launchUrl(_getDeeplinkUri(state).log());
+  Future<bool> launch(FeedState state) async => await launchUrl(_getDeeplinkUri(state)); //.log());
 }
