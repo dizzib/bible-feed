@@ -76,25 +76,27 @@ void main() async {
           when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
         });
 
-        setMockFeedState(Duration offset) => when(() => mockFeed0.state)
-            .thenReturn(FeedState(book: b0, chapter: 1, isRead: true, dateModified: DateTime.now() + offset));
+        run(Duration offset, AdvanceState expectedAdvanceState, Function verify) async {
+          when(() => mockFeed0.state).thenReturn(FeedState(
+            book: b0,
+            chapter: 1,
+            isRead: true,
+            dateModified: DateTime.now() + offset,
+          ));
+          expect(await testee.maybeAdvance(), expectedAdvanceState);
+          verify();
+        }
 
         test('today, should not advance', () async {
-          setMockFeedState(const Duration());
-          expect(await testee.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
-          verifyNoneAdvanced();
+          run(const Duration(), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced);
         });
 
         test('yesterday, should advance', () async {
-          setMockFeedState(const Duration(days: -1));
-          expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
-          verifyAllAdvanced();
+          run(const Duration(days: -1), AdvanceState.listsAdvanced, verifyAllAdvanced);
         });
 
         test('1 week ago, should advance', () async {
-          setMockFeedState(const Duration(days: -7));
-          expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
-          verifyAllAdvanced();
+          run(const Duration(days: -7), AdvanceState.listsAdvanced, verifyAllAdvanced);
         });
       });
     });
