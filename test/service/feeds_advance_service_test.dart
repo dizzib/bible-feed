@@ -16,24 +16,15 @@ class MockFeeds extends Mock implements Feeds {}
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() async {
+  await configureDependencies();
+
   late MockFeed mockFeed0;
   late MockFeed mockFeed1;
   late MockFeeds mockFeeds;
   late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceService testee;
 
-  setUp(() async {
-    await configureDependencies({
-      'rl0.book': 'b0',
-      'rl0.chapter': 1,
-      'rl0.dateModified': DateTime.now().toIso8601String(),
-      'rl0.isRead': true,
-      'rl1.book': 'b1',
-      'rl1.chapter': 1,
-      'rl1.dateModified': DateTime.now().toIso8601String(),
-      'rl1.isRead': false,
-      'hasEverAdvanced': false,
-    });
+  setUp(() {
     mockFeed0 = MockFeed();
     mockFeed1 = MockFeed();
     mockFeeds = MockFeeds();
@@ -79,29 +70,28 @@ void main() async {
         verifyNoneAdvanced();
       });
 
-      group('if all read and latest saved day is', () {
+      group('if all read and last modified is', () {
+        setUp(() {
+          when(() => mockFeeds.areChaptersRead).thenReturn(true);
+          when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
+        });
+
         getLastModifiedState(Duration offset) =>
             FeedState(book: b0, chapter: 1, isRead: true, dateModified: DateTime.now() + offset);
 
         test('today, should not advance', () async {
-          when(() => mockFeeds.areChaptersRead).thenReturn(true);
-          when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
           when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration()));
           expect(await testee.maybeAdvance(), AdvanceState.allReadAwaitingTomorrow);
           verifyNoneAdvanced();
         });
 
         test('yesterday, should advance', () async {
-          when(() => mockFeeds.areChaptersRead).thenReturn(true);
-          when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
           when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration(days: -1)));
           expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
           verifyAllAdvanced();
         });
 
         test('1 week ago, should advance', () async {
-          when(() => mockFeeds.areChaptersRead).thenReturn(true);
-          when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
           when(() => mockFeed0.state).thenReturn(getLastModifiedState(const Duration(days: -7)));
           expect(await testee.maybeAdvance(), AdvanceState.listsAdvanced);
           verifyAllAdvanced();
