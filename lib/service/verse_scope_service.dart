@@ -11,18 +11,12 @@ class VerseScopeService {
 
   VerseScopeService(this._verseScopes, this._verseScopeTogglerService);
 
-  _getVerseScope(FeedState state) {
-    if (!_verseScopeTogglerService.isEnabled) return null;
-    return _verseScopes[state.book.key]?[state.chapter]; // null, or int, or a map<int, string>
-  }
-
   _toNonBreakingWhitespace(String label) => label.replaceAll('_', String.fromCharCode(0x00A0));
 
   int getNextVerse(FeedState state) {
-    final verseScope = _getVerseScope(state);
+    final verseScope = _verseScopeTogglerService.isEnabled ? (_verseScopes[state.book.key]?[state.chapter]) : null;
     if (verseScope == null) return 1;
     if (verseScope is int) return (state.verse == 1) ? verseScope : 1;
-    assert(verseScope is Map<int, String>);
     final verses = verseScope.keys.toList();
     final index = verses.indexOf(state.verse) + 1;
     if (index == verses.length) return 1;
@@ -30,7 +24,7 @@ class VerseScopeService {
   }
 
   String getVerseScopeLabel(FeedState state) {
-    final verseScope = _getVerseScope(state);
+    final verseScope = _verseScopeTogglerService.isEnabled ? (_verseScopes[state.book.key]?[state.chapter]) : null;
     if (verseScope == null) return '';
     if (verseScope is Map<int, String>) return _toNonBreakingWhitespace(verseScope[state.verse]!);
     return _toNonBreakingWhitespace(
