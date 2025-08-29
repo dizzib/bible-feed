@@ -4,17 +4,20 @@ targets:
       - integration_test/**
       - lib/**
       - test/**
-      # - tool/**
       # It is important to include these in the default target.
       - pubspec.*
       - $package$
 
-    # builders:
-    #   # Sometimes the package name does not match the builder name.
-    #   # In such case, refer to builder by {package_name}:{builder_key}.
-    #   injectable_generator:injectable_builder:
-    #     enabled: true
-    #     generate_for:
-    #       include:
-    #         - lib/**
-    #         - test/**
+    builders:
+      # Sometimes the package name does not match the builder name.
+      # In such case, refer to builder by {package_name}:{builder_key}.
+      injectable_generator:injectable_builder:
+        enabled: true
+        generate_for:
+          include:
+            - lib/injectable.dart
+            - lib/model/*.dart
+            - lib/service/*.dart
+            - test/injectable.dart
+            - test/test_data.dart
+            - integration_test/injectable.dart
