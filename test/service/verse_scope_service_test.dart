@@ -19,7 +19,6 @@ void main() {
   setUp(() {
     mockVerseScopes = MockVerseScopes();
     mockTogglerService = MockVerseScopeTogglerService();
-    when(() => mockVerseScopes.containsKey('b2')).thenReturn(true);
     when(() => mockVerseScopes['b2']).thenReturn({
       1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
       2: 3,
