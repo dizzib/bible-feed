@@ -5,7 +5,7 @@ import 'bible_reader_service.dart';
 import 'haptic_service.dart';
 import 'haptic_toggler_service.dart';
 
-@prod // else errors in unit tests (see haptic_toggler_service)
+@prod // else errors in unit tests (see haptic_availability_service)
 @singleton
 class HapticWireupService {
   final HapticService _hapticService;
