@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:bible_feed/service/toggler_service.dart';
+import 'package:parameterized_test/parameterized_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,14 +40,12 @@ void main() {
     testee = TestTogglerService(mockSharedPreferences);
   });
 
-  test('isEnabled default is false', () {
-    when(() => mockSharedPreferences.getBool(any())).thenReturn(null);
-    expect(testee.isEnabled, false);
-  });
-
-  test('isEnabled getter returns stored value', () {
-    when(() => mockSharedPreferences.getBool('test.key')).thenReturn(true);
-    expect(testee.isEnabled, true);
+  parameterizedTest('isEnabled getter', [
+    [null, false],
+    [true, true],
+  ], (storeValue, expectValue) {
+    when(() => mockSharedPreferences.getBool('test.key')).thenReturn(storeValue);
+    expect(testee.isEnabled, expectValue);
   });
 
   test('isEnabled setter stores value and notifies listeners', () {
@@ -52,15 +53,13 @@ void main() {
     testee.addListener(() {
       notified = true;
     });
-
     when(() => mockSharedPreferences.setBool(any(), any())).thenAnswer((_) async => true);
     testee.isEnabled = true;
-
     verify(() => mockSharedPreferences.setBool('test.key', true)).called(1);
     expect(notified, true);
   });
 
-  test('isEnabled setter to true throws error if unavailable', () {
+  test('isEnabled setter to true fails assertion if unavailable', () {
     expect(() => TestUnavailableTogglerService(mockSharedPreferences).isEnabled = true, throwsAssertionError);
   });
 }
