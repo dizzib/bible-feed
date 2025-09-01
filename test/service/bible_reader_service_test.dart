@@ -22,25 +22,17 @@ void main() async {
   });
 
   group('when not linked:', () {
-    test('isLinked should be false', () {
+    test('getter defaults', () {
       expect(testee.isLinked, false);
-    });
-
-    test('linkedBibleReader should be none', () {
+      expect(testee.linkedBibleReaderIndex, 0);
       expect(testee.linkedBibleReader.displayName, 'None');
     });
 
-    group('linkedBibleReaderIndex', () {
-      test('getter should be zero', () {
-        expect(testee.linkedBibleReaderIndex, 0);
-      });
-
-      test('setter should update and save to store', () {
-        when(() => mockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
-        testee.linkedBibleReaderIndex = 1;
-        verify(() => mockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
-        expect(testee.linkedBibleReaderIndex, 1);
-      });
+    test('linkedBibleReaderIndex setter should update and save to store', () {
+      when(() => mockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
+      testee.linkedBibleReaderIndex = 1;
+      verify(() => mockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
+      expect(testee.linkedBibleReaderIndex, 1);
     });
 
     test('launchLinkedBibleReader if unread, should not launch', () async {
@@ -64,11 +56,9 @@ void main() async {
       testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
     });
 
-    test('linkedBibleReader should be blbMockBibleReader', () {
+    test('getter defaults', () {
+      expect(testee.isLinked, true);
       expect(testee.linkedBibleReader, blbMockBibleReader);
-    });
-
-    test('linkedBibleReaderIndex should be 1', () {
       expect(testee.linkedBibleReaderIndex, 1);
     });
 
