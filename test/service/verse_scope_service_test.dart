@@ -18,6 +18,10 @@ void main() {
   late MockVerseScopeTogglerService mockTogglerService;
   late FeedState state;
   late VerseScopeService testee;
+  var testVerseScopes = {
+    1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
+    2: 3,
+  };
 
   setUp(() {
     mockVerseScopes = MockVerseScopes();
@@ -37,25 +41,20 @@ void main() {
   parameterizedTest(
     'getNextVerse',
     [
-      [false, 1, 1, 1, 'service disabled'],
-      [true, 1, 1, 2, 'not at last verse in scope'],
-      [true, 1, 2, 1, 'at last verse in scope'],
-      [true, 3, 1, 1, 'scope not applicable to chapter'],
+      [null, true, 1, 1, 1, 'no verse scopes'],
+      [testVerseScopes, false, 1, 1, 1, 'service disabled'],
+      [testVerseScopes, true, 1, 1, 2, 'not at last verse in scope'],
+      [testVerseScopes, true, 1, 2, 1, 'at last verse in scope'],
+      [testVerseScopes, true, 3, 1, 1, 'scope not applicable to chapter'],
     ],
-    customDescriptionBuilder: (_, __, values) => 'when ${values[4]} should return ${values[3]}',
-    (bool isEnabled, int chapter, int verse, int expectValue, [String? desc]) {
+    customDescriptionBuilder: (_, __, values) => 'when ${values[5]} should return ${values[4]}',
+    (var verseScopes, bool isEnabled, int chapter, int verse, int expectValue, [String? desc]) {
       when(() => mockTogglerService.isEnabled).thenReturn(isEnabled);
+      when(() => mockVerseScopes['b1']).thenReturn(verseScopes);
       state = FeedState(book: b1, chapter: chapter, verse: verse);
       expect(testee.getNextVerse(state), expectValue);
     },
   );
-
-  group('getNextVerse', () {
-    test('returns 1 if no verse scopes', () {
-      when(() => mockVerseScopes['b1']).thenReturn(null);
-      expect(testee.getNextVerse(state), 1);
-    });
-  });
 
   group('getVerseScopeLabel', () {
     test('returns empty if toggler disabled', () {
