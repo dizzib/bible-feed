@@ -43,13 +43,6 @@ void main() async {
     testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
   });
 
-  Future callLaunchLinkedBibleReader(bool isRead) async {
-    final state = FeedState(book: b0, isRead: isRead);
-    when(() => mockBibleReader.launch(state)).thenAnswer((_) async => true);
-    await testee.launchLinkedBibleReader(state);
-    return state;
-  }
-
   parameterizedTest(
     'property getters',
     [
@@ -66,36 +59,37 @@ void main() async {
     },
   );
 
+  void verifyLaunched(FeedState state) {
+    verify(() => mockBibleReader.launch(state)).called(1);
+  }
+
+  void verifyNotLaunched(FeedState state) {
+    verifyNever(() => mockBibleReader.launch(state));
+  }
+
+  parameterizedTest(
+    'launchLinkedBibleReader',
+    [
+      [null, false, verifyNotLaunched],
+      ['blueLetterApp', true, verifyNotLaunched],
+      ['blueLetterApp', false, verifyLaunched],
+    ],
+    (String? bibleReaderKey, bool isRead, Function verify) async {
+      when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
+      testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
+      final state = FeedState(book: b0, isRead: isRead);
+      when(() => mockBibleReader.launch(state)).thenAnswer((_) async => true);
+      await testee.launchLinkedBibleReader(state);
+      verify(state);
+    },
+  );
+
   group('when not linked:', () {
     test('linkedBibleReaderIndex setter should update and save to store', () {
       when(() => mockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
       testee.linkedBibleReaderIndex = 1;
       verify(() => mockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
       expect(testee.linkedBibleReaderIndex, 1);
-    });
-
-    test('launchLinkedBibleReader if unread, should not launch', () async {
-      final state = await callLaunchLinkedBibleReader(false);
-      verifyNever(() => mockBibleReader.launch(state));
-    });
-  });
-
-  group('when linked to BLB:', () {
-    setUp(() {
-      when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
-      testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
-    });
-
-    group('launchLinkedBibleReader', () {
-      test('if unread, should launch', () async {
-        final state = await callLaunchLinkedBibleReader(false);
-        verify(() => mockBibleReader.launch(state)).called(1);
-      });
-
-      test('if read, should not launch', () async {
-        final state = await callLaunchLinkedBibleReader(true);
-        verifyNever(() => mockBibleReader.launch(state));
-      });
     });
   });
 }
