@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bible_feed/service/toggler_service.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,8 +22,8 @@ class TestTogglerService extends TogglerService {
   String get title => 'Test Title';
 }
 
-class TestUnavailableTogglerService extends TestTogglerService {
-  TestUnavailableTogglerService(super.sharedPreferences);
+class TestCannotEnableTogglerService extends TestTogglerService {
+  TestCannotEnableTogglerService(super.sharedPreferences);
 
   @override
   bool get canEnable => false;
@@ -48,7 +46,7 @@ void main() {
     expect(testee.isEnabled, expectValue);
   });
 
-  test('isEnabled setter stores value and notifies listeners', () {
+  test('if can enable, isEnabled setter stores value and notifies listeners', () {
     var notified = false;
     testee.addListener(() {
       notified = true;
@@ -59,7 +57,7 @@ void main() {
     expect(notified, true);
   });
 
-  test('isEnabled setter to true fails assertion if unavailable', () {
-    expect(() => TestUnavailableTogglerService(mockSharedPreferences).isEnabled = true, throwsAssertionError);
+  test('if cannot enable, isEnabled setter to true fails assertion', () {
+    expect(() => TestCannotEnableTogglerService(mockSharedPreferences).isEnabled = true, throwsAssertionError);
   });
 }
