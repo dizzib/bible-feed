@@ -1,4 +1,3 @@
-import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/verse_scopes.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
@@ -14,25 +13,19 @@ class MockVerseScopes extends Mock implements VerseScopes {}
 class MockVerseScopeTogglerService extends Mock implements VerseScopeTogglerService {}
 
 void main() {
-  late MockVerseScopes mockVerseScopes;
-  late MockVerseScopeTogglerService mockTogglerService;
-  late FeedState state;
-  late VerseScopeService testee;
-  var testVerseScopes = {
+  const testVerseScopes = {
     1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
     2: 3,
   };
 
+  late MockVerseScopeTogglerService mockTogglerService;
+  late MockVerseScopes mockVerseScopes;
+  late VerseScopeService testee;
+
   setUp(() {
-    mockVerseScopes = MockVerseScopes();
     mockTogglerService = MockVerseScopeTogglerService();
-    when(() => mockVerseScopes['b1']).thenReturn({
-      1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
-      2: 3,
-    });
-    when(() => mockTogglerService.isEnabled).thenReturn(true);
+    mockVerseScopes = MockVerseScopes();
     testee = VerseScopeService(mockVerseScopes, mockTogglerService);
-    state = FeedState(book: const Book('b1', 'Book 2', 3), chapter: 1, isRead: false);
   });
 
   parameterizedTest(
@@ -48,7 +41,7 @@ void main() {
     (var verseScopes, bool isEnabled, int chapter, int verse, int expectValue, String desc) {
       when(() => mockTogglerService.isEnabled).thenReturn(isEnabled);
       when(() => mockVerseScopes['b1']).thenReturn(verseScopes);
-      state = FeedState(book: b1, chapter: chapter, verse: verse);
+      final state = FeedState(book: b1, chapter: chapter, verse: verse);
       expect(testee.getNextVerse(state), expectValue);
     },
   );
@@ -67,7 +60,7 @@ void main() {
     (var verseScopes, bool isEnabled, int chapter, int verse, String expectValue, String desc) {
       when(() => mockTogglerService.isEnabled).thenReturn(isEnabled);
       when(() => mockVerseScopes['b1']).thenReturn(verseScopes);
-      state = FeedState(book: b1, chapter: chapter, verse: verse);
+      final state = FeedState(book: b1, chapter: chapter, verse: verse);
       expect(testee.getVerseScopeLabel(state), expectValue);
     },
   );
