@@ -9,7 +9,7 @@ class AppBase extends StatelessWidget {
   @override
   build(context) {
     theme(Brightness brightness) => ThemeData(
-          cardTheme: CardTheme(surfaceTintColor: context.colorScheme.surfaceTint),
+          cardTheme: CardThemeData(surfaceTintColor: context.colorScheme.surfaceTint),
           colorScheme: ColorScheme.fromSeed(
             brightness: brightness,
             seedColor: const Color(0xffbb86fc),
