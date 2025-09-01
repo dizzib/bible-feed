@@ -67,17 +67,18 @@ void main() async {
     parameterizedTest(
       'maybeAdvance',
       [
-        [false, const Duration(days: -1), AdvanceState.notAllRead, verifyNoneAdvanced],
+        [false, const Duration(days: 1), AdvanceState.notAllRead, verifyNoneAdvanced],
         [true, const Duration(days: 0), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
-        [true, const Duration(days: -1), AdvanceState.listsAdvanced, verifyAllAdvanced],
-        [true, const Duration(days: -7), AdvanceState.listsAdvanced, verifyAllAdvanced],
+        [true, const Duration(days: 1), AdvanceState.listsAdvanced, verifyAllAdvanced],
+        [true, const Duration(days: 7), AdvanceState.listsAdvanced, verifyAllAdvanced],
       ],
-      customDescriptionBuilder: (_, __, values) => 'when lastDateModified is Now + ${values[1]}, expect ${values[2]}',
-      (bool areChaptersRead, Duration offset, AdvanceState expectedAdvanceState, Function verify) async {
+      customDescriptionBuilder: (_, __, values) =>
+          'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}',
+      (bool areChaptersRead, Duration sinceLastModified, AdvanceState expectedAdvanceState, Function verify) async {
         when(() => mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
         when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
         when(() => mockFeed0.state)
-            .thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() + offset));
+            .thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() - sinceLastModified));
         expect(await testee.maybeAdvance(), expectedAdvanceState);
         verify();
       },
