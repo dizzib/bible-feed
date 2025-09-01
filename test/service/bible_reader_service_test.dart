@@ -36,7 +36,7 @@ void main() async {
     });
 
     test('launchLinkedBibleReader if unread, should not launch', () async {
-      final state = FeedState(book: b0, chapter: 1, isRead: false);
+      final state = FeedState(book: b0, isRead: false);
       await testee.launchLinkedBibleReader(state);
       verifyNever(() => blbMockBibleReader.launch(state));
     });
@@ -64,14 +64,14 @@ void main() async {
 
     group('launchLinkedBibleReader', () {
       test('if unread, should launch', () async {
-        final state = FeedState(book: b0, chapter: 1, isRead: false);
+        final state = FeedState(book: b0, isRead: false);
         when(() => blbMockBibleReader.launch(state)).thenAnswer((_) async => true);
         await testee.launchLinkedBibleReader(state);
         verify(() => blbMockBibleReader.launch(state)).called(1);
       });
 
       test('if read, should not launch', () async {
-        final state = FeedState(book: b0, chapter: 1, isRead: true);
+        final state = FeedState(book: b0, isRead: true);
         await testee.launchLinkedBibleReader(state);
         verifyNever(() => blbMockBibleReader.launch(state));
       });
