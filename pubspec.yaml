@@ -56,6 +56,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   mocktail: ^1.0.4
+  parameterized_test: ^2.0.1
   plugin_platform_interface: ^2.1.8
   url_launcher_platform_interface: ^2.3.2
 

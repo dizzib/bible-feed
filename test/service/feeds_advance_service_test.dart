@@ -1,4 +1,5 @@
 import 'package:bible_feed/model/feed.dart';
+import 'package:parameterized_test/parameterized_test.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
 import 'package:dartx/dartx.dart';
@@ -70,13 +71,19 @@ void main() async {
         verifyNoneAdvanced();
       });
 
-      group('if all read and last modified is', () {
-        setUp(() {
+      parameterizedTest(
+        'if all read',
+        setUp: () {
           when(() => mockFeeds.areChaptersRead).thenReturn(true);
           when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
-        });
-
-        run(Duration offset, AdvanceState expectedAdvanceState, Function verify) async {
+        },
+        [
+          [const Duration(days: 0), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+          [const Duration(days: -1), AdvanceState.listsAdvanced, verifyAllAdvanced],
+          [const Duration(days: -7), AdvanceState.listsAdvanced, verifyAllAdvanced],
+        ],
+        customDescriptionBuilder: (_, __, values) => 'when lastDateModified is Now + ${values[0]}, expect ${values[1]}',
+        (Duration offset, AdvanceState expectedAdvanceState, Function verify) async {
           when(() => mockFeed0.state).thenReturn(FeedState(
             book: b0,
             chapter: 1,
@@ -85,20 +92,8 @@ void main() async {
           ));
           expect(await testee.maybeAdvance(), expectedAdvanceState);
           verify();
-        }
-
-        test('today, should not advance', () async {
-          run(const Duration(), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced);
-        });
-
-        test('yesterday, should advance', () async {
-          run(const Duration(days: -1), AdvanceState.listsAdvanced, verifyAllAdvanced);
-        });
-
-        test('1 week ago, should advance', () async {
-          run(const Duration(days: -7), AdvanceState.listsAdvanced, verifyAllAdvanced);
-        });
-      });
+        },
+      );
     });
   });
 }

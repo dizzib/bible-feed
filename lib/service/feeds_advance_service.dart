@@ -28,11 +28,12 @@ class FeedsAdvanceService {
 
   Future<AdvanceState> maybeAdvance() async {
     if (!_feeds.areChaptersRead) return AdvanceState.notAllRead; //.log();
-    // use clock (not DateTime) for integration tests
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
-    if (clock.now().day != lastDateModified?.day) return await forceAdvance();
-    if (clock.now().month != lastDateModified?.month) return await forceAdvance();
-    if (clock.now().year != lastDateModified?.year) return await forceAdvance();
+    if (lastDateModified == null) return AdvanceState.notAllRead;
+    // use clock (not DateTime) for integration tests
+    if (clock.now().day > lastDateModified.day) return await forceAdvance();
+    if (clock.now().month > lastDateModified.month) return await forceAdvance();
+    if (clock.now().year > lastDateModified.year) return await forceAdvance();
     return AdvanceState.allReadAwaitingTomorrow; //.log();
   }
 }
