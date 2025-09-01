@@ -1,4 +1,5 @@
 import 'package:bible_feed/model/bible_reader.dart';
+import 'package:parameterized_test/parameterized_test.dart';
 import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_app_install_service.dart';
@@ -49,13 +50,23 @@ void main() async {
     return state;
   }
 
-  group('when not linked:', () {
-    test('getter defaults', () {
-      expect(testee.isLinked, false);
-      expect(testee.linkedBibleReaderIndex, 0);
-      expect(testee.linkedBibleReader.displayName, 'None');
-    });
+  parameterizedTest(
+    'property getters',
+    [
+      [null, false, 0, noneBibleReader],
+      ['invalid', false, 0, noneBibleReader],
+      ['blueLetterApp', true, 1, mockBibleReader],
+    ],
+    (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
+      when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
+      testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
+      expect(testee.isLinked, expectIsLinked);
+      expect(testee.linkedBibleReader, expectBibleReader);
+      expect(testee.linkedBibleReaderIndex, expectIndex);
+    },
+  );
 
+  group('when not linked:', () {
     test('linkedBibleReaderIndex setter should update and save to store', () {
       when(() => mockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
       testee.linkedBibleReaderIndex = 1;
@@ -69,24 +80,10 @@ void main() async {
     });
   });
 
-  group('when linked to invalid:', () {
-    test('isLinked should be false', () {
-      when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn('invalid');
-      testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
-      expect(testee.isLinked, false);
-    });
-  });
-
   group('when linked to BLB:', () {
     setUp(() {
       when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
       testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
-    });
-
-    test('getter defaults', () {
-      expect(testee.isLinked, true);
-      expect(testee.linkedBibleReader, mockBibleReader);
-      expect(testee.linkedBibleReaderIndex, 1);
     });
 
     group('launchLinkedBibleReader', () {
