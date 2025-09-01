@@ -14,44 +14,42 @@ void main() {
 
   late MockSharedPreferences mockSharedPreferences;
   late MockHapticAvailabilityService mockHapticAvailabilityService;
-  late HapticTogglerService service;
+  late HapticTogglerService testee;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
     mockHapticAvailabilityService = MockHapticAvailabilityService();
     when(() => mockSharedPreferences.getBool(any())).thenReturn(null);
     when(() => mockHapticAvailabilityService.isAvailable).thenReturn(true);
-    service = HapticTogglerService(mockSharedPreferences, mockHapticAvailabilityService);
+    testee = HapticTogglerService(mockSharedPreferences, mockHapticAvailabilityService);
   });
 
   test('default isEnabled is false', () async {
-    expect(service.isEnabled, false);
+    expect(testee.isEnabled, false);
   });
 
   test('isEnabled getter returns stored value', () {
     when(() => mockSharedPreferences.getBool('isEnabled.haptic')).thenReturn(true);
-    expect(service.isEnabled, true);
+    expect(testee.isEnabled, true);
   });
 
   test('isEnabled setter stores value and notifies listeners', () {
     var notified = false;
-    service.addListener(() {
+    testee.addListener(() {
       notified = true;
     });
-
     when(() => mockSharedPreferences.setBool(any(), any())).thenAnswer((_) async => true);
-    service.isEnabled = true;
-
-    verify(() => mockSharedPreferences.setBool('isEnabled.haptic', true)).called(1);
+    testee.isEnabled = true;
     expect(notified, true);
+    verify(() => mockSharedPreferences.setBool('isEnabled.haptic', true)).called(1);
   });
 
   test('isAvailable returns true', () {
-    expect(service.canEnable, true);
+    expect(testee.canEnable, true);
   });
 
   test('title and subtitle getters', () {
-    expect(service.title, 'Haptic Feedback');
-    expect(service.subtitle, 'Vibrate on tap or select.');
+    expect(testee.title, 'Haptic Feedback');
+    expect(testee.subtitle, 'Vibrate on tap or select.');
   });
 }
