@@ -21,6 +21,13 @@ void main() async {
     testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
   });
 
+  Future callLaunchLinkedBibleReader(bool isRead) async {
+    final state = FeedState(book: b0, isRead: isRead);
+    when(() => blbMockBibleReader.launch(state)).thenAnswer((_) async => true);
+    await testee.launchLinkedBibleReader(state);
+    return state;
+  }
+
   group('when not linked:', () {
     test('getter defaults', () {
       expect(testee.isLinked, false);
@@ -36,8 +43,7 @@ void main() async {
     });
 
     test('launchLinkedBibleReader if unread, should not launch', () async {
-      final state = FeedState(book: b0, isRead: false);
-      await testee.launchLinkedBibleReader(state);
+      final state = await callLaunchLinkedBibleReader(false);
       verifyNever(() => blbMockBibleReader.launch(state));
     });
   });
@@ -63,20 +69,13 @@ void main() async {
     });
 
     group('launchLinkedBibleReader', () {
-      Future run(bool isRead) async {
-        final state = FeedState(book: b0, isRead: isRead);
-        when(() => blbMockBibleReader.launch(state)).thenAnswer((_) async => true);
-        await testee.launchLinkedBibleReader(state);
-        return state;
-      }
-
       test('if unread, should launch', () async {
-        final state = await run(false);
+        final state = await callLaunchLinkedBibleReader(false);
         verify(() => blbMockBibleReader.launch(state)).called(1);
       });
 
       test('if read, should not launch', () async {
-        final state = await run(true);
+        final state = await callLaunchLinkedBibleReader(true);
         verifyNever(() => blbMockBibleReader.launch(state));
       });
     });
