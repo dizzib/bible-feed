@@ -7,7 +7,7 @@ class FeedState {
   bool _isRead;
   int _verse;
 
-  FeedState({required Book book, required int chapter, int verse = 1, bool isRead = false, DateTime? dateModified})
+  FeedState({required Book book, int chapter = 1, int verse = 1, bool isRead = false, DateTime? dateModified})
       : _book = book,
         _chapter = chapter,
         _dateModified = dateModified,

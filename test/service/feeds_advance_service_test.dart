@@ -67,7 +67,7 @@ void main() async {
     parameterizedTest(
       'maybeAdvance',
       [
-        [false, const Duration(days: 0), AdvanceState.notAllRead, verifyNoneAdvanced],
+        [false, const Duration(days: -1), AdvanceState.notAllRead, verifyNoneAdvanced],
         [true, const Duration(days: 0), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
         [true, const Duration(days: -1), AdvanceState.listsAdvanced, verifyAllAdvanced],
         [true, const Duration(days: -7), AdvanceState.listsAdvanced, verifyAllAdvanced],
@@ -76,12 +76,8 @@ void main() async {
       (bool areChaptersRead, Duration offset, AdvanceState expectedAdvanceState, Function verify) async {
         when(() => mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
         when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
-        when(() => mockFeed0.state).thenReturn(FeedState(
-          book: b0,
-          chapter: 1,
-          isRead: true,
-          dateModified: DateTime.now() + offset,
-        ));
+        when(() => mockFeed0.state)
+            .thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() + offset));
         expect(await testee.maybeAdvance(), expectedAdvanceState);
         verify();
       },
