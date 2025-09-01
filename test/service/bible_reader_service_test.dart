@@ -66,28 +66,31 @@ void main() async {
     expect(testee.linkedBibleReaderIndex, 1);
   });
 
-  void verifyLaunched(FeedState state) {
+  void verifyLaunchCalled(FeedState state) {
     verify(() => mockBibleReader.launch(state)).called(1);
   }
 
-  void verifyNotLaunched(FeedState state) {
+  void verifyLaunchNotCalled(FeedState state) {
     verifyNever(() => mockBibleReader.launch(state));
   }
 
   parameterizedTest(
     'launchLinkedBibleReader',
     [
-      [null, false, verifyNotLaunched],
-      ['blueLetterApp', true, verifyNotLaunched],
-      ['blueLetterApp', false, verifyLaunched],
+      [null, false, verifyLaunchNotCalled],
+      ['blueLetterApp', true, verifyLaunchNotCalled],
+      ['blueLetterApp', false, verifyLaunchCalled, true],
+      ['blueLetterApp', false, verifyLaunchCalled, false],
     ],
-    (String? bibleReaderKey, bool isRead, Function verify) async {
+    (String? bibleReaderKey, bool isRead, Function verifyLaunch, [bool ok = true]) async {
       when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
+      when(() => mockSharedPreferences.setString(any(), any())).thenAnswer((_) async => true);
       testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
       final state = FeedState(book: b0, isRead: isRead);
-      when(() => mockBibleReader.launch(state)).thenAnswer((_) async => true);
+      when(() => mockBibleReader.launch(state)).thenAnswer((_) async => ok);
       await testee.launchLinkedBibleReader(state);
-      verify(state);
+      verifyLaunch(state);
+      if (!ok) verify(() => mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
     },
   );
 }
