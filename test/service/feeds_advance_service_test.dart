@@ -19,69 +19,60 @@ class MockSharedPreferences extends Mock implements SharedPreferences {}
 void main() async {
   await configureDependencies();
 
-  late MockFeed mockFeed0;
-  late MockFeed mockFeed1;
+  late List<MockFeed> mockFeedList;
   late MockFeeds mockFeeds;
   late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceService testee;
 
   setUp(() {
-    mockFeed0 = MockFeed();
-    mockFeed1 = MockFeed();
+    mockFeedList = [MockFeed(), MockFeed()];
     mockFeeds = MockFeeds();
     mockSharedPreferences = MockSharedPreferences();
-    when(() => mockFeeds.iterator).thenReturn([mockFeed0, mockFeed1].iterator);
+    when(() => mockFeeds.iterator).thenReturn(mockFeedList.iterator);
     when(() => mockSharedPreferences.getBool('hasEverAdvanced')).thenReturn(false);
     when(() => mockSharedPreferences.setBool('hasEverAdvanced', any())).thenAnswer((_) async => true);
-    when(() => mockFeed0.advance()).thenAnswer((_) async => null);
     testee = FeedsAdvanceService(mockSharedPreferences, mockFeeds);
   });
 
-  group('hasEverAdvanced', () {
-    test('should initialise from store', () {
-      expect(testee.hasEverAdvanced, false);
-    });
+  verifyAllAdvanced() {
+    for (var f in mockFeedList) {
+      verify(() => f.advance()).called(1);
+    }
+  }
 
-    test('should be stored true after advance', () async {
-      await testee.forceAdvance();
-      verify(() => mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
-    });
+  verifyNoneAdvanced() {
+    for (var f in mockFeedList) {
+      verifyNever(() => f.advance());
+    }
+  }
+
+  test('hasEverAdvanced should default to false', () {
+    expect(testee.hasEverAdvanced, false);
   });
 
-  group('Advance:', () {
-    verifyAllAdvanced() {
-      verify(() => mockFeed0.advance()).called(1);
-      verify(() => mockFeed1.advance()).called(1);
-    }
-
-    verifyNoneAdvanced() {
-      verifyNever(() => mockFeed0.advance());
-      verifyNever(() => mockFeed1.advance());
-    }
-
-    test('forceAdvance should advance all feeds', () async {
-      await testee.forceAdvance();
-      verifyAllAdvanced();
-    });
-
-    parameterizedTest(
-      'maybeAdvance',
-      [
-        [false, const Duration(days: 1), AdvanceState.notAllRead, verifyNoneAdvanced],
-        [true, const Duration(days: 0), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
-        [true, const Duration(days: 1), AdvanceState.listsAdvanced, verifyAllAdvanced],
-        [true, const Duration(days: 7), AdvanceState.listsAdvanced, verifyAllAdvanced],
-      ],
-      customDescriptionBuilder: (_, __, values) =>
-          'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}',
-      (bool areChaptersRead, Duration sinceLastModified, AdvanceState expectedAdvanceState, Function verify) async {
-        when(() => mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
-        when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeed0);
-        when(() => mockFeed0.state)
-            .thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() - sinceLastModified));
-        expect(await testee.maybeAdvance(), expectedAdvanceState);
-        verify();
-      },
-    );
+  test('forceAdvance should advance all feeds and store hasEverAdvanced as true', () async {
+    expect(await testee.forceAdvance(), AdvanceState.listsAdvanced);
+    verifyAllAdvanced();
+    verify(() => mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
   });
+
+  parameterizedTest(
+    'maybeAdvance',
+    [
+      [false, const Duration(days: 1), AdvanceState.notAllRead, verifyNoneAdvanced],
+      [true, const Duration(days: 0), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [true, const Duration(days: 1), AdvanceState.listsAdvanced, verifyAllAdvanced],
+      [true, const Duration(days: 7), AdvanceState.listsAdvanced, verifyAllAdvanced],
+    ],
+    customDescriptionBuilder: (_, __, values) =>
+        'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}',
+    (bool areChaptersRead, Duration sinceLastModified, AdvanceState expectedAdvanceState, Function verify) async {
+      when(() => mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
+      when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeedList[0]);
+      when(() => mockFeedList[0].state)
+          .thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() - sinceLastModified));
+      expect(await testee.maybeAdvance(), expectedAdvanceState);
+      verify();
+    },
+  );
 }
