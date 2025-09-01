@@ -1,6 +1,9 @@
+import 'package:bible_feed/model/bible_reader.dart';
+import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,7 +11,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../injectable.dart';
 import '../test_data.dart';
 
+class MockBibleReader extends Mock implements BibleReader {}
+
 class MockSharedPreferences extends Mock implements SharedPreferences {}
+
+var noneBibleReader = const BibleReader('None', '', [TargetPlatform.android, TargetPlatform.iOS]);
+var mockBibleReader = MockBibleReader();
+
+class TestBibleReaders extends BibleReaders {
+  TestBibleReaders() {
+    when(() => mockBibleReader.certifiedPlatforms).thenReturn([TargetPlatform.iOS]);
+    when(() => mockBibleReader.displayName).thenReturn('Blue Letter Bible app');
+    when(() => mockBibleReader.isCertifiedForThisPlatform).thenReturn(true);
+    when(() => mockBibleReader.uriTemplate).thenReturn('blb://BOOK/CHAPTER');
+    when(() => mockBibleReader.uriVersePath).thenReturn('/VERSE');
+  }
+
+  @override
+  get items => {BibleReaderKey.none: noneBibleReader, BibleReaderKey.blueLetterApp: mockBibleReader};
+}
 
 void main() async {
   late BibleReaderService testee;
@@ -23,7 +44,7 @@ void main() async {
 
   Future callLaunchLinkedBibleReader(bool isRead) async {
     final state = FeedState(book: b0, isRead: isRead);
-    when(() => blbMockBibleReader.launch(state)).thenAnswer((_) async => true);
+    when(() => mockBibleReader.launch(state)).thenAnswer((_) async => true);
     await testee.launchLinkedBibleReader(state);
     return state;
   }
@@ -44,7 +65,7 @@ void main() async {
 
     test('launchLinkedBibleReader if unread, should not launch', () async {
       final state = await callLaunchLinkedBibleReader(false);
-      verifyNever(() => blbMockBibleReader.launch(state));
+      verifyNever(() => mockBibleReader.launch(state));
     });
   });
 
@@ -64,19 +85,19 @@ void main() async {
 
     test('getter defaults', () {
       expect(testee.isLinked, true);
-      expect(testee.linkedBibleReader, blbMockBibleReader);
+      expect(testee.linkedBibleReader, mockBibleReader);
       expect(testee.linkedBibleReaderIndex, 1);
     });
 
     group('launchLinkedBibleReader', () {
       test('if unread, should launch', () async {
         final state = await callLaunchLinkedBibleReader(false);
-        verify(() => blbMockBibleReader.launch(state)).called(1);
+        verify(() => mockBibleReader.launch(state)).called(1);
       });
 
       test('if read, should not launch', () async {
         final state = await callLaunchLinkedBibleReader(true);
-        verifyNever(() => blbMockBibleReader.launch(state));
+        verifyNever(() => mockBibleReader.launch(state));
       });
     });
   });
