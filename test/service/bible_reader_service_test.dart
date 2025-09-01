@@ -33,10 +33,10 @@ class TestBibleReaders extends BibleReaders {
 }
 
 void main() async {
-  late BibleReaderService testee;
-  late MockSharedPreferences mockSharedPreferences;
-
   await configureDependencies();
+
+  late MockSharedPreferences mockSharedPreferences;
+  late BibleReaderService testee;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
@@ -58,6 +58,13 @@ void main() async {
       expect(testee.linkedBibleReaderIndex, expectIndex);
     },
   );
+
+  test('linkedBibleReaderIndex setter should update and save to store', () {
+    when(() => mockSharedPreferences.setString(any(), any())).thenAnswer((_) async => true);
+    testee.linkedBibleReaderIndex = 1;
+    verify(() => mockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
+    expect(testee.linkedBibleReaderIndex, 1);
+  });
 
   void verifyLaunched(FeedState state) {
     verify(() => mockBibleReader.launch(state)).called(1);
@@ -83,13 +90,4 @@ void main() async {
       verify(state);
     },
   );
-
-  group('when not linked:', () {
-    test('linkedBibleReaderIndex setter should update and save to store', () {
-      when(() => mockSharedPreferences.setString('linkedBibleReader', any())).thenAnswer((_) async => true);
-      testee.linkedBibleReaderIndex = 1;
-      verify(() => mockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
-      expect(testee.linkedBibleReaderIndex, 1);
-    });
-  });
 }
