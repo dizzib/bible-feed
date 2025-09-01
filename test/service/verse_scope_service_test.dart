@@ -29,39 +29,23 @@ void main() {
   });
 
   parameterizedTest(
-    'getNextVerse',
+    'getNextVerse/getVerseScopeLabel:',
     [
-      [null, true, 1, 1, 1, 'no verse scopes'],
-      [testVerseScopes, false, 1, 1, 1, 'service disabled'],
-      [testVerseScopes, true, 3, 1, 1, 'scope not applicable to chapter'],
-      [testVerseScopes, true, 1, 1, 2, 'not at last verse in scope'],
-      [testVerseScopes, true, 1, 2, 1, 'at last verse in scope'],
+      [null, true, 1, 1, 1, '', 'no verse scopes'],
+      [testVerseScopes, false, 1, 1, 1, '', 'service disabled'],
+      [testVerseScopes, true, 3, 1, 1, '', 'scope not applicable to chapter'],
+      [testVerseScopes, true, 1, 1, 2, 'ℵ\u00A0Aleph', 'not at last verse in static scope'],
+      [testVerseScopes, true, 2, 1, 3, 'to\u00A0verse\u00A02', 'not at last verse in calculated scope'],
+      [testVerseScopes, true, 2, 3, 1, 'from\u00A0verse\u00A03', 'at last verse in calculated scope'],
     ],
-    customDescriptionBuilder: (_, __, values) => 'when ${values[5]} should return ${values[4]}',
-    (var verseScopes, bool isEnabled, int chapter, int verse, int expectValue, String desc) {
+    customDescriptionBuilder: (_, __, values) =>
+        'when ${values[6]}, expect next verse=${values[4]}, label="${values[5]}"',
+    (var verseScopes, bool isEnabled, int chapter, int verse, int expectNextVerse, String expectLabel, String desc) {
       when(() => mockTogglerService.isEnabled).thenReturn(isEnabled);
       when(() => mockVerseScopes['b1']).thenReturn(verseScopes);
       final state = FeedState(book: b1, chapter: chapter, verse: verse);
-      expect(testee.getNextVerse(state), expectValue);
-    },
-  );
-
-  parameterizedTest(
-    'getVerseScopeLabel',
-    [
-      [null, true, 1, 1, '', 'no verse scopes'],
-      [testVerseScopes, false, 1, 1, '', 'service disabled'],
-      [testVerseScopes, true, 3, 1, '', 'scope not applicable to chapter'],
-      [testVerseScopes, true, 1, 1, 'ℵ\u00A0Aleph', 'not at last verse in static scope'],
-      [testVerseScopes, true, 2, 1, 'to\u00A0verse\u00A02', 'not at last verse in calculated scope'],
-      [testVerseScopes, true, 2, 3, 'from\u00A0verse\u00A03', 'at last verse in calculated scope'],
-    ],
-    customDescriptionBuilder: (_, __, values) => 'when ${values[5]} should return ${values[4]}',
-    (var verseScopes, bool isEnabled, int chapter, int verse, String expectValue, String desc) {
-      when(() => mockTogglerService.isEnabled).thenReturn(isEnabled);
-      when(() => mockVerseScopes['b1']).thenReturn(verseScopes);
-      final state = FeedState(book: b1, chapter: chapter, verse: verse);
-      expect(testee.getVerseScopeLabel(state), expectValue);
+      expect(testee.getNextVerse(state), expectNextVerse);
+      expect(testee.getVerseScopeLabel(state), expectLabel);
     },
   );
 }
