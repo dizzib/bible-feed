@@ -18,15 +18,9 @@ void main() {
     2: 3,
   };
 
-  late MockVerseScopeTogglerService mockTogglerService;
-  late MockVerseScopes mockVerseScopes;
-  late VerseScopeService testee;
-
-  setUp(() {
-    mockTogglerService = MockVerseScopeTogglerService();
-    mockVerseScopes = MockVerseScopes();
-    testee = VerseScopeService(mockVerseScopes, mockTogglerService);
-  });
+  late MockVerseScopes mockVerseScopes = MockVerseScopes();
+  late MockVerseScopeTogglerService mockTogglerService = MockVerseScopeTogglerService();
+  late VerseScopeService testee = VerseScopeService(mockVerseScopes, mockTogglerService);
 
   parameterizedTest(
     'getNextVerse/getVerseScopeLabel:',
