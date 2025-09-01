@@ -22,10 +22,6 @@ void main() async {
   });
 
   group('when not linked:', () {
-    setUp(() {
-      when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn(null);
-    });
-
     test('isLinked should be false', () {
       expect(testee.isLinked, false);
     });
@@ -55,11 +51,9 @@ void main() async {
   });
 
   group('when linked to invalid:', () {
-    setUp(() {
+    test('isLinked should be false', () {
       when(() => mockSharedPreferences.getString('linkedBibleReader')).thenReturn('invalid');
-    });
-
-    test('should be false if store is nonsense', () {
+      testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
       expect(testee.isLinked, false);
     });
   });
