@@ -3,6 +3,18 @@
 All notable changes to this project are documented here.
 
 
+## [1.5.0] - 2025-09-02
+
+### Added
+- more long chapters to split, such as Acts 7
+- haptic (vibration) feedback on/off option
+- card fade effect
+
+### Changed
+- improve handling of Psalm 119
+- improve haptic feedback
+
+
 ## [1.4.0] - 2025-08-18
 
 ### Added
