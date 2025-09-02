@@ -64,7 +64,7 @@ void main() async {
       [true, const Duration(days: 1), AdvanceState.listsAdvanced, verifyAllAdvanced],
       [true, const Duration(days: 7), AdvanceState.listsAdvanced, verifyAllAdvanced],
     ],
-    customDescriptionBuilder: (_, __, values) {
+    customDescriptionBuilder: (_, _, values) {
       return 'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}';
     },
     (bool areChaptersRead, Duration sinceLastModified, AdvanceState expectedAdvanceState, Function verify) async {
