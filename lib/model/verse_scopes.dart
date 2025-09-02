@@ -24,7 +24,7 @@ class VerseScopes extends MapBase<String, dynamic> {
         129: 'פ_Pe__צ_Tsadde',
         145: 'ק_Qoph__ר_Resh',
         161: 'ש_Shin__ת_Tau',
-      }
+      },
     },
     '1ki': {8: 33},
     'neh': {7: 37},

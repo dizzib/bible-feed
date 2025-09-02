@@ -27,14 +27,14 @@ class BlueLetterBookKeyMap extends BibleReaderBookKeyMap {
 
   @override
   Map<String, String> get keyMap => const {
-        '1cr': '1ch',
-        '2cr': '2ch',
-        'jam': 'jas',
-        'mar': 'mrk',
-        'obd': 'oba',
-        'prv': 'pro',
-        'sos': 'sng',
-      };
+    '1cr': '1ch',
+    '2cr': '2ch',
+    'jam': 'jas',
+    'mar': 'mrk',
+    'obd': 'oba',
+    'prv': 'pro',
+    'sos': 'sng',
+  };
 }
 
 @immutable
@@ -44,15 +44,15 @@ class LogosBookKeyMap extends BibleReaderBookKeyMap {
 
   @override
   Map<String, String> get keyMap => const {
-        '1cr': '1ch',
-        '2cr': '2ch',
-        'eze': 'ezk',
-        'jam': 'jas',
-        'mar': 'mrk',
-        'obd': 'oba',
-        'prv': 'pro',
-        'rth': 'rut',
-      };
+    '1cr': '1ch',
+    '2cr': '2ch',
+    'eze': 'ezk',
+    'jam': 'jas',
+    'mar': 'mrk',
+    'obd': 'oba',
+    'prv': 'pro',
+    'rth': 'rut',
+  };
 }
 
 @immutable
@@ -62,18 +62,18 @@ class OsisParatextBookKeyMap extends BibleReaderBookKeyMap {
 
   @override
   Map<String, String> get keyMap => const {
-        '1cr': '1ch',
-        '2cr': '2ch',
-        'eze': 'ezk',
-        'jam': 'jas',
-        'joe': 'jol',
-        'mar': 'mrk',
-        'nah': 'nam',
-        'obd': 'oba',
-        'prv': 'pro',
-        'rth': 'rut',
-        'sos': 'sng',
-      };
+    '1cr': '1ch',
+    '2cr': '2ch',
+    'eze': 'ezk',
+    'jam': 'jas',
+    'joe': 'jol',
+    'mar': 'mrk',
+    'nah': 'nam',
+    'obd': 'oba',
+    'prv': 'pro',
+    'rth': 'rut',
+    'sos': 'sng',
+  };
 }
 
 @immutable
@@ -81,10 +81,5 @@ class OliveTreeBookKeyMap extends BibleReaderBookKeyMap {
   const OliveTreeBookKeyMap();
 
   @override
-  Map<String, String> get keyMap => const {
-        'jhn': 'jn',
-        '1cr': '1ch',
-        '2cr': '2ch',
-        'sos': 'ss',
-      };
+  Map<String, String> get keyMap => const {'jhn': 'jn', '1cr': '1ch', '2cr': '2ch', 'sos': 'ss'};
 }

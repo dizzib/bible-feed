@@ -5,9 +5,7 @@ import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
 
-@InjectableInit(
-  generateForDir: ['lib'],
-)
+@InjectableInit(generateForDir: ['lib'])
 Future configureDependencies() async {
   await di.init(environment: 'prod');
 }

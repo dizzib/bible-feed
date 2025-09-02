@@ -24,10 +24,7 @@ extension BuildContextExtension<T> on BuildContext {
     sl<HapticService>().impact();
     return showDialog(
       context: this,
-      builder: (_) => BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-        child: child,
-      ),
+      builder: (_) => BackdropFilter(filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0), child: child),
     );
   }
 }

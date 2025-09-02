@@ -21,33 +21,28 @@ class BookChapterDialog extends StatelessWidget {
         Container(alignment: Alignment.center, color: context.colorScheme.surfaceContainerHigh, child: child);
 
     return LayoutBuilder(
-      builder: (_, constraints) => Dialog(
-        clipBehavior: Clip.hardEdge,
-        child: Container(
-          constraints: BoxConstraints(
-            maxHeight: constraints.maxHeight * 0.8,
-            maxWidth: 300,
-          ),
-          child: Column(
-            children: [
-              Visibility(
-                visible: constraints.maxHeight > 280,
-                child: withBackground(
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      feed.readingList.name,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+      builder:
+          (_, constraints) => Dialog(
+            clipBehavior: Clip.hardEdge,
+            child: Container(
+              constraints: BoxConstraints(maxHeight: constraints.maxHeight * 0.8, maxWidth: 300),
+              child: Column(
+                children: [
+                  Visibility(
+                    visible: constraints.maxHeight > 280,
+                    child: withBackground(
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(feed.readingList.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      ),
                     ),
                   ),
-                ),
+                  Expanded(child: BookChapterDialogWheels(feed.readingList)),
+                  withBackground(BookChapterDialogFooter(feed)),
+                ],
               ),
-              Expanded(child: BookChapterDialogWheels(feed.readingList)),
-              withBackground(BookChapterDialogFooter(feed))
-            ],
+            ),
           ),
-        ),
-      ),
     );
   }
 }

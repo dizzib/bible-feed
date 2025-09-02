@@ -24,8 +24,9 @@ class FeedCard extends WatchingWidget {
 
     return AnimatedOpacity(
       opacity: feed.state.isRead ? 0.25 : 1,
-      duration:
-          Duration(milliseconds: feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed) ? 30000 : 0),
+      duration: Duration(
+        milliseconds: feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed) ? 30000 : 0,
+      ),
       child: Card(
         elevation: feed.state.isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
@@ -38,17 +39,18 @@ class FeedCard extends WatchingWidget {
             feed.toggleIsRead();
           },
           child: LayoutBuilder(
-            builder: (_, BoxConstraints c) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
-                LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
-                DefaultTextStyle.merge(
-                  style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
-                  child: FeedCardBookChapter(feed),
-                )
-              ],
-            ),
+            builder:
+                (_, BoxConstraints c) => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
+                    LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
+                    DefaultTextStyle.merge(
+                      style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
+                      child: FeedCardBookChapter(feed),
+                    ),
+                  ],
+                ),
           ),
         ),
       ),

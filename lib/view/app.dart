@@ -22,19 +22,24 @@ class _AppState extends State<App> {
 
   @override
   build(context) {
-    return LayoutBuilder(builder: (_, BoxConstraints bc) {
-      final isShowAppBar = bc.maxHeight > 360;
-      return Scaffold(
-        appBar: isShowAppBar ? AppBarMain() : null,
-        body: FeedsView(),
-        floatingActionButton: !isShowAppBar
-            ? Stack(children: [
-                SettingsIconButton(),
-                SizedBox(width: bc.maxHeight < 260 ? 44 : null, child: FittedBox(child: AllDoneFab())),
-              ])
-            : null,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
-      );
-    });
+    return LayoutBuilder(
+      builder: (_, BoxConstraints bc) {
+        final isShowAppBar = bc.maxHeight > 360;
+        return Scaffold(
+          appBar: isShowAppBar ? AppBarMain() : null,
+          body: FeedsView(),
+          floatingActionButton:
+              !isShowAppBar
+                  ? Stack(
+                    children: [
+                      SettingsIconButton(),
+                      SizedBox(width: bc.maxHeight < 260 ? 44 : null, child: FittedBox(child: AllDoneFab())),
+                    ],
+                  )
+                  : null,
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
+        );
+      },
+    );
   }
 }

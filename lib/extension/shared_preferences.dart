@@ -3,8 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 extension FeedExtensions on SharedPreferences {
   String? getBook(String key) => getString('$key.book');
   int? getChapter(String key) => getInt('$key.chapter');
-  DateTime? getDateModified(String key) =>
-      DateTime.tryParse(getString('$key.dateModified') ?? '');
+  DateTime? getDateModified(String key) => DateTime.tryParse(getString('$key.dateModified') ?? '');
   bool? getIsRead(String key) => getBool('$key.isRead');
   int? getVerse(String key) => getInt('$key.verse');
 

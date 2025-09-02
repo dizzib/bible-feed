@@ -9,11 +9,7 @@ import 'injectable.config.dart'; // AUTO-GENERATED
 class AutoAdvanceService {}
 
 @InjectableInit(
-  generateForDir: [
-    'integration_test',
-    'lib/model',
-    'lib/service',
-  ],
+  generateForDir: ['integration_test', 'lib/model', 'lib/service'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
 Future configureDependencies() async {

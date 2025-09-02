@@ -4,11 +4,7 @@ import 'package:watch_it/watch_it.dart';
 import 'injectable.config.dart'; // AUTO-GENERATED
 
 @InjectableInit(
-  generateForDir: [
-    'lib/model',
-    'lib/service',
-    'test',
-  ],
+  generateForDir: ['lib/model', 'lib/service', 'test'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
 Future configureDependencies([Map<String, Object> storeValues = const {}]) async {

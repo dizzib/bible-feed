@@ -16,8 +16,8 @@ class BibleReader {
     this._certifiedPlatforms, {
     bookKeyMap = const IdentityBookKeyMap(),
     uriVersePath,
-  })  : _bookKeyMap = bookKeyMap,
-        _uriVersePath = uriVersePath;
+  }) : _bookKeyMap = bookKeyMap,
+       _uriVersePath = uriVersePath;
 
   final BibleReaderBookKeyMap _bookKeyMap;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues

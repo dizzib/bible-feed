@@ -32,8 +32,8 @@ void main() {
       [testVerseScopes, true, 2, 1, 3, 'to\u00A0verse\u00A02', 'not at last verse in calculated scope'],
       [testVerseScopes, true, 2, 3, 1, 'from\u00A0verse\u00A03', 'at last verse in calculated scope'],
     ],
-    customDescriptionBuilder: (_, _, values) =>
-        'when ${values[6]}, expect next verse=${values[4]}, label="${values[5]}"',
+    customDescriptionBuilder:
+        (_, _, values) => 'when ${values[6]}, expect next verse=${values[4]}, label="${values[5]}"',
     (var verseScopes, bool isEnabled, int chapter, int verse, int expectNextVerse, String expectLabel, String desc) {
       when(() => mockTogglerService.isEnabled).thenReturn(isEnabled);
       when(() => mockVerseScopes['b1']).thenReturn(verseScopes);

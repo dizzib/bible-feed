@@ -20,19 +20,12 @@ class FeedCardTitleBar extends WatchingWidget {
         if (feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed))
           const Padding(
             padding: EdgeInsets.only(left: 8.0),
-            child: Tooltip(
-              message: 'This is the last chapter you read',
-              child: Icon(Icons.auto_stories),
-            ),
+            child: Tooltip(message: 'This is the last chapter you read', child: Icon(Icons.auto_stories)),
           ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              feed.readingList.name,
-              style: const TextStyle(fontSize: 18),
-              overflow: TextOverflow.ellipsis,
-            ),
+            child: Text(feed.readingList.name, style: const TextStyle(fontSize: 18), overflow: TextOverflow.ellipsis),
           ),
         ),
         IconButton(

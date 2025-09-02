@@ -22,21 +22,21 @@ void main() {
         [4, 6],
         [0, 0],
         [0, 5],
-        [0, 0]
+        [0, 0],
       ];
       var chapterState = [
         [5, 12],
         [4, 2],
         [40, 144],
         [15, 17],
-        [40, 8]
+        [40, 8],
       ];
       var chapterReadState = [
         [0, 1],
         [0, 0],
         [1, 1],
         [0, 1],
-        [1, 0]
+        [1, 0],
       ];
       for (int row = 0; row < 5; row++) {
         for (int col = 0; col < 2; col++) {

@@ -10,22 +10,23 @@ class BibleReaderSettings extends WatchingWidget {
   final brs = watchIt<BibleReaderService>();
 
   choiceChipList() => List.generate(sl<BibleReaders>().certifiedList.length, (idx) {
-        final BibleReader br = sl<BibleReaders>().certifiedList[idx];
-        return FutureBuilder<bool>(
-            future: br.isAvailable(),
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              onSelected(bool selected) {
-                if (selected) brs.linkedBibleReaderIndex = idx;
-              }
+    final BibleReader br = sl<BibleReaders>().certifiedList[idx];
+    return FutureBuilder<bool>(
+      future: br.isAvailable(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        onSelected(bool selected) {
+          if (selected) brs.linkedBibleReaderIndex = idx;
+        }
 
-              final isAvailable = snapshot.data == true;
-              return ChoiceChip(
-                label: Text('${br.displayName}${isAvailable ? "" : " is not detected"}'),
-                onSelected: isAvailable ? onSelected : null,
-                selected: idx == brs.linkedBibleReaderIndex,
-              );
-            });
-      });
+        final isAvailable = snapshot.data == true;
+        return ChoiceChip(
+          label: Text('${br.displayName}${isAvailable ? "" : " is not detected"}'),
+          onSelected: isAvailable ? onSelected : null,
+          selected: idx == brs.linkedBibleReaderIndex,
+        );
+      },
+    );
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,8 @@ class BibleReaderSettings extends WatchingWidget {
                 children: [
                   const Text('Bible Reader', style: TextStyle(fontSize: 20)),
                   const Text(
-                      'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.'),
+                    'You can configure a bible reader to open a chapter when tapped. If the bible reader is an app, please ensure it is installed.',
+                  ),
                   Wrap(spacing: spacing, children: choiceChipList()),
                 ],
               ),

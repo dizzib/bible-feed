@@ -17,12 +17,8 @@ class ListWheel extends StatelessWidget {
   final String Function(int) indexToString;
   final int maxIndex;
 
-  const ListWheel(
-    this.listWheelState, {
-    required Key key,
-    required this.indexToString,
-    required this.maxIndex,
-  }) : super(key: key);
+  const ListWheel(this.listWheelState, {required Key key, required this.indexToString, required this.maxIndex})
+    : super(key: key);
 
   @override
   build(context) {
@@ -52,26 +48,30 @@ class ListWheel extends StatelessWidget {
       );
     }
 
-    return Stack(children: [
-      const ListWheelGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter),
-      const ListWheelGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter),
-      ListWheelHighlight(height: itemExtent * magnification),
-      workaroundItemExtentBug(ListWheelScrollView.useDelegate(
-        childDelegate: ListWheelChildBuilderDelegate(
-          builder: (_, int index) {
-            if (index < 0 || index > maxIndex) return null;
-            return Text(indexToString(index));
-          },
+    return Stack(
+      children: [
+        const ListWheelGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        const ListWheelGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter),
+        ListWheelHighlight(height: itemExtent * magnification),
+        workaroundItemExtentBug(
+          ListWheelScrollView.useDelegate(
+            childDelegate: ListWheelChildBuilderDelegate(
+              builder: (_, int index) {
+                if (index < 0 || index > maxIndex) return null;
+                return Text(indexToString(index));
+              },
+            ),
+            controller: controller,
+            diameterRatio: 1.1,
+            itemExtent: itemExtent,
+            magnification: magnification,
+            onSelectedItemChanged: (index) => listWheelState.index = index,
+            overAndUnderCenterOpacity: 0.7,
+            physics: const FixedExtentScrollPhysics(),
+            useMagnifier: true,
+          ),
         ),
-        controller: controller,
-        diameterRatio: 1.1,
-        itemExtent: itemExtent,
-        magnification: magnification,
-        onSelectedItemChanged: (index) => listWheelState.index = index,
-        overAndUnderCenterOpacity: 0.7,
-        physics: const FixedExtentScrollPhysics(),
-        useMagnifier: true,
-      )),
-    ]);
+      ],
+    );
   }
 }

@@ -9,13 +9,13 @@ class AppBase extends StatelessWidget {
   @override
   build(context) {
     theme(Brightness brightness) => ThemeData(
-          cardTheme: CardThemeData(surfaceTintColor: context.colorScheme.surfaceTint),
-          colorScheme: ColorScheme.fromSeed(
-            brightness: brightness,
-            seedColor: const Color(0xffbb86fc),
-            tertiary: brightness == Brightness.dark ? Colors.red : Colors.amber,
-          ),
-        );
+      cardTheme: CardThemeData(surfaceTintColor: context.colorScheme.surfaceTint),
+      colorScheme: ColorScheme.fromSeed(
+        brightness: brightness,
+        seedColor: const Color(0xffbb86fc),
+        tertiary: brightness == Brightness.dark ? Colors.red : Colors.amber,
+      ),
+    );
 
     return SafeArea(
       child: MaterialApp(

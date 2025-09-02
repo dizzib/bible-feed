@@ -18,12 +18,10 @@ void main() {
   late MockUrlLauncher mockUrlLauncher;
 
   setUp(() {
-    testee = const BibleReader(
-      'Test Reader',
-      'https://example.com/BOOK/CHAPTER',
-      [TargetPlatform.android, TargetPlatform.iOS],
-      uriVersePath: '/VERSE',
-    );
+    testee = const BibleReader('Test Reader', 'https://example.com/BOOK/CHAPTER', [
+      TargetPlatform.android,
+      TargetPlatform.iOS,
+    ], uriVersePath: '/VERSE');
     mockUrlLauncher = MockUrlLauncher();
     registerFallbackValue(const LaunchOptions());
     when(() => mockUrlLauncher.canLaunch(any())).thenAnswer((_) async => true);
@@ -41,12 +39,15 @@ void main() {
 
   group('launch', () {
     run(bool isVerseScope, String expectedUrl) async {
-      await testee.launch(FeedState(
+      await testee.launch(
+        FeedState(
           book: const Book('gen', 'Genesis', 50),
           chapter: 1,
           dateModified: null,
           isRead: false,
-          verse: isVerseScope ? 2 : 1));
+          verse: isVerseScope ? 2 : 1,
+        ),
+      );
       verify(() => mockUrlLauncher.launchUrl(expectedUrl, any())).called(1);
     }
 

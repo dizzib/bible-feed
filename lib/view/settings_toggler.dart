@@ -18,14 +18,8 @@ class SettingsToggler<T extends TogglerService> extends WatchingWidget {
           child: Padding(
             padding: const EdgeInsets.all(spacing),
             child: SwitchListTile(
-              title: Text(
-                ts.title,
-                style: const TextStyle(fontSize: 20),
-              ),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(top: spacing),
-                child: Text(ts.subtitle),
-              ),
+              title: Text(ts.title, style: const TextStyle(fontSize: 20)),
+              subtitle: Padding(padding: const EdgeInsets.only(top: spacing), child: Text(ts.subtitle)),
               value: ts.isEnabled,
               onChanged: (value) => ts.isEnabled = value,
             ),

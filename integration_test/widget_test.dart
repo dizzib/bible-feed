@@ -28,11 +28,9 @@ void main() async {
   await configureDependencies();
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
-    await t.initialiseWidget(BookChapterDialog(Feed(
-      gospels,
-      sl<VerseScopeService>(),
-      sl<FeedStoreService>().loadState(gospels),
-    )));
+    await t.initialiseWidget(
+      BookChapterDialog(Feed(gospels, sl<VerseScopeService>(), sl<FeedStoreService>().loadState(gospels))),
+    );
     await t.scrollToLastChapter();
     await t.pump();
     for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) {
@@ -48,11 +46,9 @@ void main() async {
   });
 
   testWidgets('FeedCard', (WidgetTester t) async {
-    await t.initialiseWidget(FeedCard(Feed(
-      gospels,
-      sl<VerseScopeService>(),
-      sl<FeedStoreService>().loadState(gospels),
-    )));
+    await t.initialiseWidget(
+      FeedCard(Feed(gospels, sl<VerseScopeService>(), sl<FeedStoreService>().loadState(gospels))),
+    );
     expectText(gospels.name);
     expectBookAndChapter(matthew.name, 1);
   });

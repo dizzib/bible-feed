@@ -70,8 +70,9 @@ void main() async {
     (bool areChaptersRead, Duration sinceLastModified, AdvanceState expectedAdvanceState, Function verify) async {
       when(() => mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
       when(() => mockFeeds.lastModifiedFeed).thenReturn(mockFeedList[0]);
-      when(() => mockFeedList[0].state)
-          .thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() - sinceLastModified));
+      when(
+        () => mockFeedList[0].state,
+      ).thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() - sinceLastModified));
       expect(await testee.maybeAdvance(), expectedAdvanceState);
       verify();
     },

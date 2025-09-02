@@ -38,13 +38,17 @@ void main() {
     testee = TestTogglerService(mockSharedPreferences);
   });
 
-  parameterizedTest('isEnabled getter', [
-    [null, false],
-    [true, true],
-  ], (storeValue, expectValue) {
-    when(() => mockSharedPreferences.getBool('test.key')).thenReturn(storeValue);
-    expect(testee.isEnabled, expectValue);
-  });
+  parameterizedTest(
+    'isEnabled getter',
+    [
+      [null, false],
+      [true, true],
+    ],
+    (storeValue, expectValue) {
+      when(() => mockSharedPreferences.getBool('test.key')).thenReturn(storeValue);
+      expect(testee.isEnabled, expectValue);
+    },
+  );
 
   test('if can enable, isEnabled setter stores value and notifies listeners', () {
     var notified = false;
