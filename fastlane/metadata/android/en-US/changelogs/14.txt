@@ -1,0 +1,8 @@
+Added
+- more long chapters to split, such as Acts 7
+- haptic (vibration) feedback on/off option
+- card fade effect
+
+Changed
+- improve handling of Psalm 119
+- improve haptic feedback
