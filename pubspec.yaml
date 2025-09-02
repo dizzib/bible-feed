@@ -31,7 +31,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   app_install_events: ^0.0.3
   auto_size_text: ^3.0.0
   clock: ^1.1.1
