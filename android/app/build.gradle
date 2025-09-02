@@ -30,7 +30,7 @@ if(project.hasProperty("signing") && new File(project.property("signing") + ".gr
 
 android {
     namespace "com.me2christ.bible_feed"
-    compileSdk 35
+    compileSdk 36
 
     aaptOptions {
         cruncherEnabled = false // fix fdroid reproducible build errors
