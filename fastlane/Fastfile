@@ -41,9 +41,10 @@ lane :add_github_release do
   set_github_release(
     repository_name: $repo_name,
     api_token: ENV["GITHUB_TOKEN"],
+    name: $vname,
     tag_name: $vname,
     description: (File.read($vcode_file) rescue "No changelog provided"),
-    commitish: "master",
+    commitish: "dev",
     upload_assets: [$apk_to_upload, "#{$apk_to_upload}.sha1"]
   )
 end
