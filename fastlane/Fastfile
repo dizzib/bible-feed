@@ -71,6 +71,11 @@ platform :ios do
     $app_identifier = "com.me2christ.bible-feed" # Replace with your actual bundle ID
     $profile_name = "com.me2christ.bible-feed provisioning profile" # Found in Xcode > Signing & Capabilities
 
+    cocoapods(
+      clean_install: true,
+      podfile: "ios/Podfile"
+    )
+
     build_ios_app(
       workspace: "ios/Runner.xcworkspace",
       # scheme: "YOUR_SCHEME", # Typically the same as your project name
