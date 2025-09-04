@@ -1,16 +1,21 @@
 import 'dart:io' show Platform;
+
+import 'package:bible_feed/injectable.dart';
+import 'package:bible_feed/model/feeds.dart';
+import 'package:bible_feed/service/verse_scope_toggler_service.dart';
+import 'package:bible_feed/view/app_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:watch_it/watch_it.dart';
-import 'package:bible_feed/main.dart' as bible_feed;
-import 'package:bible_feed/model/feeds.dart';
 
 void main() {
   final b = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   const screenshotsEnabled = true;
 
   setUp(() async {
+    await configureDependencies();
+    sl<VerseScopeTogglerService>().isEnabled = true; // enable verse scopes
     WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
     if (screenshotsEnabled == true) await b.convertFlutterSurfaceToImage(); // req'd for screenshots on android only
   });
@@ -27,16 +32,16 @@ void main() {
       var chapterState = [
         [5, 12],
         [4, 2],
-        [40, 144],
+        [40, 119],
         [15, 17],
-        [40, 8],
+        [40, 7],
       ];
       var chapterReadState = [
         [0, 1],
         [0, 0],
-        [1, 1],
-        [0, 1],
         [1, 0],
+        [0, 1],
+        [1, 1],
       ];
       for (int row = 0; row < 5; row++) {
         for (int col = 0; col < 2; col++) {
@@ -59,7 +64,7 @@ void main() {
       await b.takeScreenshot('$platform/02-dark--$name');
     }
 
-    await bible_feed.main();
+    runApp(AppBase());
     await t.pumpAndSettle();
 
     setState();
