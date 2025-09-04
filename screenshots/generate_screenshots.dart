@@ -52,7 +52,7 @@ void main() {
       }
     }
 
-    Future takeScreenshots(String name, List<Brightness> brightnessList) async {
+    Future takeScreenshot(String name, [List<Brightness> brightnessList = const [Brightness.light]]) async {
       if (screenshotsEnabled == false) return;
       for (final (i, brightness) in brightnessList.indexed) {
         t.platformDispatcher.platformBrightnessTestValue = brightness;
@@ -62,17 +62,25 @@ void main() {
     }
 
     runApp(AppBase());
-    await t.pumpAndSettle();
-
     setState();
-    await takeScreenshots('0-feeds_view', [Brightness.light, Brightness.dark]);
 
-    const feedName = 'Epistles II';
-    final Finder f = find.text(feedName);
-    expect(f, findsOneWidget);
-    await t.longPress(f);
+    // feeds
     await t.pumpAndSettle();
+    await takeScreenshot('0-feeds', [Brightness.light, Brightness.dark]);
+
+    // book chapter dialog
+    const feedName = 'Epistles II';
+    await t.longPress(find.text(feedName));
+    await t.pump();
     expect(find.text(feedName), findsExactly(2));
-    await takeScreenshots('1-book_chapter_dialog', [Brightness.light]);
+    await takeScreenshot('1-book_chapter_dialog');
+    await t.tap(find.text('Update'));
+
+    // settings
+    await t.pumpAndSettle();
+    await t.tap(find.byKey(const Key('settingsIconButton')));
+    await t.pumpAndSettle();
+    expect(find.text('Settings'), findsExactly(1));
+    await takeScreenshot('2-settings');
   });
 }
