@@ -52,30 +52,27 @@ void main() {
       }
     }
 
-    Future<void> takeLightAndDarkScreenshots(String name) async {
+    Future takeScreenshots(String name, List<Brightness> brightnessList) async {
       if (screenshotsEnabled == false) return;
-      String platform = Platform.operatingSystem; // android or ios
-      t.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-      await t.pumpAndSettle();
-      await b.takeScreenshot('$platform/01-light--$name');
-      t.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
-      await t.pumpAndSettle();
-      await b.takeScreenshot('$platform/02-dark--$name');
+      for (final (i, brightness) in brightnessList.indexed) {
+        t.platformDispatcher.platformBrightnessTestValue = brightness;
+        await t.pumpAndSettle();
+        await b.takeScreenshot('${Platform.operatingSystem}/$i-${brightness.name}--$name');
+      }
     }
 
     runApp(AppBase());
     await t.pumpAndSettle();
 
     setState();
-    await takeLightAndDarkScreenshots('01-feeds_view');
+    await takeScreenshots('0-feeds_view', [Brightness.light, Brightness.dark]);
 
     const feedName = 'Epistles II';
     final Finder f = find.text(feedName);
     expect(f, findsOneWidget);
-
     await t.longPress(f);
     await t.pumpAndSettle();
     expect(find.text(feedName), findsExactly(2));
-    await takeLightAndDarkScreenshots('02-book_chapter_dialog');
+    await takeScreenshots('1-book_chapter_dialog', [Brightness.light]);
   });
 }
