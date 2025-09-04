@@ -54,8 +54,7 @@ void main() {
 
     Future<void> takeLightAndDarkScreenshots(String name) async {
       if (screenshotsEnabled == false) return;
-      String platform = (Platform.isAndroid ? 'android' : (Platform.isIOS ? 'ios' : ''));
-      assert(platform.isNotEmpty);
+      String platform = Platform.operatingSystem; // android or ios
       t.platformDispatcher.platformBrightnessTestValue = Brightness.light;
       await t.pumpAndSettle();
       await b.takeScreenshot('$platform/01-light--$name');
