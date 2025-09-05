@@ -9,10 +9,11 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
+# android
+#
 opt_out_usage
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-import "./lanes_android.rb"
-# import "./lanes_ios.rb"
+import "./lanes.rb"
