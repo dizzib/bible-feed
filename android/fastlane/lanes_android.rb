@@ -3,7 +3,7 @@ default_platform(:android)
 # global vars
 #
 require "yaml"
-ver = YAML.load_file("../pubspec.yaml")["version"]
+ver = YAML.load_file("../../pubspec.yaml")["version"]
 $vname, $vcode = ver.split('+')[0], ver.split('+')[1]
 $vcode_file = "./metadata/android/en-US/changelogs/#{$vcode}.txt"
 print "Version: #{ver}\n"

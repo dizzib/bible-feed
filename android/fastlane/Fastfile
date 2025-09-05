@@ -15,4 +15,4 @@ opt_out_usage
 # update_fastlane
 
 import "./lanes_android.rb"
-import "./lanes_ios.rb"
+# import "./lanes_ios.rb"
