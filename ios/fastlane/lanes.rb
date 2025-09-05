@@ -1,5 +1,5 @@
 platform :ios do
-  lane :build do
+  lane :build_ipa do
     desc "Build release ipa"
     $app_identifier = "com.me2christ.bible-feed" # bundle ID
     $profile_name = "com.me2christ.bible-feed provisioning profile" # Found in Xcode > Signing & Capabilities
@@ -25,8 +25,8 @@ platform :ios do
     )
   end
 
-  lane :upload do
-    desc "Upload to TestFlight"
+  lane :upload_ipa do
+    desc "Upload ipa to TestFlight"
     $api_key = app_store_connect_api_key(
       key_id: "P84TK6TW3J",
       issuer_id: "1393d029-6490-46aa-95a5-27ab94c40cfe",
