@@ -30,8 +30,8 @@ void main() async {
   setUp(() {
     mockFeedStoreService = MockFeedStoreService();
     mockVerseScopeService = MockVerseScopeService();
-    state0 = FeedState(book: b0, chapter: 1, isRead: true);
-    state1 = FeedState(book: b1, chapter: 1, isRead: false);
+    state0 = FeedState(book: b0, chapter: 1, isRead: true, dateModified: DateTime(2025, 1, 1, 7));
+    state1 = FeedState(book: b1, chapter: 1, isRead: false, dateModified: DateTime(2025, 1, 1, 8));
     when(() => mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(() => mockFeedStoreService.loadState(rl1)).thenReturn(state1);
     when(() => mockFeedStoreService.saveState(rl0, state0)).thenAnswer((_) async => true);
@@ -51,13 +51,19 @@ void main() async {
       expect(testee.areChaptersRead, true);
     });
 
-    test('lastModifiedFeed', () {
-      testee[0].toggleIsRead();
-      expect(testee.lastModifiedFeed, testee[0]);
-      testee[1].toggleIsRead();
-      expect(testee.lastModifiedFeed, testee[1]);
-      testee[0].toggleIsRead();
-      expect(testee.lastModifiedFeed, testee[0]);
+    group('lastModifiedFeed', () {
+      test('should initialise from store', () {
+        expect(testee.lastModifiedFeed, testee[1]);
+      });
+
+      test('should update on toggle', () {
+        testee[0].toggleIsRead();
+        expect(testee.lastModifiedFeed, testee[0]);
+        testee[1].toggleIsRead();
+        expect(testee.lastModifiedFeed, testee[1]);
+        testee[0].toggleIsRead();
+        expect(testee.lastModifiedFeed, testee[0]);
+      });
     });
   });
 
