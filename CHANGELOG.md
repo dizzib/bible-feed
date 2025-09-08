@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 
 
+## [1.5.1] - 2025-09-08
+
+### Changed
+- fixed auto-advance
+
+
 ## [1.5.0] - 2025-09-02
 
 ### Added
