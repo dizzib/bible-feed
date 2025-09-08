@@ -5,17 +5,17 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: opt_out_usage" time="0.00043">
+      <testcase classname="fastlane.lanes" name="0: opt_out_usage" time="0.000282">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: cocoapods" time="1.78939">
+      <testcase classname="fastlane.lanes" name="1: app_store_connect_api_key" time="0.002503">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: build_ios_app" time="61.683055">
+      <testcase classname="fastlane.lanes" name="2: bundle exec fastlane deliver download_metadata --force --api_key &apos;{&quot;key_id&quot;:&quot;P84TK6TW3J&quot;,&quot;issuer_id&quot;:&quot;1393d029-6490-46aa-95a5-27ab94c40cfe&quot;,&quot;key&quot;:&quot;-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgMPkFXVPgZbDzJnjJ\nXMnEkaHGr4PnmEoslkBfJYutVCmgCgYIKoZIzj0DAQehRANCAAT9J4ZEZOWmkNIH\nBVrhlIp8UKHge7rn2kbXsagWgs9xTyoaU1njfIaCkN9dsQfmP9TBBF4Cc8IMNGeH\nCjh5RsfH\n-----END PRIVATE KEY-----&quot;,&quot;is_key_content_base64&quot;:false,&quot;duration&quot;:1200,&quot;in_house&quot;:false}&apos; --app_identifier com.me2christ.bible-feed" time="5.554908">
         
       </testcase>
     
