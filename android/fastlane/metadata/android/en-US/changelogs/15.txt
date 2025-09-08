@@ -1,0 +1,2 @@
+Changed
+- fixed auto-advance
