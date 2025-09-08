@@ -17,17 +17,12 @@ enum BibleReaderKey {
   weDevoteApp,
 }
 
-abstract class BibleReaders {
-  Map<BibleReaderKey, BibleReader> get items;
+@lazySingleton
+class BibleReaders {
   Map<BibleReaderKey, BibleReader> get certified => items.filter((entry) => entry.value.isCertifiedForThisPlatform);
   List<BibleReader> get certifiedList => certified.values.toList();
-}
 
-@prod
-@LazySingleton(as: BibleReaders)
-class ProdBibleReaders extends BibleReaders {
-  @override
-  get items => {
+  Map<BibleReaderKey, BibleReader> get items => {
     BibleReaderKey.none: const BibleReader('None', '', [TargetPlatform.android, TargetPlatform.iOS]),
     BibleReaderKey.andBibleApp: const BibleReader(
       'AndBible app',

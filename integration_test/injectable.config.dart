@@ -38,16 +38,12 @@ import 'injectable.dart' as _i1027;
 const String _prod = 'prod';
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
-    final gh = _i526.GetItHelper(
-      this,
-      environment,
-      environmentFilter,
-    );
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
     gh.singleton<_i1027.AutoAdvanceService>(() => _i1027.AutoAdvanceService());
     await gh.singletonAsync<_i655.PackageInfo>(
@@ -59,55 +55,67 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i1033.BookListWheelState>(
-        () => _i1033.BookListWheelState());
+      () => _i1033.BookListWheelState(),
+    );
     gh.lazySingleton<_i1033.ChapterListWheelState>(
-        () => _i1033.ChapterListWheelState());
+      () => _i1033.ChapterListWheelState(),
+    );
     gh.lazySingleton<_i823.ReadingLists>(() => _i823.ReadingLists());
+    gh.lazySingleton<_i1070.BibleReaders>(() => _i1070.BibleReaders());
     gh.lazySingleton<_i967.VerseScopes>(() => _i967.VerseScopes());
     gh.lazySingleton<_i229.BibleReaderAppInstallService>(
-        () => _i229.BibleReaderAppInstallService());
+      () => _i229.BibleReaderAppInstallService(),
+    );
     gh.lazySingleton<_i119.FeedStoreService>(
-        () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()));
-    gh.lazySingleton<_i1070.BibleReaders>(
-      () => _i1070.ProdBibleReaders(),
-      registerFor: {_prod},
+      () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i283.BibleReaderService>(
+      () => _i283.BibleReaderService(
+        gh<_i229.BibleReaderAppInstallService>(),
+        gh<_i1070.BibleReaders>(),
+        gh<_i460.SharedPreferences>(),
+      ),
     );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProdPlatformService(),
       registerFor: {_prod},
     );
     gh.lazySingleton<_i430.VerseScopeTogglerService>(
-        () => _i430.VerseScopeTogglerService(gh<_i460.SharedPreferences>()));
+      () => _i430.VerseScopeTogglerService(gh<_i460.SharedPreferences>()),
+    );
     await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
       () => _i729.HapticAvailabilityService.create(),
       registerFor: {_prod},
       preResolve: true,
     );
     gh.lazySingleton<_i513.HapticTogglerService>(
-        () => _i513.HapticTogglerService(
-              gh<_i460.SharedPreferences>(),
-              gh<_i729.HapticAvailabilityService>(),
-            ));
-    gh.lazySingleton<_i109.VerseScopeService>(() => _i109.VerseScopeService(
-          gh<_i967.VerseScopes>(),
-          gh<_i430.VerseScopeTogglerService>(),
-        ));
-    gh.lazySingleton<_i283.BibleReaderService>(() => _i283.BibleReaderService(
-          gh<_i229.BibleReaderAppInstallService>(),
-          gh<_i1070.BibleReaders>(),
-          gh<_i460.SharedPreferences>(),
-        ));
+      () => _i513.HapticTogglerService(
+        gh<_i460.SharedPreferences>(),
+        gh<_i729.HapticAvailabilityService>(),
+      ),
+    );
+    gh.lazySingleton<_i109.VerseScopeService>(
+      () => _i109.VerseScopeService(
+        gh<_i967.VerseScopes>(),
+        gh<_i430.VerseScopeTogglerService>(),
+      ),
+    );
     gh.lazySingleton<_i22.HapticService>(
-        () => _i22.HapticService(gh<_i513.HapticTogglerService>()));
-    gh.lazySingleton<_i759.Feeds>(() => _i759.Feeds(
-          gh<_i119.FeedStoreService>(),
-          gh<_i109.VerseScopeService>(),
-          gh<_i823.ReadingLists>(),
-        ));
-    gh.lazySingleton<_i307.FeedsAdvanceService>(() => _i307.FeedsAdvanceService(
-          gh<_i460.SharedPreferences>(),
-          gh<_i759.Feeds>(),
-        ));
+      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
+    );
+    gh.lazySingleton<_i759.Feeds>(
+      () => _i759.Feeds(
+        gh<_i119.FeedStoreService>(),
+        gh<_i109.VerseScopeService>(),
+        gh<_i823.ReadingLists>(),
+      ),
+    );
+    gh.lazySingleton<_i307.FeedsAdvanceService>(
+      () => _i307.FeedsAdvanceService(
+        gh<_i460.SharedPreferences>(),
+        gh<_i759.Feeds>(),
+      ),
+    );
     gh.singleton<_i969.HapticWireupService>(
       () => _i969.HapticWireupService(
         gh<_i22.HapticService>(),
@@ -119,10 +127,11 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_prod},
     );
     gh.lazySingleton<_i136.AllDoneDialogService>(
-        () => _i136.AllDoneDialogService(
-              gh<_i307.FeedsAdvanceService>(),
-              gh<_i759.Feeds>(),
-            ));
+      () => _i136.AllDoneDialogService(
+        gh<_i307.FeedsAdvanceService>(),
+        gh<_i759.Feeds>(),
+      ),
+    );
     gh.singleton<_i148.AutoAdvanceService>(
       () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
       registerFor: {_prod},
