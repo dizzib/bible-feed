@@ -30,8 +30,8 @@ void main() async {
   setUp(() {
     mockFeedStoreService = MockFeedStoreService();
     mockVerseScopeService = MockVerseScopeService();
-    state0 = FeedState(book: b0, chapter: 1, isRead: true, dateModified: DateTime(2025, 1, 1, 7));
-    state1 = FeedState(book: b1, chapter: 1, isRead: false, dateModified: DateTime(2025, 1, 1, 8));
+    state0 = FeedState(book: b0, isRead: true, dateModified: DateTime(2025, 1, 1, 1));
+    state1 = FeedState(book: b1, dateModified: DateTime(2025, 1, 1, 2));
     when(() => mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(() => mockFeedStoreService.loadState(rl1)).thenReturn(state1);
     when(() => mockFeedStoreService.saveState(rl0, state0)).thenAnswer((_) async => true);

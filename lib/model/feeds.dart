@@ -16,13 +16,11 @@ class Feeds extends Iterable<Feed> with ChangeNotifier {
   Feeds(this._feedStoreService, this._verseScopeService, this._readingLists) {
     _feedList = _readingLists.map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl))).toList();
 
-    _lastModifiedFeed = _feedList.reduce((a, b) {
-      final aDate = a.state.dateModified ?? DateTime.fromMillisecondsSinceEpoch(0);
-      final bDate = b.state.dateModified ?? DateTime.fromMillisecondsSinceEpoch(0);
-      return aDate.isAfter(bDate) ? a : b;
-    });
-
     for (Feed f in _feedList) {
+      if (f.state.dateModified?.isAfter(_lastModifiedFeed?.state.dateModified ?? DateTime(0)) ?? false) {
+        _lastModifiedFeed = f;
+      }
+
       f.addListener(() async {
         notifyListeners();
         _lastModifiedFeed = f;
