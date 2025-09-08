@@ -20,14 +20,6 @@ var noneBibleReader = const BibleReader('None', '', [TargetPlatform.android, Tar
 var mockBibleReader = MockBibleReader();
 
 class TestBibleReaders extends BibleReaders {
-  TestBibleReaders() {
-    when(() => mockBibleReader.certifiedPlatforms).thenReturn([TargetPlatform.iOS]);
-    when(() => mockBibleReader.displayName).thenReturn('Blue Letter Bible app');
-    when(() => mockBibleReader.isCertifiedForThisPlatform).thenReturn(true);
-    when(() => mockBibleReader.uriTemplate).thenReturn('blb://BOOK/CHAPTER');
-    when(() => mockBibleReader.uriVersePath).thenReturn('/VERSE');
-  }
-
   @override
   get items => {BibleReaderKey.none: noneBibleReader, BibleReaderKey.blueLetterApp: mockBibleReader};
 }
@@ -39,6 +31,11 @@ void main() async {
   late BibleReaderService testee;
 
   setUp(() {
+    when(() => mockBibleReader.certifiedPlatforms).thenReturn([TargetPlatform.iOS]);
+    when(() => mockBibleReader.displayName).thenReturn('Blue Letter Bible app');
+    when(() => mockBibleReader.isCertifiedForThisPlatform).thenReturn(true);
+    when(() => mockBibleReader.uriTemplate).thenReturn('blb://BOOK/CHAPTER');
+    when(() => mockBibleReader.uriVersePath).thenReturn('/VERSE');
     mockSharedPreferences = MockSharedPreferences();
     testee = BibleReaderService(BibleReaderAppInstallService(), TestBibleReaders(), mockSharedPreferences);
   });
