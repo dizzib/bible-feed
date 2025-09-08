@@ -20,7 +20,10 @@ end
 platform :android do
   desc "Populate changelog"
   lane :populate_changelog do
-    changelog = read_changelog(section_identifier: "[#{$vname}]")
+    changelog = read_changelog(
+      changelog_path: '../CHANGELOG.md',
+      section_identifier: "[#{$vname}]"
+    )
     file = "./metadata/android/en-US/changelogs/#{$vcode}.txt"
     File.open(file, 'w') do |f| f << changelog end
   end
