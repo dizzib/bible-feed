@@ -1,7 +1,15 @@
 platform :ios do
+  $app_identifier = "com.me2christ.bible-feed" # bundle ID
+    $api_key = app_store_connect_api_key(
+      key_id: "P84TK6TW3J",
+      issuer_id: "1393d029-6490-46aa-95a5-27ab94c40cfe",
+      key_filepath: "/Users/Shared/secret/ios/AuthKey_P84TK6TW3J.p8",
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+
   lane :build_ipa do
     desc "Build release ipa"
-    $app_identifier = "com.me2christ.bible-feed" # bundle ID
     $profile_name = "com.me2christ.bible-feed provisioning profile" # Found in Xcode > Signing & Capabilities
 
     cocoapods(
@@ -27,13 +35,6 @@ platform :ios do
 
   lane :upload_ipa do
     desc "Upload ipa to TestFlight"
-    $api_key = app_store_connect_api_key(
-      key_id: "P84TK6TW3J",
-      issuer_id: "1393d029-6490-46aa-95a5-27ab94c40cfe",
-      key_filepath: "/Users/Shared/secret/ios/AuthKey_P84TK6TW3J.p8",
-      duration: 1200, # optional (maximum 1200)
-      in_house: false # optional but may be required if using match/sigh
-    )
 
     upload_to_testflight(
       api_key: $api_key,
