@@ -1,6 +1,7 @@
 gradle-wrapper.jar
 /.gradle
 /captures/
+/fastlane/report.xml
 /gradlew
 /gradlew.bat
 /local.properties
