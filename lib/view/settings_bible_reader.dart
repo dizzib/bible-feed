@@ -8,8 +8,8 @@ import 'bible_reader_link_icon.dart';
 class BibleReaderSettings extends WatchingWidget {
   final brs = watchIt<BibleReaderService>();
 
-  List<FutureBuilder<bool>> choiceChipList() => List.generate(brs.certifiedList.length, (idx) {
-    final BibleReader br = brs.certifiedList[idx];
+  List<FutureBuilder<bool>> choiceChipList() => List.generate(brs.certifiedBibleReaderList.length, (idx) {
+    final BibleReader br = brs.certifiedBibleReaderList[idx];
     return FutureBuilder<bool>(
       future: br.isAvailable(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {

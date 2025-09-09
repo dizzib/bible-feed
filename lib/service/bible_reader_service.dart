@@ -11,10 +11,10 @@ import '/service/bible_reader_app_install_service.dart';
 @lazySingleton
 class BibleReaderService with ChangeNotifier {
   final BibleReaderAppInstallService _bibleReaderAppInstallService;
-  final List<BibleReader> _bibleReaders;
+  final List<BibleReader> _bibleReaderList;
   final SharedPreferences _sharedPreferences;
 
-  BibleReaderService(this._bibleReaderAppInstallService, this._bibleReaders, this._sharedPreferences) {
+  BibleReaderService(this._bibleReaderAppInstallService, this._bibleReaderList, this._sharedPreferences) {
     _bibleReaderAppInstallService.addListener(() async {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners();
@@ -22,20 +22,19 @@ class BibleReaderService with ChangeNotifier {
         _saveState(BibleReaderKey.none); // bible reader has been uninstalled
       }
     });
-    _certifiedBibleReaders = _bibleReaders.filter((e) => e.isCertifiedForThisPlatform).toList();
+    _certifiedBibleReaderList = _bibleReaderList.filter((e) => e.isCertifiedForThisPlatform).toList();
     _loadState();
   }
 
   static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
-  late List<BibleReader> _certifiedBibleReaders;
+  late List<BibleReader> _certifiedBibleReaderList;
   late BibleReaderKey _linkedBibleReaderKey;
 
   void _loadState() {
-    final String? linkedReader = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
+    final String? linkedReaderName = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
     try {
-      _linkedBibleReaderKey = (linkedReader == null) ? BibleReaderKey.none : BibleReaderKey.values.byName(linkedReader);
-      assert(_bibleReaders.firstWhere((e) => e.key == _linkedBibleReaderKey) != null);
+      _linkedBibleReaderKey = BibleReaderKey.values.byName(linkedReaderName ?? BibleReaderKey.none.name);
     } catch (e) {
       // debugPrint('EXCEPTION: ${e.toString()}');
       _linkedBibleReaderKey = BibleReaderKey.none;
@@ -49,11 +48,11 @@ class BibleReaderService with ChangeNotifier {
     notifyListeners();
   }
 
-  List<BibleReader> get certifiedList => _certifiedBibleReaders;
+  List<BibleReader> get certifiedBibleReaderList => _certifiedBibleReaderList;
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
-  BibleReader get linkedBibleReader => _bibleReaders.firstWhere((e) => e.key == _linkedBibleReaderKey);
-  int get linkedBibleReaderIndex => _certifiedBibleReaders.indexOf(linkedBibleReader);
-  set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaders[value].key);
+  BibleReader get linkedBibleReader => _bibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);
+  int get linkedBibleReaderIndex => _certifiedBibleReaderList.indexOf(linkedBibleReader);
+  set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaderList[value].key);
 
   Future launchLinkedBibleReader(FeedState state) async {
     if (isLinked && !state.isRead) {
