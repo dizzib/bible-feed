@@ -24,7 +24,6 @@ void main() async {
 
   late MockSharedPreferences mockSharedPreferences;
   late BibleReaderService testee;
-  final items = {BibleReaderKey.none: noneBibleReader, BibleReaderKey.blueLetterApp: mockBibleReader};
 
   setUp(() {
     when(mockBibleReader.certifiedPlatforms).thenReturn([TargetPlatform.iOS]);
@@ -32,9 +31,9 @@ void main() async {
     when(mockBibleReader.isCertifiedForThisPlatform).thenReturn(true);
     when(mockBibleReader.uriTemplate).thenReturn('blb://BOOK/CHAPTER');
     when(mockBibleReader.uriVersePath).thenReturn('/VERSE');
-    when(mockBibleReaders.items).thenReturn(items);
-    when(mockBibleReaders.certified).thenReturn(items);
-    when(mockBibleReaders.certifiedList).thenReturn(items.values.toList());
+    when(
+      mockBibleReaders.items,
+    ).thenReturn({BibleReaderKey.none: noneBibleReader, BibleReaderKey.blueLetterApp: mockBibleReader});
     mockSharedPreferences = MockSharedPreferences();
     testee = BibleReaderService(BibleReaderAppInstallService(), mockBibleReaders, mockSharedPreferences);
   });

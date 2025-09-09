@@ -51,6 +51,7 @@ class BibleReaderService with ChangeNotifier {
     notifyListeners();
   }
 
+  List<BibleReader> get certifiedList => _certifiedList;
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
   BibleReader get linkedBibleReader => _bibleReaders.items[_linkedBibleReaderKey]!;
   int get linkedBibleReaderIndex => _certifiedList.indexOf(linkedBibleReader);
