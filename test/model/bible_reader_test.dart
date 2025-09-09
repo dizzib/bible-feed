@@ -1,4 +1,5 @@
 import 'package:bible_feed/model/bible_reader.dart';
+import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,21 +16,19 @@ class MockUrlLauncher extends MockUrlLauncherPlatform with MockPlatformInterface
 
 @GenerateNiceMocks([MockSpec<Feed>(), MockSpec<UrlLauncherPlatform>()])
 void main() {
+  final mockUrlLauncher = MockUrlLauncher();
   late BibleReader testee;
-  late MockUrlLauncher mockUrlLauncher;
 
   setUp(() {
-    testee = const BibleReader('Reader name', 'scheme://uri/BOOK/CHAPTER', [
+    testee = const BibleReader(BibleReaderKey.blueLetterApp, 'Reader name', 'scheme://uri/BOOK/CHAPTER', [
       TargetPlatform.android,
       TargetPlatform.iOS,
     ], uriVersePath: '/VERSE');
-    mockUrlLauncher = MockUrlLauncher();
-    when(mockUrlLauncher.canLaunch(any)).thenAnswer((_) async => true);
-    when(mockUrlLauncher.launchUrl(any, any)).thenAnswer((_) async => true);
     UrlLauncherPlatform.instance = mockUrlLauncher;
   });
 
   test('constructor: should initialise properties', () {
+    expect(testee.key, BibleReaderKey.blueLetterApp);
     expect(testee.displayName, 'Reader name');
     expect(testee.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
     expect(testee.certifiedPlatforms, contains(TargetPlatform.android));
@@ -51,7 +50,7 @@ void main() {
 
   group('isAvailable', () {
     test('should return true if None', () async {
-      expect(await const BibleReader('None', '', []).isAvailable(), true);
+      expect(await const BibleReader(BibleReaderKey.none, 'None', '', []).isAvailable(), true);
     });
 
     test('should attempt to launch first feed uri if not None', () async {
