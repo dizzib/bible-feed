@@ -17,19 +17,15 @@ import 'bible_reader_service_test.mocks.dart';
 void main() async {
   await configureDependencies();
 
-  var noneMockBibleReader = MockBibleReader();
-  var blbMockBibleReader = MockBibleReader();
+  final bibleReaders = [MockBibleReader(), MockBibleReader()];
+  when(bibleReaders[0].isCertifiedForThisPlatform).thenReturn(true);
+  when(bibleReaders[1].isCertifiedForThisPlatform).thenReturn(true);
+  when(bibleReaders[1].key).thenReturn(BibleReaderKey.blueLetterApp);
 
-  final bibleReaders = [noneMockBibleReader, blbMockBibleReader];
   late MockSharedPreferences mockSharedPreferences;
   late BibleReaderService testee;
 
   setUp(() {
-    when(noneMockBibleReader.isCertifiedForThisPlatform).thenReturn(true);
-    when(blbMockBibleReader.key).thenReturn(BibleReaderKey.blueLetterApp);
-    when(blbMockBibleReader.isCertifiedForThisPlatform).thenReturn(true);
-    when(blbMockBibleReader.uriTemplate).thenReturn('blb://BOOK/CHAPTER');
-    when(blbMockBibleReader.uriVersePath).thenReturn('/VERSE');
     mockSharedPreferences = MockSharedPreferences();
     testee = BibleReaderService(BibleReaderAppInstallService(), bibleReaders, mockSharedPreferences);
   });
@@ -37,9 +33,9 @@ void main() async {
   parameterizedTest(
     'property getters',
     [
-      [null, false, 0, noneMockBibleReader],
-      ['invalid', false, 0, noneMockBibleReader],
-      ['blueLetterApp', true, 1, blbMockBibleReader],
+      [null, false, 0, bibleReaders[0]],
+      ['invalid', false, 0, bibleReaders[0]],
+      ['blueLetterApp', true, 1, bibleReaders[1]],
     ],
     (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
@@ -51,18 +47,17 @@ void main() async {
   );
 
   test('linkedBibleReaderIndex setter should update and save to store', () {
-    when(mockSharedPreferences.setString(any, any)).thenAnswer((_) async => true);
     testee.linkedBibleReaderIndex = 1;
     verify(mockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
     expect(testee.linkedBibleReaderIndex, 1);
   });
 
   void verifyLaunchCalled(FeedState state) {
-    verify(blbMockBibleReader.launch(state)).called(1);
+    verify(bibleReaders[1].launch(state)).called(1);
   }
 
   void verifyLaunchNotCalled(FeedState state) {
-    verifyNever(blbMockBibleReader.launch(state));
+    verifyNever(bibleReaders[1].launch(state));
   }
 
   parameterizedTest(
@@ -75,9 +70,7 @@ void main() async {
     ],
     (String? bibleReaderKey, bool isRead, Function verifyLaunch, [bool ok = true]) async {
       final state = FeedState(book: b0, isRead: isRead);
-      when(blbMockBibleReader.launch(state)).thenAnswer((_) async => ok);
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
-      when(mockSharedPreferences.setString(any, any)).thenAnswer((_) async => true);
       testee = BibleReaderService(BibleReaderAppInstallService(), bibleReaders, mockSharedPreferences);
       await testee.launchLinkedBibleReader(state);
       verifyLaunch(state);
