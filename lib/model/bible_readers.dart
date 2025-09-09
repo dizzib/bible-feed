@@ -1,4 +1,3 @@
-import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -19,9 +18,6 @@ enum BibleReaderKey {
 
 @lazySingleton
 class BibleReaders {
-  Map<BibleReaderKey, BibleReader> get certified => items.filter((entry) => entry.value.isCertifiedForThisPlatform);
-  List<BibleReader> get certifiedList => certified.values.toList();
-
   Map<BibleReaderKey, BibleReader> get items => {
     BibleReaderKey.none: const BibleReader('None', '', [TargetPlatform.android, TargetPlatform.iOS]),
     BibleReaderKey.andBibleApp: const BibleReader(

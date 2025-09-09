@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,11 +22,16 @@ class BibleReaderService with ChangeNotifier {
         _saveState(BibleReaderKey.none); // bible reader has been uninstalled
       }
     });
+    _certified = _bibleReaders.items.filter((entry) => entry.value.isCertifiedForThisPlatform);
+    _certifiedList = _certified.values.toList();
     _loadState();
   }
 
-  late BibleReaderKey _linkedBibleReaderKey;
   static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
+
+  late Map<BibleReaderKey, BibleReader> _certified;
+  late List<BibleReader> _certifiedList;
+  late BibleReaderKey _linkedBibleReaderKey;
 
   void _loadState() {
     final String? linkedReader = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
@@ -47,8 +53,8 @@ class BibleReaderService with ChangeNotifier {
 
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
   BibleReader get linkedBibleReader => _bibleReaders.items[_linkedBibleReaderKey]!;
-  int get linkedBibleReaderIndex => _bibleReaders.certifiedList.indexOf(linkedBibleReader);
-  set linkedBibleReaderIndex(int value) => _saveState(_bibleReaders.certified.keys.elementAt(value));
+  int get linkedBibleReaderIndex => _certifiedList.indexOf(linkedBibleReader);
+  set linkedBibleReaderIndex(int value) => _saveState(_certified.keys.elementAt(value));
 
   Future launchLinkedBibleReader(FeedState state) async {
     if (isLinked && !state.isRead) {
