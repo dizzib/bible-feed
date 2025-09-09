@@ -22,7 +22,7 @@ class BibleReaderService with ChangeNotifier {
         _saveState(BibleReaderKey.none); // bible reader has been uninstalled
       }
     });
-    _certified = _bibleReaders.items.filter((entry) => entry.value.isCertifiedForThisPlatform);
+    _certified = _bibleReaders.items.filter((e) => e.value.isCertifiedForThisPlatform);
     _certifiedList = _certified.values.toList();
     _loadState();
   }
