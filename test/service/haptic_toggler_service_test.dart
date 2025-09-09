@@ -1,26 +1,24 @@
-import 'package:bible_feed/service/haptic_toggler_service.dart';
 import 'package:bible_feed/service/haptic_availability_service.dart';
+import 'package:bible_feed/service/haptic_toggler_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MockHapticAvailabilityService extends Mock implements HapticAvailabilityService {}
+import 'haptic_toggler_service_test.mocks.dart';
 
-class MockSharedPreferences extends Mock implements SharedPreferences {}
-
+@GenerateNiceMocks([MockSpec<HapticAvailabilityService>(), MockSpec<SharedPreferences>()])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  final mockHapticAvailabilityService = MockHapticAvailabilityService();
   late MockSharedPreferences mockSharedPreferences;
-  late MockHapticAvailabilityService mockHapticAvailabilityService;
   late HapticTogglerService testee;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    mockHapticAvailabilityService = MockHapticAvailabilityService();
-    when(() => mockSharedPreferences.getBool(any())).thenReturn(null);
-    when(() => mockHapticAvailabilityService.isAvailable).thenReturn(true);
+    when(mockHapticAvailabilityService.isAvailable).thenReturn(true);
     testee = HapticTogglerService(mockSharedPreferences, mockHapticAvailabilityService);
   });
 
@@ -29,7 +27,7 @@ void main() {
   });
 
   test('isEnabled getter returns stored value', () {
-    when(() => mockSharedPreferences.getBool('isEnabled.haptic')).thenReturn(true);
+    when(mockSharedPreferences.getBool('isEnabled.haptic')).thenReturn(true);
     expect(testee.isEnabled, true);
   });
 
@@ -38,10 +36,9 @@ void main() {
     testee.addListener(() {
       notified = true;
     });
-    when(() => mockSharedPreferences.setBool(any(), any())).thenAnswer((_) async => true);
     testee.isEnabled = true;
     expect(notified, true);
-    verify(() => mockSharedPreferences.setBool('isEnabled.haptic', true)).called(1);
+    verify(mockSharedPreferences.setBool('isEnabled.haptic', true)).called(1);
   });
 
   test('isAvailable returns true', () {
