@@ -1,11 +1,13 @@
 import 'package:bible_feed/service/toggler_service.dart';
-import 'package:parameterized_test/parameterized_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:parameterized_test/parameterized_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MockSharedPreferences extends Mock implements SharedPreferences {}
+import 'toggler_service_test.mocks.dart';
 
+@GenerateNiceMocks([MockSpec<SharedPreferences>()])
 class TestTogglerService extends TogglerService {
   TestTogglerService(super.sharedPreferences);
 
@@ -45,7 +47,7 @@ void main() {
       [true, true],
     ],
     (storeValue, expectValue) {
-      when(() => mockSharedPreferences.getBool('test.key')).thenReturn(storeValue);
+      when(mockSharedPreferences.getBool('test.key')).thenReturn(storeValue);
       expect(testee.isEnabled, expectValue);
     },
   );
@@ -55,13 +57,12 @@ void main() {
     testee.addListener(() {
       notified = true;
     });
-    when(() => mockSharedPreferences.setBool(any(), any())).thenAnswer((_) async => true);
     testee.isEnabled = true;
-    verify(() => mockSharedPreferences.setBool('test.key', true)).called(1);
+    verify(mockSharedPreferences.setBool('test.key', true)).called(1);
     expect(notified, true);
   });
 
   test('if cannot enable, isEnabled setter to true fails assertion', () {
-    expect(() => TestCannotEnableTogglerService(mockSharedPreferences).isEnabled = true, throwsAssertionError);
+    expect((() => TestCannotEnableTogglerService(mockSharedPreferences).isEnabled = true), throwsAssertionError);
   });
 }
