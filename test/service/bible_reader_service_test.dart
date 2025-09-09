@@ -52,23 +52,15 @@ void main() async {
     expect(testee.linkedBibleReaderIndex, 1);
   });
 
-  void verifyLaunchCalled(FeedState state) {
-    verify(bibleReaders[1].launch(state)).called(1);
-  }
-
-  void verifyLaunchNotCalled(FeedState state) {
-    verifyNever(bibleReaders[1].launch(state));
-  }
-
   parameterizedTest(
     'launchLinkedBibleReader',
     [
-      [null, false, verifyLaunchNotCalled],
-      ['blueLetterApp', true, verifyLaunchNotCalled],
-      ['blueLetterApp', false, verifyLaunchCalled, true],
-      ['blueLetterApp', false, verifyLaunchCalled, false],
+      [null, false, false],
+      ['blueLetterApp', true, false],
+      ['blueLetterApp', false, true, true],
+      ['blueLetterApp', false, true, false],
     ],
-    (String? bibleReaderKey, bool isRead, Function verifyLaunch, [bool ok = true]) async {
+    (String? bibleReaderKey, bool isRead, bool expectLaunch, [bool ok = true]) async {
       // arrange
       final state = FeedState(book: b0, isRead: isRead);
       when(bibleReaders[1].launch(state)).thenAnswer((_) async => ok);
@@ -79,7 +71,11 @@ void main() async {
       await testee.launchLinkedBibleReader(state);
 
       // assert
-      verifyLaunch(state);
+      if (expectLaunch) {
+        verify(bibleReaders[1].launch(state)).called(1);
+      } else {
+        verifyNever(bibleReaders[1].launch(state));
+      }
       if (!ok) verify(mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
     },
   );
