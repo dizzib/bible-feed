@@ -14,18 +14,13 @@ import '../injectable.dart';
 import '../test_data.dart';
 import 'bible_reader_service_test.mocks.dart';
 
-@GenerateNiceMocks([
-  MockSpec<BibleReader>(),
-  MockSpec<BibleReaders>(),
-  MockSpec<SharedPreferences>(),
-])
-
-var noneBibleReader = const BibleReader('None', '', [TargetPlatform.android, TargetPlatform.iOS]);
-var mockBibleReader = MockBibleReader();
-var mockBibleReaders = MockBibleReaders();
-
+@GenerateNiceMocks([MockSpec<BibleReader>(), MockSpec<BibleReaders>(), MockSpec<SharedPreferences>()])
 void main() async {
   await configureDependencies();
+
+  var noneBibleReader = const BibleReader('None', '', [TargetPlatform.android, TargetPlatform.iOS]);
+  var mockBibleReader = MockBibleReader();
+  var mockBibleReaders = MockBibleReaders();
 
   late MockSharedPreferences mockSharedPreferences;
   late BibleReaderService testee;
