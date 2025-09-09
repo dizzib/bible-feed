@@ -12,27 +12,19 @@ import '../injectable.dart';
 import '../test_data.dart';
 import 'feeds_advance_service_test.mocks.dart';
 
-@GenerateNiceMocks([
-  MockSpec<Feed>(),
-  MockSpec<Feeds>(),
-  MockSpec<SharedPreferences>(),
-])
-
+@GenerateNiceMocks([MockSpec<Feed>(), MockSpec<Feeds>(), MockSpec<SharedPreferences>()])
 void main() async {
   await configureDependencies();
 
-  late List<MockFeed> mockFeedList;
+  final mockFeedList = [MockFeed(), MockFeed()];
   late MockFeeds mockFeeds;
   late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceService testee;
 
   setUp(() {
-    mockFeedList = [MockFeed(), MockFeed()];
     mockFeeds = MockFeeds();
     mockSharedPreferences = MockSharedPreferences();
     when(mockFeeds.iterator).thenReturn(mockFeedList.iterator);
-    when(mockSharedPreferences.getBool('hasEverAdvanced')).thenReturn(false);
-    when(mockSharedPreferences.setBool('hasEverAdvanced', any)).thenAnswer((_) async => true);
     testee = FeedsAdvanceService(mockSharedPreferences, mockFeeds);
   });
 
