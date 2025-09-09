@@ -6,19 +6,18 @@ import 'package:clock/clock.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
-class MockFeedsAdvanceService extends Mock implements FeedsAdvanceService {}
+import 'auto_advance_service_test.mocks.dart';
 
+@GenerateNiceMocks([MockSpec<FeedsAdvanceService>()])
 void main() {
+  final mockFeedsAdvanceService = MockFeedsAdvanceService();
   late AutoAdvanceService testee;
-  late MockFeedsAdvanceService mockFeedsAdvanceService;
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
-
-    mockFeedsAdvanceService = MockFeedsAdvanceService();
-    when(() => mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => AdvanceState.notAllRead);
 
     final now = DateTime.now();
     final midnightTonight = DateTime(now.year, now.month, now.day + 1);
@@ -31,14 +30,14 @@ void main() {
   });
 
   test('constructor should call maybeAdvance', () async {
-    verify(() => mockFeedsAdvanceService.maybeAdvance()).called(1);
+    verify(mockFeedsAdvanceService.maybeAdvance()).called(1);
   });
 
   test('_run should call maybeAdvance and notify listeners if advanced', () async {
-    when(() => mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => AdvanceState.listsAdvanced);
+    when(mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => AdvanceState.listsAdvanced);
     final completer = Completer<void>();
     testee.addListener(completer.complete);
     await completer.future;
-    verify(() => mockFeedsAdvanceService.maybeAdvance()).called(greaterThanOrEqualTo(1));
+    verify(mockFeedsAdvanceService.maybeAdvance()).called(greaterThanOrEqualTo(1));
   });
 }
