@@ -84,11 +84,11 @@ void main() async {
       ['blueLetterApp', false, verifyLaunchCalled, false],
     ],
     (String? bibleReaderKey, bool isRead, Function verifyLaunch, [bool ok = true]) async {
+      final state = FeedState(book: b0, isRead: isRead);
+      when(mockBibleReader.launch(state)).thenAnswer((_) async => ok);
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
       when(mockSharedPreferences.setString(any, any)).thenAnswer((_) async => true);
       testee = BibleReaderService(BibleReaderAppInstallService(), mockBibleReaders, mockSharedPreferences);
-      final state = FeedState(book: b0, isRead: isRead);
-      when(mockBibleReader.launch(state)).thenAnswer((_) async => ok);
       await testee.launchLinkedBibleReader(state);
       verifyLaunch(state);
       if (!ok) verify(mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
