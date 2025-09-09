@@ -11,7 +11,7 @@ class VerseScopeService {
 
   VerseScopeService(this._verseScopes, this._verseScopeTogglerService);
 
-  _toNonBreakingWhitespace(String label) => label.replaceAll('_', String.fromCharCode(0x00A0));
+  String _toNonBreakingWhitespace(String label) => label.replaceAll('_', String.fromCharCode(0x00A0));
 
   int getNextVerse(FeedState state) {
     final verseScope = _verseScopeTogglerService.isEnabled ? (_verseScopes[state.book.key]?[state.chapter]) : null;

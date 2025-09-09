@@ -3,24 +3,23 @@ import 'package:bible_feed/model/verse_scopes.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:bible_feed/service/verse_scope_toggler_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
 import '../test_data.dart';
+import 'verse_scope_service_test.mocks.dart';
 
-class MockVerseScopes extends Mock implements VerseScopes {}
-
-class MockVerseScopeTogglerService extends Mock implements VerseScopeTogglerService {}
-
+@GenerateNiceMocks([MockSpec<VerseScopes>(), MockSpec<VerseScopeTogglerService>()])
 void main() {
   const testVerseScopes = {
     1: {1: 'ℵ_Aleph', 2: 'ℶ_Beth'},
     2: 3,
   };
 
-  late MockVerseScopes mockVerseScopes = MockVerseScopes();
-  late MockVerseScopeTogglerService mockTogglerService = MockVerseScopeTogglerService();
-  late VerseScopeService testee = VerseScopeService(mockVerseScopes, mockTogglerService);
+  final mockVerseScopes = MockVerseScopes();
+  final mockTogglerService = MockVerseScopeTogglerService();
+  final testee = VerseScopeService(mockVerseScopes, mockTogglerService);
 
   parameterizedTest(
     'getNextVerse/getVerseScopeLabel:',
@@ -35,8 +34,8 @@ void main() {
     customDescriptionBuilder:
         (_, _, values) => 'when ${values[6]}, expect next verse=${values[4]}, label="${values[5]}"',
     (var verseScopes, bool isEnabled, int chapter, int verse, int expectNextVerse, String expectLabel, String desc) {
-      when(() => mockTogglerService.isEnabled).thenReturn(isEnabled);
-      when(() => mockVerseScopes['b1']).thenReturn(verseScopes);
+      when(mockTogglerService.isEnabled).thenReturn(isEnabled);
+      when(mockVerseScopes['b1']).thenReturn(verseScopes);
       final state = FeedState(book: b1, chapter: chapter, verse: verse);
       expect(testee.getNextVerse(state), expectNextVerse);
       expect(testee.getVerseScopeLabel(state), expectLabel);
