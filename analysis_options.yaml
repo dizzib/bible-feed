@@ -1,5 +1,10 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - '**.config.dart'
+    - '**.mocks.dart'
+
 formatter:
   page_width: 120
 
