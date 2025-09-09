@@ -5,28 +5,28 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'injectable.dart';
 
-expectBookAndChapter(String expectedBookName, int expectedChapter) {
+void expectBookAndChapter(String expectedBookName, int expectedChapter) {
   expectText('$expectedBookName $expectedChapter');
 }
 
-expectChapters(int expectedValue, {int count = 10}) {
+void expectChapters(int expectedValue, {int count = 10}) {
   expect(find.textContaining(expectedValue.toString()), findsExactly(count));
 }
 
 // text helpers
-expectAtLeast1Text(dynamic expected) => expectText(expected.toString(), matcher: findsAtLeast(1));
-expectNoText(dynamic expected) => expectText(expected.toString(), matcher: findsNothing);
-expectText(dynamic expected, {matcher = findsOneWidget}) => expect(find.textContaining(expected.toString()), matcher);
+dynamic expectAtLeast1Text(dynamic expected) => expectText(expected.toString(), matcher: findsAtLeast(1));
+dynamic expectNoText(dynamic expected) => expectText(expected.toString(), matcher: findsNothing);
+void expectText(dynamic expected, {matcher = findsOneWidget}) => expect(find.textContaining(expected.toString()), matcher);
 
 extension AppTestHelper on WidgetTester {
-  initialiseApp() async {
+  Future<void> initialiseApp() async {
     WidgetsFlutterBinding.ensureInitialized();
     await configureDependencies();
     runApp(AppBase());
     await pumpAndSettle();
   }
 
-  selectLastBookAndChapter(String feedName) async {
+  Future<void> selectLastBookAndChapter(String feedName) async {
     await longPress(find.text(feedName));
     await pumpAndSettle();
     await scrollToLastBook();
@@ -36,25 +36,25 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  scrollToLastBook() async {
+  Future<void> scrollToLastBook() async {
     await scrollToLastItem('book_wheel');
   }
 
-  scrollToLastChapter() async {
+  Future<void> scrollToLastChapter() async {
     await scrollToLastItem('chapter_wheel');
   }
 
-  scrollToLastItem(String keyVal) async {
+  Future<void> scrollToLastItem(String keyVal) async {
     await drag(find.byKey(Key(keyVal)), const Offset(0, -999));
   }
 
-  tapAllDoneButton(String text) async {
+  Future<void> tapAllDoneButton(String text) async {
     expectText('All done!');
     await tap(find.text(text));
     await pumpAndSettle();
   }
 
-  tapAllLists() async {
+  Future<void> tapAllLists() async {
     var feedCards = find.byType(FeedCard).evaluate();
     for (var el in feedCards) {
       await tapAt(getCenter(find.byWidget(el.widget)));
@@ -62,21 +62,21 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  tapFab() async {
+  Future<void> tapFab() async {
     await tap(find.byType(FloatingActionButton));
     await pumpAndSettle();
   }
 
-  tapList(String bookName) async {
+  Future<void> tapList(String bookName) async {
     await tap(find.text(bookName));
     await pumpAndSettle();
   }
 
-  tapNo() async {
+  Future<void> tapNo() async {
     await tapAllDoneButton('No');
   }
 
-  tapYes() async {
+  Future<void> tapYes() async {
     await tapAllDoneButton('Yes');
   }
 }

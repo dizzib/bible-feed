@@ -14,7 +14,7 @@ import 'package:watch_it/watch_it.dart';
 import 'helper.dart';
 
 extension Helper on WidgetTester {
-  initialiseWidget(Widget widget) async {
+  Future<void> initialiseWidget(Widget widget) async {
     await pumpWidget(MaterialApp(home: widget));
   }
 }

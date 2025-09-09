@@ -27,7 +27,7 @@ class Feed with ChangeNotifier {
     notifyListeners();
   }
 
-  advance() {
+  void advance() {
     assert(_state._isRead);
     _state._verse = _verseScopeService.getNextVerse(_state);
     if (_state._verse == 1 && ++_state._chapter > _state._book.chapterCount) {
@@ -38,7 +38,7 @@ class Feed with ChangeNotifier {
     _notifyListeners();
   }
 
-  setBookAndChapter(int bookIndex, int chapter) {
+  void setBookAndChapter(int bookIndex, int chapter) {
     if (bookIndex == this.bookIndex && chapter == _state._chapter) return;
     _state._book = readingList[bookIndex];
     _state._chapter = chapter;
@@ -47,7 +47,7 @@ class Feed with ChangeNotifier {
     _notifyListeners();
   }
 
-  toggleIsRead() {
+  void toggleIsRead() {
     _state._isRead = !_state._isRead;
     _notifyListeners();
   }

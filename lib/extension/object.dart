@@ -11,7 +11,7 @@ class _AnsiColor {
 }
 
 extension ObjectLog on Object {
-  log() {
+  dynamic log() {
     if (kDebugMode) {
       debugPrint('${_AnsiColor.yellow}${clock.now().toString()} ${_AnsiColor.cyan}${toString()}${_AnsiColor.reset}');
     }
