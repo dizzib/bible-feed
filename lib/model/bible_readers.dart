@@ -18,60 +18,57 @@ enum BibleReaderKey {
 
 @lazySingleton
 class BibleReaders {
-  Map<BibleReaderKey, BibleReader> get items => const {
-    BibleReaderKey.none: BibleReader('None', '', [TargetPlatform.android, TargetPlatform.iOS]),
-    BibleReaderKey.andBibleApp: BibleReader(
-      'AndBible app',
-      'https://read.andbible.org/BOOK.CHAPTER',
-      [], // https://github.com/AndBible/and-bible/issues/3210
-    ),
-    BibleReaderKey.blueLetterApp: BibleReader(
+  List<BibleReader> get items => const [
+    BibleReader(BibleReaderKey.none, 'None', '', [TargetPlatform.android, TargetPlatform.iOS]),
+    BibleReader(BibleReaderKey.andBibleApp, 'AndBible app', 'https://read.andbible.org/BOOK.CHAPTER', []),
+    BibleReader(
+      BibleReaderKey.blueLetterApp,
       'Blue Letter Bible app',
       'blb://BOOK/CHAPTER',
-      // android: does not launch app because App info -> 'Open by default' shows '0 verified links'.
       [TargetPlatform.iOS],
       bookKeyMap: BlueLetterBookKeyMap(),
       uriVersePath: '/VERSE',
     ),
-    BibleReaderKey.blueLetterWeb: BibleReader(
+    BibleReader(
+      BibleReaderKey.blueLetterWeb,
       'Blue Letter Bible web',
       'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
-      [TargetPlatform.android, TargetPlatform.iOS], // all good
+      [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyMap: BlueLetterBookKeyMap(),
       uriVersePath: '/VERSE',
     ),
-    BibleReaderKey.lifeBibleApp: BibleReader(
-      'Life Bible app',
-      'tecartabible://BOOK.CHAPTER', // unknown path does not work
-      [],
-    ),
-    BibleReaderKey.logosBibleApp: BibleReader(
+    BibleReader(BibleReaderKey.lifeBibleApp, 'Life Bible app', 'tecartabible://BOOK.CHAPTER', []),
+    BibleReader(
+      BibleReaderKey.logosBibleApp,
       'Logos Bible app',
       'logosref:Bible.BOOK.CHAPTER',
-      [TargetPlatform.android, TargetPlatform.iOS], // android: back doesn't return to bible feed
+      [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyMap: LogosBookKeyMap(),
       uriVersePath: '.VERSE',
     ),
-    BibleReaderKey.oliveTreeApp: BibleReader(
+    BibleReader(
+      BibleReaderKey.oliveTreeApp,
       'Olive Tree app',
       'olivetree://bible/BOOK.CHAPTER',
-      [TargetPlatform.android, TargetPlatform.iOS], // android: back doesn't return to bible feed
+      [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyMap: OliveTreeBookKeyMap(),
       uriVersePath: '.VERSE',
     ),
-    BibleReaderKey.weDevoteApp: BibleReader(
+    BibleReader(
+      BibleReaderKey.weDevoteApp,
       'WeDevote app',
-      'wdbible://bible/BOOK.CHAPTER', // see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
-      [TargetPlatform.iOS], // android: does not open ref
+      'wdbible://bible/BOOK.CHAPTER',
+      [TargetPlatform.iOS],
       bookKeyMap: OsisParatextBookKeyMap(),
       uriVersePath: '.VERSE',
     ),
-    BibleReaderKey.youVersionApp: BibleReader(
+    BibleReader(
+      BibleReaderKey.youVersionApp,
       'YouVersion app',
-      'youversion://bible?reference=BOOK.CHAPTER', // see https://nickperkins.dev/2022/08/02/find-every-ios-bible-app-deeplink-url-scheme/
-      [TargetPlatform.android, TargetPlatform.iOS], // all good
+      'youversion://bible?reference=BOOK.CHAPTER',
+      [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyMap: OsisParatextBookKeyMap(),
       uriVersePath: '.VERSE',
     ),
-  };
+  ];
 }

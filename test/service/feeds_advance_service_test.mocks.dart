@@ -125,8 +125,20 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as bool);
 
   @override
-  dynamic setBookAndChapter(int? bookIndex, int? chapter) => super.noSuchMethod(
+  void advance() => super.noSuchMethod(
+    Invocation.method(#advance, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void setBookAndChapter(int? bookIndex, int? chapter) => super.noSuchMethod(
     Invocation.method(#setBookAndChapter, [bookIndex, chapter]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void toggleIsRead() => super.noSuchMethod(
+    Invocation.method(#toggleIsRead, []),
     returnValueForMissingStub: null,
   );
 

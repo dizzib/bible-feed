@@ -1,3 +1,4 @@
+import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,6 +12,7 @@ import 'feeds.dart';
 // for ios, scheme must be added to info.plist!!!
 class BibleReader {
   const BibleReader(
+    this._key,
     this._displayName,
     this._uriTemplate,
     this._certifiedPlatforms, {
@@ -19,6 +21,7 @@ class BibleReader {
   }) : _bookKeyMap = bookKeyMap,
        _uriVersePath = uriVersePath;
 
+  final BibleReaderKey _key;
   final BibleReaderBookKeyMap _bookKeyMap;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
   final String _displayName;
@@ -37,6 +40,7 @@ class BibleReader {
   BibleReaderBookKeyMap get bookKeyMap => _bookKeyMap;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   String get displayName => _displayName;
+  BibleReaderKey get key => _key;
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
 

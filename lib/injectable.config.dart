@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/injectable.dart' as _i537;
+import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
@@ -64,15 +65,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i229.BibleReaderAppInstallService>(
       () => _i229.BibleReaderAppInstallService(),
     );
-    gh.lazySingleton<_i119.FeedStoreService>(
-      () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
-    );
     gh.lazySingleton<_i283.BibleReaderService>(
       () => _i283.BibleReaderService(
         gh<_i229.BibleReaderAppInstallService>(),
-        gh<_i1070.BibleReaders>(),
+        gh<List<_i270.BibleReader>>(),
         gh<_i460.SharedPreferences>(),
       ),
+    );
+    gh.lazySingleton<_i119.FeedStoreService>(
+      () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProdPlatformService(),
