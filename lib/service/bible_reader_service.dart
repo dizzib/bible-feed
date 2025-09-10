@@ -11,10 +11,9 @@ import '/service/bible_reader_app_install_service.dart';
 @lazySingleton
 class BibleReaderService with ChangeNotifier {
   final BibleReaderAppInstallService _bibleReaderAppInstallService;
-  final BibleReaders _bibleReaders;
   final SharedPreferences _sharedPreferences;
 
-  BibleReaderService(this._bibleReaderAppInstallService, this._bibleReaders, this._sharedPreferences) {
+  BibleReaderService(this._bibleReaderAppInstallService, this._sharedPreferences, BibleReaders bibleReaders) {
     _bibleReaderAppInstallService.addListener(() async {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners();
@@ -22,7 +21,7 @@ class BibleReaderService with ChangeNotifier {
         _saveState(BibleReaderKey.none); // bible reader has been uninstalled
       }
     });
-    _certifiedBibleReaderList = _bibleReaders.filter((e) => e.isCertifiedForThisPlatform).toList();
+    _certifiedBibleReaderList = bibleReaders.filter((e) => e.isCertifiedForThisPlatform).toList();
     _loadState();
   }
 
@@ -50,7 +49,7 @@ class BibleReaderService with ChangeNotifier {
 
   List<BibleReader> get certifiedBibleReaderList => _certifiedBibleReaderList;
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
-  BibleReader get linkedBibleReader => _bibleReaders.firstWhere((e) => e.key == _linkedBibleReaderKey);
+  BibleReader get linkedBibleReader => _certifiedBibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);
   int get linkedBibleReaderIndex => _certifiedBibleReaderList.indexOf(linkedBibleReader);
   set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaderList[value].key);
 

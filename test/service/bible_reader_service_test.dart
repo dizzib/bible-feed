@@ -27,7 +27,7 @@ void main() async {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    testee = BibleReaderService(BibleReaderAppInstallService(), bibleReaders, mockSharedPreferences);
+    testee = BibleReaderService(BibleReaderAppInstallService(), mockSharedPreferences, bibleReaders);
   });
 
   parameterizedTest(
@@ -39,7 +39,7 @@ void main() async {
     ],
     (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
-      testee = BibleReaderService(BibleReaderAppInstallService(), bibleReaders, mockSharedPreferences);
+      testee = BibleReaderService(BibleReaderAppInstallService(), mockSharedPreferences, bibleReaders);
       expect(testee.isLinked, expectIsLinked);
       expect(testee.linkedBibleReader, expectBibleReader);
       expect(testee.linkedBibleReaderIndex, expectIndex);
@@ -67,7 +67,7 @@ void main() async {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
 
       // act
-      testee = BibleReaderService(BibleReaderAppInstallService(), bibleReaders, mockSharedPreferences);
+      testee = BibleReaderService(BibleReaderAppInstallService(), mockSharedPreferences, bibleReaders);
       await testee.launchLinkedBibleReader(state);
 
       // assert
