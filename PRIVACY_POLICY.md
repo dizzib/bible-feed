@@ -2,9 +2,9 @@
 
 ## Overview
 
-Welcome to the Bible Feed app for Android!
+Welcome to the Bible Feed app for Android and iOS!
 
-This is an open-source app. The source code is available on GitHub under the MIT license.
+This is an open-source app. The source code is available on GitHub under the GPL 3 license.
 
 It was created on [Google's open-source Flutter framework][flutter], and makes use of a handful of 3rd party open-source libraries.
 
