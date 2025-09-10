@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'bible_reader.dart';
 import 'bible_reader_book_keymap.dart';
 
+// mockito cannot mock enums, otherwise we could use an enhanced enum
 enum BibleReaderKeys {
   none,
   andBibleApp,
