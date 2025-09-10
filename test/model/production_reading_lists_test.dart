@@ -7,7 +7,7 @@ void main() {
   });
 
   test('total chapters per list', () {
-    run(i, expectTotalChapters) => expect(ProductionReadingLists().elementAt(i).totalChapters, expectTotalChapters);
+    run(i, expectTotalChapters) => expect(ProductionReadingLists()[i].totalChapters, expectTotalChapters);
 
     run(0, 89);
     run(1, 187);
