@@ -1,13 +1,13 @@
-import 'package:bible_feed/model/base_iterable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 import '/model/book.dart';
 import '/model/reading_list.dart';
+import 'reading_lists.dart';
 
-@lazySingleton
 @immutable
-class ProductionReadingLists extends BaseIterable<ReadingList> {
+@LazySingleton(as: ReadingLists)
+class ProductionReadingLists extends ReadingLists {
   ProductionReadingLists()
     : super([
         ReadingList('gos', 'Gospels', const [

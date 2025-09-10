@@ -2,16 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'dart:core';
 import 'package:injectable/injectable.dart';
 
-import '/model/production_reading_lists.dart';
 import '/service/feed_store_service.dart';
 import '/service/verse_scope_service.dart';
 import 'feed.dart';
+import 'reading_lists.dart';
 
 @lazySingleton
 class Feeds extends Iterable<Feed> with ChangeNotifier {
   final FeedStoreService _feedStoreService;
   final VerseScopeService _verseScopeService;
-  final ProductionReadingLists _readingLists;
+  final ReadingLists _readingLists;
 
   Feeds(this._feedStoreService, this._verseScopeService, this._readingLists) {
     _feedList = _readingLists.map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl))).toList();

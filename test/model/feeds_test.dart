@@ -1,6 +1,6 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
-import 'package:bible_feed/model/production_reading_lists.dart';
+import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,11 +12,6 @@ import '../test_data.dart';
 import 'feeds_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FeedStoreService>(), MockSpec<VerseScopeService>()])
-class TestReadingLists extends ProductionReadingLists {
-  @override
-  get iterator => [rl0, rl1].iterator;
-}
-
 void main() async {
   await configureDependencies();
 
@@ -33,7 +28,7 @@ void main() async {
     state1 = FeedState(book: b1, dateModified: DateTime(2025, 1, 1, 2));
     when(mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(mockFeedStoreService.loadState(rl1)).thenReturn(state1);
-    testee = Feeds(mockFeedStoreService, mockVerseScopeService, TestReadingLists());
+    testee = Feeds(mockFeedStoreService, mockVerseScopeService, ReadingLists([rl0, rl1]));
   });
 
   group('property', () {
