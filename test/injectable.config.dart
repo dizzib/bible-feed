@@ -12,6 +12,7 @@
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
+import 'package:bible_feed/model/production_bible_readers.dart' as _i545;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
 import 'package:bible_feed/model/verse_scopes.dart' as _i967;
 import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
@@ -65,12 +66,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i505.TestPlatformService(),
       registerFor: {_test},
     );
-    gh.lazySingleton<_i1070.BibleReaders>(
-      () => const _i1070.ProdBibleReaders(),
-    );
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
+    gh.lazySingleton<_i1070.BibleReaders>(() => const _i545.ProdBibleReaders());
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProdPlatformService(),
       registerFor: {_prod},
