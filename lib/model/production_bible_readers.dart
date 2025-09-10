@@ -1,3 +1,4 @@
+import 'package:bible_feed/model/bible_reader_keys.dart';
 import 'package:bible_feed/model/bible_readers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';

@@ -1,5 +1,5 @@
 import 'package:bible_feed/model/bible_reader.dart';
-import 'package:bible_feed/model/bible_readers.dart';
+import 'package:bible_feed/model/bible_reader_keys.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
