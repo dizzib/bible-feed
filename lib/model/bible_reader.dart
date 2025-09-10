@@ -21,7 +21,7 @@ class BibleReader {
   }) : _bookKeyMap = bookKeyMap,
        _uriVersePath = uriVersePath;
 
-  final BibleReaderKey _key;
+  final BibleReaderKeys _key;
   final BibleReaderBookKeyMap _bookKeyMap;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
   final String _displayName;
@@ -40,7 +40,7 @@ class BibleReader {
   BibleReaderBookKeyMap get bookKeyMap => _bookKeyMap;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   String get displayName => _displayName;
-  BibleReaderKey get key => _key;
+  BibleReaderKeys get key => _key;
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
 

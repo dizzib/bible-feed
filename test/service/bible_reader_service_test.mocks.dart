@@ -79,13 +79,13 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as String);
 
   @override
-  _i6.BibleReaderKey get key =>
+  _i6.BibleReaderKeys get key =>
       (super.noSuchMethod(
             Invocation.getter(#key),
-            returnValue: _i6.BibleReaderKey.none,
-            returnValueForMissingStub: _i6.BibleReaderKey.none,
+            returnValue: _i6.BibleReaderKeys.none,
+            returnValueForMissingStub: _i6.BibleReaderKeys.none,
           )
-          as _i6.BibleReaderKey);
+          as _i6.BibleReaderKeys);
 
   @override
   String get uriTemplate =>

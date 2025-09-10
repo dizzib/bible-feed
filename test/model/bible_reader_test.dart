@@ -20,7 +20,7 @@ void main() {
   late BibleReader testee;
 
   setUp(() {
-    testee = const BibleReader(BibleReaderKey.blueLetterApp, 'Reader name', 'scheme://uri/BOOK/CHAPTER', [
+    testee = const BibleReader(BibleReaderKeys.blueLetterApp, 'Reader name', 'scheme://uri/BOOK/CHAPTER', [
       TargetPlatform.android,
       TargetPlatform.iOS,
     ], uriVersePath: '/VERSE');
@@ -28,7 +28,7 @@ void main() {
   });
 
   test('constructor: should initialise properties', () {
-    expect(testee.key, BibleReaderKey.blueLetterApp);
+    expect(testee.key, BibleReaderKeys.blueLetterApp);
     expect(testee.displayName, 'Reader name');
     expect(testee.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
     expect(testee.certifiedPlatforms, contains(TargetPlatform.android));
@@ -50,7 +50,7 @@ void main() {
 
   group('isAvailable', () {
     test('should return true if None', () async {
-      expect(await const BibleReader(BibleReaderKey.none, 'None', '', []).isAvailable(), true);
+      expect(await const BibleReader(BibleReaderKeys.none, 'None', '', []).isAvailable(), true);
     });
 
     test('should attempt to launch first feed uri if not None', () async {

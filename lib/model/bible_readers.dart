@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'bible_reader.dart';
 import 'bible_reader_book_keymap.dart';
 
-enum BibleReaderKey {
+enum BibleReaderKeys {
   none,
   andBibleApp,
   blueLetterApp,
@@ -34,10 +34,10 @@ class BibleReaders extends Iterable<BibleReader> {
 class ProdBibleReaders extends BibleReaders {
   const ProdBibleReaders()
     : super(const [
-        BibleReader(BibleReaderKey.none, 'None', '', [TargetPlatform.android, TargetPlatform.iOS]),
-        BibleReader(BibleReaderKey.andBibleApp, 'AndBible app', 'https://read.andbible.org/BOOK.CHAPTER', []),
+        BibleReader(BibleReaderKeys.none, 'None', '', [TargetPlatform.android, TargetPlatform.iOS]),
+        BibleReader(BibleReaderKeys.andBibleApp, 'AndBible app', 'https://read.andbible.org/BOOK.CHAPTER', []),
         BibleReader(
-          BibleReaderKey.blueLetterApp,
+          BibleReaderKeys.blueLetterApp,
           'Blue Letter Bible app',
           'blb://BOOK/CHAPTER',
           [TargetPlatform.iOS],
@@ -45,16 +45,16 @@ class ProdBibleReaders extends BibleReaders {
           uriVersePath: '/VERSE',
         ),
         BibleReader(
-          BibleReaderKey.blueLetterWeb,
+          BibleReaderKeys.blueLetterWeb,
           'Blue Letter Bible web',
           'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
           bookKeyMap: BlueLetterBookKeyMap(),
           uriVersePath: '/VERSE',
         ),
-        BibleReader(BibleReaderKey.lifeBibleApp, 'Life Bible app', 'tecartabible://BOOK.CHAPTER', []),
+        BibleReader(BibleReaderKeys.lifeBibleApp, 'Life Bible app', 'tecartabible://BOOK.CHAPTER', []),
         BibleReader(
-          BibleReaderKey.logosBibleApp,
+          BibleReaderKeys.logosBibleApp,
           'Logos Bible app',
           'logosref:Bible.BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
@@ -62,7 +62,7 @@ class ProdBibleReaders extends BibleReaders {
           uriVersePath: '.VERSE',
         ),
         BibleReader(
-          BibleReaderKey.oliveTreeApp,
+          BibleReaderKeys.oliveTreeApp,
           'Olive Tree app',
           'olivetree://bible/BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
@@ -70,7 +70,7 @@ class ProdBibleReaders extends BibleReaders {
           uriVersePath: '.VERSE',
         ),
         BibleReader(
-          BibleReaderKey.weDevoteApp,
+          BibleReaderKeys.weDevoteApp,
           'WeDevote app',
           'wdbible://bible/BOOK.CHAPTER',
           [TargetPlatform.iOS],
@@ -78,7 +78,7 @@ class ProdBibleReaders extends BibleReaders {
           uriVersePath: '.VERSE',
         ),
         BibleReader(
-          BibleReaderKey.youVersionApp,
+          BibleReaderKeys.youVersionApp,
           'YouVersion app',
           'youversion://bible?reference=BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],

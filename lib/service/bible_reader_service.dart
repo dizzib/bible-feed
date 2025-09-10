@@ -18,7 +18,7 @@ class BibleReaderService with ChangeNotifier {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners();
       } else {
-        _saveState(BibleReaderKey.none); // bible reader has been uninstalled
+        _saveState(BibleReaderKeys.none); // bible reader has been uninstalled
       }
     });
     _certifiedBibleReaderList = bibleReaders.filter((e) => e.isCertifiedForThisPlatform).toList();
@@ -28,19 +28,19 @@ class BibleReaderService with ChangeNotifier {
   static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
   late List<BibleReader> _certifiedBibleReaderList;
-  late BibleReaderKey _linkedBibleReaderKey;
+  late BibleReaderKeys _linkedBibleReaderKey;
 
   void _loadState() {
     final String? linkedReaderName = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
     try {
-      _linkedBibleReaderKey = BibleReaderKey.values.byName(linkedReaderName ?? BibleReaderKey.none.name);
+      _linkedBibleReaderKey = BibleReaderKeys.values.byName(linkedReaderName ?? BibleReaderKeys.none.name);
     } catch (e) {
       // debugPrint('EXCEPTION: ${e.toString()}');
-      _linkedBibleReaderKey = BibleReaderKey.none;
+      _linkedBibleReaderKey = BibleReaderKeys.none;
     }
   }
 
-  void _saveState(BibleReaderKey value) {
+  void _saveState(BibleReaderKeys value) {
     if (value == _linkedBibleReaderKey) return;
     _linkedBibleReaderKey = value;
     _sharedPreferences.setString(_linkedBibleReaderStoreKey, value.name);
@@ -48,7 +48,7 @@ class BibleReaderService with ChangeNotifier {
   }
 
   List<BibleReader> get certifiedBibleReaderList => _certifiedBibleReaderList;
-  bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
+  bool get isLinked => _linkedBibleReaderKey != BibleReaderKeys.none;
   BibleReader get linkedBibleReader => _certifiedBibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);
   int get linkedBibleReaderIndex => _certifiedBibleReaderList.indexOf(linkedBibleReader);
   set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaderList[value].key);
@@ -56,7 +56,7 @@ class BibleReaderService with ChangeNotifier {
   Future launchLinkedBibleReader(FeedState state) async {
     if (isLinked && !state.isRead) {
       final ok = await linkedBibleReader.launch(state);
-      if (!ok) _saveState(BibleReaderKey.none);
+      if (!ok) _saveState(BibleReaderKeys.none);
     }
   }
 }

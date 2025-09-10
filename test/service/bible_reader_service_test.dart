@@ -20,7 +20,7 @@ void main() async {
   final bibleReaders = BibleReaders([MockBibleReader(), MockBibleReader()]);
   when(bibleReaders[0].isCertifiedForThisPlatform).thenReturn(true);
   when(bibleReaders[1].isCertifiedForThisPlatform).thenReturn(true);
-  when(bibleReaders[1].key).thenReturn(BibleReaderKey.blueLetterApp);
+  when(bibleReaders[1].key).thenReturn(BibleReaderKeys.blueLetterApp);
 
   late MockSharedPreferences mockSharedPreferences;
   late BibleReaderService testee;
