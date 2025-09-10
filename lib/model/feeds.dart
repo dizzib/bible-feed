@@ -5,18 +5,17 @@ import 'package:injectable/injectable.dart';
 
 import '/service/feed_store_service.dart';
 import '/service/verse_scope_service.dart';
+import 'base_iterable.dart';
 import 'feed.dart';
 import 'reading_lists.dart';
 
 @lazySingleton
-class Feeds extends Iterable<Feed> with ChangeNotifier {
+class Feeds extends BaseIterable<Feed> with ChangeNotifier {
   final FeedStoreService _feedStoreService;
-  final VerseScopeService _verseScopeService;
 
-  Feeds(this._feedStoreService, this._verseScopeService, ReadingLists readingLists) {
-    _feedList = readingLists.map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl))).toList();
-
-    for (Feed f in _feedList) {
+  Feeds(this._feedStoreService, VerseScopeService verseScopeService, ReadingLists readingLists)
+    : super(readingLists.map((rl) => Feed(rl, verseScopeService, _feedStoreService.loadState(rl))).toList()) {
+    for (Feed f in this) {
       if (f.state.dateModified?.isAfter(_lastModifiedFeed?.state.dateModified ?? DateTime(0)) ?? false) {
         _lastModifiedFeed = f;
       }
@@ -29,13 +28,8 @@ class Feeds extends Iterable<Feed> with ChangeNotifier {
     }
   }
 
-  late List<Feed> _feedList;
   Feed? _lastModifiedFeed;
 
-  Feed operator [](int i) => _feedList[i];
-  bool get areChaptersRead => _feedList.where((feed) => !feed.state.isRead).isEmpty;
+  bool get areChaptersRead => where((feed) => !feed.state.isRead).isEmpty;
   Feed? get lastModifiedFeed => _lastModifiedFeed;
-
-  @override
-  Iterator<Feed> get iterator => _feedList.iterator;
 }

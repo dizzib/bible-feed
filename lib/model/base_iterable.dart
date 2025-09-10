@@ -1,6 +1,3 @@
-import 'package:flutter/foundation.dart';
-
-@immutable
 class BaseIterable<T> extends Iterable<T> {
   const BaseIterable(this._items);
 
