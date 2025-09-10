@@ -1,10 +1,10 @@
-import 'package:bible_feed/model/bible_reader_keys.dart';
-import 'package:bible_feed/model/bible_readers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'bible_reader.dart';
 import 'bible_reader_book_keymap.dart';
+import 'bible_reader_keys.dart';
+import 'bible_readers.dart';
 
 @LazySingleton(as: BibleReaders)
 @immutable

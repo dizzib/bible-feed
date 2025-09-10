@@ -7,8 +7,8 @@ import '/model/reading_list.dart';
 
 @lazySingleton
 @immutable
-class ReadingLists extends BaseIterable<ReadingList> {
-  ReadingLists()
+class ProductionReadingLists extends BaseIterable<ReadingList> {
+  ProductionReadingLists()
     : super([
         ReadingList('gos', 'Gospels', const [
           Book('mat', 'Matthew', 28),

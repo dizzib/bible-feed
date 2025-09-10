@@ -13,7 +13,7 @@ import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
 import 'package:bible_feed/model/production_bible_readers.dart' as _i545;
-import 'package:bible_feed/model/reading_lists.dart' as _i823;
+import 'package:bible_feed/model/production_reading_lists.dart' as _i438;
 import 'package:bible_feed/model/verse_scopes.dart' as _i967;
 import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
 import 'package:bible_feed/service/auto_advance_service.dart' as _i148;
@@ -61,10 +61,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.ChapterListWheelState>(
       () => _i1033.ChapterListWheelState(),
     );
-    gh.lazySingleton<_i823.ReadingLists>(() => _i823.ReadingLists());
     gh.lazySingleton<_i967.VerseScopes>(() => _i967.VerseScopes());
     gh.lazySingleton<_i229.BibleReaderAppInstallService>(
       () => _i229.BibleReaderAppInstallService(),
+    );
+    gh.lazySingleton<_i438.ProductionReadingLists>(
+      () => _i438.ProductionReadingLists(),
     );
     gh.lazySingleton<_i1070.BibleReaders>(
       () => const _i545.ProductionBibleReaders(),
@@ -103,15 +105,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i430.VerseScopeTogglerService>(),
       ),
     );
-    gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
-    );
     gh.lazySingleton<_i759.Feeds>(
       () => _i759.Feeds(
         gh<_i119.FeedStoreService>(),
         gh<_i109.VerseScopeService>(),
-        gh<_i823.ReadingLists>(),
+        gh<_i438.ProductionReadingLists>(),
       ),
+    );
+    gh.lazySingleton<_i22.HapticService>(
+      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
     );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(
