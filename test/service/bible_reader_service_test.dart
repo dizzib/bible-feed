@@ -17,7 +17,7 @@ import 'bible_reader_service_test.mocks.dart';
 void main() async {
   await configureDependencies();
 
-  final bibleReaders = [MockBibleReader(), MockBibleReader()];
+  final bibleReaders = BibleReaders([MockBibleReader(), MockBibleReader()]);
   when(bibleReaders[0].isCertifiedForThisPlatform).thenReturn(true);
   when(bibleReaders[1].isCertifiedForThisPlatform).thenReturn(true);
   when(bibleReaders[1].key).thenReturn(BibleReaderKey.blueLetterApp);
