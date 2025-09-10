@@ -8,8 +8,8 @@ import 'bible_reader_book_keymap.dart';
 
 @LazySingleton(as: BibleReaders)
 @immutable
-class ProdBibleReaders extends BibleReaders {
-  const ProdBibleReaders()
+class ProductionBibleReaders extends BibleReaders {
+  const ProductionBibleReaders()
     : super(const [
         BibleReader(BibleReaderKeys.none, 'None', '', [TargetPlatform.android, TargetPlatform.iOS]),
         BibleReader(BibleReaderKeys.andBibleApp, 'AndBible app', 'https://read.andbible.org/BOOK.CHAPTER', []),

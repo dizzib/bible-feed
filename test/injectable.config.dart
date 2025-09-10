@@ -66,10 +66,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i505.TestPlatformService(),
       registerFor: {_test},
     );
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => const _i545.ProductionBibleReaders(),
+    );
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
-    gh.lazySingleton<_i1070.BibleReaders>(() => const _i545.ProdBibleReaders());
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProdPlatformService(),
       registerFor: {_prod},
