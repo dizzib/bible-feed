@@ -1,13 +1,17 @@
 This app helps you keep track of your daily bible reading if you are using the Professor Grant Horner reading plan.
 
-It removes the need for a printed sheet of paper or individual bookmarks.
+It removes the need for a printed sheet of paper or physical bookmarks.
 
 Tap each of the 10 reading lists to mark them as read then wait for the lists to automatically advanced at midnight, or manually advance them immediately.
 
 A linear indicator shows your progress in each list.
 
-If you are already on the PGH plan and using this app for the first time, you can set it up with your current reading position: tap the up/down icon or long press a cell to bring up a dialog where you can update the book and chapter.
+If you are already on the PGH plan and using this app for the first time, you can set it up with your current reading position: tap the up/down icon or long press a cell to show a dialog where you can update the book and chapter.
 
-Optionally tap the settings (cog) icon to configure an external bible reader, such as Blue Letter Bible or YouVersion, to open a chapter when tapped.
+Optionally tap the settings (cog) icon to configure these additional features:
+
+- to open an external bible reader, such as Blue Letter Bible or Logos, at the book/chapter/verse when tapped.
+- to split long chapters, such as Psalm 119 or Acts 7, into shorter sections.
+- to vibrate the device on tap or select.
 
 In John 6:57 Jesus says "he who feeds on Me will live because of Me", so let us feed on Him and His word daily and DO what He says, in obedience keeping His commandments to the end. Amen.
