@@ -1,5 +1,5 @@
-class BaseIterable<T> extends Iterable<T> {
-  const BaseIterable(this._items);
+class BaseList<T> extends Iterable<T> {
+  const BaseList(this._items);
 
   final List<T> _items;
 

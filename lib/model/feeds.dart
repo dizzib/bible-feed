@@ -5,12 +5,12 @@ import 'package:injectable/injectable.dart';
 
 import '/service/feed_store_service.dart';
 import '/service/verse_scope_service.dart';
-import 'base_iterable.dart';
+import 'base_list.dart';
 import 'feed.dart';
 import 'reading_lists.dart';
 
 @lazySingleton
-class Feeds extends BaseIterable<Feed> with ChangeNotifier {
+class Feeds extends BaseList<Feed> with ChangeNotifier {
   final FeedStoreService _feedStoreService;
 
   Feeds(this._feedStoreService, VerseScopeService verseScopeService, ReadingLists readingLists)
