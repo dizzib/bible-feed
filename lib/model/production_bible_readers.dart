@@ -6,8 +6,8 @@ import 'bible_reader_book_keymap.dart';
 import 'bible_reader_keys.dart';
 import 'bible_readers.dart';
 
-@LazySingleton(as: BibleReaders)
 @immutable
+@LazySingleton(as: BibleReaders)
 class ProductionBibleReaders extends BibleReaders {
   const ProductionBibleReaders()
     : super(const [
