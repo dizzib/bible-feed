@@ -22,8 +22,7 @@ platform :ios do
     )
 
     build_ios_app(
-      workspace: "../ios/Runner.xcworkspace",
-      # scheme: "YOUR_SCHEME", # Typically the same as your project name
+      workspace: "Runner.xcworkspace",
       export_method: "app-store",
       clean: true,
       export_options: {
