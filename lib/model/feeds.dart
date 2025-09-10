@@ -1,5 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'dart:core';
+
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import '/service/feed_store_service.dart';
@@ -11,10 +12,9 @@ import 'reading_lists.dart';
 class Feeds extends Iterable<Feed> with ChangeNotifier {
   final FeedStoreService _feedStoreService;
   final VerseScopeService _verseScopeService;
-  final ReadingLists _readingLists;
 
-  Feeds(this._feedStoreService, this._verseScopeService, this._readingLists) {
-    _feedList = _readingLists.map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl))).toList();
+  Feeds(this._feedStoreService, this._verseScopeService, ReadingLists readingLists) {
+    _feedList = readingLists.map((rl) => Feed(rl, _verseScopeService, _feedStoreService.loadState(rl))).toList();
 
     for (Feed f in _feedList) {
       if (f.state.dateModified?.isAfter(_lastModifiedFeed?.state.dateModified ?? DateTime(0)) ?? false) {
