@@ -9,7 +9,7 @@ abstract class PlatformService {
 
 @prod
 @LazySingleton(as: PlatformService)
-class ProdPlatformService extends PlatformService {
+class ProductionPlatformService extends PlatformService {
   @override
   bool get isAndroid => Platform.isAndroid;
 

@@ -3,11 +3,11 @@ import 'package:injectable/injectable.dart';
 
 @prod // prevent Haptics.canVibrate erroring in unit tests
 @lazySingleton
-class HapticAvailabilityService {
+class ProductionHapticAvailabilityService {
   @factoryMethod
   @preResolve
-  static Future<HapticAvailabilityService> create() async {
-    final hapticAvailabilityService = HapticAvailabilityService();
+  static Future<ProductionHapticAvailabilityService> create() async {
+    final hapticAvailabilityService = ProductionHapticAvailabilityService();
     hapticAvailabilityService._isAvailable = await Haptics.canVibrate();
     return hapticAvailabilityService;
   }

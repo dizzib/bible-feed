@@ -5,7 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:bible_feed/service/haptic_availability_service.dart' as _i2;
+import 'package:bible_feed/service/production_haptic_availability_service.dart'
+    as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i3;
 
@@ -23,11 +24,11 @@ import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [HapticAvailabilityService].
+/// A class which mocks [ProductionHapticAvailabilityService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHapticAvailabilityService extends _i1.Mock
-    implements _i2.HapticAvailabilityService {
+class MockProductionHapticAvailabilityService extends _i1.Mock
+    implements _i2.ProductionHapticAvailabilityService {
   @override
   bool get isAvailable =>
       (super.noSuchMethod(

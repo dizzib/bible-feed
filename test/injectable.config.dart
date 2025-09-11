@@ -23,11 +23,12 @@ import 'package:bible_feed/service/bible_reader_app_install_service.dart'
 import 'package:bible_feed/service/bible_reader_service.dart' as _i283;
 import 'package:bible_feed/service/feed_store_service.dart' as _i119;
 import 'package:bible_feed/service/feeds_advance_service.dart' as _i307;
-import 'package:bible_feed/service/haptic_availability_service.dart' as _i729;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
 import 'package:bible_feed/service/haptic_toggler_service.dart' as _i513;
 import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
+import 'package:bible_feed/service/production_haptic_availability_service.dart'
+    as _i789;
 import 'package:bible_feed/service/verse_scope_service.dart' as _i109;
 import 'package:bible_feed/service/verse_scope_toggler_service.dart' as _i430;
 import 'package:get_it/get_it.dart' as _i174;
@@ -73,17 +74,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
-    gh.lazySingleton<_i578.PlatformService>(
-      () => _i578.ProdPlatformService(),
-      registerFor: {_prod},
-    );
     gh.lazySingleton<_i430.VerseScopeTogglerService>(
       () => _i430.VerseScopeTogglerService(gh<_i460.SharedPreferences>()),
     );
-    await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
-      () => _i729.HapticAvailabilityService.create(),
+    await gh.lazySingletonAsync<_i789.ProductionHapticAvailabilityService>(
+      () => _i789.ProductionHapticAvailabilityService.create(),
       registerFor: {_prod},
       preResolve: true,
+    );
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i578.ProductionPlatformService(),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i283.BibleReaderService>(
       () => _i283.BibleReaderService(
@@ -95,7 +96,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i513.HapticTogglerService>(
       () => _i513.HapticTogglerService(
         gh<_i460.SharedPreferences>(),
-        gh<_i729.HapticAvailabilityService>(),
+        gh<_i789.ProductionHapticAvailabilityService>(),
       ),
     );
     gh.lazySingleton<_i109.VerseScopeService>(
