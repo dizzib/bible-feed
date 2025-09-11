@@ -1,3 +1,3 @@
 class HapticAvailabilityService {
-  bool get isAvailable => false;
+  bool get isAvailable => true;
 }
