@@ -29,6 +29,7 @@ import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
 import 'package:bible_feed/service/production_haptic_availability_service.dart'
     as _i789;
+import 'package:bible_feed/service/production_platform_service.dart' as _i455;
 import 'package:bible_feed/service/verse_scope_service.dart' as _i109;
 import 'package:bible_feed/service/verse_scope_toggler_service.dart' as _i430;
 import 'package:get_it/get_it.dart' as _i174;
@@ -83,7 +84,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i578.PlatformService>(
-      () => _i578.ProductionPlatformService(),
+      () => _i455.ProductionPlatformService(),
       registerFor: {_prod},
     );
     gh.lazySingleton<_i283.BibleReaderService>(
