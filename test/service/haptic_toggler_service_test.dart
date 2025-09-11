@@ -17,7 +17,7 @@ void main() {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    testee = HapticTogglerService(mockSharedPreferences, TestHapticAvailabilityService());
+    testee = HapticTogglerService(mockSharedPreferences, TestPlatformService());
   });
 
   test('default isEnabled is false', () async {
