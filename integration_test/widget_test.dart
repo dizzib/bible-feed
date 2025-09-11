@@ -1,6 +1,7 @@
 import 'package:bible_feed/injectable.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/production_reading_lists.dart';
+import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
@@ -21,11 +22,10 @@ extension Helper on WidgetTester {
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
 
   final gospels = ProductionReadingLists().elementAt(0);
   final matthew = gospels[0];
-
-  await configureDependencies();
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
     await t.initialiseWidget(
@@ -56,7 +56,7 @@ void main() async {
   testWidgets('FeedsView', (WidgetTester t) async {
     await t.initialiseWidget(FeedsView());
     expectChapters(1);
-    for (var l in sl<ProductionReadingLists>()) {
+    for (var l in sl<ReadingLists>()) {
       expectAtLeast1Text(l.name);
     }
   });
