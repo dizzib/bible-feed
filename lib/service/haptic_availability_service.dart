@@ -1,3 +1,5 @@
 class HapticAvailabilityService {
-  late final bool isAvailable;
+  HapticAvailabilityService(this.isAvailable);
+
+  final bool isAvailable;
 }

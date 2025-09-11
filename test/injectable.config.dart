@@ -73,6 +73,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => const _i545.ProductionBibleReaders(),
     );
     gh.lazySingleton<_i823.ReadingLists>(() => _i438.ProductionReadingLists());
+    gh.lazySingleton<_i729.HapticAvailabilityService>(
+      () => _i505.TestHapticAvailabilityService(),
+      registerFor: {_test},
+    );
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );

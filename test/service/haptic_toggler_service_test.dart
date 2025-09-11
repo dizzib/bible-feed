@@ -1,4 +1,3 @@
-import 'package:bible_feed/service/haptic_availability_service.dart';
 import 'package:bible_feed/service/haptic_toggler_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,9 +5,10 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../test_data.dart';
 import 'haptic_toggler_service_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<HapticAvailabilityService>(), MockSpec<SharedPreferences>()])
+@GenerateNiceMocks([MockSpec<SharedPreferences>()])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -17,9 +17,7 @@ void main() {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    final mockHapticAvailabilityService = MockHapticAvailabilityService();
-    when(mockHapticAvailabilityService.isAvailable).thenReturn(true);
-    testee = HapticTogglerService(mockSharedPreferences, mockHapticAvailabilityService);
+    testee = HapticTogglerService(mockSharedPreferences, TestHapticAvailabilityService());
   });
 
   test('default isEnabled is false', () async {

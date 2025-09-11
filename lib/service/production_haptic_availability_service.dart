@@ -6,11 +6,10 @@ import 'haptic_availability_service.dart';
 @prod
 @LazySingleton(as: HapticAvailabilityService)
 class ProductionHapticAvailabilityService extends HapticAvailabilityService {
+  ProductionHapticAvailabilityService(super.isAvailable);
+
   @factoryMethod
   @preResolve
-  static Future<ProductionHapticAvailabilityService> create() async {
-    final has = ProductionHapticAvailabilityService();
-    has.isAvailable = await Haptics.canVibrate();
-    return has;
-  }
+  static Future<ProductionHapticAvailabilityService> create() async =>
+      ProductionHapticAvailabilityService(await Haptics.canVibrate());
 }
