@@ -10,12 +10,7 @@ class ProductionHapticAvailabilityService extends HapticAvailabilityService {
   @preResolve
   static Future<ProductionHapticAvailabilityService> create() async {
     final has = ProductionHapticAvailabilityService();
-    has._isAvailable = await Haptics.canVibrate();
+    has.isAvailable = await Haptics.canVibrate();
     return has;
   }
-
-  late bool _isAvailable;
-
-  @override
-  bool get isAvailable => _isAvailable;
 }
