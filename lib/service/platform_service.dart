@@ -1,4 +1,6 @@
 abstract class PlatformService {
-  bool get isAndroid;
-  bool get isIOS;
+  PlatformService({required this.isAndroid, required this.isIOS});
+
+  final bool isAndroid;
+  final bool isIOS;
 }

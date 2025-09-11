@@ -18,9 +18,5 @@ class TestHapticAvailabilityService extends HapticAvailabilityService {
 @test
 @LazySingleton(as: PlatformService)
 class TestPlatformService extends PlatformService {
-  @override
-  bool get isAndroid => false;
-
-  @override
-  bool get isIOS => true;
+  TestPlatformService() : super(isAndroid: false, isIOS: true);
 }
