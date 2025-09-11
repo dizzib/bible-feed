@@ -43,6 +43,7 @@ dependencies:
   watch_it: ^1.6.5
 
 dev_dependencies:
+  alchemist: ^0.12.1
   build_runner: ^2.7.0
   flutter_driver:
     sdk: flutter

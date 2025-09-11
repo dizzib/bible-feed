@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 
 import 'feeds_advance_service.dart';
 
-@prod // disable log noise in unit tests
 @singleton // cannot be lazy, else https://github.com/dart-lang/tools/issues/705 manifests in integration test
 class AutoAdvanceService with ChangeNotifier {
   final FeedsAdvanceService _feedsAdvanceService;

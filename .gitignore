@@ -45,6 +45,11 @@ build
 fastlane/README.md
 fastlane/report.xml
 
+# golden tests
+**/goldens/ci
+**/goldens/macos
+**/goldens/linux
+
 # Symbolication related
 app.*.symbols
 

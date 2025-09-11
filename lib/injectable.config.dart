@@ -124,15 +124,14 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       registerFor: {_prod},
     );
+    gh.singleton<_i148.AutoAdvanceService>(
+      () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
+    );
     gh.lazySingleton<_i136.AllDoneDialogService>(
       () => _i136.AllDoneDialogService(
         gh<_i307.FeedsAdvanceService>(),
         gh<_i759.Feeds>(),
       ),
-    );
-    gh.singleton<_i148.AutoAdvanceService>(
-      () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
-      registerFor: {_prod},
     );
     return this;
   }
