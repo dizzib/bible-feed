@@ -7,6 +7,18 @@ import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
 
+enum Devices {
+  googlePixel3(density: 3, size: Size(1080, 2160)),
+  iPhone8Plus(density: 3, size: Size(1242, 2208));
+
+  const Devices({required this.density, required this.size});
+
+  final double density;
+  final Size size;
+
+  Size get logicalSize => size / density;
+}
+
 Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
@@ -35,7 +47,7 @@ Future<void> main() async {
     ];
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 2; col++) {
-        var feed = sl<Feeds>()[row * 2 + col];
+        final feed = sl<Feeds>()[row * 2 + col];
         feed.setBookAndChapter(bookState[row][col], chapterState[row][col]);
         if (chapterReadState[row][col] == 1) feed.toggleIsRead();
       }
@@ -47,26 +59,35 @@ Future<void> main() async {
   goldenTest(
     'screenshot',
     fileName: 'android',
+    pumpBeforeTest: (t) {
+      t.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+      return t.pumpAndSettle();
+    },
     whilePerforming: (t) async {
       await t.longPress(find.text('Epistles II'));
       await t.pumpAndSettle();
       return;
     },
-    builder:
-        () => GoldenTestGroup(
-          children: [
-            GoldenTestScenario(
-              name: 'android',
-              constraints: BoxConstraints.tight(const Size(400, 800)),
-              child: AppBase(),
-            ),
-          ],
-        ),
+    builder: () {
+      return GoldenTestGroup(
+        children: [
+          GoldenTestScenario(
+            name: 'android',
+            constraints: BoxConstraints.tight(Devices.googlePixel3.logicalSize),
+            child: AppBase(),
+          ),
+        ],
+      );
+    },
   );
 
   goldenTest(
     'screenshot ios',
     fileName: 'ios',
+    pumpBeforeTest: (t) {
+      t.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+      return t.pumpAndSettle();
+    },
     whilePerforming: (t) async {
       await t.tap(find.byKey(const Key('settingsIconButton')));
       await t.pumpAndSettle();
@@ -75,7 +96,11 @@ Future<void> main() async {
     builder:
         () => GoldenTestGroup(
           children: [
-            GoldenTestScenario(name: 'ios', constraints: BoxConstraints.tight(const Size(600, 1200)), child: AppBase()),
+            GoldenTestScenario(
+              name: 'ios',
+              constraints: BoxConstraints.tight(Devices.iPhone8Plus.logicalSize),
+              child: AppBase(),
+            ),
           ],
         ),
   );
