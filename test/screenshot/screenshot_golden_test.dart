@@ -8,16 +8,32 @@ import 'package:watch_it/watch_it.dart';
 import '../injectable.dart';
 
 enum Devices {
-  googlePixel3(density: 3, size: Size(1080, 2160)),
-  iPhone8Plus(density: 3, size: Size(1242, 2208));
+  googlePixel3('google-pixel-3', Size(1080, 2160), density: 3),
+  iPhone8Plus('iphone-8-plus', Size(1242, 2208), density: 3);
 
-  const Devices({required this.density, required this.size});
+  const Devices(this.name, this.size, {required this.density});
 
-  final double density;
+  final String name;
   final Size size;
+  final double density;
 
   Size get logicalSize => size / density;
 }
+
+class Scenario {
+  const Scenario(this.name, {this.brightness = Brightness.light, this.gesture});
+
+  final String name;
+  final Brightness brightness;
+  final Future<void> Function(WidgetTester)? gesture;
+}
+
+final scenarios = {
+  const Scenario('home'),
+  Scenario('bookChapterDialog', gesture: (t) async => await t.longPress(find.text('Epistles II'))),
+  Scenario('settings', gesture: (t) async => await t.tap(find.byKey(const Key('settingsIconButton')))),
+  const Scenario('home', brightness: Brightness.dark),
+};
 
 Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -56,52 +72,32 @@ Future<void> main() async {
 
   setState();
 
-  goldenTest(
-    'screenshot',
-    fileName: 'android',
-    pumpBeforeTest: (t) {
-      t.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
-      return t.pumpAndSettle();
-    },
-    whilePerforming: (t) async {
-      await t.longPress(find.text('Epistles II'));
-      await t.pumpAndSettle();
-      return;
-    },
-    builder: () {
-      return GoldenTestGroup(
-        children: [
-          GoldenTestScenario(
-            name: 'android',
-            constraints: BoxConstraints.tight(Devices.googlePixel3.logicalSize),
-            child: AppBase(),
-          ),
-        ],
+  for (final device in Devices.values) {
+    for (final (index, scenario) in scenarios.indexed) {
+      goldenTest(
+        'screenshot',
+        fileName: '${device.name}-$index-${scenario.name}',
+        pumpBeforeTest: (t) {
+          t.platformDispatcher.platformBrightnessTestValue = scenario.brightness;
+          return t.pumpAndSettle();
+        },
+        whilePerforming: (t) async {
+          if (scenario.gesture != null) await scenario.gesture!(t);
+          await t.pumpAndSettle();
+          return;
+        },
+        builder: () {
+          return GoldenTestGroup(
+            children: [
+              GoldenTestScenario(
+                name: '', // displayed on top of screenshot
+                constraints: BoxConstraints.tight(device.logicalSize),
+                child: AppBase(),
+              ),
+            ],
+          );
+        },
       );
-    },
-  );
-
-  goldenTest(
-    'screenshot ios',
-    fileName: 'ios',
-    pumpBeforeTest: (t) {
-      t.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-      return t.pumpAndSettle();
-    },
-    whilePerforming: (t) async {
-      await t.tap(find.byKey(const Key('settingsIconButton')));
-      await t.pumpAndSettle();
-      return;
-    },
-    builder:
-        () => GoldenTestGroup(
-          children: [
-            GoldenTestScenario(
-              name: 'ios',
-              constraints: BoxConstraints.tight(Devices.iPhone8Plus.logicalSize),
-              child: AppBase(),
-            ),
-          ],
-        ),
-  );
+    }
+  }
 }
