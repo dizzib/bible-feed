@@ -15,7 +15,8 @@ enum Platforms { android, iOS }
 
 enum Devices {
   googlePixel3('google-pixel-3', Platforms.android, Size(1080, 2160), density: 3),
-  iPhone8Plus('iphone-8-plus', Platforms.iOS, Size(1242, 2208), density: 3);
+  iPhoneXsMax('iphone-XsMax', Platforms.iOS, Size(1242, 2688), density: 3);
+  // iPhone8Plus('iphone-8-plus', Platforms.iOS, Size(1242, 2208), density: 3);
 
   const Devices(this.name, this.platform, this.size, {required this.density});
 
