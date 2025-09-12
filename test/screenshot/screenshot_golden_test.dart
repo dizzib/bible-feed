@@ -1,6 +1,9 @@
 @Tags(['screenshots'])
 library;
 
+// This script only generates screenshots.
+// They are resized and moved to fastlane by external scripts.
+
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/verse_scope_toggler_service.dart';
