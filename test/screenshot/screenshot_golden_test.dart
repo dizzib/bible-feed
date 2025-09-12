@@ -1,8 +1,6 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/view/app_base.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
