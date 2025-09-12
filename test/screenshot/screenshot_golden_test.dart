@@ -80,6 +80,7 @@ Future<void> main() async {
 
   for (final device in Devices.values) {
     for (final (index, scenario) in scenarios.indexed) {
+      // seems to generate in background, even after await!?
       goldenTest(
         'screenshot',
         fileName: '${device.platform.name}/${device.name}_$index-${scenario.name}',
