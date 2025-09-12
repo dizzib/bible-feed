@@ -8,13 +8,16 @@ import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
 
-enum Devices {
-  googlePixel3('google-pixel-3', Size(1080, 2160), density: 3),
-  iPhone8Plus('iphone-8-plus', Size(1242, 2208), density: 3);
+enum Platforms { android, iOS }
 
-  const Devices(this.name, this.size, {required this.density});
+enum Devices {
+  googlePixel3('google-pixel-3', Platforms.android, Size(1080, 2160), density: 3),
+  iPhone8Plus('iphone-8-plus', Platforms.iOS, Size(1242, 2208), density: 3);
+
+  const Devices(this.name, this.platform, this.size, {required this.density});
 
   final String name;
+  final Platforms platform;
   final Size size;
   final double density;
 
@@ -79,7 +82,7 @@ Future<void> main() async {
     for (final (index, scenario) in scenarios.indexed) {
       goldenTest(
         'screenshot',
-        fileName: '${device.name}_$index-${scenario.name}',
+        fileName: '${device.platform.name}/${device.name}_$index-${scenario.name}',
         pumpBeforeTest: (t) {
           t.platformDispatcher.platformBrightnessTestValue = scenario.brightness;
           return t.pumpAndSettle();
