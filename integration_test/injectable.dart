@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -18,10 +17,6 @@ Future configureDependencies() async {
 
 @module // register third-party
 abstract class RegisterModule {
-  @preResolve
-  @singleton
-  Future<PackageInfo> get packageInfo => PackageInfo.fromPlatform();
-
   // TODO replace with SharedPreferencesWithCache when it supports unit tests
   // https://github.com/flutter/flutter/issues/159597
   @preResolve
