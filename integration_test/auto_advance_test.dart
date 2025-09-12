@@ -2,13 +2,10 @@ import 'package:bible_feed/extension/object.dart';
 import 'package:clock/clock.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
 
 import 'helper.dart';
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
   var now = DateTime.now();
   var midnightTonight = DateTime(now.year, now.month, now.day + 1);
   var durationToMidnight = midnightTonight.difference(now).log();

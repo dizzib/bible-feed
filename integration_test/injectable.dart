@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -12,6 +13,7 @@ class AutoAdvanceService {}
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
 Future configureDependencies() async {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   await di.init(environment: 'prod'); // use production reading lists
 }
 

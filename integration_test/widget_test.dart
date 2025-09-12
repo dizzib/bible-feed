@@ -9,7 +9,6 @@ import 'package:bible_feed/view/feed_card.dart';
 import 'package:bible_feed/view/feeds_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
 import 'package:watch_it/watch_it.dart';
 
 import 'helper.dart';
@@ -21,7 +20,6 @@ extension Helper on WidgetTester {
 }
 
 void main() async {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
 
   final gospels = ProductionReadingLists().elementAt(0);

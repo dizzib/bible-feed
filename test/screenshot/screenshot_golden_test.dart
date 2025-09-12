@@ -1,3 +1,6 @@
+@Tags(['screenshots'])
+library;
+
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/verse_scope_toggler_service.dart';
@@ -40,7 +43,6 @@ final scenarios = {
 };
 
 Future<void> main() async {
-  TestWidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   sl<VerseScopeTogglerService>().isEnabled = true; // enable verse scopes
   WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
