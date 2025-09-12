@@ -18,5 +18,5 @@ class TestAppService extends AppService {
 @test
 @LazySingleton(as: PlatformService)
 class TestPlatformService extends PlatformService {
-  TestPlatformService() : super(isAndroid: false, isIOS: true, isHapticAvailable: true);
+  TestPlatformService() : super(isAndroid: true, isIOS: false, isHapticAvailable: true);
 }

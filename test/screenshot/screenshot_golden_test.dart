@@ -1,5 +1,6 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/model/feeds.dart';
+import 'package:bible_feed/service/verse_scope_toggler_service.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -38,6 +39,8 @@ final scenarios = {
 Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
+  sl<VerseScopeTogglerService>().isEnabled = true; // enable verse scopes
+  WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
 
   void setState() {
     var bookState = [
@@ -50,7 +53,7 @@ Future<void> main() async {
     var chapterState = [
       [5, 12],
       [4, 2],
-      [40, 119],
+      [40, 144],
       [15, 17],
       [40, 7],
     ];
@@ -59,7 +62,7 @@ Future<void> main() async {
       [0, 0],
       [1, 0],
       [0, 1],
-      [1, 1],
+      [1, 0],
     ];
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 2; col++) {
@@ -76,7 +79,7 @@ Future<void> main() async {
     for (final (index, scenario) in scenarios.indexed) {
       goldenTest(
         'screenshot',
-        fileName: '${device.name}-$index-${scenario.name}',
+        fileName: '${device.name}_$index-${scenario.name}',
         pumpBeforeTest: (t) {
           t.platformDispatcher.platformBrightnessTestValue = scenario.brightness;
           return t.pumpAndSettle();
