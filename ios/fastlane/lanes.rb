@@ -46,10 +46,8 @@ platform :ios do
         email_address: ENV["APP_REVIEW_EMAIL"],
         phone_number: ENV["APP_REVIEW_PHONE"],
       },
-      metadata_path: "./metadata",
-      overwrite_screenshots: true,
-      screenshots_path: "./screenshots",
-      skip_screenshots: false,
+      copyright: "#{Time.now.year} #{ENV["APP_REVIEW_FIRST_NAME"]} #{ENV["APP_REVIEW_LAST_NAME"]}",
+      precheck_include_in_app_purchases: false,
       submit_for_review: false,
     )
   end
