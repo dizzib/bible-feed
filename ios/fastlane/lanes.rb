@@ -43,6 +43,11 @@ platform :ios do
   lane :upload_meta do
     desc "Upload metadata"
 
+    $release_notes = read_changelog(
+      changelog_path: '../CHANGELOG.md',
+      section_identifier: "[#{$vname}]"
+    )
+
     deliver(
       app_review_information: {
         first_name: ENV["APP_REVIEW_FIRST_NAME"],
@@ -55,6 +60,9 @@ platform :ios do
       force: true,
       # ipa: "../build/bible-feed.ipa",
       precheck_include_in_app_purchases: false,
+      release_notes: {
+        'en-GB' => $release_notes,
+      },
       submit_for_review: false,
     )
   end
