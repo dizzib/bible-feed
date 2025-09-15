@@ -39,16 +39,16 @@ platform :ios do
   lane :upload_meta do
     desc "Upload metadata"
 
-    app_review_information(
-      first_name: ENV["APP_REVIEW_FIRST_NAME"],
-      last_name: ENV["APP_REVIEW_LAST_NAME"],
-      email_address: ENV["APP_REVIEW_EMAIL"],
-      phone_number: ENV["APP_REVIEW_PHONE"],
-    )
-
     deliver(
-      submit_for_review: false,
+      app_review_information: {
+        first_name: ENV["APP_REVIEW_FIRST_NAME"],
+        last_name: ENV["APP_REVIEW_LAST_NAME"],
+        email_address: ENV["APP_REVIEW_EMAIL"],
+        phone_number: ENV["APP_REVIEW_PHONE"],
+      },
       metadata_path: "./metadata",
+      screenshots_path: "./screenshots",
+      submit_for_review: false,
     )
   end
 
