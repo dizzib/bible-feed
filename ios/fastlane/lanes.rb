@@ -1,3 +1,7 @@
+require "yaml"
+ver = YAML.load_file("../../pubspec.yaml")["version"]
+$vname, $vcode = ver.split('+')[0], ver.split('+')[1]
+
 platform :ios do
   $app_identifier = "com.me2christ.bible-feed" # bundle ID
   $api_key = app_store_connect_api_key(
@@ -46,6 +50,7 @@ platform :ios do
         email_address: ENV["APP_REVIEW_EMAIL"],
         phone_number: ENV["APP_REVIEW_PHONE"],
       },
+      app_version: $vname,
       copyright: "#{Time.now.year} #{ENV["APP_REVIEW_FIRST_NAME"]} #{ENV["APP_REVIEW_LAST_NAME"]}",
       precheck_include_in_app_purchases: false,
       submit_for_review: false,
