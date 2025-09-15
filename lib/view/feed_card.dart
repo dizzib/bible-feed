@@ -30,27 +30,35 @@ class FeedCard extends WatchingWidget {
       child: Card(
         elevation: feed.state.isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          enableFeedback: false,
-          onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
-          onTap: () {
-            sl<HapticService>().impact();
-            sl<BibleReaderService>().launchLinkedBibleReader(feed.state);
-            feed.toggleIsRead();
-          },
-          child: LayoutBuilder(
-            builder:
-                (_, BoxConstraints c) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
-                    LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
-                    DefaultTextStyle.merge(
-                      style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
-                      child: FeedCardBookChapter(feed),
-                    ),
-                  ],
-                ),
+        child: Semantics(
+          excludeSemantics: true,
+          label:
+              '${feed.state.book.name} chapter ${feed.state.chapter} is currently ${feed.state.isRead ? 'read' : 'unread'}',
+          hint: '''
+              Tap to ${brs.isLinked && !feed.state.isRead ? 'open Bible reader and' : ''} mark as ${feed.state.isRead ? 'unread' : 'read'}.
+              Long press to change the book and chapter.''',
+          child: InkWell(
+            enableFeedback: false,
+            onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
+            onTap: () {
+              sl<HapticService>().impact();
+              sl<BibleReaderService>().launchLinkedBibleReader(feed.state);
+              feed.toggleIsRead();
+            },
+            child: LayoutBuilder(
+              builder:
+                  (_, BoxConstraints c) => Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
+                      LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
+                      DefaultTextStyle.merge(
+                        style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
+                        child: FeedCardBookChapter(feed),
+                      ),
+                    ],
+                  ),
+            ),
           ),
         ),
       ),
