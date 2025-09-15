@@ -8,6 +8,7 @@ class SettingsIconButton extends StatelessWidget {
   build(BuildContext context) => IconButton(
     key: const Key('settingsIconButton'), // for generate screenshots
     icon: const Icon(Icons.settings, size: 32),
+    tooltip: 'Open settings',
     onPressed: () => context.navigateTo(Settings()),
   );
 }
