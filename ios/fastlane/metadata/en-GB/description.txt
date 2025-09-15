@@ -2,7 +2,7 @@ This app helps you keep track of your daily bible reading if you are using the P
 
 It removes the need for a printed sheet of paper or physical bookmarks.
 
-Tap each of the 10 reading lists to mark them as read then wait for the lists to automatically advanced at midnight, or manually advance them immediately.
+Tap each of the 10 reading lists to mark them as read then wait for the lists to automatically advanced at midnight, or manually advance them immediately. The lists will not advance unless all 10 are marked as read.
 
 A linear indicator shows your progress in each list.
 
@@ -14,4 +14,4 @@ Optionally tap the settings (cog) icon to configure these additional features:
 - to split long chapters, such as Psalm 119 or Acts 7, into shorter sections.
 - to vibrate the device on tap or select.
 
-In John 6:57 Jesus says "he who feeds on Me will live because of Me", so let us feed on Him and His word daily and DO what He says, in obedience keeping His commandments to the end. Amen.
+In John 6:57 Jesus says "he that eateth me, even he shall live by me", so let us feed on Him and His word daily and do what He says, in obedience keeping His commandments to the end. Amen.
