@@ -52,6 +52,8 @@ platform :ios do
       },
       app_version: $vname,
       copyright: "#{Time.now.year} #{ENV["APP_REVIEW_FIRST_NAME"]} #{ENV["APP_REVIEW_LAST_NAME"]}",
+      force: true,
+      # ipa: "../build/bible-feed.ipa",
       precheck_include_in_app_purchases: false,
       submit_for_review: false,
     )
