@@ -21,7 +21,6 @@ platform :android do
   desc "Populate changelog"
   lane :populate_changelog do
     changelog = read_changelog(
-      changelog_path: '../CHANGELOG.md',
       section_identifier: "[#{$vname}]"
     )
     file = "./metadata/android/en-US/changelogs/#{$vcode}.txt"
