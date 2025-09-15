@@ -47,7 +47,9 @@ platform :ios do
         phone_number: ENV["APP_REVIEW_PHONE"],
       },
       metadata_path: "./metadata",
+      overwrite_screenshots: true,
       screenshots_path: "./screenshots",
+      skip_screenshots: false,
       submit_for_review: false,
     )
   end
