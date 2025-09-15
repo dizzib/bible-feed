@@ -42,7 +42,6 @@ flutter_jank_metrics_*.json
 build
 
 # fastlane
-fastlane/README.md
 fastlane/report.xml
 
 # golden tests
