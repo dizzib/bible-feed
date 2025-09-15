@@ -30,6 +30,7 @@ class BlueLetterBookKeyMap extends BibleReaderBookKeyMap {
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
+    'jud': 'jde',
     'mar': 'mrk',
     'obd': 'oba',
     'prv': 'pro',
