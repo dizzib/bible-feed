@@ -39,10 +39,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios upload_ipa
+### ios upload_ipa_to_testflight
 
 ```sh
-[bundle exec] fastlane ios upload_ipa
+[bundle exec] fastlane ios upload_ipa_to_testflight
 ```
 
 

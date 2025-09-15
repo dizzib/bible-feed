@@ -57,7 +57,7 @@ platform :ios do
     )
   end
 
-  lane :upload_ipa do
+  lane :upload_ipa_to_testflight do
     desc "Upload ipa to TestFlight"
 
     upload_to_testflight(
