@@ -12,12 +12,13 @@ class ProductionBibleReaders extends BibleReaders {
   const ProductionBibleReaders()
     : super(const [
         BibleReader(BibleReaderKeys.none, 'None', '', [TargetPlatform.android, TargetPlatform.iOS]),
+        // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
         BibleReader(BibleReaderKeys.andBibleApp, 'AndBible app', 'https://read.andbible.org/BOOK.CHAPTER', []),
         BibleReader(
           BibleReaderKeys.blueLetterApp,
           'Blue Letter Bible app',
           'blb://BOOK/CHAPTER',
-          [TargetPlatform.iOS],
+          [TargetPlatform.iOS], // android has Open by default -> '0 verified links' and does not open!?
           bookKeyMap: BlueLetterBookKeyMap(),
           uriVersePath: '/VERSE',
         ),
