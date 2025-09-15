@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 
 
+## [1.5.2] - 2025-09-15
+
+### Changed
+- fixed Blue Letter Bible link to Jude
+
+
 ## [1.5.1] - 2025-09-08
 
 ### Changed
