@@ -17,18 +17,22 @@ import '../injectable.dart';
 enum Platforms { android, iOS }
 
 enum Devices {
-  googlePixel3('google-pixel-3', Platforms.android, Size(1080, 2160), density: 3),
-  iPhoneXsMax('iphone-XsMax', Platforms.iOS, Size(1242, 2688), density: 3);
-  // iPhone8Plus('iphone-8-plus', Platforms.iOS, Size(1242, 2208), density: 3);
+  googlePixel3(true, 'google-pixel-3', Platforms.android, Size(1080, 2160), density: 3),
+  iPadPro12_9(true, 'ipad-pro-12_9', Platforms.iOS, Size(2048, 2732), density: 2, inches: 12.9),
+  iPhoneXsMax(true, 'iphone-xs-max', Platforms.iOS, Size(1242, 2688), density: 3, inches: 6.5),
+  iPhone16Pro(false, 'iphone-16-pro', Platforms.iOS, Size(1206, 2622), density: 3, inches: 6.3),
+  iPhone8Plus(false, 'iphone-8-plus', Platforms.iOS, Size(1242, 2208), density: 3, inches: 5.5);
 
-  const Devices(this.name, this.platform, this.size, {required this.density});
+  const Devices(this.enabled, this.name, this.platform, this.physicalSize, {required this.density, this.inches});
 
+  final bool enabled;
   final String name;
   final Platforms platform;
-  final Size size;
+  final Size physicalSize;
   final double density;
+  final double? inches;
 
-  Size get logicalSize => size / density;
+  Size get logicalSize => physicalSize / density;
 }
 
 class Scenario {
@@ -84,7 +88,7 @@ Future<void> main() async {
 
   setState();
 
-  for (final device in Devices.values) {
+  for (final device in Devices.values.where((d) => d.enabled)) {
     for (final (index, scenario) in scenarios.indexed) {
       // seems to generate in background, even after await!?
       goldenTest(
