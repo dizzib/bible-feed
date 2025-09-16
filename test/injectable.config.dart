@@ -71,9 +71,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1070.BibleReaders>(
       () => const _i545.ProductionBibleReaders(),
     );
-    gh.lazySingleton<_i977.AppService>(
-      () => _i505.TestAppService(),
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i505.TestAppService.create(),
       registerFor: {_test},
+      preResolve: true,
     );
     gh.lazySingleton<_i823.ReadingLists>(() => _i438.ProductionReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(

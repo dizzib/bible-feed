@@ -1,4 +1,6 @@
 import 'package:bible_feed/model/book.dart';
+import 'dart:io';
+import 'package:yaml/yaml.dart';
 import 'package:bible_feed/model/reading_list.dart';
 import 'package:bible_feed/service/app_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
@@ -12,7 +14,15 @@ var rl1 = ReadingList('rl1', 'Reading List 1', const [b0, b1]);
 @test
 @LazySingleton(as: AppService)
 class TestAppService extends AppService {
-  TestAppService() : super(buildNumber: '15', version: '1.5.1');
+  TestAppService({required super.buildNumber, required super.version});
+
+  @factoryMethod
+  @preResolve
+  static Future<TestAppService> create() async {
+    final yaml = loadYaml(await File('pubspec.yaml').readAsString());
+    final versionAndBuild = yaml['version'].split('+');
+    return TestAppService(buildNumber: versionAndBuild[1].toString(), version: versionAndBuild[0].toString());
+  }
 }
 
 @test
