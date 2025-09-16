@@ -28,6 +28,7 @@ ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
 /fastlane/preview.html
 /fastlane/report.xml
+/fastlane/screenshots/
 
 # Exceptions to above rules.
 !default.mode1v3
