@@ -25,7 +25,7 @@ class FeedCard extends WatchingWidget {
     return AnimatedOpacity(
       opacity: feed.state.isRead ? 0.25 : 1,
       duration: Duration(
-        milliseconds: feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed) ? 30000 : 0,
+        seconds: feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed) ? 30 : 0,
       ),
       child: Card(
         elevation: feed.state.isRead ? 0 : 12,
