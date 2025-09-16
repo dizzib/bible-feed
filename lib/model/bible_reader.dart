@@ -1,10 +1,10 @@
-import 'package:bible_feed/model/bible_reader_keys.dart';
-import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '/service/platform_service.dart';
 import 'bible_reader_book_keymap.dart';
+import 'bible_reader_keys.dart';
 import 'feed.dart';
 import 'feeds.dart';
 

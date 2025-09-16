@@ -1,6 +1,6 @@
-import 'package:bible_feed/model/list_wheel_state.dart';
 import 'package:injectable/injectable.dart';
 
+import '/model/list_wheel_state.dart';
 import 'bible_reader_service.dart';
 import 'haptic_service.dart';
 import 'haptic_toggler_service.dart';

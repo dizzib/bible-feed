@@ -1,7 +1,7 @@
-import 'package:bible_feed/model/bible_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '/model/bible_reader.dart';
 import '/service/bible_reader_service.dart';
 import 'bible_reader_link_icon.dart';
 

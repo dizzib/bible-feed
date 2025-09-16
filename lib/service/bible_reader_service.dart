@@ -1,10 +1,10 @@
-import 'package:bible_feed/model/bible_reader_keys.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/bible_reader.dart';
+import '/model/bible_reader_keys.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
 import '/service/bible_reader_app_install_service.dart';
