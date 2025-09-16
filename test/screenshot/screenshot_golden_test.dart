@@ -18,7 +18,7 @@ enum Platforms { android, iOS }
 
 enum Devices {
   googlePixel3(true, 'google-pixel-3', Platforms.android, Size(1080, 2160), density: 3),
-  iPadPro12_9(true, 'ipad-pro-12_9', Platforms.iOS, Size(2048, 2732), density: 2, inches: 12.9),
+  iPadPro12(true, 'ipadPro129', Platforms.iOS, Size(2048, 2732), density: 2, inches: 12.9), // name must be ipadPro129 to upload to 3rd-gen slot (13")
   iPhoneXsMax(true, 'iphone-xs-max', Platforms.iOS, Size(1242, 2688), density: 3, inches: 6.5),
   iPhone16Pro(false, 'iphone-16-pro', Platforms.iOS, Size(1206, 2622), density: 3, inches: 6.3),
   iPhone8Plus(false, 'iphone-8-plus', Platforms.iOS, Size(1242, 2208), density: 3, inches: 5.5);
