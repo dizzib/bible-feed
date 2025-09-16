@@ -10,7 +10,7 @@ If you are already on the PGH plan and using this app for the first time, you ca
 
 Optionally tap the settings (cog) icon to configure these additional features:
 
-- to open an external bible reader, such as Blue Letter Bible or Logos, at the book/chapter/verse when tapped.
+- to open an external bible reader, such as Blue Letter Bible or Logos, at the book/chapter/verse when tapped. This feature works well in split screen mode on a tablet.
 - to split long chapters, such as Psalm 119 or Acts 7, into shorter sections.
 - to vibrate the device on tap or select.
 
