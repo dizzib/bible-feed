@@ -18,6 +18,5 @@ targets:
             - lib/injectable.dart
             - lib/model/*.dart
             - lib/service/*.dart
-            - test/injectable.dart
-            - test/test_data.dart
+            - test/*.dart
             - integration_test/injectable.dart

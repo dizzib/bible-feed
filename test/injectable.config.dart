@@ -37,6 +37,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
+import 'test_app_service.dart' as _i963;
 import 'test_data.dart' as _i505;
 
 const String _test = 'test';
@@ -68,13 +69,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i505.TestPlatformService(),
       registerFor: {_test},
     );
-    gh.lazySingleton<_i1070.BibleReaders>(
-      () => const _i545.ProductionBibleReaders(),
-    );
     await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i505.TestAppService.create(),
+      () => _i963.TestAppService.create(),
       registerFor: {_test},
       preResolve: true,
+    );
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => const _i545.ProductionBibleReaders(),
     );
     gh.lazySingleton<_i823.ReadingLists>(() => _i438.ProductionReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(
