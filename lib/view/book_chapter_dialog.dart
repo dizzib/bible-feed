@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -25,7 +27,10 @@ class BookChapterDialog extends StatelessWidget {
           (_, constraints) => Dialog(
             clipBehavior: Clip.hardEdge,
             child: Container(
-              constraints: BoxConstraints(maxHeight: constraints.maxHeight * 0.8, maxWidth: 300),
+              constraints: BoxConstraints(
+                maxHeight: constraints.maxHeight * 0.8,
+                maxWidth: [300, constraints.maxWidth * 0.5].reduce(max).toDouble(),
+              ),
               child: Column(
                 children: [
                   Visibility(
