@@ -69,7 +69,7 @@ void main() async {
 
       // act
       testee = BibleReaderService(BibleReaderAppInstallService(), mockSharedPreferences, bibleReaders);
-      await testee.launchLinkedBibleReader(state);
+      final retval = await testee.launchLinkedBibleReader(state);
 
       // assert
       if (expectLaunch) {
@@ -77,6 +77,7 @@ void main() async {
       } else {
         verifyNever(bibleReaders[1].launch(state));
       }
+      expect(retval, ok);
       if (!ok) verify(mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
     },
   );
