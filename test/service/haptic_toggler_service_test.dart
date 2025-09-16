@@ -5,7 +5,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../test_data.dart';
+import '../test_platform_service.dart';
 import 'haptic_toggler_service_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<SharedPreferences>()])
