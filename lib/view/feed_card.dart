@@ -7,6 +7,7 @@ import '/model/feeds.dart';
 import '/service/bible_reader_service.dart';
 import '/service/haptic_service.dart';
 import '/service/verse_scope_toggler_service.dart';
+import 'bible_reader_launch_failed_dialog.dart';
 import 'book_chapter_dialog.dart';
 import 'feed_card_book_chapter.dart';
 import 'feed_card_title_bar.dart';
@@ -40,9 +41,10 @@ class FeedCard extends WatchingWidget {
           child: InkWell(
             enableFeedback: false,
             onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
-            onTap: () {
+            onTap: () async {
               sl<HapticService>().impact();
-              sl<BibleReaderService>().launchLinkedBibleReader(feed.state);
+              final ok = await sl<BibleReaderService>().launchLinkedBibleReader(feed.state);
+              if (!ok && context.mounted) context.showDialogWithBlurBackground(BibleReaderLaunchFailedDialog());
               feed.toggleIsRead();
             },
             child: LayoutBuilder(
