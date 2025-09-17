@@ -1,10 +1,11 @@
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_keys.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:parameterized_test/parameterized_test.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 
@@ -16,10 +17,11 @@ class MockUrlLauncher extends MockUrlLauncherPlatform with MockPlatformInterface
 
 @GenerateNiceMocks([MockSpec<Feed>(), MockSpec<UrlLauncherPlatform>()])
 void main() {
-  final mockUrlLauncher = MockUrlLauncher();
+  late MockUrlLauncher mockUrlLauncher;
   late BibleReader testee;
 
   setUp(() {
+    mockUrlLauncher = MockUrlLauncher();
     testee = const BibleReader(BibleReaderKeys.blueLetterApp, 'Reader name', 'scheme://uri/BOOK/CHAPTER', [
       TargetPlatform.android,
       TargetPlatform.iOS,
@@ -45,6 +47,16 @@ void main() {
     test('in verse scope, should launch with verse path', () async {
       await testee.launch(FeedState(book: b0, verse: 2));
       verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1/2', any)).called(1);
+    });
+
+    parameterizedTest('no exception thrown, should return launchUrl return value', [true, false], (retval) async {
+      when(mockUrlLauncher.launchUrl(any, any)).thenAnswer((_) async => retval);
+      expect(await testee.launch(FeedState(book: b0, verse: 1)), retval);
+    });
+
+    test('PlatformException thrown, should return false', () async {
+      when(mockUrlLauncher.launchUrl(any, any)).thenThrow(PlatformException);
+      expect(await testee.launch(FeedState(book: b0, verse: 2)), false);
     });
   });
 
