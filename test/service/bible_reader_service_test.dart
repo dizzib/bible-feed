@@ -61,15 +61,15 @@ void main() async {
       ['blueLetterApp', false, true, true],
       ['blueLetterApp', false, true, false],
     ],
-    (String? bibleReaderKey, bool isRead, bool expectLaunch, [bool ok = true]) async {
+    (String? bibleReaderKey, bool isRead, bool expectLaunch, [bool expectOk = true]) async {
       // arrange
       final state = FeedState(book: b0, isRead: isRead);
-      when(bibleReaders[1].launch(state)).thenAnswer((_) async => ok);
+      when(bibleReaders[1].launch(state)).thenAnswer((_) async => expectOk);
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
 
       // act
       testee = BibleReaderService(BibleReaderAppInstallService(), mockSharedPreferences, bibleReaders);
-      final retval = await testee.launchLinkedBibleReader(state);
+      final ok = await testee.launchLinkedBibleReader(state);
 
       // assert
       if (expectLaunch) {
@@ -77,8 +77,8 @@ void main() async {
       } else {
         verifyNever(bibleReaders[1].launch(state));
       }
-      expect(retval, ok);
-      if (!ok) verify(mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
+      expect(ok, expectOk);
+      if (!expectOk) verify(mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
     },
   );
 }
