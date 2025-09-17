@@ -78,7 +78,6 @@ void main() async {
         verifyNever(bibleReaders[1].launch(state));
       }
       expect(ok, expectOk);
-      if (!expectOk) verify(mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
     },
   );
 }

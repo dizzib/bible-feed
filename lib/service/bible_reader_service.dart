@@ -56,8 +56,6 @@ class BibleReaderService with ChangeNotifier {
 
   Future<bool> launchLinkedBibleReader(FeedState state) async {
     if (!isLinked || state.isRead) return Future.value(true);
-    final ok = await linkedBibleReader.launch(state);
-    if (!ok) _saveState(BibleReaderKeys.none);
-    return Future.value(ok);
+    return linkedBibleReader.launch(state);
   }
 }
