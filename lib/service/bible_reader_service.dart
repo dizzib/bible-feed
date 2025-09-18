@@ -8,6 +8,7 @@ import '/model/bible_reader_keys.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
 import '/service/bible_reader_app_install_service.dart';
+import 'result.dart';
 
 @lazySingleton
 class BibleReaderService with ChangeNotifier {
@@ -54,8 +55,9 @@ class BibleReaderService with ChangeNotifier {
   int get linkedBibleReaderIndex => _certifiedBibleReaderList.indexOf(linkedBibleReader);
   set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaderList[value].key);
 
-  Future<bool> launchLinkedBibleReader(FeedState state) async {
-    if (!isLinked || state.isRead) return Future.value(true);
-    return linkedBibleReader.launch(state);
+  Future<Result> launchLinkedBibleReader(FeedState state) async {
+    if (!isLinked || state.isRead) return Future.value(Success());
+    final ok = await linkedBibleReader.launch(state);
+    return ok ? Success() : Failure();
   }
 }

@@ -4,6 +4,7 @@ import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
+import 'package:bible_feed/service/result.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -56,20 +57,20 @@ void main() async {
   parameterizedTest(
     'launchLinkedBibleReader',
     [
-      [null, false, false],
-      ['blueLetterApp', true, false],
-      ['blueLetterApp', false, true, true],
-      ['blueLetterApp', false, true, false],
+      [null, false, false, Success()],
+      ['blueLetterApp', true, false, Success()],
+      ['blueLetterApp', false, true, Success(), true],
+      ['blueLetterApp', false, true, Failure(), false],
     ],
-    (String? bibleReaderKey, bool isRead, bool expectLaunch, [bool expectOk = true]) async {
+    (String? bibleReaderKey, bool isRead, bool expectLaunch, Result expectResult, [bool launchOk = true]) async {
       // arrange
       final state = FeedState(book: b0, isRead: isRead);
-      when(bibleReaders[1].launch(state)).thenAnswer((_) async => expectOk);
+      when(bibleReaders[1].launch(state)).thenAnswer((_) async => launchOk);
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
 
       // act
       testee = BibleReaderService(BibleReaderAppInstallService(), mockSharedPreferences, bibleReaders);
-      final ok = await testee.launchLinkedBibleReader(state);
+      final result = await testee.launchLinkedBibleReader(state);
 
       // assert
       if (expectLaunch) {
@@ -77,7 +78,7 @@ void main() async {
       } else {
         verifyNever(bibleReaders[1].launch(state));
       }
-      expect(ok, expectOk);
+      expect(result.runtimeType, expectResult.runtimeType);
     },
   );
 }
