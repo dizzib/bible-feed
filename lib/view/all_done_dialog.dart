@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/extension/build_context.dart';
 import '/service/feeds_advance_service.dart';
+import 'build_context_extension.dart';
 
 class AllDoneDialog extends StatelessWidget {
   @override

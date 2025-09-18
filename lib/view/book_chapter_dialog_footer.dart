@@ -2,9 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/extension/build_context.dart';
 import '/model/feed.dart';
 import '/model/list_wheel_state.dart';
+import 'build_context_extension.dart';
 
 class BookChapterDialogFooter extends WatchingWidget {
   final Feed feed;

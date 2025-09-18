@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/extension/build_context.dart';
+import 'build_context_extension.dart';
 import 'settings.dart';
 
 class SettingsIconButton extends StatelessWidget {
