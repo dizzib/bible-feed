@@ -26,11 +26,11 @@ void main() {
     });
   });
 
-  test('IdentityBookKeyMap apply returns original key unchanged', () {
-    expect(BibleReaderBookKeyMap.Identity.apply(createBook('anykey')), equals('anykey'));
+  test('identity apply returns original key unchanged', () {
+    expect(BibleReaderBookKeyMap.identity.apply(createBook('anykey')), equals('anykey'));
   });
 
-  testMapping(BibleReaderBookKeyMap.BlueLetter, const {
+  testMapping(BibleReaderBookKeyMap.blueLetter, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
@@ -41,7 +41,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BibleReaderBookKeyMap.Logos, const {
+  testMapping(BibleReaderBookKeyMap.logos, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -52,7 +52,7 @@ void main() {
     'rth': 'rut',
   });
 
-  testMapping(BibleReaderBookKeyMap.OsisParatext, const {
+  testMapping(BibleReaderBookKeyMap.osisParatext, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -66,7 +66,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BibleReaderBookKeyMap.OliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
+  testMapping(BibleReaderBookKeyMap.oliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
 }
 
 // Helper class for testing concrete class

@@ -10,10 +10,10 @@ class BibleReaderBookKeyMap {
   String apply(Book b) => keyMap[b.key] ?? b.key;
 
   /// Identity map with no key changes
-  static const Identity = BibleReaderBookKeyMap({});
+  static const identity = BibleReaderBookKeyMap({});
 
   /// BlueLetter key map
-  static const BlueLetter = BibleReaderBookKeyMap({
+  static const blueLetter = BibleReaderBookKeyMap({
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
@@ -25,7 +25,7 @@ class BibleReaderBookKeyMap {
   });
 
   /// Logos key map
-  static const Logos = BibleReaderBookKeyMap({
+  static const logos = BibleReaderBookKeyMap({
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -37,7 +37,7 @@ class BibleReaderBookKeyMap {
   });
 
   /// OsisParatext key map
-  static const OsisParatext = BibleReaderBookKeyMap({
+  static const osisParatext = BibleReaderBookKeyMap({
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -52,7 +52,7 @@ class BibleReaderBookKeyMap {
   });
 
   /// OliveTree key map
-  static const OliveTree = BibleReaderBookKeyMap({
+  static const oliveTree = BibleReaderBookKeyMap({
     '1cr': '1ch',
     '2cr': '2ch',
     'jhn': 'jn',
