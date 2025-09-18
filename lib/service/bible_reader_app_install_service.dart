@@ -1,18 +1,17 @@
 import 'dart:io';
 
 import 'package:app_install_events/app_install_events.dart';
+import 'package:df_log/df_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-
-import '../object_extension.dart';
 
 @lazySingleton
 class BibleReaderAppInstallService with ChangeNotifier {
   BibleReaderAppInstallService() {
     // ios is not supported
     if (Platform.isAndroid) {
-      AppIUEvents().appEvents.listen((e) {
-        e.log();
+      AppIUEvents().appEvents.listen((event) {
+        Log.info(event);
         notifyListeners();
       });
     }
