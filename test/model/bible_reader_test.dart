@@ -46,23 +46,6 @@ void main() {
     expect(testee.uriVersePath, '/VERSE');
   });
 
-  group('launch', () {
-    test('not in verse scope, should launch without verse path', () async {
-      await testee.launch(FeedState(book: b0, verse: 1));
-      verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1', any)).called(1);
-    });
-
-    test('in verse scope, should launch with verse path', () async {
-      await testee.launch(FeedState(book: b0, verse: 2));
-      verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1/2', any)).called(1);
-    });
-
-    parameterizedTest('should return whatever launchUrl returns', [true, false], (retval) async {
-      when(mockUrlLauncher.launchUrl(any, any)).thenAnswer((_) async => retval);
-      expect(await testee.launch(FeedState(book: b0, verse: 1)), retval);
-    });
-  });
-
   group('isAvailable', () {
     test('should return true if None', () async {
       expect(await const BibleReader(BibleReaderKeys.none, BibleReaderTypes.none, 'None', '', []).isAvailable(), true);
@@ -111,4 +94,21 @@ void main() {
       expect(testee.isCertified(platform), expectResult);
     },
   );
+
+  group('launch', () {
+    test('not in verse scope, should launch without verse path', () async {
+      await testee.launch(FeedState(book: b0, verse: 1));
+      verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1', any)).called(1);
+    });
+
+    test('in verse scope, should launch with verse path', () async {
+      await testee.launch(FeedState(book: b0, verse: 2));
+      verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1/2', any)).called(1);
+    });
+
+    parameterizedTest('should return whatever launchUrl returns', [true, false], (retval) async {
+      when(mockUrlLauncher.launchUrl(any, any)).thenAnswer((_) async => retval);
+      expect(await testee.launch(FeedState(book: b0, verse: 1)), retval);
+    });
+  });
 }
