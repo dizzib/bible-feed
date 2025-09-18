@@ -13,7 +13,7 @@ class BibleReaderFailureDialog extends StatelessWidget {
   @override
   build(context) {
     final bibleReader = sl<BibleReaderService>().linkedBibleReader;
-    final bibleReaderName = bibleReader.displayName;
+    final bibleReaderName = bibleReader.name;
     var message = bibleReader.isApp ? 'Please ensure the $bibleReaderName app is installed, or try' : 'Try';
     message = '$message choosing another bible reader in settings';
 

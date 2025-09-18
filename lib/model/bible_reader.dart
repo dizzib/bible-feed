@@ -13,7 +13,7 @@ import 'feeds.dart';
 class BibleReader {
   const BibleReader(
     this._key,
-    this._displayName,
+    this._name,
     this._uriTemplate,
     this._certifiedPlatforms, {
     bookKeyMap = const IdentityBookKeyMap(),
@@ -26,8 +26,8 @@ class BibleReader {
   final BibleReaderKeys _key;
   final BibleReaderBookKeyMap _bookKeyMap;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
-  final String _displayName;
   final bool _isWeb;
+  final String _name;
   final String _uriTemplate;
   final String? _uriVersePath;
 
@@ -42,9 +42,16 @@ class BibleReader {
 
   BibleReaderBookKeyMap get bookKeyMap => _bookKeyMap;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
-  String get displayName => _displayName;
+  String get displayName =>
+      '$_name ${_key == BibleReaderKeys.none
+              ? ''
+              : _isWeb
+              ? 'web'
+              : 'app'}'
+          .trim();
   bool get isApp => !_isWeb;
   BibleReaderKeys get key => _key;
+  String get name => _name;
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
 

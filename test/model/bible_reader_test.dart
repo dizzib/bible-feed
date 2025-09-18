@@ -31,7 +31,7 @@ void main() {
 
   test('constructor: should initialise properties', () {
     expect(testee.key, BibleReaderKeys.blueLetterApp);
-    expect(testee.displayName, 'Reader name');
+    expect(testee.name, 'Reader name');
     expect(testee.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
     expect(testee.certifiedPlatforms, contains(TargetPlatform.android));
     expect(testee.certifiedPlatforms, contains(TargetPlatform.iOS));
