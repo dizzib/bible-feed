@@ -1,4 +1,5 @@
 import 'package:dartx/dartx.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,7 +58,10 @@ class BibleReaderService with ChangeNotifier {
 
   Future<Result> launchLinkedBibleReader(FeedState state) async {
     if (!isLinked || state.isRead) return Future.value(Success());
-    final ok = await linkedBibleReader.launch(state);
-    return ok ? Success() : Failure();
+    try {
+      return await linkedBibleReader.launch(state) ? Success() : Failure();
+    } on PlatformException catch (e) {
+      return Future.value(Failure(e));
+    }
   }
 }

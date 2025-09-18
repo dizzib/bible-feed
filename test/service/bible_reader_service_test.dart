@@ -5,6 +5,7 @@ import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:bible_feed/service/result.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -81,4 +82,11 @@ void main() async {
       expect(result.runtimeType, expectResult.runtimeType);
     },
   );
+
+  test('launchLinkedBibleReader should return Failure on PlatformException', () async {
+    testee.linkedBibleReaderIndex = 1;
+    var state = FeedState(book: b1, isRead: false);
+    when(bibleReaders[1].launch(state)).thenThrow(PlatformException(code: 'code'));
+    expect((await testee.launchLinkedBibleReader(state)).runtimeType, Failure);
+  });
 }
