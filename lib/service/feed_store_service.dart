@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/extension/shared_preferences.dart';
 import '/model/feed.dart';
 import '/model/reading_list.dart';
+import 'shared_preferences_extension.dart';
 
 @lazySingleton
 class FeedStoreService {

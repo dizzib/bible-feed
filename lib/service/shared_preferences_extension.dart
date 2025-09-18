@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-extension FeedExtensions on SharedPreferences {
+extension FeedExtension on SharedPreferences {
   String? getBook(String key) => getString('$key.book');
   int? getChapter(String key) => getInt('$key.chapter');
   DateTime? getDateModified(String key) => DateTime.tryParse(getString('$key.dateModified') ?? '');
