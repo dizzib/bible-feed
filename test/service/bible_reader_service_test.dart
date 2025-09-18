@@ -55,6 +55,7 @@ void main() async {
         mockPlatformService,
         bibleReaders,
       );
+      expect(testee.certifiedBibleReaderList, bibleReaders);
       expect(testee.isLinked, expectIsLinked);
       expect(testee.linkedBibleReader, expectBibleReader);
       expect(testee.linkedBibleReaderIndex, expectIndex);
