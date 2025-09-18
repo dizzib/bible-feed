@@ -82,6 +82,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i283.BibleReaderService(
         gh<_i229.BibleReaderAppInstallService>(),
         gh<_i460.SharedPreferences>(),
+        gh<_i578.PlatformService>(),
         gh<_i1070.BibleReaders>(),
       ),
     );

@@ -9,6 +9,7 @@ import '/model/bible_reader_keys.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
 import '/service/bible_reader_app_install_service.dart';
+import 'platform_service.dart';
 import 'result.dart';
 
 @lazySingleton
@@ -16,7 +17,12 @@ class BibleReaderService with ChangeNotifier {
   final BibleReaderAppInstallService _bibleReaderAppInstallService;
   final SharedPreferences _sharedPreferences;
 
-  BibleReaderService(this._bibleReaderAppInstallService, this._sharedPreferences, BibleReaders bibleReaders) {
+  BibleReaderService(
+    this._bibleReaderAppInstallService,
+    this._sharedPreferences,
+    PlatformService platformService,
+    BibleReaders bibleReaders,
+  ) {
     _bibleReaderAppInstallService.addListener(() async {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners();
@@ -24,7 +30,7 @@ class BibleReaderService with ChangeNotifier {
         _saveState(BibleReaderKeys.none); // bible reader has been uninstalled
       }
     });
-    _certifiedBibleReaderList = bibleReaders.filter((e) => e.isCertifiedForThisPlatform).toList();
+    _certifiedBibleReaderList = bibleReaders.filter((br) => br.isCertified(platformService)).toList();
     _loadState();
   }
 

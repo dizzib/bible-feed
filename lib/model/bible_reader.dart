@@ -49,14 +49,14 @@ class BibleReader {
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
 
-  bool get isCertifiedForThisPlatform =>
-      (sl<PlatformService>().isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
-      (sl<PlatformService>().isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
-
   Future<bool> isAvailable() async {
     if (uriTemplate.isEmpty) return Future.value(true); // 'None' is always available
     return canLaunchUrl(_getDeeplinkUri(sl<Feeds>()[0].state)); // attempt to launch first feed uri
   }
+
+  bool isCertified(PlatformService platformService) =>
+      (platformService.isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
+      (platformService.isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
 
   Future<bool> launch(FeedState state) async => launchUrl(_getDeeplinkUri(state));
 }

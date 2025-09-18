@@ -8,11 +8,12 @@ import 'dart:async' as _i7;
 import 'package:bible_feed/model/bible_reader.dart' as _i3;
 import 'package:bible_feed/model/bible_reader_book_keymap.dart' as _i2;
 import 'package:bible_feed/model/bible_reader_keys.dart' as _i6;
-import 'package:bible_feed/model/feed.dart' as _i8;
+import 'package:bible_feed/model/feed.dart' as _i9;
+import 'package:bible_feed/service/platform_service.dart' as _i8;
 import 'package:flutter/foundation.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
-import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i9;
+import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -79,6 +80,15 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as String);
 
   @override
+  bool get isApp =>
+      (super.noSuchMethod(
+            Invocation.getter(#isApp),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i6.BibleReaderKeys get key =>
       (super.noSuchMethod(
             Invocation.getter(#key),
@@ -86,6 +96,18 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
             returnValueForMissingStub: _i6.BibleReaderKeys.none,
           )
           as _i6.BibleReaderKeys);
+
+  @override
+  String get name =>
+      (super.noSuchMethod(
+            Invocation.getter(#name),
+            returnValue: _i5.dummyValue<String>(this, Invocation.getter(#name)),
+            returnValueForMissingStub: _i5.dummyValue<String>(
+              this,
+              Invocation.getter(#name),
+            ),
+          )
+          as String);
 
   @override
   String get uriTemplate =>
@@ -103,15 +125,6 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as String);
 
   @override
-  bool get isCertifiedForThisPlatform =>
-      (super.noSuchMethod(
-            Invocation.getter(#isCertifiedForThisPlatform),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
   _i7.Future<bool> isAvailable() =>
       (super.noSuchMethod(
             Invocation.method(#isAvailable, []),
@@ -121,7 +134,16 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as _i7.Future<bool>);
 
   @override
-  _i7.Future<bool> launch(_i8.FeedState? state) =>
+  bool isCertified(_i8.PlatformService? platformService) =>
+      (super.noSuchMethod(
+            Invocation.method(#isCertified, [platformService]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  _i7.Future<bool> launch(_i9.FeedState? state) =>
       (super.noSuchMethod(
             Invocation.method(#launch, [state]),
             returnValue: _i7.Future<bool>.value(false),
@@ -130,10 +152,42 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as _i7.Future<bool>);
 }
 
+/// A class which mocks [PlatformService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPlatformService extends _i1.Mock implements _i8.PlatformService {
+  @override
+  bool get isAndroid =>
+      (super.noSuchMethod(
+            Invocation.getter(#isAndroid),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  bool get isIOS =>
+      (super.noSuchMethod(
+            Invocation.getter(#isIOS),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  bool get isHapticAvailable =>
+      (super.noSuchMethod(
+            Invocation.getter(#isHapticAvailable),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+}
+
 /// A class which mocks [SharedPreferences].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
+class MockSharedPreferences extends _i1.Mock implements _i10.SharedPreferences {
   @override
   Set<String> getKeys() =>
       (super.noSuchMethod(
