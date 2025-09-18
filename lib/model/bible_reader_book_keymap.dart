@@ -82,5 +82,5 @@ class OliveTreeBookKeyMap extends BibleReaderBookKeyMap {
   const OliveTreeBookKeyMap();
 
   @override
-  Map<String, String> get keyMap => const {'jhn': 'jn', '1cr': '1ch', '2cr': '2ch', 'sos': 'ss'};
+  Map<String, String> get keyMap => const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'};
 }
