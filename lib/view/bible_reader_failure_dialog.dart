@@ -4,7 +4,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '/service/bible_reader_service.dart';
 
-class BibleReaderLaunchFailedDialog extends StatelessWidget {
+class BibleReaderFailureDialog extends StatelessWidget {
   @override
   build(context) {
     final br = sl<BibleReaderService>().linkedBibleReader;
