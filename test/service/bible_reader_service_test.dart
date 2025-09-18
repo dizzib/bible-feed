@@ -67,43 +67,45 @@ void main() async {
     expect(testee.linkedBibleReaderIndex, 1);
   });
 
-  parameterizedTest(
-    'launchLinkedBibleReader',
-    [
-      [null, false, false, Success()],
-      ['blueLetterApp', true, false, Success()],
-      ['blueLetterApp', false, true, Success(), true],
-      ['blueLetterApp', false, true, Failure(), false],
-    ],
-    (String? bibleReaderKey, bool isRead, bool expectLaunch, Result expectResult, [bool launchOk = true]) async {
-      // arrange
-      final state = FeedState(book: b0, isRead: isRead);
-      when(bibleReaders[1].launch(state)).thenAnswer((_) async => launchOk);
-      when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
+  group('launchLinkedBibleReader', () {
+    parameterizedTest(
+      'should return Success unless launch returned false',
+      [
+        [null, false, false, Success()],
+        ['blueLetterApp', true, false, Success()],
+        ['blueLetterApp', false, true, Success(), true],
+        ['blueLetterApp', false, true, Failure(), false],
+      ],
+      (String? bibleReaderKey, bool isRead, bool expectLaunch, Result expectResult, [bool launchOk = true]) async {
+        // arrange
+        final state = FeedState(book: b0, isRead: isRead);
+        when(bibleReaders[1].launch(state)).thenAnswer((_) async => launchOk);
+        when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
 
-      // act
-      testee = BibleReaderService(
-        BibleReaderAppInstallService(),
-        mockSharedPreferences,
-        mockPlatformService,
-        bibleReaders,
-      );
-      final result = await testee.launchLinkedBibleReader(state);
+        // act
+        testee = BibleReaderService(
+          BibleReaderAppInstallService(),
+          mockSharedPreferences,
+          mockPlatformService,
+          bibleReaders,
+        );
+        final result = await testee.launchLinkedBibleReader(state);
 
-      // assert
-      if (expectLaunch) {
-        verify(bibleReaders[1].launch(state)).called(1);
-      } else {
-        verifyNever(bibleReaders[1].launch(state));
-      }
-      expect(result.runtimeType, expectResult.runtimeType);
-    },
-  );
+        // assert
+        if (expectLaunch) {
+          verify(bibleReaders[1].launch(state)).called(1);
+        } else {
+          verifyNever(bibleReaders[1].launch(state));
+        }
+        expect(result.runtimeType, expectResult.runtimeType);
+      },
+    );
 
-  test('launchLinkedBibleReader should return Failure on PlatformException', () async {
-    testee.linkedBibleReaderIndex = 1;
-    var state = FeedState(book: b1, isRead: false);
-    when(bibleReaders[1].launch(state)).thenThrow(PlatformException(code: 'code'));
-    expect((await testee.launchLinkedBibleReader(state)).runtimeType, Failure);
+    test('should return Failure on PlatformException', () async {
+      testee.linkedBibleReaderIndex = 1;
+      var state = FeedState(book: b1, isRead: false);
+      when(bibleReaders[1].launch(state)).thenThrow(PlatformException(code: 'code'));
+      expect((await testee.launchLinkedBibleReader(state)).runtimeType, Failure);
+    });
   });
 }
