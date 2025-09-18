@@ -50,7 +50,7 @@ class BibleReader {
   String? get uriVersePath => _uriVersePath;
 
   Future<bool> isAvailable() async {
-    if (uriTemplate.isEmpty) return Future.value(true); // 'None' is always available
+    if (_type == BibleReaderTypes.none) return Future.value(true);
     return canLaunchUrl(_getDeeplinkUri(sl<Feeds>()[0].state)); // attempt to launch first feed uri
   }
 
