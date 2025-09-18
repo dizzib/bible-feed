@@ -4,7 +4,7 @@ import 'package:app_install_events/app_install_events.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
-import '/extension/object.dart';
+import '../object_extension.dart';
 
 @lazySingleton
 class BibleReaderAppInstallService with ChangeNotifier {

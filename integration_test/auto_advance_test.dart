@@ -1,4 +1,4 @@
-import 'package:bible_feed/extension/object.dart';
+import 'package:bible_feed/object_extension.dart';
 import 'package:clock/clock.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';

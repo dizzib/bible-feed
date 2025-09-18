@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '/extension/object.dart';
 import '/view/app_base.dart';
 import 'injectable.dart';
+import 'object_extension.dart';
 
 Future<void> main() async {
   'starting app'.log();
