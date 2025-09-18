@@ -6,7 +6,7 @@ import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/service/verse_scope_service.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
-import 'package:bible_feed/view/feeds_view.dart';
+import 'package:bible_feed/view/feeds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';

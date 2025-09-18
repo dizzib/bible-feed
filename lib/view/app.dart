@@ -4,7 +4,7 @@ import 'package:watch_it/watch_it.dart';
 import '/service/auto_advance_service.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
-import 'feeds_view.dart';
+import 'feeds.dart';
 import 'settings_icon_button.dart';
 
 class App extends StatefulWidget {
