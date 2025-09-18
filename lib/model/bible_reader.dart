@@ -5,6 +5,7 @@ import 'package:watch_it/watch_it.dart';
 import '/service/platform_service.dart';
 import 'bible_reader_book_keymap.dart';
 import 'bible_reader_keys.dart';
+import 'bible_reader_types.dart';
 import 'feed.dart';
 import 'feeds.dart';
 
@@ -16,17 +17,17 @@ class BibleReader {
     this._name,
     this._uriTemplate,
     this._certifiedPlatforms, {
+    BibleReaderTypes type = BibleReaderTypes.app,
     bookKeyMap = const IdentityBookKeyMap(),
-    isWeb = false,
     uriVersePath,
-  }) : _bookKeyMap = bookKeyMap,
-       _isWeb = isWeb,
+  }) : _type = type,
+       _bookKeyMap = bookKeyMap,
        _uriVersePath = uriVersePath;
 
   final BibleReaderKeys _key;
+  final BibleReaderTypes _type;
   final BibleReaderBookKeyMap _bookKeyMap;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
-  final bool _isWeb;
   final String _name;
   final String _uriTemplate;
   final String? _uriVersePath;
@@ -42,14 +43,8 @@ class BibleReader {
 
   BibleReaderBookKeyMap get bookKeyMap => _bookKeyMap;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
-  String get displayName =>
-      '$_name ${_key == BibleReaderKeys.none
-              ? ''
-              : _isWeb
-              ? 'web'
-              : 'app'}'
-          .trim();
-  bool get isApp => !_isWeb;
+  String get displayName => '$_name ${_key == BibleReaderKeys.none ? '' : _type.name}'.trim();
+  bool get isApp => _type == BibleReaderTypes.app;
   BibleReaderKeys get key => _key;
   String get name => _name;
   String get uriTemplate => _uriTemplate;

@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'bible_reader.dart';
 import 'bible_reader_book_keymap.dart';
 import 'bible_reader_keys.dart';
+import 'bible_reader_types.dart';
 import 'bible_readers.dart';
 
 @immutable
@@ -11,7 +12,10 @@ import 'bible_readers.dart';
 class ProductionBibleReaders extends BibleReaders {
   const ProductionBibleReaders()
     : super(const [
-        BibleReader(BibleReaderKeys.none, 'None', '', [TargetPlatform.android, TargetPlatform.iOS]),
+        BibleReader(BibleReaderKeys.none, 'None', '', [
+          TargetPlatform.android,
+          TargetPlatform.iOS,
+        ], type: BibleReaderTypes.none),
         // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
         BibleReader(BibleReaderKeys.andBibleApp, 'AndBible', 'https://read.andbible.org/BOOK.CHAPTER', []),
         BibleReader(
@@ -28,7 +32,7 @@ class ProductionBibleReaders extends BibleReaders {
           'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
           bookKeyMap: BlueLetterBookKeyMap(),
-          isWeb: true,
+          type: BibleReaderTypes.web,
           uriVersePath: '/VERSE',
         ),
         BibleReader(BibleReaderKeys.lifeBibleApp, 'Life Bible', 'tecartabible://BOOK.CHAPTER', []),
