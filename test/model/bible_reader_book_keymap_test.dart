@@ -3,11 +3,26 @@ import 'package:bible_feed/model/bible_reader_book_keymap.dart';
 import 'package:bible_feed/model/book.dart';
 
 void main() {
+  Book createBook(String key) => Book(key, '', 1);
+
+  void testMapping(BibleReaderBookKeyMap map, Map<String, String> knownMappings) {
+    group(map.runtimeType.toString(), () {
+      knownMappings.forEach((input, expected) {
+        test('apply maps "$input" to "$expected"', () {
+          expect(map.apply(createBook(input)), equals(expected));
+        });
+      });
+
+      test('apply returns original key for unknown keys', () {
+        expect(map.apply(createBook('unknown')), equals('unknown'));
+      });
+    });
+  }
+
   group('BibleReaderBookKeyMap', () {
     test('apply returns original key if not in keyMap', () {
       final map = _TestBookKeyMap();
-      final book = const Book('unknown', '', 1);
-      expect(map.apply(book), equals('unknown'));
+      expect(map.apply(createBook('unknown')), equals('unknown'));
     });
   });
 
@@ -15,62 +30,41 @@ void main() {
     final map = const IdentityBookKeyMap();
 
     test('apply returns original key unchanged', () {
-      final book = const Book('anykey', '', 1);
-      expect(map.apply(book), equals('anykey'));
+      expect(map.apply(createBook('anykey')), equals('anykey'));
     });
   });
 
-  group('BlueLetterBookKeyMap', () {
-    final map = const BlueLetterBookKeyMap();
+  testMapping(
+    const BlueLetterBookKeyMap(),
+    const {
+      '1cr': '1ch',
+      'jam': 'jas',
+    },
+  );
 
-    test('apply returns mapped key for known keys', () {
-      expect(map.apply(const Book('1cr', '', 1)), equals('1ch'));
-      expect(map.apply(const Book('jam', '', 1)), equals('jas'));
-    });
+  testMapping(
+    const LogosBookKeyMap(),
+    const {
+      '1cr': '1ch',
+      'rth': 'rut',
+    },
+  );
 
-    test('apply returns original key for unknown keys', () {
-      expect(map.apply(const Book('unknown', '', 1)), equals('unknown'));
-    });
-  });
+  testMapping(
+    const OsisParatextBookKeyMap(),
+    const {
+      '1cr': '1ch',
+      'nah': 'nam',
+    },
+  );
 
-  group('LogosBookKeyMap', () {
-    final map = const LogosBookKeyMap();
-
-    test('apply returns mapped key for known keys', () {
-      expect(map.apply(const Book('1cr', '', 1)), equals('1ch'));
-      expect(map.apply(const Book('rth', '', 1)), equals('rut'));
-    });
-
-    test('apply returns original key for unknown keys', () {
-      expect(map.apply(const Book('unknown', '', 1)), equals('unknown'));
-    });
-  });
-
-  group('OsisParatextBookKeyMap', () {
-    final map = const OsisParatextBookKeyMap();
-
-    test('apply returns mapped key for known keys', () {
-      expect(map.apply(const Book('1cr', '', 1)), equals('1ch'));
-      expect(map.apply(const Book('nah', '', 1)), equals('nam'));
-    });
-
-    test('apply returns original key for unknown keys', () {
-      expect(map.apply(const Book('unknown', '', 1)), equals('unknown'));
-    });
-  });
-
-  group('OliveTreeBookKeyMap', () {
-    final map = const OliveTreeBookKeyMap();
-
-    test('apply returns mapped key for known keys', () {
-      expect(map.apply(const Book('1cr', '', 1)), equals('1ch'));
-      expect(map.apply(const Book('sos', '', 1)), equals('ss'));
-    });
-
-    test('apply returns original key for unknown keys', () {
-      expect(map.apply(const Book('unknown', '', 1)), equals('unknown'));
-    });
-  });
+  testMapping(
+    const OliveTreeBookKeyMap(),
+    const {
+      '1cr': '1ch',
+      'sos': 'ss',
+    },
+  );
 }
 
 // Helper class for testing abstract class
