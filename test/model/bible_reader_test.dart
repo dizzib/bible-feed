@@ -1,5 +1,6 @@
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_keys.dart';
+import 'package:bible_feed/model/bible_reader_types.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,10 +23,14 @@ void main() {
 
   setUp(() {
     mockUrlLauncher = MockUrlLauncher();
-    testee = const BibleReader(BibleReaderKeys.blueLetterApp, 'Reader name', 'scheme://uri/BOOK/CHAPTER', [
-      TargetPlatform.android,
-      TargetPlatform.iOS,
-    ], uriVersePath: '/VERSE');
+    testee = const BibleReader(
+      BibleReaderKeys.blueLetterApp,
+      BibleReaderTypes.app,
+      'Reader name',
+      'scheme://uri/BOOK/CHAPTER',
+      [TargetPlatform.android, TargetPlatform.iOS],
+      uriVersePath: '/VERSE',
+    );
     UrlLauncherPlatform.instance = mockUrlLauncher;
   });
 
@@ -57,7 +62,7 @@ void main() {
 
   group('isAvailable', () {
     test('should return true if None', () async {
-      expect(await const BibleReader(BibleReaderKeys.none, 'None', '', []).isAvailable(), true);
+      expect(await const BibleReader(BibleReaderKeys.none, BibleReaderTypes.none, 'None', '', []).isAvailable(), true);
     });
 
     test('should attempt to launch first feed uri if not None', () async {

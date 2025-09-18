@@ -14,14 +14,13 @@ import 'feeds.dart';
 class BibleReader {
   const BibleReader(
     this._key,
+    this._type,
     this._name,
     this._uriTemplate,
     this._certifiedPlatforms, {
-    BibleReaderTypes type = BibleReaderTypes.app,
     bookKeyMap = const IdentityBookKeyMap(),
     uriVersePath,
-  }) : _type = type,
-       _bookKeyMap = bookKeyMap,
+  }) : _bookKeyMap = bookKeyMap,
        _uriVersePath = uriVersePath;
 
   final BibleReaderKeys _key;
