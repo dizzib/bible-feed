@@ -21,20 +21,16 @@ void main() {
 
   group('BibleReaderBookKeyMap', () {
     test('apply returns original key if not in keyMap', () {
-      final map = _TestBookKeyMap();
+      final map = const _TestBookKeyMap();
       expect(map.apply(createBook('unknown')), equals('unknown'));
     });
   });
 
-  group('IdentityBookKeyMap', () {
-    final map = const IdentityBookKeyMap();
-
-    test('apply returns original key unchanged', () {
-      expect(map.apply(createBook('anykey')), equals('anykey'));
-    });
+  test('IdentityBookKeyMap apply returns original key unchanged', () {
+    expect(BibleReaderBookKeyMap.Identity.apply(createBook('anykey')), equals('anykey'));
   });
 
-  testMapping(const BlueLetterBookKeyMap(), const {
+  testMapping(BibleReaderBookKeyMap.BlueLetter, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
@@ -45,7 +41,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(const LogosBookKeyMap(), const {
+  testMapping(BibleReaderBookKeyMap.Logos, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -56,7 +52,7 @@ void main() {
     'rth': 'rut',
   });
 
-  testMapping(const OsisParatextBookKeyMap(), const {
+  testMapping(BibleReaderBookKeyMap.OsisParatext, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -70,11 +66,10 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(const OliveTreeBookKeyMap(), const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
+  testMapping(BibleReaderBookKeyMap.OliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
 }
 
-// Helper class for testing abstract class
+// Helper class for testing concrete class
 class _TestBookKeyMap extends BibleReaderBookKeyMap {
-  @override
-  Map<String, String> get keyMap => const {};
+  const _TestBookKeyMap() : super(const {});
 }

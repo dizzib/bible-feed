@@ -30,7 +30,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Blue Letter Bible',
           'blb://BOOK/CHAPTER',
           [TargetPlatform.iOS], // android has Open by default -> '0 verified links' and does not open!?
-          bookKeyMap: BlueLetterBookKeyMap(),
+          bookKeyMap: BibleReaderBookKeyMap.BlueLetter,
           uriVersePath: '/VERSE',
         ),
         BibleReader(
@@ -39,7 +39,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Blue Letter Bible',
           'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyMap: BlueLetterBookKeyMap(),
+          bookKeyMap: BibleReaderBookKeyMap.BlueLetter,
           uriVersePath: '/VERSE',
         ),
         BibleReader(
@@ -55,7 +55,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Logos Bible',
           'logosref:Bible.BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyMap: LogosBookKeyMap(),
+          bookKeyMap: BibleReaderBookKeyMap.Logos,
           uriVersePath: '.VERSE',
         ),
         BibleReader(
@@ -64,7 +64,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Olive Tree',
           'olivetree://bible/BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyMap: OliveTreeBookKeyMap(),
+          bookKeyMap: BibleReaderBookKeyMap.OliveTree,
           uriVersePath: '.VERSE',
         ),
         BibleReader(
@@ -73,7 +73,7 @@ class ProductionBibleReaders extends BibleReaders {
           'WeDevote',
           'wdbible://bible/BOOK.CHAPTER',
           [TargetPlatform.iOS],
-          bookKeyMap: OsisParatextBookKeyMap(),
+          bookKeyMap: BibleReaderBookKeyMap.OsisParatext,
           uriVersePath: '.VERSE',
         ),
         BibleReader(
@@ -82,7 +82,7 @@ class ProductionBibleReaders extends BibleReaders {
           'YouVersion',
           'youversion://bible?reference=BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyMap: OsisParatextBookKeyMap(),
+          bookKeyMap: BibleReaderBookKeyMap.OsisParatext,
           uriVersePath: '.VERSE',
         ),
       ]);

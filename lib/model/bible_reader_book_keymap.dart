@@ -1,32 +1,19 @@
 import 'package:flutter/foundation.dart';
-
 import '/model/book.dart';
 
 @immutable
-abstract class BibleReaderBookKeyMap {
-  const BibleReaderBookKeyMap();
-  Map<String, String> get keyMap => {};
+class BibleReaderBookKeyMap {
+  final Map<String, String> keyMap;
 
-  @nonVirtual
+  const BibleReaderBookKeyMap(this.keyMap);
+
   String apply(Book b) => keyMap[b.key] ?? b.key;
-}
 
-//// implementations
+  /// Identity map with no key changes
+  static const Identity = BibleReaderBookKeyMap({});
 
-@immutable
-class IdentityBookKeyMap extends BibleReaderBookKeyMap {
-  const IdentityBookKeyMap();
-
-  @override
-  Map<String, String> get keyMap => const {};
-}
-
-@immutable
-class BlueLetterBookKeyMap extends BibleReaderBookKeyMap {
-  const BlueLetterBookKeyMap();
-
-  @override
-  Map<String, String> get keyMap => const {
+  /// BlueLetter key map
+  static const BlueLetter = BibleReaderBookKeyMap({
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
@@ -35,16 +22,10 @@ class BlueLetterBookKeyMap extends BibleReaderBookKeyMap {
     'obd': 'oba',
     'prv': 'pro',
     'sos': 'sng',
-  };
-}
+  });
 
-@immutable
-// osis paratext with manual testing
-class LogosBookKeyMap extends BibleReaderBookKeyMap {
-  const LogosBookKeyMap();
-
-  @override
-  Map<String, String> get keyMap => const {
+  /// Logos key map
+  static const Logos = BibleReaderBookKeyMap({
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -53,16 +34,10 @@ class LogosBookKeyMap extends BibleReaderBookKeyMap {
     'obd': 'oba',
     'prv': 'pro',
     'rth': 'rut',
-  };
-}
+  });
 
-@immutable
-// see https://wiki.crosswire.org/OSIS_Book_Abbreviations
-class OsisParatextBookKeyMap extends BibleReaderBookKeyMap {
-  const OsisParatextBookKeyMap();
-
-  @override
-  Map<String, String> get keyMap => const {
+  /// OsisParatext key map
+  static const OsisParatext = BibleReaderBookKeyMap({
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -74,13 +49,14 @@ class OsisParatextBookKeyMap extends BibleReaderBookKeyMap {
     'prv': 'pro',
     'rth': 'rut',
     'sos': 'sng',
-  };
-}
+  });
 
-@immutable
-class OliveTreeBookKeyMap extends BibleReaderBookKeyMap {
-  const OliveTreeBookKeyMap();
-
-  @override
-  Map<String, String> get keyMap => const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'};
+  /// OliveTree key map
+  static const OliveTree = BibleReaderBookKeyMap({
+    '1cr': '1ch',
+    '2cr': '2ch',
+    'jhn': 'jn',
+    'jud': 'jde',
+    'sos': 'ss',
+  });
 }

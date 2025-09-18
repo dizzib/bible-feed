@@ -18,7 +18,7 @@ class BibleReader {
     this._name,
     this._uriTemplate,
     this._certifiedPlatforms, {
-    bookKeyMap = const IdentityBookKeyMap(),
+    bookKeyMap = BibleReaderBookKeyMap.Identity,
     uriVersePath,
   }) : _bookKeyMap = bookKeyMap,
        _uriVersePath = uriVersePath;
