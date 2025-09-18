@@ -59,7 +59,7 @@ class BibleReaderService with ChangeNotifier {
   Future<Result> launchLinkedBibleReader(FeedState state) async {
     if (!isLinked || state.isRead) return Future.value(Success());
     try {
-      return await linkedBibleReader.launch(state) ? Success() : Failure();
+      return Future.value(await linkedBibleReader.launch(state) ? Success() : Failure());
     } on PlatformException catch (e) {
       return Future.value(Failure(e));
     }
