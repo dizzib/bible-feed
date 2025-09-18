@@ -1,4 +1,4 @@
-abstract class PlatformService {
+class PlatformService {
   PlatformService({required this.isAndroid, required this.isIOS, required this.isHapticAvailable});
 
   final bool isAndroid;

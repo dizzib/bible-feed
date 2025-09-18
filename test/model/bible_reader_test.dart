@@ -2,6 +2,7 @@ import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_keys.dart';
 import 'package:bible_feed/model/bible_reader_types.dart';
 import 'package:bible_feed/model/feed.dart';
+import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -75,4 +76,39 @@ void main() {
       verify(mockUrlLauncher.canLaunch(any)).called(1);
     });
   });
+
+  parameterizedTest(
+    'isCertified',
+    [
+      [
+        [TargetPlatform.android],
+        true,
+        false,
+        true,
+      ],
+      [
+        [TargetPlatform.android],
+        false,
+        true,
+        false,
+      ],
+      [
+        [TargetPlatform.iOS],
+        false,
+        true,
+        true,
+      ],
+      [
+        [TargetPlatform.iOS],
+        true,
+        false,
+        false,
+      ],
+    ],
+    (certifiedPlatforms, isAndroid, isIOS, expectResult) {
+      final platform = PlatformService(isAndroid: isAndroid, isIOS: isIOS, isHapticAvailable: false);
+      final testee = BibleReader(BibleReaderKeys.none, BibleReaderTypes.none, '', '', certifiedPlatforms);
+      expect(testee.isCertified(platform), expectResult);
+    },
+  );
 }
