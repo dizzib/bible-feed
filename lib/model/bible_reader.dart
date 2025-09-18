@@ -53,11 +53,5 @@ class BibleReader {
     return canLaunchUrl(_getDeeplinkUri(sl<Feeds>()[0].state)); // attempt to launch first feed uri
   }
 
-  Future<bool> launch(FeedState state) async {
-    try {
-      return await launchUrl(_getDeeplinkUri(state));
-    } catch (e) {
-      return Future.value(false);
-    }
-  }
+  Future<bool> launch(FeedState state) async => launchUrl(_getDeeplinkUri(state));
 }

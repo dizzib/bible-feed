@@ -49,14 +49,9 @@ void main() {
       verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1/2', any)).called(1);
     });
 
-    parameterizedTest('no exception thrown, should return launchUrl return value', [true, false], (retval) async {
+    parameterizedTest('should return whatever launchUrl returns', [true, false], (retval) async {
       when(mockUrlLauncher.launchUrl(any, any)).thenAnswer((_) async => retval);
       expect(await testee.launch(FeedState(book: b0, verse: 1)), retval);
-    });
-
-    test('PlatformException thrown, should return false', () async {
-      when(mockUrlLauncher.launchUrl(any, any)).thenThrow(PlatformException);
-      expect(await testee.launch(FeedState(book: b0, verse: 2)), false);
     });
   });
 
