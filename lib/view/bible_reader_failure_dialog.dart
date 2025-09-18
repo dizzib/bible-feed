@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 
+import '../service/bible_reader_service.dart';
 import '/service/result.dart';
 
 class BibleReaderFailureDialog extends StatelessWidget {
@@ -10,11 +12,16 @@ class BibleReaderFailureDialog extends StatelessWidget {
 
   @override
   build(context) {
+    final bibleReader = sl<BibleReaderService>().linkedBibleReader;
+    final bibleReaderName = bibleReader.displayName;
+    var message = bibleReader.isApp ? 'Please ensure the $bibleReaderName app is installed, or try' : 'Try';
+    message = '$message choosing another bible reader in settings';
+
     return CupertinoAlertDialog(
-      title: const Text('Failed to launch the bible reader'),
+      title: Text('Failed to launch the $bibleReaderName bible reader'),
       content: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text('The bible reader is now disabled.\n\n${failure.exception?.toString() ?? ''}'.trim()),
+        child: Text('$message\n\n${failure.exception?.toString() ?? ''}'.trim()),
       ),
       actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Ok'))],
     );

@@ -13,10 +13,10 @@ class ProductionBibleReaders extends BibleReaders {
     : super(const [
         BibleReader(BibleReaderKeys.none, 'None', '', [TargetPlatform.android, TargetPlatform.iOS]),
         // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
-        BibleReader(BibleReaderKeys.andBibleApp, 'AndBible app', 'https://read.andbible.org/BOOK.CHAPTER', []),
+        BibleReader(BibleReaderKeys.andBibleApp, 'AndBible', 'https://read.andbible.org/BOOK.CHAPTER', []),
         BibleReader(
           BibleReaderKeys.blueLetterApp,
-          'Blue Letter Bible app',
+          'Blue Letter Bible',
           'blb://BOOK/CHAPTER',
           [TargetPlatform.iOS], // android has Open by default -> '0 verified links' and does not open!?
           bookKeyMap: BlueLetterBookKeyMap(),
@@ -24,16 +24,17 @@ class ProductionBibleReaders extends BibleReaders {
         ),
         BibleReader(
           BibleReaderKeys.blueLetterWeb,
-          'Blue Letter Bible web',
+          'Blue Letter Bible',
           'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
           bookKeyMap: BlueLetterBookKeyMap(),
+          isWeb: true,
           uriVersePath: '/VERSE',
         ),
-        BibleReader(BibleReaderKeys.lifeBibleApp, 'Life Bible app', 'tecartabible://BOOK.CHAPTER', []),
+        BibleReader(BibleReaderKeys.lifeBibleApp, 'Life Bible', 'tecartabible://BOOK.CHAPTER', []),
         BibleReader(
           BibleReaderKeys.logosBibleApp,
-          'Logos Bible app',
+          'Logos Bible',
           'logosref:Bible.BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
           bookKeyMap: LogosBookKeyMap(),
@@ -41,7 +42,7 @@ class ProductionBibleReaders extends BibleReaders {
         ),
         BibleReader(
           BibleReaderKeys.oliveTreeApp,
-          'Olive Tree app',
+          'Olive Tree',
           'olivetree://bible/BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
           bookKeyMap: OliveTreeBookKeyMap(),
@@ -49,7 +50,7 @@ class ProductionBibleReaders extends BibleReaders {
         ),
         BibleReader(
           BibleReaderKeys.weDevoteApp,
-          'WeDevote app',
+          'WeDevote',
           'wdbible://bible/BOOK.CHAPTER',
           [TargetPlatform.iOS],
           bookKeyMap: OsisParatextBookKeyMap(),
@@ -57,7 +58,7 @@ class ProductionBibleReaders extends BibleReaders {
         ),
         BibleReader(
           BibleReaderKeys.youVersionApp,
-          'YouVersion app',
+          'YouVersion',
           'youversion://bible?reference=BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
           bookKeyMap: OsisParatextBookKeyMap(),

@@ -17,14 +17,17 @@ class BibleReader {
     this._uriTemplate,
     this._certifiedPlatforms, {
     bookKeyMap = const IdentityBookKeyMap(),
+    isWeb = false,
     uriVersePath,
   }) : _bookKeyMap = bookKeyMap,
+       _isWeb = isWeb,
        _uriVersePath = uriVersePath;
 
   final BibleReaderKeys _key;
   final BibleReaderBookKeyMap _bookKeyMap;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
   final String _displayName;
+  final bool _isWeb;
   final String _uriTemplate;
   final String? _uriVersePath;
 
@@ -40,6 +43,7 @@ class BibleReader {
   BibleReaderBookKeyMap get bookKeyMap => _bookKeyMap;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   String get displayName => _displayName;
+  bool get isApp => !_isWeb;
   BibleReaderKeys get key => _key;
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
