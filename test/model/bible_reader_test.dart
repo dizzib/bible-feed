@@ -96,12 +96,12 @@ void main() {
   );
 
   group('launch', () {
-    test('not in verse scope, should launch without verse path', () async {
+    test('if verse = 1, should launch without verse path', () async {
       await testee.launch(FeedState(book: b0, verse: 1));
       verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1', any)).called(1);
     });
 
-    test('in verse scope, should launch with verse path', () async {
+    test('if verse > 1, should launch with verse path', () async {
       await testee.launch(FeedState(book: b0, verse: 2));
       verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1/2', any)).called(1);
     });
