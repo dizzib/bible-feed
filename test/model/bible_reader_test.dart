@@ -96,15 +96,17 @@ void main() {
   );
 
   group('launch', () {
-    test('if verse = 1, should launch without verse path', () async {
-      await testee.launch(FeedState(book: b0, verse: 1));
-      verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1', any)).called(1);
-    });
-
-    test('if verse > 1, should launch with verse path', () async {
-      await testee.launch(FeedState(book: b0, verse: 2));
-      verify(mockUrlLauncher.launchUrl('scheme://uri/b0/1/2', any)).called(1);
-    });
+    parameterizedTest(
+      'should call launchUrl with correct uri',
+      [
+        [1, 'scheme://uri/b0/1'],
+        [2, 'scheme://uri/b0/1/2'],
+      ],
+      (verse, expectLaunchUri) async {
+        await testee.launch(FeedState(book: b0, verse: verse));
+        verify(mockUrlLauncher.launchUrl(expectLaunchUri, any)).called(1);
+      },
+    );
 
     parameterizedTest('should return whatever launchUrl returns', [true, false], (retval) async {
       when(mockUrlLauncher.launchUrl(any, any)).thenAnswer((_) async => retval);
