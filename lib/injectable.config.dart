@@ -76,14 +76,6 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_prod},
       preResolve: true,
     );
-    gh.lazySingleton<_i283.BibleReaderService>(
-      () => _i283.BibleReaderService(
-        gh<_i229.BibleReaderAppInstallService>(),
-        gh<_i460.SharedPreferences>(),
-        gh<_i578.PlatformService>(),
-        gh<_i1070.BibleReaders>(),
-      ),
-    );
     gh.lazySingleton<_i513.HapticTogglerService>(
       () => _i513.HapticTogglerService(
         gh<_i460.SharedPreferences>(),
@@ -94,6 +86,14 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i281.ProductionAppService.create(),
       registerFor: {_prod},
       preResolve: true,
+    );
+    gh.lazySingleton<_i283.BibleReaderService>(
+      () => _i283.BibleReaderService(
+        gh<_i460.SharedPreferences>(),
+        gh<_i229.BibleReaderAppInstallService>(),
+        gh<_i578.PlatformService>(),
+        gh<_i1070.BibleReaders>(),
+      ),
     );
     gh.lazySingleton<_i109.VerseScopeService>(
       () => _i109.VerseScopeService(

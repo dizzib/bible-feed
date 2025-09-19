@@ -33,8 +33,8 @@ void main() async {
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
     testee = BibleReaderService(
-      BibleReaderAppInstallService(),
       mockSharedPreferences,
+      BibleReaderAppInstallService(),
       mockPlatformService,
       bibleReaders,
     );
@@ -50,8 +50,8 @@ void main() async {
     (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
       testee = BibleReaderService(
-        BibleReaderAppInstallService(),
         mockSharedPreferences,
+        BibleReaderAppInstallService(),
         mockPlatformService,
         bibleReaders,
       );
@@ -85,8 +85,8 @@ void main() async {
 
         // act
         testee = BibleReaderService(
-          BibleReaderAppInstallService(),
           mockSharedPreferences,
+          BibleReaderAppInstallService(),
           mockPlatformService,
           bibleReaders,
         );

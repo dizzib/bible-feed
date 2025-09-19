@@ -14,16 +14,15 @@ import 'result.dart';
 
 @lazySingleton
 class BibleReaderService with ChangeNotifier {
-  final BibleReaderAppInstallService _bibleReaderAppInstallService;
   final SharedPreferences _sharedPreferences;
 
   BibleReaderService(
-    this._bibleReaderAppInstallService,
     this._sharedPreferences,
+    BibleReaderAppInstallService bibleReaderAppInstallService,
     PlatformService platformService,
     BibleReaders bibleReaders,
   ) {
-    _bibleReaderAppInstallService.addListener(() async {
+    bibleReaderAppInstallService.addListener(() async {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners();
       } else {
