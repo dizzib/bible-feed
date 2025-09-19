@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'bible_reader.dart';
-import 'bible_reader_book_key_externaliser.dart';
 import 'bible_reader_keys.dart';
 import 'bible_reader_types.dart';
 import 'bible_readers.dart';
+import 'book_key_externaliser.dart';
 
 @immutable
 @LazySingleton(as: BibleReaders)
@@ -30,7 +30,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Blue Letter Bible',
           'blb://BOOK/CHAPTER',
           [TargetPlatform.iOS], // android has Open by default -> '0 verified links' and does not open!?
-          bookKeyExternaliser: BibleReaderBookKeyExternaliser.blueLetter,
+          bookKeyExternaliser: BookKeyExternaliser.blueLetter,
           uriVersePath: '/VERSE',
         ),
         BibleReader(
@@ -39,7 +39,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Blue Letter Bible',
           'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyExternaliser: BibleReaderBookKeyExternaliser.blueLetter,
+          bookKeyExternaliser: BookKeyExternaliser.blueLetter,
           uriVersePath: '/VERSE',
         ),
         BibleReader(
@@ -55,7 +55,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Logos Bible',
           'logosref:Bible.BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyExternaliser: BibleReaderBookKeyExternaliser.logos,
+          bookKeyExternaliser: BookKeyExternaliser.logos,
           uriVersePath: '.VERSE',
         ),
         BibleReader(
@@ -64,7 +64,7 @@ class ProductionBibleReaders extends BibleReaders {
           'Olive Tree',
           'olivetree://bible/BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyExternaliser: BibleReaderBookKeyExternaliser.oliveTree,
+          bookKeyExternaliser: BookKeyExternaliser.oliveTree,
           uriVersePath: '.VERSE',
         ),
         BibleReader(
@@ -73,7 +73,7 @@ class ProductionBibleReaders extends BibleReaders {
           'WeDevote',
           'wdbible://bible/BOOK.CHAPTER',
           [TargetPlatform.iOS],
-          bookKeyExternaliser: BibleReaderBookKeyExternaliser.osisParatext,
+          bookKeyExternaliser: BookKeyExternaliser.osisParatext,
           uriVersePath: '.VERSE',
         ),
         BibleReader(
@@ -82,7 +82,7 @@ class ProductionBibleReaders extends BibleReaders {
           'YouVersion',
           'youversion://bible?reference=BOOK.CHAPTER',
           [TargetPlatform.android, TargetPlatform.iOS],
-          bookKeyExternaliser: BibleReaderBookKeyExternaliser.osisParatext,
+          bookKeyExternaliser: BookKeyExternaliser.osisParatext,
           uriVersePath: '.VERSE',
         ),
       ]);

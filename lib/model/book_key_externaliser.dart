@@ -2,8 +2,8 @@ import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-class BibleReaderBookKeyExternaliser {
-  final List<String> externalBookKeys;
+class BookKeyExternaliser {
+  const BookKeyExternaliser(this.externalBookKeys);
 
   // Bible reader external key : BibleFeed internal key
   static const keyMap = {
@@ -23,18 +23,20 @@ class BibleReaderBookKeyExternaliser {
     'ss': 'sos',
   };
 
-  const BibleReaderBookKeyExternaliser(this.externalBookKeys);
+  final List<String> externalBookKeys;
 
   String apply(String bookKey) =>
       keyMap.entries.firstOrNullWhere((en) => en.value == bookKey && externalBookKeys.contains(en.key))?.key ?? bookKey;
 
-  static const identity = BibleReaderBookKeyExternaliser([]);
+  static const identity = BookKeyExternaliser([]);
 
-  static const blueLetter = BibleReaderBookKeyExternaliser(['1ch', '2ch', 'jas', 'jde', 'mrk', 'oba', 'pro', 'sng']);
-  static const logos = BibleReaderBookKeyExternaliser(['1ch', '2ch', 'ezk', 'jas', 'mrk', 'oba', 'pro', 'rut']);
-  static const oliveTree = BibleReaderBookKeyExternaliser(['1ch', '2ch', 'jn', 'jde', 'ss']);
+  static const blueLetter = BookKeyExternaliser(['1ch', '2ch', 'jas', 'jde', 'mrk', 'oba', 'pro', 'sng']);
 
-  static const osisParatext = BibleReaderBookKeyExternaliser([
+  static const logos = BookKeyExternaliser(['1ch', '2ch', 'ezk', 'jas', 'mrk', 'oba', 'pro', 'rut']);
+
+  static const oliveTree = BookKeyExternaliser(['1ch', '2ch', 'jn', 'jde', 'ss']);
+
+  static const osisParatext = BookKeyExternaliser([
     '1ch',
     '2ch',
     'ezk',

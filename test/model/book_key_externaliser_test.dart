@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bible_feed/model/bible_reader_book_key_externaliser.dart';
+import 'package:bible_feed/model/book_key_externaliser.dart';
 
 void main() {
-  void testMapping(BibleReaderBookKeyExternaliser testee, Map<String, String> knownMappings) {
+  void testMapping(BookKeyExternaliser testee, Map<String, String> knownMappings) {
     group(testee.runtimeType.toString(), () {
       knownMappings.forEach((input, expected) {
         test('apply "$input" should return "$expected"', () {
@@ -23,10 +23,10 @@ void main() {
   });
 
   test('identity apply returns original key unchanged', () {
-    expect(BibleReaderBookKeyExternaliser.identity.apply('anykey'), 'anykey');
+    expect(BookKeyExternaliser.identity.apply('anykey'), 'anykey');
   });
 
-  testMapping(BibleReaderBookKeyExternaliser.blueLetter, const {
+  testMapping(BookKeyExternaliser.blueLetter, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
@@ -37,7 +37,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BibleReaderBookKeyExternaliser.logos, const {
+  testMapping(BookKeyExternaliser.logos, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -48,7 +48,7 @@ void main() {
     'rth': 'rut',
   });
 
-  testMapping(BibleReaderBookKeyExternaliser.osisParatext, const {
+  testMapping(BookKeyExternaliser.osisParatext, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -62,7 +62,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BibleReaderBookKeyExternaliser.oliveTree, const {
+  testMapping(BookKeyExternaliser.oliveTree, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'jhn': 'jn',
@@ -72,6 +72,6 @@ void main() {
 }
 
 // Helper class for testing concrete class
-class _TestBookKeyExternaliser extends BibleReaderBookKeyExternaliser {
+class _TestBookKeyExternaliser extends BookKeyExternaliser {
   const _TestBookKeyExternaliser() : super(const []);
 }

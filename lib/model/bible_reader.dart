@@ -3,9 +3,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '/service/platform_service.dart';
-import 'bible_reader_book_key_externaliser.dart';
 import 'bible_reader_keys.dart';
 import 'bible_reader_types.dart';
+import 'book_key_externaliser.dart';
 import 'feed.dart';
 import 'feeds.dart';
 
@@ -18,14 +18,14 @@ class BibleReader {
     this._name,
     this._uriTemplate,
     this._certifiedPlatforms, {
-    bookKeyExternaliser = BibleReaderBookKeyExternaliser.identity,
+    bookKeyExternaliser = BookKeyExternaliser.identity,
     uriVersePath,
   }) : _bookKeyExternaliser = bookKeyExternaliser,
        _uriVersePath = uriVersePath;
 
   final BibleReaderKeys _key;
   final BibleReaderTypes _type;
-  final BibleReaderBookKeyExternaliser _bookKeyExternaliser;
+  final BookKeyExternaliser _bookKeyExternaliser;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
   final String _name;
   final String _uriTemplate;
