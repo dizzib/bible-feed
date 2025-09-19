@@ -1,62 +1,54 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
+
 import '/model/book.dart';
 
 @immutable
 class BibleReaderBookKeyMap {
-  final Map<String, String> keyMap;
+  final List<String> values;
 
-  const BibleReaderBookKeyMap(this.keyMap);
+  // Bible reader external : BibleFeed internal
+  static const keyMap = {
+    '1ch': '1cr',
+    '2ch': '2cr',
+    'ezk': 'eze',
+    'jas': 'jam',
+    'jde': 'jud',
+    'jn': 'jhn',
+    'jol': 'joe',
+    'mrk': 'mar',
+    'nam': 'nah',
+    'oba': 'obd',
+    'pro': 'prv',
+    'rut': 'rth',
+    'sng': 'sos',
+    'ss': 'sos',
+  };
 
-  String apply(Book b) => keyMap[b.key] ?? b.key;
+  const BibleReaderBookKeyMap(this.values);
 
-  /// Identity map with no key changes
-  static const identity = BibleReaderBookKeyMap({});
+  String apply(Book b) =>
+      keyMap.entries.firstOrNullWhere((entry) => entry.value == b.key && values.contains(entry.key))?.key ?? b.key;
 
-  /// BlueLetter key map
-  static const blueLetter = BibleReaderBookKeyMap({
-    '1cr': '1ch',
-    '2cr': '2ch',
-    'jam': 'jas',
-    'jud': 'jde',
-    'mar': 'mrk',
-    'obd': 'oba',
-    'prv': 'pro',
-    'sos': 'sng',
-  });
+  static const identity = BibleReaderBookKeyMap([]);
 
-  /// Logos key map
-  static const logos = BibleReaderBookKeyMap({
-    '1cr': '1ch',
-    '2cr': '2ch',
-    'eze': 'ezk',
-    'jam': 'jas',
-    'mar': 'mrk',
-    'obd': 'oba',
-    'prv': 'pro',
-    'rth': 'rut',
-  });
+  static const blueLetter = BibleReaderBookKeyMap(['1ch', '2ch', 'jas', 'jde', 'mrk', 'oba', 'pro', 'sng']);
 
-  /// OsisParatext key map
-  static const osisParatext = BibleReaderBookKeyMap({
-    '1cr': '1ch',
-    '2cr': '2ch',
-    'eze': 'ezk',
-    'jam': 'jas',
-    'joe': 'jol',
-    'mar': 'mrk',
-    'nah': 'nam',
-    'obd': 'oba',
-    'prv': 'pro',
-    'rth': 'rut',
-    'sos': 'sng',
-  });
+  static const logos = BibleReaderBookKeyMap(['1ch', '2ch', 'ezk', 'jas', 'mrk', 'oba', 'pro', 'rut']);
 
-  /// OliveTree key map
-  static const oliveTree = BibleReaderBookKeyMap({
-    '1cr': '1ch',
-    '2cr': '2ch',
-    'jhn': 'jn',
-    'jud': 'jde',
-    'sos': 'ss',
-  });
+  static const osisParatext = BibleReaderBookKeyMap([
+    '1ch',
+    '2ch',
+    'ezk',
+    'jas',
+    'jol',
+    'mrk',
+    'nam',
+    'oba',
+    'pro',
+    'rut',
+    'sng',
+  ]);
+
+  static const oliveTree = BibleReaderBookKeyMap(['1ch', '2ch', 'jn', 'jde', 'ss']);
 }

@@ -71,5 +71,5 @@ void main() {
 
 // Helper class for testing concrete class
 class _TestBookKeyMap extends BibleReaderBookKeyMap {
-  const _TestBookKeyMap() : super(const {});
+  const _TestBookKeyMap() : super(const []);
 }
