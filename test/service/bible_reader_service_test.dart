@@ -2,7 +2,6 @@ import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_keys.dart';
 import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/service/app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
 import 'package:bible_feed/service/result.dart';
@@ -32,12 +31,7 @@ void main() async {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    testee = BibleReaderService(
-      mockSharedPreferences,
-      AppInstallService(),
-      mockPlatformService,
-      bibleReaders,
-    );
+    testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
   });
 
   parameterizedTest(
@@ -49,12 +43,7 @@ void main() async {
     ],
     (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
-      testee = BibleReaderService(
-        mockSharedPreferences,
-        AppInstallService(),
-        mockPlatformService,
-        bibleReaders,
-      );
+      testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
       expect(testee.certifiedBibleReaderList, bibleReaders);
       expect(testee.isLinked, expectIsLinked);
       expect(testee.linkedBibleReader, expectBibleReader);
@@ -84,12 +73,7 @@ void main() async {
         when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
 
         // act
-        testee = BibleReaderService(
-          mockSharedPreferences,
-          AppInstallService(),
-          mockPlatformService,
-          bibleReaders,
-        );
+        testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
         final result = await testee.launchLinkedBibleReader(state);
 
         // assert
