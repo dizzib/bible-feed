@@ -8,7 +8,7 @@ import '/model/bible_reader.dart';
 import '/model/bible_reader_keys.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
-import '/service/bible_reader_app_install_service.dart';
+import '/service/app_install_service.dart';
 import 'platform_service.dart';
 import 'result.dart';
 
@@ -18,11 +18,11 @@ class BibleReaderService with ChangeNotifier {
 
   BibleReaderService(
     this._sharedPreferences,
-    BibleReaderAppInstallService bibleReaderAppInstallService,
+    AppInstallService appInstallService,
     PlatformService platformService,
     BibleReaders bibleReaders,
   ) {
-    bibleReaderAppInstallService.addListener(() async {
+    appInstallService.addListener(() async {
       if (await linkedBibleReader.isAvailable()) {
         notifyListeners(); // the linked bible reader is still installed
       } else {

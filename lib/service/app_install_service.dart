@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class BibleReaderAppInstallService with ChangeNotifier {
-  BibleReaderAppInstallService() {
+class AppInstallService with ChangeNotifier {
+  AppInstallService() {
     // ios is not supported
     if (Platform.isAndroid) {
       AppIUEvents().appEvents.listen((event) {

@@ -2,7 +2,7 @@ import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_keys.dart';
 import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/service/bible_reader_app_install_service.dart';
+import 'package:bible_feed/service/app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
 import 'package:bible_feed/service/result.dart';
@@ -34,7 +34,7 @@ void main() async {
     mockSharedPreferences = MockSharedPreferences();
     testee = BibleReaderService(
       mockSharedPreferences,
-      BibleReaderAppInstallService(),
+      AppInstallService(),
       mockPlatformService,
       bibleReaders,
     );
@@ -51,7 +51,7 @@ void main() async {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
       testee = BibleReaderService(
         mockSharedPreferences,
-        BibleReaderAppInstallService(),
+        AppInstallService(),
         mockPlatformService,
         bibleReaders,
       );
@@ -86,7 +86,7 @@ void main() async {
         // act
         testee = BibleReaderService(
           mockSharedPreferences,
-          BibleReaderAppInstallService(),
+          AppInstallService(),
           mockPlatformService,
           bibleReaders,
         );
