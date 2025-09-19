@@ -29,9 +29,11 @@ class BookKeyExternaliser {
 
   final List<String> _externalBookKeys;
 
-  String getExternalBookKey(String bookKey) =>
-      _keyMap.entries.firstOrNullWhere((en) => en.value == bookKey && _externalBookKeys.contains(en.key))?.key ??
-      bookKey;
+  String getExternalBookKey(String internalBookKey) =>
+      _keyMap.entries
+          .firstOrNullWhere((en) => en.value == internalBookKey && _externalBookKeys.contains(en.key))
+          ?.key ??
+      internalBookKey;
 
   static const identity = BookKeyExternaliser([]);
   static const blueLetter = BookKeyExternaliser([..._ext1Keys, 'jas', 'jde', 'sng']);
