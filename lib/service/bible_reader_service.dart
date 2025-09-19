@@ -24,9 +24,9 @@ class BibleReaderService with ChangeNotifier {
   ) {
     bibleReaderAppInstallService.addListener(() async {
       if (await linkedBibleReader.isAvailable()) {
-        notifyListeners();
+        notifyListeners(); // the linked bible reader is still installed
       } else {
-        _saveState(BibleReaderKeys.none); // bible reader has been uninstalled
+        _saveState(BibleReaderKeys.none); // the linked bible reader has been uninstalled
       }
     });
     _certifiedBibleReaderList = bibleReaders.filter((br) => br.isCertified(platformService)).toList();
