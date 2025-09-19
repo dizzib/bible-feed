@@ -1,33 +1,29 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bible_feed/model/bible_reader_book_key_externaliser.dart';
-import 'package:bible_feed/model/book.dart';
 
 void main() {
-  Book createBook(String key) => Book(key, '', 1);
-
-  void testMapping(BibleReaderBookKeyExternaliser map, Map<String, String> knownMappings) {
-    group(map.runtimeType.toString(), () {
+  void testMapping(BibleReaderBookKeyExternaliser testee, Map<String, String> knownMappings) {
+    group(testee.runtimeType.toString(), () {
       knownMappings.forEach((input, expected) {
-        test('apply maps "$input" to "$expected"', () {
-          expect(map.apply(createBook(input)), equals(expected));
+        test('apply "$input" should return "$expected"', () {
+          expect(testee.apply(input), expected);
         });
       });
 
       test('apply returns original key for unknown keys', () {
-        expect(map.apply(createBook('unknown')), equals('unknown'));
+        expect(testee.apply('unknown'), 'unknown');
       });
     });
   }
 
   group('BibleReaderBookKeyExternaliser', () {
     test('apply returns original key if not in keyMap', () {
-      final map = const _TestBookKeyExternaliser();
-      expect(map.apply(createBook('unknown')), equals('unknown'));
+      expect(const _TestBookKeyExternaliser().apply('unknown'), 'unknown');
     });
   });
 
   test('identity apply returns original key unchanged', () {
-    expect(BibleReaderBookKeyExternaliser.identity.apply(createBook('anykey')), equals('anykey'));
+    expect(BibleReaderBookKeyExternaliser.identity.apply('anykey'), 'anykey');
   });
 
   testMapping(BibleReaderBookKeyExternaliser.blueLetter, const {

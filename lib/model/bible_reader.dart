@@ -32,7 +32,7 @@ class BibleReader {
   final String? _uriVersePath;
 
   Uri _getDeeplinkUri(FeedState state) {
-    final externalBookKey = _bookKeyExternaliser.apply(state.book);
+    final externalBookKey = _bookKeyExternaliser.apply(state.book.key);
     var uri = uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', state.chapter.toString());
     if (uriVersePath != null && state.verse > 1) {
       uri += uriVersePath!.replaceAll('VERSE', state.verse.toString());

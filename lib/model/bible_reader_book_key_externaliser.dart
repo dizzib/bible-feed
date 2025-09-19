@@ -1,8 +1,6 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
 
-import '/model/book.dart';
-
 @immutable
 class BibleReaderBookKeyExternaliser {
   final List<String> externalBookKeys;
@@ -27,8 +25,8 @@ class BibleReaderBookKeyExternaliser {
 
   const BibleReaderBookKeyExternaliser(this.externalBookKeys);
 
-  String apply(Book b) =>
-      keyMap.entries.firstOrNullWhere((en) => en.value == b.key && externalBookKeys.contains(en.key))?.key ?? b.key;
+  String apply(String bookKey) =>
+      keyMap.entries.firstOrNullWhere((en) => en.value == bookKey && externalBookKeys.contains(en.key))?.key ?? bookKey;
 
   static const identity = BibleReaderBookKeyExternaliser([]);
 
