@@ -5,25 +5,25 @@ void main() {
   void testMapping(BookKeyExternaliser testee, Map<String, String> knownMappings) {
     group(testee.runtimeType.toString(), () {
       knownMappings.forEach((input, expected) {
-        test('apply "$input" should return "$expected"', () {
-          expect(testee.apply(input), expected);
+        test('getExternalBookKey "$input" should return "$expected"', () {
+          expect(testee.getExternalBookKey(input), expected);
         });
       });
 
-      test('apply returns original key for unknown keys', () {
-        expect(testee.apply('unknown'), 'unknown');
+      test('getExternalBookKey returns original key for unknown keys', () {
+        expect(testee.getExternalBookKey('unknown'), 'unknown');
       });
     });
   }
 
   group('BibleReaderBookKeyExternaliser', () {
-    test('apply returns original key if not in keyMap', () {
-      expect(const _TestBookKeyExternaliser().apply('unknown'), 'unknown');
+    test('getExternalBookKey returns original key if not in keyMap', () {
+      expect(const _TestBookKeyExternaliser().getExternalBookKey('unknown'), 'unknown');
     });
   });
 
   test('identity apply returns original key unchanged', () {
-    expect(BookKeyExternaliser.identity.apply('anykey'), 'anykey');
+    expect(BookKeyExternaliser.identity.getExternalBookKey('anykey'), 'anykey');
   });
 
   testMapping(BookKeyExternaliser.blueLetter, const {

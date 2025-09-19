@@ -29,7 +29,7 @@ class BookKeyExternaliser {
 
   final List<String> _externalBookKeys;
 
-  String apply(String bookKey) =>
+  String getExternalBookKey(String bookKey) =>
       _keyMap.entries.firstOrNullWhere((en) => en.value == bookKey && _externalBookKeys.contains(en.key))?.key ??
       bookKey;
 
