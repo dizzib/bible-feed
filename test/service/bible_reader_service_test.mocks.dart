@@ -3,17 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
+import 'dart:async' as _i6;
 
-import 'package:bible_feed/model/bible_reader.dart' as _i3;
-import 'package:bible_feed/model/bible_reader_book_keymap.dart' as _i2;
-import 'package:bible_feed/model/bible_reader_keys.dart' as _i6;
-import 'package:bible_feed/model/feed.dart' as _i9;
-import 'package:bible_feed/service/platform_service.dart' as _i8;
-import 'package:flutter/foundation.dart' as _i4;
+import 'package:bible_feed/model/bible_reader.dart' as _i2;
+import 'package:bible_feed/model/bible_reader_keys.dart' as _i5;
+import 'package:bible_feed/model/feed.dart' as _i8;
+import 'package:bible_feed/service/platform_service.dart' as _i7;
+import 'package:flutter/foundation.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i5;
-import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i4;
+import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -29,50 +28,29 @@ import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i10;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeBibleReaderBookKeyMap_0 extends _i1.SmartFake
-    implements _i2.BibleReaderBookKeyMap {
-  _FakeBibleReaderBookKeyMap_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
 /// A class which mocks [BibleReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
+class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
   @override
-  _i2.BibleReaderBookKeyMap get bookKeyMap =>
-      (super.noSuchMethod(
-            Invocation.getter(#bookKeyMap),
-            returnValue: _FakeBibleReaderBookKeyMap_0(
-              this,
-              Invocation.getter(#bookKeyMap),
-            ),
-            returnValueForMissingStub: _FakeBibleReaderBookKeyMap_0(
-              this,
-              Invocation.getter(#bookKeyMap),
-            ),
-          )
-          as _i2.BibleReaderBookKeyMap);
-
-  @override
-  List<_i4.TargetPlatform> get certifiedPlatforms =>
+  List<_i3.TargetPlatform> get certifiedPlatforms =>
       (super.noSuchMethod(
             Invocation.getter(#certifiedPlatforms),
-            returnValue: <_i4.TargetPlatform>[],
-            returnValueForMissingStub: <_i4.TargetPlatform>[],
+            returnValue: <_i3.TargetPlatform>[],
+            returnValueForMissingStub: <_i3.TargetPlatform>[],
           )
-          as List<_i4.TargetPlatform>);
+          as List<_i3.TargetPlatform>);
 
   @override
   String get displayName =>
       (super.noSuchMethod(
             Invocation.getter(#displayName),
-            returnValue: _i5.dummyValue<String>(
+            returnValue: _i4.dummyValue<String>(
               this,
               Invocation.getter(#displayName),
             ),
-            returnValueForMissingStub: _i5.dummyValue<String>(
+            returnValueForMissingStub: _i4.dummyValue<String>(
               this,
               Invocation.getter(#displayName),
             ),
@@ -89,20 +67,20 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as bool);
 
   @override
-  _i6.BibleReaderKeys get key =>
+  _i5.BibleReaderKeys get key =>
       (super.noSuchMethod(
             Invocation.getter(#key),
-            returnValue: _i6.BibleReaderKeys.none,
-            returnValueForMissingStub: _i6.BibleReaderKeys.none,
+            returnValue: _i5.BibleReaderKeys.none,
+            returnValueForMissingStub: _i5.BibleReaderKeys.none,
           )
-          as _i6.BibleReaderKeys);
+          as _i5.BibleReaderKeys);
 
   @override
   String get name =>
       (super.noSuchMethod(
             Invocation.getter(#name),
-            returnValue: _i5.dummyValue<String>(this, Invocation.getter(#name)),
-            returnValueForMissingStub: _i5.dummyValue<String>(
+            returnValue: _i4.dummyValue<String>(this, Invocation.getter(#name)),
+            returnValueForMissingStub: _i4.dummyValue<String>(
               this,
               Invocation.getter(#name),
             ),
@@ -113,11 +91,11 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
   String get uriTemplate =>
       (super.noSuchMethod(
             Invocation.getter(#uriTemplate),
-            returnValue: _i5.dummyValue<String>(
+            returnValue: _i4.dummyValue<String>(
               this,
               Invocation.getter(#uriTemplate),
             ),
-            returnValueForMissingStub: _i5.dummyValue<String>(
+            returnValueForMissingStub: _i4.dummyValue<String>(
               this,
               Invocation.getter(#uriTemplate),
             ),
@@ -125,16 +103,16 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as String);
 
   @override
-  _i7.Future<bool> isAvailable() =>
+  _i6.Future<bool> isAvailable() =>
       (super.noSuchMethod(
             Invocation.method(#isAvailable, []),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  bool isCertified(_i8.PlatformService? platformService) =>
+  bool isCertified(_i7.PlatformService? platformService) =>
       (super.noSuchMethod(
             Invocation.method(#isCertified, [platformService]),
             returnValue: false,
@@ -143,19 +121,19 @@ class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
           as bool);
 
   @override
-  _i7.Future<bool> launch(_i9.FeedState? state) =>
+  _i6.Future<bool> launch(_i8.FeedState? state) =>
       (super.noSuchMethod(
             Invocation.method(#launch, [state]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 }
 
 /// A class which mocks [PlatformService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPlatformService extends _i1.Mock implements _i8.PlatformService {
+class MockPlatformService extends _i1.Mock implements _i7.PlatformService {
   @override
   bool get isAndroid =>
       (super.noSuchMethod(
@@ -187,7 +165,7 @@ class MockPlatformService extends _i1.Mock implements _i8.PlatformService {
 /// A class which mocks [SharedPreferences].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i10.SharedPreferences {
+class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
   @override
   Set<String> getKeys() =>
       (super.noSuchMethod(
@@ -255,83 +233,83 @@ class MockSharedPreferences extends _i1.Mock implements _i10.SharedPreferences {
           as List<String>?);
 
   @override
-  _i7.Future<bool> setBool(String? key, bool? value) =>
+  _i6.Future<bool> setBool(String? key, bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setBool, [key, value]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<bool> setInt(String? key, int? value) =>
+  _i6.Future<bool> setInt(String? key, int? value) =>
       (super.noSuchMethod(
             Invocation.method(#setInt, [key, value]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<bool> setDouble(String? key, double? value) =>
+  _i6.Future<bool> setDouble(String? key, double? value) =>
       (super.noSuchMethod(
             Invocation.method(#setDouble, [key, value]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<bool> setString(String? key, String? value) =>
+  _i6.Future<bool> setString(String? key, String? value) =>
       (super.noSuchMethod(
             Invocation.method(#setString, [key, value]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<bool> setStringList(String? key, List<String>? value) =>
+  _i6.Future<bool> setStringList(String? key, List<String>? value) =>
       (super.noSuchMethod(
             Invocation.method(#setStringList, [key, value]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<bool> remove(String? key) =>
+  _i6.Future<bool> remove(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#remove, [key]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<bool> commit() =>
+  _i6.Future<bool> commit() =>
       (super.noSuchMethod(
             Invocation.method(#commit, []),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<bool> clear() =>
+  _i6.Future<bool> clear() =>
       (super.noSuchMethod(
             Invocation.method(#clear, []),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
-          as _i7.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i7.Future<void> reload() =>
+  _i6.Future<void> reload() =>
       (super.noSuchMethod(
             Invocation.method(#reload, []),
-            returnValue: _i7.Future<void>.value(),
-            returnValueForMissingStub: _i7.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i7.Future<void>);
+          as _i6.Future<void>);
 }

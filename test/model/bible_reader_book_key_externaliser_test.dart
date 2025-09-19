@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bible_feed/model/bible_reader_book_keymap.dart';
+import 'package:bible_feed/model/bible_reader_book_key_externaliser.dart';
 import 'package:bible_feed/model/book.dart';
 
 void main() {
   Book createBook(String key) => Book(key, '', 1);
 
-  void testMapping(BibleReaderBookKeyMap map, Map<String, String> knownMappings) {
+  void testMapping(BibleReaderBookKeyExternaliser map, Map<String, String> knownMappings) {
     group(map.runtimeType.toString(), () {
       knownMappings.forEach((input, expected) {
         test('apply maps "$input" to "$expected"', () {
@@ -19,18 +19,18 @@ void main() {
     });
   }
 
-  group('BibleReaderBookKeyMap', () {
+  group('BibleReaderBookKeyExternaliser', () {
     test('apply returns original key if not in keyMap', () {
-      final map = const _TestBookKeyMap();
+      final map = const _TestBookKeyExternaliser();
       expect(map.apply(createBook('unknown')), equals('unknown'));
     });
   });
 
   test('identity apply returns original key unchanged', () {
-    expect(BibleReaderBookKeyMap.identity.apply(createBook('anykey')), equals('anykey'));
+    expect(BibleReaderBookKeyExternaliser.identity.apply(createBook('anykey')), equals('anykey'));
   });
 
-  testMapping(BibleReaderBookKeyMap.blueLetter, const {
+  testMapping(BibleReaderBookKeyExternaliser.blueLetter, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
@@ -41,7 +41,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BibleReaderBookKeyMap.logos, const {
+  testMapping(BibleReaderBookKeyExternaliser.logos, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -52,7 +52,7 @@ void main() {
     'rth': 'rut',
   });
 
-  testMapping(BibleReaderBookKeyMap.osisParatext, const {
+  testMapping(BibleReaderBookKeyExternaliser.osisParatext, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -66,10 +66,16 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BibleReaderBookKeyMap.oliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
+  testMapping(BibleReaderBookKeyExternaliser.oliveTree, const {
+    '1cr': '1ch',
+    '2cr': '2ch',
+    'jhn': 'jn',
+    'jud': 'jde',
+    'sos': 'ss',
+  });
 }
 
 // Helper class for testing concrete class
-class _TestBookKeyMap extends BibleReaderBookKeyMap {
-  const _TestBookKeyMap() : super(const []);
+class _TestBookKeyExternaliser extends BibleReaderBookKeyExternaliser {
+  const _TestBookKeyExternaliser() : super(const []);
 }
