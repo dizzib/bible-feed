@@ -2,11 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:bible_feed/model/book_key_externaliser.dart';
 
 void main() {
-  void testMapping(BookKeyExternaliser testee, Map<String, String> knownMappings) {
+  void runTest(BookKeyExternaliser testee, Map<String, String> knownMappings) {
     group(testee.runtimeType.toString(), () {
-      knownMappings.forEach((input, expected) {
-        test('getExternalBookKey "$input" should return "$expected"', () {
-          expect(testee.getExternalBookKey(input), expected);
+      knownMappings.forEach((from, to) {
+        test('getExternalBookKey "$from" should return "$to"', () {
+          expect(testee.getExternalBookKey(from), to);
         });
       });
 
@@ -26,7 +26,7 @@ void main() {
     expect(BookKeyExternaliser.identity.getExternalBookKey('anykey'), 'anykey');
   });
 
-  testMapping(BookKeyExternaliser.blueLetter, const {
+  runTest(BookKeyExternaliser.blueLetter, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'jam': 'jas',
@@ -37,7 +37,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BookKeyExternaliser.logos, const {
+  runTest(BookKeyExternaliser.logos, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -48,7 +48,7 @@ void main() {
     'rth': 'rut',
   });
 
-  testMapping(BookKeyExternaliser.osisParatext, const {
+  runTest(BookKeyExternaliser.osisParatext, const {
     '1cr': '1ch',
     '2cr': '2ch',
     'eze': 'ezk',
@@ -62,13 +62,7 @@ void main() {
     'sos': 'sng',
   });
 
-  testMapping(BookKeyExternaliser.oliveTree, const {
-    '1cr': '1ch',
-    '2cr': '2ch',
-    'jhn': 'jn',
-    'jud': 'jde',
-    'sos': 'ss',
-  });
+  runTest(BookKeyExternaliser.oliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
 }
 
 // Helper class for testing concrete class
