@@ -7,12 +7,13 @@ class BookKeyExternaliser {
 
   // Bible reader external key : BibleFeed internal key
   static const _keyMap = {
+    'jn': 'jhn',
+    'ss': 'sos',
     '1ch': '1cr',
     '2ch': '2cr',
     'ezk': 'eze',
     'jas': 'jam',
     'jde': 'jud',
-    'jn': 'jhn',
     'jol': 'joe',
     'mrk': 'mar',
     'nam': 'nah',
@@ -20,7 +21,6 @@ class BookKeyExternaliser {
     'pro': 'prv',
     'rut': 'rth',
     'sng': 'sos',
-    'ss': 'sos',
   };
 
   static const _ext0Keys = ['1ch', '2ch'];
