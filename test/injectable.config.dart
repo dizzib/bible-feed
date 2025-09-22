@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
+import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
 import 'package:bible_feed/model/production_bible_readers.dart' as _i545;
@@ -21,6 +22,7 @@ import 'package:bible_feed/service/app_install_service.dart' as _i817;
 import 'package:bible_feed/service/app_service.dart' as _i977;
 import 'package:bible_feed/service/auto_advance_service.dart' as _i148;
 import 'package:bible_feed/service/bible_reader_service.dart' as _i283;
+import 'package:bible_feed/service/chapter_split_service.dart' as _i283;
 import 'package:bible_feed/service/feed_store_service.dart' as _i119;
 import 'package:bible_feed/service/feeds_advance_service.dart' as _i307;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
@@ -61,6 +63,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1033.ChapterListWheelState(),
     );
     gh.lazySingleton<_i967.VerseScopes>(() => _i967.VerseScopes());
+    gh.lazySingleton<_i1006.ChapterSplitters>(() => _i1006.ChapterSplitters());
     gh.lazySingleton<_i578.PlatformService>(
       () => _i55.TestPlatformService(),
       registerFor: {_test},
@@ -79,6 +82,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i430.VerseScopeTogglerService>(
       () => _i430.VerseScopeTogglerService(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i283.ChapterSplitService>(
+      () => _i283.ChapterSplitService(
+        gh<_i1006.ChapterSplitters>(),
+        gh<_i430.VerseScopeTogglerService>(),
+      ),
     );
     await gh.lazySingletonAsync<_i578.PlatformService>(
       () => _i455.ProductionPlatformService.create(),
