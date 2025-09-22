@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '/model.production/book_key_externaliser.dart';
 import '/service/platform_service.dart';
 import 'bible_reader_keys.dart';
 import 'bible_reader_types.dart';
-import 'book_key_externaliser.dart';
 import 'feed.dart';
 import 'feeds.dart';
 

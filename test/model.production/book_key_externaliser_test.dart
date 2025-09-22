@@ -16,6 +16,8 @@ void main() {
     });
   }
 
+  runTest(BookKeyExternaliser.identity, const {});
+
   runTest(BookKeyExternaliser.blueLetter, const {
     '1cr': '1ch',
     '2cr': '2ch',
