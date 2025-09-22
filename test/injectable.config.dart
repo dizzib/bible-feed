@@ -38,6 +38,7 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
 import 'test_app_service.dart' as _i963;
+import 'test_chapter_splitters.dart' as _i1034;
 import 'test_platform_service.dart' as _i55;
 
 const String _test = 'test';
@@ -65,13 +66,15 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i55.TestPlatformService(),
       registerFor: {_test},
     );
-    gh.lazySingleton<_i1070.BibleReaders>(() => const _i901.BibleReaders());
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i963.TestAppService.create(),
       registerFor: {_test},
       preResolve: true,
     );
-    gh.lazySingleton<_i1006.ChapterSplitters>(() => _i179.ChapterSplitters());
+    gh.lazySingleton<_i1006.ChapterSplitters>(
+      () => _i1034.ChapterSplitters(),
+      registerFor: {_test},
+    );
     gh.lazySingleton<_i823.ReadingLists>(() => _i396.ReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
@@ -81,8 +84,16 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_prod},
       preResolve: true,
     );
+    gh.lazySingleton<_i1006.ChapterSplitters>(
+      () => _i179.ChapterSplitters(),
+      registerFor: {_prod},
+    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => const _i901.BibleReaders(),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i283.ChapterSplitService>(
       () => _i283.ChapterSplitService(

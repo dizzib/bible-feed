@@ -57,8 +57,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.ChapterListWheelState>(
       () => _i1033.ChapterListWheelState(),
     );
-    gh.lazySingleton<_i1070.BibleReaders>(() => const _i901.BibleReaders());
-    gh.lazySingleton<_i1006.ChapterSplitters>(() => _i179.ChapterSplitters());
     gh.lazySingleton<_i823.ReadingLists>(() => _i396.ReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
@@ -68,8 +66,16 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_prod},
       preResolve: true,
     );
+    gh.lazySingleton<_i1006.ChapterSplitters>(
+      () => _i179.ChapterSplitters(),
+      registerFor: {_prod},
+    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => const _i901.BibleReaders(),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i283.ChapterSplitService>(
       () => _i283.ChapterSplitService(

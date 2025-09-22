@@ -1,8 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import '/model/chapter_splitter.dart';
 import '/model/chapter_splitters.dart' as base;
 
+@prod
+@immutable
 @LazySingleton(as: base.ChapterSplitters)
 class ChapterSplitters extends base.ChapterSplitters {
   ChapterSplitters()

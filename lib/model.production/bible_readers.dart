@@ -7,6 +7,7 @@ import '/model/bible_readers.dart' as base;
 import 'bible_reader_key.dart';
 import 'book_key_externaliser.dart';
 
+@prod
 @immutable
 @LazySingleton(as: base.BibleReaders)
 class BibleReaders extends base.BibleReaders {
