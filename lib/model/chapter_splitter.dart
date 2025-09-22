@@ -3,12 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'feed.dart';
 
 @immutable
-class VerseScope {
+class ChapterSplitter {
   final String bookKey;
   final int chapter;
   final List<int> verses; // each section starts at these verse numbers, excluding verse 1
 
-  const VerseScope(this.bookKey, this.chapter, this.verses);
+  const ChapterSplitter(this.bookKey, this.chapter, this.verses);
 
   String _toNonBreakingWhitespace(String label) => label.replaceAll('_', String.fromCharCode(0x00A0));
 
