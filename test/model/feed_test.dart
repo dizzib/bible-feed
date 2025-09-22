@@ -19,7 +19,7 @@ void main() async {
   final mockVerseScopeService = MockVerseScopeService();
 
   setUp(() {
-    state = FeedState(book: b1, chapter: 1, isRead: false);
+    state = FeedState(book: b1);
     when(mockVerseScopeService.getNextVerse(state)).thenReturn(1);
     testee = Feed(rl1, mockVerseScopeService, state);
   });
