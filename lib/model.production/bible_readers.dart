@@ -5,7 +5,7 @@ import '/model/bible_reader.dart';
 import '/model/bible_reader_keys.dart';
 import '/model/bible_reader_types.dart';
 import '/model/bible_readers.dart' as base;
-import '/model/book_key_externaliser.dart';
+import 'book_key_externaliser.dart';
 
 @immutable
 @LazySingleton(as: base.BibleReaders)

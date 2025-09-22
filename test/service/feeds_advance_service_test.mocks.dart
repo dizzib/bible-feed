@@ -8,9 +8,9 @@ import 'dart:ui' as _i5;
 
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/feeds.dart' as _i6;
-import 'package:bible_feed/model/reading_list.dart' as _i3;
+import 'package:bible_feed/model/reading_list.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i4;
+import 'package:mockito/src/dummies.dart' as _i3;
 import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i7;
 
 // ignore_for_file: type=lint
@@ -65,6 +65,21 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as int);
 
   @override
+  String get chapterSplitLabel =>
+      (super.noSuchMethod(
+            Invocation.getter(#chapterSplitLabel),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#chapterSplitLabel),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#chapterSplitLabel),
+            ),
+          )
+          as String);
+
+  @override
   double get progress =>
       (super.noSuchMethod(
             Invocation.getter(#progress),
@@ -74,19 +89,19 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as double);
 
   @override
-  _i3.ReadingList get readingList =>
+  _i4.ReadingList get readingList =>
       (super.noSuchMethod(
             Invocation.getter(#readingList),
-            returnValue: _i4.dummyValue<_i3.ReadingList>(
+            returnValue: _i3.dummyValue<_i4.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
-            returnValueForMissingStub: _i4.dummyValue<_i3.ReadingList>(
+            returnValueForMissingStub: _i3.dummyValue<_i4.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
           )
-          as _i3.ReadingList);
+          as _i4.ReadingList);
 
   @override
   _i2.FeedState get state =>
@@ -99,21 +114,6 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
             ),
           )
           as _i2.FeedState);
-
-  @override
-  String get chapterSplitLabel =>
-      (super.noSuchMethod(
-            Invocation.getter(#chapterSplitLabel),
-            returnValue: _i4.dummyValue<String>(
-              this,
-              Invocation.getter(#chapterSplitLabel),
-            ),
-            returnValueForMissingStub: _i4.dummyValue<String>(
-              this,
-              Invocation.getter(#chapterSplitLabel),
-            ),
-          )
-          as String);
 
   @override
   bool get hasListeners =>
@@ -367,11 +367,11 @@ class MockFeeds extends _i1.Mock implements _i6.Feeds {
   T fold<T>(T? initialValue, T Function(T, _i2.Feed)? combine) =>
       (super.noSuchMethod(
             Invocation.method(#fold, [initialValue, combine]),
-            returnValue: _i4.dummyValue<T>(
+            returnValue: _i3.dummyValue<T>(
               this,
               Invocation.method(#fold, [initialValue, combine]),
             ),
-            returnValueForMissingStub: _i4.dummyValue<T>(
+            returnValueForMissingStub: _i3.dummyValue<T>(
               this,
               Invocation.method(#fold, [initialValue, combine]),
             ),
@@ -391,11 +391,11 @@ class MockFeeds extends _i1.Mock implements _i6.Feeds {
   String join([String? separator = '']) =>
       (super.noSuchMethod(
             Invocation.method(#join, [separator]),
-            returnValue: _i4.dummyValue<String>(
+            returnValue: _i3.dummyValue<String>(
               this,
               Invocation.method(#join, [separator]),
             ),
-            returnValueForMissingStub: _i4.dummyValue<String>(
+            returnValueForMissingStub: _i3.dummyValue<String>(
               this,
               Invocation.method(#join, [separator]),
             ),

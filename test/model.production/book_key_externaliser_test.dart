@@ -1,5 +1,5 @@
+import 'package:bible_feed/model.production/book_key_externaliser.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bible_feed/model/book_key_externaliser.dart';
 
 void main() {
   void runTest(BookKeyExternaliser testee, Map<String, String> knownMappings) {
