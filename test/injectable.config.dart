@@ -16,6 +16,8 @@ import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
+import 'package:bible_feed/service.production/app_service.dart' as _i87;
+import 'package:bible_feed/service.production/platform_service.dart' as _i117;
 import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
 import 'package:bible_feed/service/app_install_service.dart' as _i817;
 import 'package:bible_feed/service/app_service.dart' as _i977;
@@ -29,8 +31,6 @@ import 'package:bible_feed/service/haptic_service.dart' as _i22;
 import 'package:bible_feed/service/haptic_toggler_service.dart' as _i513;
 import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
-import 'package:bible_feed/service/production_app_service.dart' as _i281;
-import 'package:bible_feed/service/production_platform_service.dart' as _i455;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -75,6 +75,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
+    await gh.lazySingletonAsync<_i578.PlatformService>(
+      () => _i117.PlatformService.create(),
+      registerFor: {_prod},
+      preResolve: true,
+    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
@@ -84,8 +89,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.ChapterSplitTogglerService>(),
       ),
     );
-    await gh.lazySingletonAsync<_i578.PlatformService>(
-      () => _i455.ProductionPlatformService.create(),
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i87.AppService.create(),
       registerFor: {_prod},
       preResolve: true,
     );
@@ -94,11 +99,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i460.SharedPreferences>(),
         gh<_i578.PlatformService>(),
       ),
-    );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i281.ProductionAppService.create(),
-      registerFor: {_prod},
-      preResolve: true,
     );
     gh.lazySingleton<_i283.BibleReaderService>(
       () => _i283.BibleReaderService(
