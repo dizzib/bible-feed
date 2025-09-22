@@ -7,9 +7,9 @@ import 'dart:async' as _i7;
 import 'dart:ui' as _i5;
 
 import 'package:bible_feed/model/feed.dart' as _i2;
-import 'package:bible_feed/model/reading_list.dart' as _i3;
+import 'package:bible_feed/model/reading_list.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i4;
+import 'package:mockito/src/dummies.dart' as _i3;
 import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart'
     as _i6;
 
@@ -55,6 +55,21 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as int);
 
   @override
+  String get chapterSplitLabel =>
+      (super.noSuchMethod(
+            Invocation.getter(#chapterSplitLabel),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#chapterSplitLabel),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#chapterSplitLabel),
+            ),
+          )
+          as String);
+
+  @override
   double get progress =>
       (super.noSuchMethod(
             Invocation.getter(#progress),
@@ -64,19 +79,19 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as double);
 
   @override
-  _i3.ReadingList get readingList =>
+  _i4.ReadingList get readingList =>
       (super.noSuchMethod(
             Invocation.getter(#readingList),
-            returnValue: _i4.dummyValue<_i3.ReadingList>(
+            returnValue: _i3.dummyValue<_i4.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
-            returnValueForMissingStub: _i4.dummyValue<_i3.ReadingList>(
+            returnValueForMissingStub: _i3.dummyValue<_i4.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
           )
-          as _i3.ReadingList);
+          as _i4.ReadingList);
 
   @override
   _i2.FeedState get state =>
@@ -89,21 +104,6 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
             ),
           )
           as _i2.FeedState);
-
-  @override
-  String get chapterSplitLabel =>
-      (super.noSuchMethod(
-            Invocation.getter(#chapterSplitLabel),
-            returnValue: _i4.dummyValue<String>(
-              this,
-              Invocation.getter(#chapterSplitLabel),
-            ),
-            returnValueForMissingStub: _i4.dummyValue<String>(
-              this,
-              Invocation.getter(#chapterSplitLabel),
-            ),
-          )
-          as String);
 
   @override
   bool get hasListeners =>

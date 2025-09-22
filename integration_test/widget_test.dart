@@ -1,7 +1,7 @@
 import 'package:bible_feed/injectable.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/model/production_reading_lists.dart';
 import 'package:bible_feed/model/reading_lists.dart';
+import 'package:bible_feed/model.production/reading_lists.dart' as prod;
 import 'package:bible_feed/service/chapter_split_service.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
@@ -22,7 +22,7 @@ extension Helper on WidgetTester {
 void main() async {
   await configureDependencies();
 
-  final gospels = ProductionReadingLists().elementAt(0);
+  final gospels = prod.ReadingLists().elementAt(0);
   final matthew = gospels[0];
 
   testWidgets('BookChapterDialog', (WidgetTester t) async {
