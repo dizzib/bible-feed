@@ -16,13 +16,12 @@ class BibleReaders extends base.BibleReaders {
           TargetPlatform.android,
           TargetPlatform.iOS,
         ]),
-        // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
         BibleReader(
           BibleReaderKey.andBibleApp,
           BibleReaderType.app,
           'AndBible',
           'https://read.andbible.org/BOOK.CHAPTER',
-          [],
+          [], // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
         ),
         BibleReader(
           BibleReaderKey.blueLetterApp,
