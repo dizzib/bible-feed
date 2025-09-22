@@ -8,7 +8,7 @@ import 'dart:ui' as _i7;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i2;
 import 'package:bible_feed/model/chapter_splitters.dart' as _i5;
 import 'package:bible_feed/model/feed.dart' as _i4;
-import 'package:bible_feed/service/verse_scope_toggler_service.dart' as _i6;
+import 'package:bible_feed/service/chapter_split_toggler_service.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
 
@@ -481,11 +481,11 @@ class MockChapterSplitters extends _i1.Mock implements _i5.ChapterSplitters {
           as _i2.ChapterSplitter);
 }
 
-/// A class which mocks [VerseScopeTogglerService].
+/// A class which mocks [ChapterSplitTogglerService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockVerseScopeTogglerService extends _i1.Mock
-    implements _i6.VerseScopeTogglerService {
+class MockChapterSplitTogglerService extends _i1.Mock
+    implements _i6.ChapterSplitTogglerService {
   @override
   bool get canEnable =>
       (super.noSuchMethod(

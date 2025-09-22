@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'toggler_service.dart';
 
 @lazySingleton
-class VerseScopeTogglerService extends TogglerService {
-  VerseScopeTogglerService(super.sharedPreferences);
+class ChapterSplitTogglerService extends TogglerService {
+  ChapterSplitTogglerService(super.sharedPreferences);
 
   @override
   bool get canEnable => true;

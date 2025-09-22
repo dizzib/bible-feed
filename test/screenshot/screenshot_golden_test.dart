@@ -6,7 +6,7 @@ library;
 
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/model/feeds.dart';
-import 'package:bible_feed/service/verse_scope_toggler_service.dart';
+import 'package:bible_feed/service/chapter_split_toggler_service.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -56,7 +56,7 @@ final scenarios = {
 
 Future<void> main() async {
   await configureDependencies();
-  sl<VerseScopeTogglerService>().isEnabled = true; // enable verse scopes
+  sl<ChapterSplitTogglerService>().isEnabled = true; // enable verse scopes
   WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
 
   void setState() {

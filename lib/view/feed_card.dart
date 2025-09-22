@@ -6,7 +6,7 @@ import '/model/feed.dart';
 import '/model/feeds.dart';
 import '/service/bible_reader_service.dart';
 import '/service/haptic_service.dart';
-import '/service/verse_scope_toggler_service.dart';
+import '/service/chapter_split_toggler_service.dart';
 import 'bible_reader_failure_dialog.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';
@@ -21,7 +21,7 @@ class FeedCard extends WatchingWidget {
   build(context) {
     final brs = watchIt<BibleReaderService>();
     final feeds = watchIt<Feeds>();
-    watchIt<VerseScopeTogglerService>();
+    watchIt<ChapterSplitTogglerService>();
     watch(feed);
 
     return AnimatedOpacity(
