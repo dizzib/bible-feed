@@ -16,8 +16,8 @@ targets:
         generate_for:
           include:
             - lib/injectable.dart
-            - lib/model/*.dart
-            - lib/service/*.dart
+            - lib/model*/*.dart
+            - lib/service*/*.dart
             - test/*.dart
             - integration_test/injectable.dart
       mockito:mockBuilder:

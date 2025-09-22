@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'bible_reader.dart';
-import 'bible_reader_keys.dart';
-import 'bible_reader_types.dart';
-import 'bible_readers.dart';
-import 'book_key_externaliser.dart';
+import '/model/bible_reader.dart';
+import '/model/bible_reader_keys.dart';
+import '/model/bible_reader_types.dart';
+import '/model/bible_readers.dart' as base;
+import '/model/book_key_externaliser.dart';
 
 @immutable
-@LazySingleton(as: BibleReaders)
-class ProductionBibleReaders extends BibleReaders {
-  const ProductionBibleReaders()
+@LazySingleton(as: base.BibleReaders)
+class BibleReaders extends base.BibleReaders {
+  const BibleReaders()
     : super(const [
         BibleReader(BibleReaderKeys.none, BibleReaderTypes.none, 'None', '', [
           TargetPlatform.android,

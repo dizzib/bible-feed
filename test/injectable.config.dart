@@ -9,12 +9,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:bible_feed/model.production/bible_readers.dart' as _i901;
+import 'package:bible_feed/model.production/reading_lists.dart' as _i396;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
-import 'package:bible_feed/model/production_bible_readers.dart' as _i545;
-import 'package:bible_feed/model/production_reading_lists.dart' as _i438;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
 import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
 import 'package:bible_feed/service/app_install_service.dart' as _i817;
@@ -65,15 +65,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i55.TestPlatformService(),
       registerFor: {_test},
     );
+    gh.lazySingleton<_i1070.BibleReaders>(() => const _i901.BibleReaders());
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i963.TestAppService.create(),
       registerFor: {_test},
       preResolve: true,
     );
-    gh.lazySingleton<_i1070.BibleReaders>(
-      () => const _i545.ProductionBibleReaders(),
-    );
-    gh.lazySingleton<_i823.ReadingLists>(() => _i438.ProductionReadingLists());
+    gh.lazySingleton<_i823.ReadingLists>(() => _i396.ReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );

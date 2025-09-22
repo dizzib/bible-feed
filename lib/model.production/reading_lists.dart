@@ -3,12 +3,12 @@ import 'package:injectable/injectable.dart';
 
 import '/model/book.dart';
 import '/model/reading_list.dart';
-import 'reading_lists.dart';
+import '/model/reading_lists.dart' as base;
 
 @immutable
-@LazySingleton(as: ReadingLists)
-class ProductionReadingLists extends ReadingLists {
-  ProductionReadingLists()
+@LazySingleton(as: base.ReadingLists)
+class ReadingLists extends base.ReadingLists {
+  ReadingLists()
     : super([
         ReadingList('gos', 'Gospels', const [
           Book('mat', 'Matthew', 28),
