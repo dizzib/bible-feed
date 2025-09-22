@@ -93,4 +93,11 @@ void main() async {
       expect((await testee.launchLinkedBibleReader(state)).runtimeType, Failure);
     });
   });
+
+  test('unlinkBibleReader should set to none and save to store', () {
+    testee.linkedBibleReaderIndex = 1;
+    testee.unlinkBibleReader();
+    verify(mockSharedPreferences.setString('linkedBibleReader', 'none')).called(1);
+    expect(testee.isLinked, false);
+  });
 }

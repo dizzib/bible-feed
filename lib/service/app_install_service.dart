@@ -17,7 +17,7 @@ class AppInstallService with ChangeNotifier {
         notifyListeners();
         return;
       }
-      bibleReaderService.linkedBibleReaderIndex = 0; // the linked bible reader has been uninstalled
+      bibleReaderService.unlinkBibleReader(); // the linked bible reader has been uninstalled
     });
   }
 }

@@ -55,4 +55,6 @@ class BibleReaderService with ChangeNotifier {
       return Future.value(Failure(e));
     }
   }
+
+  void unlinkBibleReader() => _saveState(BibleReaderKeys.none);
 }
