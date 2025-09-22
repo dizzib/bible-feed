@@ -3,8 +3,8 @@ import 'dart:core';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
+import '/service/chapter_split_service.dart';
 import '/service/feed_store_service.dart';
-import '/service/verse_scope_service.dart';
 import 'base_list.dart';
 import 'feed.dart';
 import 'reading_lists.dart';
@@ -13,8 +13,8 @@ import 'reading_lists.dart';
 class Feeds extends BaseList<Feed> with ChangeNotifier {
   final FeedStoreService _feedStoreService;
 
-  Feeds(this._feedStoreService, VerseScopeService verseScopeService, ReadingLists readingLists)
-    : super(readingLists.map((rl) => Feed(rl, verseScopeService, _feedStoreService.loadState(rl))).toList()) {
+  Feeds(this._feedStoreService, ChapterSplitService chapterSplitService, ReadingLists readingLists)
+    : super(readingLists.map((rl) => Feed(rl, chapterSplitService, _feedStoreService.loadState(rl))).toList()) {
     for (Feed f in this) {
       if (f.state.dateModified?.isAfter(_lastModifiedFeed?.state.dateModified ?? DateTime(0)) ?? false) {
         _lastModifiedFeed = f;

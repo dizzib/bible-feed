@@ -1,6 +1,6 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/service/verse_scope_service.dart';
+import 'package:bible_feed/service/chapter_split_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -10,18 +10,18 @@ import 'feed_test.mocks.dart';
 import '../injectable.dart';
 import '../test_data.dart';
 
-@GenerateNiceMocks([MockSpec<VerseScopeService>()])
+@GenerateNiceMocks([MockSpec<ChapterSplitService>()])
 void main() async {
   configureDependencies();
 
   late Feed testee;
   late FeedState state;
-  final mockVerseScopeService = MockVerseScopeService();
+  final mockChapterSplitService = MockChapterSplitService();
 
   setUp(() {
     state = FeedState(book: b1);
-    when(mockVerseScopeService.getNextVerse(state)).thenReturn(1);
-    testee = Feed(rl1, mockVerseScopeService, state);
+    when(mockChapterSplitService.getNextVerse(state)).thenReturn(1);
+    testee = Feed(rl1, mockChapterSplitService, state);
   });
 
   group('property', () {
@@ -93,7 +93,7 @@ void main() async {
       });
 
       test('with verse scope, should advance verse only', () async {
-        when(mockVerseScopeService.getNextVerse(state)).thenReturn(3);
+        when(mockChapterSplitService.getNextVerse(state)).thenReturn(3);
         checkState(b1, 1, 1);
         testee.toggleIsRead();
         testee.advance();

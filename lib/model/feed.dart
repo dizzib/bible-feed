@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '/service/verse_scope_service.dart';
+import '/service/chapter_split_service.dart';
 import 'book.dart';
 import 'reading_list.dart';
 
@@ -9,9 +9,9 @@ part 'feed_state.dart';
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
   final ReadingList _readingList;
-  final VerseScopeService _verseScopeService;
+  final ChapterSplitService _chapterSplitService;
 
-  Feed(this._readingList, this._verseScopeService, this._state);
+  Feed(this._readingList, this._chapterSplitService, this._state);
 
   final FeedState _state;
 
@@ -20,7 +20,7 @@ class Feed with ChangeNotifier {
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   FeedState get state => _state;
-  String get verseScopeLabel => _verseScopeService.getVerseScopeLabel(_state);
+  String get verseScopeLabel => _chapterSplitService.getLabel(_state);
 
   void _notifyListeners() {
     _state._dateModified = DateTime.now();
@@ -29,7 +29,7 @@ class Feed with ChangeNotifier {
 
   void advance() {
     assert(_state._isRead);
-    _state._verse = _verseScopeService.getNextVerse(_state);
+    _state._verse = _chapterSplitService.getNextVerse(_state);
     if (_state._verse == 1 && ++_state._chapter > _state._book.chapterCount) {
       _state._book = _readingList[(bookIndex + 1) % _readingList.count];
       _state._chapter = 1;

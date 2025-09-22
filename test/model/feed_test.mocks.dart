@@ -4,7 +4,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/model/feed.dart' as _i3;
-import 'package:bible_feed/service/verse_scope_service.dart' as _i2;
+import 'package:bible_feed/service/chapter_split_service.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 
@@ -22,10 +22,11 @@ import 'package:mockito/src/dummies.dart' as _i4;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [VerseScopeService].
+/// A class which mocks [ChapterSplitService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockVerseScopeService extends _i1.Mock implements _i2.VerseScopeService {
+class MockChapterSplitService extends _i1.Mock
+    implements _i2.ChapterSplitService {
   @override
   int getNextVerse(_i3.FeedState? state) =>
       (super.noSuchMethod(
@@ -36,16 +37,16 @@ class MockVerseScopeService extends _i1.Mock implements _i2.VerseScopeService {
           as int);
 
   @override
-  String getVerseScopeLabel(_i3.FeedState? state) =>
+  String getLabel(_i3.FeedState? state) =>
       (super.noSuchMethod(
-            Invocation.method(#getVerseScopeLabel, [state]),
+            Invocation.method(#getLabel, [state]),
             returnValue: _i4.dummyValue<String>(
               this,
-              Invocation.method(#getVerseScopeLabel, [state]),
+              Invocation.method(#getLabel, [state]),
             ),
             returnValueForMissingStub: _i4.dummyValue<String>(
               this,
-              Invocation.method(#getVerseScopeLabel, [state]),
+              Invocation.method(#getLabel, [state]),
             ),
           )
           as String);

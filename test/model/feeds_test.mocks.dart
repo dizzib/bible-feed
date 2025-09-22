@@ -7,8 +7,8 @@ import 'dart:async' as _i5;
 
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
+import 'package:bible_feed/service/chapter_split_service.dart' as _i6;
 import 'package:bible_feed/service/feed_store_service.dart' as _i3;
-import 'package:bible_feed/service/verse_scope_service.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 
@@ -63,10 +63,11 @@ class MockFeedStoreService extends _i1.Mock implements _i3.FeedStoreService {
           as _i5.Future<dynamic>);
 }
 
-/// A class which mocks [VerseScopeService].
+/// A class which mocks [ChapterSplitService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockVerseScopeService extends _i1.Mock implements _i6.VerseScopeService {
+class MockChapterSplitService extends _i1.Mock
+    implements _i6.ChapterSplitService {
   @override
   int getNextVerse(_i2.FeedState? state) =>
       (super.noSuchMethod(
@@ -77,16 +78,16 @@ class MockVerseScopeService extends _i1.Mock implements _i6.VerseScopeService {
           as int);
 
   @override
-  String getVerseScopeLabel(_i2.FeedState? state) =>
+  String getLabel(_i2.FeedState? state) =>
       (super.noSuchMethod(
-            Invocation.method(#getVerseScopeLabel, [state]),
+            Invocation.method(#getLabel, [state]),
             returnValue: _i7.dummyValue<String>(
               this,
-              Invocation.method(#getVerseScopeLabel, [state]),
+              Invocation.method(#getLabel, [state]),
             ),
             returnValueForMissingStub: _i7.dummyValue<String>(
               this,
-              Invocation.method(#getVerseScopeLabel, [state]),
+              Invocation.method(#getLabel, [state]),
             ),
           )
           as String);

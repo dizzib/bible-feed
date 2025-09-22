@@ -32,7 +32,6 @@ import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
 import 'package:bible_feed/service/production_app_service.dart' as _i281;
 import 'package:bible_feed/service/production_platform_service.dart' as _i455;
-import 'package:bible_feed/service/verse_scope_service.dart' as _i109;
 import 'package:bible_feed/service/verse_scope_toggler_service.dart' as _i430;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -99,10 +98,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1070.BibleReaders>(),
       ),
     );
-    gh.lazySingleton<_i109.VerseScopeService>(
-      () => _i109.VerseScopeService(
-        gh<_i967.VerseScopes>(),
-        gh<_i430.VerseScopeTogglerService>(),
+    gh.lazySingleton<_i759.Feeds>(
+      () => _i759.Feeds(
+        gh<_i119.FeedStoreService>(),
+        gh<_i283.ChapterSplitService>(),
+        gh<_i823.ReadingLists>(),
+      ),
+    );
+    gh.lazySingleton<_i307.FeedsAdvanceService>(
+      () => _i307.FeedsAdvanceService(
+        gh<_i460.SharedPreferences>(),
+        gh<_i759.Feeds>(),
       ),
     );
     gh.lazySingleton<_i817.AppInstallService>(
@@ -114,16 +120,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
     );
-    gh.lazySingleton<_i759.Feeds>(
-      () => _i759.Feeds(
-        gh<_i119.FeedStoreService>(),
-        gh<_i109.VerseScopeService>(),
-        gh<_i823.ReadingLists>(),
-      ),
+    gh.singleton<_i148.AutoAdvanceService>(
+      () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
     );
-    gh.lazySingleton<_i307.FeedsAdvanceService>(
-      () => _i307.FeedsAdvanceService(
-        gh<_i460.SharedPreferences>(),
+    gh.lazySingleton<_i136.AllDoneDialogService>(
+      () => _i136.AllDoneDialogService(
+        gh<_i307.FeedsAdvanceService>(),
         gh<_i759.Feeds>(),
       ),
     );
@@ -136,15 +138,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1033.ChapterListWheelState>(),
       ),
       registerFor: {_prod},
-    );
-    gh.singleton<_i148.AutoAdvanceService>(
-      () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
-    );
-    gh.lazySingleton<_i136.AllDoneDialogService>(
-      () => _i136.AllDoneDialogService(
-        gh<_i307.FeedsAdvanceService>(),
-        gh<_i759.Feeds>(),
-      ),
     );
     return this;
   }
