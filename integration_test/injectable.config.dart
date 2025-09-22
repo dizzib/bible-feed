@@ -98,11 +98,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i430.VerseScopeTogglerService>(),
       ),
     );
+    gh.lazySingleton<_i817.AppInstallService>(
+      () => _i817.AppInstallService(
+        gh<_i283.BibleReaderService>(),
+        gh<_i578.PlatformService>(),
+      ),
+    );
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
-    );
-    gh.lazySingleton<_i817.AppInstallService>(
-      () => _i817.AppInstallService(gh<_i283.BibleReaderService>()),
     );
     gh.lazySingleton<_i759.Feeds>(
       () => _i759.Feeds(
