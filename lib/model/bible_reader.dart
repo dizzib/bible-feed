@@ -5,7 +5,7 @@ import 'package:watch_it/watch_it.dart';
 import '/model.production/book_key_externaliser.dart';
 import '/service/platform_service.dart';
 import 'bible_reader_key.dart';
-import 'bible_reader_types.dart';
+import 'bible_reader_type.dart';
 import 'feed.dart';
 import 'feeds.dart';
 
@@ -24,7 +24,7 @@ class BibleReader {
        _uriVersePath = uriVersePath;
 
   final BibleReaderKey _key;
-  final BibleReaderTypes _type;
+  final BibleReaderType _type;
   final BookKeyExternaliser _bookKeyExternaliser;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
   final String _name;
@@ -42,14 +42,14 @@ class BibleReader {
 
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   String get displayName => '$_name ${_key == BibleReaderKey.none ? '' : _type.name}'.trim();
-  bool get isApp => _type == BibleReaderTypes.app;
+  bool get isApp => _type == BibleReaderType.app;
   BibleReaderKey get key => _key;
   String get name => _name;
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
 
   Future<bool> isAvailable() async {
-    if (_type == BibleReaderTypes.none) return Future.value(true);
+    if (_type == BibleReaderType.none) return Future.value(true);
     return canLaunchUrl(_getDeeplinkUri(sl<Feeds>()[0].state)); // attempt to launch first feed uri
   }
 
