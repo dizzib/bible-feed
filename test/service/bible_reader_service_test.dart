@@ -1,5 +1,5 @@
 import 'package:bible_feed/model/bible_reader.dart';
-import 'package:bible_feed/model/bible_reader_keys.dart';
+import 'package:bible_feed/model/bible_reader_key.dart';
 import 'package:bible_feed/model/bible_readers.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
@@ -24,7 +24,7 @@ void main() async {
   final bibleReaders = BibleReaders([MockBibleReader(), MockBibleReader()]);
   when(bibleReaders[0].isCertified(mockPlatformService)).thenReturn(true);
   when(bibleReaders[1].isCertified(mockPlatformService)).thenReturn(true);
-  when(bibleReaders[1].key).thenReturn(BibleReaderKeys.blueLetterApp);
+  when(bibleReaders[1].key).thenReturn(BibleReaderKey.blueLetterApp);
 
   late MockSharedPreferences mockSharedPreferences;
   late BibleReaderService testee;

@@ -4,7 +4,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '/model.production/book_key_externaliser.dart';
 import '/service/platform_service.dart';
-import 'bible_reader_keys.dart';
+import 'bible_reader_key.dart';
 import 'bible_reader_types.dart';
 import 'feed.dart';
 import 'feeds.dart';
@@ -23,7 +23,7 @@ class BibleReader {
   }) : _bookKeyExternaliser = bookKeyExternaliser,
        _uriVersePath = uriVersePath;
 
-  final BibleReaderKeys _key;
+  final BibleReaderKey _key;
   final BibleReaderTypes _type;
   final BookKeyExternaliser _bookKeyExternaliser;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
@@ -41,9 +41,9 @@ class BibleReader {
   }
 
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
-  String get displayName => '$_name ${_key == BibleReaderKeys.none ? '' : _type.name}'.trim();
+  String get displayName => '$_name ${_key == BibleReaderKey.none ? '' : _type.name}'.trim();
   bool get isApp => _type == BibleReaderTypes.app;
-  BibleReaderKeys get key => _key;
+  BibleReaderKey get key => _key;
   String get name => _name;
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;

@@ -6,7 +6,7 @@
 import 'dart:async' as _i6;
 
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
-import 'package:bible_feed/model/bible_reader_keys.dart' as _i5;
+import 'package:bible_feed/model/bible_reader_key.dart' as _i5;
 import 'package:bible_feed/model/feed.dart' as _i8;
 import 'package:bible_feed/service/platform_service.dart' as _i7;
 import 'package:flutter/foundation.dart' as _i3;
@@ -67,13 +67,13 @@ class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
           as bool);
 
   @override
-  _i5.BibleReaderKeys get key =>
+  _i5.BibleReaderKey get key =>
       (super.noSuchMethod(
             Invocation.getter(#key),
-            returnValue: _i5.BibleReaderKeys.none,
-            returnValueForMissingStub: _i5.BibleReaderKeys.none,
+            returnValue: _i5.BibleReaderKey.none,
+            returnValueForMissingStub: _i5.BibleReaderKey.none,
           )
-          as _i5.BibleReaderKeys);
+          as _i5.BibleReaderKey);
 
   @override
   String get name =>

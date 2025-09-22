@@ -1,5 +1,5 @@
 import 'package:bible_feed/model/bible_reader.dart';
-import 'package:bible_feed/model/bible_reader_keys.dart';
+import 'package:bible_feed/model/bible_reader_key.dart';
 import 'package:bible_feed/model/bible_reader_types.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/platform_service.dart';
@@ -25,7 +25,7 @@ void main() {
   setUp(() {
     mockUrlLauncher = MockUrlLauncher();
     testee = const BibleReader(
-      BibleReaderKeys.blueLetterApp,
+      BibleReaderKey.blueLetterApp,
       BibleReaderTypes.app,
       'Reader name',
       'scheme://uri/BOOK/CHAPTER',
@@ -36,7 +36,7 @@ void main() {
   });
 
   test('constructor: should initialise properties', () {
-    expect(testee.key, BibleReaderKeys.blueLetterApp);
+    expect(testee.key, BibleReaderKey.blueLetterApp);
     expect(testee.name, 'Reader name');
     expect(testee.displayName, 'Reader name app');
     expect(testee.isApp, true);
@@ -48,7 +48,7 @@ void main() {
 
   group('isAvailable', () {
     test('should return true if None', () async {
-      expect(await const BibleReader(BibleReaderKeys.none, BibleReaderTypes.none, 'None', '', []).isAvailable(), true);
+      expect(await const BibleReader(BibleReaderKey.none, BibleReaderTypes.none, 'None', '', []).isAvailable(), true);
     });
 
     test('should attempt to launch first feed uri if not None', () async {
@@ -90,7 +90,7 @@ void main() {
     ],
     (certifiedPlatforms, isAndroid, isIOS, expectResult) {
       final platform = PlatformService(isAndroid: isAndroid, isIOS: isIOS, isHapticAvailable: false);
-      final testee = BibleReader(BibleReaderKeys.none, BibleReaderTypes.none, '', '', certifiedPlatforms);
+      final testee = BibleReader(BibleReaderKey.none, BibleReaderTypes.none, '', '', certifiedPlatforms);
       expect(testee.isCertified(platform), expectResult);
     },
   );

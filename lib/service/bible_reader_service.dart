@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/bible_reader.dart';
-import '/model/bible_reader_keys.dart';
+import '/model/bible_reader_key.dart';
 import '/model/bible_readers.dart';
 import '/model/feed.dart';
 import 'platform_service.dart';
@@ -23,18 +23,18 @@ class BibleReaderService with ChangeNotifier {
   static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
   late List<BibleReader> _certifiedBibleReaderList;
-  late BibleReaderKeys _linkedBibleReaderKey;
+  late BibleReaderKey _linkedBibleReaderKey;
 
   void _loadState() {
     final String? linkedReaderName = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
     try {
-      _linkedBibleReaderKey = BibleReaderKeys.values.byName(linkedReaderName ?? BibleReaderKeys.none.name);
+      _linkedBibleReaderKey = BibleReaderKey.values.byName(linkedReaderName ?? BibleReaderKey.none.name);
     } catch (e) {
-      _linkedBibleReaderKey = BibleReaderKeys.none;
+      _linkedBibleReaderKey = BibleReaderKey.none;
     }
   }
 
-  void _saveState(BibleReaderKeys value) {
+  void _saveState(BibleReaderKey value) {
     if (value == _linkedBibleReaderKey) return;
     _linkedBibleReaderKey = value;
     _sharedPreferences.setString(_linkedBibleReaderStoreKey, value.name);
@@ -42,7 +42,7 @@ class BibleReaderService with ChangeNotifier {
   }
 
   List<BibleReader> get certifiedBibleReaderList => _certifiedBibleReaderList;
-  bool get isLinked => _linkedBibleReaderKey != BibleReaderKeys.none;
+  bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
   BibleReader get linkedBibleReader => _certifiedBibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);
   int get linkedBibleReaderIndex => _certifiedBibleReaderList.indexOf(linkedBibleReader);
   set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaderList[value].key);
@@ -56,5 +56,5 @@ class BibleReaderService with ChangeNotifier {
     }
   }
 
-  void unlinkBibleReader() => _saveState(BibleReaderKeys.none);
+  void unlinkBibleReader() => _saveState(BibleReaderKey.none);
 }

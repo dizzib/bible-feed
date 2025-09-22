@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import '/model/bible_reader.dart';
-import '/model/bible_reader_keys.dart';
+import '/model/bible_reader_key.dart';
 import '/model/bible_reader_types.dart';
 import '/model/bible_readers.dart' as base;
 import 'book_key_externaliser.dart';
@@ -12,20 +12,20 @@ import 'book_key_externaliser.dart';
 class BibleReaders extends base.BibleReaders {
   const BibleReaders()
     : super(const [
-        BibleReader(BibleReaderKeys.none, BibleReaderTypes.none, 'None', '', [
+        BibleReader(BibleReaderKey.none, BibleReaderTypes.none, 'None', '', [
           TargetPlatform.android,
           TargetPlatform.iOS,
         ]),
         // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
         BibleReader(
-          BibleReaderKeys.andBibleApp,
+          BibleReaderKey.andBibleApp,
           BibleReaderTypes.app,
           'AndBible',
           'https://read.andbible.org/BOOK.CHAPTER',
           [],
         ),
         BibleReader(
-          BibleReaderKeys.blueLetterApp,
+          BibleReaderKey.blueLetterApp,
           BibleReaderTypes.app,
           'Blue Letter Bible',
           'blb://BOOK/CHAPTER',
@@ -34,7 +34,7 @@ class BibleReaders extends base.BibleReaders {
           uriVersePath: '/VERSE',
         ),
         BibleReader(
-          BibleReaderKeys.blueLetterWeb,
+          BibleReaderKey.blueLetterWeb,
           BibleReaderTypes.web,
           'Blue Letter Bible',
           'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
@@ -43,14 +43,14 @@ class BibleReaders extends base.BibleReaders {
           uriVersePath: '/VERSE',
         ),
         BibleReader(
-          BibleReaderKeys.lifeBibleApp,
+          BibleReaderKey.lifeBibleApp,
           BibleReaderTypes.app,
           'Life Bible',
           'tecartabible://BOOK.CHAPTER',
           [],
         ),
         BibleReader(
-          BibleReaderKeys.logosBibleApp,
+          BibleReaderKey.logosBibleApp,
           BibleReaderTypes.app,
           'Logos Bible',
           'logosref:Bible.BOOK.CHAPTER',
@@ -59,7 +59,7 @@ class BibleReaders extends base.BibleReaders {
           uriVersePath: '.VERSE',
         ),
         BibleReader(
-          BibleReaderKeys.oliveTreeApp,
+          BibleReaderKey.oliveTreeApp,
           BibleReaderTypes.app,
           'Olive Tree',
           'olivetree://bible/BOOK.CHAPTER',
@@ -68,7 +68,7 @@ class BibleReaders extends base.BibleReaders {
           uriVersePath: '.VERSE',
         ),
         BibleReader(
-          BibleReaderKeys.weDevoteApp,
+          BibleReaderKey.weDevoteApp,
           BibleReaderTypes.app,
           'WeDevote',
           'wdbible://bible/BOOK.CHAPTER',
@@ -77,7 +77,7 @@ class BibleReaders extends base.BibleReaders {
           uriVersePath: '.VERSE',
         ),
         BibleReader(
-          BibleReaderKeys.youVersionApp,
+          BibleReaderKey.youVersionApp,
           BibleReaderTypes.app,
           'YouVersion',
           'youversion://bible?reference=BOOK.CHAPTER',
