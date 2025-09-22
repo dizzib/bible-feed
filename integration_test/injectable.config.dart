@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/model.production/bible_readers.dart' as _i901;
+import 'package:bible_feed/model.production/chapter_splitters.dart' as _i179;
 import 'package:bible_feed/model.production/reading_lists.dart' as _i396;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
@@ -58,8 +59,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.ChapterListWheelState>(
       () => _i1033.ChapterListWheelState(),
     );
-    gh.lazySingleton<_i1006.ChapterSplitters>(() => _i1006.ChapterSplitters());
     gh.lazySingleton<_i1070.BibleReaders>(() => const _i901.BibleReaders());
+    gh.lazySingleton<_i1006.ChapterSplitters>(() => _i179.ChapterSplitters());
     gh.lazySingleton<_i823.ReadingLists>(() => _i396.ReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
