@@ -101,16 +101,16 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as _i2.FeedState);
 
   @override
-  String get verseScopeLabel =>
+  String get chapterSplitLabel =>
       (super.noSuchMethod(
-            Invocation.getter(#verseScopeLabel),
+            Invocation.getter(#chapterSplitLabel),
             returnValue: _i4.dummyValue<String>(
               this,
-              Invocation.getter(#verseScopeLabel),
+              Invocation.getter(#chapterSplitLabel),
             ),
             returnValueForMissingStub: _i4.dummyValue<String>(
               this,
-              Invocation.getter(#verseScopeLabel),
+              Invocation.getter(#chapterSplitLabel),
             ),
           )
           as String);
