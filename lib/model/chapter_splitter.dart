@@ -6,7 +6,7 @@ import 'feed.dart';
 class ChapterSplitter {
   final String bookKey;
   final int chapter;
-  final List<int> verses; // each section starts at these verse numbers, excluding verse 1
+  final List<int> verses; // each section split starts at these verse numbers, excluding verse 1
 
   const ChapterSplitter(this.bookKey, this.chapter, this.verses);
 
