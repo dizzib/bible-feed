@@ -17,10 +17,10 @@ class Feed with ChangeNotifier {
 
   int get bookIndex => _readingList.indexOf(_state._book);
   int get chaptersRead => _state._chapter - (_state._isRead ? 0 : 1);
+  String get chapterSplitLabel => _chapterSplitService.getLabel(_state);
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   FeedState get state => _state;
-  String get chapterSplitLabel => _chapterSplitService.getLabel(_state);
 
   void _notifyListeners() {
     _state._dateModified = DateTime.now();

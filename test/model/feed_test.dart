@@ -37,6 +37,11 @@ void main() async {
       expect(testee.state.chapter, 1);
     });
 
+    test('chapterSplitLabel get', () {
+      when(mockChapterSplitService.getLabel(state)).thenReturn('label');
+      expect(testee.chapterSplitLabel, 'label');
+    });
+
     test('isChapterRead get/set should affect chaptersRead', () {
       expect(testee.state.isRead, false);
       expect(testee.chaptersRead, 0);
