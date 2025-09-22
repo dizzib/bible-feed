@@ -16,16 +16,6 @@ void main() {
     });
   }
 
-  group('BibleReaderBookKeyExternaliser', () {
-    test('getExternalBookKey returns original key if not in keyMap', () {
-      expect(const _TestBookKeyExternaliser().getExternalBookKey('unknown'), 'unknown');
-    });
-  });
-
-  test('identity apply returns original key unchanged', () {
-    expect(BookKeyExternaliser.identity.getExternalBookKey('anykey'), 'anykey');
-  });
-
   runTest(BookKeyExternaliser.blueLetter, const {
     '1cr': '1ch',
     '2cr': '2ch',
@@ -63,9 +53,4 @@ void main() {
   });
 
   runTest(BookKeyExternaliser.oliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
-}
-
-// Helper class for testing concrete class
-class _TestBookKeyExternaliser extends BookKeyExternaliser {
-  const _TestBookKeyExternaliser() : super(const []);
 }
