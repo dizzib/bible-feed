@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '/model.production/bible_reader_key.dart';
 import '/model.production/book_key_externaliser.dart';
 import '/service/platform_service.dart';
-import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
 import 'feed.dart';
 import 'feeds.dart';

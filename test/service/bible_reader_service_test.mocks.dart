@@ -5,8 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
 
+import 'package:bible_feed/model.production/bible_reader_key.dart' as _i5;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
-import 'package:bible_feed/model/bible_reader_key.dart' as _i5;
 import 'package:bible_feed/model/feed.dart' as _i8;
 import 'package:bible_feed/service/platform_service.dart' as _i7;
 import 'package:flutter/foundation.dart' as _i3;

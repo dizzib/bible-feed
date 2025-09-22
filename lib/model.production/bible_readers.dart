@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import '/model/bible_reader.dart';
-import '/model/bible_reader_key.dart';
 import '/model/bible_reader_type.dart';
 import '/model/bible_readers.dart' as base;
+import 'bible_reader_key.dart';
 import 'book_key_externaliser.dart';
 
 @immutable
