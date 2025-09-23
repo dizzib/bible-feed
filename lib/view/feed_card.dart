@@ -5,7 +5,7 @@ import '../service/bible_reader_launch_service.dart';
 import '../service/result.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
-import '/service/bible_reader_service.dart';
+import '/service/bible_reader_link_service.dart';
 import '/service/haptic_service.dart';
 import '/service/chapter_split_toggler_service.dart';
 import 'bible_reader_failure_dialog.dart';
@@ -20,7 +20,7 @@ class FeedCard extends WatchingWidget {
 
   @override
   build(context) {
-    final brs = watchIt<BibleReaderService>();
+    final brs = watchIt<BibleReaderLinkService>();
     final feeds = watchIt<Feeds>();
     watchIt<ChapterSplitTogglerService>();
     watch(feed);
@@ -45,7 +45,7 @@ class FeedCard extends WatchingWidget {
             onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
             onTap: () async {
               sl<HapticService>().impact();
-              final linkedBibleReader = sl<BibleReaderService>().linkedBibleReader;
+              final linkedBibleReader = sl<BibleReaderLinkService>().linkedBibleReader;
               final result = await sl<BibleReaderLaunchService>().launch(linkedBibleReader, feed.state);
               if (result is Failure && context.mounted) {
                 context.showDialogWithBlurBackground(BibleReaderFailureDialog(result));

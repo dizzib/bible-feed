@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'bible_reader_launch_service.dart';
-import 'bible_reader_service.dart';
+import 'bible_reader_link_service.dart';
 import 'platform_service.dart';
 
 @lazySingleton
 class AppInstallService with ChangeNotifier {
   AppInstallService(
-    BibleReaderService bibleReaderService,
+    BibleReaderLinkService bibleReaderService,
     BibleReaderLaunchService bibleReaderLaunchService,
     PlatformService platformService,
   ) {

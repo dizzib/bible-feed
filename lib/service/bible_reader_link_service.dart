@@ -9,10 +9,10 @@ import '/model.production/bible_reader_key.dart';
 import 'platform_service.dart';
 
 @lazySingleton
-class BibleReaderService with ChangeNotifier {
+class BibleReaderLinkService with ChangeNotifier {
   final SharedPreferences _sharedPreferences;
 
-  BibleReaderService(
+  BibleReaderLinkService(
     this._sharedPreferences,
     PlatformService platformService,
     BibleReaders bibleReaders,

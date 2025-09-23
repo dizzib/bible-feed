@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/service/bible_reader_service.dart';
+import '/service/bible_reader_link_service.dart';
 
 class BibleReaderLinkIcon extends WatchingWidget {
   @override
   build(context) {
-    final brs = watchIt<BibleReaderService>();
+    final brs = watchIt<BibleReaderLinkService>();
 
     return Tooltip(
       message: brs.isLinked ? 'The ${brs.linkedBibleReader.name} is enabled' : 'The bible reader is disabled',

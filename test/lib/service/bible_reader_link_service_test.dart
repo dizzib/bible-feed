@@ -1,7 +1,7 @@
 import 'package:bible_feed/model.production/bible_reader_key.dart';
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_readers.dart';
-import 'package:bible_feed/service/bible_reader_service.dart';
+import 'package:bible_feed/service/bible_reader_link_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bible_reader_service_test.mocks.dart';
+import 'bible_reader_link_service_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<BibleReader>(),
@@ -24,11 +24,11 @@ void main() async {
   when(bibleReaders[1].key).thenReturn(BibleReaderKey.blueLetterApp);
 
   late MockSharedPreferences mockSharedPreferences;
-  late BibleReaderService testee;
+  late BibleReaderLinkService testee;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
+    testee = BibleReaderLinkService(mockSharedPreferences, mockPlatformService, bibleReaders);
   });
 
   parameterizedTest(
@@ -40,7 +40,7 @@ void main() async {
     ],
     (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
-      testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
+      testee = BibleReaderLinkService(mockSharedPreferences, mockPlatformService, bibleReaders);
       expect(testee.certifiedBibleReaderList, bibleReaders);
       expect(testee.isLinked, expectIsLinked);
       expect(testee.linkedBibleReader, expectBibleReader);

@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '/model/list_wheel_state.dart';
-import 'bible_reader_service.dart';
+import 'bible_reader_link_service.dart';
 import 'haptic_service.dart';
 import 'haptic_toggler_service.dart';
 
@@ -10,7 +10,7 @@ import 'haptic_toggler_service.dart';
 class HapticWireupService {
   final HapticService _hapticService;
   final HapticTogglerService _hapticTogglerService;
-  final BibleReaderService _bibleReaderService;
+  final BibleReaderLinkService _bibleReaderService;
   final BookListWheelState _bookListWheelState;
   final ChapterListWheelState _chapterListWheelState;
 

@@ -4,14 +4,14 @@ import 'package:watch_it/watch_it.dart';
 import '../service/bible_reader_launch_service.dart';
 import '/model/bible_reader.dart';
 import '/service/app_install_service.dart';
-import '/service/bible_reader_service.dart';
+import '/service/bible_reader_link_service.dart';
 import 'bible_reader_link_icon.dart';
 
 class BibleReaderSettings extends WatchingWidget {
   @override
   Widget build(BuildContext context) {
     watchIt<AppInstallService>();
-    final brs = watchIt<BibleReaderService>();
+    final brs = watchIt<BibleReaderLinkService>();
 
     List<FutureBuilder<bool>> choiceChipList() => List.generate(brs.certifiedBibleReaderList.length, (idx) {
       final BibleReader br = brs.certifiedBibleReaderList[idx];
