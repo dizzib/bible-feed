@@ -38,9 +38,11 @@ class BibleReader {
     return Uri.parse(uri);
   }
 
+  BookKeyExternaliser get bookKeyExternaliser => _bookKeyExternaliser;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   String get displayName => '$_name ${_key == BibleReaderKey.none ? '' : _type.name}'.trim();
   bool get isApp => _type == BibleReaderType.app;
+  bool get isNone => _key == BibleReaderKey.none;
   BibleReaderKey get key => _key;
   String get name => _name;
   String get uriTemplate => _uriTemplate;

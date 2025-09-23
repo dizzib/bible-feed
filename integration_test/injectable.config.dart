@@ -23,6 +23,7 @@ import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
 import 'package:bible_feed/service/app_install_service.dart' as _i817;
 import 'package:bible_feed/service/app_service.dart' as _i977;
 import 'package:bible_feed/service/auto_advance_service.dart' as _i148;
+import 'package:bible_feed/service/bible_reader_launch_service.dart' as _i905;
 import 'package:bible_feed/service/bible_reader_service.dart' as _i283;
 import 'package:bible_feed/service/chapter_split_service.dart' as _i283;
 import 'package:bible_feed/service/chapter_split_toggler_service.dart' as _i301;
@@ -97,6 +98,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i460.SharedPreferences>(),
         gh<_i578.PlatformService>(),
       ),
+    );
+    gh.lazySingleton<_i905.BibleReaderLaunchService>(
+      () => _i905.BibleReaderLaunchService(gh<_i626.UrlLaunchService>()),
     );
     gh.lazySingleton<_i759.Feeds>(
       () => _i759.Feeds(
