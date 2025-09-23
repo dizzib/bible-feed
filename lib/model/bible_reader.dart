@@ -1,13 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:watch_it/watch_it.dart';
 
 import '/model.production/bible_reader_key.dart';
 import '/model.production/book_key_externaliser.dart';
 import '/service/platform_service.dart';
 import 'bible_reader_type.dart';
 import 'feed.dart';
-import 'feeds.dart';
 
 @immutable
 // for ios, scheme must be added to info.plist!!!
@@ -31,7 +29,7 @@ class BibleReader {
   final String _uriTemplate;
   final String? _uriVersePath;
 
-  Uri _getDeeplinkUri(String internalBookKey, int chapter, int verse) {
+  Uri _getDeeplinkUri(String internalBookKey, [int chapter = 1, int verse = 1]) {
     final externalBookKey = _bookKeyExternaliser.getExternalBookKey(internalBookKey);
     var uri = uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
     if (uriVersePath != null && verse > 1) {
@@ -50,8 +48,7 @@ class BibleReader {
 
   Future<bool> isAvailable() async {
     if (_type == BibleReaderType.none) return Future.value(true);
-    final state = sl<Feeds>()[0].state;
-    return canLaunchUrl(_getDeeplinkUri(state.book.key, state.chapter, state.verse));
+    return canLaunchUrl(_getDeeplinkUri('mat'));
   }
 
   bool isCertified(PlatformService platformService) =>
