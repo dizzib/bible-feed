@@ -7,12 +7,13 @@ import 'dart:async' as _i6;
 
 import 'package:bible_feed/model.production/bible_reader_key.dart' as _i5;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
-import 'package:bible_feed/model/feed.dart' as _i8;
-import 'package:bible_feed/service/platform_service.dart' as _i7;
+import 'package:bible_feed/model/feed.dart' as _i9;
+import 'package:bible_feed/service/platform_service.dart' as _i8;
+import 'package:bible_feed/service/url_launch_service.dart' as _i7;
 import 'package:flutter/foundation.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
-import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i9;
+import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -103,16 +104,16 @@ class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
           as String);
 
   @override
-  _i6.Future<bool> isAvailable() =>
+  _i6.Future<bool> isAvailable(_i7.UrlLaunchService? urlLaunchService) =>
       (super.noSuchMethod(
-            Invocation.method(#isAvailable, []),
+            Invocation.method(#isAvailable, [urlLaunchService]),
             returnValue: _i6.Future<bool>.value(false),
             returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
           as _i6.Future<bool>);
 
   @override
-  bool isCertified(_i7.PlatformService? platformService) =>
+  bool isCertified(_i8.PlatformService? platformService) =>
       (super.noSuchMethod(
             Invocation.method(#isCertified, [platformService]),
             returnValue: false,
@@ -121,9 +122,12 @@ class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
           as bool);
 
   @override
-  _i6.Future<bool> launch(_i8.FeedState? state) =>
+  _i6.Future<bool> launch(
+    _i7.UrlLaunchService? urlLaunchService,
+    _i9.FeedState? state,
+  ) =>
       (super.noSuchMethod(
-            Invocation.method(#launch, [state]),
+            Invocation.method(#launch, [urlLaunchService, state]),
             returnValue: _i6.Future<bool>.value(false),
             returnValueForMissingStub: _i6.Future<bool>.value(false),
           )
@@ -133,7 +137,7 @@ class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
 /// A class which mocks [PlatformService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPlatformService extends _i1.Mock implements _i7.PlatformService {
+class MockPlatformService extends _i1.Mock implements _i8.PlatformService {
   @override
   bool get isAndroid =>
       (super.noSuchMethod(
@@ -165,7 +169,7 @@ class MockPlatformService extends _i1.Mock implements _i7.PlatformService {
 /// A class which mocks [SharedPreferences].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
+class MockSharedPreferences extends _i1.Mock implements _i10.SharedPreferences {
   @override
   Set<String> getKeys() =>
       (super.noSuchMethod(
@@ -312,4 +316,27 @@ class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
             returnValueForMissingStub: _i6.Future<void>.value(),
           )
           as _i6.Future<void>);
+}
+
+/// A class which mocks [UrlLaunchService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUrlLaunchService extends _i1.Mock implements _i7.UrlLaunchService {
+  @override
+  _i6.Future<bool> canLaunchUrl(Uri? uri) =>
+      (super.noSuchMethod(
+            Invocation.method(#canLaunchUrl, [uri]),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
+          )
+          as _i6.Future<bool>);
+
+  @override
+  _i6.Future<bool> launchUrl(Uri? uri) =>
+      (super.noSuchMethod(
+            Invocation.method(#launchUrl, [uri]),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
+          )
+          as _i6.Future<bool>);
 }

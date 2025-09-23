@@ -10,12 +10,19 @@ import '/model/feed.dart';
 import '/model.production/bible_reader_key.dart';
 import 'platform_service.dart';
 import 'result.dart';
+import 'url_launch_service.dart';
 
 @lazySingleton
 class BibleReaderService with ChangeNotifier {
   final SharedPreferences _sharedPreferences;
+  final UrlLaunchService _urlLaunchService;
 
-  BibleReaderService(this._sharedPreferences, PlatformService platformService, BibleReaders bibleReaders) {
+  BibleReaderService(
+    this._sharedPreferences,
+    this._urlLaunchService,
+    PlatformService platformService,
+    BibleReaders bibleReaders,
+  ) {
     _certifiedBibleReaderList = bibleReaders.filter((br) => br.isCertified(platformService)).toList();
     _loadState();
   }
@@ -50,7 +57,7 @@ class BibleReaderService with ChangeNotifier {
   Future<Result> launchLinkedBibleReader(FeedState state) async {
     if (!isLinked || state.isRead) return Future.value(Success());
     try {
-      return Future.value(await linkedBibleReader.launch(state) ? Success() : Failure());
+      return Future.value(await linkedBibleReader.launch(_urlLaunchService, state) ? Success() : Failure());
     } on PlatformException catch (e) {
       return Future.value(Failure(e));
     }

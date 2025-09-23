@@ -5,6 +5,7 @@ import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
 import 'package:bible_feed/service/result.dart';
+import 'package:bible_feed/service/url_launch_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -15,9 +16,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../test_data.dart';
 import 'bible_reader_service_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<BibleReader>(), MockSpec<PlatformService>(), MockSpec<SharedPreferences>()])
+@GenerateNiceMocks([
+  MockSpec<BibleReader>(),
+  MockSpec<PlatformService>(),
+  MockSpec<SharedPreferences>(),
+  MockSpec<UrlLaunchService>(),
+])
 void main() async {
   final mockPlatformService = MockPlatformService();
+  final mockUrlLaunchService = MockUrlLaunchService();
   final bibleReaders = BibleReaders([MockBibleReader(), MockBibleReader()]);
   when(bibleReaders[0].isCertified(mockPlatformService)).thenReturn(true);
   when(bibleReaders[1].isCertified(mockPlatformService)).thenReturn(true);
@@ -28,7 +35,7 @@ void main() async {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
+    testee = BibleReaderService(mockSharedPreferences, mockUrlLaunchService, mockPlatformService, bibleReaders);
   });
 
   parameterizedTest(
@@ -40,7 +47,7 @@ void main() async {
     ],
     (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
-      testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
+      testee = BibleReaderService(mockSharedPreferences, mockUrlLaunchService, mockPlatformService, bibleReaders);
       expect(testee.certifiedBibleReaderList, bibleReaders);
       expect(testee.isLinked, expectIsLinked);
       expect(testee.linkedBibleReader, expectBibleReader);
@@ -66,18 +73,18 @@ void main() async {
       (String? bibleReaderKey, bool isRead, bool expectLaunch, Result expectResult, [bool launchOk = true]) async {
         // arrange
         final state = FeedState(book: b0, isRead: isRead);
-        when(bibleReaders[1].launch(state)).thenAnswer((_) async => launchOk);
+        when(bibleReaders[1].launch(mockUrlLaunchService, state)).thenAnswer((_) async => launchOk);
         when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
 
         // act
-        testee = BibleReaderService(mockSharedPreferences, mockPlatformService, bibleReaders);
+        testee = BibleReaderService(mockSharedPreferences, mockUrlLaunchService, mockPlatformService, bibleReaders);
         final result = await testee.launchLinkedBibleReader(state);
 
         // assert
         if (expectLaunch) {
-          verify(bibleReaders[1].launch(state)).called(1);
+          verify(bibleReaders[1].launch(mockUrlLaunchService, state)).called(1);
         } else {
-          verifyNever(bibleReaders[1].launch(state));
+          verifyNever(bibleReaders[1].launch(mockUrlLaunchService, state));
         }
         expect(result.runtimeType, expectResult.runtimeType);
       },
@@ -86,7 +93,7 @@ void main() async {
     test('should return Failure on PlatformException', () async {
       testee.linkedBibleReaderIndex = 1;
       var state = FeedState(book: b1, isRead: false);
-      when(bibleReaders[1].launch(state)).thenThrow(PlatformException(code: 'code'));
+      when(bibleReaders[1].launch(mockUrlLaunchService, state)).thenThrow(PlatformException(code: 'code'));
       expect((await testee.launchLinkedBibleReader(state)).runtimeType, Failure);
     });
   });

@@ -8,10 +8,9 @@ import 'dart:ui' as _i5;
 
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
+import 'package:bible_feed/service/url_launch_service.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
-import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart'
-    as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -157,81 +156,23 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
   );
 }
 
-/// A class which mocks [UrlLauncherPlatform].
+/// A class which mocks [UrlLaunchService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUrlLauncherPlatform extends _i1.Mock
-    implements _i6.UrlLauncherPlatform {
+class MockUrlLaunchService extends _i1.Mock implements _i6.UrlLaunchService {
   @override
-  _i7.Future<bool> canLaunch(String? url) =>
+  _i7.Future<bool> canLaunchUrl(Uri? uri) =>
       (super.noSuchMethod(
-            Invocation.method(#canLaunch, [url]),
+            Invocation.method(#canLaunchUrl, [uri]),
             returnValue: _i7.Future<bool>.value(false),
             returnValueForMissingStub: _i7.Future<bool>.value(false),
           )
           as _i7.Future<bool>);
 
   @override
-  _i7.Future<bool> launch(
-    String? url, {
-    required bool? useSafariVC,
-    required bool? useWebView,
-    required bool? enableJavaScript,
-    required bool? enableDomStorage,
-    required bool? universalLinksOnly,
-    required Map<String, String>? headers,
-    String? webOnlyWindowName,
-  }) =>
+  _i7.Future<bool> launchUrl(Uri? uri) =>
       (super.noSuchMethod(
-            Invocation.method(
-              #launch,
-              [url],
-              {
-                #useSafariVC: useSafariVC,
-                #useWebView: useWebView,
-                #enableJavaScript: enableJavaScript,
-                #enableDomStorage: enableDomStorage,
-                #universalLinksOnly: universalLinksOnly,
-                #headers: headers,
-                #webOnlyWindowName: webOnlyWindowName,
-              },
-            ),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
-          )
-          as _i7.Future<bool>);
-
-  @override
-  _i7.Future<bool> launchUrl(String? url, _i6.LaunchOptions? options) =>
-      (super.noSuchMethod(
-            Invocation.method(#launchUrl, [url, options]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
-          )
-          as _i7.Future<bool>);
-
-  @override
-  _i7.Future<void> closeWebView() =>
-      (super.noSuchMethod(
-            Invocation.method(#closeWebView, []),
-            returnValue: _i7.Future<void>.value(),
-            returnValueForMissingStub: _i7.Future<void>.value(),
-          )
-          as _i7.Future<void>);
-
-  @override
-  _i7.Future<bool> supportsMode(_i6.PreferredLaunchMode? mode) =>
-      (super.noSuchMethod(
-            Invocation.method(#supportsMode, [mode]),
-            returnValue: _i7.Future<bool>.value(false),
-            returnValueForMissingStub: _i7.Future<bool>.value(false),
-          )
-          as _i7.Future<bool>);
-
-  @override
-  _i7.Future<bool> supportsCloseForMode(_i6.PreferredLaunchMode? mode) =>
-      (super.noSuchMethod(
-            Invocation.method(#supportsCloseForMode, [mode]),
+            Invocation.method(#launchUrl, [uri]),
             returnValue: _i7.Future<bool>.value(false),
             returnValueForMissingStub: _i7.Future<bool>.value(false),
           )

@@ -5,14 +5,19 @@ import 'package:injectable/injectable.dart';
 
 import 'bible_reader_service.dart';
 import 'platform_service.dart';
+import 'url_launch_service.dart';
 
 @lazySingleton
 class AppInstallService with ChangeNotifier {
-  AppInstallService(BibleReaderService bibleReaderService, PlatformService platformService) {
+  AppInstallService(
+    BibleReaderService bibleReaderService,
+    PlatformService platformService,
+    UrlLaunchService urlLaunchService,
+  ) {
     if (platformService.isIOS) return; // ios cannot detect app (un)install events
     AppIUEvents().appEvents.listen((event) async {
       Log.info(event);
-      if (await bibleReaderService.linkedBibleReader.isAvailable()) {
+      if (await bibleReaderService.linkedBibleReader.isAvailable(urlLaunchService)) {
         notifyListeners();
         return;
       }

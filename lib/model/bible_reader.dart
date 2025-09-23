@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../service/url_launch_service.dart';
 import '/model.production/bible_reader_key.dart';
 import '/model.production/book_key_externaliser.dart';
 import '/service/platform_service.dart';
@@ -46,14 +46,15 @@ class BibleReader {
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
 
-  Future<bool> isAvailable() async {
+  Future<bool> isAvailable(UrlLaunchService urlLaunchService) async {
     if (_type == BibleReaderType.none) return Future.value(true);
-    return canLaunchUrl(_getDeeplinkUri('mat'));
+    return urlLaunchService.canLaunchUrl(_getDeeplinkUri('mat'));
   }
 
   bool isCertified(PlatformService platformService) =>
       (platformService.isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
       (platformService.isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
 
-  Future<bool> launch(FeedState state) async => launchUrl(_getDeeplinkUri(state.book.key, state.chapter, state.verse));
+  Future<bool> launch(UrlLaunchService urlLaunchService, FeedState state) async =>
+      urlLaunchService.launchUrl(_getDeeplinkUri(state.book.key, state.chapter, state.verse));
 }
