@@ -31,11 +31,11 @@ class BibleReader {
   final String _uriTemplate;
   final String? _uriVersePath;
 
-  Uri _getDeeplinkUri(FeedState state) {
-    final externalBookKey = _bookKeyExternaliser.getExternalBookKey(state.book.key);
-    var uri = uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', state.chapter.toString());
-    if (uriVersePath != null && state.verse > 1) {
-      uri += uriVersePath!.replaceAll('VERSE', state.verse.toString());
+  Uri _getDeeplinkUri(String internalBookKey, int chapter, int verse) {
+    final externalBookKey = _bookKeyExternaliser.getExternalBookKey(internalBookKey);
+    var uri = uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
+    if (uriVersePath != null && verse > 1) {
+      uri += uriVersePath!.replaceAll('VERSE', verse.toString());
     }
     return Uri.parse(uri);
   }
@@ -50,12 +50,13 @@ class BibleReader {
 
   Future<bool> isAvailable() async {
     if (_type == BibleReaderType.none) return Future.value(true);
-    return canLaunchUrl(_getDeeplinkUri(sl<Feeds>()[0].state)); // attempt to launch first feed uri
+    final state = sl<Feeds>()[0].state;
+    return canLaunchUrl(_getDeeplinkUri(state.book.key, state.chapter, state.verse));
   }
 
   bool isCertified(PlatformService platformService) =>
       (platformService.isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||
       (platformService.isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
 
-  Future<bool> launch(FeedState state) async => launchUrl(_getDeeplinkUri(state));
+  Future<bool> launch(FeedState state) async => launchUrl(_getDeeplinkUri(state.book.key, state.chapter, state.verse));
 }
