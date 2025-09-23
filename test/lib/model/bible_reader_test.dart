@@ -1,5 +1,5 @@
-import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model.production/bible_reader_key.dart';
+import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_type.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/platform_service.dart';
@@ -10,7 +10,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
-import '../../injectable.dart';
 import '../test_data.dart';
 import 'bible_reader_test.mocks.dart';
 
@@ -56,12 +55,9 @@ void main() {
       );
     });
 
-    test('should attempt to launch first feed uri if not None', () async {
-      await configureDependencies();
-      final mockFeed = MockFeed();
-      when(mockFeed.state).thenReturn(FeedState(book: b0));
+    test('should attempt to launch matthew 1 if not None', () async {
       await testee.isAvailable(mockUrlLaunchService);
-      // verify(mockUrlLaunchService.canLaunch(any)).called(1);
+      verify(mockUrlLaunchService.canLaunchUrl(Uri.parse('scheme://uri/mat/1'))).called(1);
     });
   });
 
