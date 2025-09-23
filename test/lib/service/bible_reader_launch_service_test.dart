@@ -38,20 +38,20 @@ void main() async {
     parameterizedTest(
       'should launchUrl with correct uri and return Success unless launchUrl returned false',
       [
-        [noneBibleReader, 1, false, false, null, Success()],
-        [blbBibleReader, 1, true, false, null, Success()],
-        [blbBibleReader, 1, false, true, 'scheme://uri/b0/1', Success(), true],
-        [blbBibleReader, 2, false, true, 'scheme://uri/b0/1/2', Success(), true],
-        [blbBibleReader, 1, false, true, 'scheme://uri/b0/1', Failure(), false],
+        [noneBibleReader, 1, false, false, false, Success()],
+        [blbBibleReader, 1, true, false, false, Success()],
+        [blbBibleReader, 1, false, true, true, Success(), 'scheme://uri/b0/1'],
+        [blbBibleReader, 2, false, true, true, Success(), 'scheme://uri/b0/1/2'],
+        [blbBibleReader, 1, false, true, false, Failure(), 'scheme://uri/b0/1'],
       ],
       (
         BibleReader bibleReader,
         int verse,
         bool isRead,
         bool expectLaunch,
-        String? expectLaunchUrl,
+        bool launchOk,
         Result expectResult, [
-        bool launchOk = true,
+        String? expectLaunchUrl,
       ]) async {
         final state = FeedState(book: b0, verse: verse, isRead: isRead);
         when(mockUrlLaunchService.launchUrl(any)).thenAnswer((_) async => launchOk);
