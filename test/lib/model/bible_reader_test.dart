@@ -11,7 +11,7 @@ import 'package:parameterized_test/parameterized_test.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 
-import '../injectable.dart';
+import '../../injectable.dart';
 import '../test_data.dart';
 import 'bible_reader_test.mocks.dart';
 

@@ -37,9 +37,9 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
-import 'test_app_service.dart' as _i963;
-import 'test_chapter_splitters.dart' as _i1034;
-import 'test_platform_service.dart' as _i55;
+import 'lib/test_app_service.dart' as _i531;
+import 'lib/test_chapter_splitters.dart' as _i229;
+import 'lib/test_platform_service.dart' as _i737;
 
 const String _test = 'test';
 const String _prod = 'prod';
@@ -63,19 +63,19 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1033.ChapterListWheelState(),
     );
     gh.lazySingleton<_i578.PlatformService>(
-      () => _i55.TestPlatformService(),
+      () => _i737.TestPlatformService(),
       registerFor: {_test},
     );
     await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i963.TestAppService.create(),
+      () => _i531.TestAppService.create(),
       registerFor: {_test},
       preResolve: true,
     );
+    gh.lazySingleton<_i823.ReadingLists>(() => _i396.ReadingLists());
     gh.lazySingleton<_i1006.ChapterSplitters>(
-      () => _i1034.ChapterSplitters(),
+      () => _i229.ChapterSplitters(),
       registerFor: {_test},
     );
-    gh.lazySingleton<_i823.ReadingLists>(() => _i396.ReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );

@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 
 import 'feed_test.mocks.dart';
 
-import '../injectable.dart';
+import '../../injectable.dart';
 import '../test_data.dart';
 
 @GenerateNiceMocks([MockSpec<ChapterSplitService>()])

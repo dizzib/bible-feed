@@ -19,10 +19,11 @@ targets:
             - lib/model*/*.dart
             - lib/service*/*.dart
             - test/*.dart
+            - test/lib/*.dart
             - integration_test/injectable.dart
       mockito:mockBuilder:
         enabled: true
         generate_for:
           include:
-            - test/model*/*.dart
-            - test/service*/*.dart
+            - test/lib/model*/*.dart
+            - test/lib/service*/*.dart

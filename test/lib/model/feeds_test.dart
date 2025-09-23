@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../injectable.dart';
+import '../../injectable.dart';
 import '../test_data.dart';
 import 'feeds_test.mocks.dart';
 

@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../injectable.dart';
+import '../../injectable.dart';
 import '../test_data.dart';
 
 void main() async {
