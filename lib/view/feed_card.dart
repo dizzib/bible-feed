@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '../service/bible_reader_launch_service.dart';
 import '../service/result.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
@@ -44,8 +45,11 @@ class FeedCard extends WatchingWidget {
             onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
             onTap: () async {
               sl<HapticService>().impact();
-              final result = await sl<BibleReaderService>().launchLinkedBibleReader(feed.state);
-              if (result is Failure && context.mounted) context.showDialogWithBlurBackground(BibleReaderFailureDialog(result));
+              final linkedBibleReader = sl<BibleReaderService>().linkedBibleReader;
+              final result = await sl<BibleReaderLaunchService>().launch(linkedBibleReader, feed.state);
+              if (result is Failure && context.mounted) {
+                context.showDialogWithBlurBackground(BibleReaderFailureDialog(result));
+              }
               feed.toggleIsRead();
             },
             child: LayoutBuilder(

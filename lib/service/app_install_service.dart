@@ -3,21 +3,21 @@ import 'package:df_log/df_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
+import 'bible_reader_launch_service.dart';
 import 'bible_reader_service.dart';
 import 'platform_service.dart';
-import 'url_launch_service.dart';
 
 @lazySingleton
 class AppInstallService with ChangeNotifier {
   AppInstallService(
     BibleReaderService bibleReaderService,
+    BibleReaderLaunchService bibleReaderLaunchService,
     PlatformService platformService,
-    UrlLaunchService urlLaunchService,
   ) {
     if (platformService.isIOS) return; // ios cannot detect app (un)install events
     AppIUEvents().appEvents.listen((event) async {
       Log.info(event);
-      if (await bibleReaderService.linkedBibleReader.isAvailable(urlLaunchService)) {
+      if (await bibleReaderLaunchService.isAvailable(bibleReaderService.linkedBibleReader)) {
         notifyListeners();
         return;
       }

@@ -21,8 +21,8 @@ class BibleReaderLaunchService {
     return url;
   }
 
-  Future<bool> canLaunch(BibleReader bibleReader) async {
-    assert(!bibleReader.isNone);
+  Future<bool> isAvailable(BibleReader bibleReader) async {
+    if (bibleReader.isNone) return Future.value(true);
     return _urlLaunchService.canLaunchUrl(_getDeeplinkUri(bibleReader, 'mat', 1));
   }
 

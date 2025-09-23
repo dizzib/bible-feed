@@ -1,25 +1,15 @@
 import 'package:bible_feed/model.production/bible_reader_key.dart';
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_type.dart';
-import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/platform_service.dart';
-import 'package:bible_feed/service/url_launch_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
-import '../test_data.dart';
-import 'bible_reader_test.mocks.dart';
-
-@GenerateNiceMocks([MockSpec<Feed>(), MockSpec<UrlLaunchService>()])
 void main() {
-  late MockUrlLaunchService mockUrlLaunchService;
   late BibleReader testee;
 
   setUp(() {
-    mockUrlLaunchService = MockUrlLaunchService();
     testee = const BibleReader(
       BibleReaderKey.blueLetterApp,
       BibleReaderType.app,
@@ -39,26 +29,6 @@ void main() {
     expect(testee.certifiedPlatforms, contains(TargetPlatform.android));
     expect(testee.certifiedPlatforms, contains(TargetPlatform.iOS));
     expect(testee.uriVersePath, '/VERSE');
-  });
-
-  group('isAvailable', () {
-    test('should return true if None', () async {
-      expect(
-        await const BibleReader(
-          BibleReaderKey.none,
-          BibleReaderType.none,
-          'None',
-          '',
-          [],
-        ).isAvailable(mockUrlLaunchService),
-        true,
-      );
-    });
-
-    test('should attempt to launch matthew 1 if not None', () async {
-      await testee.isAvailable(mockUrlLaunchService);
-      verify(mockUrlLaunchService.canLaunchUrl('scheme://uri/mat/1')).called(1);
-    });
   });
 
   parameterizedTest(
@@ -95,23 +65,4 @@ void main() {
       expect(testee.isCertified(platform), expectResult);
     },
   );
-
-  group('launch', () {
-    parameterizedTest(
-      'should call launchUrl with correct uri',
-      [
-        [1, 'scheme://uri/b0/1'],
-        [2, 'scheme://uri/b0/1/2'],
-      ],
-      (verse, expectLaunchUri) async {
-        await testee.launch(mockUrlLaunchService, FeedState(book: b0, verse: verse));
-        verify(mockUrlLaunchService.launchUrl(expectLaunchUri)).called(1);
-      },
-    );
-
-    parameterizedTest('should return whatever launchUrl returns', [true, false], (retval) async {
-      when(mockUrlLaunchService.launchUrl(any)).thenAnswer((_) async => retval);
-      expect(await testee.launch(mockUrlLaunchService, FeedState(book: b0, verse: 1)), retval);
-    });
-  });
 }

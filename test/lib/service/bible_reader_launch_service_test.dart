@@ -12,7 +12,7 @@ import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
 import '../test_data.dart';
-import 'bible_reader_service_test.mocks.dart';
+import 'bible_reader_launch_service_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<UrlLaunchService>()])
 void main() async {

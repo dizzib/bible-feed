@@ -1,25 +1,19 @@
 import 'package:dartx/dartx.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/bible_reader.dart';
 import '/model/bible_readers.dart';
-import '/model/feed.dart';
 import '/model.production/bible_reader_key.dart';
 import 'platform_service.dart';
-import 'result.dart';
-import 'url_launch_service.dart';
 
 @lazySingleton
 class BibleReaderService with ChangeNotifier {
   final SharedPreferences _sharedPreferences;
-  final UrlLaunchService _urlLaunchService;
 
   BibleReaderService(
     this._sharedPreferences,
-    this._urlLaunchService,
     PlatformService platformService,
     BibleReaders bibleReaders,
   ) {
@@ -53,15 +47,6 @@ class BibleReaderService with ChangeNotifier {
   BibleReader get linkedBibleReader => _certifiedBibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);
   int get linkedBibleReaderIndex => _certifiedBibleReaderList.indexOf(linkedBibleReader);
   set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaderList[value].key);
-
-  Future<Result> launchLinkedBibleReader(FeedState state) async {
-    if (!isLinked || state.isRead) return Future.value(Success());
-    try {
-      return Future.value(await linkedBibleReader.launch(_urlLaunchService, state) ? Success() : Failure());
-    } on PlatformException catch (e) {
-      return Future.value(Failure(e));
-    }
-  }
 
   void unlinkBibleReader() => _saveState(BibleReaderKey.none);
 }
