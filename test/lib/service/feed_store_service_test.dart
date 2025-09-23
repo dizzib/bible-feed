@@ -2,34 +2,27 @@ import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watch_it/watch_it.dart';
 
-import '../../injectable.dart';
 import '../test_data.dart';
+import 'feed_store_service_test.mocks.dart';
 
+@GenerateNiceMocks([MockSpec<SharedPreferences>()])
 void main() async {
+  late MockSharedPreferences mockSharedPreferences;
   late FeedStoreService testee;
+
   final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
-  initFeed(Map<String, Object> storeValues) async {
-    await configureDependencies(storeValues);
-    testee = sl<FeedStoreService>();
-  }
-
   setUp(() async {
-    await initFeed({
-      'rl1.book': 'b1',
-      'rl1.chapter': 2,
-      'rl1.dateModified': yesterday.toIso8601String(),
-      'rl1.isRead': true,
-      'rl1.verse': 3,
-    });
+    mockSharedPreferences = MockSharedPreferences();
+    testee = FeedStoreService(mockSharedPreferences);
   });
 
   group('loadState', () {
     test('should load defaults if store is empty', () async {
-      await initFeed({});
       final state = testee.loadState(rl1);
       expect(state.book, b0);
       expect(state.chapter, 1);
@@ -39,6 +32,11 @@ void main() async {
     });
 
     test('should load from store if store is populated', () async {
+      when(mockSharedPreferences.getString('rl1.book')).thenReturn('b1');
+      when(mockSharedPreferences.getInt('rl1.chapter')).thenReturn(2);
+      when(mockSharedPreferences.getString('rl1.dateModified')).thenReturn(yesterday.toIso8601String());
+      when(mockSharedPreferences.getBool('rl1.isRead')).thenReturn(true);
+      when(mockSharedPreferences.getInt('rl1.verse')).thenReturn(3);
       final state = testee.loadState(rl1);
       expect(state.book, b1);
       expect(state.chapter, 2);
@@ -50,13 +48,12 @@ void main() async {
 
   group('saveState', () {
     test('should save to store', () async {
-      await initFeed({});
       await testee.saveState(rl1, FeedState(book: b1, chapter: 2, dateModified: yesterday, isRead: true, verse: 3));
-      expect(sl<SharedPreferences>().getString('rl1.book'), 'b1');
-      expect(sl<SharedPreferences>().getInt('rl1.chapter'), 2);
-      expect(sl<SharedPreferences>().getString('rl1.dateModified'), yesterday.toIso8601String());
-      expect(sl<SharedPreferences>().getBool('rl1.isRead'), true);
-      expect(sl<SharedPreferences>().getInt('rl1.verse'), 3);
+      verify(mockSharedPreferences.setString('rl1.book', 'b1')).called(1);
+      verify(mockSharedPreferences.setInt('rl1.chapter', 2)).called(1);
+      verify(mockSharedPreferences.setString('rl1.dateModified', yesterday.toIso8601String())).called(1);
+      verify(mockSharedPreferences.setBool('rl1.isRead', true)).called(1);
+      verify(mockSharedPreferences.setInt('rl1.verse', 3)).called(1);
     });
   });
 }
