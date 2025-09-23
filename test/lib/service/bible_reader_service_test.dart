@@ -12,14 +12,11 @@ import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../injectable.dart';
 import '../test_data.dart';
 import 'bible_reader_service_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<BibleReader>(), MockSpec<PlatformService>(), MockSpec<SharedPreferences>()])
 void main() async {
-  await configureDependencies();
-
   final mockPlatformService = MockPlatformService();
   final bibleReaders = BibleReaders([MockBibleReader(), MockBibleReader()]);
   when(bibleReaders[0].isCertified(mockPlatformService)).thenReturn(true);

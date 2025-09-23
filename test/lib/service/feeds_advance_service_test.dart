@@ -8,14 +8,11 @@ import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../injectable.dart';
 import '../test_data.dart';
 import 'feeds_advance_service_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<Feed>(), MockSpec<Feeds>(), MockSpec<SharedPreferences>()])
 void main() async {
-  await configureDependencies();
-
   final mockFeedList = [MockFeed(), MockFeed()];
   late MockFeeds mockFeeds;
   late MockSharedPreferences mockSharedPreferences;
