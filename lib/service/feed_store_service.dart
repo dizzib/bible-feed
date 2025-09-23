@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/feed.dart';
 import '/model/reading_list.dart';
-import 'shared_preferences_extension.dart';
 
 @lazySingleton
 class FeedStoreService {
@@ -13,19 +12,19 @@ class FeedStoreService {
 
   FeedState loadState(ReadingList readingList) {
     return FeedState(
-      book: readingList.getBook(_sharedPreferences.getBook(readingList.key) ?? readingList[0].key),
-      chapter: _sharedPreferences.getChapter(readingList.key) ?? 1,
-      dateModified: _sharedPreferences.getDateModified(readingList.key),
-      isRead: _sharedPreferences.getIsRead(readingList.key) ?? false,
-      verse: _sharedPreferences.getVerse(readingList.key) ?? 1,
+      book: readingList.getBook(_sharedPreferences.getString('${readingList.key}.book') ?? readingList[0].key),
+      chapter: _sharedPreferences.getInt('${readingList.key}.chapter') ?? 1,
+      dateModified: DateTime.tryParse(_sharedPreferences.getString('${readingList.key}.dateModified') ?? ''),
+      isRead: _sharedPreferences.getBool('${readingList.key}.isRead') ?? false,
+      verse: _sharedPreferences.getInt('${readingList.key}.verse') ?? 1,
     );
   }
 
   Future saveState(ReadingList readingList, FeedState state) async {
-    await _sharedPreferences.setBook(readingList.key, state.book.key);
-    await _sharedPreferences.setChapter(readingList.key, state.chapter);
-    await _sharedPreferences.setDateModified(readingList.key, state.dateModified);
-    await _sharedPreferences.setIsRead(readingList.key, state.isRead);
-    await _sharedPreferences.setVerse(readingList.key, state.verse);
+    await _sharedPreferences.setString('${readingList.key}.book', state.book.key);
+    await _sharedPreferences.setInt('${readingList.key}.chapter', state.chapter);
+    await _sharedPreferences.setString('${readingList.key}.dateModified', state.dateModified?.toIso8601String() ?? '');
+    await _sharedPreferences.setBool('${readingList.key}.isRead', state.isRead);
+    await _sharedPreferences.setInt('${readingList.key}.verse', state.verse);
   }
 }
