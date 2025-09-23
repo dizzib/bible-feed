@@ -34,6 +34,26 @@ void main() async {
     testee = BibleReaderLaunchService(mockUrlLaunchService);
   });
 
+  group('isAvailable', () {
+    test('if bibleReader is None, should not attempt launch and return true', () async {
+      expect(await testee.isAvailable(noneBibleReader), true);
+      verifyNever(mockUrlLaunchService.canLaunchUrl(any));
+    });
+
+    parameterizedTest(
+      'if bibleReader is not None, should attempt to launch matthew 1 and return true/false on ok/fail',
+      [
+        [true, true],
+        [false, false],
+      ],
+      (bool canLaunch, bool expectIsAvailable) async {
+        when(mockUrlLaunchService.canLaunchUrl(any)).thenAnswer((_) async => canLaunch);
+        expect(await testee.isAvailable(blbBibleReader), expectIsAvailable);
+        verify(mockUrlLaunchService.canLaunchUrl('scheme://uri/mat/1')).called(1);
+      },
+    );
+  });
+
   group('launch', () {
     parameterizedTest(
       'should launchUrl with correct uri and return Success unless launchUrl returned false',
