@@ -50,7 +50,7 @@ class BibleReader {
 
   Future<bool> isAvailable(UrlLaunchService urlLaunchService) async {
     if (_type == BibleReaderType.none) return Future.value(true);
-    return urlLaunchService.canLaunchUrl(_getDeeplinkUri('mat'));
+    return urlLaunchService.canLaunchUrl(_getDeeplinkUri('mat').toString());
   }
 
   bool isCertified(PlatformService platformService) =>
@@ -58,5 +58,5 @@ class BibleReader {
       (platformService.isIOS && certifiedPlatforms.contains(TargetPlatform.iOS));
 
   Future<bool> launch(UrlLaunchService urlLaunchService, FeedState state) async =>
-      urlLaunchService.launchUrl(_getDeeplinkUri(state.book.key, state.chapter, state.verse));
+      urlLaunchService.launchUrl(_getDeeplinkUri(state.book.key, state.chapter, state.verse).toString());
 }

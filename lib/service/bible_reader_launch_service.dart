@@ -12,13 +12,13 @@ class BibleReaderLaunchService {
 
   BibleReaderLaunchService(this._urlLaunchService);
 
-  Uri _getDeeplinkUri(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
+  String _getDeeplinkUri(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey(internalBookKey);
-    var uri = bibleReader.uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
+    var url = bibleReader.uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
     if (bibleReader.uriVersePath != null && verse > 1) {
-      uri += bibleReader.uriVersePath!.replaceAll('VERSE', verse.toString());
+      url += bibleReader.uriVersePath!.replaceAll('VERSE', verse.toString());
     }
-    return Uri.parse(uri);
+    return url;
   }
 
   Future<bool> canLaunch(BibleReader bibleReader) async {

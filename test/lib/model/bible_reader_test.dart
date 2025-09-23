@@ -57,7 +57,7 @@ void main() {
 
     test('should attempt to launch matthew 1 if not None', () async {
       await testee.isAvailable(mockUrlLaunchService);
-      verify(mockUrlLaunchService.canLaunchUrl(Uri.parse('scheme://uri/mat/1'))).called(1);
+      verify(mockUrlLaunchService.canLaunchUrl('scheme://uri/mat/1')).called(1);
     });
   });
 
@@ -105,7 +105,7 @@ void main() {
       ],
       (verse, expectLaunchUri) async {
         await testee.launch(mockUrlLaunchService, FeedState(book: b0, verse: verse));
-        verify(mockUrlLaunchService.launchUrl(Uri.parse(expectLaunchUri))).called(1);
+        verify(mockUrlLaunchService.launchUrl(expectLaunchUri)).called(1);
       },
     );
 

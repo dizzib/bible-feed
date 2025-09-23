@@ -161,18 +161,18 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
 /// See the documentation for Mockito's code generation for more information.
 class MockUrlLaunchService extends _i1.Mock implements _i6.UrlLaunchService {
   @override
-  _i7.Future<bool> canLaunchUrl(Uri? uri) =>
+  _i7.Future<bool> canLaunchUrl(String? url) =>
       (super.noSuchMethod(
-            Invocation.method(#canLaunchUrl, [uri]),
+            Invocation.method(#canLaunchUrl, [url]),
             returnValue: _i7.Future<bool>.value(false),
             returnValueForMissingStub: _i7.Future<bool>.value(false),
           )
           as _i7.Future<bool>);
 
   @override
-  _i7.Future<bool> launchUrl(Uri? uri) =>
+  _i7.Future<bool> launchUrl(String? url) =>
       (super.noSuchMethod(
-            Invocation.method(#launchUrl, [uri]),
+            Invocation.method(#launchUrl, [url]),
             returnValue: _i7.Future<bool>.value(false),
             returnValueForMissingStub: _i7.Future<bool>.value(false),
           )
