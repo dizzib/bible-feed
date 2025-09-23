@@ -27,8 +27,7 @@ class BibleReaderLaunchService {
   }
 
   Future<Result> launch(BibleReader bibleReader, FeedState state) async {
-    assert(!bibleReader.isNone);
-    assert(!state.isRead);
+    if (bibleReader.isNone || state.isRead) return Future.value(Success());
     try {
       final uri = _getDeeplinkUri(bibleReader, state.book.key, state.chapter, state.verse);
       return Future.value(await _urlLaunchService.launchUrl(uri) ? Success() : Failure());
