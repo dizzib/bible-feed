@@ -5,6 +5,8 @@ import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
 
+// this file must reside here in /test for coverage to include all files!?
+
 @InjectableInit(
   generateForDir: ['lib/model*', 'lib/service', 'test'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
