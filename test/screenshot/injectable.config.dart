@@ -37,9 +37,9 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
-import 'test_app_service.dart' as _i963;
-import 'test_chapter_splitters.dart' as _i1034;
-import 'test_platform_service.dart' as _i55;
+import 'model.stub/chapter_splitters.dart' as _i972;
+import 'service.stub/app_service.dart' as _i634;
+import 'service.stub/platform_service.dart' as _i1019;
 
 const String _prod = 'prod';
 const String _screenshot = 'screenshot';
@@ -78,30 +78,24 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i179.ChapterSplitters(),
       registerFor: {_prod},
     );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i634.TestAppService.create(),
+      registerFor: {_screenshot},
+      preResolve: true,
+    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
-    gh.lazySingleton<_i1006.ChapterSplitters>(
-      () => _i1034.ChapterSplitters(),
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i1019.TestPlatformService(),
       registerFor: {_screenshot},
-    );
-    gh.lazySingleton<_i283.ChapterSplitService>(
-      () => _i283.ChapterSplitService(
-        gh<_i1006.ChapterSplitters>(),
-        gh<_i301.ChapterSplitTogglerService>(),
-      ),
-    );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i963.TestAppService.create(),
-      registerFor: {_screenshot},
-      preResolve: true,
     );
     gh.lazySingleton<_i817.AppInstallService>(
       () => _i817.AppInstallService(),
       registerFor: {_screenshot},
     );
-    gh.lazySingleton<_i578.PlatformService>(
-      () => _i55.TestPlatformService(),
+    gh.lazySingleton<_i1006.ChapterSplitters>(
+      () => _i972.ChapterSplitters(),
       registerFor: {_screenshot},
     );
     gh.lazySingleton<_i513.HapticTogglerService>(
@@ -120,6 +114,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1070.BibleReaders>(),
       ),
     );
+    gh.lazySingleton<_i283.ChapterSplitService>(
+      () => _i283.ChapterSplitService(
+        gh<_i1006.ChapterSplitters>(),
+        gh<_i301.ChapterSplitTogglerService>(),
+      ),
+    );
+    gh.lazySingleton<_i22.HapticService>(
+      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
+    );
     gh.lazySingleton<_i759.Feeds>(
       () => _i759.Feeds(
         gh<_i119.FeedStoreService>(),
@@ -133,18 +136,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i759.Feeds>(),
       ),
     );
-    gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
-    );
-    gh.singleton<_i148.AutoAdvanceService>(
-      () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
-    );
-    gh.lazySingleton<_i136.AllDoneDialogService>(
-      () => _i136.AllDoneDialogService(
-        gh<_i307.FeedsAdvanceService>(),
-        gh<_i759.Feeds>(),
-      ),
-    );
     gh.singleton<_i969.HapticWireupService>(
       () => _i969.HapticWireupService(
         gh<_i22.HapticService>(),
@@ -154,6 +145,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1033.ChapterListWheelState>(),
       ),
       registerFor: {_prod},
+    );
+    gh.singleton<_i148.AutoAdvanceService>(
+      () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
+    );
+    gh.lazySingleton<_i136.AllDoneDialogService>(
+      () => _i136.AllDoneDialogService(
+        gh<_i307.FeedsAdvanceService>(),
+        gh<_i759.Feeds>(),
+      ),
     );
     return this;
   }

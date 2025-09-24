@@ -4,7 +4,7 @@ import 'package:bible_feed/service/app_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yaml/yaml.dart';
 
-import 'injectable.dart';
+import '../injectable.dart';
 
 @screenshot
 @LazySingleton(as: AppService)
