@@ -1,12 +1,16 @@
 import 'package:bible_feed/service/haptic_toggler_service.dart';
+import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../test_platform_service.dart';
 import 'haptic_toggler_service_test.mocks.dart';
+
+class TestPlatformService extends PlatformService {
+  TestPlatformService() : super(isAndroid: true, isIOS: false, isHapticAvailable: true);
+}
 
 @GenerateNiceMocks([MockSpec<SharedPreferences>()])
 void main() {
