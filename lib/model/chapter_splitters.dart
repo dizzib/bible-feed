@@ -4,7 +4,7 @@ import 'base_list.dart';
 import 'chapter_splitter.dart';
 import 'feed.dart';
 
-// base class, for unit tests
+// use base class for unit tests, extend for production
 class ChapterSplitters extends BaseList<ChapterSplitter> {
   ChapterSplitters(super._items);
 
