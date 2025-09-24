@@ -37,7 +37,7 @@ class BibleReader {
   // calculated getters
   String get displayName => '$_name ${isNone ? '' : _type.name}'.trim();
   bool get isApp => _type == BibleReaderType.app;
-  bool get isNone => _key == BibleReaderKey.none;
+  bool get isNone => _type == BibleReaderType.none;
 
   bool isCertified(PlatformService platformService) =>
       (platformService.isAndroid && _certifiedPlatforms.contains(TargetPlatform.android)) ||
