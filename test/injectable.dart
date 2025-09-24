@@ -12,14 +12,14 @@ import 'injectable.config.dart'; // AUTO-GENERATED
   generateForDir: ['lib/model*', 'lib/service', 'test'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
-Future configureScreenshotDependencies() async {
+Future configureDependencies(String environment) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   // https://stackoverflow.com/questions/74093954/how-to-fix-no-implementation-found-for-method-getall-on-channel-plugins-flutter
   SharedPreferences.setMockInitialValues({});
 
   await di.reset();
-  await di.init(environment: 'screenshot'); // use test reading lists
+  await di.init(environment: environment);
 }
 
 @module // register third-party
