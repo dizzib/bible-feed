@@ -13,12 +13,7 @@ class AllDoneDialog extends StatelessWidget {
       content: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ListBody(
-            children: [
-              Text('Lists advance at midnight.', style: context.textTheme.bodyLarge),
-              Text('Advance now?', style: context.textTheme.bodyLarge),
-            ],
-          ),
+          child: Text('Lists advance at midnight.\n\nAdvance now?', style: context.textTheme.bodyLarge),
         ),
       ),
       actions: [
