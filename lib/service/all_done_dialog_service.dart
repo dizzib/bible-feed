@@ -13,8 +13,7 @@ class AllDoneDialogService {
   bool _isAlreadyShown = false;
 
   // auto-show dialog once only
-  bool get isAutoShowAllDoneDialog =>
-      _feeds.areChaptersRead && !_feedsAdvanceService.hasEverAdvanced && !_isAlreadyShown;
+  bool get isAutoShow => _feeds.areChaptersRead && !_feedsAdvanceService.hasEverAdvanced && !_isAlreadyShown;
 
   set isAlreadyShown(bool value) => _isAlreadyShown = value;
 }
