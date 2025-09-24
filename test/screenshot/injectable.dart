@@ -5,22 +5,25 @@ import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
 
+const screenshot = Environment('screenshot');
+
 @InjectableInit(
-  generateForDir: ['lib/model*', 'lib/service*', 'test'],
+  generateForDir: ['lib/model*', 'lib/service*', 'test/screenshot'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
-Future configureDependencies([Map<String, Object> storeValues = const {}]) async {
+Future configureDependencies() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   // https://stackoverflow.com/questions/74093954/how-to-fix-no-implementation-found-for-method-getall-on-channel-plugins-flutter
-  SharedPreferences.setMockInitialValues(storeValues);
+  SharedPreferences.setMockInitialValues({});
 
   await di.reset();
-  await di.init(environment: 'test'); // use test reading lists
+  await di.init(environment: 'screenshot'); // use test reading lists
 }
 
 @module // register third-party
 abstract class RegisterModuleTest {
   @preResolve
+  @singleton
   Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
 }

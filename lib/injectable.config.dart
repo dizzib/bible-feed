@@ -18,6 +18,8 @@ import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
+import 'package:bible_feed/service.production/app_install_service.dart'
+    as _i285;
 import 'package:bible_feed/service.production/app_service.dart' as _i87;
 import 'package:bible_feed/service.production/platform_service.dart' as _i117;
 import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
@@ -40,6 +42,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 const String _prod = 'prod';
+const String _screenshot = 'screenshot';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -60,6 +63,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1033.ChapterListWheelState(),
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => const _i901.BibleReaders(),
+      registerFor: {_prod, _screenshot},
+    );
     gh.lazySingleton<_i823.ReadingLists>(() => _i396.ReadingLists());
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
@@ -76,10 +83,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
-    gh.lazySingleton<_i1070.BibleReaders>(
-      () => const _i901.BibleReaders(),
-      registerFor: {_prod},
-    );
     gh.lazySingleton<_i283.ChapterSplitService>(
       () => _i283.ChapterSplitService(
         gh<_i1006.ChapterSplitters>(),
@@ -90,6 +93,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i87.AppService.create(),
       registerFor: {_prod},
       preResolve: true,
+    );
+    gh.lazySingleton<_i817.AppInstallService>(
+      () => _i817.AppInstallService(),
+      registerFor: {_screenshot},
     );
     gh.lazySingleton<_i513.HapticTogglerService>(
       () => _i513.HapticTogglerService(
@@ -115,11 +122,12 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.lazySingleton<_i817.AppInstallService>(
-      () => _i817.AppInstallService(
+      () => _i285.AppInstallService(
         gh<_i134.BibleReaderLinkService>(),
         gh<_i905.BibleReaderLaunchService>(),
-        gh<_i578.PlatformService>(),
+        gh<_i117.PlatformService>(),
       ),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(

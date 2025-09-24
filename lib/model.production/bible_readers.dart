@@ -8,6 +8,7 @@ import 'bible_reader_key.dart';
 import 'book_key_externaliser.dart';
 
 @prod
+@Environment('screenshot')
 @immutable
 @LazySingleton(as: base.BibleReaders)
 class BibleReaders extends base.BibleReaders {

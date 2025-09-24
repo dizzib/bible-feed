@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../injectable.dart';
+import 'injectable.dart';
 
 enum Platform { android, iOS }
 
@@ -20,9 +20,9 @@ enum Device {
   googlePixel3(true, 'google-pixel-3', Platform.android, Size(1080, 2160), density: 3),
   // name must be ipadPro129 to upload to 3rd-gen slot (13")
   iPadPro12(true, 'ipadPro129', Platform.iOS, Size(2048, 2732), density: 2, inches: 12.9),
-  iPadPro11(true, 'ipad-pro-11', Platform.iOS, Size(1668, 2388), density: 2, inches: 11),
-  iPhoneXsMax(true, 'iphone-xs-max', Platform.iOS, Size(1242, 2688), density: 3, inches: 6.5),
-  iPhone8Plus(true, 'iphone-8-plus', Platform.iOS, Size(1242, 2208), density: 3, inches: 5.5);
+  // iPadPro11(true, 'ipad-pro-11', Platform.iOS, Size(1668, 2388), density: 2, inches: 11),
+  iPhoneXsMax(true, 'iphone-xs-max', Platform.iOS, Size(1242, 2688), density: 3, inches: 6.5);
+  // iPhone8Plus(true, 'iphone-8-plus', Platform.iOS, Size(1242, 2208), density: 3, inches: 5.5);
   // These are not yet supported in fastlane...
   // iPhone16ProMax(true, 'iphone-16-pro-max', Platforms.iOS, Size(1320, 2868), density: 3, inches: 6.9),
   // iPhone16Pro(true, 'iphone-16-pro', Platforms.iOS, Size(1206, 2622), density: 3, inches: 6.3),
