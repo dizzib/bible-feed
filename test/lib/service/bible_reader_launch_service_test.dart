@@ -1,6 +1,4 @@
-import 'package:bible_feed/model.production/bible_reader_key.dart';
 import 'package:bible_feed/model/bible_reader.dart';
-import 'package:bible_feed/model/bible_reader_type.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_launch_service.dart';
 import 'package:bible_feed/service/result.dart';
@@ -18,16 +16,6 @@ import 'bible_reader_launch_service_test.mocks.dart';
 void main() async {
   late MockUrlLaunchService mockUrlLaunchService;
   late BibleReaderLaunchService testee;
-
-  final noneBibleReader = const BibleReader(BibleReaderKey.none, BibleReaderType.none, '', '', []);
-  final blbBibleReader = const BibleReader(
-    BibleReaderKey.blueLetterApp,
-    BibleReaderType.app,
-    'name',
-    'scheme://uri/BOOK/CHAPTER',
-    [TargetPlatform.android, TargetPlatform.iOS],
-    uriVersePath: '/VERSE',
-  );
 
   setUp(() {
     mockUrlLaunchService = MockUrlLaunchService();

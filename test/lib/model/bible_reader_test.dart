@@ -6,24 +6,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
+import '../test_data.dart';
+
 void main() {
   late BibleReader testee;
 
   setUp(() {
-    testee = const BibleReader(
-      BibleReaderKey.blueLetterApp,
-      BibleReaderType.app,
-      'Reader name',
-      'scheme://uri/BOOK/CHAPTER',
-      [TargetPlatform.android, TargetPlatform.iOS],
-      uriVersePath: '/VERSE',
-    );
+    testee = blbBibleReader;
   });
 
   test('constructor: should initialise properties', () {
     expect(testee.key, BibleReaderKey.blueLetterApp);
-    expect(testee.name, 'Reader name');
-    expect(testee.displayName, 'Reader name app');
+    expect(testee.name, 'name');
+    expect(testee.displayName, 'name app');
     expect(testee.isApp, true);
     expect(testee.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
     expect(testee.certifiedPlatforms, contains(TargetPlatform.android));
