@@ -14,15 +14,12 @@ void main() {
       expect(noneBibleReader.key, BibleReaderKey.none);
       expect(noneBibleReader.name, '');
       expect(noneBibleReader.uriTemplate, '');
-      expect(noneBibleReader.certifiedPlatforms, []);
     });
 
     test('blbBibleReader', () {
       expect(blbBibleReader.key, BibleReaderKey.blueLetterApp);
       expect(blbBibleReader.name, 'name');
       expect(blbBibleReader.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
-      expect(blbBibleReader.certifiedPlatforms, contains(TargetPlatform.android));
-      expect(blbBibleReader.certifiedPlatforms, contains(TargetPlatform.iOS));
       expect(blbBibleReader.uriVersePath, '/VERSE');
     });
   });
