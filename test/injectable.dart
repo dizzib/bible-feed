@@ -1,3 +1,4 @@
+import 'package:app_install_events/app_install_events.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +24,9 @@ Future configureScreenshotDependencies() async {
 
 @module // register third-party
 abstract class RegisterModuleTest {
+  @lazySingleton
+  AppIUEvents get appIUEvents => AppIUEvents();
+
   @preResolve
   @singleton
   Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();

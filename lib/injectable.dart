@@ -1,3 +1,4 @@
+import 'package:app_install_events/app_install_events.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
@@ -11,6 +12,9 @@ Future configureDependencies() async {
 
 @module // register third-party
 abstract class RegisterModule {
+  @lazySingleton
+  AppIUEvents get appIUEvents => AppIUEvents();
+
   // TODO replace with SharedPreferencesWithCache when it supports unit tests
   // https://github.com/flutter/flutter/issues/159597
   @preResolve

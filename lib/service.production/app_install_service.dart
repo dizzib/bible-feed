@@ -11,12 +11,13 @@ import '/service/platform_service.dart';
 @LazySingleton(as: base.AppInstallService)
 class AppInstallService extends base.AppInstallService {
   AppInstallService(
+    AppIUEvents appIUEvents,
     BibleReaderLinkService bibleReaderService,
     BibleReaderLaunchService bibleReaderLaunchService,
     PlatformService platformService,
   ) {
     if (platformService.isIOS) return; // ios cannot detect app (un)install events
-    AppIUEvents().appEvents.listen((event) async {
+    appIUEvents.appEvents.listen((event) async {
       Log.info(event);
       if (await bibleReaderLaunchService.isAvailable(bibleReaderService.linkedBibleReader)) {
         notifyListeners();

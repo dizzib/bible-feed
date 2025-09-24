@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:app_install_events/app_install_events.dart' as _i96;
 import 'package:bible_feed/model.production/bible_readers.dart' as _i901;
 import 'package:bible_feed/model.production/chapter_splitters.dart' as _i179;
 import 'package:bible_feed/model.production/reading_lists.dart' as _i396;
@@ -58,6 +59,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.clearedSharedPreferences,
       preResolve: true,
     );
+    gh.lazySingleton<_i96.AppIUEvents>(() => registerModule.appIUEvents);
     gh.lazySingleton<_i1033.BookListWheelState>(
       () => _i1033.BookListWheelState(),
     );
@@ -126,19 +128,20 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i823.ReadingLists>(),
       ),
     );
-    gh.lazySingleton<_i817.AppInstallService>(
-      () => _i285.AppInstallService(
-        gh<_i134.BibleReaderLinkService>(),
-        gh<_i905.BibleReaderLaunchService>(),
-        gh<_i578.PlatformService>(),
-      ),
-      registerFor: {_prod},
-    );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(
         gh<_i460.SharedPreferences>(),
         gh<_i759.Feeds>(),
       ),
+    );
+    gh.lazySingleton<_i817.AppInstallService>(
+      () => _i285.AppInstallService(
+        gh<_i96.AppIUEvents>(),
+        gh<_i134.BibleReaderLinkService>(),
+        gh<_i905.BibleReaderLaunchService>(),
+        gh<_i578.PlatformService>(),
+      ),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),

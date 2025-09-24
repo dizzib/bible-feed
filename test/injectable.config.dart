@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:app_install_events/app_install_events.dart' as _i96;
 import 'package:bible_feed/model.production/bible_readers.dart' as _i901;
 import 'package:bible_feed/model.production/chapter_splitters.dart' as _i179;
 import 'package:bible_feed/model.production/reading_lists.dart' as _i396;
@@ -63,6 +64,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1033.ChapterListWheelState(),
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i96.AppIUEvents>(() => registerModuleTest.appIUEvents);
     gh.lazySingleton<_i1070.BibleReaders>(
       () => const _i901.BibleReaders(),
       registerFor: {_prod, _screenshot},
