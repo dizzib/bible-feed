@@ -5,8 +5,8 @@ import '/model.production/book_key_externaliser.dart';
 import '/service/platform_service.dart';
 import 'bible_reader_type.dart';
 
-@immutable
 // for ios, scheme must be added to info.plist!!!
+@immutable
 class BibleReader {
   const BibleReader(
     this._key,
@@ -27,15 +27,18 @@ class BibleReader {
   final String _uriTemplate;
   final String? _uriVersePath;
 
+  // static getters
   BookKeyExternaliser get bookKeyExternaliser => _bookKeyExternaliser;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
-  String get displayName => '$_name ${isNone ? '' : _type.name}'.trim();
-  bool get isApp => _type == BibleReaderType.app;
-  bool get isNone => _key == BibleReaderKey.none;
   BibleReaderKey get key => _key;
   String get name => _name;
   String get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
+
+  // calculated getters
+  String get displayName => '$_name ${isNone ? '' : _type.name}'.trim();
+  bool get isApp => _type == BibleReaderType.app;
+  bool get isNone => _key == BibleReaderKey.none;
 
   bool isCertified(PlatformService platformService) =>
       (platformService.isAndroid && certifiedPlatforms.contains(TargetPlatform.android)) ||

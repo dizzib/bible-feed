@@ -5,13 +5,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i9;
 
-import 'package:bible_feed/model.production/bible_reader_key.dart' as _i6;
+import 'package:bible_feed/model.production/bible_reader_key.dart' as _i5;
 import 'package:bible_feed/model.production/book_key_externaliser.dart' as _i3;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
 import 'package:bible_feed/service/platform_service.dart' as _i7;
 import 'package:flutter/foundation.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i5;
+import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i8;
 
 // ignore_for_file: type=lint
@@ -52,14 +52,50 @@ class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
           as List<_i4.TargetPlatform>);
 
   @override
+  _i5.BibleReaderKey get key =>
+      (super.noSuchMethod(
+            Invocation.getter(#key),
+            returnValue: _i5.BibleReaderKey.none,
+            returnValueForMissingStub: _i5.BibleReaderKey.none,
+          )
+          as _i5.BibleReaderKey);
+
+  @override
+  String get name =>
+      (super.noSuchMethod(
+            Invocation.getter(#name),
+            returnValue: _i6.dummyValue<String>(this, Invocation.getter(#name)),
+            returnValueForMissingStub: _i6.dummyValue<String>(
+              this,
+              Invocation.getter(#name),
+            ),
+          )
+          as String);
+
+  @override
+  String get uriTemplate =>
+      (super.noSuchMethod(
+            Invocation.getter(#uriTemplate),
+            returnValue: _i6.dummyValue<String>(
+              this,
+              Invocation.getter(#uriTemplate),
+            ),
+            returnValueForMissingStub: _i6.dummyValue<String>(
+              this,
+              Invocation.getter(#uriTemplate),
+            ),
+          )
+          as String);
+
+  @override
   String get displayName =>
       (super.noSuchMethod(
             Invocation.getter(#displayName),
-            returnValue: _i5.dummyValue<String>(
+            returnValue: _i6.dummyValue<String>(
               this,
               Invocation.getter(#displayName),
             ),
-            returnValueForMissingStub: _i5.dummyValue<String>(
+            returnValueForMissingStub: _i6.dummyValue<String>(
               this,
               Invocation.getter(#displayName),
             ),
@@ -83,42 +119,6 @@ class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
             returnValueForMissingStub: false,
           )
           as bool);
-
-  @override
-  _i6.BibleReaderKey get key =>
-      (super.noSuchMethod(
-            Invocation.getter(#key),
-            returnValue: _i6.BibleReaderKey.none,
-            returnValueForMissingStub: _i6.BibleReaderKey.none,
-          )
-          as _i6.BibleReaderKey);
-
-  @override
-  String get name =>
-      (super.noSuchMethod(
-            Invocation.getter(#name),
-            returnValue: _i5.dummyValue<String>(this, Invocation.getter(#name)),
-            returnValueForMissingStub: _i5.dummyValue<String>(
-              this,
-              Invocation.getter(#name),
-            ),
-          )
-          as String);
-
-  @override
-  String get uriTemplate =>
-      (super.noSuchMethod(
-            Invocation.getter(#uriTemplate),
-            returnValue: _i5.dummyValue<String>(
-              this,
-              Invocation.getter(#uriTemplate),
-            ),
-            returnValueForMissingStub: _i5.dummyValue<String>(
-              this,
-              Invocation.getter(#uriTemplate),
-            ),
-          )
-          as String);
 
   @override
   bool isCertified(_i7.PlatformService? platformService) =>
