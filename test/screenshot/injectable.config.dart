@@ -17,10 +17,6 @@ import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
-import 'package:bible_feed/service.production/app_install_service.dart'
-    as _i285;
-import 'package:bible_feed/service.production/app_service.dart' as _i87;
-import 'package:bible_feed/service.production/platform_service.dart' as _i117;
 import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
 import 'package:bible_feed/service/app_install_service.dart' as _i817;
 import 'package:bible_feed/service/app_service.dart' as _i977;
@@ -75,11 +71,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
-    await gh.lazySingletonAsync<_i578.PlatformService>(
-      () => _i117.PlatformService.create(),
-      registerFor: {_prod},
-      preResolve: true,
-    );
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i179.ChapterSplitters(),
       registerFor: {_prod},
@@ -96,11 +87,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1006.ChapterSplitters>(),
         gh<_i301.ChapterSplitTogglerService>(),
       ),
-    );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i87.AppService.create(),
-      registerFor: {_prod},
-      preResolve: true,
     );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i963.TestAppService.create(),
@@ -137,14 +123,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i283.ChapterSplitService>(),
         gh<_i823.ReadingLists>(),
       ),
-    );
-    gh.lazySingleton<_i817.AppInstallService>(
-      () => _i285.AppInstallService(
-        gh<_i134.BibleReaderLinkService>(),
-        gh<_i905.BibleReaderLaunchService>(),
-        gh<_i578.PlatformService>(),
-      ),
-      registerFor: {_prod},
     );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(
