@@ -9,7 +9,7 @@ import 'injectable.config.dart'; // AUTO-GENERATED
   generateForDir: ['lib/model*', 'lib/service', 'test'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
-Future configureDependencies() async {
+Future configureScreenshotDependencies() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   // https://stackoverflow.com/questions/74093954/how-to-fix-no-implementation-found-for-method-getall-on-channel-plugins-flutter
