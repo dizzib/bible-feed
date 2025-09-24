@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
-import 'injectable.dart';
+import '../injectable.dart';
 
 enum Platform { android, iOS }
 

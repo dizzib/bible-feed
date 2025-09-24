@@ -18,7 +18,7 @@ targets:
             - lib/injectable.dart
             - lib/model*/*.dart
             - lib/service*/*.dart
-            - test/screenshot/injectable.dart
+            - test/injectable.dart
             - test/screenshot/*.stub/*.dart
             - integration_test/injectable.dart
       mockito:mockBuilder:
