@@ -56,7 +56,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModuleTest = _$RegisterModuleTest();
-    await gh.factoryAsync<_i460.SharedPreferences>(
+    await gh.singletonAsync<_i460.SharedPreferences>(
       () => registerModuleTest.sharedPreferences,
       preResolve: true,
     );
@@ -142,7 +142,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i285.AppInstallService(
         gh<_i134.BibleReaderLinkService>(),
         gh<_i905.BibleReaderLaunchService>(),
-        gh<_i117.PlatformService>(),
+        gh<_i578.PlatformService>(),
       ),
       registerFor: {_prod},
     );

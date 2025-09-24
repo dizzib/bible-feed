@@ -3,9 +3,9 @@ import 'package:df_log/df_log.dart';
 import 'package:injectable/injectable.dart';
 
 import '/service/app_install_service.dart' as base;
-import '../service/bible_reader_launch_service.dart';
-import '../service/bible_reader_link_service.dart';
-import 'platform_service.dart';
+import '/service/bible_reader_launch_service.dart';
+import '/service/bible_reader_link_service.dart';
+import '/service/platform_service.dart';
 
 @prod
 @LazySingleton(as: base.AppInstallService)

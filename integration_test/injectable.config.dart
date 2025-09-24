@@ -127,7 +127,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i285.AppInstallService(
         gh<_i134.BibleReaderLinkService>(),
         gh<_i905.BibleReaderLaunchService>(),
-        gh<_i117.PlatformService>(),
+        gh<_i578.PlatformService>(),
       ),
       registerFor: {_prod},
     );
