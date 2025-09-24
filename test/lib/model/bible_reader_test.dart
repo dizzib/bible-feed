@@ -9,21 +9,36 @@ import 'package:parameterized_test/parameterized_test.dart';
 import '../test_data.dart';
 
 void main() {
-  late BibleReader testee;
+  group('static getters', () {
+    test('noneBibleReader', () {
+      expect(noneBibleReader.key, BibleReaderKey.none);
+      expect(noneBibleReader.name, '');
+      expect(noneBibleReader.uriTemplate, '');
+      expect(noneBibleReader.certifiedPlatforms, []);
+    });
 
-  setUp(() {
-    testee = blbBibleReader;
+    test('blbBibleReader', () {
+      expect(blbBibleReader.key, BibleReaderKey.blueLetterApp);
+      expect(blbBibleReader.name, 'name');
+      expect(blbBibleReader.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
+      expect(blbBibleReader.certifiedPlatforms, contains(TargetPlatform.android));
+      expect(blbBibleReader.certifiedPlatforms, contains(TargetPlatform.iOS));
+      expect(blbBibleReader.uriVersePath, '/VERSE');
+    });
   });
 
-  test('constructor: should initialise properties', () {
-    expect(testee.key, BibleReaderKey.blueLetterApp);
-    expect(testee.name, 'name');
-    expect(testee.displayName, 'name app');
-    expect(testee.isApp, true);
-    expect(testee.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
-    expect(testee.certifiedPlatforms, contains(TargetPlatform.android));
-    expect(testee.certifiedPlatforms, contains(TargetPlatform.iOS));
-    expect(testee.uriVersePath, '/VERSE');
+  group('calculated getters', () {
+    test('noneBibleReader', () {
+      expect(noneBibleReader.displayName, '');
+      expect(noneBibleReader.isApp, false);
+      expect(noneBibleReader.isNone, true);
+    });
+
+    test('blbBibleReader', () {
+      expect(blbBibleReader.displayName, 'name app');
+      expect(blbBibleReader.isApp, true);
+      expect(blbBibleReader.isNone, false);
+    });
   });
 
   parameterizedTest(
