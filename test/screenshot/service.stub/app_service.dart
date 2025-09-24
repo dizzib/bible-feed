@@ -4,9 +4,7 @@ import 'package:bible_feed/service/app_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:yaml/yaml.dart';
 
-import '../injectable.dart';
-
-@screenshot
+@Environment('screenshot')
 @LazySingleton(as: AppService)
 class TestAppService extends AppService {
   TestAppService({required super.buildNumber, required super.version});

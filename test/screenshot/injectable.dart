@@ -5,8 +5,6 @@ import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
 
-const screenshot = Environment('screenshot');
-
 @InjectableInit(
   generateForDir: ['lib/model*', 'lib/service', 'test/screenshot'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
