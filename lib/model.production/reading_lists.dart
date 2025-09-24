@@ -5,6 +5,8 @@ import '/model/book.dart';
 import '/model/reading_list.dart';
 import '/model/reading_lists.dart' as base;
 
+@prod
+@Environment('screenshot')
 @immutable
 @LazySingleton(as: base.ReadingLists)
 class ReadingLists extends base.ReadingLists {
