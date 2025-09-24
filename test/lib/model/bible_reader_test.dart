@@ -9,7 +9,7 @@ import 'package:parameterized_test/parameterized_test.dart';
 import '../test_data.dart';
 
 void main() {
-  group('static getters', () {
+  group('field getters', () {
     test('noneBibleReader', () {
       expect(noneBibleReader.key, BibleReaderKey.none);
       expect(noneBibleReader.name, '');

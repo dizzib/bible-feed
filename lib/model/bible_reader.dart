@@ -27,7 +27,7 @@ class BibleReader {
   final String _uriTemplate;
   final String? _uriVersePath;
 
-  // static getters
+  // field getters
   BookKeyExternaliser get bookKeyExternaliser => _bookKeyExternaliser;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   BibleReaderKey get key => _key;
