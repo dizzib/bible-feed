@@ -13,7 +13,7 @@ class AllDoneFab extends WatchingWidget {
 
     void showAllDoneDialog() {
       context.showDialogWithBlurBackground(AllDoneDialog());
-      sl<AllDoneDialogService>().isAlreadyShown = true;
+      sl<AllDoneDialogService>().hasShown = true;
     }
 
     if (sl<AllDoneDialogService>().isAutoShow) Future.delayed(Duration.zero, showAllDoneDialog);
