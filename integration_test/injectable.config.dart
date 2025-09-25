@@ -104,7 +104,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i817.AppInstallService>(
-      () => _i817.AppInstallService(),
+      () => _i817.ScreenshotAppInstallService(),
       registerFor: {_screenshot},
     );
     gh.lazySingleton<_i578.PlatformService>(

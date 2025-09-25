@@ -7,9 +7,7 @@ import '/service/bible_reader_launch_service.dart';
 import '/service/bible_reader_link_service.dart';
 import '/service/platform_service.dart';
 
-@Environment('screenshot')
-@lazySingleton
-class AppInstallService with ChangeNotifier {}
+abstract class AppInstallService with ChangeNotifier {}
 
 @prod
 @LazySingleton(as: AppInstallService)
@@ -31,3 +29,7 @@ class ProductionAppInstallService extends AppInstallService {
     });
   }
 }
+
+@Environment('screenshot')
+@LazySingleton(as: AppInstallService)
+class ScreenshotAppInstallService extends AppInstallService {}
