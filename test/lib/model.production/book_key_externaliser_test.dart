@@ -1,4 +1,4 @@
-import 'package:bible_feed/model.production/book_key_externaliser.dart';
+import 'package:bible_feed/model/book_key_externaliser.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

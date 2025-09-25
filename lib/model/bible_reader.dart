@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import '/model.production/bible_reader_key.dart';
-import '/model.production/book_key_externaliser.dart';
+import '/model/bible_reader_key.dart';
+import '/model/book_key_externaliser.dart';
 import '/service/platform_service.dart';
 import 'bible_reader_type.dart';
 

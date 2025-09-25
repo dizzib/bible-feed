@@ -1,4 +1,4 @@
-import 'package:bible_feed/model.production/bible_reader_key.dart';
+import 'package:bible_feed/model/bible_reader_key.dart';
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_type.dart';
 import 'package:bible_feed/model/book.dart';

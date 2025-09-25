@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/bible_reader.dart';
 import '/model/bible_readers.dart';
-import '/model.production/bible_reader_key.dart';
+import '/model/bible_reader_key.dart';
 import 'platform_service.dart';
 
 @lazySingleton
