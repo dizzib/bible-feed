@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:watch_it/watch_it.dart';
 
-import '/service/haptic_toggler_service.dart';
 import '/service/chapter_split_toggler_service.dart';
+import '/service/haptic_toggler_service.dart';
 import 'app_version.dart';
 import 'settings_bible_reader.dart';
 import 'settings_toggler.dart';
 
-class Settings extends WatchingWidget {
+class Settings extends StatelessWidget {
   @override
   build(context) {
     const spacing = 12.0;
@@ -23,7 +22,7 @@ class Settings extends WatchingWidget {
               spacing: spacing,
               children: [
                 BibleReaderSettings(),
-                SettingsToggler<ChapterSplitTogglerService>(), 
+                SettingsToggler<ChapterSplitTogglerService>(),
                 SettingsToggler<HapticTogglerService>(),
                 const AppVersion(),
               ],
