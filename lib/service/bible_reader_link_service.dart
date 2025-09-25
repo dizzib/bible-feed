@@ -12,18 +12,14 @@ import 'platform_service.dart';
 class BibleReaderLinkService with ChangeNotifier {
   final SharedPreferences _sharedPreferences;
 
-  BibleReaderLinkService(
-    this._sharedPreferences,
-    PlatformService platformService,
-    BibleReaders bibleReaders,
-  ) {
-    _certifiedBibleReaderList = bibleReaders.filter((br) => br.isCertified(platformService)).toList();
+  BibleReaderLinkService(this._sharedPreferences, PlatformService platformService, BibleReaders bibleReaders)
+    : _certifiedBibleReaderList = bibleReaders.filter((br) => br.isCertified(platformService)).toList() {
     _loadState();
   }
 
   static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
-  late List<BibleReader> _certifiedBibleReaderList;
+  final List<BibleReader> _certifiedBibleReaderList;
   late BibleReaderKey _linkedBibleReaderKey;
 
   void _loadState() {
