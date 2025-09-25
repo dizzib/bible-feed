@@ -1,13 +1,20 @@
-import 'package:bible_feed/model.production/reading_lists.dart';
+import 'package:bible_feed/model/reading_lists.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:watch_it/watch_it.dart';
 
-void main() {
+import '../../injectable.dart';
+
+void main() async {
+  await configureDependencies('test');
+
+  final testee = sl<ReadingLists>();
+
   test('total reading lists should be 10', () {
-    expect(ReadingLists().length, 10);
+    expect(testee.length, 10);
   });
 
   test('total chapters per list', () {
-    run(i, expectTotalChapters) => expect(ReadingLists()[i].totalChapters, expectTotalChapters);
+    run(i, expectTotalChapters) => expect(testee[i].totalChapters, expectTotalChapters);
 
     run(0, 89);
     run(1, 187);

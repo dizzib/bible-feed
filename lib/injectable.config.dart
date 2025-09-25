@@ -12,12 +12,12 @@
 import 'package:app_install_events/app_install_events.dart' as _i96;
 import 'package:bible_feed/injectable.dart' as _i537;
 import 'package:bible_feed/model.production/bible_readers.dart' as _i901;
-import 'package:bible_feed/model.production/reading_lists.dart' as _i396;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i19;
 import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
 import 'package:bible_feed/model/feeds.dart' as _i759;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
+import 'package:bible_feed/model/reading_list.dart' as _i279;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
 import 'package:bible_feed/service.production/app_install_service.dart'
     as _i285;
@@ -53,6 +53,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
+    final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     await gh.singletonAsync<_i460.SharedPreferences>(
       () => registerModule.sharedPreferences,
@@ -64,6 +65,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.ChapterListWheelState>(
       () => _i1033.ChapterListWheelState(),
     );
+    gh.lazySingleton<List<_i279.ReadingList>>(
+      () => readingListsModule.readingLists,
+    );
     gh.lazySingleton<List<_i19.ChapterSplitter>>(
       () => chapterSplittersModule.chapterSplitters,
     );
@@ -71,10 +75,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i1070.BibleReaders>(
       () => const _i901.BibleReaders(),
-      registerFor: {_prod, _screenshot},
-    );
-    gh.lazySingleton<_i823.ReadingLists>(
-      () => _i396.ReadingLists(),
       registerFor: {_prod, _screenshot},
     );
     gh.lazySingleton<_i119.FeedStoreService>(
@@ -114,6 +114,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i905.BibleReaderLaunchService>(
       () => _i905.BibleReaderLaunchService(gh<_i626.UrlLaunchService>()),
+    );
+    gh.lazySingleton<_i823.ReadingLists>(
+      () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
     gh.lazySingleton<_i134.BibleReaderLinkService>(
       () => _i134.BibleReaderLinkService(
@@ -171,5 +174,7 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$RegisterModule extends _i537.RegisterModule {}
+
+class _$ReadingListsModule extends _i823.ReadingListsModule {}
 
 class _$ChapterSplittersModule extends _i1006.ChapterSplittersModule {}
