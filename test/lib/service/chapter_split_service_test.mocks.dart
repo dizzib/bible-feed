@@ -103,6 +103,7 @@ class MockChapterSplitter extends _i1.Mock implements _i2.ChapterSplitter {
 /// A class which mocks [ChapterSplitters].
 ///
 /// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
 class MockChapterSplitters extends _i1.Mock implements _i5.ChapterSplitters {
   @override
   Iterator<_i2.ChapterSplitter> get iterator =>
