@@ -31,6 +31,7 @@ import 'package:bible_feed/service/feeds_advance_service.dart' as _i307;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
 import 'package:bible_feed/service/haptic_toggler_service.dart' as _i513;
 import 'package:bible_feed/service/haptic_wireup_service.dart' as _i969;
+import 'package:bible_feed/service/platform_event_service.dart' as _i516;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
 import 'package:bible_feed/service/url_launch_service.dart' as _i626;
 import 'package:get_it/get_it.dart' as _i174;
@@ -98,6 +99,10 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.ChapterSplitTogglerService>(),
       ),
     );
+    gh.lazySingleton<_i516.PlatformEventService>(
+      () => _i516.ScreenshotPlatformEventService(),
+      registerFor: {_screenshot},
+    );
     await gh.lazySingletonAsync<_i578.PlatformService>(
       () => _i578.ProductionPlatformService.create(),
       registerFor: {_prod},
@@ -106,6 +111,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i817.AppInstallService>(
       () => _i817.ScreenshotAppInstallService(),
       registerFor: {_screenshot},
+    );
+    gh.lazySingleton<_i516.PlatformEventService>(
+      () => _i516.ProductionPlatformEventService(),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ScreenshotPlatformService(),
@@ -137,15 +146,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i823.ReadingLists>(),
       ),
     );
-    gh.lazySingleton<_i817.AppInstallService>(
-      () => _i817.ProductionAppInstallService(
-        gh<_i96.AppIUEvents>(),
-        gh<_i134.BibleReaderLinkService>(),
-        gh<_i905.BibleReaderLaunchService>(),
-        gh<_i578.PlatformService>(),
-      ),
-      registerFor: {_prod},
-    );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(
         gh<_i460.SharedPreferences>(),
@@ -154,6 +154,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
+    );
+    gh.lazySingleton<_i817.AppInstallService>(
+      () => _i817.ProductionAppInstallService(
+        gh<_i96.AppIUEvents>(),
+        gh<_i134.BibleReaderLinkService>(),
+        gh<_i905.BibleReaderLaunchService>(),
+        gh<_i578.PlatformService>(),
+        gh<_i516.PlatformEventService>(),
+      ),
+      registerFor: {_prod},
     );
     gh.singleton<_i148.AutoAdvanceService>(
       () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),
