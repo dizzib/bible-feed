@@ -21,7 +21,6 @@ import 'package:bible_feed/model/reading_lists.dart' as _i823;
 import 'package:bible_feed/service.production/app_install_service.dart'
     as _i285;
 import 'package:bible_feed/service.production/app_service.dart' as _i87;
-import 'package:bible_feed/service.production/platform_service.dart' as _i117;
 import 'package:bible_feed/service/all_done_dialog_service.dart' as _i136;
 import 'package:bible_feed/service/app_install_service.dart' as _i817;
 import 'package:bible_feed/service/app_service.dart' as _i977;
@@ -43,10 +42,9 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
 import 'screenshot/service.stub/app_service.dart' as _i364;
-import 'screenshot/service.stub/platform_service.dart' as _i408;
 
-const String _prod = 'prod';
 const String _screenshot = 'screenshot';
+const String _prod = 'prod';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -89,11 +87,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
-    await gh.lazySingletonAsync<_i578.PlatformService>(
-      () => _i117.PlatformService.create(),
-      registerFor: {_prod},
-      preResolve: true,
-    );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i364.TestAppService.create(),
       registerFor: {_screenshot},
@@ -108,17 +101,22 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.ChapterSplitTogglerService>(),
       ),
     );
-    gh.lazySingleton<_i578.PlatformService>(
-      () => _i408.TestPlatformService(),
-      registerFor: {_screenshot},
-    );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i87.AppService.create(),
       registerFor: {_prod},
       preResolve: true,
     );
+    await gh.lazySingletonAsync<_i578.PlatformService>(
+      () => _i578.ProductionPlatformService.create(),
+      registerFor: {_prod},
+      preResolve: true,
+    );
     gh.lazySingleton<_i817.AppInstallService>(
       () => _i817.AppInstallService(),
+      registerFor: {_screenshot},
+    );
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i578.ScreenshotPlatformService(),
       registerFor: {_screenshot},
     );
     gh.lazySingleton<_i513.HapticTogglerService>(
