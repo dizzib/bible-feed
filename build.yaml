@@ -16,8 +16,8 @@ targets:
         generate_for:
           include:
             - lib/injectable.dart
-            - lib/model*/*.dart
-            - lib/service*/*.dart
+            - lib/model/*.dart
+            - lib/service/*.dart
             - test/injectable.dart
             - test/screenshot/*.stub/*.dart
             - integration_test/injectable.dart
@@ -25,5 +25,5 @@ targets:
         enabled: true
         generate_for:
           include:
-            - test/lib/model*/*.dart
+            - test/lib/model/*.dart
             - test/lib/service*/*.dart
