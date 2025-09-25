@@ -43,8 +43,8 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'injectable.dart' as _i1027;
 import 'screenshot/service.stub/app_service.dart' as _i364;
 
-const String _screenshot = 'screenshot';
 const String _prod = 'prod';
+const String _screenshot = 'screenshot';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -88,8 +88,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
     await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i364.TestAppService.create(),
-      registerFor: {_screenshot},
+      () => _i977.ProductionAppService.create(),
+      registerFor: {_prod},
       preResolve: true,
     );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
@@ -101,7 +101,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.ChapterSplitTogglerService>(),
       ),
     );
-    await gh.lazySingletonAsync<_i977.AppService>(
+    await gh.lazySingletonAsync<_i977.ProductionAppService>(
       () => _i87.AppService.create(),
       registerFor: {_prod},
       preResolve: true,
@@ -109,6 +109,11 @@ extension GetItInjectableX on _i174.GetIt {
     await gh.lazySingletonAsync<_i578.PlatformService>(
       () => _i578.ProductionPlatformService.create(),
       registerFor: {_prod},
+      preResolve: true,
+    );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i364.AppService.create(),
+      registerFor: {_screenshot},
       preResolve: true,
     );
     gh.lazySingleton<_i817.AppInstallService>(

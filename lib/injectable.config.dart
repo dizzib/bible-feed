@@ -85,6 +85,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i977.ProductionAppService.create(),
+      registerFor: {_prod},
+      preResolve: true,
+    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
@@ -94,7 +99,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.ChapterSplitTogglerService>(),
       ),
     );
-    await gh.lazySingletonAsync<_i977.AppService>(
+    await gh.lazySingletonAsync<_i977.ProductionAppService>(
       () => _i87.AppService.create(),
       registerFor: {_prod},
       preResolve: true,
