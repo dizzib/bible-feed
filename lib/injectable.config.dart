@@ -11,7 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:app_install_events/app_install_events.dart' as _i96;
 import 'package:bible_feed/injectable.dart' as _i537;
-import 'package:bible_feed/model.production/bible_readers.dart' as _i901;
+import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i19;
 import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
@@ -55,6 +55,7 @@ extension GetItInjectableX on _i174.GetIt {
     final registerModule = _$RegisterModule();
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
+    final bibleReadersModule = _$BibleReadersModule();
     await gh.singletonAsync<_i460.SharedPreferences>(
       () => registerModule.sharedPreferences,
       preResolve: true,
@@ -71,14 +72,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<List<_i19.ChapterSplitter>>(
       () => chapterSplittersModule.chapterSplitters,
     );
+    gh.lazySingleton<List<_i270.BibleReader>>(
+      () => bibleReadersModule.bibleReader,
+    );
     gh.lazySingleton<_i96.AppIUEvents>(() => registerModule.appIUEvents);
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
-    gh.lazySingleton<_i1070.BibleReaders>(
-      () => const _i901.BibleReaders(),
-      registerFor: {_prod, _screenshot},
-    );
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i1070.BibleReaders>(
+      () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
     );
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
@@ -178,3 +181,5 @@ class _$RegisterModule extends _i537.RegisterModule {}
 class _$ReadingListsModule extends _i823.ReadingListsModule {}
 
 class _$ChapterSplittersModule extends _i1006.ChapterSplittersModule {}
+
+class _$BibleReadersModule extends _i1070.BibleReadersModule {}
