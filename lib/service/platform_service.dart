@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:injectable/injectable.dart';
 
+import '../injectable.dart';
+
 class PlatformService {
   PlatformService({required this.isAndroid, required this.isIOS, required this.isHapticAvailable});
 
@@ -25,7 +27,7 @@ class ProductionPlatformService extends PlatformService {
   );
 }
 
-@Environment('screenshot')
+@screenshot
 @LazySingleton(as: PlatformService)
 class ScreenshotPlatformService extends PlatformService {
   ScreenshotPlatformService() : super(isAndroid: true, isIOS: false, isHapticAvailable: true);

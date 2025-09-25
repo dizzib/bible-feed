@@ -3,6 +3,8 @@ import 'package:df_log/df_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
+import '../injectable.dart';
+
 abstract class PlatformEventService with ChangeNotifier {}
 
 @prod
@@ -16,6 +18,6 @@ class ProductionPlatformEventService extends PlatformEventService {
   }
 }
 
-@Environment('screenshot')
+@screenshot
 @LazySingleton(as: PlatformEventService)
 class ScreenshotPlatformEventService extends PlatformEventService {}
