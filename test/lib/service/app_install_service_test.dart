@@ -22,7 +22,6 @@ void main() {
   late MockBibleReaderLaunchService mockBibleReaderLaunchService;
   late MockPlatformService mockPlatformService;
   late MockPlatformEventService mockPlatformEventService;
-  late bool notified;
 
   setUp(() {
     mockBibleReaderLaunchService = MockBibleReaderLaunchService();
@@ -31,16 +30,12 @@ void main() {
     mockPlatformService = MockPlatformService();
   });
 
-  createTestee() {
-    final testee = AppInstallService(
-      mockBibleReaderLaunchService,
-      mockBibleReaderLinkService,
-      mockPlatformEventService,
-      mockPlatformService,
-    );
-    notified = false;
-    testee.addListener(() => notified = true);
-  }
+  AppInstallService createTestee() => AppInstallService(
+    mockBibleReaderLaunchService,
+    mockBibleReaderLinkService,
+    mockPlatformEventService,
+    mockPlatformService,
+  );
 
   test('on ios, does not add listener', () {
     when(mockPlatformService.isIOS).thenReturn(true);
@@ -49,19 +44,20 @@ void main() {
   });
 
   group('on android, on platform event fired', () {
+    late VoidCallback listener;
+    late bool notified;
+
     setUp(() {
       when(mockPlatformService.isIOS).thenReturn(false);
-      createTestee();
-      verify(mockPlatformEventService.addListener(any)).called(1);
+      when(mockPlatformEventService.addListener(any)).thenAnswer((invocation) {
+        listener = invocation.positionalArguments[0] as VoidCallback;
+      });
+      notified = false;
+      createTestee().addListener(() => notified = true);
     });
 
     test('if linked bible reader is available, should notify listeners', () async {
       when(mockBibleReaderLaunchService.isAvailable(any)).thenAnswer((_) async => true);
-      late VoidCallback listener;
-      when(mockPlatformEventService.addListener(any)).thenAnswer((invocation) {
-        listener = invocation.positionalArguments[0] as VoidCallback;
-      });
-      createTestee();
       listener.call();
       await Future.delayed(Duration.zero); // wait for async listener
       expect(notified, true);
@@ -70,11 +66,6 @@ void main() {
 
     test('if linked bible reader is not available, should unlink', () async {
       when(mockBibleReaderLaunchService.isAvailable(any)).thenAnswer((_) async => false);
-      late VoidCallback listener;
-      when(mockPlatformEventService.addListener(any)).thenAnswer((invocation) {
-        listener = invocation.positionalArguments[0] as VoidCallback;
-      });
-      createTestee();
       listener.call();
       await Future.delayed(Duration.zero); // wait for async listener
       expect(notified, false);
