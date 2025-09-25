@@ -145,6 +145,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i823.ReadingLists>(),
       ),
     );
+    gh.lazySingleton<_i817.AppInstallService>(
+      () => _i817.AppInstallService(
+        gh<_i905.BibleReaderLaunchService>(),
+        gh<_i134.BibleReaderLinkService>(),
+        gh<_i516.PlatformEventService>(),
+        gh<_i578.PlatformService>(),
+      ),
+    );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(
         gh<_i460.SharedPreferences>(),
@@ -153,14 +161,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
-    );
-    gh.lazySingleton<_i817.AppInstallService>(
-      () => _i817.AppInstallService(
-        gh<_i134.BibleReaderLinkService>(),
-        gh<_i905.BibleReaderLaunchService>(),
-        gh<_i578.PlatformService>(),
-        gh<_i516.PlatformEventService>(),
-      ),
     );
     gh.singleton<_i148.AutoAdvanceService>(
       () => _i148.AutoAdvanceService(gh<_i307.FeedsAdvanceService>()),

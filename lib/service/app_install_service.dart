@@ -9,18 +9,18 @@ import 'platform_event_service.dart';
 @lazySingleton
 class AppInstallService with ChangeNotifier {
   AppInstallService(
-    BibleReaderLinkService bibleReaderService,
     BibleReaderLaunchService bibleReaderLaunchService,
-    PlatformService platformService,
+    BibleReaderLinkService bibleReaderLinkService,
     PlatformEventService platformEventService,
+    PlatformService platformService,
   ) {
     if (platformService.isIOS) return; // ios cannot detect app (un)install events
     platformEventService.addListener(() async {
-      if (await bibleReaderLaunchService.isAvailable(bibleReaderService.linkedBibleReader)) {
+      if (await bibleReaderLaunchService.isAvailable(bibleReaderLinkService.linkedBibleReader)) {
         notifyListeners();
         return;
       }
-      bibleReaderService.unlinkBibleReader(); // the linked bible reader has been uninstalled
+      bibleReaderLinkService.unlinkBibleReader(); // the linked bible reader has been uninstalled
     });
   }
 }
