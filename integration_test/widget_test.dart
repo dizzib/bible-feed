@@ -51,7 +51,7 @@ void main() async {
   });
 
   testWidgets('FeedsView', (WidgetTester t) async {
-    await t.initialiseWidget(FeedsView());
+    await t.initialiseWidget(Feeds());
     expectChapters(1);
     for (var l in sl<ReadingLists>()) {
       expectAtLeast1Text(l.name);

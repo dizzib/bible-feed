@@ -27,7 +27,7 @@ class _AppState extends State<App> {
         final isShowAppBar = bc.maxHeight > 360;
         return Scaffold(
           appBar: isShowAppBar ? AppBarMain() : null,
-          body: FeedsView(),
+          body: Feeds(),
           floatingActionButton:
               !isShowAppBar
                   ? Stack(
