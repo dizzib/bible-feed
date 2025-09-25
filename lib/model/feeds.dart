@@ -20,10 +20,10 @@ class Feeds extends BaseList<Feed> with ChangeNotifier {
         _lastModifiedFeed = f;
       }
 
-      f.addListener(() async {
+      f.addListener(() {
         notifyListeners();
         _lastModifiedFeed = f;
-        await _feedStoreService.saveState(f.readingList, f.state);
+        _feedStoreService.saveState(f.readingList, f.state);
       });
     }
   }
