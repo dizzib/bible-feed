@@ -49,6 +49,7 @@ void main() {
 
     setUp(() {
       when(mockPlatformService.isIOS).thenReturn(false);
+      // capture the PlatformEventService listener so we can invoke it
       when(mockPlatformEventService.addListener(any)).thenAnswer((invocation) {
         listener = invocation.positionalArguments[0] as VoidCallback;
       });
@@ -56,19 +57,20 @@ void main() {
       createTestee().addListener(() => notified = true);
     });
 
+    Future run(bool isAvailable) async {
+      when(mockBibleReaderLaunchService.isAvailable(any)).thenAnswer((_) async => isAvailable);
+      listener.call(); // invoke PlatformEventService listener
+      await Future.delayed(Duration.zero);
+      expect(notified, isAvailable);
+    }
+
     test('if linked bible reader is available, should notify listeners', () async {
-      when(mockBibleReaderLaunchService.isAvailable(any)).thenAnswer((_) async => true);
-      listener.call();
-      await Future.delayed(Duration.zero); // wait for async listener
-      expect(notified, true);
+      await run(true);
       verifyNever(mockBibleReaderLinkService.unlinkBibleReader());
     });
 
     test('if linked bible reader is not available, should unlink', () async {
-      when(mockBibleReaderLaunchService.isAvailable(any)).thenAnswer((_) async => false);
-      listener.call();
-      await Future.delayed(Duration.zero); // wait for async listener
-      expect(notified, false);
+      await run(false);
       verify(mockBibleReaderLinkService.unlinkBibleReader()).called(1);
     });
   });
