@@ -1,4 +1,3 @@
-import 'package:app_install_events/app_install_events.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,13 +6,9 @@ import '/service/bible_reader_link_service.dart';
 import '/service/platform_service.dart';
 import 'platform_event_service.dart';
 
-abstract class AppInstallService with ChangeNotifier {}
-
-@prod
-@LazySingleton(as: AppInstallService)
-class ProductionAppInstallService extends AppInstallService {
-  ProductionAppInstallService(
-    AppIUEvents appIUEvents,
+@lazySingleton
+class AppInstallService with ChangeNotifier {
+  AppInstallService(
     BibleReaderLinkService bibleReaderService,
     BibleReaderLaunchService bibleReaderLaunchService,
     PlatformService platformService,
@@ -29,7 +24,3 @@ class ProductionAppInstallService extends AppInstallService {
     });
   }
 }
-
-@Environment('screenshot')
-@LazySingleton(as: AppInstallService)
-class ScreenshotAppInstallService extends AppInstallService {}
