@@ -28,15 +28,15 @@ class _AppState extends State<App> {
         return Scaffold(
           appBar: isShowAppBar ? AppBarMain() : null,
           body: Feeds(),
-          floatingActionButton:
-              !isShowAppBar
-                  ? Stack(
-                    children: [
-                      SettingsIconButton(),
-                      SizedBox(width: bc.maxHeight < 260 ? 44 : null, child: FittedBox(child: AllDoneFab())),
-                    ],
-                  )
-                  : null,
+          floatingActionButton: Visibility(
+            visible: !isShowAppBar,
+            child: Stack(
+              children: [
+                SettingsIconButton(),
+                SizedBox(width: bc.maxHeight < 260 ? 44 : null, child: FittedBox(child: AllDoneFab())),
+              ],
+            ),
+          ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
         );
       },
