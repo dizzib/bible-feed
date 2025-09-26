@@ -8,12 +8,12 @@ analyzer:
     - dart_code_linter
 
 dart_code_linter:
+  extends:
+    - package:dart_code_linter/presets/metrics_recommended.yaml
   metrics:
-    cyclomatic-complexity: 20
-    number-of-parameters: 4
-    maximum-nesting-level: 5
-  metrics-exclude:
-    - test/**
+    halstead-volume: 1000
+    maintainability-index: 40
+    number-of-methods: 12
   rules:
     # - arguments-ordering
     - avoid-dynamic
@@ -40,6 +40,7 @@ formatter:
 linter:
   rules:
     avoid_print: true
+    # document_ignores: true
     prefer_const_constructors_in_immutables: true
     prefer_const_constructors: true
     prefer_const_literals_to_create_immutables: true
