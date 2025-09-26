@@ -8,7 +8,7 @@ class FeedCardSemantics extends WatchingWidget {
   final Widget? child;
   final Feed feed;
 
-  const FeedCardSemantics(this.feed, {required this.child});
+  const FeedCardSemantics({required this.feed, required this.child});
 
   @override
   build(context) {

@@ -43,7 +43,7 @@ class FeedCard extends WatchingWidget {
         elevation: state.isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: FeedCardSemantics(
-          feed,
+          feed: feed,
           child: InkWell(
             enableFeedback: false,
             onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
