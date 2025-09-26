@@ -7,7 +7,8 @@ import '/service/bible_reader_link_service.dart';
 class FeedCardSemantics extends WatchingWidget {
   final Widget? child;
   final Feed feed;
-  const FeedCardSemantics(this.feed, {this.child});
+
+  const FeedCardSemantics(this.feed, {required this.child});
 
   @override
   build(context) {
