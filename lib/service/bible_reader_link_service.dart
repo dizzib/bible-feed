@@ -20,7 +20,7 @@ class BibleReaderLinkService with ChangeNotifier {
   static const _linkedBibleReaderStoreKey = 'linkedBibleReader';
 
   final List<BibleReader> _certifiedBibleReaderList;
-  late BibleReaderKey _linkedBibleReaderKey;
+  late BibleReaderKey _linkedBibleReaderKey; // ignore: avoid-late-keyword
 
   void _loadState() {
     final String? linkedReaderName = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
