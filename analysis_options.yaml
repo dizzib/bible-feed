@@ -15,9 +15,10 @@ dart_code_linter:
   metrics-exclude:
     - test/**
   rules:
+    # - arguments-ordering
     - avoid-dynamic
     - avoid-late-keyword
-    - avoid-passing-async-when-sync-expected
+    # - avoid-passing-async-when-sync-expected
     - avoid-redundant-async
     - avoid-unnecessary-type-assertions
     - avoid-unnecessary-type-casts
