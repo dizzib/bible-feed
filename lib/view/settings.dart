@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/service/chapter_split_toggler_service.dart';
 import '/service/haptic_toggler_service.dart';
 import 'app_version.dart';
-import 'settings_bible_reader.dart';
+import 'bible_reader_settings.dart';
 import 'settings_toggler.dart';
 
 class Settings extends StatelessWidget {
