@@ -12,6 +12,7 @@ import 'bible_reader_failure_dialog.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';
 import 'feed_card_book_chapter.dart';
+import 'feed_card_semantics.dart';
 import 'feed_card_title_bar.dart';
 
 class FeedCard extends WatchingWidget {
@@ -36,11 +37,7 @@ class FeedCard extends WatchingWidget {
     final feeds = watchIt<Feeds>();
     final state = feed.state;
     final isRead = state.isRead;
-
     final isLastModifiedReadFeed = isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
-    final semanticsLabel = '${state.book.name} chapter ${state.chapter} is currently ${isRead ? 'read' : 'unread'}';
-    final semanticsHint =
-        'Tap to ${brs.isLinked && !isRead ? 'open Bible reader and' : ''} mark as ${isRead ? 'unread' : 'read'}. Long press to change the book and chapter.';
 
     return AnimatedOpacity(
       opacity: isRead ? 0.25 : 1,
@@ -48,10 +45,8 @@ class FeedCard extends WatchingWidget {
       child: Card(
         elevation: isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
-        child: Semantics(
-          excludeSemantics: true,
-          label: semanticsLabel,
-          hint: semanticsHint,
+        child: FeedCardSemantics(
+          feed,
           child: InkWell(
             enableFeedback: false,
             onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
