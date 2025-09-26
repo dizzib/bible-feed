@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/bible_reader_launch_service.dart';
-import '../service/result.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
+import '/service/bible_reader_launch_service.dart';
 import '/service/bible_reader_link_service.dart';
-import '/service/haptic_service.dart';
 import '/service/chapter_split_toggler_service.dart';
+import '/service/haptic_service.dart';
+import '/service/result.dart';
 import 'bible_reader_failure_dialog.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';
@@ -34,11 +34,11 @@ class FeedCard extends WatchingWidget {
     final brs = watchIt<BibleReaderLinkService>();
     final feeds = watchIt<Feeds>();
     final state = feed.state;
-    final isLastModifiedReadFeed = state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
+    final isLastReadAndLinked = state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
 
     return AnimatedOpacity(
       opacity: state.isRead ? 0.25 : 1,
-      duration: Duration(seconds: isLastModifiedReadFeed ? 30 : 0),
+      duration: Duration(seconds: isLastReadAndLinked ? 30 : 0),
       child: Card(
         elevation: state.isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,

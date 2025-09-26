@@ -47,10 +47,10 @@ void main() async {
       'should launchUrl with correct uri and return Success unless launchUrl returned false',
       [
         [noneBibleReader, 1, false, false, false, Success()],
-        [blbBibleReader, 1, true, false, false, Success()],
-        [blbBibleReader, 1, false, true, true, Success(), 'scheme://uri/b0/1'],
-        [blbBibleReader, 2, false, true, true, Success(), 'scheme://uri/b0/1/2'],
-        [blbBibleReader, 1, false, true, false, Failure(), 'scheme://uri/b0/1'],
+        [blbBibleReader, 1, false, false, false, Success()],
+        [blbBibleReader, 1, true, true, true, Success(), 'scheme://uri/b0/1'],
+        [blbBibleReader, 2, true, true, true, Success(), 'scheme://uri/b0/1/2'],
+        [blbBibleReader, 1, true, true, false, Failure(), 'scheme://uri/b0/1'],
       ],
       (
         BibleReader bibleReader,
@@ -76,7 +76,7 @@ void main() async {
     );
 
     test('should return Failure on PlatformException', () async {
-      var state = FeedState(book: b1, isRead: false);
+      var state = FeedState(book: b1, isRead: true);
       when(mockUrlLaunchService.launchUrl(any)).thenThrow(PlatformException(code: 'code'));
       expect((await testee.launch(blbBibleReader, state)).runtimeType, Failure);
     });
