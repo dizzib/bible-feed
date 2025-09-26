@@ -20,25 +20,24 @@ class FeedCard extends WatchingWidget {
 
   @override
   build(context) {
+    watch(feed);
+    watchIt<ChapterSplitTogglerService>();
     final brs = watchIt<BibleReaderLinkService>();
     final feeds = watchIt<Feeds>();
-    watchIt<ChapterSplitTogglerService>();
-    watch(feed);
+    final state = feed.state;
+    final isRead = state.isRead;
 
     return AnimatedOpacity(
-      opacity: feed.state.isRead ? 0.25 : 1,
-      duration: Duration(
-        seconds: feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed) ? 30 : 0,
-      ),
+      opacity: isRead ? 0.25 : 1,
+      duration: Duration(seconds: isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed) ? 30 : 0),
       child: Card(
-        elevation: feed.state.isRead ? 0 : 12,
+        elevation: isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: Semantics(
           excludeSemantics: true,
-          label:
-              '${feed.state.book.name} chapter ${feed.state.chapter} is currently ${feed.state.isRead ? 'read' : 'unread'}',
+          label: '${state.book.name} chapter ${state.chapter} is currently ${isRead ? 'read' : 'unread'}',
           hint: '''
-              Tap to ${brs.isLinked && !feed.state.isRead ? 'open Bible reader and' : ''} mark as ${feed.state.isRead ? 'unread' : 'read'}.
+              Tap to ${brs.isLinked && !isRead ? 'open Bible reader and' : ''} mark as ${isRead ? 'unread' : 'read'}.
               Long press to change the book and chapter.''',
           child: InkWell(
             enableFeedback: false,
