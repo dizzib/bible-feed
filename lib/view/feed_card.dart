@@ -19,14 +19,12 @@ class FeedCard extends WatchingWidget {
   final Feed feed;
   const FeedCard(this.feed);
 
-  Future<void> _handleTap(BuildContext context, FeedState state) async {
+  Future<void> _handleTap(BuildContext context) async {
     sl<HapticService>().impact();
-    final linkedBibleReader = sl<BibleReaderLinkService>().linkedBibleReader;
-    final result = await sl<BibleReaderLaunchService>().launch(linkedBibleReader, state);
-    if (result is Failure && context.mounted) {
-      context.showDialogWithBlurBackground(BibleReaderFailureDialog(result));
-    }
     feed.toggleIsRead();
+    final res = await sl<BibleReaderLaunchService>().launch(sl<BibleReaderLinkService>().linkedBibleReader, feed.state);
+    if (res is Success) return;
+    if (context.mounted) context.showDialogWithBlurBackground(BibleReaderFailureDialog(res as Failure));
   }
 
   @override
@@ -49,7 +47,7 @@ class FeedCard extends WatchingWidget {
           child: InkWell(
             enableFeedback: false,
             onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
-            onTap: () => _handleTap(context, state),
+            onTap: () => _handleTap(context),
             child: LayoutBuilder(
               builder: (_, BoxConstraints c) {
                 final fontSize = (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30;
