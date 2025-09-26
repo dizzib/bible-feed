@@ -4,8 +4,12 @@ analyzer:
   exclude:
     - '**.config.dart'
     - '**.mocks.dart'
+
+  # This dcl plugin uses far too cpu and ram on M1 Air base model!
+  # Also has a bug where a 2nd connection does not work.
+  #
   # plugins:
-  #   - dart_code_linter # uses too many resources on M1 Air base model!
+  #   - dart_code_linter
 
 dart_code_linter:
   extends:
