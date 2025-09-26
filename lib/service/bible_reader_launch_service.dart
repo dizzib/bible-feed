@@ -15,10 +15,8 @@ class BibleReaderLaunchService {
   String _getDeeplinkUri(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey(internalBookKey);
     var url = bibleReader.uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
-    if (bibleReader.uriVersePath != null && verse > 1) {
-      url += bibleReader.uriVersePath!.replaceAll('VERSE', verse.toString());
-    }
-    return url;
+    if (bibleReader.uriVersePath == null || verse == 1) return url;
+    return url + bibleReader.uriVersePath!.replaceAll('VERSE', verse.toString());
   }
 
   Future<bool> isAvailable(BibleReader bibleReader) {
