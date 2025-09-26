@@ -9,16 +9,13 @@ class FeedCardBookChapter extends StatelessWidget {
 
   @override
   build(context) {
+    final chapterText = '${feed.state.book.name} ${feed.state.chapter} ${feed.chapterSplitLabel}'.trim();
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
-          child: AutoSizeText(
-            '${feed.state.book.name} ${feed.state.chapter} ${feed.chapterSplitLabel}'.trim(),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-          ),
+          child: AutoSizeText(chapterText, maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
         ),
       ),
     );

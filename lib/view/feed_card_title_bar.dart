@@ -11,17 +11,22 @@ class FeedCardTitleBar extends WatchingWidget {
   final Feed feed;
   const FeedCardTitleBar(this.feed);
 
+  Widget _buildLastReadIcon() {
+    return const Padding(
+      padding: EdgeInsets.only(left: 8.0),
+      child: Tooltip(message: 'This is the last chapter you read', child: Icon(Icons.auto_stories)),
+    );
+  }
+
   @override
   build(context) {
     final brs = watchIt<BibleReaderLinkService>();
     final feeds = watchIt<Feeds>();
+    final isLastReadChapter = feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
+
     return Row(
       children: [
-        if (feed.state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed))
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Tooltip(message: 'This is the last chapter you read', child: Icon(Icons.auto_stories)),
-          ),
+        if (isLastReadChapter) _buildLastReadIcon(),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),

@@ -18,6 +18,16 @@ class FeedCard extends WatchingWidget {
   final Feed feed;
   const FeedCard(this.feed);
 
+  Future<void> _handleTap(BuildContext context, FeedState state) async {
+    sl<HapticService>().impact();
+    final linkedBibleReader = sl<BibleReaderLinkService>().linkedBibleReader;
+    final result = await sl<BibleReaderLaunchService>().launch(linkedBibleReader, state);
+    if (result is Failure && context.mounted) {
+      context.showDialogWithBlurBackground(BibleReaderFailureDialog(result));
+    }
+    feed.toggleIsRead();
+  }
+
   @override
   build(context) {
     watch(feed);
@@ -27,43 +37,40 @@ class FeedCard extends WatchingWidget {
     final state = feed.state;
     final isRead = state.isRead;
 
+    final isLastModifiedReadFeed = isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
+    final semanticsLabel = '${state.book.name} chapter ${state.chapter} is currently ${isRead ? 'read' : 'unread'}';
+    final semanticsHint =
+        'Tap to ${brs.isLinked && !isRead ? 'open Bible reader and' : ''} mark as ${isRead ? 'unread' : 'read'}. Long press to change the book and chapter.';
+
     return AnimatedOpacity(
       opacity: isRead ? 0.25 : 1,
-      duration: Duration(seconds: isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed) ? 30 : 0),
+      duration: Duration(seconds: isLastModifiedReadFeed ? 30 : 0),
       child: Card(
         elevation: isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: Semantics(
           excludeSemantics: true,
-          label: '${state.book.name} chapter ${state.chapter} is currently ${isRead ? 'read' : 'unread'}',
-          hint: '''
-              Tap to ${brs.isLinked && !isRead ? 'open Bible reader and' : ''} mark as ${isRead ? 'unread' : 'read'}.
-              Long press to change the book and chapter.''',
+          label: semanticsLabel,
+          hint: semanticsHint,
           child: InkWell(
             enableFeedback: false,
             onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
-            onTap: () async {
-              sl<HapticService>().impact();
-              final linkedBibleReader = sl<BibleReaderLinkService>().linkedBibleReader;
-              final result = await sl<BibleReaderLaunchService>().launch(linkedBibleReader, state);
-              if (result is Failure && context.mounted) {
-                context.showDialogWithBlurBackground(BibleReaderFailureDialog(result));
-              }
-              feed.toggleIsRead();
-            },
+            onTap: () => _handleTap(context, state),
             child: LayoutBuilder(
-              builder:
-                  (_, BoxConstraints c) => Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
-                      LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
-                      DefaultTextStyle.merge(
-                        style: TextStyle(fontSize: (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30),
-                        child: FeedCardBookChapter(feed),
-                      ),
-                    ],
-                  ),
+              builder: (_, BoxConstraints c) {
+                final fontSize = (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30;
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
+                    LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
+                    DefaultTextStyle.merge(
+                      style: TextStyle(fontSize: fontSize.toDouble()),
+                      child: FeedCardBookChapter(feed),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
