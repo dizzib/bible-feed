@@ -36,14 +36,13 @@ class FeedCard extends WatchingWidget {
     final brs = watchIt<BibleReaderLinkService>();
     final feeds = watchIt<Feeds>();
     final state = feed.state;
-    final isRead = state.isRead;
-    final isLastModifiedReadFeed = isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
+    final isLastModifiedReadFeed = state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
 
     return AnimatedOpacity(
-      opacity: isRead ? 0.25 : 1,
+      opacity: state.isRead ? 0.25 : 1,
       duration: Duration(seconds: isLastModifiedReadFeed ? 30 : 0),
       child: Card(
-        elevation: isRead ? 0 : 12,
+        elevation: state.isRead ? 0 : 12,
         clipBehavior: Clip.hardEdge,
         child: FeedCardSemantics(
           feed,
