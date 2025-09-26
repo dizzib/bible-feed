@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ListWheelState with ChangeNotifier {
-  late int _index;
+  int _index = 0;
 
   int get index => _index;
 
