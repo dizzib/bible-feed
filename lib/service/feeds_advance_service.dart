@@ -30,7 +30,7 @@ class FeedsAdvanceService {
     if (!_feeds.areChaptersRead) return AdvanceState.notAllRead;
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
     if (lastDateModified == null) return AdvanceState.notAllRead;
-    var now = clock.now(); // use clock (not DateTime) for integration tests
+    var now = clock.now(); // Use clock (not DateTime) for integration tests.
     if (now.day > lastDateModified.day) return forceAdvance();
     if (now.month > lastDateModified.month) return forceAdvance();
     if (now.year > lastDateModified.year) return forceAdvance();
