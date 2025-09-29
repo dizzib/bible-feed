@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '/model/list_wheel_state.dart';
-import '/view/list_wheel_effects.dart';
+import '/view/list_wheel_gradient.dart';
+import '/view/list_wheel_highlight.dart';
 import 'build_context_extension.dart';
 
 // known issues with various wheel pickers...
