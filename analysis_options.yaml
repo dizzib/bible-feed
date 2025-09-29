@@ -29,7 +29,6 @@ dart_code_linter:
     - newline-before-return: false
     - no-magic-number:
         allowed: [0, 0.5, 1]
-    - prefer-moving-to-variable: false
     # flutter
     - prefer-extracting-callbacks: false
 

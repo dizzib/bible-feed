@@ -12,20 +12,16 @@ class ListWheelGradient extends StatelessWidget {
     return Align(
       alignment: begin,
       child: LayoutBuilder(
-        builder:
-            (_, constraints) => Container(
-              height: constraints.maxHeight * 0.5,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: begin,
-                  end: end,
-                  colors: [
-                    context.colorScheme.surfaceContainerHigh.withValues(alpha: context.isDarkMode ? 0.0 : 1.0),
-                    context.colorScheme.surfaceContainerHigh.withValues(alpha: context.isDarkMode ? 1.0 : 0.0),
-                  ],
-                ),
-              ),
+        builder: (_, constraints) {
+          final colorStart = context.colorScheme.surfaceContainerHigh.withValues(alpha: context.isDarkMode ? 0.0 : 1.0);
+          final colorEnd = context.colorScheme.surfaceContainerHigh.withValues(alpha: context.isDarkMode ? 1.0 : 0.0);
+          return Container(
+            height: constraints.maxHeight * 0.5,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(begin: begin, end: end, colors: [colorStart, colorEnd]),
             ),
+          );
+        },
       ),
     );
   }
