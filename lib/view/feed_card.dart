@@ -4,7 +4,6 @@ import 'package:watch_it/watch_it.dart';
 import '/model/feed.dart';
 import '/model/feeds.dart';
 import '/service/bible_reader_link_service.dart';
-import '/service/chapter_split_toggler_service.dart';
 import 'feed_card_body.dart';
 import 'feed_card_semantics.dart';
 
@@ -15,7 +14,6 @@ class FeedCard extends WatchingWidget {
   @override
   build(context) {
     watch(feed);
-    // watchIt<ChapterSplitTogglerService>();
     final brs = watchIt<BibleReaderLinkService>();
     final feeds = watchIt<Feeds>();
     final state = feed.state;
