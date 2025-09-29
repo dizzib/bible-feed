@@ -34,7 +34,6 @@ dart_code_linter:
     - prefer-correct-identifier-length: false
     - prefer-moving-to-variable: false
     - prefer-match-file-name: false
-    - prefer-static-class: false
     # flutter
     - prefer-extracting-callbacks: false
 
