@@ -33,7 +33,7 @@ class _AppState extends State<App> {
           floatingActionButton: Visibility(
             visible: !isShowAppBar,
             child: Stack(
-              children: [SettingsIconButton(), SizedBox(width: fabBoxSize, child: FittedBox(child: AllDoneFab()))],
+              children: [SettingsIconButton(), SizedBox(height: fabBoxSize, child: AllDoneFab())],
             ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
