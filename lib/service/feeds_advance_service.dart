@@ -4,8 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/feed.dart';
 import '/model/feeds.dart';
-
-enum AdvanceState { notAllRead, allReadAwaitingTomorrow, listsAdvanced }
+import '/service/feed_advance_state.dart';
 
 @lazySingleton
 class FeedsAdvanceService {
@@ -18,22 +17,22 @@ class FeedsAdvanceService {
 
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
-  Future<AdvanceState> forceAdvance() async {
+  Future<FeedAdvanceState> forceAdvance() async {
     for (Feed f in _feeds) {
       f.advance();
     }
     await _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
-    return Future.value(AdvanceState.listsAdvanced);
+    return Future.value(FeedAdvanceState.listsAdvanced);
   }
 
-  Future<AdvanceState> maybeAdvance() async {
-    if (!_feeds.areChaptersRead) return AdvanceState.notAllRead;
+  Future<FeedAdvanceState> maybeAdvance() async {
+    if (!_feeds.areChaptersRead) return FeedAdvanceState.notAllRead;
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
-    if (lastDateModified == null) return AdvanceState.notAllRead;
+    if (lastDateModified == null) return FeedAdvanceState.notAllRead;
     var now = clock.now(); // Use clock (not DateTime) for integration tests.
     if (now.day > lastDateModified.day) return forceAdvance();
     if (now.month > lastDateModified.month) return forceAdvance();
     if (now.year > lastDateModified.year) return forceAdvance();
-    return Future.value(AdvanceState.allReadAwaitingTomorrow);
+    return Future.value(FeedAdvanceState.allReadAwaitingTomorrow);
   }
 }

@@ -5,6 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:bible_feed/service/feed_advance_state.dart' as _i4;
 import 'package:bible_feed/service/feeds_advance_service.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -37,28 +38,28 @@ class MockFeedsAdvanceService extends _i1.Mock
           as bool);
 
   @override
-  _i3.Future<_i2.AdvanceState> forceAdvance() =>
+  _i3.Future<_i4.FeedAdvanceState> forceAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#forceAdvance, []),
-            returnValue: _i3.Future<_i2.AdvanceState>.value(
-              _i2.AdvanceState.notAllRead,
+            returnValue: _i3.Future<_i4.FeedAdvanceState>.value(
+              _i4.FeedAdvanceState.notAllRead,
             ),
-            returnValueForMissingStub: _i3.Future<_i2.AdvanceState>.value(
-              _i2.AdvanceState.notAllRead,
+            returnValueForMissingStub: _i3.Future<_i4.FeedAdvanceState>.value(
+              _i4.FeedAdvanceState.notAllRead,
             ),
           )
-          as _i3.Future<_i2.AdvanceState>);
+          as _i3.Future<_i4.FeedAdvanceState>);
 
   @override
-  _i3.Future<_i2.AdvanceState> maybeAdvance() =>
+  _i3.Future<_i4.FeedAdvanceState> maybeAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#maybeAdvance, []),
-            returnValue: _i3.Future<_i2.AdvanceState>.value(
-              _i2.AdvanceState.notAllRead,
+            returnValue: _i3.Future<_i4.FeedAdvanceState>.value(
+              _i4.FeedAdvanceState.notAllRead,
             ),
-            returnValueForMissingStub: _i3.Future<_i2.AdvanceState>.value(
-              _i2.AdvanceState.notAllRead,
+            returnValueForMissingStub: _i3.Future<_i4.FeedAdvanceState>.value(
+              _i4.FeedAdvanceState.notAllRead,
             ),
           )
-          as _i3.Future<_i2.AdvanceState>);
+          as _i3.Future<_i4.FeedAdvanceState>);
 }

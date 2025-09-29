@@ -1,5 +1,6 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
+import 'package:bible_feed/service/feed_advance_state.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -42,7 +43,7 @@ void main() async {
   });
 
   test('forceAdvance should advance all feeds and store hasEverAdvanced as true', () async {
-    expect(await testee.forceAdvance(), AdvanceState.listsAdvanced);
+    expect(await testee.forceAdvance(), FeedAdvanceState.listsAdvanced);
     verifyAllAdvanced();
     verify(mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
   });
@@ -50,15 +51,15 @@ void main() async {
   parameterizedTest(
     'maybeAdvance',
     [
-      [false, const Duration(days: 1), AdvanceState.notAllRead, verifyNoneAdvanced],
-      [true, const Duration(days: 0), AdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
-      [true, const Duration(days: 1), AdvanceState.listsAdvanced, verifyAllAdvanced],
-      [true, const Duration(days: 7), AdvanceState.listsAdvanced, verifyAllAdvanced],
+      [false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
+      [true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
     ],
     customDescriptionBuilder: (_, _, values) {
       return 'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}';
     },
-    (bool areChaptersRead, Duration sinceLastModified, AdvanceState expectedAdvanceState, Function verify) async {
+    (bool areChaptersRead, Duration sinceLastModified, FeedAdvanceState expectedAdvanceState, Function verify) async {
       when(mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
       when(mockFeeds.lastModifiedFeed).thenReturn(mockFeedList[0]);
       when(
