@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '/service/haptic_service.dart';
+import 'constants.dart';
 
 extension BuildContextExtension<T> on BuildContext {
   // device
@@ -16,16 +17,17 @@ extension BuildContextExtension<T> on BuildContext {
   // theme
   ThemeData get theme => Theme.of(this);
   ColorScheme get colorScheme => theme.colorScheme;
-  double get defaultFontSize => DefaultTextStyle.of(this).style.fontSize ?? 14;
+  double get defaultFontSize => DefaultTextStyle.of(this).style.fontSize ?? Constants.defaultFontSize;
   TextTheme get textTheme => theme.textTheme;
 
   void navigateTo(Widget page) => Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
 
   Future<T?> showDialogWithBlurBackground(Widget child) {
     sl<HapticService>().impact();
+    const blurSigma = 3.0;
     return showDialog(
       context: this,
-      builder: (_) => BackdropFilter(filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0), child: child),
+      builder: (_) => BackdropFilter(filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma), child: child),
     );
   }
 }

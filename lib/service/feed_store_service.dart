@@ -11,10 +11,13 @@ class FeedStoreService {
   FeedStoreService(this._sharedPreferences);
 
   FeedState loadState(ReadingList readingList) {
+    const defaultChapter = 1;
+    const defaultVerse = 1;
+
     return FeedState(
       book: readingList.getBook(_sharedPreferences.getString('${readingList.key}.book') ?? readingList[0].key),
-      chapter: _sharedPreferences.getInt('${readingList.key}.chapter') ?? 1,
-      verse: _sharedPreferences.getInt('${readingList.key}.verse') ?? 1,
+      chapter: _sharedPreferences.getInt('${readingList.key}.chapter') ?? defaultChapter,
+      verse: _sharedPreferences.getInt('${readingList.key}.verse') ?? defaultVerse,
       isRead: _sharedPreferences.getBool('${readingList.key}.isRead') ?? false,
       dateModified: DateTime.tryParse(_sharedPreferences.getString('${readingList.key}.dateModified') ?? ''),
     );
