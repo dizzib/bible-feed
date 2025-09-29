@@ -29,8 +29,9 @@ class AutoAdvanceService with ChangeNotifier {
   }
 
   void _setTimer() {
-    final midnightTonight = DateTime(clock.now().year, clock.now().month, clock.now().day + 1);
-    final durationToMidnight = midnightTonight.difference(clock.now());
+    final now = clock.now(); // Use clock (not DateTime) for tests.
+    final midnightTonight = DateTime(now.year, now.month, now.day + 1);
+    final durationToMidnight = midnightTonight.difference(now);
     _timer?.cancel();
     _timer = Timer(durationToMidnight, _run);
     // 'AutoAdvanceService: timer will fire in ${durationToMidnight.toString()}'.log();
