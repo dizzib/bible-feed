@@ -25,16 +25,14 @@ class _AppState extends State<App> {
     return LayoutBuilder(
       builder: (_, BoxConstraints bc) {
         final isShowAppBar = bc.maxHeight > 360;
-        final fabBoxSize = bc.maxHeight < 260 ? 44.0 : null;
+        final allDoneFabSize = bc.maxHeight < 260 ? 44.0 : null;
 
         return Scaffold(
           appBar: isShowAppBar ? AppBarMain() : null,
           body: Feeds(),
           floatingActionButton: Visibility(
             visible: !isShowAppBar,
-            child: Stack(
-              children: [SettingsIconButton(), SizedBox(height: fabBoxSize, child: AllDoneFab())],
-            ),
+            child: Stack(children: [SettingsIconButton(), SizedBox(height: allDoneFabSize, child: AllDoneFab())]),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
         );
