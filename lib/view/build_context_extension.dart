@@ -27,6 +27,7 @@ extension BuildContextExtension<T> on BuildContext {
     const blurSigma = 3.0;
     return showDialog(
       context: this,
+      // ignore: no-equal-arguments, x and y must be equal
       builder: (_) => BackdropFilter(filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma), child: child),
     );
   }
