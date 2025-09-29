@@ -23,7 +23,6 @@ dart_code_linter:
     # dart
     - arguments-ordering: false
     - avoid-ignoring-return-values: false
-    - avoid-non-null-assertion: false
     - avoid-passing-async-when-sync-expected: false
     - format-comment: false
     - member-ordering: false

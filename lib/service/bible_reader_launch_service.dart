@@ -16,6 +16,7 @@ class BibleReaderLaunchService {
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey(internalBookKey);
     var url = bibleReader.uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
     if (bibleReader.uriVersePath == null || verse == 1) return url;
+    // ignore: avoid-non-null-assertion, passed above null check
     return url + bibleReader.uriVersePath!.replaceAll('VERSE', verse.toString());
   }
 

@@ -24,8 +24,7 @@ class ListWheel extends StatelessWidget {
   @override
   build(context) {
     const magnification = 1.1;
-    var itemExtent =
-        DefaultTextStyle.of(context).style.fontSize! * 1.4 * context.deviceTextScale; // accomodate various text sizes
+    var itemExtent = context.defaultFontSize * context.deviceTextScale * 1.4; // accomodate various text sizes
     var controller = FixedExtentScrollController(initialItem: listWheelState.index);
 
     // guard against selected index exceeding the maximum e.g. when changing from Revelation 7 to Jude
