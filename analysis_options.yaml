@@ -14,11 +14,15 @@ analyzer:
 dart_code_linter:
   extends:
     - package:dart_code_linter/presets/metrics_recommended.yaml
+    - package:dart_code_linter/presets/flutter_all.yaml
   metrics:
     halstead-volume: 1000
     maintainability-index: 40
     number-of-methods: 12
   rules:
+    # flutter
+    - prefer-extracting-callbacks: false
+
     # - arguments-ordering
     - avoid-dynamic
     - avoid-cascade-after-if-null
