@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/bible_reader_launch_service.dart';
 import '/model/bible_reader.dart';
 import '/service/app_install_service.dart';
+import '/service/bible_reader_launch_service.dart';
 import '/service/bible_reader_link_service.dart';
+import 'constants.dart';
 
 class BibleReaderSettingsChips extends WatchingWidget {
   @override
@@ -13,7 +14,7 @@ class BibleReaderSettingsChips extends WatchingWidget {
     final brs = watchIt<BibleReaderLinkService>();
 
     return Wrap(
-      spacing: 12.0,
+      spacing: Constants.settingsDefaultSpacing,
       children: List.generate(brs.certifiedBibleReaderList.length, (idx) {
         final BibleReader bibleReader = brs.certifiedBibleReaderList[idx];
         return FutureBuilder<bool>(
