@@ -37,12 +37,12 @@ class FeedCardBody extends WatchingWidget {
       child: LayoutBuilder(
         builder: (_, BoxConstraints c) {
           final fontSize = (c.maxWidth < 300 || c.maxHeight < 80) ? 24.0 : 30.0;
-          final visible = c.maxHeight > 99;
+          final isVisible = c.maxHeight > 99;
 
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Visibility(visible: visible, child: FeedCardTitleBar(feed)),
+              Visibility(visible: isVisible, child: FeedCardTitleBar(feed)),
               LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
               DefaultTextStyle.merge(style: TextStyle(fontSize: fontSize), child: FeedCardBookChapter(feed)),
             ],
