@@ -48,12 +48,12 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final registerModule = _$RegisterModule();
+    final registerThirdParty = _$RegisterThirdParty();
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     final bibleReadersModule = _$BibleReadersModule();
     await gh.singletonAsync<_i460.SharedPreferences>(
-      () => registerModule.sharedPreferences,
+      () => registerThirdParty.sharedPreferences,
       preResolve: true,
     );
     gh.lazySingleton<_i1033.BookListWheelState>(
@@ -178,7 +178,7 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$RegisterModule extends _i537.RegisterModule {}
+class _$RegisterThirdParty extends _i537.RegisterThirdParty {}
 
 class _$ReadingListsModule extends _i823.ReadingListsModule {}
 

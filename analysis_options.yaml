@@ -31,7 +31,6 @@ dart_code_linter:
     - no-equal-arguments: false
     - no-magic-number: false
     - prefer-moving-to-variable: false
-    - prefer-match-file-name: false
     # flutter
     - prefer-extracting-callbacks: false
 

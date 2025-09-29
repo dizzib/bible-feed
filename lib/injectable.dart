@@ -12,8 +12,9 @@ Future configureDependencies() async {
   await di.init(environment: 'prod');
 }
 
-@module // register third-party
-abstract class RegisterModule {
+@module
+// ignore: prefer-match-file-name, @InjectableInit only works on top-level function, not on Injectable class
+abstract class RegisterThirdParty {
   // TODO replace with SharedPreferencesWithCache when it supports unit tests
   // https://github.com/flutter/flutter/issues/159597
   @preResolve
