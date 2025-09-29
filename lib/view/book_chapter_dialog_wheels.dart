@@ -14,24 +14,19 @@ class BookChapterDialogWheels extends WatchingWidget {
     var bookIndex = watchIt<BookListWheelState>().index;
     return LayoutBuilder(
       builder: (_, constraints) {
-        const fontSizeNormal = 16.0;
-        const fontSizeLarge = 23.0;
-        const fontSizeThresholdHeight = 190;
-        const fontSizeThresholdWidth = 200;
+        final fontSize = (constraints.maxWidth < 200 || constraints.maxHeight < 190) ? 16.0 : 23.0;
+        final dialogWidth = constraints.maxWidth * 0.8;
 
         return DefaultTextStyle.merge(
           style: TextStyle(
-            fontSize:
-                (constraints.maxWidth < fontSizeThresholdWidth || constraints.maxHeight < fontSizeThresholdHeight)
-                    ? fontSizeNormal
-                    : fontSizeLarge,
+            fontSize: fontSize,
             fontWeight: FontWeight.w600,
             overflow: TextOverflow.ellipsis, // without this, large text wraps and disappears
           ),
           child: Row(
             children: [
               SizedBox(
-                width: constraints.maxWidth * 0.8,
+                width: dialogWidth,
                 child: ListWheel(
                   sl<BookListWheelState>(),
                   key: const Key('book_wheel'),
