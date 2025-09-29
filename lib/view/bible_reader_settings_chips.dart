@@ -14,7 +14,7 @@ class BibleReaderSettingsChips extends WatchingWidget {
     final brs = watchIt<BibleReaderLinkService>();
 
     return Wrap(
-      spacing: Constants.settingsDefaultSpacing,
+      spacing: Constants.settingsSpacing,
       children: List.generate(brs.certifiedBibleReaderList.length, (idx) {
         final BibleReader bibleReader = brs.certifiedBibleReaderList[idx];
         return FutureBuilder<bool>(

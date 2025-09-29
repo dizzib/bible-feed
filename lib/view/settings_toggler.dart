@@ -15,11 +15,11 @@ class SettingsToggler<T extends TogglerService> extends WatchingWidget {
         ignoring: !togglerService.canEnable,
         child: Card(
           child: Padding(
-            padding: const EdgeInsets.all(Constants.settingsDefaultSpacing),
+            padding: const EdgeInsets.all(Constants.settingsSpacing),
             child: SwitchListTile(
               title: Text(togglerService.title, style: const TextStyle(fontSize: 20)),
               subtitle: Padding(
-                padding: const EdgeInsets.only(top: Constants.settingsDefaultSpacing),
+                padding: const EdgeInsets.only(top: Constants.settingsSpacing),
                 child: Text(togglerService.subtitle),
               ),
               value: togglerService.isEnabled,
