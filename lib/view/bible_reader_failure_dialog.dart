@@ -4,6 +4,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '../service/bible_reader_link_service.dart';
 import '/service/result.dart';
+import 'constants.dart';
 
 class BibleReaderFailureDialog extends StatelessWidget {
   final Failure failure;
@@ -20,7 +21,7 @@ class BibleReaderFailureDialog extends StatelessWidget {
     return CupertinoAlertDialog(
       title: Text('Failed to launch the $bibleReaderName bible reader'),
       content: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: Constants.defaultPadding,
         child: Text('$message\n\n${failure.exception?.toString() ?? ''}'.trim()),
       ),
       actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Ok'))],

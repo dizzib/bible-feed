@@ -4,6 +4,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '/service/feeds_advance_service.dart';
 import 'build_context_extension.dart';
+import 'constants.dart';
 
 class AllDoneDialog extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class AllDoneDialog extends StatelessWidget {
       title: Text('All done!', style: context.textTheme.titleLarge),
       content: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: Constants.defaultPadding,
           child: Text('Lists advance at midnight.\n\nAdvance now?', style: context.textTheme.bodyLarge),
         ),
       ),

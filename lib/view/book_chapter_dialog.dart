@@ -8,6 +8,7 @@ import '/model/list_wheel_state.dart';
 import '/view/book_chapter_dialog_footer.dart';
 import '/view/book_chapter_dialog_wheels.dart';
 import 'build_context_extension.dart';
+import 'constants.dart';
 
 class BookChapterDialog extends StatelessWidget {
   final Feed feed;
@@ -37,7 +38,7 @@ class BookChapterDialog extends StatelessWidget {
                     visible: constraints.maxHeight > 280,
                     child: withBackground(
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: Constants.defaultPadding,
                         child: Text(feed.readingList.name, style: const TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ),
