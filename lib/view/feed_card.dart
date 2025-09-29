@@ -35,12 +35,15 @@ class FeedCard extends WatchingWidget {
     final feeds = watchIt<Feeds>();
     final state = feed.state;
     final isLastReadAndLinked = state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
+    final secondsToFade = Duration(seconds: isLastReadAndLinked ? 30 : 0);
+    final opacity = state.isRead ? 0.25 : 1.0;
+    final elevation = state.isRead ? 0.0 : 12.0;
 
     return AnimatedOpacity(
-      opacity: state.isRead ? 0.25 : 1,
-      duration: Duration(seconds: isLastReadAndLinked ? 30 : 0),
+      opacity: opacity,
+      duration: secondsToFade,
       child: Card(
-        elevation: state.isRead ? 0 : 12,
+        elevation: elevation,
         clipBehavior: Clip.hardEdge,
         child: FeedCardSemantics(
           feed: feed,
@@ -51,10 +54,11 @@ class FeedCard extends WatchingWidget {
             child: LayoutBuilder(
               builder: (_, BoxConstraints c) {
                 final fontSize = (c.maxWidth < 300 || c.maxHeight < 80) ? 24 : 30;
+                final visible = c.maxHeight > 99;
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Visibility(visible: c.maxHeight > 99, child: FeedCardTitleBar(feed)),
+                    Visibility(visible: visible, child: FeedCardTitleBar(feed)),
                     LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
                     DefaultTextStyle.merge(
                       style: TextStyle(fontSize: fontSize.toDouble()),
