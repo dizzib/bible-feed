@@ -29,10 +29,14 @@ class FeedsAdvanceService {
     if (!_feeds.areChaptersRead) return FeedAdvanceState.notAllRead;
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
     if (lastDateModified == null) return FeedAdvanceState.notAllRead;
-    var now = clock.now(); // Use clock (not DateTime) for integration tests.
-    if (now.day > lastDateModified.day) return forceAdvance();
-    if (now.month > lastDateModified.month) return forceAdvance();
-    if (now.year > lastDateModified.year) return forceAdvance();
+    final now = clock.now(); // Use clock (not DateTime) for tests.
+    final lastMidnightOfNow = DateTime(now.year, now.month, now.day);
+    final lastMidnightOfLastDateModified = DateTime(
+      lastDateModified.year,
+      lastDateModified.month,
+      lastDateModified.day,
+    );
+    if (lastMidnightOfNow.isAfter(lastMidnightOfLastDateModified)) return forceAdvance();
     return Future.value(FeedAdvanceState.allReadAwaitingTomorrow);
   }
 }
