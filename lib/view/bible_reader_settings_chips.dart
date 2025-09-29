@@ -15,9 +15,9 @@ class BibleReaderSettingsChips extends WatchingWidget {
     return Wrap(
       spacing: 12.0,
       children: List.generate(brs.certifiedBibleReaderList.length, (idx) {
-        final BibleReader br = brs.certifiedBibleReaderList[idx];
+        final BibleReader bibleReader = brs.certifiedBibleReaderList[idx];
         return FutureBuilder<bool>(
-          future: sl<BibleReaderLaunchService>().isAvailable(br),
+          future: sl<BibleReaderLaunchService>().isAvailable(bibleReader),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             onSelected(bool selected) {
               if (selected) brs.linkedBibleReaderIndex = idx;
@@ -25,7 +25,7 @@ class BibleReaderSettingsChips extends WatchingWidget {
 
             final isAvailable = snapshot.data == true;
             return ChoiceChip(
-              label: Text('${br.displayName}${isAvailable ? "" : " is not detected"}'),
+              label: Text('${bibleReader.displayName}${isAvailable ? "" : " is not detected"}'),
               onSelected: isAvailable ? onSelected : null,
               selected: idx == brs.linkedBibleReaderIndex,
             );

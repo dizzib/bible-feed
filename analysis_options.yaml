@@ -30,7 +30,6 @@ dart_code_linter:
     - newline-before-return: false
     - no-equal-arguments: false
     - no-magic-number: false
-    - prefer-correct-identifier-length: false
     - prefer-moving-to-variable: false
     - prefer-match-file-name: false
     # flutter
