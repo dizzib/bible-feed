@@ -62,11 +62,11 @@ class ListWheel extends StatelessWidget {
               },
             ),
             controller: controller,
-            diameterRatio: 1.1,
+            diameterRatio: 1.1, // ignore: no-magic-number, clear enough!
             itemExtent: itemExtent,
             magnification: magnification,
             onSelectedItemChanged: (index) => listWheelState.index = index,
-            overAndUnderCenterOpacity: 0.7,
+            overAndUnderCenterOpacity: 0.7, // ignore: no-magic-number, clear enough!
             physics: const FixedExtentScrollPhysics(),
             useMagnifier: true,
           ),
