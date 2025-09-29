@@ -2,6 +2,7 @@ import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/feed_advance_state.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
+import 'package:clock/clock.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -60,12 +61,12 @@ void main() async {
       return 'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}';
     },
     (bool areChaptersRead, Duration sinceLastModified, FeedAdvanceState expectedAdvanceState, Function verify) async {
+      final date = DateTime(2030, 1, 1, 1);
+      final clock = Clock(() => date);
       when(mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
       when(mockFeeds.lastModifiedFeed).thenReturn(mockFeedList[0]);
-      when(
-        mockFeedList[0].state,
-      ).thenReturn(FeedState(book: b0, isRead: true, dateModified: DateTime.now() - sinceLastModified));
-      expect(await testee.maybeAdvance(), expectedAdvanceState);
+      when(mockFeedList[0].state).thenReturn(FeedState(book: b0, isRead: true, dateModified: date - sinceLastModified));
+      await withClock(clock, () async => expect(await testee.maybeAdvance(), expectedAdvanceState));
       verify();
     },
   );
