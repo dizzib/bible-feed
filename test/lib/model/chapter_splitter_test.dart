@@ -14,7 +14,7 @@ void main() {
       [161, 1, 'from\u00A0verse\u00A0161'],
     ],
     (int verse, int expectNextVerse, String expectLabel) {
-      final testee = ChapterSplitter('b0', 1, List.generate(10, (i) => 17 + i * 16));
+      final testee = const ChapterSplitter('b0', 1, [17, 33, 49, 65, 81, 97, 113, 129, 145, 161]);
       expect(testee.getLabel(FeedState(book: b0, verse: verse)), expectLabel);
     },
   );

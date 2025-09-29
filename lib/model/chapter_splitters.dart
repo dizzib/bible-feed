@@ -29,6 +29,6 @@ abstract class ChapterSplittersModule {
     const ChapterSplitter('mat', 26, [36]),
     const ChapterSplitter('neh', 7, [37]),
     const ChapterSplitter('num', 7, [48]),
-    ChapterSplitter('psa', 119, List.generate(10, (i) => 17 + i * 16)),
+    const ChapterSplitter('psa', 119, [17, 33, 49, 65, 81, 97, 113, 129, 145, 161]),
   ];
 }
