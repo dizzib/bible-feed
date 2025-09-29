@@ -27,7 +27,8 @@ dart_code_linter:
     - format-comment: false
     - member-ordering: false
     - newline-before-return: false
-    - no-magic-number: false
+    - no-magic-number:
+        allowed: [0, 0.5, 1]
     - prefer-moving-to-variable: false
     # flutter
     - prefer-extracting-callbacks: false
