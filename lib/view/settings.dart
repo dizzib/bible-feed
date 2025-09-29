@@ -17,7 +17,7 @@ class Settings extends StatelessWidget {
         thumbVisibility: true,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(spacing, 0, spacing, spacing),
+            padding: const EdgeInsets.all(spacing).copyWith(top: 0),
             child: Column(
               spacing: spacing,
               children: [
