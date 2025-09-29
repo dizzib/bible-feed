@@ -4,10 +4,10 @@ import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
 
-const screenshot = Environment('screenshot'); // ignore: prefer-static-class
+const screenshot = Environment('screenshot'); // ignore: prefer-static-class, global for @screenshot
 
 @InjectableInit(generateForDir: ['lib'])
-// ignore: prefer-static-class
+// ignore: prefer-static-class, allow global
 Future configureDependencies() async {
   await di.init(environment: 'prod');
 }
