@@ -13,16 +13,12 @@ analyzer:
 
 dart_code_linter:
   extends:
-    - package:dart_code_linter/presets/metrics_recommended.yaml
     - package:dart_code_linter/presets/all.yaml
-  metrics:
-    halstead-volume: 1000
-    maintainability-index: 40
-    number-of-methods: 12
+    - package:dart_code_linter/presets/metrics_recommended.yaml
   rules:
     # dart
-    - arguments-ordering: false
-    - avoid-ignoring-return-values: false
+    - arguments-ordering: false # lots failing!
+    - avoid-ignoring-return-values: false # lots failing!
     - format-comment: false # lots failing!
     - member-ordering: false # lots failing!
     - newline-before-return: false # <20 failing
@@ -30,6 +26,10 @@ dart_code_linter:
         allowed: [0, 0.5, 1]
     # flutter
     - prefer-extracting-callbacks: false
+  metrics:
+    halstead-volume: 1000
+    maintainability-index: 40
+    number-of-methods: 12
 
 formatter:
   page_width: 120
