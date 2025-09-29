@@ -10,7 +10,10 @@ class ChapterSplitter {
 
   const ChapterSplitter(this.bookKey, this.chapter, this.verses);
 
-  String _toNonBreakingWhitespace(String label) => label.replaceAll('_', String.fromCharCode(0x00A0));
+  String _toNonBreakingWhitespace(String label) {
+    var nonBreakingSpaceCharCode = 0x00A0;
+    return label.replaceAll('_', String.fromCharCode(nonBreakingSpaceCharCode));
+  }
 
   int getNextVerse(FeedState state) {
     assert(state.book.key == bookKey);
