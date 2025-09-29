@@ -14,46 +14,29 @@ analyzer:
 dart_code_linter:
   extends:
     - package:dart_code_linter/presets/metrics_recommended.yaml
-    - package:dart_code_linter/presets/flutter_all.yaml
+    - package:dart_code_linter/presets/all.yaml
   metrics:
     halstead-volume: 1000
     maintainability-index: 40
     number-of-methods: 12
   rules:
+    # dart
+    - arguments-ordering: false
+    - avoid-ignoring-return-values: false
+    - avoid-non-null-assertion: false
+    - avoid-passing-async-when-sync-expected: false
+    - format-comment: false
+    - member-ordering: false
+    - newline-before-return: false
+    - no-equal-arguments: false
+    - no-magic-number: false
+    - prefer-commenting-analyzer-ignores: false
+    - prefer-correct-identifier-length: false
+    - prefer-moving-to-variable: false
+    - prefer-match-file-name: false
+    - prefer-static-class: false
     # flutter
     - prefer-extracting-callbacks: false
-
-    # - arguments-ordering
-    - avoid-dynamic
-    - avoid-cascade-after-if-null
-    - avoid-collection-methods-with-unrelated-types
-    - avoid-double-slash-imports
-    - avoid-duplicate-exports
-    - avoid-dynamic
-    - avoid-global-state
-    # - avoid-ignoring-return-values
-    - avoid-late-keyword
-    - avoid-missing-enum-constant-in-map
-    - avoid-nested-conditional-expressions
-    - avoid-non-ascii-symbols
-    - avoid-non-null-assertion
-    # - avoid-passing-async-when-sync-expected
-    - avoid-redundant-async
-    - avoid-throw-in-catch-block
-    - avoid-top-level-members-in-tests
-    - avoid-unnecessary-type-assertions
-    - avoid-unnecessary-type-casts
-    - avoid-unrelated-type-assertions
-    - avoid-unused-parameters
-    - avoid-nested-conditional-expressions
-    # - newline-before-return
-    - no-boolean-literal-compare
-    - no-empty-block
-    - prefer-trailing-comma
-    - prefer-conditional-expressions
-    - no-equal-then-else
-    # - prefer-moving-to-variable
-    # - prefer-match-file-name
 
 formatter:
   page_width: 120
