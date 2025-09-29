@@ -49,19 +49,36 @@ void main() async {
     verify(mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
   });
 
+  final midMonth = DateTime(2025, 7, 15, 12);
+  final newMonth = DateTime(2025, 10, 1, 12);
+  final newYear = DateTime(2025, 1, 1, 12);
+
   parameterizedTest(
     'maybeAdvance',
     [
-      [false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
-      [true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
-      [true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
-      [true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [midMonth, false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
+      [midMonth, true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [midMonth, true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [midMonth, true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newMonth, false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
+      [newMonth, true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [newMonth, true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newMonth, true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newYear, false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
+      [newYear, true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [newYear, true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newYear, true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
     ],
     customDescriptionBuilder: (_, _, values) {
       return 'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}';
     },
-    (bool areChaptersRead, Duration sinceLastModified, FeedAdvanceState expectedAdvanceState, Function verify) async {
-      final date = DateTime(2030, 1, 1, 1);
+    (
+      DateTime date,
+      bool areChaptersRead,
+      Duration sinceLastModified,
+      FeedAdvanceState expectedAdvanceState,
+      Function verify,
+    ) async {
       final clock = Clock(() => date);
       when(mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
       when(mockFeeds.lastModifiedFeed).thenReturn(mockFeedList[0]);
