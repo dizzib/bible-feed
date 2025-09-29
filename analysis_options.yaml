@@ -5,7 +5,7 @@ analyzer:
     - '**.config.dart'
     - '**.mocks.dart'
 
-  # This dcl plugin uses far too cpu and ram on M1 Air base model!
+  # This dcl plugin uses far too much cpu and ram on M1 Air base model!
   # Also has a bug where a 2nd connection does not work.
   #
   # plugins:
@@ -23,10 +23,9 @@ dart_code_linter:
     # dart
     - arguments-ordering: false
     - avoid-ignoring-return-values: false
-    - avoid-passing-async-when-sync-expected: false
-    - format-comment: false
-    - member-ordering: false
-    - newline-before-return: false
+    - format-comment: false # lots failing!
+    - member-ordering: false # lots failing!
+    - newline-before-return: false # <20 failing
     - no-magic-number:
         allowed: [0, 0.5, 1]
     # flutter

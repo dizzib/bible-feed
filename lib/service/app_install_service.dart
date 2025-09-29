@@ -15,12 +15,15 @@ class AppInstallService with ChangeNotifier {
     PlatformService platformService,
   ) {
     if (platformService.isIOS) return; // IOS cannot detect app (un)install events.
-    platformEventService.addListener(() async {
+
+    void handleAppInstallOrUninstall() async {
       if (await bibleReaderLaunchService.isAvailable(bibleReaderLinkService.linkedBibleReader)) {
         notifyListeners();
-        return;
+      } else {
+        bibleReaderLinkService.unlinkBibleReader(); // The linked bible reader has been uninstalled.
       }
-      bibleReaderLinkService.unlinkBibleReader(); // The linked bible reader has been uninstalled.
-    });
+    }
+
+    platformEventService.addListener(handleAppInstallOrUninstall);
   }
 }
