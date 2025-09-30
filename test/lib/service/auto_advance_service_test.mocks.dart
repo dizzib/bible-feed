@@ -3,10 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:bible_feed/service/feed_advance_state.dart' as _i4;
-import 'package:bible_feed/service/feeds_advance_service.dart' as _i2;
+import 'package:bible_feed/service/date_time_service.dart' as _i2;
+import 'package:bible_feed/service/feed_advance_state.dart' as _i5;
+import 'package:bible_feed/service/feeds_advance_service.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -23,11 +24,33 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+/// A class which mocks [DateTimeService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDateTimeService extends _i1.Mock implements _i2.DateTimeService {
+  @override
+  DateTime get now =>
+      (super.noSuchMethod(
+            Invocation.getter(#now),
+            returnValue: _FakeDateTime_0(this, Invocation.getter(#now)),
+            returnValueForMissingStub: _FakeDateTime_0(
+              this,
+              Invocation.getter(#now),
+            ),
+          )
+          as DateTime);
+}
+
 /// A class which mocks [FeedsAdvanceService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFeedsAdvanceService extends _i1.Mock
-    implements _i2.FeedsAdvanceService {
+    implements _i3.FeedsAdvanceService {
   @override
   bool get hasEverAdvanced =>
       (super.noSuchMethod(
@@ -38,28 +61,28 @@ class MockFeedsAdvanceService extends _i1.Mock
           as bool);
 
   @override
-  _i3.Future<_i4.FeedAdvanceState> forceAdvance() =>
+  _i4.Future<_i5.FeedAdvanceState> forceAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#forceAdvance, []),
-            returnValue: _i3.Future<_i4.FeedAdvanceState>.value(
-              _i4.FeedAdvanceState.notAllRead,
+            returnValue: _i4.Future<_i5.FeedAdvanceState>.value(
+              _i5.FeedAdvanceState.notAllRead,
             ),
-            returnValueForMissingStub: _i3.Future<_i4.FeedAdvanceState>.value(
-              _i4.FeedAdvanceState.notAllRead,
+            returnValueForMissingStub: _i4.Future<_i5.FeedAdvanceState>.value(
+              _i5.FeedAdvanceState.notAllRead,
             ),
           )
-          as _i3.Future<_i4.FeedAdvanceState>);
+          as _i4.Future<_i5.FeedAdvanceState>);
 
   @override
-  _i3.Future<_i4.FeedAdvanceState> maybeAdvance() =>
+  _i4.Future<_i5.FeedAdvanceState> maybeAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#maybeAdvance, []),
-            returnValue: _i3.Future<_i4.FeedAdvanceState>.value(
-              _i4.FeedAdvanceState.notAllRead,
+            returnValue: _i4.Future<_i5.FeedAdvanceState>.value(
+              _i5.FeedAdvanceState.notAllRead,
             ),
-            returnValueForMissingStub: _i3.Future<_i4.FeedAdvanceState>.value(
-              _i4.FeedAdvanceState.notAllRead,
+            returnValueForMissingStub: _i4.Future<_i5.FeedAdvanceState>.value(
+              _i5.FeedAdvanceState.notAllRead,
             ),
           )
-          as _i3.Future<_i4.FeedAdvanceState>);
+          as _i4.Future<_i5.FeedAdvanceState>);
 }
