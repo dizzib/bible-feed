@@ -26,7 +26,7 @@ void main() async {
     state1 = FeedState(book: b1, dateModified: DateTime(2025, 1, 1, 2));
     when(mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(mockFeedStoreService.loadState(rl1)).thenReturn(state1);
-    testee = Feeds(mockFeedStoreService, mockChapterSplitService, DateTimeService(), ReadingLists([rl0, rl1]));
+    testee = Feeds(mockFeedStoreService, mockChapterSplitService, NowDateTimeService(), ReadingLists([rl0, rl1]));
   });
 
   group('property', () {

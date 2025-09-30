@@ -18,7 +18,7 @@ void main() async {
   setUp(() {
     state = FeedState(book: b1);
     when(mockChapterSplitService.getNextVerse(state)).thenReturn(1);
-    testee = Feed(rl1, mockChapterSplitService, DateTimeService(), state);
+    testee = Feed(rl1, mockChapterSplitService, NowDateTimeService(), state);
   });
 
   group('property', () {

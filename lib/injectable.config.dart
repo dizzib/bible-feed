@@ -41,6 +41,7 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 const String _integration_test = 'integration_test';
 const String _prod = 'prod';
+const String _test = 'test';
 const String _screenshot = 'screenshot';
 
 extension GetItInjectableX on _i174.GetIt {
@@ -78,6 +79,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i99.MidnightDateTimeService(),
       registerFor: {_integration_test},
     );
+    gh.lazySingleton<_i99.DateTimeService>(
+      () => _i99.NowDateTimeService(),
+      registerFor: {_prod, _test},
+    );
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
@@ -103,10 +108,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ScreenshotPlatformEventService(),
       registerFor: {_screenshot},
-    );
-    gh.lazySingleton<_i99.DateTimeService>(
-      () => _i99.NowDateTimeService(),
-      registerFor: {_prod},
     );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i977.ProductionAppService.create(),
