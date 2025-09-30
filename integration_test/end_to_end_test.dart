@@ -5,7 +5,7 @@ import 'injectable.dart';
 
 void main() {
   testWidgets('end-to-end', (t) async {
-    await configureDependencies('prod');
+    await configureDependencies(environment: 'prod');
     await t.startApp();
     expectChapters(1);
     await t.tapAllLists();

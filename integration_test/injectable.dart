@@ -12,7 +12,7 @@ import 'injectable.config.dart'; // AUTO-GENERATED
   generateForDir: ['integration_test', 'lib/model*', 'lib/service*'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
-Future configureDependencies([String? environment = 'prod']) async {
+Future configureDependencies({String? environment = 'prod'}) async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   await di.init(environment: environment);
 }
