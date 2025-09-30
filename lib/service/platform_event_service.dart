@@ -7,6 +7,7 @@ import '../injectable.dart';
 
 abstract class PlatformEventService with ChangeNotifier {}
 
+@integrationTest
 @prod
 @LazySingleton(as: PlatformEventService)
 class ProductionPlatformEventService extends PlatformEventService {

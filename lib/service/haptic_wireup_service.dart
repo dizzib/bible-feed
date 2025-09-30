@@ -1,10 +1,12 @@
 import 'package:injectable/injectable.dart';
 
+import '../injectable.dart';
 import '/model/list_wheel_state.dart';
 import 'bible_reader_link_service.dart';
 import 'haptic_service.dart';
 import 'haptic_toggler_service.dart';
 
+@integrationTest
 @prod // else errors in unit tests (see haptic_availability_service)
 @singleton
 class HapticWireupService {

@@ -14,7 +14,7 @@ class AutoAdvanceService {}
 )
 Future configureDependencies() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  await di.init(environment: 'prod');
+  await di.init(environment: 'integration_test');
 }
 
 @module // register third-party

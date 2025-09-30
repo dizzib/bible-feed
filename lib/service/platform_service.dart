@@ -13,6 +13,7 @@ class PlatformService {
   final bool isHapticAvailable;
 }
 
+@integrationTest
 @prod
 @LazySingleton(as: PlatformService)
 class ProductionPlatformService extends PlatformService {

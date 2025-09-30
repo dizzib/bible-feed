@@ -4,6 +4,7 @@ import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
 
+const integrationTest = Environment('integration_test'); // ignore: prefer-static-class, global for @integrationTest
 const screenshot = Environment('screenshot'); // ignore: prefer-static-class, global for @screenshot
 
 @InjectableInit(generateForDir: ['lib'])

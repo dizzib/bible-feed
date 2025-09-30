@@ -5,7 +5,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/model/feed.dart' as _i3;
 import 'package:bible_feed/service/chapter_split_service.dart' as _i2;
-import 'package:bible_feed/service/date_time_service.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 
@@ -22,11 +21,6 @@ import 'package:mockito/src/dummies.dart' as _i4;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
-
-class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
-  _FakeDateTime_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
 
 /// A class which mocks [ChapterSplitService].
 ///
@@ -56,21 +50,4 @@ class MockChapterSplitService extends _i1.Mock
             ),
           )
           as String);
-}
-
-/// A class which mocks [DateTimeService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i5.DateTimeService {
-  @override
-  DateTime get now =>
-      (super.noSuchMethod(
-            Invocation.getter(#now),
-            returnValue: _FakeDateTime_0(this, Invocation.getter(#now)),
-            returnValueForMissingStub: _FakeDateTime_0(
-              this,
-              Invocation.getter(#now),
-            ),
-          )
-          as DateTime);
 }
