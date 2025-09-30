@@ -4,7 +4,7 @@ import 'helper.dart';
 
 void main() {
   testWidgets('auto advance at midnight', (t) async {
-    await t.initialiseApp();
+    await t.initialiseApp('integration_test');
     expectChapters(1);
     await t.tapAllLists();
     expectText('All done!');

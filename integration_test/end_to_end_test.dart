@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'helper.dart';
 
 void main() {
-  testWidgets('end-to-end', (WidgetTester t) async {
-    await t.initialiseApp();
+  testWidgets('end-to-end', (t) async {
+    await t.initialiseApp('prod');
     expectChapters(1);
     await t.tapAllLists();
     await t.tapNo();

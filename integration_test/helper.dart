@@ -16,12 +16,13 @@ void expectChapters(int expectedValue, {int count = 10}) {
 // text helpers
 dynamic expectAtLeast1Text(dynamic expected) => expectText(expected.toString(), matcher: findsAtLeast(1));
 dynamic expectNoText(dynamic expected) => expectText(expected.toString(), matcher: findsNothing);
-void expectText(dynamic expected, {matcher = findsOneWidget}) => expect(find.textContaining(expected.toString()), matcher);
+void expectText(dynamic expected, {matcher = findsOneWidget}) =>
+    expect(find.textContaining(expected.toString()), matcher);
 
 extension AppTestHelper on WidgetTester {
-  Future<void> initialiseApp() async {
+  Future<void> initialiseApp([String? environment]) async {
     WidgetsFlutterBinding.ensureInitialized();
-    await configureDependencies();
+    await configureDependencies(environment);
     runApp(AppBase());
     await pumpAndSettle();
   }

@@ -56,7 +56,6 @@ extension GetItInjectableX on _i174.GetIt {
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     final bibleReadersModule = _$BibleReadersModule();
-    gh.singleton<_i1027.AutoAdvanceService>(() => _i1027.AutoAdvanceService());
     await gh.singletonAsync<_i460.SharedPreferences>(
       () => registerModule.clearedSharedPreferences,
       preResolve: true,
