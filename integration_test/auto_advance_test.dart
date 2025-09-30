@@ -1,10 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helper.dart';
+import 'injectable.dart';
 
 void main() {
   testWidgets('auto advance at midnight', (t) async {
-    await t.initialiseApp('integration_test');
+    await configureDependencies('integration_test');
+    await t.startApp();
     expectChapters(1);
     await t.tapAllLists();
     expectText('All done!');

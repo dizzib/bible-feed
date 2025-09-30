@@ -3,8 +3,6 @@ import 'package:bible_feed/view/feed_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'injectable.dart';
-
 void expectBookAndChapter(String expectedBookName, int expectedChapter) {
   expectText('$expectedBookName $expectedChapter');
 }
@@ -20,9 +18,8 @@ void expectText(dynamic expected, {matcher = findsOneWidget}) =>
     expect(find.textContaining(expected.toString()), matcher);
 
 extension AppTestHelper on WidgetTester {
-  Future<void> initialiseApp([String? environment]) async {
+  Future<void> startApp() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await configureDependencies(environment);
     runApp(AppBase());
     await pumpAndSettle();
   }

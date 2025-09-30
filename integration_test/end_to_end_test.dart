@@ -1,10 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'helper.dart';
+import 'injectable.dart';
 
 void main() {
   testWidgets('end-to-end', (t) async {
-    await t.initialiseApp('prod');
+    await configureDependencies('prod');
+    await t.startApp();
     expectChapters(1);
     await t.tapAllLists();
     await t.tapNo();
