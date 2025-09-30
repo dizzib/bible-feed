@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '/service/chapter_split_service.dart';
+import '../service/date_time_service.dart';
 import 'book.dart';
 import 'reading_list.dart';
 
@@ -10,8 +11,9 @@ part 'feed_state.dart';
 class Feed with ChangeNotifier {
   final ReadingList _readingList;
   final ChapterSplitService _chapterSplitService;
+  final DateTimeService _dateTimeService;
 
-  Feed(this._readingList, this._chapterSplitService, this._state);
+  Feed(this._readingList, this._chapterSplitService, this._dateTimeService, this._state);
 
   final FeedState _state;
 
@@ -23,7 +25,7 @@ class Feed with ChangeNotifier {
   FeedState get state => _state;
 
   void _notifyListeners() {
-    _state._dateModified = DateTime.now();
+    _state._dateModified = _dateTimeService.now;
     notifyListeners();
   }
 

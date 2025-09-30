@@ -140,13 +140,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1070.BibleReaders>(),
       ),
     );
-    gh.lazySingleton<_i759.Feeds>(
-      () => _i759.Feeds(
-        gh<_i119.FeedStoreService>(),
-        gh<_i283.ChapterSplitService>(),
-        gh<_i823.ReadingLists>(),
-      ),
-    );
     gh.lazySingleton<_i817.AppInstallService>(
       () => _i817.AppInstallService(
         gh<_i905.BibleReaderLaunchService>(),
@@ -154,6 +147,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i516.PlatformEventService>(),
         gh<_i578.PlatformService>(),
       ),
+    );
+    gh.lazySingleton<_i759.Feeds>(
+      () => _i759.Feeds(
+        gh<_i119.FeedStoreService>(),
+        gh<_i283.ChapterSplitService>(),
+        gh<_i99.DateTimeService>(),
+        gh<_i823.ReadingLists>(),
+      ),
+    );
+    gh.lazySingleton<_i22.HapticService>(
+      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
     );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(
@@ -168,15 +172,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i759.Feeds>(),
       ),
     );
-    gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
-    );
-    gh.singleton<_i148.AutoAdvanceService>(
-      () => _i148.AutoAdvanceService(
-        gh<_i99.DateTimeService>(),
-        gh<_i307.FeedsAdvanceService>(),
-      ),
-    );
     gh.singleton<_i969.HapticWireupService>(
       () => _i969.HapticWireupService(
         gh<_i22.HapticService>(),
@@ -186,6 +181,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1033.ChapterListWheelState>(),
       ),
       registerFor: {_prod},
+    );
+    gh.singleton<_i148.AutoAdvanceService>(
+      () => _i148.AutoAdvanceService(
+        gh<_i99.DateTimeService>(),
+        gh<_i307.FeedsAdvanceService>(),
+      ),
     );
     return this;
   }

@@ -1,6 +1,7 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/chapter_split_service.dart';
+import 'package:bible_feed/service/date_time_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -17,7 +18,7 @@ void main() async {
   setUp(() {
     state = FeedState(book: b1);
     when(mockChapterSplitService.getNextVerse(state)).thenReturn(1);
-    testee = Feed(rl1, mockChapterSplitService, state);
+    testee = Feed(rl1, mockChapterSplitService, DateTimeService(), state);
   });
 
   group('property', () {
