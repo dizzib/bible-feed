@@ -1,8 +1,8 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
+import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/feed_advance_state.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
-import 'package:clock/clock.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -13,18 +13,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../test_data.dart';
 import 'feeds_advance_service_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<Feed>(), MockSpec<Feeds>(), MockSpec<SharedPreferences>()])
+@GenerateNiceMocks([MockSpec<Feed>(), MockSpec<Feeds>(), MockSpec<DateTimeService>(), MockSpec<SharedPreferences>()])
 void main() async {
   final mockFeedList = [MockFeed(), MockFeed()];
   late MockFeeds mockFeeds;
+  late MockDateTimeService mockDateTimeService;
   late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceService testee;
 
   setUp(() {
     mockFeeds = MockFeeds();
+    mockDateTimeService = MockDateTimeService();
     mockSharedPreferences = MockSharedPreferences();
     when(mockFeeds.iterator).thenReturn(mockFeedList.iterator);
-    testee = FeedsAdvanceService(mockSharedPreferences, mockFeeds);
+    testee = FeedsAdvanceService(mockDateTimeService, mockSharedPreferences, mockFeeds);
   });
 
   verifyAllAdvanced() {
@@ -79,11 +81,11 @@ void main() async {
       FeedAdvanceState expectedAdvanceState,
       Function verify,
     ) async {
-      final clock = Clock(() => date);
+      when(mockDateTimeService.now).thenReturn(date);
       when(mockFeeds.areChaptersRead).thenReturn(areChaptersRead);
       when(mockFeeds.lastModifiedFeed).thenReturn(mockFeedList[0]);
       when(mockFeedList[0].state).thenReturn(FeedState(book: b0, isRead: true, dateModified: date - sinceLastModified));
-      await withClock(clock, () async => expect(await testee.maybeAdvance(), expectedAdvanceState));
+      expect(await testee.maybeAdvance(), expectedAdvanceState);
       verify();
     },
   );
