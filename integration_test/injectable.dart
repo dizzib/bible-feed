@@ -5,9 +5,6 @@ import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
 
-// @singleton // cannot be lazy, else https://github.com/dart-lang/tools/issues/705 manifests in integration test
-// class AutoAdvanceService {}
-
 @InjectableInit(
   generateForDir: ['integration_test', 'lib/model*', 'lib/service*'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
