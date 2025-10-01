@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import '/model/bible_reader.dart';
 import '/model/feed.dart';
-import 'result.dart';
+import 'bible_reader_launch_result.dart';
 import 'url_launch_service.dart';
 
 @lazySingleton
@@ -25,7 +25,7 @@ class BibleReaderLaunchService {
     return _urlLaunchService.canLaunchUrl(_getDeeplinkUri(bibleReader, 'mat', 1));
   }
 
-  Future<Result> launch(BibleReader bibleReader, FeedState state) async {
+  Future<BibleReaderLaunchResult> launch(BibleReader bibleReader, FeedState state) async {
     if (bibleReader.isNone || !state.isRead) return Future.value(Success());
     try {
       final uri = _getDeeplinkUri(bibleReader, state.book.key, state.chapter, state.verse);

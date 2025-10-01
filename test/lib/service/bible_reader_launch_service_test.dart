@@ -1,7 +1,7 @@
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/feed.dart';
+import 'package:bible_feed/service/bible_reader_launch_result.dart';
 import 'package:bible_feed/service/bible_reader_launch_service.dart';
-import 'package:bible_feed/service/result.dart';
 import 'package:bible_feed/service/url_launch_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -58,7 +58,7 @@ void main() async {
         bool isRead,
         bool expectLaunch,
         bool launchOk,
-        Result expectResult, [
+        BibleReaderLaunchResult expectResult, [
         String? expectLaunchUrl,
       ]) async {
         final state = FeedState(book: b0, verse: verse, isRead: isRead);

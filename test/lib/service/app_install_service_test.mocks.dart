@@ -8,11 +8,11 @@ import 'dart:ui' as _i9;
 
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
 import 'package:bible_feed/model/feed.dart' as _i6;
+import 'package:bible_feed/service/bible_reader_launch_result.dart' as _i5;
 import 'package:bible_feed/service/bible_reader_launch_service.dart' as _i3;
 import 'package:bible_feed/service/bible_reader_link_service.dart' as _i8;
 import 'package:bible_feed/service/platform_event_service.dart' as _i10;
 import 'package:bible_feed/service/platform_service.dart' as _i11;
-import 'package:bible_feed/service/result.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 
@@ -50,26 +50,27 @@ class MockBibleReaderLaunchService extends _i1.Mock
           as _i4.Future<bool>);
 
   @override
-  _i4.Future<_i5.Result> launch(
+  _i4.Future<_i5.BibleReaderLaunchResult> launch(
     _i2.BibleReader? bibleReader,
     _i6.FeedState? state,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#launch, [bibleReader, state]),
-            returnValue: _i4.Future<_i5.Result>.value(
-              _i7.dummyValue<_i5.Result>(
+            returnValue: _i4.Future<_i5.BibleReaderLaunchResult>.value(
+              _i7.dummyValue<_i5.BibleReaderLaunchResult>(
                 this,
                 Invocation.method(#launch, [bibleReader, state]),
               ),
             ),
-            returnValueForMissingStub: _i4.Future<_i5.Result>.value(
-              _i7.dummyValue<_i5.Result>(
-                this,
-                Invocation.method(#launch, [bibleReader, state]),
-              ),
-            ),
+            returnValueForMissingStub:
+                _i4.Future<_i5.BibleReaderLaunchResult>.value(
+                  _i7.dummyValue<_i5.BibleReaderLaunchResult>(
+                    this,
+                    Invocation.method(#launch, [bibleReader, state]),
+                  ),
+                ),
           )
-          as _i4.Future<_i5.Result>);
+          as _i4.Future<_i5.BibleReaderLaunchResult>);
 }
 
 /// A class which mocks [BibleReaderLinkService].
