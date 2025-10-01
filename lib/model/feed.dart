@@ -24,7 +24,7 @@ class Feed with ChangeNotifier {
   ReadingList get readingList => _readingList;
   FeedState get state => _state;
 
-  void _notifyListeners() {
+  void _setDateModifiedThenNotify() {
     _state._dateModified = _dateTimeService.now;
     notifyListeners();
   }
@@ -37,7 +37,7 @@ class Feed with ChangeNotifier {
       _state._chapter = 1;
     }
     _state._isRead = false;
-    _notifyListeners();
+    _setDateModifiedThenNotify();
   }
 
   void setBookAndChapter(int bookIndex, int chapter) {
@@ -46,11 +46,11 @@ class Feed with ChangeNotifier {
     _state._chapter = chapter;
     _state._verse = 1;
     _state._isRead = false;
-    _notifyListeners();
+    _setDateModifiedThenNotify();
   }
 
   void toggleIsRead() {
     _state._isRead = !_state._isRead;
-    _notifyListeners();
+    _setDateModifiedThenNotify();
   }
 }
