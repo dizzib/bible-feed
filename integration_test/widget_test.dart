@@ -14,23 +14,19 @@ import 'helper.dart';
 import 'injectable.dart';
 
 extension Helper on WidgetTester {
-  Future<void> initialiseWidget(Widget widget) async {
-    await pumpWidget(MaterialApp(home: widget));
-  }
+  Future initialiseWidget(Widget widget) async => await pumpWidget(MaterialApp(home: widget));
 }
 
 void main() async {
   await configureDependencies();
 
+  final chapterSplitService = sl<ChapterSplitService>();
   final gospels = sl<ReadingLists>()[0];
   final matthew = gospels[0];
+  final feed = Feed(gospels, chapterSplitService, NowDateTimeService(), sl<FeedStoreService>().loadState(gospels));
 
-  testWidgets('BookChapterDialog', (WidgetTester t) async {
-    await t.initialiseWidget(
-      BookChapterDialog(
-        Feed(gospels, sl<ChapterSplitService>(), NowDateTimeService(), sl<FeedStoreService>().loadState(gospels)),
-      ),
-    );
+  testWidgets('BookChapterDialog', (t) async {
+    await t.initialiseWidget(BookChapterDialog(feed));
     await t.scrollToLastChapter();
     await t.pump();
     for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) {
@@ -45,17 +41,13 @@ void main() async {
     expectNoText(matthew.chapterCount);
   });
 
-  testWidgets('FeedCard', (WidgetTester t) async {
-    await t.initialiseWidget(
-      FeedCard(
-        Feed(gospels, sl<ChapterSplitService>(), NowDateTimeService(), sl<FeedStoreService>().loadState(gospels)),
-      ),
-    );
+  testWidgets('FeedCard', (t) async {
+    await t.initialiseWidget(FeedCard(feed));
     expectText(gospels.name);
     expectBookAndChapter(matthew.name, 1);
   });
 
-  testWidgets('FeedsView', (WidgetTester t) async {
+  testWidgets('FeedsView', (t) async {
     await t.initialiseWidget(Feeds());
     expectChapters(1);
     for (var l in sl<ReadingLists>()) {
