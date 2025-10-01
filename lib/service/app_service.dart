@@ -1,7 +1,7 @@
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:injectable/injectable.dart';
 
-import '../injectable.env.dart';
+import '/injectable.env.dart';
 
 abstract class AppService {
   AppService({required this.buildNumber, required this.version});

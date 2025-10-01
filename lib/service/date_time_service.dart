@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../injectable.env.dart';
+import '/injectable.env.dart';
 
 // Prefer this to clock, due to issues like:
 //
