@@ -40,12 +40,13 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
 import 'screenshot/service/screenshot_app_service.dart' as _i349;
+import 'screenshot/service/screenshot_platform_event_service.dart' as _i312;
 import 'screenshot/service/screenshot_platform_service.dart' as _i305;
 
+const String _midnight_test = 'midnight_test';
 const String _prod = 'prod';
 const String _screenshot = 'screenshot';
 const String _test = 'test';
-const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -78,13 +79,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i516.PlatformEventService>(
+      () => _i516.ProductionPlatformEventService(),
+      registerFor: {_midnight_test, _prod},
+    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_prod, _screenshot, _test},
-    );
-    gh.lazySingleton<_i516.PlatformEventService>(
-      () => _i516.ScreenshotPlatformEventService(),
-      registerFor: {_midnight_test, _screenshot},
     );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i977.ProductionAppService.create(),
@@ -120,8 +121,8 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i516.PlatformEventService>(
-      () => _i516.ProductionPlatformEventService(),
-      registerFor: {_prod},
+      () => _i312.ScreenshotPlatformEventService(),
+      registerFor: {_screenshot},
     );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i305.ScreenshotPlatformService(),
