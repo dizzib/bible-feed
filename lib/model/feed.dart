@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '/service/chapter_split_service.dart';
-import '../service/date_time_service.dart';
+import '/service/date_time_service.dart';
 import 'book.dart';
 import 'reading_list.dart';
 

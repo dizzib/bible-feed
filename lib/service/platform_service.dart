@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:injectable/injectable.dart';
 
-import '../injectable.env.dart';
+import '/injectable.env.dart';
 
 class PlatformService {
   PlatformService({required this.isAndroid, required this.isIOS, required this.isHapticAvailable});
