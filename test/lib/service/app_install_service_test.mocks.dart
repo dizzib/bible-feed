@@ -50,23 +50,23 @@ class MockBibleReaderLaunchService extends _i1.Mock
           as _i4.Future<bool>);
 
   @override
-  _i4.Future<_i5.BibleReaderLaunchResult> launch(
+  _i4.Future<_i5.BibleReaderLaunchResult> maybeLaunch(
     _i2.BibleReader? bibleReader,
     _i6.FeedState? state,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#launch, [bibleReader, state]),
+            Invocation.method(#maybeLaunch, [bibleReader, state]),
             returnValue: _i4.Future<_i5.BibleReaderLaunchResult>.value(
               _i7.dummyValue<_i5.BibleReaderLaunchResult>(
                 this,
-                Invocation.method(#launch, [bibleReader, state]),
+                Invocation.method(#maybeLaunch, [bibleReader, state]),
               ),
             ),
             returnValueForMissingStub:
                 _i4.Future<_i5.BibleReaderLaunchResult>.value(
                   _i7.dummyValue<_i5.BibleReaderLaunchResult>(
                     this,
-                    Invocation.method(#launch, [bibleReader, state]),
+                    Invocation.method(#maybeLaunch, [bibleReader, state]),
                   ),
                 ),
           )

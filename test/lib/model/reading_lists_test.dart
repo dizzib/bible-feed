@@ -1,13 +1,10 @@
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:watch_it/watch_it.dart';
 
-import '../../injectable.dart';
+class TestReadingListsModule extends ReadingListsModule {}
 
 void main() async {
-  await configureDependencies('test');
-
-  final testee = sl<ReadingLists>();
+  final testee = ReadingLists(TestReadingListsModule().readingLists);
 
   test('total reading lists should be 10', () {
     expect(testee.length, 10);

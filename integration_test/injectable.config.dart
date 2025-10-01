@@ -155,13 +155,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
     );
-    gh.lazySingleton<_i307.FeedsAdvanceService>(
-      () => _i307.FeedsAdvanceService(
-        gh<_i99.DateTimeService>(),
-        gh<_i460.SharedPreferences>(),
-        gh<_i759.Feeds>(),
-      ),
-    );
     gh.singleton<_i969.HapticWireupService>(
       () => _i969.HapticWireupService(
         gh<_i22.HapticService>(),
@@ -170,7 +163,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
       ),
-      registerFor: {_midnight_test, _prod},
+    );
+    gh.lazySingleton<_i307.FeedsAdvanceService>(
+      () => _i307.FeedsAdvanceService(
+        gh<_i99.DateTimeService>(),
+        gh<_i460.SharedPreferences>(),
+        gh<_i759.Feeds>(),
+      ),
     );
     gh.lazySingleton<_i136.AllDoneDialogService>(
       () => _i136.AllDoneDialogService(
