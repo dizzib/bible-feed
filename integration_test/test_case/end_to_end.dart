@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'helper.dart';
-import 'injectable.dart';
+import '../helper.dart';
+import '../injectable.dart';
 
-void main() {
+Future runEndToEndTest() async {
   testWidgets('end-to-end', (t) async {
     await configureDependencies(environment: 'prod');
     await t.startApp();

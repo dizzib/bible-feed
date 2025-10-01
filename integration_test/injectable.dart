@@ -11,6 +11,7 @@ import 'injectable.config.dart'; // AUTO-GENERATED
 )
 Future configureDependencies({required String environment}) async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  await di.reset();
   await di.init(environment: environment);
 }
 

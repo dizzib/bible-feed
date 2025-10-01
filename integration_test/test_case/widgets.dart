@@ -11,14 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
-import 'helper.dart';
-import 'injectable.dart';
+import '../helper.dart';
+import '../injectable.dart';
 
 extension Helper on WidgetTester {
   Future initialiseWidget(Widget widget) async => await pumpWidget(MaterialApp(home: widget));
 }
 
-void main() async {
+Future runWidgetTests() async {
   await configureDependencies(environment: 'prod');
 
   final gospels = sl<ReadingLists>()[0];
@@ -48,7 +48,7 @@ void main() async {
     expectBookAndChapter(matthew.name, 1);
   });
 
-  testWidgets('FeedsView', (t) async {
+  testWidgets('Feeds', (t) async {
     await t.initialiseWidget(Feeds());
     expectChapters(1);
     for (final rl in sl<ReadingLists>()) {

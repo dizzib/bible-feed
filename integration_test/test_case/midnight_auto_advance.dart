@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'helper.dart';
-import 'injectable.dart';
+import '../helper.dart';
+import '../injectable.dart';
 
-void main() {
+Future runMidnightAdvanceTest() async{
   testWidgets('auto advance at midnight', (t) async {
     await configureDependencies(environment: 'midnight_test');
     await t.startApp();
