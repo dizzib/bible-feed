@@ -1,3 +1,4 @@
+import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/chapter_split_service.dart';
@@ -20,17 +21,17 @@ extension Helper on WidgetTester {
 void main() async {
   await configureDependencies();
 
-  final chapterSplitService = sl<ChapterSplitService>();
   final gospels = sl<ReadingLists>()[0];
   final matthew = gospels[0];
-  final feed = Feed(gospels, chapterSplitService, NowDateTimeService(), sl<FeedStoreService>().loadState(gospels));
+  final state = sl<FeedStoreService>().loadState(gospels);
+  final feed = Feed(gospels, sl<ChapterSplitService>(), NowDateTimeService(), state);
 
   testWidgets('BookChapterDialog', (t) async {
     await t.initialiseWidget(BookChapterDialog(feed));
     await t.scrollToLastChapter();
     await t.pump();
-    for (int bookIndex = 0; bookIndex < gospels.length; bookIndex++) {
-      expectText(gospels[bookIndex].name);
+    for (Book b in gospels) {
+      expectText(b.name);
     }
     expectText(matthew.chapterCount);
     await t.scrollToLastBook();
@@ -50,8 +51,8 @@ void main() async {
   testWidgets('FeedsView', (t) async {
     await t.initialiseWidget(Feeds());
     expectChapters(1);
-    for (var l in sl<ReadingLists>()) {
-      expectAtLeast1Text(l.name);
+    for (final rl in sl<ReadingLists>()) {
+      expectAtLeast1Text(rl.name);
     }
   });
 }
