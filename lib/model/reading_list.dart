@@ -6,9 +6,8 @@ import 'book.dart';
 // books in a reading list (e.g. Matthew, Mark, Luke and John) without state
 @immutable
 final class ReadingList extends BaseList<Book> {
-  ReadingList(this.key, this.name, super._items) : count = _items.length, totalChapters = _items.totalChapters;
+  ReadingList(this.key, this.name, super._items) : totalChapters = _items.totalChapters;
 
-  final int count; // e.g. 4 books in The Gospels
   final String key; // e.g. gos
   final String name; // e.g. Gospels
   final int totalChapters;

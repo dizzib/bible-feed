@@ -4,7 +4,7 @@ import '../test_data.dart';
 
 void main() {
   test('constructor', () {
-    expect(rl1.count, 2);
+    expect(rl1.length, 2);
     expect(rl1.totalChapters, 4);
   });
 

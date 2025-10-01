@@ -29,7 +29,7 @@ void main() async {
     await t.initialiseWidget(BookChapterDialog(feed));
     await t.scrollToLastChapter();
     await t.pump();
-    for (int bookIndex = 0; bookIndex < gospels.count; bookIndex++) {
+    for (int bookIndex = 0; bookIndex < gospels.length; bookIndex++) {
       expectText(gospels[bookIndex].name);
     }
     expectText(matthew.chapterCount);

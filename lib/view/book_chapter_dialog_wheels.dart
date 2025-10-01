@@ -31,7 +31,7 @@ class BookChapterDialogWheels extends WatchingWidget {
                   sl<BookListWheelState>(),
                   key: const Key('book_wheel'),
                   indexToString: (index) => readingList[index].name,
-                  maxIndex: readingList.count - 1,
+                  maxIndex: readingList.length - 1,
                 ),
               ),
               Flexible(

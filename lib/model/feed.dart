@@ -33,7 +33,7 @@ class Feed with ChangeNotifier {
     assert(_state._isRead);
     _state._verse = _chapterSplitService.getNextVerse(_state);
     if (_state._verse == 1 && ++_state._chapter > _state._book.chapterCount) {
-      _state._book = _readingList[(bookIndex + 1) % _readingList.count];
+      _state._book = _readingList[(bookIndex + 1) % _readingList.length];
       _state._chapter = 1;
     }
     _state._isRead = false;
