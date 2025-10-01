@@ -1,4 +1,3 @@
-import 'package:bible_feed/injectable.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/chapter_split_service.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
 import 'helper.dart';
+import 'injectable.dart';
 
 extension Helper on WidgetTester {
   Future<void> initialiseWidget(Widget widget) async {
