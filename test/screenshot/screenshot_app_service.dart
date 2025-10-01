@@ -7,14 +7,14 @@ import 'package:yaml/yaml.dart';
 
 @screenshot
 @LazySingleton(as: base.AppService)
-class AppService extends base.AppService {
-  AppService({required super.buildNumber, required super.version});
+class ScreenshotAppService extends base.AppService {
+  ScreenshotAppService({required super.buildNumber, required super.version});
 
   @factoryMethod
   @preResolve
-  static Future<AppService> create() async {
+  static Future<ScreenshotAppService> create() async {
     final yaml = loadYaml(await File('pubspec.yaml').readAsString());
     final versionAndBuild = yaml['version'].split('+');
-    return AppService(buildNumber: versionAndBuild[1].toString(), version: versionAndBuild[0].toString());
+    return ScreenshotAppService(buildNumber: versionAndBuild[1].toString(), version: versionAndBuild[0].toString());
   }
 }

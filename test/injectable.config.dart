@@ -39,12 +39,12 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
-import 'screenshot/service.stub/app_service.dart' as _i364;
+import 'screenshot/screenshot_app_service.dart' as _i1010;
 
-const String _midnight_test = 'midnight_test';
-const String _screenshot = 'screenshot';
 const String _prod = 'prod';
+const String _screenshot = 'screenshot';
 const String _test = 'test';
+const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -77,6 +77,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i99.DateTimeService>(
+      () => _i99.NowDateTimeService(),
+      registerFor: {_prod, _screenshot, _test},
+    );
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ScreenshotPlatformEventService(),
       registerFor: {_midnight_test, _screenshot},
@@ -91,10 +95,6 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_midnight_test, _prod},
       preResolve: true,
     );
-    gh.lazySingleton<_i99.DateTimeService>(
-      () => _i99.NowDateTimeService(),
-      registerFor: {_prod, _test},
-    );
     gh.lazySingleton<_i119.FeedStoreService>(
       () => _i119.FeedStoreService(gh<_i460.SharedPreferences>()),
     );
@@ -104,6 +104,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i1010.ScreenshotAppService.create(),
+      registerFor: {_screenshot},
+      preResolve: true,
+    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
@@ -112,11 +117,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1006.ChapterSplitters>(),
         gh<_i301.ChapterSplitTogglerService>(),
       ),
-    );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i364.AppService.create(),
-      registerFor: {_screenshot},
-      preResolve: true,
     );
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ProductionPlatformEventService(),
