@@ -21,6 +21,7 @@ targets:
             - test/injectable.dart
             - test/screenshot/*.stub/*.dart
             - integration_test/injectable.dart
+            - integration_test/service/*.dart
       mockito:mockBuilder:
         enabled: true
         generate_for:

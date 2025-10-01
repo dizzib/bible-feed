@@ -41,9 +41,9 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'injectable.dart' as _i1027;
 import 'screenshot/service.stub/app_service.dart' as _i364;
 
-const String _integration_test = 'integration_test';
 const String _prod = 'prod';
 const String _test = 'test';
+const String _integration_test = 'integration_test';
 const String _screenshot = 'screenshot';
 
 extension GetItInjectableX on _i174.GetIt {
@@ -77,10 +77,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
-    gh.lazySingleton<_i99.DateTimeService>(
-      () => _i99.MidnightDateTimeService(),
-      registerFor: {_integration_test},
-    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_prod, _test},
