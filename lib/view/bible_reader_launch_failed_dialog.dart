@@ -6,10 +6,10 @@ import '/service/bible_reader_launch_result.dart';
 import '/service/bible_reader_link_service.dart';
 import 'constants.dart';
 
-class BibleReaderFailureDialog extends StatelessWidget {
+class BibleReaderLaunchFailedDialog extends StatelessWidget {
   final LaunchFailed launchResult;
 
-  const BibleReaderFailureDialog(this.launchResult);
+  const BibleReaderLaunchFailedDialog(this.launchResult);
 
   @override
   build(context) {

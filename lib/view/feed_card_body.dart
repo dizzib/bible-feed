@@ -7,7 +7,7 @@ import '/service/bible_reader_launch_service.dart';
 import '/service/bible_reader_link_service.dart';
 import '/service/chapter_split_toggler_service.dart';
 import '/service/haptic_service.dart';
-import 'bible_reader_failure_dialog.dart';
+import 'bible_reader_launch_failed_dialog.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';
 import 'feed_card_book_chapter.dart';
@@ -25,7 +25,7 @@ class FeedCardBody extends WatchingWidget {
       feed.state,
     );
     if (result is! LaunchFailed) return;
-    if (context.mounted) context.showDialogWithBlurBackground(BibleReaderFailureDialog(result));
+    if (context.mounted) context.showDialogWithBlurBackground(BibleReaderLaunchFailedDialog(result));
   }
 
   @override
