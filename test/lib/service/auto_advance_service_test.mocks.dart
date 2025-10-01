@@ -6,8 +6,8 @@
 import 'dart:async' as _i4;
 
 import 'package:bible_feed/service/date_time_service.dart' as _i2;
-import 'package:bible_feed/service/feed_advance_state.dart' as _i5;
 import 'package:bible_feed/service/feeds_advance_service.dart' as _i3;
+import 'package:bible_feed/service/feeds_advance_state.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -61,28 +61,28 @@ class MockFeedsAdvanceService extends _i1.Mock
           as bool);
 
   @override
-  _i4.Future<_i5.FeedAdvanceState> forceAdvance() =>
+  _i4.Future<_i5.FeedsAdvanceState> forceAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#forceAdvance, []),
-            returnValue: _i4.Future<_i5.FeedAdvanceState>.value(
-              _i5.FeedAdvanceState.notAllRead,
+            returnValue: _i4.Future<_i5.FeedsAdvanceState>.value(
+              _i5.FeedsAdvanceState.notAllRead,
             ),
-            returnValueForMissingStub: _i4.Future<_i5.FeedAdvanceState>.value(
-              _i5.FeedAdvanceState.notAllRead,
+            returnValueForMissingStub: _i4.Future<_i5.FeedsAdvanceState>.value(
+              _i5.FeedsAdvanceState.notAllRead,
             ),
           )
-          as _i4.Future<_i5.FeedAdvanceState>);
+          as _i4.Future<_i5.FeedsAdvanceState>);
 
   @override
-  _i4.Future<_i5.FeedAdvanceState> maybeAdvance() =>
+  _i4.Future<_i5.FeedsAdvanceState> maybeAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#maybeAdvance, []),
-            returnValue: _i4.Future<_i5.FeedAdvanceState>.value(
-              _i5.FeedAdvanceState.notAllRead,
+            returnValue: _i4.Future<_i5.FeedsAdvanceState>.value(
+              _i5.FeedsAdvanceState.notAllRead,
             ),
-            returnValueForMissingStub: _i4.Future<_i5.FeedAdvanceState>.value(
-              _i5.FeedAdvanceState.notAllRead,
+            returnValueForMissingStub: _i4.Future<_i5.FeedsAdvanceState>.value(
+              _i5.FeedsAdvanceState.notAllRead,
             ),
           )
-          as _i4.Future<_i5.FeedAdvanceState>);
+          as _i4.Future<_i5.FeedsAdvanceState>);
 }

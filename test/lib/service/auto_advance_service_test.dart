@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bible_feed/service/auto_advance_service.dart';
 import 'package:bible_feed/service/date_time_service.dart';
-import 'package:bible_feed/service/feed_advance_state.dart';
+import 'package:bible_feed/service/feeds_advance_state.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,7 +28,7 @@ void main() {
   });
 
   test('_run should call maybeAdvance and notify listeners if advanced', () async {
-    when(mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => FeedAdvanceState.listsAdvanced);
+    when(mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => FeedsAdvanceState.listsAdvanced);
     final completer = Completer<void>();
     testee.addListener(completer.complete);
     await completer.future;

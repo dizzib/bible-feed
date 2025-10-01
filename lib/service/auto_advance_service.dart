@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
-import 'feed_advance_state.dart';
 import 'date_time_service.dart';
 import 'feeds_advance_service.dart';
+import 'feeds_advance_state.dart';
 
 @singleton // Cannot be lazy, else https://github.com/dart-lang/tools/issues/705 manifests in integration test.
 class AutoAdvanceService with ChangeNotifier {
@@ -25,7 +25,7 @@ class AutoAdvanceService with ChangeNotifier {
   }
 
   void _run() async {
-    if (await _feedsAdvanceService.maybeAdvance() == FeedAdvanceState.listsAdvanced) notifyListeners();
+    if (await _feedsAdvanceService.maybeAdvance() == FeedsAdvanceState.listsAdvanced) notifyListeners();
     _setTimer();
   }
 

@@ -1,7 +1,7 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/date_time_service.dart';
-import 'package:bible_feed/service/feed_advance_state.dart';
+import 'package:bible_feed/service/feeds_advance_state.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -46,7 +46,7 @@ void main() async {
   });
 
   test('forceAdvance should advance all feeds and store hasEverAdvanced as true', () async {
-    expect(await testee.forceAdvance(), FeedAdvanceState.listsAdvanced);
+    expect(await testee.forceAdvance(), FeedsAdvanceState.listsAdvanced);
     verifyAllAdvanced();
     verify(mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
   });
@@ -58,18 +58,18 @@ void main() async {
   parameterizedTest(
     'maybeAdvance',
     [
-      [midMonth, false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
-      [midMonth, true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
-      [midMonth, true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
-      [midMonth, true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
-      [newMonth, false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
-      [newMonth, true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
-      [newMonth, true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
-      [newMonth, true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
-      [newYear, false, const Duration(days: 1), FeedAdvanceState.notAllRead, verifyNoneAdvanced],
-      [newYear, true, const Duration(days: 0), FeedAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
-      [newYear, true, const Duration(days: 1), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
-      [newYear, true, const Duration(days: 7), FeedAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [midMonth, false, const Duration(days: 1), FeedsAdvanceState.notAllRead, verifyNoneAdvanced],
+      [midMonth, true, const Duration(days: 0), FeedsAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [midMonth, true, const Duration(days: 1), FeedsAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [midMonth, true, const Duration(days: 7), FeedsAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newMonth, false, const Duration(days: 1), FeedsAdvanceState.notAllRead, verifyNoneAdvanced],
+      [newMonth, true, const Duration(days: 0), FeedsAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [newMonth, true, const Duration(days: 1), FeedsAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newMonth, true, const Duration(days: 7), FeedsAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newYear, false, const Duration(days: 1), FeedsAdvanceState.notAllRead, verifyNoneAdvanced],
+      [newYear, true, const Duration(days: 0), FeedsAdvanceState.allReadAwaitingTomorrow, verifyNoneAdvanced],
+      [newYear, true, const Duration(days: 1), FeedsAdvanceState.listsAdvanced, verifyAllAdvanced],
+      [newYear, true, const Duration(days: 7), FeedsAdvanceState.listsAdvanced, verifyAllAdvanced],
     ],
     customDescriptionBuilder: (_, _, values) {
       return 'when areChaptersRead=${values[0]} and lastDateModified=(Now - ${values[1]}), expect ${values[2]}';
@@ -78,7 +78,7 @@ void main() async {
       DateTime date,
       bool areChaptersRead,
       Duration sinceLastModified,
-      FeedAdvanceState expectedAdvanceState,
+      FeedsAdvanceState expectedAdvanceState,
       Function verify,
     ) async {
       when(mockDateTimeService.now).thenReturn(date);
