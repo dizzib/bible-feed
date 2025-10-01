@@ -19,7 +19,13 @@ Future runEndToEndTest() async {
     await t.tapFab();
     await t.tapYes();
     expectChapters(3);
-    await t.selectLastBookAndChapter('Gospels');
+    await t.longPress(find.text('Gospels'));
+    await t.pumpAndSettle();
+    await t.scrollToLastBook(); // subsequent t.pump breaks!?
+    await t.scrollToLastChapter();
+    await t.pumpAndSettle();
+    await t.tap(find.text('Update'));
+    await t.pumpAndSettle();
     expectBookAndChapter('John', 21);
     expectChapters(3, count: 9);
   });

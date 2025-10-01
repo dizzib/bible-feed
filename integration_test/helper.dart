@@ -22,16 +22,6 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  Future selectLastBookAndChapter(String feedName) async {
-    await longPress(find.text(feedName));
-    await pumpAndSettle();
-    await scrollToLastBook();
-    await scrollToLastChapter();
-    await pumpAndSettle();
-    await tap(find.text('Update'));
-    await pumpAndSettle();
-  }
-
   Future scrollToLastBook() async {
     await scrollToLastItem('book_wheel');
   }
@@ -42,6 +32,7 @@ extension AppTestHelper on WidgetTester {
 
   Future scrollToLastItem(String keyVal) async {
     await drag(find.byKey(Key(keyVal)), const Offset(0, -999));
+    // await pumpAndSettle(); // uncommenting breaks!?
   }
 
   Future tapAllDoneButton(String text) async {
