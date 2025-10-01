@@ -19,7 +19,7 @@ extension Helper on WidgetTester {
 }
 
 void main() async {
-  await configureDependencies();
+  await configureDependencies(environment: 'prod');
 
   final gospels = sl<ReadingLists>()[0];
   final matthew = gospels[0];
