@@ -42,9 +42,9 @@ void main() async {
     );
   });
 
-  group('launch', () {
+  group('maybeLaunch', () {
     parameterizedTest(
-      'should launchUrl with correct uri and return LaunchOk unless launchUrl returned false',
+      'should (maybe) launchUrl with correct uri and return correct Launch result',
       [
         [noneBibleReader, 1, false, false, false, LaunchBypassed()],
         [blbBibleReader, 1, false, false, false, LaunchBypassed()],
@@ -64,7 +64,7 @@ void main() async {
         final state = FeedState(book: b0, verse: verse, isRead: isRead);
         when(mockUrlLaunchService.launchUrl(any)).thenAnswer((_) async => launchOk);
 
-        final result = await testee.launch(bibleReader, state);
+        final result = await testee.maybeLaunch(bibleReader, state);
 
         if (expectLaunch) {
           verify(mockUrlLaunchService.launchUrl(expectLaunchUrl)).called(1);
@@ -75,10 +75,10 @@ void main() async {
       },
     );
 
-    test('should return Failure on PlatformException', () async {
+    test('should return LaunchFailed on PlatformException', () async {
       var state = FeedState(book: b1, isRead: true);
       when(mockUrlLaunchService.launchUrl(any)).thenThrow(PlatformException(code: 'code'));
-      expect((await testee.launch(blbBibleReader, state)).runtimeType, LaunchFailed);
+      expect((await testee.maybeLaunch(blbBibleReader, state)).runtimeType, LaunchFailed);
     });
   });
 }
