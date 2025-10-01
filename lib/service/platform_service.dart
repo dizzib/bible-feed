@@ -27,9 +27,3 @@ class ProductionPlatformService extends PlatformService {
     isHapticAvailable: await Haptics.canVibrate(),
   );
 }
-
-@screenshot
-@LazySingleton(as: PlatformService)
-class ScreenshotPlatformService extends PlatformService {
-  ScreenshotPlatformService() : super(isAndroid: true, isIOS: false, isHapticAvailable: true);
-}

@@ -39,7 +39,8 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'injectable.dart' as _i1027;
-import 'screenshot/screenshot_app_service.dart' as _i1010;
+import 'screenshot/service/screenshot_app_service.dart' as _i349;
+import 'screenshot/service/screenshot_platform_service.dart' as _i305;
 
 const String _prod = 'prod';
 const String _screenshot = 'screenshot';
@@ -104,11 +105,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i1010.ScreenshotAppService.create(),
-      registerFor: {_screenshot},
-      preResolve: true,
-    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
@@ -118,12 +114,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.ChapterSplitTogglerService>(),
       ),
     );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i349.ScreenshotAppService.create(),
+      registerFor: {_screenshot},
+      preResolve: true,
+    );
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ProductionPlatformEventService(),
       registerFor: {_prod},
     );
     gh.lazySingleton<_i578.PlatformService>(
-      () => _i578.ScreenshotPlatformService(),
+      () => _i305.ScreenshotPlatformService(),
       registerFor: {_screenshot},
     );
     gh.lazySingleton<_i513.HapticTogglerService>(

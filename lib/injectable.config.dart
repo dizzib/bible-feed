@@ -115,10 +115,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i516.ProductionPlatformEventService(),
       registerFor: {_prod},
     );
-    gh.lazySingleton<_i578.PlatformService>(
-      () => _i578.ScreenshotPlatformService(),
-      registerFor: {_screenshot},
-    );
     gh.lazySingleton<_i513.HapticTogglerService>(
       () => _i513.HapticTogglerService(
         gh<_i460.SharedPreferences>(),

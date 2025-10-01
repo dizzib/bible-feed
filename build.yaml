@@ -19,7 +19,7 @@ targets:
             - lib/model/*.dart
             - lib/service/*.dart
             - test/injectable.dart
-            - test/screenshot/*.dart
+            - test/screenshot/service/*.dart
             - integration_test/injectable.dart
             - integration_test/service/*.dart
       mockito:mockBuilder:
