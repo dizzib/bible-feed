@@ -32,8 +32,8 @@ Future runWidgetTests() async {
       expectText(b.name);
     }
     await t.scrollToLastChapter();
-    await t.pump();
-    expectText(matthew.chapterCount);
+    await t.pumpAndSettle();
+    expectText(matthew.chapterCount, matcher: findsWidgets);
     await t.scrollToLastBook();
     await t.pumpAndSettle();
     final john = gospels[3];
