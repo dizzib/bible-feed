@@ -286,6 +286,24 @@ class MockFeeds extends _i1.Mock implements _i6.Feeds {
           as _i2.Feed);
 
   @override
+  int indexOf(_i2.Feed? item) =>
+      (super.noSuchMethod(
+            Invocation.method(#indexOf, [item]),
+            returnValue: 0,
+            returnValueForMissingStub: 0,
+          )
+          as int);
+
+  @override
+  List<_i2.Feed> sublistTo(int? end) =>
+      (super.noSuchMethod(
+            Invocation.method(#sublistTo, [end]),
+            returnValue: <_i2.Feed>[],
+            returnValueForMissingStub: <_i2.Feed>[],
+          )
+          as List<_i2.Feed>);
+
+  @override
   Iterable<R> cast<R>() =>
       (super.noSuchMethod(
             Invocation.method(#cast, []),
