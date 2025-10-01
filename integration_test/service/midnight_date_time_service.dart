@@ -1,4 +1,4 @@
-import 'package:bible_feed/injectable.dart';
+import 'package:bible_feed/injectable.env.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:injectable/injectable.dart';
 

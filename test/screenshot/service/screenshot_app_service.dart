@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bible_feed/injectable.dart';
+import 'package:bible_feed/injectable.env.dart';
 import 'package:bible_feed/service/app_service.dart' as base;
 import 'package:injectable/injectable.dart';
 import 'package:yaml/yaml.dart';
