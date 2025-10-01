@@ -28,11 +28,11 @@ Future runWidgetTests() async {
 
   testWidgets('BookChapterDialog', (t) async {
     await t.initialiseWidget(BookChapterDialog(feed));
-    await t.scrollToLastChapter();
-    await t.pump();
     for (Book b in gospels) {
       expectText(b.name);
     }
+    await t.scrollToLastChapter();
+    await t.pump();
     expectText(matthew.chapterCount);
     await t.scrollToLastBook();
     await t.pumpAndSettle();
