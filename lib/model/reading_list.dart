@@ -1,25 +1,21 @@
 import 'package:flutter/foundation.dart';
 
+import 'base_list.dart';
 import 'book.dart';
 
 // books in a reading list (e.g. Matthew, Mark, Luke and John) without state
 @immutable
-final class ReadingList {
-  ReadingList(this.key, this.name, this._books) : count = _books.length, totalChapters = _books.totalChapters;
+final class ReadingList extends BaseList<Book> {
+  ReadingList(this.key, this.name, super._items) : count = _items.length, totalChapters = _items.totalChapters;
 
   final int count; // e.g. 4 books in The Gospels
   final String key; // e.g. gos
   final String name; // e.g. Gospels
   final int totalChapters;
-  final List<Book> _books;
-
-  /// properties
-  Book operator [](int i) => _books[i];
 
   /// methods
-  int chaptersTo(int bookIndex, int chapter) => _books.sublist(0, bookIndex).totalChapters + chapter;
-  Book getBook(String key) => _books.where((Book b) => b.key == key).single;
-  int indexOf(Book b) => _books.indexOf(b);
+  int chaptersTo(int bookIndex, int chapter) => sublistTo(bookIndex).totalChapters + chapter;
+  Book getBook(String key) => where((Book b) => b.key == key).single;
   double progressTo(int bookIndex, int chapter) => chaptersTo(bookIndex, chapter) / totalChapters;
 }
 
