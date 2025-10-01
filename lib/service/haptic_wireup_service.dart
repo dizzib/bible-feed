@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
-import '../injectable.dart';
 import '/model/list_wheel_state.dart';
+import '../injectable.dart';
 import 'bible_reader_link_service.dart';
 import 'haptic_service.dart';
 import 'haptic_toggler_service.dart';
