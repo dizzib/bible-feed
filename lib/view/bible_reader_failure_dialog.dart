@@ -7,9 +7,9 @@ import '/service/bible_reader_link_service.dart';
 import 'constants.dart';
 
 class BibleReaderFailureDialog extends StatelessWidget {
-  final Failure failure;
+  final LaunchFailed launchResult;
 
-  const BibleReaderFailureDialog(this.failure);
+  const BibleReaderFailureDialog(this.launchResult);
 
   @override
   build(context) {
@@ -22,7 +22,7 @@ class BibleReaderFailureDialog extends StatelessWidget {
       title: Text('Failed to launch the $bibleReaderName bible reader'),
       content: Padding(
         padding: Constants.defaultPadding,
-        child: Text('$message\n\n${failure.exception?.toString() ?? ''}'.trim()),
+        child: Text('$message\n\n${launchResult.exception?.toString() ?? ''}'.trim()),
       ),
       actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Ok'))],
     );

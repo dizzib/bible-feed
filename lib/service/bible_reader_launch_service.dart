@@ -26,12 +26,12 @@ class BibleReaderLaunchService {
   }
 
   Future<BibleReaderLaunchResult> launch(BibleReader bibleReader, FeedState state) async {
-    if (bibleReader.isNone || !state.isRead) return Future.value(Success());
+    if (bibleReader.isNone || !state.isRead) return Future.value(LaunchBypassed());
     try {
       final uri = _getDeeplinkUri(bibleReader, state.book.key, state.chapter, state.verse);
-      return Future.value(await _urlLaunchService.launchUrl(uri) ? Success() : Failure());
+      return Future.value(await _urlLaunchService.launchUrl(uri) ? LaunchOk() : LaunchFailed());
     } on PlatformException catch (e) {
-      return Future.value(Failure(e));
+      return Future.value(LaunchFailed(e));
     }
   }
 }
