@@ -2,7 +2,7 @@ import 'package:bible_feed/injectable.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:injectable/injectable.dart';
 
-@integrationTest
+@midnightTest
 @LazySingleton(as: DateTimeService)
 class MidnightDateTimeService extends DateTimeService {
   static const int _allowToSettleSecs = 2;

@@ -5,7 +5,7 @@ import 'injectable.dart';
 
 void main() {
   testWidgets('auto advance at midnight', (t) async {
-    await configureDependencies(environment: 'integration_test');
+    await configureDependencies(environment: 'midnight_test');
     await t.startApp();
     expectChapters(1);
     await t.tapAllLists();

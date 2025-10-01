@@ -39,10 +39,10 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+const String _midnight_test = 'midnight_test';
+const String _screenshot = 'screenshot';
 const String _prod = 'prod';
 const String _test = 'test';
-const String _integration_test = 'integration_test';
-const String _screenshot = 'screenshot';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -75,6 +75,20 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i516.PlatformEventService>(
+      () => _i516.ScreenshotPlatformEventService(),
+      registerFor: {_midnight_test, _screenshot},
+    );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i977.ProductionAppService.create(),
+      registerFor: {_midnight_test, _prod},
+      preResolve: true,
+    );
+    await gh.lazySingletonAsync<_i578.PlatformService>(
+      () => _i578.ProductionPlatformService.create(),
+      registerFor: {_midnight_test, _prod},
+      preResolve: true,
+    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_prod, _test},
@@ -88,10 +102,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
-    gh.lazySingleton<_i516.PlatformEventService>(
-      () => _i516.ProductionPlatformEventService(),
-      registerFor: {_integration_test, _prod},
-    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
@@ -102,28 +112,24 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.lazySingleton<_i516.PlatformEventService>(
-      () => _i516.ScreenshotPlatformEventService(),
-      registerFor: {_screenshot},
-    );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i977.ProductionAppService.create(),
-      registerFor: {_integration_test, _prod},
-      preResolve: true,
+      () => _i516.ProductionPlatformEventService(),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ScreenshotPlatformService(),
       registerFor: {_screenshot},
+    );
+    gh.lazySingleton<_i513.HapticTogglerService>(
+      () => _i513.HapticTogglerService(
+        gh<_i460.SharedPreferences>(),
+        gh<_i578.PlatformService>(),
+      ),
     );
     gh.lazySingleton<_i905.BibleReaderLaunchService>(
       () => _i905.BibleReaderLaunchService(gh<_i626.UrlLaunchService>()),
     );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
-    );
-    await gh.lazySingletonAsync<_i578.PlatformService>(
-      () => _i578.ProductionPlatformService.create(),
-      registerFor: {_integration_test, _prod},
-      preResolve: true,
     );
     gh.lazySingleton<_i134.BibleReaderLinkService>(
       () => _i134.BibleReaderLinkService(
@@ -148,32 +154,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i823.ReadingLists>(),
       ),
     );
-    gh.lazySingleton<_i513.HapticTogglerService>(
-      () => _i513.HapticTogglerService(
-        gh<_i460.SharedPreferences>(),
-        gh<_i578.PlatformService>(),
-      ),
+    gh.lazySingleton<_i22.HapticService>(
+      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
     );
     gh.lazySingleton<_i307.FeedsAdvanceService>(
       () => _i307.FeedsAdvanceService(
         gh<_i99.DateTimeService>(),
         gh<_i460.SharedPreferences>(),
         gh<_i759.Feeds>(),
-      ),
-    );
-    gh.lazySingleton<_i136.AllDoneDialogService>(
-      () => _i136.AllDoneDialogService(
-        gh<_i307.FeedsAdvanceService>(),
-        gh<_i759.Feeds>(),
-      ),
-    );
-    gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
-    );
-    gh.singleton<_i148.AutoAdvanceService>(
-      () => _i148.AutoAdvanceService(
-        gh<_i99.DateTimeService>(),
-        gh<_i307.FeedsAdvanceService>(),
       ),
     );
     gh.singleton<_i969.HapticWireupService>(
@@ -184,7 +172,19 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
       ),
-      registerFor: {_integration_test, _prod},
+      registerFor: {_midnight_test, _prod},
+    );
+    gh.lazySingleton<_i136.AllDoneDialogService>(
+      () => _i136.AllDoneDialogService(
+        gh<_i307.FeedsAdvanceService>(),
+        gh<_i759.Feeds>(),
+      ),
+    );
+    gh.singleton<_i148.AutoAdvanceService>(
+      () => _i148.AutoAdvanceService(
+        gh<_i99.DateTimeService>(),
+        gh<_i307.FeedsAdvanceService>(),
+      ),
     );
     return this;
   }
