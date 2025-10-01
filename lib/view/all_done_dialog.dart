@@ -9,6 +9,11 @@ import 'constants.dart';
 class AllDoneDialog extends StatelessWidget {
   @override
   build(context) {
+    void onPressYes() {
+      sl<FeedsAdvanceService>().forceAdvance();
+      Navigator.pop(context);
+    }
+
     return CupertinoAlertDialog(
       title: Text('All done!', style: context.textTheme.titleLarge),
       content: SingleChildScrollView(
@@ -19,13 +24,7 @@ class AllDoneDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(onPressed: () => Navigator.pop(context), child: const Text('No')),
-        TextButton(
-          onPressed: () {
-            sl<FeedsAdvanceService>().forceAdvance();
-            Navigator.pop(context);
-          }, // dialog is dismissed in FeedsView
-          child: const Text('Yes'),
-        ),
+        TextButton(onPressed: onPressYes, child: const Text('Yes')),
       ],
     );
   }
