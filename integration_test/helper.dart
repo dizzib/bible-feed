@@ -22,13 +22,8 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  Future scrollToLastBook() async {
-    await scrollToLastItem('book_wheel');
-  }
-
-  Future scrollToLastChapter() async {
-    await scrollToLastItem('chapter_wheel');
-  }
+  Future scrollToLastBook() async => await scrollToLastItem('book_wheel');
+  Future scrollToLastChapter() async => await scrollToLastItem('chapter_wheel');
 
   Future scrollToLastItem(String keyVal) async {
     await drag(find.byKey(Key(keyVal)), const Offset(0, -999));
