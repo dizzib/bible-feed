@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import '../service/platform_service.dart';
 import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
 import 'book_key_externaliser.dart';
@@ -29,6 +28,7 @@ class BibleReader {
 
   // field getters
   BookKeyExternaliser get bookKeyExternaliser => _bookKeyExternaliser;
+  List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   BibleReaderKey get key => _key;
   String get name => _name;
   String get uriTemplate => _uriTemplate;
@@ -38,8 +38,4 @@ class BibleReader {
   String get displayName => '$_name ${isNone ? '' : _type.name}'.trim();
   bool get isApp => _type == BibleReaderType.app;
   bool get isNone => _type == BibleReaderType.none;
-
-  bool isCertified(PlatformService platformService) =>
-      (platformService.isAndroid && _certifiedPlatforms.contains(TargetPlatform.android)) ||
-      (platformService.isIOS && _certifiedPlatforms.contains(TargetPlatform.iOS));
 }

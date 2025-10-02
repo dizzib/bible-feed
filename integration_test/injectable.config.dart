@@ -23,6 +23,8 @@ import 'package:bible_feed/service/app_service.dart' as _i977;
 import 'package:bible_feed/service/auto_advance_service.dart' as _i148;
 import 'package:bible_feed/service/bible_reader_launch_service.dart' as _i905;
 import 'package:bible_feed/service/bible_reader_link_service.dart' as _i134;
+import 'package:bible_feed/service/bible_readers_certified_service.dart'
+    as _i273;
 import 'package:bible_feed/service/chapter_split_service.dart' as _i283;
 import 'package:bible_feed/service/chapter_split_toggler_service.dart' as _i301;
 import 'package:bible_feed/service/date_time_service.dart' as _i99;
@@ -104,6 +106,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
+    gh.lazySingleton<_i273.BibleReadersCertifiedService>(
+      () => _i273.BibleReadersCertifiedService(
+        gh<_i578.PlatformService>(),
+        gh<_i1070.BibleReaders>(),
+      ),
+    );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
     );
@@ -132,16 +140,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i134.BibleReaderLinkService>(
       () => _i134.BibleReaderLinkService(
         gh<_i460.SharedPreferences>(),
-        gh<_i578.PlatformService>(),
-        gh<_i1070.BibleReaders>(),
-      ),
-    );
-    gh.lazySingleton<_i817.AppInstallService>(
-      () => _i817.AppInstallService(
-        gh<_i905.BibleReaderLaunchService>(),
-        gh<_i134.BibleReaderLinkService>(),
-        gh<_i516.PlatformEventService>(),
-        gh<_i578.PlatformService>(),
+        gh<_i273.BibleReadersCertifiedService>(),
       ),
     );
     gh.lazySingleton<_i759.Feeds>(
@@ -162,6 +161,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i134.BibleReaderLinkService>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
+      ),
+    );
+    gh.lazySingleton<_i817.AppInstallService>(
+      () => _i817.AppInstallService(
+        gh<_i905.BibleReaderLaunchService>(),
+        gh<_i134.BibleReaderLinkService>(),
+        gh<_i516.PlatformEventService>(),
+        gh<_i578.PlatformService>(),
       ),
     );
     gh.lazySingleton<_i307.FeedsAdvanceService>(

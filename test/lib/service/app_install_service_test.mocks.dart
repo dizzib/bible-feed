@@ -79,15 +79,6 @@ class MockBibleReaderLaunchService extends _i1.Mock
 class MockBibleReaderLinkService extends _i1.Mock
     implements _i8.BibleReaderLinkService {
   @override
-  List<_i2.BibleReader> get certifiedBibleReaderList =>
-      (super.noSuchMethod(
-            Invocation.getter(#certifiedBibleReaderList),
-            returnValue: <_i2.BibleReader>[],
-            returnValueForMissingStub: <_i2.BibleReader>[],
-          )
-          as List<_i2.BibleReader>);
-
-  @override
   bool get isLinked =>
       (super.noSuchMethod(
             Invocation.getter(#isLinked),
