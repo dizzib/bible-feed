@@ -28,6 +28,7 @@ import 'package:bible_feed/service/bible_readers_certified_service.dart'
 import 'package:bible_feed/service/chapter_split_service.dart' as _i283;
 import 'package:bible_feed/service/chapter_split_toggler_service.dart' as _i301;
 import 'package:bible_feed/service/date_time_service.dart' as _i99;
+import 'package:bible_feed/service/feed_advance_service.dart' as _i840;
 import 'package:bible_feed/service/feed_store_service.dart' as _i119;
 import 'package:bible_feed/service/feeds_advance_service.dart' as _i307;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
@@ -142,13 +143,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
-    gh.lazySingleton<_i759.Feeds>(
-      () => _i759.Feeds(
-        gh<_i119.FeedStoreService>(),
-        gh<_i283.ChapterSplitService>(),
-        gh<_i99.DateTimeService>(),
-        gh<_i823.ReadingLists>(),
-      ),
+    gh.lazySingleton<_i840.FeedAdvanceService>(
+      () => _i840.FeedAdvanceService(gh<_i283.ChapterSplitService>()),
     );
     gh.lazySingleton<_i273.BibleReadersCertifiedService>(
       () => _i273.BibleReadersCertifiedService(
@@ -159,17 +155,21 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
     );
-    gh.lazySingleton<_i307.FeedsAdvanceService>(
-      () => _i307.FeedsAdvanceService(
-        gh<_i99.DateTimeService>(),
-        gh<_i460.SharedPreferences>(),
-        gh<_i759.Feeds>(),
-      ),
+    gh.lazySingleton<_i759.Feeds>(
+      () => _i759.Feeds(gh<_i119.FeedStoreService>(), gh<_i823.ReadingLists>()),
     );
     gh.lazySingleton<_i134.BibleReaderLinkService>(
       () => _i134.BibleReaderLinkService(
         gh<_i460.SharedPreferences>(),
         gh<_i273.BibleReadersCertifiedService>(),
+      ),
+    );
+    gh.lazySingleton<_i307.FeedsAdvanceService>(
+      () => _i307.FeedsAdvanceService(
+        gh<_i99.DateTimeService>(),
+        gh<_i460.SharedPreferences>(),
+        gh<_i840.FeedAdvanceService>(),
+        gh<_i759.Feeds>(),
       ),
     );
     gh.lazySingleton<_i136.AllDoneDialogService>(

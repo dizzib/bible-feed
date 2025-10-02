@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 
+import '../service/chapter_split_service.dart';
 import '/model/feed.dart';
 import 'constants.dart';
 
@@ -11,13 +13,14 @@ class FeedCardBookChapter extends StatelessWidget {
   @override
   build(context) {
     const maxLines = 2;
+    final chapterSplitLabel = sl<ChapterSplitService>().getLabel(feed.state);
 
     return Expanded(
       child: Padding(
         padding: Constants.defaultPadding,
         child: Center(
           child: AutoSizeText(
-            '${feed.state.book.name} ${feed.state.chapter} ${feed.chapterSplitLabel}'.trim(),
+            '${feed.state.book.name} ${feed.state.chapter} $chapterSplitLabel'.trim(),
             maxLines: maxLines,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

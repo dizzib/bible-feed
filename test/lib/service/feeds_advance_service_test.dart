@@ -1,6 +1,7 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/date_time_service.dart';
+import 'package:bible_feed/service/feed_advance_service.dart';
 import 'package:bible_feed/service/feeds_advance_state.dart';
 import 'package:bible_feed/service/feeds_advance_service.dart';
 import 'package:dartx/dartx.dart';
@@ -13,31 +14,39 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../test_data.dart';
 import 'feeds_advance_service_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<Feed>(), MockSpec<Feeds>(), MockSpec<DateTimeService>(), MockSpec<SharedPreferences>()])
+@GenerateNiceMocks([
+  MockSpec<DateTimeService>(),
+  MockSpec<Feed>(),
+  MockSpec<FeedAdvanceService>(),
+  MockSpec<Feeds>(),
+  MockSpec<SharedPreferences>(),
+])
 void main() async {
   final mockFeedList = [MockFeed(), MockFeed()];
-  late MockFeeds mockFeeds;
   late MockDateTimeService mockDateTimeService;
+  late MockFeedAdvanceService mockFeedAdvanceService;
+  late MockFeeds mockFeeds;
   late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceService testee;
 
   setUp(() {
-    mockFeeds = MockFeeds();
     mockDateTimeService = MockDateTimeService();
+    mockFeedAdvanceService = MockFeedAdvanceService();
+    mockFeeds = MockFeeds();
     mockSharedPreferences = MockSharedPreferences();
     when(mockFeeds.iterator).thenReturn(mockFeedList.iterator);
-    testee = FeedsAdvanceService(mockDateTimeService, mockSharedPreferences, mockFeeds);
+    testee = FeedsAdvanceService(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceService, mockFeeds);
   });
 
   verifyAllAdvanced() {
     for (var f in mockFeedList) {
-      verify(f.advance()).called(1);
+      verify(mockFeedAdvanceService.advance(f)).called(1);
     }
   }
 
   verifyNoneAdvanced() {
     for (var f in mockFeedList) {
-      verifyNever(f.advance());
+      verifyNever(mockFeedAdvanceService.advance(f));
     }
   }
 

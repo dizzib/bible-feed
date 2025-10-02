@@ -7,10 +7,8 @@ import 'dart:async' as _i5;
 
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
-import 'package:bible_feed/service/chapter_split_service.dart' as _i6;
 import 'package:bible_feed/service/feed_store_service.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -61,34 +59,4 @@ class MockFeedStoreService extends _i1.Mock implements _i3.FeedStoreService {
             returnValueForMissingStub: _i5.Future<dynamic>.value(),
           )
           as _i5.Future<dynamic>);
-}
-
-/// A class which mocks [ChapterSplitService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockChapterSplitService extends _i1.Mock
-    implements _i6.ChapterSplitService {
-  @override
-  int getNextVerse(_i2.FeedState? state) =>
-      (super.noSuchMethod(
-            Invocation.method(#getNextVerse, [state]),
-            returnValue: 0,
-            returnValueForMissingStub: 0,
-          )
-          as int);
-
-  @override
-  String getLabel(_i2.FeedState? state) =>
-      (super.noSuchMethod(
-            Invocation.method(#getLabel, [state]),
-            returnValue: _i7.dummyValue<String>(
-              this,
-              Invocation.method(#getLabel, [state]),
-            ),
-            returnValueForMissingStub: _i7.dummyValue<String>(
-              this,
-              Invocation.method(#getLabel, [state]),
-            ),
-          )
-          as String);
 }

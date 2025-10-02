@@ -35,7 +35,7 @@ class BookChapterDialogFooter extends WatchingWidget {
             ),
             TextButton(
               onPressed: () {
-                feed.setBookAndChapter(bookIndex, chapter);
+                feed.setBookChapterVerse(bookIndex, chapter);
                 Navigator.pop(context);
               },
               child: const Padding(padding: EdgeInsets.only(right: 8.0), child: Text('Update')),

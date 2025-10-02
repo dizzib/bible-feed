@@ -1,8 +1,6 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/model/reading_lists.dart';
-import 'package:bible_feed/service/chapter_split_service.dart';
-import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -11,22 +9,20 @@ import 'package:mockito/mockito.dart';
 import '../test_data.dart';
 import 'feeds_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<FeedStoreService>(), MockSpec<ChapterSplitService>()])
+@GenerateNiceMocks([MockSpec<FeedStoreService>()])
 void main() async {
   late Feeds testee;
   late MockFeedStoreService mockFeedStoreService;
-  late MockChapterSplitService mockChapterSplitService;
   late FeedState state0;
   late FeedState state1;
 
   setUp(() {
     mockFeedStoreService = MockFeedStoreService();
-    mockChapterSplitService = MockChapterSplitService();
     state0 = FeedState(book: b0, isRead: true, dateModified: DateTime(2025, 1, 1, 1));
     state1 = FeedState(book: b1, dateModified: DateTime(2025, 1, 1, 2));
     when(mockFeedStoreService.loadState(rl0)).thenReturn(state0);
     when(mockFeedStoreService.loadState(rl1)).thenReturn(state1);
-    testee = Feeds(mockFeedStoreService, mockChapterSplitService, NowDateTimeService(), ReadingLists([rl0, rl1]));
+    testee = Feeds(mockFeedStoreService, ReadingLists([rl0, rl1]));
   });
 
   group('property', () {

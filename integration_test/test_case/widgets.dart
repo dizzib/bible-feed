@@ -1,8 +1,6 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
-import 'package:bible_feed/service/chapter_split_service.dart';
-import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/feed_store_service.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/feed_card.dart';
@@ -24,7 +22,7 @@ Future runWidgetTests() async {
   final gospels = sl<ReadingLists>()[0];
   final matthew = gospels[0];
   final state = sl<FeedStoreService>().loadState(gospels);
-  final feed = Feed(gospels, sl<ChapterSplitService>(), NowDateTimeService(), state);
+  final feed = Feed(gospels, state);
 
   testWidgets('BookChapterDialog', (t) async {
     await t.initialiseWidget(BookChapterDialog(feed));

@@ -84,7 +84,7 @@ Future<void> main() async {
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 2; col++) {
         final feed = sl<Feeds>()[row * 2 + col];
-        feed.setBookAndChapter(bookState[row][col], chapterState[row][col]);
+        feed.setBookChapterVerse(bookState[row][col], chapterState[row][col]);
         if (chapterReadState[row][col] == 1) feed.toggleIsRead();
       }
     }
