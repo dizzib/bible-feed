@@ -3,8 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '/model/feed.dart';
 import '/model/feeds.dart';
-import '/service/feeds_advance_state.dart';
 import 'date_time_service.dart';
+import 'feeds_advance_state.dart';
 
 @lazySingleton
 class FeedsAdvanceService {

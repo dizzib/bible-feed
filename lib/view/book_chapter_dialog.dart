@@ -5,8 +5,8 @@ import 'package:watch_it/watch_it.dart';
 
 import '/model/feed.dart';
 import '/model/list_wheel_state.dart';
-import '/view/book_chapter_dialog_footer.dart';
-import '/view/book_chapter_dialog_wheels.dart';
+import 'book_chapter_dialog_footer.dart';
+import 'book_chapter_dialog_wheels.dart';
 import 'build_context_extension.dart';
 import 'constants.dart';
 

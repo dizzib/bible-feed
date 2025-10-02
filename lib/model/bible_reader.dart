@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-import '/model/bible_reader_key.dart';
-import '/model/book_key_externaliser.dart';
 import '/service/platform_service.dart';
+import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
+import 'book_key_externaliser.dart';
 
 // for ios, scheme must be added to info.plist!!!
 @immutable
