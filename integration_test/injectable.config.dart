@@ -177,7 +177,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i759.Feeds>(),
       ),
     );
-    gh.lazySingleton<_i148.AutoAdvanceService>(
+    gh.singleton<_i148.AutoAdvanceService>(
       () => _i148.AutoAdvanceService(
         gh<_i99.DateTimeService>(),
         gh<_i307.FeedsAdvanceService>(),

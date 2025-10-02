@@ -7,7 +7,7 @@ import 'date_time_service.dart';
 import 'feeds_advance_service.dart';
 import 'feeds_advance_state.dart';
 
-@lazySingleton
+@singleton
 class AutoAdvanceService with ChangeNotifier {
   final DateTimeService _dateTimeService;
   final FeedsAdvanceService _feedsAdvanceService;
