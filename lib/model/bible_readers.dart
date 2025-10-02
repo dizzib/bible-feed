@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
-import '/model/bible_reader_key.dart';
-import '/model/book_key_externaliser.dart';
 import 'base_list.dart';
 import 'bible_reader.dart';
+import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
+import 'book_key_externaliser.dart';
 
 @immutable
 @lazySingleton
