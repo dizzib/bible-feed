@@ -241,6 +241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  darq:
+    dependency: transitive
+    description:
+      name: darq
+      sha256: ae2d39b09c2c40e8286e03bf2d746490532da8bef34dbf66b78e2231d8fffbe7
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   dart_code_linter:
     dependency: "direct dev"
     description:
@@ -297,6 +305,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.14.2"
+  directed_graph:
+    dependency: transitive
+    description:
+      name: directed_graph
+      sha256: "6582283519fc08a6a14172d8a3798238f09275a1147e7599baf09c6245e3104a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.5"
   equatable:
     dependency: transitive
     description:
@@ -305,6 +321,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
+  exception_templates:
+    dependency: transitive
+    description:
+      name: exception_templates
+      sha256: "517f7c770da690073663f867ee2057ae2f4ffb28edae9da9faa624aa29ac76eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
   fake_async:
     dependency: "direct dev"
     description:
@@ -511,6 +535,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.9.0"
+  lakos:
+    dependency: "direct dev"
+    description:
+      name: lakos
+      sha256: cdc4d3c1c4a381dfa56ec7cb79fc72381029d831fa51d9b427a4d6fc7a81901c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.6"
+  lazy_memo:
+    dependency: transitive
+    description:
+      name: lazy_memo
+      sha256: dcb30b4184a6d767e1d779d74ce784d752d38313b8fb4bad6b659ae7af4bb34d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.3"
   leak_tracker:
     dependency: transitive
     description:
@@ -735,6 +775,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  quote_buffer:
+    dependency: transitive
+    description:
+      name: quote_buffer
+      sha256: "5be4662a87aac8152aa05cdcf467e421aa2edc3b147f069798e2d26539b7ed0a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.7"
   recase:
     dependency: transitive
     description:

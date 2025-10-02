@@ -56,6 +56,7 @@ dev_dependencies:
   injectable_generator: ^2.8.1
   integration_test:
     sdk: flutter
+  lakos: ^2.0.6
   mockito: ^5.5.0
   parameterized_test: ^2.0.1
   yaml: ^3.1.3
