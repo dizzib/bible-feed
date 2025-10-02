@@ -14,10 +14,10 @@ class FeedCard extends WatchingWidget {
   @override
   build(context) {
     watch(feed);
-    final brs = watchIt<BibleReaderLinkService>();
+    final brls = watchIt<BibleReaderLinkService>();
     final feeds = watchIt<Feeds>();
     final state = feed.state;
-    final isLastReadAndLinked = state.isRead && brs.isLinked && identical(feed, feeds.lastModifiedFeed);
+    final isLastReadAndLinked = state.isRead && brls.isLinked && identical(feed, feeds.lastModifiedFeed);
     final secondsToFade = Duration(seconds: isLastReadAndLinked ? 30 : 0);
     final opacity = state.isRead ? 0.25 : 1.0;
     final elevation = state.isRead ? 0.0 : 12.0;

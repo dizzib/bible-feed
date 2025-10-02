@@ -13,13 +13,13 @@ class FeedCardSemantics extends WatchingWidget {
   @override
   build(context) {
     watch(feed);
-    final brs = watchIt<BibleReaderLinkService>();
+    final brls = watchIt<BibleReaderLinkService>();
     final state = feed.state;
     final isRead = state.isRead;
 
     final semanticsLabel = '${state.book.name} chapter ${state.chapter} is currently ${isRead ? 'read' : 'unread'}';
     final semanticsHint =
-        'Tap to ${brs.isLinked && !isRead ? 'open Bible reader and' : ''} mark as ${isRead ? 'unread' : 'read'}. Long press to change the book and chapter.';
+        'Tap to ${brls.isLinked && !isRead ? 'open Bible reader and' : ''} mark as ${isRead ? 'unread' : 'read'}. Long press to change the book and chapter.';
 
     return Semantics(excludeSemantics: true, label: semanticsLabel, hint: semanticsHint, child: child);
   }
