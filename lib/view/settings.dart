@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/service/chapter_split_toggler_service.dart';
-import '/service/haptic_toggler_service.dart';
+import '../service/chapter_split_toggler_service.dart';
+import '../service/haptic_toggler_service.dart';
 import 'app_version.dart';
 import 'bible_reader_settings.dart';
 import 'constants.dart';

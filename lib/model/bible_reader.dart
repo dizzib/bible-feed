@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '/service/platform_service.dart';
+import '../service/platform_service.dart';
 import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
 import 'book_key_externaliser.dart';

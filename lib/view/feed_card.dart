@@ -3,7 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '/model/feed.dart';
 import '/model/feeds.dart';
-import '/service/bible_reader_link_service.dart';
+import '../service/bible_reader_link_service.dart';
 import 'feed_card_body.dart';
 import 'feed_card_semantics.dart';
 
