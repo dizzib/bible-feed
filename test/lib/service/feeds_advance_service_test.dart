@@ -54,8 +54,8 @@ void main() async {
     expect(testee.hasEverAdvanced, false);
   });
 
-  test('forceAdvance should advance all feeds and store hasEverAdvanced as true', () async {
-    expect(await testee.forceAdvance(), FeedsAdvanceState.listsAdvanced);
+  test('advance should advance all feeds and store hasEverAdvanced as true', () async {
+    expect(await testee.advance(), FeedsAdvanceState.listsAdvanced);
     verifyAllAdvanced();
     verify(mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
   });

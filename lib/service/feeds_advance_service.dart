@@ -20,7 +20,7 @@ class FeedsAdvanceService {
 
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
-  Future<FeedsAdvanceState> forceAdvance() async {
+  Future<FeedsAdvanceState> advance() async {
     for (Feed f in _feedsService.feeds) {
       _feedAdvanceService.advance(f);
     }
@@ -39,7 +39,7 @@ class FeedsAdvanceService {
       lastDateModified.month,
       lastDateModified.day,
     );
-    if (lastMidnightOfNow.isAfter(lastMidnightOfLastDateModified)) return forceAdvance();
+    if (lastMidnightOfNow.isAfter(lastMidnightOfLastDateModified)) return advance();
     return Future.value(FeedsAdvanceState.allReadAwaitingTomorrow);
   }
 }

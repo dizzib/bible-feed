@@ -10,7 +10,7 @@ class AllDoneDialog extends StatelessWidget {
   @override
   build(context) {
     void onPressYes() {
-      sl<FeedsAdvanceService>().forceAdvance();
+      sl<FeedsAdvanceService>().advance();
       Navigator.pop(context);
     }
 
