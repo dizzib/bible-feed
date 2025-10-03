@@ -19,7 +19,7 @@ class AppBase extends StatelessWidget {
 
     return SafeArea(
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: true,
         navigatorObservers: [sl<HapticService>()],
         title: 'Bible Feed',
         themeMode: ThemeMode.system,
