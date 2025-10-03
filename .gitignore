@@ -9,6 +9,8 @@ core
 .buildlog/
 .history
 .svn/
+_coverage/
+_report/
 coverage/
 migrate_working_dir/
 devtools_options.yaml
