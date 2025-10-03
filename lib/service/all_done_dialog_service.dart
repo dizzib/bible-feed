@@ -1,19 +1,19 @@
 import 'package:injectable/injectable.dart';
 
-import '/model/feeds.dart';
 import 'feeds_advance_service.dart';
+import 'feeds_service.dart';
 
 @lazySingleton
 class AllDoneDialogService {
-  final Feeds _feeds;
+  final FeedsService _feedsService;
   final FeedsAdvanceService _feedsAdvanceService;
 
-  AllDoneDialogService(this._feedsAdvanceService, this._feeds);
+  AllDoneDialogService(this._feedsAdvanceService, this._feedsService);
 
   bool _hasShown = false;
 
   // For onboarding, auto-show dialog only the first time all chapters are read.
-  bool get isAutoShow => _feeds.areChaptersRead && !_feedsAdvanceService.hasEverAdvanced && !_hasShown;
+  bool get isAutoShow => _feedsService.areChaptersRead && !_feedsAdvanceService.hasEverAdvanced && !_hasShown;
 
   set hasShown(bool value) => _hasShown = value;
 }

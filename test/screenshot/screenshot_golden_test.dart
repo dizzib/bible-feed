@@ -5,8 +5,8 @@ library;
 // They are resized and moved to fastlane by external scripts.
 
 import 'package:alchemist/alchemist.dart';
-import 'package:bible_feed/model/feeds.dart';
 import 'package:bible_feed/service/chapter_split_toggler_service.dart';
+import 'package:bible_feed/service/feeds_service.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -83,7 +83,7 @@ Future<void> main() async {
     ];
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 2; col++) {
-        final feed = sl<Feeds>()[row * 2 + col];
+        final feed = sl<FeedsService>().feeds[row * 2 + col];
         feed.setBookChapterVerse(bookState[row][col], chapterState[row][col]);
         if (chapterReadState[row][col] == 1) feed.toggleIsRead();
       }

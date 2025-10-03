@@ -7,10 +7,10 @@ import 'dart:async' as _i10;
 import 'dart:ui' as _i6;
 
 import 'package:bible_feed/model/feed.dart' as _i2;
-import 'package:bible_feed/model/feeds.dart' as _i8;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
 import 'package:bible_feed/service/date_time_service.dart' as _i3;
 import 'package:bible_feed/service/feed_advance_service.dart' as _i7;
+import 'package:bible_feed/service/feeds_service.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
 import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i9;
@@ -36,16 +36,6 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
 
 class _FakeFeedState_1 extends _i1.SmartFake implements _i2.FeedState {
   _FakeFeedState_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeIterator_2<E> extends _i1.SmartFake implements Iterator<E> {
-  _FakeIterator_2(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeFeed_3 extends _i1.SmartFake implements _i2.Feed {
-  _FakeFeed_3(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -183,10 +173,10 @@ class MockFeedAdvanceService extends _i1.Mock
   );
 }
 
-/// A class which mocks [Feeds].
+/// A class which mocks [FeedsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeeds extends _i1.Mock implements _i8.Feeds {
+class MockFeedsService extends _i1.Mock implements _i8.FeedsService {
   @override
   bool get areChaptersRead =>
       (super.noSuchMethod(
@@ -197,82 +187,13 @@ class MockFeeds extends _i1.Mock implements _i8.Feeds {
           as bool);
 
   @override
-  Iterator<_i2.Feed> get iterator =>
+  List<_i2.Feed> get feeds =>
       (super.noSuchMethod(
-            Invocation.getter(#iterator),
-            returnValue: _FakeIterator_2<_i2.Feed>(
-              this,
-              Invocation.getter(#iterator),
-            ),
-            returnValueForMissingStub: _FakeIterator_2<_i2.Feed>(
-              this,
-              Invocation.getter(#iterator),
-            ),
+            Invocation.getter(#feeds),
+            returnValue: <_i2.Feed>[],
+            returnValueForMissingStub: <_i2.Feed>[],
           )
-          as Iterator<_i2.Feed>);
-
-  @override
-  int get length =>
-      (super.noSuchMethod(
-            Invocation.getter(#length),
-            returnValue: 0,
-            returnValueForMissingStub: 0,
-          )
-          as int);
-
-  @override
-  bool get isEmpty =>
-      (super.noSuchMethod(
-            Invocation.getter(#isEmpty),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  bool get isNotEmpty =>
-      (super.noSuchMethod(
-            Invocation.getter(#isNotEmpty),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  _i2.Feed get first =>
-      (super.noSuchMethod(
-            Invocation.getter(#first),
-            returnValue: _FakeFeed_3(this, Invocation.getter(#first)),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.getter(#first),
-            ),
-          )
-          as _i2.Feed);
-
-  @override
-  _i2.Feed get last =>
-      (super.noSuchMethod(
-            Invocation.getter(#last),
-            returnValue: _FakeFeed_3(this, Invocation.getter(#last)),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.getter(#last),
-            ),
-          )
-          as _i2.Feed);
-
-  @override
-  _i2.Feed get single =>
-      (super.noSuchMethod(
-            Invocation.getter(#single),
-            returnValue: _FakeFeed_3(this, Invocation.getter(#single)),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.getter(#single),
-            ),
-          )
-          as _i2.Feed);
+          as List<_i2.Feed>);
 
   @override
   bool get hasListeners =>
@@ -282,291 +203,6 @@ class MockFeeds extends _i1.Mock implements _i8.Feeds {
             returnValueForMissingStub: false,
           )
           as bool);
-
-  @override
-  _i2.Feed operator [](int? i) =>
-      (super.noSuchMethod(
-            Invocation.method(#[], [i]),
-            returnValue: _FakeFeed_3(this, Invocation.method(#[], [i])),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.method(#[], [i]),
-            ),
-          )
-          as _i2.Feed);
-
-  @override
-  int indexOf(_i2.Feed? item) =>
-      (super.noSuchMethod(
-            Invocation.method(#indexOf, [item]),
-            returnValue: 0,
-            returnValueForMissingStub: 0,
-          )
-          as int);
-
-  @override
-  List<_i2.Feed> sublistTo(int? end) =>
-      (super.noSuchMethod(
-            Invocation.method(#sublistTo, [end]),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as List<_i2.Feed>);
-
-  @override
-  Iterable<R> cast<R>() =>
-      (super.noSuchMethod(
-            Invocation.method(#cast, []),
-            returnValue: <R>[],
-            returnValueForMissingStub: <R>[],
-          )
-          as Iterable<R>);
-
-  @override
-  Iterable<_i2.Feed> followedBy(Iterable<_i2.Feed>? other) =>
-      (super.noSuchMethod(
-            Invocation.method(#followedBy, [other]),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as Iterable<_i2.Feed>);
-
-  @override
-  Iterable<T> map<T>(T Function(_i2.Feed)? toElement) =>
-      (super.noSuchMethod(
-            Invocation.method(#map, [toElement]),
-            returnValue: <T>[],
-            returnValueForMissingStub: <T>[],
-          )
-          as Iterable<T>);
-
-  @override
-  Iterable<_i2.Feed> where(bool Function(_i2.Feed)? test) =>
-      (super.noSuchMethod(
-            Invocation.method(#where, [test]),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as Iterable<_i2.Feed>);
-
-  @override
-  Iterable<T> whereType<T>() =>
-      (super.noSuchMethod(
-            Invocation.method(#whereType, []),
-            returnValue: <T>[],
-            returnValueForMissingStub: <T>[],
-          )
-          as Iterable<T>);
-
-  @override
-  Iterable<T> expand<T>(Iterable<T> Function(_i2.Feed)? toElements) =>
-      (super.noSuchMethod(
-            Invocation.method(#expand, [toElements]),
-            returnValue: <T>[],
-            returnValueForMissingStub: <T>[],
-          )
-          as Iterable<T>);
-
-  @override
-  bool contains(Object? element) =>
-      (super.noSuchMethod(
-            Invocation.method(#contains, [element]),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  void forEach(void Function(_i2.Feed)? action) => super.noSuchMethod(
-    Invocation.method(#forEach, [action]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  _i2.Feed reduce(_i2.Feed Function(_i2.Feed, _i2.Feed)? combine) =>
-      (super.noSuchMethod(
-            Invocation.method(#reduce, [combine]),
-            returnValue: _FakeFeed_3(
-              this,
-              Invocation.method(#reduce, [combine]),
-            ),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.method(#reduce, [combine]),
-            ),
-          )
-          as _i2.Feed);
-
-  @override
-  T fold<T>(T? initialValue, T Function(T, _i2.Feed)? combine) =>
-      (super.noSuchMethod(
-            Invocation.method(#fold, [initialValue, combine]),
-            returnValue: _i5.dummyValue<T>(
-              this,
-              Invocation.method(#fold, [initialValue, combine]),
-            ),
-            returnValueForMissingStub: _i5.dummyValue<T>(
-              this,
-              Invocation.method(#fold, [initialValue, combine]),
-            ),
-          )
-          as T);
-
-  @override
-  bool every(bool Function(_i2.Feed)? test) =>
-      (super.noSuchMethod(
-            Invocation.method(#every, [test]),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  String join([String? separator = '']) =>
-      (super.noSuchMethod(
-            Invocation.method(#join, [separator]),
-            returnValue: _i5.dummyValue<String>(
-              this,
-              Invocation.method(#join, [separator]),
-            ),
-            returnValueForMissingStub: _i5.dummyValue<String>(
-              this,
-              Invocation.method(#join, [separator]),
-            ),
-          )
-          as String);
-
-  @override
-  bool any(bool Function(_i2.Feed)? test) =>
-      (super.noSuchMethod(
-            Invocation.method(#any, [test]),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  List<_i2.Feed> toList({bool? growable = true}) =>
-      (super.noSuchMethod(
-            Invocation.method(#toList, [], {#growable: growable}),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as List<_i2.Feed>);
-
-  @override
-  Set<_i2.Feed> toSet() =>
-      (super.noSuchMethod(
-            Invocation.method(#toSet, []),
-            returnValue: <_i2.Feed>{},
-            returnValueForMissingStub: <_i2.Feed>{},
-          )
-          as Set<_i2.Feed>);
-
-  @override
-  Iterable<_i2.Feed> take(int? count) =>
-      (super.noSuchMethod(
-            Invocation.method(#take, [count]),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as Iterable<_i2.Feed>);
-
-  @override
-  Iterable<_i2.Feed> takeWhile(bool Function(_i2.Feed)? test) =>
-      (super.noSuchMethod(
-            Invocation.method(#takeWhile, [test]),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as Iterable<_i2.Feed>);
-
-  @override
-  Iterable<_i2.Feed> skip(int? count) =>
-      (super.noSuchMethod(
-            Invocation.method(#skip, [count]),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as Iterable<_i2.Feed>);
-
-  @override
-  Iterable<_i2.Feed> skipWhile(bool Function(_i2.Feed)? test) =>
-      (super.noSuchMethod(
-            Invocation.method(#skipWhile, [test]),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
-          )
-          as Iterable<_i2.Feed>);
-
-  @override
-  _i2.Feed firstWhere(
-    bool Function(_i2.Feed)? test, {
-    _i2.Feed Function()? orElse,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#firstWhere, [test], {#orElse: orElse}),
-            returnValue: _FakeFeed_3(
-              this,
-              Invocation.method(#firstWhere, [test], {#orElse: orElse}),
-            ),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.method(#firstWhere, [test], {#orElse: orElse}),
-            ),
-          )
-          as _i2.Feed);
-
-  @override
-  _i2.Feed lastWhere(
-    bool Function(_i2.Feed)? test, {
-    _i2.Feed Function()? orElse,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#lastWhere, [test], {#orElse: orElse}),
-            returnValue: _FakeFeed_3(
-              this,
-              Invocation.method(#lastWhere, [test], {#orElse: orElse}),
-            ),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.method(#lastWhere, [test], {#orElse: orElse}),
-            ),
-          )
-          as _i2.Feed);
-
-  @override
-  _i2.Feed singleWhere(
-    bool Function(_i2.Feed)? test, {
-    _i2.Feed Function()? orElse,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#singleWhere, [test], {#orElse: orElse}),
-            returnValue: _FakeFeed_3(
-              this,
-              Invocation.method(#singleWhere, [test], {#orElse: orElse}),
-            ),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.method(#singleWhere, [test], {#orElse: orElse}),
-            ),
-          )
-          as _i2.Feed);
-
-  @override
-  _i2.Feed elementAt(int? index) =>
-      (super.noSuchMethod(
-            Invocation.method(#elementAt, [index]),
-            returnValue: _FakeFeed_3(
-              this,
-              Invocation.method(#elementAt, [index]),
-            ),
-            returnValueForMissingStub: _FakeFeed_3(
-              this,
-              Invocation.method(#elementAt, [index]),
-            ),
-          )
-          as _i2.Feed);
 
   @override
   void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(

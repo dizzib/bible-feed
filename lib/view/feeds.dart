@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/model/feeds.dart' as model;
+import '../service/feeds_service.dart';
 import 'feed_card.dart';
 
 class Feeds extends StatelessWidget {
@@ -13,8 +13,8 @@ class Feeds extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              Expanded(child: FeedCard(sl<model.Feeds>()[index])),
-              Expanded(child: FeedCard(sl<model.Feeds>()[index + 1])),
+              Expanded(child: FeedCard(sl<FeedsService>().feeds[index])),
+              Expanded(child: FeedCard(sl<FeedsService>().feeds[index + 1])),
             ],
           ),
         ),
