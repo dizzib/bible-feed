@@ -7,15 +7,20 @@ import 'book_key_externaliser.dart';
 // for ios, scheme must be added to info.plist!!!
 @immutable
 class BibleReader {
-  const BibleReader(
-    this._key,
-    this._type,
-    this._name,
-    this._uriTemplate,
-    this._certifiedPlatforms, {
-    bookKeyExternaliser = BookKeyExternaliser.identity,
-    uriVersePath,
-  }) : _bookKeyExternaliser = bookKeyExternaliser,
+  const BibleReader({
+    required BibleReaderKey key,
+    required BibleReaderType type,
+    required String name,
+    required String uriTemplate,
+    required List<TargetPlatform> certifiedPlatforms,
+    BookKeyExternaliser bookKeyExternaliser = BookKeyExternaliser.identity,
+    String? uriVersePath,
+  }) : _key = key,
+       _type = type,
+       _name = name,
+       _uriTemplate = uriTemplate,
+       _certifiedPlatforms = certifiedPlatforms,
+       _bookKeyExternaliser = bookKeyExternaliser,
        _uriVersePath = uriVersePath;
 
   final BibleReaderKey _key;
