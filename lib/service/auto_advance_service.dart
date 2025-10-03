@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:df_log/df_log.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
@@ -26,7 +25,6 @@ class AutoAdvanceService with ChangeNotifier {
   }
 
   void _run() async {
-    Log.info('_run');
     if (await _feedsAdvanceService.maybeAdvance() == FeedsAdvanceState.listsAdvanced) notifyListeners();
     _setTimer();
   }
@@ -37,6 +35,6 @@ class AutoAdvanceService with ChangeNotifier {
     final durationToMidnight = midnightTonight.difference(now);
     _timer?.cancel();
     _timer = Timer(durationToMidnight, _run);
-    Log.info('$now. Timer will fire in ${durationToMidnight.toString()}');
+    // Log.info('$now. Timer will fire in ${durationToMidnight.toString()}');
   }
 }

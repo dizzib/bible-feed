@@ -5,12 +5,15 @@ import 'package:injectable/injectable.dart';
 @midnightTest
 @LazySingleton(as: DateTimeService)
 class MidnightDateTimeService extends DateTimeService {
-  static const int _allowToSettleSecs = 2;
-  final Duration _offset;
+  final DateTime _createDateTime;
 
-  MidnightDateTimeService()
-    : _offset = DateTime(2025, 1, 1, 23, 59, 60 - _allowToSettleSecs).difference(DateTime.now());
+  MidnightDateTimeService() : _createDateTime = DateTime.now();
 
   @override
-  DateTime get now => DateTime.now().add(_offset);
+  DateTime get now {
+    const timeToSettle = Duration(seconds: 2);
+    final timeSinceCreate = DateTime.now().difference(_createDateTime);
+    final midnightTonight = DateTime(_createDateTime.year, _createDateTime.month, _createDateTime.day + 1);
+    return midnightTonight.add(timeSinceCreate).subtract(timeToSettle);
+  }
 }

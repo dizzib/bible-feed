@@ -1,4 +1,3 @@
-import 'package:df_log/df_log.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +21,6 @@ class FeedsAdvanceService {
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
   Future<FeedsAdvanceState> forceAdvance() async {
-    Log.info('forceAdvance');
     for (Feed f in _feeds) {
       _feedAdvanceService.advance(f);
     }
@@ -31,13 +29,9 @@ class FeedsAdvanceService {
   }
 
   Future<FeedsAdvanceState> maybeAdvance() async {
-    Log.info('maybeAdvance');
     if (!_feeds.areChaptersRead) return FeedsAdvanceState.notAllRead;
-    Log.info(1);
     final lastDateModified = _feeds.lastModifiedFeed?.state.dateModified;
-    Log.info(2);
     if (lastDateModified == null) return FeedsAdvanceState.notAllRead;
-    Log.info(3);
     final now = _dateTimeService.now;
     final lastMidnightOfNow = DateTime(now.year, now.month, now.day);
     final lastMidnightOfLastDateModified = DateTime(
@@ -45,8 +39,6 @@ class FeedsAdvanceService {
       lastDateModified.month,
       lastDateModified.day,
     );
-    Log.info(lastMidnightOfNow);
-    Log.info(lastMidnightOfLastDateModified);
     if (lastMidnightOfNow.isAfter(lastMidnightOfLastDateModified)) return forceAdvance();
     return Future.value(FeedsAdvanceState.allReadAwaitingTomorrow);
   }
