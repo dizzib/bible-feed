@@ -4,17 +4,20 @@ import 'package:injectable/injectable.dart';
 import '/model/bible_reader.dart';
 import '/model/feed.dart';
 import 'bible_reader_launch_result.dart';
+import 'platform_service.dart';
 import 'url_launch_service.dart';
 
 @lazySingleton
 class BibleReaderLaunchService {
+  final PlatformService _platformService;
   final UrlLaunchService _urlLaunchService;
 
-  BibleReaderLaunchService(this._urlLaunchService);
+  BibleReaderLaunchService(this._platformService, this._urlLaunchService);
 
   String _getDeeplinkUri(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey(internalBookKey);
-    var url = bibleReader.uriTemplate.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
+    var url = bibleReader.uriTemplate[_platformService.currentPlatform]!;
+    url = url.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
     if (bibleReader.uriVersePath == null || verse == 1) return url;
     // ignore: avoid-non-null-assertion, passed above null check
     return url + bibleReader.uriVersePath!.replaceAll('VERSE', verse.toString());

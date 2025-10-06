@@ -3,12 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bible_feed/model/bible_reader.dart' as _i2;
-import 'package:bible_feed/model/bible_reader_key.dart' as _i5;
-import 'package:bible_feed/model/book_key_externaliser.dart' as _i3;
-import 'package:flutter/foundation.dart' as _i4;
+import 'package:bible_feed/model/bible_reader.dart' as _i3;
+import 'package:bible_feed/model/bible_reader_key.dart' as _i6;
+import 'package:bible_feed/model/book_key_externaliser.dart' as _i4;
+import 'package:bible_feed/model/uri_template.dart' as _i2;
+import 'package:flutter/foundation.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,44 +25,49 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeUriTemplate_0 extends _i1.SmartFake implements _i2.UriTemplate {
+  _FakeUriTemplate_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [BibleReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
+class MockBibleReader extends _i1.Mock implements _i3.BibleReader {
   @override
-  _i3.BookKeyExternaliser get bookKeyExternaliser =>
+  _i4.BookKeyExternaliser get bookKeyExternaliser =>
       (super.noSuchMethod(
             Invocation.getter(#bookKeyExternaliser),
-            returnValue: _i3.BookKeyExternaliser.identity,
-            returnValueForMissingStub: _i3.BookKeyExternaliser.identity,
+            returnValue: _i4.BookKeyExternaliser.identity,
+            returnValueForMissingStub: _i4.BookKeyExternaliser.identity,
           )
-          as _i3.BookKeyExternaliser);
+          as _i4.BookKeyExternaliser);
 
   @override
-  List<_i4.TargetPlatform> get certifiedPlatforms =>
+  List<_i5.TargetPlatform> get certifiedPlatforms =>
       (super.noSuchMethod(
             Invocation.getter(#certifiedPlatforms),
-            returnValue: <_i4.TargetPlatform>[],
-            returnValueForMissingStub: <_i4.TargetPlatform>[],
+            returnValue: <_i5.TargetPlatform>[],
+            returnValueForMissingStub: <_i5.TargetPlatform>[],
           )
-          as List<_i4.TargetPlatform>);
+          as List<_i5.TargetPlatform>);
 
   @override
-  _i5.BibleReaderKey get key =>
+  _i6.BibleReaderKey get key =>
       (super.noSuchMethod(
             Invocation.getter(#key),
-            returnValue: _i5.BibleReaderKey.none,
-            returnValueForMissingStub: _i5.BibleReaderKey.none,
+            returnValue: _i6.BibleReaderKey.none,
+            returnValueForMissingStub: _i6.BibleReaderKey.none,
           )
-          as _i5.BibleReaderKey);
+          as _i6.BibleReaderKey);
 
   @override
   String get name =>
       (super.noSuchMethod(
             Invocation.getter(#name),
-            returnValue: _i6.dummyValue<String>(this, Invocation.getter(#name)),
-            returnValueForMissingStub: _i6.dummyValue<String>(
+            returnValue: _i7.dummyValue<String>(this, Invocation.getter(#name)),
+            returnValueForMissingStub: _i7.dummyValue<String>(
               this,
               Invocation.getter(#name),
             ),
@@ -69,29 +75,29 @@ class MockBibleReader extends _i1.Mock implements _i2.BibleReader {
           as String);
 
   @override
-  String get uriTemplate =>
+  _i2.UriTemplate get uriTemplate =>
       (super.noSuchMethod(
             Invocation.getter(#uriTemplate),
-            returnValue: _i6.dummyValue<String>(
+            returnValue: _FakeUriTemplate_0(
               this,
               Invocation.getter(#uriTemplate),
             ),
-            returnValueForMissingStub: _i6.dummyValue<String>(
+            returnValueForMissingStub: _FakeUriTemplate_0(
               this,
               Invocation.getter(#uriTemplate),
             ),
           )
-          as String);
+          as _i2.UriTemplate);
 
   @override
   String get displayName =>
       (super.noSuchMethod(
             Invocation.getter(#displayName),
-            returnValue: _i6.dummyValue<String>(
+            returnValue: _i7.dummyValue<String>(
               this,
               Invocation.getter(#displayName),
             ),
-            returnValueForMissingStub: _i6.dummyValue<String>(
+            returnValueForMissingStub: _i7.dummyValue<String>(
               this,
               Invocation.getter(#displayName),
             ),

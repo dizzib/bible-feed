@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
 import 'book_key_externaliser.dart';
+import 'uri_template.dart';
 
 // for ios, scheme must be added to info.plist!!!
 @immutable
@@ -11,7 +12,7 @@ class BibleReader {
     required BibleReaderKey key,
     required BibleReaderType type,
     required String name,
-    required String uriTemplate,
+    required UriTemplate uriTemplate,
     required List<TargetPlatform> certifiedPlatforms,
     BookKeyExternaliser bookKeyExternaliser = BookKeyExternaliser.identity,
     String? uriVersePath,
@@ -28,7 +29,7 @@ class BibleReader {
   final BookKeyExternaliser _bookKeyExternaliser;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
   final String _name;
-  final String _uriTemplate;
+  final UriTemplate _uriTemplate;
   final String? _uriVersePath;
 
   // field getters
@@ -36,7 +37,7 @@ class BibleReader {
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   BibleReaderKey get key => _key;
   String get name => _name;
-  String get uriTemplate => _uriTemplate;
+  UriTemplate get uriTemplate => _uriTemplate;
   String? get uriVersePath => _uriVersePath;
 
   // calculated getters

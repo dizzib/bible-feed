@@ -2,6 +2,7 @@ import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/bible_reader_launch_result.dart';
 import 'package:bible_feed/service/bible_reader_launch_service.dart';
+import 'package:bible_feed/service/platform_service.dart';
 import 'package:bible_feed/service/url_launch_service.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,14 +13,17 @@ import 'package:parameterized_test/parameterized_test.dart';
 import '../test_data.dart';
 import 'bible_reader_launch_service_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<UrlLaunchService>()])
+@GenerateNiceMocks([MockSpec<PlatformService>(), MockSpec<UrlLaunchService>()])
 void main() async {
+  late MockPlatformService mockPlatformService;
   late MockUrlLaunchService mockUrlLaunchService;
   late BibleReaderLaunchService testee;
 
   setUp(() {
+    mockPlatformService = MockPlatformService();
     mockUrlLaunchService = MockUrlLaunchService();
-    testee = BibleReaderLaunchService(mockUrlLaunchService);
+    when(mockPlatformService.currentPlatform).thenReturn(TargetPlatform.android);
+    testee = BibleReaderLaunchService(mockPlatformService, mockUrlLaunchService);
   });
 
   group('isAvailable', () {
@@ -37,22 +41,25 @@ void main() async {
       (bool canLaunch, bool expectIsAvailable) async {
         when(mockUrlLaunchService.canLaunchUrl(any)).thenAnswer((_) async => canLaunch);
         expect(await testee.isAvailable(blbBibleReader), expectIsAvailable);
-        verify(mockUrlLaunchService.canLaunchUrl('scheme://uri/mat/1')).called(1);
+        verify(mockUrlLaunchService.canLaunchUrl('blb://android/mat/1')).called(1);
       },
     );
   });
-
   group('maybeLaunch', () {
     parameterizedTest(
       'should (maybe) launchUrl with correct uri and return correct Launch result',
       [
-        [noneBibleReader, 1, false, false, false, LaunchBypassed()],
-        [blbBibleReader, 1, false, false, false, LaunchBypassed()],
-        [blbBibleReader, 1, true, true, true, LaunchOk(), 'scheme://uri/b0/1'],
-        [blbBibleReader, 2, true, true, true, LaunchOk(), 'scheme://uri/b0/1/2'],
-        [blbBibleReader, 1, true, true, false, LaunchFailed(), 'scheme://uri/b0/1'],
+        [TargetPlatform.android, noneBibleReader, 1, false, false, false, LaunchBypassed()],
+        [TargetPlatform.android, blbBibleReader, 1, false, false, false, LaunchBypassed()],
+        [TargetPlatform.android, blbBibleReader, 1, true, true, true, LaunchOk(), 'blb://android/b0/1'],
+        [TargetPlatform.android, blbBibleReader, 2, true, true, true, LaunchOk(), 'blb://android/b0/1/2'],
+        [TargetPlatform.android, blbBibleReader, 1, true, true, false, LaunchFailed(), 'blb://android/b0/1'],
+        [TargetPlatform.iOS, blbBibleReader, 1, true, true, true, LaunchOk(), 'blb://ios/b0/1'],
+        [TargetPlatform.iOS, blbBibleReader, 2, true, true, true, LaunchOk(), 'blb://ios/b0/1/2'],
+        [TargetPlatform.iOS, blbBibleReader, 1, true, true, false, LaunchFailed(), 'blb://ios/b0/1'],
       ],
       (
+        TargetPlatform currentPlatform,
         BibleReader bibleReader,
         int verse,
         bool isRead,
@@ -62,6 +69,7 @@ void main() async {
         String? expectLaunchUrl,
       ]) async {
         final state = FeedState(book: b0, verse: verse, isRead: isRead);
+        when(mockPlatformService.currentPlatform).thenReturn(currentPlatform);
         when(mockUrlLaunchService.launchUrl(any)).thenAnswer((_) async => launchOk);
 
         final result = await testee.maybeLaunch(bibleReader, state);

@@ -1,5 +1,6 @@
 import 'package:bible_feed/model/bible_reader_key.dart';
 import 'package:bible_feed/model/book_key_externaliser.dart';
+import 'package:bible_feed/model/uri_template.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../test_data.dart';
@@ -10,7 +11,7 @@ void main() {
       expect(noneBibleReader.key, BibleReaderKey.none);
       expect(noneBibleReader.name, '');
       expect(noneBibleReader.certifiedPlatforms, []);
-      expect(noneBibleReader.uriTemplate, '');
+      expect(noneBibleReader.uriTemplate, UriTemplate(''));
       expect(noneBibleReader.bookKeyExternaliser, BookKeyExternaliser.identity);
     });
 
@@ -18,7 +19,10 @@ void main() {
       expect(blbBibleReader.key, BibleReaderKey.blueLetterApp);
       expect(blbBibleReader.name, 'name');
       expect(blbBibleReader.certifiedPlatforms, []);
-      expect(blbBibleReader.uriTemplate, 'scheme://uri/BOOK/CHAPTER');
+      expect(
+        blbBibleReader.uriTemplate,
+        UriTemplate.byPlatform(android: 'blb://android/BOOK/CHAPTER', iOS: 'blb://ios/BOOK/CHAPTER'),
+      );
       expect(blbBibleReader.uriVersePath, '/VERSE');
       expect(blbBibleReader.bookKeyExternaliser, BookKeyExternaliser.blueLetter);
     });

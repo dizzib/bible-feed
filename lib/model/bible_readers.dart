@@ -6,6 +6,7 @@ import 'bible_reader.dart';
 import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
 import 'book_key_externaliser.dart';
+import 'uri_template.dart';
 
 @immutable
 @lazySingleton
@@ -16,27 +17,27 @@ class BibleReaders extends BaseList<BibleReader> {
 @module
 abstract class BibleReadersModule {
   @lazySingleton
-  List<BibleReader> get bibleReader => const [
+  List<BibleReader> get bibleReader => [
     BibleReader(
       key: BibleReaderKey.none,
       type: BibleReaderType.none,
       name: 'None',
-      uriTemplate: '',
-      certifiedPlatforms: [TargetPlatform.android, TargetPlatform.iOS],
+      uriTemplate: UriTemplate(''),
+      certifiedPlatforms: const [TargetPlatform.android, TargetPlatform.iOS],
     ),
     BibleReader(
       key: BibleReaderKey.andBibleApp,
       type: BibleReaderType.app,
       name: 'AndBible',
-      uriTemplate: 'https://read.andbible.org/BOOK.CHAPTER',
-      certifiedPlatforms: [], // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
+      uriTemplate: UriTemplate('https://read.andbible.org/BOOK.CHAPTER'),
+      certifiedPlatforms: const [], // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
     ),
     BibleReader(
       key: BibleReaderKey.blueLetterApp,
       type: BibleReaderType.app,
       name: 'Blue Letter Bible',
-      uriTemplate: 'blb://BOOK/CHAPTER',
-      certifiedPlatforms: [TargetPlatform.iOS], // android has Open by default -> '0 verified links' and does not open!?
+      uriTemplate: UriTemplate.byPlatform(android: 'blb://bible/BOOK/CHAPTER', iOS: 'blb://BOOK/CHAPTER'),
+      certifiedPlatforms: const [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyExternaliser: BookKeyExternaliser.blueLetter,
       uriVersePath: '/VERSE',
     ),
@@ -44,8 +45,8 @@ abstract class BibleReadersModule {
       key: BibleReaderKey.blueLetterWeb,
       type: BibleReaderType.web,
       name: 'Blue Letter Bible',
-      uriTemplate: 'https://www.blueletterbible.org/nkjv/BOOK/CHAPTER',
-      certifiedPlatforms: [TargetPlatform.android, TargetPlatform.iOS],
+      uriTemplate: UriTemplate('https://www.blueletterbible.org/nkjv/BOOK/CHAPTER'),
+      certifiedPlatforms: const [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyExternaliser: BookKeyExternaliser.blueLetter,
       uriVersePath: '/VERSE',
     ),
@@ -53,15 +54,15 @@ abstract class BibleReadersModule {
       key: BibleReaderKey.lifeBibleApp,
       type: BibleReaderType.app,
       name: 'Life Bible',
-      uriTemplate: 'tecartabible://BOOK.CHAPTER',
-      certifiedPlatforms: [],
+      uriTemplate: UriTemplate('tecartabible://BOOK.CHAPTER'),
+      certifiedPlatforms: const [],
     ),
     BibleReader(
       key: BibleReaderKey.logosBibleApp,
       type: BibleReaderType.app,
       name: 'Logos Bible',
-      uriTemplate: 'logosref:Bible.BOOK.CHAPTER',
-      certifiedPlatforms: [TargetPlatform.android, TargetPlatform.iOS],
+      uriTemplate: UriTemplate('logosref:Bible.BOOK.CHAPTER'),
+      certifiedPlatforms: const [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyExternaliser: BookKeyExternaliser.logos,
       uriVersePath: '.VERSE',
     ),
@@ -69,8 +70,8 @@ abstract class BibleReadersModule {
       key: BibleReaderKey.oliveTreeApp,
       type: BibleReaderType.app,
       name: 'Olive Tree',
-      uriTemplate: 'olivetree://bible/BOOK.CHAPTER',
-      certifiedPlatforms: [TargetPlatform.android, TargetPlatform.iOS],
+      uriTemplate: UriTemplate('olivetree://bible/BOOK.CHAPTER'),
+      certifiedPlatforms: const [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyExternaliser: BookKeyExternaliser.oliveTree,
       uriVersePath: '.VERSE',
     ),
@@ -78,8 +79,8 @@ abstract class BibleReadersModule {
       key: BibleReaderKey.weDevoteApp,
       type: BibleReaderType.app,
       name: 'WeDevote',
-      uriTemplate: 'wdbible://bible/BOOK.CHAPTER',
-      certifiedPlatforms: [TargetPlatform.iOS],
+      uriTemplate: UriTemplate('wdbible://bible/BOOK.CHAPTER'),
+      certifiedPlatforms: const [TargetPlatform.iOS],
       bookKeyExternaliser: BookKeyExternaliser.osisParatext,
       uriVersePath: '.VERSE',
     ),
@@ -87,8 +88,8 @@ abstract class BibleReadersModule {
       key: BibleReaderKey.youVersionApp,
       type: BibleReaderType.app,
       name: 'YouVersion',
-      uriTemplate: 'youversion://bible?reference=BOOK.CHAPTER',
-      certifiedPlatforms: [TargetPlatform.android, TargetPlatform.iOS],
+      uriTemplate: UriTemplate('youversion://bible?reference=BOOK.CHAPTER'),
+      certifiedPlatforms: const [TargetPlatform.android, TargetPlatform.iOS],
       bookKeyExternaliser: BookKeyExternaliser.osisParatext,
       uriVersePath: '.VERSE',
     ),

@@ -3,9 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i5;
 
-import 'package:bible_feed/service/url_launch_service.dart' as _i2;
+import 'package:bible_feed/service/platform_service.dart' as _i2;
+import 'package:bible_feed/service/url_launch_service.dart' as _i4;
+import 'package:flutter/foundation.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -22,25 +24,66 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+/// A class which mocks [PlatformService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPlatformService extends _i1.Mock implements _i2.PlatformService {
+  @override
+  _i3.TargetPlatform get currentPlatform =>
+      (super.noSuchMethod(
+            Invocation.getter(#currentPlatform),
+            returnValue: _i3.TargetPlatform.android,
+            returnValueForMissingStub: _i3.TargetPlatform.android,
+          )
+          as _i3.TargetPlatform);
+
+  @override
+  bool get isHapticAvailable =>
+      (super.noSuchMethod(
+            Invocation.getter(#isHapticAvailable),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  bool get isAndroid =>
+      (super.noSuchMethod(
+            Invocation.getter(#isAndroid),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  bool get isIOS =>
+      (super.noSuchMethod(
+            Invocation.getter(#isIOS),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+}
+
 /// A class which mocks [UrlLaunchService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUrlLaunchService extends _i1.Mock implements _i2.UrlLaunchService {
+class MockUrlLaunchService extends _i1.Mock implements _i4.UrlLaunchService {
   @override
-  _i3.Future<bool> canLaunchUrl(String? url) =>
+  _i5.Future<bool> canLaunchUrl(String? url) =>
       (super.noSuchMethod(
             Invocation.method(#canLaunchUrl, [url]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i5.Future<bool>.value(false),
+            returnValueForMissingStub: _i5.Future<bool>.value(false),
           )
-          as _i3.Future<bool>);
+          as _i5.Future<bool>);
 
   @override
-  _i3.Future<bool> launchUrl(String? url) =>
+  _i5.Future<bool> launchUrl(String? url) =>
       (super.noSuchMethod(
             Invocation.method(#launchUrl, [url]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
+            returnValue: _i5.Future<bool>.value(false),
+            returnValueForMissingStub: _i5.Future<bool>.value(false),
           )
-          as _i3.Future<bool>);
+          as _i5.Future<bool>);
 }

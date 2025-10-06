@@ -137,9 +137,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i578.PlatformService>(),
       ),
     );
-    gh.lazySingleton<_i905.BibleReaderLaunchService>(
-      () => _i905.BibleReaderLaunchService(gh<_i626.UrlLaunchService>()),
-    );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
@@ -150,6 +147,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i273.BibleReadersCertifiedService(
         gh<_i578.PlatformService>(),
         gh<_i1070.BibleReaders>(),
+      ),
+    );
+    gh.lazySingleton<_i905.BibleReaderLaunchService>(
+      () => _i905.BibleReaderLaunchService(
+        gh<_i578.PlatformService>(),
+        gh<_i626.UrlLaunchService>(),
       ),
     );
     gh.lazySingleton<_i22.HapticService>(

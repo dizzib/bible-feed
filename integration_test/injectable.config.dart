@@ -126,14 +126,17 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i123.MidnightDateTimeService(),
       registerFor: {_midnight_test},
     );
+    gh.lazySingleton<_i905.BibleReaderLaunchService>(
+      () => _i905.BibleReaderLaunchService(
+        gh<_i578.PlatformService>(),
+        gh<_i626.UrlLaunchService>(),
+      ),
+    );
     gh.lazySingleton<_i513.HapticTogglerService>(
       () => _i513.HapticTogglerService(
         gh<_i460.SharedPreferences>(),
         gh<_i578.PlatformService>(),
       ),
-    );
-    gh.lazySingleton<_i905.BibleReaderLaunchService>(
-      () => _i905.BibleReaderLaunchService(gh<_i626.UrlLaunchService>()),
     );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
