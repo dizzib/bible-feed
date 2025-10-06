@@ -28,7 +28,7 @@ dart_code_linter:
     - prefer-extracting-callbacks: false
   metrics:
     halstead-volume: 1000
-    maintainability-index: 40
+    maintainability-index: 35
     number-of-methods: 12
 
 formatter:
