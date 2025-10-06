@@ -37,12 +37,12 @@ class BibleReaderLinkService with ChangeNotifier {
     notifyListeners();
   }
 
+  List<BibleReader> get _certifiedBibleReaderList => _bibleReadersCertifiedService.certifiedBibleReaderList;
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
-  BibleReader get linkedBibleReader =>
-      _bibleReadersCertifiedService.certifiedBibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);
-  int get linkedBibleReaderIndex => _bibleReadersCertifiedService.certifiedBibleReaderList.indexOf(linkedBibleReader);
-  set linkedBibleReaderIndex(int value) =>
-      _saveState(_bibleReadersCertifiedService.certifiedBibleReaderList[value].key);
+
+  BibleReader get linkedBibleReader => _certifiedBibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);
+  int get linkedBibleReaderIndex => _certifiedBibleReaderList.indexOf(linkedBibleReader);
+  set linkedBibleReaderIndex(int value) => _saveState(_certifiedBibleReaderList[value].key);
 
   void unlinkBibleReader() => _saveState(BibleReaderKey.none);
 }
