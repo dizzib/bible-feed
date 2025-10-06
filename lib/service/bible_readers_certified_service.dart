@@ -1,5 +1,4 @@
 import 'package:dartx/dartx.dart';
-import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 import '/model/bible_reader.dart';
@@ -10,13 +9,7 @@ import 'platform_service.dart';
 class BibleReadersCertifiedService {
   BibleReadersCertifiedService(PlatformService platformService, BibleReaders bibleReaders)
     : _certifiedBibleReaderList =
-          bibleReaders
-              .filter(
-                (br) =>
-                    (platformService.isAndroid && br.certifiedPlatforms.contains(TargetPlatform.android)) ||
-                    (platformService.isIOS && br.certifiedPlatforms.contains(TargetPlatform.iOS)),
-              )
-              .toList();
+          bibleReaders.filter((br) => br.certifiedPlatforms.contains(platformService.currentPlatform)).toList();
 
   final List<BibleReader> _certifiedBibleReaderList;
 

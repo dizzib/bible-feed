@@ -22,18 +22,16 @@ void main() async {
     'certifiedBibleReaderList',
     [
       [
-        true,
-        false,
+        TargetPlatform.android,
         [bibleReaders[1], bibleReaders[3]],
       ],
       [
-        false,
-        true,
+        TargetPlatform.iOS,
         [bibleReaders[2], bibleReaders[3]],
       ],
     ],
-    (isAndroid, isIOS, expectResult) {
-      final platformService = PlatformService(isAndroid: isAndroid, isIOS: isIOS, isHapticAvailable: false);
+    (currentPlatform, expectResult) {
+      final platformService = PlatformService(currentPlatform: currentPlatform, isHapticAvailable: false);
       final testee = BibleReadersCertifiedService(platformService, bibleReaders);
       expect(testee.certifiedBibleReaderList, expectResult);
     },

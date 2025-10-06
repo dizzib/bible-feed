@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'haptic_toggler_service_test.mocks.dart';
 
 class TestPlatformService extends PlatformService {
-  TestPlatformService() : super(isAndroid: true, isIOS: false, isHapticAvailable: true);
+  TestPlatformService() : super(currentPlatform: TargetPlatform.android, isHapticAvailable: true);
 }
 
 @GenerateNiceMocks([MockSpec<SharedPreferences>()])

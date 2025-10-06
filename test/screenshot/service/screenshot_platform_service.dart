@@ -1,9 +1,10 @@
 import 'package:bible_feed/injectable.env.dart';
 import 'package:bible_feed/service/platform_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 @screenshot
 @LazySingleton(as: PlatformService)
 class ScreenshotPlatformService extends PlatformService {
-  ScreenshotPlatformService() : super(isAndroid: true, isIOS: false, isHapticAvailable: true);
+  ScreenshotPlatformService() : super(currentPlatform: TargetPlatform.android, isHapticAvailable: true);
 }
