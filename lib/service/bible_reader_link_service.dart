@@ -23,8 +23,7 @@ class BibleReaderLinkService with ChangeNotifier {
     final String? linkedReaderName = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
     try {
       _linkedBibleReaderKey = BibleReaderKey.values.byName(linkedReaderName ?? BibleReaderKey.none.name);
-      // ignore: unused_local_variable
-      final checkCertified = linkedBibleReader; // throws an exception if linkedBibleReader is invalid or uncertified
+      linkedBibleReader; // throws an exception if linkedBibleReader is invalid or uncertified
     } catch (e) {
       _linkedBibleReaderKey = BibleReaderKey.none;
     }
