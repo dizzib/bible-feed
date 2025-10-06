@@ -24,7 +24,7 @@ void main() async {
   });
 
   parameterizedTest(
-    'property getters',
+    'constructor should load linkedBibleReader from store',
     [
       [null, false, 0, noneBibleReader],
       ['invalid', false, 0, noneBibleReader],
