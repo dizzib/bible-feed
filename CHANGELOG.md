@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 
 
+## [1.6.0] - 2025-10-06
+
+### Added
+- Blue Letter Bible app reader for Android
+
+
 ## [1.5.2] - 2025-09-15
 
 ### Changed
