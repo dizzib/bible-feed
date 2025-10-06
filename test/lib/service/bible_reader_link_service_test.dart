@@ -39,6 +39,13 @@ void main() async {
     },
   );
 
+  test('constructor should set linkedBibleReader to none if stored linkedBibleReader is uncertified', () {
+    when(mockBibleReadersCertifiedService.certifiedBibleReaderList).thenReturn([]);
+    when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
+    testee = BibleReaderLinkService(mockSharedPreferences, mockBibleReadersCertifiedService);
+    expect(testee.isLinked, false);
+  });
+
   test('linkedBibleReaderIndex setter should update and save to store', () {
     testee.linkedBibleReaderIndex = 1;
     verify(mockSharedPreferences.setString('linkedBibleReader', 'blueLetterApp')).called(1);
