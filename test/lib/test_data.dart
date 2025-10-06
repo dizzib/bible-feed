@@ -2,6 +2,7 @@ import 'package:bible_feed/model/bible_reader_key.dart';
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_reader_type.dart';
 import 'package:bible_feed/model/book.dart';
+import 'package:bible_feed/model/book_key_externaliser.dart';
 import 'package:bible_feed/model/reading_list.dart';
 
 const b0 = Book('b0', 'Book 0', 1);
@@ -26,4 +27,5 @@ final blbBibleReader = const BibleReader(
   certifiedPlatforms: [],
   uriTemplate: 'scheme://uri/BOOK/CHAPTER',
   uriVersePath: '/VERSE',
+  bookKeyExternaliser: BookKeyExternaliser.blueLetter,
 );
