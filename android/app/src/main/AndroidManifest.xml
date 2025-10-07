@@ -48,7 +48,10 @@
           <category android:name="android.intent.category.BROWSABLE" />
           <data android:scheme="https" />
         </intent>
+        <!-- to deeplink bible apps (in preference to QUERY_ALL_PACKAGES) -->
+        <package android:name="org.blueletterbible.blb" />
+        <package android:name="com.logos.androidlogos" />
+        <package android:name="biblereader.olivetree" />
+        <package android:name="com.sirma.mobile.bible.android" />
     </queries>
-    <!-- to deeplink bible apps -->
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
 </manifest>

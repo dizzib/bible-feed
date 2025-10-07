@@ -14,6 +14,7 @@ class BibleReaders extends BaseList<BibleReader> {
   const BibleReaders(super._items);
 }
 
+// Android bible readers must be added to the queries section of AndroidManifest.xml.
 @module
 abstract class BibleReadersModule {
   @lazySingleton
