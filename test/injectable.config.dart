@@ -46,10 +46,10 @@ import 'screenshot/service/screenshot_app_service.dart' as _i349;
 import 'screenshot/service/screenshot_platform_event_service.dart' as _i312;
 import 'screenshot/service/screenshot_platform_service.dart' as _i305;
 
-const String _midnight_test = 'midnight_test';
 const String _prod = 'prod';
 const String _screenshot = 'screenshot';
 const String _test = 'test';
+const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -82,10 +82,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
-    gh.lazySingleton<_i516.PlatformEventService>(
-      () => _i516.ProductionPlatformEventService(),
-      registerFor: {_midnight_test, _prod},
-    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_prod, _screenshot, _test},
@@ -140,6 +136,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
+    gh.lazySingleton<_i516.PlatformEventService>(
+      () => _i516.ProductionPlatformEventService(gh<_i578.PlatformService>()),
+      registerFor: {_midnight_test, _prod},
+    );
     gh.lazySingleton<_i840.FeedAdvanceService>(
       () => _i840.FeedAdvanceService(gh<_i283.ChapterSplitService>()),
     );
@@ -190,6 +190,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i129.FeedsService>(),
       ),
     );
+    gh.lazySingleton<_i817.AppInstallService>(
+      () => _i817.AppInstallService(
+        gh<_i905.BibleReaderLaunchService>(),
+        gh<_i134.BibleReaderLinkService>(),
+        gh<_i516.PlatformEventService>(),
+      ),
+    );
     gh.singleton<_i969.HapticWireupService>(
       () => _i969.HapticWireupService(
         gh<_i22.HapticService>(),
@@ -197,14 +204,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i134.BibleReaderLinkService>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
-      ),
-    );
-    gh.lazySingleton<_i817.AppInstallService>(
-      () => _i817.AppInstallService(
-        gh<_i905.BibleReaderLaunchService>(),
-        gh<_i134.BibleReaderLinkService>(),
-        gh<_i516.PlatformEventService>(),
-        gh<_i578.PlatformService>(),
       ),
     );
     return this;

@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:bible_feed/service/app_install_service.dart';
 import 'package:bible_feed/service/bible_reader_link_service.dart';
 import 'package:bible_feed/service/bible_reader_launch_service.dart';
-import 'package:bible_feed/service/platform_service.dart';
 import 'package:bible_feed/service/platform_event_service.dart';
 
 import 'app_install_service_test.mocks.dart';
@@ -15,40 +14,26 @@ import 'app_install_service_test.mocks.dart';
   MockSpec<BibleReaderLaunchService>(),
   MockSpec<BibleReaderLinkService>(),
   MockSpec<PlatformEventService>(),
-  MockSpec<PlatformService>(),
 ])
 void main() {
   late MockBibleReaderLinkService mockBibleReaderLinkService;
   late MockBibleReaderLaunchService mockBibleReaderLaunchService;
-  late MockPlatformService mockPlatformService;
   late MockPlatformEventService mockPlatformEventService;
 
   setUp(() {
     mockBibleReaderLaunchService = MockBibleReaderLaunchService();
     mockBibleReaderLinkService = MockBibleReaderLinkService();
     mockPlatformEventService = MockPlatformEventService();
-    mockPlatformService = MockPlatformService();
   });
 
-  AppInstallService createTestee() => AppInstallService(
-    mockBibleReaderLaunchService,
-    mockBibleReaderLinkService,
-    mockPlatformEventService,
-    mockPlatformService,
-  );
-
-  test('on ios, does not add listener', () {
-    when(mockPlatformService.isIOS).thenReturn(true);
-    createTestee();
-    verifyNever(mockPlatformEventService.addListener(any));
-  });
+  AppInstallService createTestee() =>
+      AppInstallService(mockBibleReaderLaunchService, mockBibleReaderLinkService, mockPlatformEventService);
 
   group('on android, on platform event fired', () {
     late VoidCallback listener;
     late bool notified;
 
     setUp(() {
-      when(mockPlatformService.isIOS).thenReturn(false);
       // capture the PlatformEventService listener so we can invoke it
       when(mockPlatformEventService.addListener(any)).thenAnswer((invocation) {
         listener = invocation.positionalArguments[0] as VoidCallback;

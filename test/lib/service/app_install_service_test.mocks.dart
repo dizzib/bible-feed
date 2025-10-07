@@ -12,8 +12,6 @@ import 'package:bible_feed/service/bible_reader_launch_result.dart' as _i5;
 import 'package:bible_feed/service/bible_reader_launch_service.dart' as _i3;
 import 'package:bible_feed/service/bible_reader_link_service.dart' as _i8;
 import 'package:bible_feed/service/platform_event_service.dart' as _i10;
-import 'package:bible_feed/service/platform_service.dart' as _i11;
-import 'package:flutter/services.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 
@@ -195,45 +193,4 @@ class MockPlatformEventService extends _i1.Mock
     Invocation.method(#notifyListeners, []),
     returnValueForMissingStub: null,
   );
-}
-
-/// A class which mocks [PlatformService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockPlatformService extends _i1.Mock implements _i11.PlatformService {
-  @override
-  _i12.TargetPlatform get currentPlatform =>
-      (super.noSuchMethod(
-            Invocation.getter(#currentPlatform),
-            returnValue: _i12.TargetPlatform.android,
-            returnValueForMissingStub: _i12.TargetPlatform.android,
-          )
-          as _i12.TargetPlatform);
-
-  @override
-  bool get isHapticAvailable =>
-      (super.noSuchMethod(
-            Invocation.getter(#isHapticAvailable),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  bool get isAndroid =>
-      (super.noSuchMethod(
-            Invocation.getter(#isAndroid),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  bool get isIOS =>
-      (super.noSuchMethod(
-            Invocation.getter(#isIOS),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
 }

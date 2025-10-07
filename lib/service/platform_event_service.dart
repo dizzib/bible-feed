@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import '/injectable.env.dart';
+import 'platform_service.dart';
 
 abstract class PlatformEventService with ChangeNotifier {}
 
@@ -11,7 +12,8 @@ abstract class PlatformEventService with ChangeNotifier {}
 @prod
 @LazySingleton(as: PlatformEventService)
 class ProductionPlatformEventService extends PlatformEventService {
-  ProductionPlatformEventService() {
+  ProductionPlatformEventService(PlatformService platformService) {
+    if (platformService.isIOS) return; // IOS cannot detect app (un)install events.
     AppIUEvents().appEvents.listen((event) {
       Log.info(event);
       notifyListeners();
