@@ -15,6 +15,7 @@ class BibleReaders extends BaseList<BibleReader> {
 }
 
 // Android bible readers must be added to the queries section of AndroidManifest.xml.
+// IOS bible reader schemes must be added to LSApplicationQueriesSchemes in Info.plist.
 @module
 abstract class BibleReadersModule {
   @lazySingleton
@@ -55,8 +56,14 @@ abstract class BibleReadersModule {
       key: BibleReaderKey.lifeBibleApp,
       type: BibleReaderType.app,
       name: 'Life Bible',
-      uriTemplate: UriTemplate('tecartabible://BOOK.CHAPTER'),
+      uriTemplate: UriTemplate('tecartabible://BOOK CHAPTER'), // 'https://tecartabible.com/bible/BOOK+CHAPTER'
+      // Not certified due to these issues:
+      // - :VERSE works only via https
+      // - forcibly reverts translation over https
+      // - 3-letter book keys are not documented, but mostly work on ios or over https on android (e.g. 2 chronicles broken)
+      // - android back button works but needs 2 taps
       certifiedPlatforms: const [],
+      uriVersePath: ':VERSE',
     ),
     BibleReader(
       key: BibleReaderKey.logosBibleApp,

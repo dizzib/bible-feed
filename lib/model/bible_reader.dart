@@ -5,7 +5,6 @@ import 'bible_reader_type.dart';
 import 'book_key_externaliser.dart';
 import 'uri_template.dart';
 
-// for ios, scheme must be added to info.plist!!!
 @immutable
 class BibleReader {
   const BibleReader({
