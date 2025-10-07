@@ -25,7 +25,8 @@ class BibleReaderLaunchService {
 
   Future<bool> isAvailable(BibleReader bibleReader) {
     if (bibleReader.isNone) return Future.value(true);
-    return _urlLaunchService.canLaunchUrl(_getDeeplinkUri(bibleReader, 'mat', 1));
+    final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey('mat');
+    return _urlLaunchService.canLaunchUrl(_getDeeplinkUri(bibleReader, externalBookKey, 1));
   }
 
   Future<BibleReaderLaunchResult> maybeLaunch(BibleReader bibleReader, FeedState state) async {
