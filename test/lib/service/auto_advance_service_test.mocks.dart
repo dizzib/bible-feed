@@ -61,9 +61,9 @@ class MockFeedsAdvanceService extends _i1.Mock
           as bool);
 
   @override
-  _i4.Future<_i5.FeedsAdvanceState> forceAdvance() =>
+  _i4.Future<_i5.FeedsAdvanceState> advance() =>
       (super.noSuchMethod(
-            Invocation.method(#forceAdvance, []),
+            Invocation.method(#advance, []),
             returnValue: _i4.Future<_i5.FeedsAdvanceState>.value(
               _i5.FeedsAdvanceState.notAllRead,
             ),
