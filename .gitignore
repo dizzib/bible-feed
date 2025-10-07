@@ -10,7 +10,7 @@ core
 .history
 .svn/
 _coverage/
-_report/
+_diagram/
 coverage/
 migrate_working_dir/
 devtools_options.yaml
