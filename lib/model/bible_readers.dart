@@ -32,7 +32,7 @@ abstract class BibleReadersModule {
       type: BibleReaderType.app,
       name: 'AndBible',
       uriTemplate: UriTemplate('https://read.andbible.org/BOOK.CHAPTER'),
-      certifiedPlatforms: const [], // Deep links not working: https://github.com/AndBible/and-bible/issues/3210
+      // Not certified because deep links are not working: https://github.com/AndBible/and-bible/issues/3210
     ),
     BibleReader(
       key: BibleReaderKey.blueLetterApp,
@@ -62,7 +62,6 @@ abstract class BibleReadersModule {
       // - forcibly reverts translation over https
       // - 3-letter book keys are not documented, but mostly work on ios or over https on android (e.g. 2 chronicles broken)
       // - android back button works but needs 2 taps
-      certifiedPlatforms: const [],
       uriVersePath: ':VERSE',
     ),
     BibleReader(

@@ -12,7 +12,7 @@ class BibleReader {
     required BibleReaderType type,
     required String name,
     required UriTemplate uriTemplate,
-    required List<TargetPlatform> certifiedPlatforms,
+    List<TargetPlatform> certifiedPlatforms = const [],
     BookKeyExternaliser bookKeyExternaliser = BookKeyExternaliser.identity,
     String? uriVersePath,
   }) : _key = key,
