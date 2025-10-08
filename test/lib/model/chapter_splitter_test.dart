@@ -1,4 +1,5 @@
 import 'package:bible_feed/model/chapter_splitter.dart';
+import 'package:bible_feed/model/chapter_splitters.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:parameterized_test/parameterized_test.dart';
@@ -14,7 +15,7 @@ void main() {
       [161, 1, 'from\u00A0verse\u00A0161'],
     ],
     (int verse, int expectNextVerse, String expectLabel) {
-      final testee = const ChapterSplitter('b0', 1, [17, 33, 49, 65, 81, 97, 113, 129, 145, 161]);
+      final testee = ChapterSplitter(b0.key, 1, ChapterSplitters.psalm119VerseList);
       expect(testee.getLabel(FeedState(book: b0, verse: verse)), expectLabel);
     },
   );

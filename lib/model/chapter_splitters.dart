@@ -11,6 +11,8 @@ import 'feed.dart';
 class ChapterSplitters extends BaseList<ChapterSplitter> {
   const ChapterSplitters(super._items);
 
+  static const psalm119VerseList = [17, 33, 49, 65, 81, 97, 113, 129, 145, 161]; // used by unit test
+
   ChapterSplitter? find(FeedState state) =>
       firstOrNullWhere((item) => item.bookKey == state.book.key && item.chapter == state.chapter);
 }
@@ -29,6 +31,6 @@ abstract class ChapterSplittersModule {
     const ChapterSplitter('mat', 26, [36]),
     const ChapterSplitter('neh', 7, [37]),
     const ChapterSplitter('num', 7, [48]),
-    const ChapterSplitter('psa', 119, [17, 33, 49, 65, 81, 97, 113, 129, 145, 161]),
+    const ChapterSplitter('psa', 119, ChapterSplitters.psalm119VerseList),
   ];
 }
