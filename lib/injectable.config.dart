@@ -163,6 +163,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i969.HapticWireupService>(
       () => _i969.HapticWireupService(
         gh<_i22.HapticService>(),
+        gh<_i301.ChapterSplitTogglerService>(),
         gh<_i513.HapticTogglerService>(),
         gh<_i134.BibleReaderLinkService>(),
         gh<_i1033.BookListWheelState>(),

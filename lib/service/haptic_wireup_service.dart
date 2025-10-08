@@ -2,12 +2,14 @@ import 'package:injectable/injectable.dart';
 
 import '/model/list_wheel_state.dart';
 import 'bible_reader_link_service.dart';
+import 'chapter_split_toggler_service.dart';
 import 'haptic_service.dart';
 import 'haptic_toggler_service.dart';
 
 @singleton
 class HapticWireupService {
   final HapticService _hapticService;
+  final ChapterSplitTogglerService _chapterSplitTogglerService;
   final HapticTogglerService _hapticTogglerService;
   final BibleReaderLinkService _bibleReaderService;
   final BookListWheelState _bookListWheelState;
@@ -15,6 +17,7 @@ class HapticWireupService {
 
   HapticWireupService(
     this._hapticService,
+    this._chapterSplitTogglerService,
     this._hapticTogglerService,
     this._bibleReaderService,
     this._bookListWheelState,
@@ -23,6 +26,7 @@ class HapticWireupService {
     _bibleReaderService.addListener(_hapticService.impact);
     _bookListWheelState.addListener(_hapticService.impact);
     _chapterListWheelState.addListener(_hapticService.impact);
+    _chapterSplitTogglerService.addListener(_hapticService.impact);
     _hapticTogglerService.addListener(_hapticService.impact);
   }
 }
