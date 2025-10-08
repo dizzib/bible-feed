@@ -87,7 +87,7 @@ abstract class BibleReadersModule {
       type: BibleReaderType.app,
       name: 'WeDevote',
       uriTemplate: UriTemplate('wdbible://bible/BOOK.CHAPTER'),
-      certifiedPlatforms: const [TargetPlatform.iOS],
+      certifiedPlatforms: const [TargetPlatform.iOS], // not detected on android
       bookKeyExternaliser: BookKeyExternaliser.osisParatext,
       uriVersePath: '.VERSE',
     ),
