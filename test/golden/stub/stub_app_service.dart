@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:yaml/yaml.dart';
 
 @golden
-@screenshot
 @LazySingleton(as: base.AppService)
 class ScreenshotAppService extends base.AppService {
   ScreenshotAppService({required super.buildNumber, required super.version});

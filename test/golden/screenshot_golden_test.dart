@@ -55,7 +55,7 @@ final scenarios = {
 };
 
 Future<void> main() async {
-  await configureDependencies('screenshot');
+  await configureDependencies('golden');
   sl<ChapterSplitTogglerService>().isEnabled = true; // enable verse scopes
   WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
 

@@ -13,7 +13,6 @@ abstract class DateTimeService {
 
 @golden
 @prod
-@screenshot
 @test
 @LazySingleton(as: DateTimeService)
 class NowDateTimeService extends DateTimeService {
