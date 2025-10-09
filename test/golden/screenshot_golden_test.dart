@@ -5,14 +5,12 @@ library;
 // They are resized and moved to fastlane by external scripts.
 
 import 'package:alchemist/alchemist.dart';
-import 'package:bible_feed/service/chapter_split_toggler_service.dart';
-import 'package:bible_feed/service/feeds_service.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
+import 'helper.dart';
 
 enum Platform { android, iOS }
 
@@ -56,41 +54,10 @@ final scenarios = {
 
 Future<void> main() async {
   await configureDependencies('golden');
-  sl<ChapterSplitTogglerService>().isEnabled = true; // enable verse scopes
   WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
 
-  void setState() {
-    var bookState = [
-      [0, 1],
-      [4, 6],
-      [0, 0],
-      [0, 5],
-      [0, 0],
-    ];
-    var chapterState = [
-      [5, 12],
-      [4, 2],
-      [40, 144],
-      [15, 17],
-      [40, 7],
-    ];
-    var chapterReadState = [
-      [0, 1],
-      [0, 0],
-      [1, 0],
-      [0, 1],
-      [1, 0],
-    ];
-    for (int row = 0; row < 5; row++) {
-      for (int col = 0; col < 2; col++) {
-        final feed = sl<FeedsService>().feeds[row * 2 + col];
-        feed.setBookChapterVerse(bookState[row][col], chapterState[row][col]);
-        if (chapterReadState[row][col] == 1) feed.toggleIsRead();
-      }
-    }
-  }
-
-  setState();
+  Helper.enableVerseScopes();
+  Helper.initialiseFeeds();
 
   for (final device in Device.values.where((d) => d.enabled)) {
     for (final (index, scenario) in scenarios.indexed) {

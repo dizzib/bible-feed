@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
+import 'helper.dart';
 
 class Scenario {
   const Scenario(this.widget, this.constraints);
@@ -30,6 +31,9 @@ final scenarios = {
 Future<void> main() async {
   await configureDependencies('golden');
   WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
+
+  Helper.enableVerseScopes();
+  Helper.initialiseFeeds();
 
   scenarios.forEach((name, scenario) {
     goldenTest(
