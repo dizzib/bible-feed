@@ -11,6 +11,7 @@ abstract class DateTimeService {
   DateTime get now;
 }
 
+@golden
 @prod
 @screenshot
 @test

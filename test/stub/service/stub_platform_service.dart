@@ -3,6 +3,7 @@ import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
+@golden
 @screenshot
 @LazySingleton(as: PlatformService)
 class ScreenshotPlatformService extends PlatformService {

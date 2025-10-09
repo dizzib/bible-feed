@@ -44,10 +44,11 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'injectable.dart' as _i1027;
 import 'service/midnight_date_time_service.dart' as _i123;
 
+const String _midnight_test = 'midnight_test';
 const String _prod = 'prod';
+const String _golden = 'golden';
 const String _screenshot = 'screenshot';
 const String _test = 'test';
-const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -80,10 +81,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
-    gh.lazySingleton<_i99.DateTimeService>(
-      () => _i99.NowDateTimeService(),
-      registerFor: {_prod, _screenshot, _test},
-    );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i977.ProductionAppService.create(),
       registerFor: {_midnight_test, _prod},
@@ -102,6 +99,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
+    );
+    gh.lazySingleton<_i99.DateTimeService>(
+      () => _i99.NowDateTimeService(),
+      registerFor: {_golden, _prod, _screenshot, _test},
     );
     gh.lazySingleton<_i273.BibleReadersCertifiedService>(
       () => _i273.BibleReadersCertifiedService(

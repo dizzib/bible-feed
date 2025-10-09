@@ -5,6 +5,7 @@ import 'package:bible_feed/service/app_service.dart' as base;
 import 'package:injectable/injectable.dart';
 import 'package:yaml/yaml.dart';
 
+@golden
 @screenshot
 @LazySingleton(as: base.AppService)
 class ScreenshotAppService extends base.AppService {
