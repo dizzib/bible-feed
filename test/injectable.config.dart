@@ -46,11 +46,9 @@ import 'golden/stub/stub_platform_event_service.dart' as _i919;
 import 'golden/stub/stub_platform_service.dart' as _i250;
 import 'injectable.dart' as _i1027;
 
-const String _midnight_test = 'midnight_test';
-const String _prod = 'prod';
 const String _golden = 'golden';
-const String _screenshot = 'screenshot';
-const String _test = 'test';
+const String _prod = 'prod';
+const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -83,6 +81,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i99.DateTimeService>(
+      () => _i99.NowDateTimeService(),
+      registerFor: {_golden, _prod},
+    );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i977.ProductionAppService.create(),
       registerFor: {_midnight_test, _prod},
@@ -99,27 +101,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
     );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i252.ScreenshotAppService.create(),
-      registerFor: {_golden, _screenshot},
-      preResolve: true,
-    );
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
-    gh.lazySingleton<_i99.DateTimeService>(
-      () => _i99.NowDateTimeService(),
-      registerFor: {_golden, _prod, _screenshot, _test},
+    gh.lazySingleton<_i516.PlatformEventService>(
+      () => _i919.ScreenshotPlatformEventService(),
+      registerFor: {_golden},
     );
-    gh.lazySingleton<_i578.PlatformService>(
-      () => _i250.ScreenshotPlatformService(),
-      registerFor: {_golden, _screenshot},
-    );
-    gh.lazySingleton<_i273.BibleReadersCertifiedService>(
-      () => _i273.BibleReadersCertifiedService(
-        gh<_i578.PlatformService>(),
-        gh<_i1070.BibleReaders>(),
-      ),
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i252.ScreenshotAppService.create(),
+      registerFor: {_golden},
+      preResolve: true,
     );
     gh.lazySingleton<_i301.ChapterSplitTogglerService>(
       () => _i301.ChapterSplitTogglerService(gh<_i460.SharedPreferences>()),
@@ -130,9 +122,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i301.ChapterSplitTogglerService>(),
       ),
     );
-    gh.lazySingleton<_i516.PlatformEventService>(
-      () => _i919.ScreenshotPlatformEventService(),
-      registerFor: {_golden, _screenshot},
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i250.ScreenshotPlatformService(),
+      registerFor: {_golden},
     );
     gh.lazySingleton<_i905.BibleReaderLaunchService>(
       () => _i905.BibleReaderLaunchService(
@@ -153,14 +145,14 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i516.ProductionPlatformEventService(gh<_i578.PlatformService>()),
       registerFor: {_midnight_test, _prod},
     );
-    gh.lazySingleton<_i134.BibleReaderLinkService>(
-      () => _i134.BibleReaderLinkService(
-        gh<_i460.SharedPreferences>(),
-        gh<_i273.BibleReadersCertifiedService>(),
-      ),
-    );
     gh.lazySingleton<_i840.FeedAdvanceService>(
       () => _i840.FeedAdvanceService(gh<_i283.ChapterSplitService>()),
+    );
+    gh.lazySingleton<_i273.BibleReadersCertifiedService>(
+      () => _i273.BibleReadersCertifiedService(
+        gh<_i578.PlatformService>(),
+        gh<_i1070.BibleReaders>(),
+      ),
     );
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i513.HapticTogglerService>()),
@@ -169,6 +161,32 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i129.FeedsService(
         gh<_i119.FeedStoreService>(),
         gh<_i823.ReadingLists>(),
+      ),
+    );
+    gh.lazySingleton<_i307.FeedsAdvanceService>(
+      () => _i307.FeedsAdvanceService(
+        gh<_i99.DateTimeService>(),
+        gh<_i460.SharedPreferences>(),
+        gh<_i840.FeedAdvanceService>(),
+        gh<_i129.FeedsService>(),
+      ),
+    );
+    gh.lazySingleton<_i134.BibleReaderLinkService>(
+      () => _i134.BibleReaderLinkService(
+        gh<_i460.SharedPreferences>(),
+        gh<_i273.BibleReadersCertifiedService>(),
+      ),
+    );
+    gh.singleton<_i148.AutoAdvanceService>(
+      () => _i148.AutoAdvanceService(
+        gh<_i99.DateTimeService>(),
+        gh<_i307.FeedsAdvanceService>(),
+      ),
+    );
+    gh.lazySingleton<_i136.AllDoneDialogService>(
+      () => _i136.AllDoneDialogService(
+        gh<_i307.FeedsAdvanceService>(),
+        gh<_i129.FeedsService>(),
       ),
     );
     gh.lazySingleton<_i817.AppInstallService>(
@@ -186,26 +204,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i134.BibleReaderLinkService>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
-      ),
-    );
-    gh.lazySingleton<_i307.FeedsAdvanceService>(
-      () => _i307.FeedsAdvanceService(
-        gh<_i99.DateTimeService>(),
-        gh<_i460.SharedPreferences>(),
-        gh<_i840.FeedAdvanceService>(),
-        gh<_i129.FeedsService>(),
-      ),
-    );
-    gh.singleton<_i148.AutoAdvanceService>(
-      () => _i148.AutoAdvanceService(
-        gh<_i99.DateTimeService>(),
-        gh<_i307.FeedsAdvanceService>(),
-      ),
-    );
-    gh.lazySingleton<_i136.AllDoneDialogService>(
-      () => _i136.AllDoneDialogService(
-        gh<_i307.FeedsAdvanceService>(),
-        gh<_i129.FeedsService>(),
       ),
     );
     return this;
