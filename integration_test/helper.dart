@@ -49,6 +49,11 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
+  Future tapIconButton(String key) async {
+    await tap(find.byKey(Key(key)));
+    await pumpAndSettle();
+  }
+
   Future tapList(String bookName) async {
     await tap(find.text(bookName));
     await pumpAndSettle();

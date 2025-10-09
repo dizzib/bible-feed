@@ -19,7 +19,7 @@ Future runEndToEndTest() async {
     await t.tapFab();
     await t.tapYes();
     expectChapters(3);
-    await t.longPress(find.text('Gospels'));
+    await t.tapIconButton('gos');
     await t.pumpAndSettle();
     await t.scrollToLastBook(); // subsequent t.pump breaks!?
     await t.scrollToLastChapter();
