@@ -30,6 +30,7 @@ class FeedCardTitleBar extends WatchingWidget {
           ),
         ),
         IconButton(
+          key: Key(feed.readingList.key), // for screenshot generator
           icon: const Icon(Icons.unfold_more),
           onPressed: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
         ),

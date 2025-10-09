@@ -38,17 +38,17 @@ enum Device {
 }
 
 class Scenario {
-  const Scenario(this.name, {this.brightness = Brightness.light, this.gesture});
+  const Scenario(this.name, {this.brightness = Brightness.light, this.tapKey});
 
   final String name;
   final Brightness brightness;
-  final Future<void> Function(WidgetTester)? gesture;
+  final String? tapKey;
 }
 
 final scenarios = {
   const Scenario('home'),
-  Scenario('bookChapterDialog', gesture: (t) async => await t.longPress(find.text('Epistles II'))),
-  Scenario('settings', gesture: (t) async => await t.tap(find.byKey(const Key('settingsIconButton')))),
+  const Scenario('bookChapterDialog', tapKey: 'ep2'),
+  const Scenario('settings', tapKey: 'settingsIconButton'),
   const Scenario('home', brightness: Brightness.dark),
 };
 
@@ -70,7 +70,7 @@ Future<void> main() async {
           return t.pumpAndSettle();
         },
         whilePerforming: (t) async {
-          if (scenario.gesture != null) await scenario.gesture!(t);
+          if (scenario.tapKey != null) await t.tap(find.byKey(Key(scenario.tapKey!)));
           await t.pumpAndSettle();
           return;
         },
