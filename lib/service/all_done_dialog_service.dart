@@ -10,10 +10,8 @@ class AllDoneDialogService {
 
   AllDoneDialogService(this._feedsAdvanceService, this._feedsService);
 
-  bool _hasShown = false;
+  bool hasShown = false;
 
   // For onboarding, auto-show dialog only the first time all chapters are read.
-  bool get isAutoShow => _feedsService.areChaptersRead && !_feedsAdvanceService.hasEverAdvanced && !_hasShown;
-
-  set hasShown(bool value) => _hasShown = value;
+  bool get isAutoShow => _feedsService.areChaptersRead && !_feedsAdvanceService.hasEverAdvanced && !hasShown;
 }
