@@ -15,12 +15,11 @@ class FeedCard extends WatchingWidget {
   build(context) {
     watch(feed);
     final brls = watchIt<BibleReaderLinkService>();
-    final feedsService = watchIt<FeedsService>();
-    final state = feed.state;
-    final isLastReadAndLinked = state.isRead && brls.isLinked && identical(feed, feedsService.lastModifiedFeed);
+    final isRead = feed.state.isRead;
+    final isLastReadAndLinked = isRead && brls.isLinked && identical(feed, sl<FeedsService>().lastModifiedFeed);
     final secondsToFade = Duration(seconds: isLastReadAndLinked ? 30 : 0);
-    final opacity = state.isRead ? 0.25 : 1.0;
-    final elevation = state.isRead ? 0.0 : 12.0;
+    final opacity = isRead ? 0.25 : 1.0;
+    final elevation = isRead ? 0.0 : 12.0;
 
     return AnimatedOpacity(
       opacity: opacity,
