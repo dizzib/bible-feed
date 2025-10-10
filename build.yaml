@@ -26,5 +26,5 @@ targets:
         enabled: true
         generate_for:
           include:
-            - test/lib/model/*.dart
-            - test/lib/service/*.dart
+            - test/unit/model/*.dart
+            - test/unit/service/*.dart
