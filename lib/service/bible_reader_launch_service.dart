@@ -14,7 +14,7 @@ class BibleReaderLaunchService {
 
   BibleReaderLaunchService(this._platformService, this._urlLaunchService);
 
-  String _getDeeplinkUri(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
+  String _getDeeplinkUrl(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey(internalBookKey);
     var url = bibleReader.uriTemplate[_platformService.currentPlatform]!;
     url = url.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
@@ -26,14 +26,14 @@ class BibleReaderLaunchService {
   Future<bool> isAvailable(BibleReader bibleReader) {
     if (bibleReader.isNone) return Future.value(true);
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey('mat');
-    return _urlLaunchService.canLaunchUrl(_getDeeplinkUri(bibleReader, externalBookKey, 1));
+    return _urlLaunchService.canLaunchUrl(_getDeeplinkUrl(bibleReader, externalBookKey, 1));
   }
 
   Future<BibleReaderLaunchResult> maybeLaunch(BibleReader bibleReader, FeedState state) async {
     if (bibleReader.isNone || !state.isRead) return Future.value(LaunchBypassed());
     try {
-      final uri = _getDeeplinkUri(bibleReader, state.book.key, state.chapter, state.verse);
-      return Future.value(await _urlLaunchService.launchUrl(uri) ? LaunchOk() : LaunchFailed());
+      final url = _getDeeplinkUrl(bibleReader, state.book.key, state.chapter, state.verse);
+      return Future.value(await _urlLaunchService.launchUrl(url) ? LaunchOk() : LaunchFailed());
     } on PlatformException catch (e) {
       return Future.value(LaunchFailed(e));
     }
