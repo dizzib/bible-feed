@@ -16,7 +16,7 @@ class BibleReaderLaunchFailedDialog extends StatelessWidget {
     final bibleReader = sl<BibleReaderLinkService>().linkedBibleReader;
     final bibleReaderName = bibleReader.name;
     var message = bibleReader.isApp ? 'Please ensure the $bibleReaderName app is installed, or try' : 'Try';
-    message = '$message choosing another bible reader in settings';
+    message = '$message choosing another bible reader in settings.';
 
     return CupertinoAlertDialog(
       title: Text('Failed to launch the $bibleReaderName bible reader'),
