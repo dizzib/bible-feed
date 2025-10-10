@@ -7,21 +7,12 @@ import 'app_bar_main.dart';
 import 'feeds.dart';
 import 'settings_icon_button.dart';
 
-class App extends StatefulWidget {
+class App extends WatchingWidget {
   @override
-  State<App> createState() => _AppState();
-}
+  build(_) {
+    // dismiss dialogs on auto-advance
+    registerChangeNotifierHandler(handler: (context, AutoAdvanceService _, _) => Navigator.maybePop(context));
 
-class _AppState extends State<App> {
-  @override
-  void initState() {
-    super.initState();
-    // this must come beneath MaterialApp Navigator
-    sl<AutoAdvanceService>().addListener(() => Navigator.maybePop(context)); // dismiss all-done dialog
-  }
-
-  @override
-  build(context) {
     return LayoutBuilder(
       builder: (_, BoxConstraints bc) {
         final isShowAppBar = bc.maxHeight > 360;
