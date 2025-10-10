@@ -4,7 +4,7 @@ import 'package:bible_feed/model/bible_reader_type.dart';
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/book_key_externaliser.dart';
 import 'package:bible_feed/model/reading_list.dart';
-import 'package:bible_feed/model/uri_template.dart';
+import 'package:bible_feed/model/url_template.dart';
 
 const b0 = Book('b0', 'Book 0', 1);
 const b1 = Book('b1', 'Book 1', 3);
@@ -18,7 +18,7 @@ final noneBibleReader = BibleReader(
   type: BibleReaderType.none,
   name: '',
   certifiedPlatforms: const [],
-  uriTemplate: UriTemplate(''),
+  urlTemplate: UrlTemplate(''),
 );
 
 final blbBibleReader = BibleReader(
@@ -26,7 +26,7 @@ final blbBibleReader = BibleReader(
   type: BibleReaderType.app,
   name: 'name',
   certifiedPlatforms: const [],
-  uriTemplate: UriTemplate.byPlatform(android: 'blb://android/BOOK/CHAPTER', iOS: 'blb://ios/BOOK/CHAPTER'),
-  uriVersePath: '/VERSE',
+  urlTemplate: UrlTemplate.byPlatform(android: 'blb://android/BOOK/CHAPTER', iOS: 'blb://ios/BOOK/CHAPTER'),
+  urlVersePath: '/VERSE',
   bookKeyExternaliser: BookKeyExternaliser.blueLetter,
 );

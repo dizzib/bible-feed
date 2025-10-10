@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'bible_reader_key.dart';
 import 'bible_reader_type.dart';
 import 'book_key_externaliser.dart';
-import 'uri_template.dart';
+import 'url_template.dart';
 
 @immutable
 class BibleReader {
@@ -11,33 +11,33 @@ class BibleReader {
     required BibleReaderKey key,
     required BibleReaderType type,
     required String name,
-    required UriTemplate uriTemplate,
+    required UrlTemplate urlTemplate,
     List<TargetPlatform> certifiedPlatforms = const [],
     BookKeyExternaliser bookKeyExternaliser = BookKeyExternaliser.identity,
-    String? uriVersePath,
+    String? urlVersePath,
   }) : _key = key,
        _type = type,
        _name = name,
-       _uriTemplate = uriTemplate,
+       _urlTemplate = urlTemplate,
        _certifiedPlatforms = certifiedPlatforms,
        _bookKeyExternaliser = bookKeyExternaliser,
-       _uriVersePath = uriVersePath;
+       _urlVersePath = urlVersePath;
 
   final BibleReaderKey _key;
   final BibleReaderType _type;
   final BookKeyExternaliser _bookKeyExternaliser;
   final List<TargetPlatform> _certifiedPlatforms; // platforms confirmed working with no issues
   final String _name;
-  final UriTemplate _uriTemplate;
-  final String? _uriVersePath;
+  final UrlTemplate _urlTemplate;
+  final String? _urlVersePath;
 
   // field getters
   BookKeyExternaliser get bookKeyExternaliser => _bookKeyExternaliser;
   List<TargetPlatform> get certifiedPlatforms => _certifiedPlatforms;
   BibleReaderKey get key => _key;
   String get name => _name;
-  UriTemplate get uriTemplate => _uriTemplate;
-  String? get uriVersePath => _uriVersePath;
+  UrlTemplate get urlTemplate => _urlTemplate;
+  String? get urlVersePath => _urlVersePath;
 
   // calculated getters
   String get displayName => '$_name ${isNone ? '' : _type.name}'.trim();

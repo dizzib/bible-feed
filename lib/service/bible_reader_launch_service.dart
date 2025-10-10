@@ -16,11 +16,11 @@ class BibleReaderLaunchService {
 
   String _getDeeplinkUrl(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey(internalBookKey);
-    var url = bibleReader.uriTemplate[_platformService.currentPlatform]!;
+    var url = bibleReader.urlTemplate[_platformService.currentPlatform]!;
     url = url.replaceAll('BOOK', externalBookKey).replaceAll('CHAPTER', chapter.toString());
-    if (bibleReader.uriVersePath == null || verse == 1) return url;
+    if (bibleReader.urlVersePath == null || verse == 1) return url;
     // ignore: avoid-non-null-assertion, passed above null check
-    return url + bibleReader.uriVersePath!.replaceAll('VERSE', verse.toString());
+    return url + bibleReader.urlVersePath!.replaceAll('VERSE', verse.toString());
   }
 
   Future<bool> isAvailable(BibleReader bibleReader) {
