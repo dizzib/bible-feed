@@ -18,6 +18,7 @@ class BibleReaderSettingsChips extends WatchingWidget {
       spacing: Constants.settingsSpacing,
       children: List.generate(brcs.certifiedBibleReaderList.length, (idx) {
         final bibleReader = brcs.certifiedBibleReaderList[idx];
+        // Using watchFuture here causes an infinite loop because .isAvailable always returns a new future.
         return FutureBuilder(
           future: sl<BibleReaderLaunchService>().isAvailable(bibleReader),
           builder: (_, AsyncSnapshot<bool> snapshot) {
