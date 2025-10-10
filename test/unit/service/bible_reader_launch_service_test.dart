@@ -45,6 +45,7 @@ void main() async {
       },
     );
   });
+
   group('maybeLaunch', () {
     parameterizedTest(
       'should (maybe) launchUrl with correct uri and return correct Launch result',
