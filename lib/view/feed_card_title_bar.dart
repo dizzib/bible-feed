@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '/model/feed.dart';
+import '../model/feed.dart';
 import '../service/feeds_service.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';

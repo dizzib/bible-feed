@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../service/chapter_split_service.dart';
-import '/model/feed.dart';
+import '../model/feed.dart';
 import 'constants.dart';
 
 class FeedCardBookChapter extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
-import '/model/chapter_splitters.dart';
-import '/model/feed.dart';
+import '../model/chapter_splitters.dart';
+import '../model/feed.dart';
 import 'chapter_split_toggler_service.dart';
 
 @lazySingleton

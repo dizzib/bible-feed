@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
-import '/model/bible_reader.dart';
-import '/model/feed.dart';
+import '../model/bible_reader.dart';
+import '../model/feed.dart';
 import 'bible_reader_launch_result.dart';
 import 'platform_service.dart';
 import 'url_launch_service.dart';

@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '/model/feed.dart';
+import '../model/feed.dart';
 import 'chapter_split_service.dart';
 
 @lazySingleton

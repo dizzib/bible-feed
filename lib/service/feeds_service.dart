@@ -3,8 +3,8 @@ import 'dart:core';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
-import '/model/feed.dart';
-import '/model/reading_lists.dart';
+import '../model/feed.dart';
+import '../model/reading_lists.dart';
 import 'feed_store_service.dart';
 
 @lazySingleton

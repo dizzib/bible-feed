@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/model/bible_reader.dart';
-import '/model/bible_reader_key.dart';
+import '../model/bible_reader.dart';
+import '../model/bible_reader_key.dart';
 import 'bible_readers_certified_service.dart';
 
 @lazySingleton
