@@ -41,7 +41,7 @@ dependencies:
   package_info_plus: ^8.3.0
   shared_preferences: ^2.5.2
   url_launcher: ^6.3.2 # to launch bible reader deeplinks
-  watch_it: ^1.6.5 # state management and service locator
+  watch_it: ^1.7.0 # state management and service locator
 
 dev_dependencies:
   alchemist: ^0.12.1 # to generate screenshots
