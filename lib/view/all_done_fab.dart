@@ -16,7 +16,7 @@ class AllDoneFab extends WatchingWidget {
       sl<AllDoneDialogService>().hasShown = true;
     }
 
-    if (sl<AllDoneDialogService>().isAutoShow) Future.delayed(Duration.zero, showAllDoneDialog);
+    if (sl<AllDoneDialogService>().isAutoShow) Future(showAllDoneDialog);
 
     return AnimatedScale(
       duration: const Duration(milliseconds: 200),
