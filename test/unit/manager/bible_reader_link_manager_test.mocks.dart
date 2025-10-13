@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:bible_feed/manager/bible_readers_certified_service.dart' as _i2;
+import 'package:bible_feed/manager/bible_readers_certified_manager.dart' as _i2;
 import 'package:bible_feed/model/bible_reader.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i4;
@@ -24,11 +24,11 @@ import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i4;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [BibleReadersCertifiedService].
+/// A class which mocks [BibleReadersCertifiedManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBibleReadersCertifiedService extends _i1.Mock
-    implements _i2.BibleReadersCertifiedService {
+class MockBibleReadersCertifiedManager extends _i1.Mock
+    implements _i2.BibleReadersCertifiedManager {
   @override
   List<_i3.BibleReader> get certifiedBibleReaderList =>
       (super.noSuchMethod(

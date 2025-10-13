@@ -4,14 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/bible_reader.dart';
 import '../model/bible_reader_key.dart';
-import 'bible_readers_certified_service.dart';
+import 'bible_readers_certified_manager.dart';
 
 @lazySingleton
 class BibleReaderLinkManager with ChangeNotifier {
-  final BibleReadersCertifiedService _bibleReadersCertifiedService;
+  final BibleReadersCertifiedManager _bibleReadersCertifiedManager;
   final SharedPreferences _sharedPreferences;
 
-  BibleReaderLinkManager(this._sharedPreferences, this._bibleReadersCertifiedService) {
+  BibleReaderLinkManager(this._sharedPreferences, this._bibleReadersCertifiedManager) {
     _loadState();
   }
 
@@ -36,7 +36,7 @@ class BibleReaderLinkManager with ChangeNotifier {
     notifyListeners();
   }
 
-  List<BibleReader> get _certifiedBibleReaderList => _bibleReadersCertifiedService.certifiedBibleReaderList;
+  List<BibleReader> get _certifiedBibleReaderList => _bibleReadersCertifiedManager.certifiedBibleReaderList;
   bool get isLinked => _linkedBibleReaderKey != BibleReaderKey.none;
 
   BibleReader get linkedBibleReader => _certifiedBibleReaderList.firstWhere((e) => e.key == _linkedBibleReaderKey);

@@ -1,26 +1,26 @@
 import 'package:bible_feed/model/chapter_splitter.dart';
 import 'package:bible_feed/model/chapter_splitters.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/manager/chapter_split_service.dart';
-import 'package:bible_feed/manager/chapter_split_toggler_service.dart';
+import 'package:bible_feed/manager/chapter_split_manager.dart';
+import 'package:bible_feed/manager/chapter_split_toggler_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../test_data.dart';
-import 'chapter_split_service_test.mocks.dart';
+import 'chapter_split_manager_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<ChapterSplitter>(), MockSpec<ChapterSplitters>(), MockSpec<ChapterSplitTogglerService>()])
+@GenerateNiceMocks([MockSpec<ChapterSplitter>(), MockSpec<ChapterSplitters>(), MockSpec<ChapterSplitTogglerManager>()])
 void main() {
   final mockChapterSplitter = MockChapterSplitter();
   final mockChapterSplitters = MockChapterSplitters();
-  final mockTogglerService = MockChapterSplitTogglerService();
+  final mockTogglerService = MockChapterSplitTogglerManager();
   final state = FeedState(book: b0);
-  late ChapterSplitService testee;
+  late ChapterSplitManager testee;
 
   setUp(() {
     when(mockTogglerService.isEnabled).thenReturn(true);
-    testee = ChapterSplitService(mockChapterSplitters, mockTogglerService);
+    testee = ChapterSplitManager(mockChapterSplitters, mockTogglerService);
   });
 
   group('getNextVerse', () {

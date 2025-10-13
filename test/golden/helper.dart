@@ -1,10 +1,10 @@
-import 'package:bible_feed/manager/chapter_split_toggler_service.dart';
+import 'package:bible_feed/manager/chapter_split_toggler_manager.dart';
 import 'package:bible_feed/manager/feeds_service.dart';
 import 'package:watch_it/watch_it.dart';
 
 class Helper {
   static void enableVerseScopes() {
-    sl<ChapterSplitTogglerService>().isEnabled = true;
+    sl<ChapterSplitTogglerManager>().isEnabled = true;
   }
 
   static void initialiseFeeds() {

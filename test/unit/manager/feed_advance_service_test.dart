@@ -1,6 +1,6 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/manager/chapter_split_service.dart';
+import 'package:bible_feed/manager/chapter_split_manager.dart';
 import 'package:bible_feed/manager/feed_advance_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -9,9 +9,9 @@ import 'package:mockito/mockito.dart';
 import '../test_data.dart';
 import 'feed_advance_service_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<ChapterSplitService>()])
+@GenerateNiceMocks([MockSpec<ChapterSplitManager>()])
 void main() async {
-  final mockChapterSplitService = MockChapterSplitService();
+  final mockChapterSplitManager = MockChapterSplitManager();
   late Feed feed;
   late FeedState state;
   late FeedAdvanceService testee;
@@ -19,8 +19,8 @@ void main() async {
   setUp(() {
     state = FeedState(book: b1);
     feed = Feed(rl1, state);
-    when(mockChapterSplitService.getNextVerse(state)).thenReturn(1);
-    testee = FeedAdvanceService(mockChapterSplitService);
+    when(mockChapterSplitManager.getNextVerse(state)).thenReturn(1);
+    testee = FeedAdvanceService(mockChapterSplitManager);
   });
 
   test('should fail assertion if not read', () {
@@ -64,7 +64,7 @@ void main() async {
   });
 
   test('with chapter split, should advance verse only', () {
-    when(mockChapterSplitService.getNextVerse(state)).thenReturn(3);
+    when(mockChapterSplitManager.getNextVerse(state)).thenReturn(3);
     checkState(b1, 1, 1);
     feed.toggleIsRead();
     testee.advance(feed);

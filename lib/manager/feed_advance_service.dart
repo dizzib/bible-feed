@@ -1,11 +1,11 @@
 import 'package:injectable/injectable.dart';
 
 import '../model/feed.dart';
-import 'chapter_split_service.dart';
+import 'chapter_split_manager.dart';
 
 @lazySingleton
 class FeedAdvanceService {
-  final ChapterSplitService _chapterSplitService;
+  final ChapterSplitManager _chapterSplitService;
 
   FeedAdvanceService(this._chapterSplitService);
 

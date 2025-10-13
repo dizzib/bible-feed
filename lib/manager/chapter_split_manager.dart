@@ -2,14 +2,14 @@ import 'package:injectable/injectable.dart';
 
 import '../model/chapter_splitters.dart';
 import '../model/feed.dart';
-import 'chapter_split_toggler_service.dart';
+import 'chapter_split_toggler_manager.dart';
 
 @lazySingleton
-class ChapterSplitService {
+class ChapterSplitManager {
   final ChapterSplitters _chapterSplitters;
-  final ChapterSplitTogglerService _chapterSplitTogglerService;
+  final ChapterSplitTogglerManager _chapterSplitTogglerService;
 
-  ChapterSplitService(this._chapterSplitters, this._chapterSplitTogglerService);
+  ChapterSplitManager(this._chapterSplitters, this._chapterSplitTogglerService);
 
   int getNextVerse(FeedState state) =>
       _chapterSplitTogglerService.isEnabled ? (_chapterSplitters.find(state)?.getNextVerse(state) ?? 1) : 1;
