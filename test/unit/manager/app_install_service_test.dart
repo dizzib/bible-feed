@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:bible_feed/manager/app_install_service.dart';
 import 'package:bible_feed/manager/bible_reader_link_service.dart';
 import 'package:bible_feed/manager/bible_reader_launch_service.dart';
-import 'package:bible_feed/manager/platform_event_service.dart';
+import 'package:bible_feed/service/platform_event_service.dart';
 
 import 'app_install_service_test.mocks.dart';
 
