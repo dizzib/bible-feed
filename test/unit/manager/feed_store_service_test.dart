@@ -1,5 +1,5 @@
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/service/feed_store_service.dart';
+import 'package:bible_feed/manager/feed_store_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

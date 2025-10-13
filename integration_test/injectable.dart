@@ -6,7 +6,7 @@ import 'package:watch_it/watch_it.dart';
 import 'injectable.config.dart'; // AUTO-GENERATED
 
 @InjectableInit(
-  generateForDir: ['integration_test', 'lib/model*', 'lib/service*'],
+  generateForDir: ['integration_test', 'lib/model*', 'lib/manager*', 'lib/service*'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
 Future configureDependencies({required String environment}) async {

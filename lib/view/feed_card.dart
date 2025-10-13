@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../model/feed.dart';
-import '../service/bible_reader_link_service.dart';
-import '../service/feeds_service.dart';
+import '../manager/bible_reader_link_service.dart';
+import '../manager/feeds_service.dart';
 import 'feed_card_body.dart';
 import 'feed_card_semantics.dart';
 

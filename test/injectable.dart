@@ -7,7 +7,7 @@ import 'injectable.config.dart'; // AUTO-GENERATED
 
 // this must be called from any unit test for coverage to include uncovered files!
 @InjectableInit(
-  generateForDir: ['lib/model*', 'lib/service*', 'test'],
+  generateForDir: ['lib/model*', 'lib/manager*', 'lib/service*', 'test'],
   preferRelativeImports: true, // because classes inside this folder can not be package-imports
 )
 Future configureDependencies(String environment) async {

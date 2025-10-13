@@ -27,4 +27,5 @@ targets:
         generate_for:
           include:
             - test/unit/model/*.dart
+            - test/unit/manager/*.dart
             - test/unit/service/*.dart

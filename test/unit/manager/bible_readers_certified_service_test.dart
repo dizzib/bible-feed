@@ -1,7 +1,7 @@
 import 'package:bible_feed/model/bible_reader.dart';
 import 'package:bible_feed/model/bible_readers.dart';
-import 'package:bible_feed/service/bible_readers_certified_service.dart';
-import 'package:bible_feed/service/platform_service.dart';
+import 'package:bible_feed/manager/bible_readers_certified_service.dart';
+import 'package:bible_feed/manager/platform_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

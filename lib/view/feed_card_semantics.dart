@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../model/feed.dart';
-import '../service/bible_reader_link_service.dart';
+import '../manager/bible_reader_link_service.dart';
 
 class FeedCardSemantics extends WatchingWidget {
   final Widget? child;

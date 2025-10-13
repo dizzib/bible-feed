@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../model/feed.dart';
-import '../service/bible_reader_launch_result.dart';
-import '../service/bible_reader_launch_service.dart';
-import '../service/bible_reader_link_service.dart';
-import '../service/chapter_split_toggler_service.dart';
-import '../service/haptic_service.dart';
+import '../manager/bible_reader_launch_result.dart';
+import '../manager/bible_reader_launch_service.dart';
+import '../manager/bible_reader_link_service.dart';
+import '../manager/chapter_split_toggler_service.dart';
+import '../manager/haptic_service.dart';
 import 'bible_reader_launch_failed_dialog.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';

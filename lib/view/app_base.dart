@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/haptic_service.dart';
+import '../manager/haptic_service.dart';
 import 'app.dart';
 import 'build_context_extension.dart';
 

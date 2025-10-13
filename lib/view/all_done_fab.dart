@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/feeds_service.dart';
-import '../service/all_done_dialog_service.dart';
+import '../manager/feeds_service.dart';
+import '../manager/all_done_dialog_service.dart';
 import 'all_done_dialog.dart';
 import 'build_context_extension.dart';
 

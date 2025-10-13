@@ -1,5 +1,5 @@
-import 'package:bible_feed/service/chapter_split_toggler_service.dart';
-import 'package:bible_feed/service/feeds_service.dart';
+import 'package:bible_feed/manager/chapter_split_toggler_service.dart';
+import 'package:bible_feed/manager/feeds_service.dart';
 import 'package:watch_it/watch_it.dart';
 
 class Helper {

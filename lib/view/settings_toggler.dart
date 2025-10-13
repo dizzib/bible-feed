@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/toggler_service.dart';
+import '../manager/toggler_service.dart';
 import 'constants.dart';
 
 class SettingsToggler<T extends TogglerService> extends WatchingWidget {

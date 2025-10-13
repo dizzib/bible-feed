@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/app_install_service.dart';
-import '../service/bible_reader_launch_service.dart';
-import '../service/bible_reader_link_service.dart';
-import '../service/bible_readers_certified_service.dart';
+import '../manager/app_install_service.dart';
+import '../manager/bible_reader_launch_service.dart';
+import '../manager/bible_reader_link_service.dart';
+import '../manager/bible_readers_certified_service.dart';
 import 'constants.dart';
 
 class BibleReaderSettingsChips extends WatchingWidget {

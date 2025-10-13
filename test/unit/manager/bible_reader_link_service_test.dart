@@ -1,6 +1,6 @@
 import 'package:bible_feed/model/bible_reader.dart';
-import 'package:bible_feed/service/bible_reader_link_service.dart';
-import 'package:bible_feed/service/bible_readers_certified_service.dart';
+import 'package:bible_feed/manager/bible_reader_link_service.dart';
+import 'package:bible_feed/manager/bible_readers_certified_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

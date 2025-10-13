@@ -1,7 +1,7 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
-import 'package:bible_feed/service/feed_store_service.dart';
+import 'package:bible_feed/manager/feed_store_service.dart';
 import 'package:bible_feed/view/app.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/settings.dart';

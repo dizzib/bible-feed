@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/chapter_split_service.dart';
+import '../manager/chapter_split_service.dart';
 import '../model/feed.dart';
 import 'constants.dart';
 
