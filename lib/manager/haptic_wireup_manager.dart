@@ -7,7 +7,7 @@ import 'chapter_split_toggler_manager.dart';
 import 'haptic_toggler_manager.dart';
 
 @singleton
-class HapticWireupService {
+class HapticWireupManager {
   final HapticService _hapticService;
   final ChapterSplitTogglerManager _chapterSplitTogglerService;
   final HapticTogglerManager _hapticTogglerManager;
@@ -15,7 +15,7 @@ class HapticWireupService {
   final BookListWheelState _bookListWheelState;
   final ChapterListWheelState _chapterListWheelState;
 
-  HapticWireupService(
+  HapticWireupManager(
     this._hapticService,
     this._chapterSplitTogglerService,
     this._hapticTogglerManager,
