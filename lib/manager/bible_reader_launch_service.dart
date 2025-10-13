@@ -3,9 +3,9 @@ import 'package:injectable/injectable.dart';
 
 import '../model/bible_reader.dart';
 import '../model/feed.dart';
+import '../service/platform_service.dart';
+import '../service/url_launch_service.dart';
 import 'bible_reader_launch_result.dart';
-import 'platform_service.dart';
-import 'url_launch_service.dart';
 
 @lazySingleton
 class BibleReaderLaunchService {

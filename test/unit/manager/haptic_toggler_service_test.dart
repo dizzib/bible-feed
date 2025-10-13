@@ -1,5 +1,5 @@
 import 'package:bible_feed/manager/haptic_toggler_service.dart';
-import 'package:bible_feed/manager/platform_service.dart';
+import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

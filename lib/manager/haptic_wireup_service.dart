@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
 
 import '../model/list_wheel_state.dart';
+import '../service/haptic_service.dart';
 import 'bible_reader_link_service.dart';
 import 'chapter_split_toggler_service.dart';
-import 'haptic_service.dart';
 import 'haptic_toggler_service.dart';
 
 @singleton

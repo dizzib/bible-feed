@@ -5,8 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:bible_feed/manager/platform_service.dart' as _i2;
-import 'package:bible_feed/manager/url_launch_service.dart' as _i4;
+import 'package:bible_feed/service/platform_service.dart' as _i2;
+import 'package:bible_feed/service/url_launch_service.dart' as _i4;
 import 'package:flutter/foundation.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 

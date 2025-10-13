@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
-import 'date_time_service.dart';
+import '../service/date_time_service.dart';
 import 'feeds_advance_service.dart';
 import 'feeds_advance_state.dart';
 

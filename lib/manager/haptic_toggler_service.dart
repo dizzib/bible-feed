@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import 'platform_service.dart';
+import '../service/platform_service.dart';
 import 'toggler_service.dart';
 
 @lazySingleton

@@ -3,8 +3,8 @@ import 'package:df_log/df_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
+import '../service/platform_service.dart';
 import '/injectable.env.dart';
-import 'platform_service.dart';
 
 abstract class PlatformEventService with ChangeNotifier {}
 

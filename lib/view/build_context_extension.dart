@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/haptic_service.dart';
+import '../service/haptic_service.dart';
 import 'constants.dart';
 
 extension BuildContextExtension<T> on BuildContext {

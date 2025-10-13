@@ -9,7 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bible_feed/manager/date_time_service.dart' as _i695;
+import 'package:bible_feed/manager/haptic_toggler_service.dart' as _i524;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i19;
@@ -17,6 +17,11 @@ import 'package:bible_feed/model/chapter_splitters.dart' as _i1006;
 import 'package:bible_feed/model/list_wheel_state.dart' as _i1033;
 import 'package:bible_feed/model/reading_list.dart' as _i279;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
+import 'package:bible_feed/service/app_service.dart' as _i977;
+import 'package:bible_feed/service/date_time_service.dart' as _i99;
+import 'package:bible_feed/service/haptic_service.dart' as _i22;
+import 'package:bible_feed/service/platform_service.dart' as _i578;
+import 'package:bible_feed/service/url_launch_service.dart' as _i626;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -24,6 +29,8 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'injectable.dart' as _i1027;
 import 'service/midnight_date_time_service.dart' as _i123;
 
+const String _golden = 'golden';
+const String _prod = 'prod';
 const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
@@ -56,15 +63,33 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<List<_i270.BibleReader>>(
       () => bibleReadersModule.bibleReader,
     );
+    gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i99.DateTimeService>(
+      () => _i99.NowDateTimeService(),
+      registerFor: {_golden, _prod},
+    );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i977.ProductionAppService.create(),
+      registerFor: {_midnight_test, _prod},
+      preResolve: true,
+    );
+    await gh.lazySingletonAsync<_i578.PlatformService>(
+      () => _i578.ProductionPlatformService.create(),
+      registerFor: {_midnight_test, _prod},
+      preResolve: true,
+    );
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
     );
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
-    gh.lazySingleton<_i695.DateTimeService>(
+    gh.lazySingleton<_i99.DateTimeService>(
       () => _i123.MidnightDateTimeService(),
       registerFor: {_midnight_test},
+    );
+    gh.lazySingleton<_i22.HapticService>(
+      () => _i22.HapticService(gh<_i524.HapticTogglerService>()),
     );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
