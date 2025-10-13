@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:bible_feed/manager/feed_store_service.dart' as _i3;
+import 'package:bible_feed/manager/feed_store_manager.dart' as _i3;
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
@@ -29,10 +29,10 @@ class _FakeFeedState_0 extends _i1.SmartFake implements _i2.FeedState {
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [FeedStoreService].
+/// A class which mocks [FeedStoreManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeedStoreService extends _i1.Mock implements _i3.FeedStoreService {
+class MockFeedStoreManager extends _i1.Mock implements _i3.FeedStoreManager {
   @override
   _i2.FeedState loadState(_i4.ReadingList? readingList) =>
       (super.noSuchMethod(

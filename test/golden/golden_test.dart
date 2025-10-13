@@ -1,7 +1,7 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
-import 'package:bible_feed/manager/feed_store_service.dart';
+import 'package:bible_feed/manager/feed_store_manager.dart';
 import 'package:bible_feed/view/app.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/settings.dart';
@@ -18,7 +18,7 @@ class Scenario {
 }
 
 final epistles2 = sl<ReadingLists>()[3];
-final state = sl<FeedStoreService>().loadState(epistles2);
+final state = sl<FeedStoreManager>().loadState(epistles2);
 final deviceConstraints = [const Size(360, 720), const Size(180, 360), const Size(834, 1194)];
 final dialogConstraints = [const Size(300, 600), const Size(200, 300), const Size(500, 900)];
 

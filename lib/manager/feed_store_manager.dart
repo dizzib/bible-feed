@@ -5,10 +5,10 @@ import '../model/feed.dart';
 import '../model/reading_list.dart';
 
 @lazySingleton
-class FeedStoreService {
+class FeedStoreManager {
   final SharedPreferences _sharedPreferences;
 
-  FeedStoreService(this._sharedPreferences);
+  FeedStoreManager(this._sharedPreferences);
 
   FeedState loadState(ReadingList readingList) {
     const defaultChapter = 1;

@@ -1,5 +1,5 @@
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/manager/feed_store_service.dart';
+import 'package:bible_feed/manager/feed_store_manager.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -7,18 +7,18 @@ import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_data.dart';
-import 'feed_store_service_test.mocks.dart';
+import 'feed_store_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<SharedPreferences>()])
 void main() async {
   late MockSharedPreferences mockSharedPreferences;
-  late FeedStoreService testee;
+  late FeedStoreManager testee;
 
   final DateTime yesterday = DateTime.now() - const Duration(days: 1);
 
   setUp(() async {
     mockSharedPreferences = MockSharedPreferences();
-    testee = FeedStoreService(mockSharedPreferences);
+    testee = FeedStoreManager(mockSharedPreferences);
   });
 
   group('loadState', () {

@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/feed.dart';
 import '../service/date_time_service.dart';
-import 'feed_advance_service.dart';
+import 'feed_advance_manager.dart';
 import 'feeds_advance_state.dart';
 import 'feeds_service.dart';
 
@@ -11,10 +11,10 @@ import 'feeds_service.dart';
 class FeedsAdvanceService {
   final DateTimeService _dateTimeService;
   final SharedPreferences _sharedPreferences;
-  final FeedAdvanceService _feedAdvanceService;
+  final FeedAdvanceManager _feedAdvanceManager;
   final FeedsService _feedsService;
 
-  FeedsAdvanceService(this._dateTimeService, this._sharedPreferences, this._feedAdvanceService, this._feedsService);
+  FeedsAdvanceService(this._dateTimeService, this._sharedPreferences, this._feedAdvanceManager, this._feedsService);
 
   static const _hasEverAdvancedStoreKey = 'hasEverAdvanced';
 
@@ -22,7 +22,7 @@ class FeedsAdvanceService {
 
   Future<FeedsAdvanceState> advance() async {
     for (Feed f in _feedsService.feeds) {
-      _feedAdvanceService.advance(f);
+      _feedAdvanceManager.advance(f);
     }
     await _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
     return Future.value(FeedsAdvanceState.listsAdvanced);

@@ -6,7 +6,7 @@
 import 'dart:async' as _i10;
 import 'dart:ui' as _i6;
 
-import 'package:bible_feed/manager/feed_advance_service.dart' as _i7;
+import 'package:bible_feed/manager/feed_advance_manager.dart' as _i7;
 import 'package:bible_feed/manager/feeds_service.dart' as _i8;
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
@@ -161,11 +161,11 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
   );
 }
 
-/// A class which mocks [FeedAdvanceService].
+/// A class which mocks [FeedAdvanceManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeedAdvanceService extends _i1.Mock
-    implements _i7.FeedAdvanceService {
+class MockFeedAdvanceManager extends _i1.Mock
+    implements _i7.FeedAdvanceManager {
   @override
   void advance(_i2.Feed? feed) => super.noSuchMethod(
     Invocation.method(#advance, [feed]),

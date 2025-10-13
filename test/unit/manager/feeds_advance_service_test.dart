@@ -1,8 +1,8 @@
-import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/manager/feed_advance_service.dart';
-import 'package:bible_feed/manager/feeds_advance_state.dart';
+import 'package:bible_feed/manager/feed_advance_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_service.dart';
+import 'package:bible_feed/manager/feeds_advance_state.dart';
 import 'package:bible_feed/manager/feeds_service.dart';
+import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,36 +17,36 @@ import 'feeds_advance_service_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<DateTimeService>(),
   MockSpec<Feed>(),
-  MockSpec<FeedAdvanceService>(),
+  MockSpec<FeedAdvanceManager>(),
   MockSpec<FeedsService>(),
   MockSpec<SharedPreferences>(),
 ])
 void main() async {
   final mockFeedList = [MockFeed(), MockFeed()];
   late MockDateTimeService mockDateTimeService;
-  late MockFeedAdvanceService mockFeedAdvanceService;
+  late MockFeedAdvanceManager mockFeedAdvanceManager;
   late MockFeedsService mockFeedsService;
   late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceService testee;
 
   setUp(() {
     mockDateTimeService = MockDateTimeService();
-    mockFeedAdvanceService = MockFeedAdvanceService();
+    mockFeedAdvanceManager = MockFeedAdvanceManager();
     mockFeedsService = MockFeedsService();
     mockSharedPreferences = MockSharedPreferences();
     when(mockFeedsService.feeds).thenReturn(mockFeedList);
-    testee = FeedsAdvanceService(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceService, mockFeedsService);
+    testee = FeedsAdvanceService(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceManager, mockFeedsService);
   });
 
   verifyAllAdvanced() {
     for (var f in mockFeedList) {
-      verify(mockFeedAdvanceService.advance(f)).called(1);
+      verify(mockFeedAdvanceManager.advance(f)).called(1);
     }
   }
 
   verifyNoneAdvanced() {
     for (var f in mockFeedList) {
-      verifyNever(mockFeedAdvanceService.advance(f));
+      verifyNever(mockFeedAdvanceManager.advance(f));
     }
   }
 

@@ -1,26 +1,26 @@
 import 'package:bible_feed/model/book.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/manager/chapter_split_manager.dart';
-import 'package:bible_feed/manager/feed_advance_service.dart';
+import 'package:bible_feed/manager/feed_advance_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../test_data.dart';
-import 'feed_advance_service_test.mocks.dart';
+import 'feed_advance_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<ChapterSplitManager>()])
 void main() async {
   final mockChapterSplitManager = MockChapterSplitManager();
   late Feed feed;
   late FeedState state;
-  late FeedAdvanceService testee;
+  late FeedAdvanceManager testee;
 
   setUp(() {
     state = FeedState(book: b1);
     feed = Feed(rl1, state);
     when(mockChapterSplitManager.getNextVerse(state)).thenReturn(1);
-    testee = FeedAdvanceService(mockChapterSplitManager);
+    testee = FeedAdvanceManager(mockChapterSplitManager);
   });
 
   test('should fail assertion if not read', () {

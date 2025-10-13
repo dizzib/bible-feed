@@ -4,10 +4,10 @@ import '../model/feed.dart';
 import 'chapter_split_manager.dart';
 
 @lazySingleton
-class FeedAdvanceService {
+class FeedAdvanceManager {
   final ChapterSplitManager _chapterSplitService;
 
-  FeedAdvanceService(this._chapterSplitService);
+  FeedAdvanceManager(this._chapterSplitService);
 
   void advance(Feed feed) {
     final state = feed.state;
