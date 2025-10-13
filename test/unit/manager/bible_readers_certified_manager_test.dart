@@ -31,7 +31,7 @@ void main() async {
       ],
     ],
     (currentPlatform, expectResult) {
-      final platformService = PlatformService(currentPlatform: currentPlatform, isHapticAvailable: false);
+      final platformService = PlatformService(currentPlatform: currentPlatform);
       final testee = BibleReadersCertifiedManager(platformService, bibleReaders);
       expect(testee.certifiedBibleReaderList, expectResult);
     },

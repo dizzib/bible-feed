@@ -6,5 +6,5 @@ import 'package:injectable/injectable.dart';
 @golden
 @LazySingleton(as: PlatformService)
 class ScreenshotPlatformService extends PlatformService {
-  ScreenshotPlatformService() : super(currentPlatform: TargetPlatform.android, isHapticAvailable: true);
+  ScreenshotPlatformService() : super(currentPlatform: TargetPlatform.android);
 }

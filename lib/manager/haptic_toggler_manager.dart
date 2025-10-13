@@ -1,16 +1,16 @@
 import 'package:injectable/injectable.dart';
 
-import '../service/platform_service.dart';
+import '../service/haptic_availability_service.dart';
 import 'toggler_manager.dart';
 
 @lazySingleton
 class HapticTogglerManager extends TogglerManager {
-  HapticTogglerManager(super.sharedPreferences, this._platformService);
+  HapticTogglerManager(super.sharedPreferences, this._hapticAvailabilityService);
 
-  final PlatformService _platformService;
+  final HapticAvailabilityService _hapticAvailabilityService;
 
   @override
-  bool get canEnable => _platformService.isHapticAvailable;
+  bool get canEnable => _hapticAvailabilityService.isHapticAvailable;
 
   @override
   get storeKey => 'isEnabled.haptic';

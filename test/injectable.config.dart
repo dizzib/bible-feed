@@ -33,6 +33,7 @@ import 'package:bible_feed/model/reading_list.dart' as _i279;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
 import 'package:bible_feed/service/app_service.dart' as _i977;
 import 'package:bible_feed/service/date_time_service.dart' as _i99;
+import 'package:bible_feed/service/haptic_availability_service.dart' as _i729;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
 import 'package:bible_feed/service/platform_event_service.dart' as _i516;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
@@ -42,6 +43,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'golden/stub/stub_app_service.dart' as _i252;
+import 'golden/stub/stub_haptic_availability_service.dart' as _i434;
 import 'golden/stub/stub_platform_event_service.dart' as _i919;
 import 'golden/stub/stub_platform_service.dart' as _i250;
 import 'injectable.dart' as _i1027;
@@ -85,15 +87,19 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i99.NowDateTimeService(),
       registerFor: {_golden, _prod},
     );
+    await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
+      () => _i729.ProductionHapticAvailabilityService.create(),
+      registerFor: {_midnight_test, _prod},
+      preResolve: true,
+    );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i977.ProductionAppService.create(),
       registerFor: {_midnight_test, _prod},
       preResolve: true,
     );
-    await gh.lazySingletonAsync<_i578.PlatformService>(
-      () => _i578.ProductionPlatformService.create(),
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i578.ProductionPlatformService(),
       registerFor: {_midnight_test, _prod},
-      preResolve: true,
     );
     gh.lazySingleton<_i571.FeedStoreManager>(
       () => _i571.FeedStoreManager(gh<_i460.SharedPreferences>()),
@@ -126,14 +132,18 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i626.UrlLaunchService>(),
       ),
     );
-    gh.lazySingleton<_i79.HapticTogglerManager>(
-      () => _i79.HapticTogglerManager(
-        gh<_i460.SharedPreferences>(),
-        gh<_i578.PlatformService>(),
-      ),
+    gh.lazySingleton<_i729.HapticAvailabilityService>(
+      () => _i434.GoldenHapticAvailabilityService(),
+      registerFor: {_golden},
     );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
+    );
+    gh.lazySingleton<_i79.HapticTogglerManager>(
+      () => _i79.HapticTogglerManager(
+        gh<_i460.SharedPreferences>(),
+        gh<_i729.HapticAvailabilityService>(),
+      ),
     );
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ProductionPlatformEventService(gh<_i578.PlatformService>()),

@@ -1,5 +1,5 @@
 import 'package:bible_feed/manager/haptic_toggler_manager.dart';
-import 'package:bible_feed/service/platform_service.dart';
+import 'package:bible_feed/service/haptic_availability_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'haptic_toggler_manager_test.mocks.dart';
 
-class TestPlatformService extends PlatformService {
-  TestPlatformService() : super(currentPlatform: TargetPlatform.android, isHapticAvailable: true);
+class TestHapticAvailabilityService extends HapticAvailabilityService {
+  TestHapticAvailabilityService() : super(isHapticAvailable: true);
 }
 
 @GenerateNiceMocks([MockSpec<SharedPreferences>()])
@@ -21,7 +21,7 @@ void main() {
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    testee = HapticTogglerManager(mockSharedPreferences, TestPlatformService());
+    testee = HapticTogglerManager(mockSharedPreferences, TestHapticAvailabilityService());
   });
 
   test('default isEnabled is false', () async {

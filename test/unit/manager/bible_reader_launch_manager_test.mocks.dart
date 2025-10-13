@@ -38,15 +38,6 @@ class MockPlatformService extends _i1.Mock implements _i2.PlatformService {
           as _i3.TargetPlatform);
 
   @override
-  bool get isHapticAvailable =>
-      (super.noSuchMethod(
-            Invocation.getter(#isHapticAvailable),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
   bool get isAndroid =>
       (super.noSuchMethod(
             Invocation.getter(#isAndroid),
