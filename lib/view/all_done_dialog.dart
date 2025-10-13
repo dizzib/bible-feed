@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/feeds_advance_service.dart';
+import '../manager/feeds_advance_manager.dart';
 import 'build_context_extension.dart';
 import 'constants.dart';
 
@@ -10,7 +10,7 @@ class AllDoneDialog extends StatelessWidget {
   @override
   build(context) {
     void onPressYes() {
-      sl<FeedsAdvanceService>().advance();
+      sl<FeedsAdvanceManager>().advance();
       Navigator.pop(context);
     }
 

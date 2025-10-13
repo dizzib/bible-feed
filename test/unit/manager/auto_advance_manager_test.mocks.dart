@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:bible_feed/manager/feeds_advance_service.dart' as _i3;
+import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i3;
 import 'package:bible_feed/manager/feeds_advance_state.dart' as _i5;
 import 'package:bible_feed/service/date_time_service.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -46,11 +46,11 @@ class MockDateTimeService extends _i1.Mock implements _i2.DateTimeService {
           as DateTime);
 }
 
-/// A class which mocks [FeedsAdvanceService].
+/// A class which mocks [FeedsAdvanceManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeedsAdvanceService extends _i1.Mock
-    implements _i3.FeedsAdvanceService {
+class MockFeedsAdvanceManager extends _i1.Mock
+    implements _i3.FeedsAdvanceManager {
   @override
   bool get hasEverAdvanced =>
       (super.noSuchMethod(

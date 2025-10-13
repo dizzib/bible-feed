@@ -4,15 +4,15 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 import '../service/date_time_service.dart';
-import 'feeds_advance_service.dart';
+import 'feeds_advance_manager.dart';
 import 'feeds_advance_state.dart';
 
 @singleton
 class AutoAdvanceManager with ChangeNotifier {
   final DateTimeService _dateTimeService;
-  final FeedsAdvanceService _feedsAdvanceService;
+  final FeedsAdvanceManager _feedsAdvanceManager;
 
-  AutoAdvanceManager(this._dateTimeService, this._feedsAdvanceService) {
+  AutoAdvanceManager(this._dateTimeService, this._feedsAdvanceManager) {
     AppLifecycleListener(onResume: _onResume);
     _onResume();
   }
@@ -20,12 +20,12 @@ class AutoAdvanceManager with ChangeNotifier {
   Timer? _timer;
 
   void _onResume() {
-    _feedsAdvanceService.maybeAdvance();
+    _feedsAdvanceManager.maybeAdvance();
     _setTimer();
   }
 
   void _run() async {
-    if (await _feedsAdvanceService.maybeAdvance() == FeedsAdvanceState.listsAdvanced) notifyListeners();
+    if (await _feedsAdvanceManager.maybeAdvance() == FeedsAdvanceState.listsAdvanced) notifyListeners();
     _setTimer();
   }
 

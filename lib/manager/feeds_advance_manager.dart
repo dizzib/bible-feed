@@ -8,13 +8,13 @@ import 'feeds_advance_state.dart';
 import 'feeds_service.dart';
 
 @lazySingleton
-class FeedsAdvanceService {
+class FeedsAdvanceManager {
   final DateTimeService _dateTimeService;
   final SharedPreferences _sharedPreferences;
   final FeedAdvanceManager _feedAdvanceManager;
   final FeedsService _feedsService;
 
-  FeedsAdvanceService(this._dateTimeService, this._sharedPreferences, this._feedAdvanceManager, this._feedsService);
+  FeedsAdvanceManager(this._dateTimeService, this._sharedPreferences, this._feedAdvanceManager, this._feedsService);
 
   static const _hasEverAdvancedStoreKey = 'hasEverAdvanced';
 

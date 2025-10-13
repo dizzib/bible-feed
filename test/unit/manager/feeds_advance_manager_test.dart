@@ -1,5 +1,5 @@
 import 'package:bible_feed/manager/feed_advance_manager.dart';
-import 'package:bible_feed/manager/feeds_advance_service.dart';
+import 'package:bible_feed/manager/feeds_advance_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_state.dart';
 import 'package:bible_feed/manager/feeds_service.dart';
 import 'package:bible_feed/model/feed.dart';
@@ -12,7 +12,7 @@ import 'package:parameterized_test/parameterized_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_data.dart';
-import 'feeds_advance_service_test.mocks.dart';
+import 'feeds_advance_manager_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<DateTimeService>(),
@@ -27,7 +27,7 @@ void main() async {
   late MockFeedAdvanceManager mockFeedAdvanceManager;
   late MockFeedsService mockFeedsService;
   late MockSharedPreferences mockSharedPreferences;
-  late FeedsAdvanceService testee;
+  late FeedsAdvanceManager testee;
 
   setUp(() {
     mockDateTimeService = MockDateTimeService();
@@ -35,7 +35,7 @@ void main() async {
     mockFeedsService = MockFeedsService();
     mockSharedPreferences = MockSharedPreferences();
     when(mockFeedsService.feeds).thenReturn(mockFeedList);
-    testee = FeedsAdvanceService(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceManager, mockFeedsService);
+    testee = FeedsAdvanceManager(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceManager, mockFeedsService);
   });
 
   verifyAllAdvanced() {
