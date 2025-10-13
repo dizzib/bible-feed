@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
+import '../model/feeds_advance_state.dart';
 import '../service/date_time_service.dart';
 import 'feeds_advance_manager.dart';
-import 'feeds_advance_state.dart';
 
 @singleton
 class AutoAdvanceManager with ChangeNotifier {

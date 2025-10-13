@@ -2,9 +2,9 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/feed.dart';
+import '../model/feeds_advance_state.dart';
 import '../service/date_time_service.dart';
 import 'feed_advance_manager.dart';
-import 'feeds_advance_state.dart';
 import 'feeds_service.dart';
 
 @lazySingleton

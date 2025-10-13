@@ -1,6 +1,6 @@
 import 'package:bible_feed/manager/auto_advance_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
-import 'package:bible_feed/manager/feeds_advance_state.dart';
+import 'package:bible_feed/model/feeds_advance_state.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter/widgets.dart';

@@ -1,8 +1,8 @@
 import 'package:bible_feed/manager/feed_advance_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
-import 'package:bible_feed/manager/feeds_advance_state.dart';
 import 'package:bible_feed/manager/feeds_service.dart';
 import 'package:bible_feed/model/feed.dart';
+import 'package:bible_feed/model/feeds_advance_state.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
