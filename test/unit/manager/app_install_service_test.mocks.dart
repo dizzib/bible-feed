@@ -6,10 +6,10 @@
 import 'dart:async' as _i4;
 import 'dart:ui' as _i9;
 
-import 'package:bible_feed/manager/bible_reader_launch_result.dart' as _i5;
 import 'package:bible_feed/manager/bible_reader_launch_service.dart' as _i3;
 import 'package:bible_feed/manager/bible_reader_link_service.dart' as _i8;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
+import 'package:bible_feed/model/bible_reader_launch_result.dart' as _i5;
 import 'package:bible_feed/model/feed.dart' as _i6;
 import 'package:bible_feed/service/platform_event_service.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
