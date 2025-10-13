@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/feeds_service.dart';
-import '../manager/all_done_dialog_service.dart';
+import '../manager/all_done_dialog_manager.dart';
 import 'all_done_dialog.dart';
 import 'build_context_extension.dart';
 
@@ -13,10 +13,10 @@ class AllDoneFab extends WatchingWidget {
 
     void showAllDoneDialog() {
       context.showDialogWithBlurBackground(AllDoneDialog());
-      sl<AllDoneDialogService>().hasShown = true;
+      sl<AllDoneDialogManager>().hasShown = true;
     }
 
-    if (sl<AllDoneDialogService>().isAutoShow) Future(showAllDoneDialog);
+    if (sl<AllDoneDialogManager>().isAutoShow) Future(showAllDoneDialog);
 
     return AnimatedScale(
       duration: const Duration(milliseconds: 200),

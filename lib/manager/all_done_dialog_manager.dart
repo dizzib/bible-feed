@@ -4,11 +4,11 @@ import 'feeds_advance_service.dart';
 import 'feeds_service.dart';
 
 @lazySingleton
-class AllDoneDialogService {
+class AllDoneDialogManager {
   final FeedsService _feedsService;
   final FeedsAdvanceService _feedsAdvanceService;
 
-  AllDoneDialogService(this._feedsAdvanceService, this._feedsService);
+  AllDoneDialogManager(this._feedsAdvanceService, this._feedsService);
 
   bool hasShown = false;
 
