@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../manager/chapter_split_toggler_manager.dart';
-import '../manager/haptic_toggler_service.dart';
+import '../manager/haptic_toggler_manager.dart';
 import 'app_version.dart';
 import 'bible_reader_settings.dart';
 import 'constants.dart';
@@ -22,7 +22,7 @@ class Settings extends StatelessWidget {
               children: [
                 BibleReaderSettings(),
                 SettingsToggler<ChapterSplitTogglerManager>(),
-                SettingsToggler<HapticTogglerService>(),
+                SettingsToggler<HapticTogglerManager>(),
                 const AppVersion(),
               ],
             ),

@@ -4,13 +4,13 @@ import '../model/list_wheel_state.dart';
 import '../service/haptic_service.dart';
 import 'bible_reader_link_manager.dart';
 import 'chapter_split_toggler_manager.dart';
-import 'haptic_toggler_service.dart';
+import 'haptic_toggler_manager.dart';
 
 @singleton
 class HapticWireupService {
   final HapticService _hapticService;
   final ChapterSplitTogglerManager _chapterSplitTogglerService;
-  final HapticTogglerService _hapticTogglerService;
+  final HapticTogglerManager _hapticTogglerManager;
   final BibleReaderLinkManager _bibleReaderLinkManager;
   final BookListWheelState _bookListWheelState;
   final ChapterListWheelState _chapterListWheelState;
@@ -18,7 +18,7 @@ class HapticWireupService {
   HapticWireupService(
     this._hapticService,
     this._chapterSplitTogglerService,
-    this._hapticTogglerService,
+    this._hapticTogglerManager,
     this._bibleReaderLinkManager,
     this._bookListWheelState,
     this._chapterListWheelState,
@@ -27,6 +27,6 @@ class HapticWireupService {
     _bookListWheelState.addListener(_hapticService.impact);
     _chapterListWheelState.addListener(_hapticService.impact);
     _chapterSplitTogglerService.addListener(_hapticService.impact);
-    _hapticTogglerService.addListener(_hapticService.impact);
+    _hapticTogglerManager.addListener(_hapticService.impact);
   }
 }

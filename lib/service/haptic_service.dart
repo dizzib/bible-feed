@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
-import '../manager/haptic_toggler_service.dart';
+import '../manager/haptic_toggler_manager.dart';
 
 @lazySingleton
 class HapticService extends RouteObserver<PageRoute<dynamic>> {
-  final HapticTogglerService _hapticTogglerService;
+  final HapticTogglerManager _hapticTogglerManager;
 
-  HapticService(this._hapticTogglerService);
+  HapticService(this._hapticTogglerManager);
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) => impact();
@@ -17,6 +17,6 @@ class HapticService extends RouteObserver<PageRoute<dynamic>> {
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => impact();
 
   void impact() {
-    if (_hapticTogglerService.isEnabled) HapticFeedback.lightImpact();
+    if (_hapticTogglerManager.isEnabled) HapticFeedback.lightImpact();
   }
 }

@@ -1,4 +1,4 @@
-import 'package:bible_feed/manager/haptic_toggler_service.dart';
+import 'package:bible_feed/manager/haptic_toggler_manager.dart';
 import 'package:bible_feed/service/platform_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'haptic_toggler_service_test.mocks.dart';
+import 'haptic_toggler_manager_test.mocks.dart';
 
 class TestPlatformService extends PlatformService {
   TestPlatformService() : super(currentPlatform: TargetPlatform.android, isHapticAvailable: true);
@@ -17,11 +17,11 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   late MockSharedPreferences mockSharedPreferences;
-  late HapticTogglerService testee;
+  late HapticTogglerManager testee;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    testee = HapticTogglerService(mockSharedPreferences, TestPlatformService());
+    testee = HapticTogglerManager(mockSharedPreferences, TestPlatformService());
   });
 
   test('default isEnabled is false', () async {

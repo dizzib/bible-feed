@@ -4,8 +4,8 @@ import '../service/platform_service.dart';
 import 'toggler_service.dart';
 
 @lazySingleton
-class HapticTogglerService extends TogglerService {
-  HapticTogglerService(super.sharedPreferences, this._platformService);
+class HapticTogglerManager extends TogglerService {
+  HapticTogglerManager(super.sharedPreferences, this._platformService);
 
   final PlatformService _platformService;
 

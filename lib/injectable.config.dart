@@ -10,7 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/injectable.dart' as _i537;
-import 'package:bible_feed/manager/haptic_toggler_service.dart' as _i524;
+import 'package:bible_feed/manager/haptic_toggler_manager.dart' as _i79;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i19;
@@ -84,7 +84,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
     gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i524.HapticTogglerService>()),
+      () => _i22.HapticService(gh<_i79.HapticTogglerManager>()),
     );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
