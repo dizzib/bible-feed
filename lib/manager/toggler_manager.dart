@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class TogglerService with ChangeNotifier {
+abstract class TogglerManager with ChangeNotifier {
   final SharedPreferences _sharedPreferences;
 
-  TogglerService(this._sharedPreferences);
+  TogglerManager(this._sharedPreferences);
 
   bool get canEnable;
   String get storeKey;

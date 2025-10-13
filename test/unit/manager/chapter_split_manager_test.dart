@@ -14,18 +14,18 @@ import 'chapter_split_manager_test.mocks.dart';
 void main() {
   final mockChapterSplitter = MockChapterSplitter();
   final mockChapterSplitters = MockChapterSplitters();
-  final mockTogglerService = MockChapterSplitTogglerManager();
+  final mockTogglerManager = MockChapterSplitTogglerManager();
   final state = FeedState(book: b0);
   late ChapterSplitManager testee;
 
   setUp(() {
-    when(mockTogglerService.isEnabled).thenReturn(true);
-    testee = ChapterSplitManager(mockChapterSplitters, mockTogglerService);
+    when(mockTogglerManager.isEnabled).thenReturn(true);
+    testee = ChapterSplitManager(mockChapterSplitters, mockTogglerManager);
   });
 
   group('getNextVerse', () {
     test('disabled, should return 1 and empty string', () {
-      when(mockTogglerService.isEnabled).thenReturn(false);
+      when(mockTogglerManager.isEnabled).thenReturn(false);
       expect(testee.getNextVerse(state), 1);
       expect(testee.getLabel(state), '');
     });

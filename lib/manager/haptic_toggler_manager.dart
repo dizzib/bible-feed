@@ -1,10 +1,10 @@
 import 'package:injectable/injectable.dart';
 
 import '../service/platform_service.dart';
-import 'toggler_service.dart';
+import 'toggler_manager.dart';
 
 @lazySingleton
-class HapticTogglerManager extends TogglerService {
+class HapticTogglerManager extends TogglerManager {
   HapticTogglerManager(super.sharedPreferences, this._platformService);
 
   final PlatformService _platformService;

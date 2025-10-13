@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/toggler_service.dart';
+import '../manager/toggler_manager.dart';
 import 'constants.dart';
 
-class SettingsToggler<T extends TogglerService> extends WatchingWidget {
+class SettingsToggler<T extends TogglerManager> extends WatchingWidget {
   @override
   Widget build(BuildContext context) {
     final togglerService = watchIt<T>();

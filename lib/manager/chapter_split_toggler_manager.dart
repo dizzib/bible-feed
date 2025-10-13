@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
 
-import 'toggler_service.dart';
+import 'toggler_manager.dart';
 
 @lazySingleton
-class ChapterSplitTogglerManager extends TogglerService {
+class ChapterSplitTogglerManager extends TogglerManager {
   ChapterSplitTogglerManager(super.sharedPreferences);
 
   @override
