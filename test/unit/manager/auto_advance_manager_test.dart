@@ -1,4 +1,4 @@
-import 'package:bible_feed/manager/auto_advance_service.dart';
+import 'package:bible_feed/manager/auto_advance_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_state.dart';
 import 'package:bible_feed/manager/feeds_advance_service.dart';
 import 'package:bible_feed/service/date_time_service.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'auto_advance_service_test.mocks.dart';
+import 'auto_advance_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<DateTimeService>(), MockSpec<FeedsAdvanceService>()])
 void main() {
@@ -22,7 +22,7 @@ void main() {
   });
 
   test('constructor should call maybeAdvance', () async {
-    AutoAdvanceService(mockDateTimeService, mockFeedsAdvanceService);
+    AutoAdvanceManager(mockDateTimeService, mockFeedsAdvanceService);
     verify(mockFeedsAdvanceService.maybeAdvance()).called(1);
   });
 
@@ -30,7 +30,7 @@ void main() {
     await fakeAsync((fakeAsync) {
       when(mockFeedsAdvanceService.maybeAdvance()).thenAnswer((_) async => FeedsAdvanceState.listsAdvanced);
       var notified = false;
-      AutoAdvanceService(mockDateTimeService, mockFeedsAdvanceService).addListener(() => notified = true);
+      AutoAdvanceManager(mockDateTimeService, mockFeedsAdvanceService).addListener(() => notified = true);
       fakeAsync.elapse(const Duration(minutes: 1, seconds: 5));
       verify(mockFeedsAdvanceService.maybeAdvance()).called(2); // initial then timed
       expect(notified, true);

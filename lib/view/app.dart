@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/auto_advance_service.dart';
+import '../manager/auto_advance_manager.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
 import 'feeds.dart';
@@ -11,7 +11,7 @@ class App extends WatchingWidget {
   @override
   build(_) {
     // dismiss dialogs on auto-advance
-    registerChangeNotifierHandler(handler: (context, AutoAdvanceService _, _) => Navigator.maybePop(context));
+    registerChangeNotifierHandler(handler: (context, AutoAdvanceManager _, _) => Navigator.maybePop(context));
 
     return LayoutBuilder(
       builder: (_, BoxConstraints bc) {

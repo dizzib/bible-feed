@@ -8,11 +8,11 @@ import '../service/platform_service.dart';
 import '../service/url_launch_service.dart';
 
 @lazySingleton
-class BibleReaderLaunchService {
+class BibleReaderLaunchManager {
   final PlatformService _platformService;
   final UrlLaunchService _urlLaunchService;
 
-  BibleReaderLaunchService(this._platformService, this._urlLaunchService);
+  BibleReaderLaunchManager(this._platformService, this._urlLaunchService);
 
   String _getDeeplinkUrl(BibleReader bibleReader, String internalBookKey, int chapter, [int verse = 1]) {
     final externalBookKey = bibleReader.bookKeyExternaliser.getExternalBookKey(internalBookKey);

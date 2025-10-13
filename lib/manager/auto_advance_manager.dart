@@ -8,11 +8,11 @@ import 'feeds_advance_service.dart';
 import 'feeds_advance_state.dart';
 
 @singleton
-class AutoAdvanceService with ChangeNotifier {
+class AutoAdvanceManager with ChangeNotifier {
   final DateTimeService _dateTimeService;
   final FeedsAdvanceService _feedsAdvanceService;
 
-  AutoAdvanceService(this._dateTimeService, this._feedsAdvanceService) {
+  AutoAdvanceManager(this._dateTimeService, this._feedsAdvanceService) {
     AppLifecycleListener(onResume: _onResume);
     _onResume();
   }

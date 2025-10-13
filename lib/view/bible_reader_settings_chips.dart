@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/app_install_service.dart';
-import '../manager/bible_reader_launch_service.dart';
+import '../manager/app_install_manager.dart';
+import '../manager/bible_reader_launch_manager.dart';
 import '../manager/bible_reader_link_service.dart';
 import '../manager/bible_readers_certified_service.dart';
 import 'constants.dart';
@@ -10,7 +10,7 @@ import 'constants.dart';
 class BibleReaderSettingsChips extends WatchingWidget {
   @override
   Widget build(BuildContext context) {
-    watchIt<AppInstallService>();
+    watchIt<AppInstallManager>();
     final brcs = sl<BibleReadersCertifiedService>();
     final brls = watchIt<BibleReaderLinkService>();
 
@@ -20,7 +20,7 @@ class BibleReaderSettingsChips extends WatchingWidget {
         final bibleReader = brcs.certifiedBibleReaderList[idx];
         // Using watchFuture here causes an infinite loop because .isAvailable always returns a new future.
         return FutureBuilder(
-          future: sl<BibleReaderLaunchService>().isAvailable(bibleReader),
+          future: sl<BibleReaderLaunchManager>().isAvailable(bibleReader),
           builder: (_, AsyncSnapshot<bool> snapshot) {
             onSelected(bool selected) {
               if (selected) brls.linkedBibleReaderIndex = idx;

@@ -1,32 +1,31 @@
+import 'package:bible_feed/manager/app_install_manager.dart';
+import 'package:bible_feed/manager/bible_reader_launch_manager.dart';
+import 'package:bible_feed/manager/bible_reader_link_service.dart';
+import 'package:bible_feed/service/platform_event_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:flutter/foundation.dart';
 
-import 'package:bible_feed/manager/app_install_service.dart';
-import 'package:bible_feed/manager/bible_reader_link_service.dart';
-import 'package:bible_feed/manager/bible_reader_launch_service.dart';
-import 'package:bible_feed/service/platform_event_service.dart';
-
-import 'app_install_service_test.mocks.dart';
+import 'app_install_manager_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<BibleReaderLaunchService>(),
+  MockSpec<BibleReaderLaunchManager>(),
   MockSpec<BibleReaderLinkService>(),
   MockSpec<PlatformEventService>(),
 ])
 void main() {
   late MockBibleReaderLinkService mockBibleReaderLinkService;
-  late MockBibleReaderLaunchService mockBibleReaderLaunchService;
+  late MockBibleReaderLaunchManager mockBibleReaderLaunchManager;
   late MockPlatformEventService mockPlatformEventService;
   late VoidCallback listener;
   late bool notified;
 
-  AppInstallService createTestee() =>
-      AppInstallService(mockBibleReaderLaunchService, mockBibleReaderLinkService, mockPlatformEventService);
+  AppInstallManager createTestee() =>
+      AppInstallManager(mockBibleReaderLaunchManager, mockBibleReaderLinkService, mockPlatformEventService);
 
   setUp(() {
-    mockBibleReaderLaunchService = MockBibleReaderLaunchService();
+    mockBibleReaderLaunchManager = MockBibleReaderLaunchManager();
     mockBibleReaderLinkService = MockBibleReaderLinkService();
     mockPlatformEventService = MockPlatformEventService();
     // capture the PlatformEventService listener so we can invoke it
@@ -38,7 +37,7 @@ void main() {
   });
 
   Future run(bool isAvailable) async {
-    when(mockBibleReaderLaunchService.isAvailable(any)).thenAnswer((_) async => isAvailable);
+    when(mockBibleReaderLaunchManager.isAvailable(any)).thenAnswer((_) async => isAvailable);
     listener.call(); // invoke PlatformEventService listener
     await Future.delayed(Duration.zero);
     expect(notified, isAvailable);
