@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/bible_reader_launch_service.dart';
-import '../manager/bible_reader_link_service.dart';
+import '../manager/bible_reader_launch_manager.dart';
+import '../manager/bible_reader_link_manager.dart';
 import '../manager/chapter_split_toggler_service.dart';
 import '../model/bible_reader_launch_result.dart';
 import '../model/feed.dart';
@@ -20,8 +20,8 @@ class FeedCardBody extends WatchingWidget {
   Future<void> _handleTap(BuildContext context) async {
     sl<HapticService>().impact();
     feed.toggleIsRead();
-    final result = await sl<BibleReaderLaunchService>().maybeLaunch(
-      sl<BibleReaderLinkService>().linkedBibleReader,
+    final result = await sl<BibleReaderLaunchManager>().maybeLaunch(
+      sl<BibleReaderLinkManager>().linkedBibleReader,
       feed.state,
     );
     if (result is! LaunchFailed) return;

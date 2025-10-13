@@ -1,5 +1,5 @@
 import 'package:bible_feed/model/bible_reader.dart';
-import 'package:bible_feed/manager/bible_reader_link_service.dart';
+import 'package:bible_feed/manager/bible_reader_link_manager.dart';
 import 'package:bible_feed/manager/bible_readers_certified_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -8,19 +8,19 @@ import 'package:parameterized_test/parameterized_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_data.dart';
-import 'bible_reader_link_service_test.mocks.dart';
+import 'bible_reader_link_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<BibleReadersCertifiedService>(), MockSpec<SharedPreferences>()])
 void main() async {
   late MockBibleReadersCertifiedService mockBibleReadersCertifiedService;
   late MockSharedPreferences mockSharedPreferences;
-  late BibleReaderLinkService testee;
+  late BibleReaderLinkManager testee;
 
   setUp(() {
     mockBibleReadersCertifiedService = MockBibleReadersCertifiedService();
     mockSharedPreferences = MockSharedPreferences();
     when(mockBibleReadersCertifiedService.certifiedBibleReaderList).thenReturn([noneBibleReader, blbBibleReader]);
-    testee = BibleReaderLinkService(mockSharedPreferences, mockBibleReadersCertifiedService);
+    testee = BibleReaderLinkManager(mockSharedPreferences, mockBibleReadersCertifiedService);
   });
 
   parameterizedTest(
@@ -32,7 +32,7 @@ void main() async {
     ],
     (String? bibleReaderKey, bool expectIsLinked, int expectIndex, BibleReader expectBibleReader) {
       when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn(bibleReaderKey);
-      testee = BibleReaderLinkService(mockSharedPreferences, mockBibleReadersCertifiedService);
+      testee = BibleReaderLinkManager(mockSharedPreferences, mockBibleReadersCertifiedService);
       expect(testee.isLinked, expectIsLinked);
       expect(testee.linkedBibleReader, expectBibleReader);
       expect(testee.linkedBibleReaderIndex, expectIndex);
@@ -42,7 +42,7 @@ void main() async {
   test('constructor should set linkedBibleReader to none if stored linkedBibleReader is uncertified', () {
     when(mockBibleReadersCertifiedService.certifiedBibleReaderList).thenReturn([]);
     when(mockSharedPreferences.getString('linkedBibleReader')).thenReturn('blueLetterApp');
-    testee = BibleReaderLinkService(mockSharedPreferences, mockBibleReadersCertifiedService);
+    testee = BibleReaderLinkManager(mockSharedPreferences, mockBibleReadersCertifiedService);
     expect(testee.isLinked, false);
   });
 

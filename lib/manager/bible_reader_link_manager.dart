@@ -7,11 +7,11 @@ import '../model/bible_reader_key.dart';
 import 'bible_readers_certified_service.dart';
 
 @lazySingleton
-class BibleReaderLinkService with ChangeNotifier {
+class BibleReaderLinkManager with ChangeNotifier {
   final BibleReadersCertifiedService _bibleReadersCertifiedService;
   final SharedPreferences _sharedPreferences;
 
-  BibleReaderLinkService(this._sharedPreferences, this._bibleReadersCertifiedService) {
+  BibleReaderLinkManager(this._sharedPreferences, this._bibleReadersCertifiedService) {
     _loadState();
   }
 

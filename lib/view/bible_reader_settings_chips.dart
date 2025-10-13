@@ -3,7 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '../manager/app_install_manager.dart';
 import '../manager/bible_reader_launch_manager.dart';
-import '../manager/bible_reader_link_service.dart';
+import '../manager/bible_reader_link_manager.dart';
 import '../manager/bible_readers_certified_service.dart';
 import 'constants.dart';
 
@@ -12,7 +12,7 @@ class BibleReaderSettingsChips extends WatchingWidget {
   Widget build(BuildContext context) {
     watchIt<AppInstallManager>();
     final brcs = sl<BibleReadersCertifiedService>();
-    final brls = watchIt<BibleReaderLinkService>();
+    final brlm = watchIt<BibleReaderLinkManager>();
 
     return Wrap(
       spacing: Constants.settingsSpacing,
@@ -23,14 +23,14 @@ class BibleReaderSettingsChips extends WatchingWidget {
           future: sl<BibleReaderLaunchManager>().isAvailable(bibleReader),
           builder: (_, AsyncSnapshot<bool> snapshot) {
             onSelected(bool selected) {
-              if (selected) brls.linkedBibleReaderIndex = idx;
+              if (selected) brlm.linkedBibleReaderIndex = idx;
             }
 
             final isAvailable = snapshot.data ?? false;
             return ChoiceChip(
               label: Text('${bibleReader.displayName}${isAvailable ? "" : " is not detected"}'),
               onSelected: isAvailable ? onSelected : null,
-              selected: idx == brls.linkedBibleReaderIndex,
+              selected: idx == brlm.linkedBibleReaderIndex,
             );
           },
         );

@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 import 'dart:ui' as _i9;
 
 import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i3;
-import 'package:bible_feed/manager/bible_reader_link_service.dart' as _i8;
+import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i8;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
 import 'package:bible_feed/model/bible_reader_launch_result.dart' as _i5;
 import 'package:bible_feed/model/feed.dart' as _i6;
@@ -72,11 +72,11 @@ class MockBibleReaderLaunchManager extends _i1.Mock
           as _i4.Future<_i5.BibleReaderLaunchResult>);
 }
 
-/// A class which mocks [BibleReaderLinkService].
+/// A class which mocks [BibleReaderLinkManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBibleReaderLinkService extends _i1.Mock
-    implements _i8.BibleReaderLinkService {
+class MockBibleReaderLinkManager extends _i1.Mock
+    implements _i8.BibleReaderLinkManager {
   @override
   bool get isLinked =>
       (super.noSuchMethod(
