@@ -16,6 +16,7 @@ targets:
         generate_for:
           include:
             - lib/injectable.dart
+            - lib/manager/*.dart
             - lib/model/*.dart
             - lib/service/*.dart
             - test/injectable.dart
@@ -28,4 +29,3 @@ targets:
           include:
             - test/unit/manager/*.dart
             - test/unit/model/*.dart
-            - test/unit/service/*.dart

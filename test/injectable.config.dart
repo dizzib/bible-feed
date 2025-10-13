@@ -9,7 +9,21 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:bible_feed/manager/all_done_dialog_manager.dart' as _i541;
+import 'package:bible_feed/manager/app_install_manager.dart' as _i610;
+import 'package:bible_feed/manager/auto_advance_manager.dart' as _i111;
+import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
+import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i567;
+import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
+    as _i837;
+import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
+import 'package:bible_feed/manager/chapter_split_toggler_manager.dart' as _i172;
+import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
+import 'package:bible_feed/manager/feed_store_manager.dart' as _i571;
+import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i477;
+import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
 import 'package:bible_feed/manager/haptic_toggler_manager.dart' as _i79;
+import 'package:bible_feed/manager/haptic_wireup_manager.dart' as _i519;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i19;
@@ -81,6 +95,9 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_midnight_test, _prod},
       preResolve: true,
     );
+    gh.lazySingleton<_i571.FeedStoreManager>(
+      () => _i571.FeedStoreManager(gh<_i460.SharedPreferences>()),
+    );
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
     );
@@ -96,12 +113,24 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_golden},
       preResolve: true,
     );
+    gh.lazySingleton<_i172.ChapterSplitTogglerManager>(
+      () => _i172.ChapterSplitTogglerManager(gh<_i460.SharedPreferences>()),
+    );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i250.ScreenshotPlatformService(),
       registerFor: {_golden},
     );
-    gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i79.HapticTogglerManager>()),
+    gh.lazySingleton<_i186.BibleReaderLaunchManager>(
+      () => _i186.BibleReaderLaunchManager(
+        gh<_i578.PlatformService>(),
+        gh<_i626.UrlLaunchService>(),
+      ),
+    );
+    gh.lazySingleton<_i79.HapticTogglerManager>(
+      () => _i79.HapticTogglerManager(
+        gh<_i460.SharedPreferences>(),
+        gh<_i578.PlatformService>(),
+      ),
     );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
@@ -109,6 +138,73 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ProductionPlatformEventService(gh<_i578.PlatformService>()),
       registerFor: {_midnight_test, _prod},
+    );
+    gh.lazySingleton<_i10.ChapterSplitManager>(
+      () => _i10.ChapterSplitManager(
+        gh<_i1006.ChapterSplitters>(),
+        gh<_i172.ChapterSplitTogglerManager>(),
+      ),
+    );
+    gh.lazySingleton<_i716.FeedAdvanceManager>(
+      () => _i716.FeedAdvanceManager(gh<_i10.ChapterSplitManager>()),
+    );
+    gh.lazySingleton<_i127.FeedsManager>(
+      () => _i127.FeedsManager(
+        gh<_i571.FeedStoreManager>(),
+        gh<_i823.ReadingLists>(),
+      ),
+    );
+    gh.lazySingleton<_i837.BibleReadersCertifiedManager>(
+      () => _i837.BibleReadersCertifiedManager(
+        gh<_i578.PlatformService>(),
+        gh<_i1070.BibleReaders>(),
+      ),
+    );
+    gh.lazySingleton<_i477.FeedsAdvanceManager>(
+      () => _i477.FeedsAdvanceManager(
+        gh<_i99.DateTimeService>(),
+        gh<_i460.SharedPreferences>(),
+        gh<_i716.FeedAdvanceManager>(),
+        gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.lazySingleton<_i22.HapticService>(
+      () => _i22.HapticService(gh<_i79.HapticTogglerManager>()),
+    );
+    gh.lazySingleton<_i567.BibleReaderLinkManager>(
+      () => _i567.BibleReaderLinkManager(
+        gh<_i460.SharedPreferences>(),
+        gh<_i837.BibleReadersCertifiedManager>(),
+      ),
+    );
+    gh.singleton<_i111.AutoAdvanceManager>(
+      () => _i111.AutoAdvanceManager(
+        gh<_i99.DateTimeService>(),
+        gh<_i477.FeedsAdvanceManager>(),
+      ),
+    );
+    gh.lazySingleton<_i541.AllDoneDialogManager>(
+      () => _i541.AllDoneDialogManager(
+        gh<_i477.FeedsAdvanceManager>(),
+        gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.singleton<_i519.HapticWireupManager>(
+      () => _i519.HapticWireupManager(
+        gh<_i22.HapticService>(),
+        gh<_i172.ChapterSplitTogglerManager>(),
+        gh<_i79.HapticTogglerManager>(),
+        gh<_i567.BibleReaderLinkManager>(),
+        gh<_i1033.BookListWheelState>(),
+        gh<_i1033.ChapterListWheelState>(),
+      ),
+    );
+    gh.lazySingleton<_i610.AppInstallManager>(
+      () => _i610.AppInstallManager(
+        gh<_i186.BibleReaderLaunchManager>(),
+        gh<_i567.BibleReaderLinkManager>(),
+        gh<_i516.PlatformEventService>(),
+      ),
     );
     return this;
   }
