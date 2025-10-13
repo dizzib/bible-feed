@@ -8,10 +8,10 @@ import '../model/reading_lists.dart';
 import 'feed_store_manager.dart';
 
 @lazySingleton
-class FeedsService with ChangeNotifier {
+class FeedsManager with ChangeNotifier {
   final FeedStoreManager _feedStoreManager;
 
-  FeedsService(this._feedStoreManager, ReadingLists readingLists)
+  FeedsManager(this._feedStoreManager, ReadingLists readingLists)
     : _feeds = readingLists.map((rl) => Feed(rl, _feedStoreManager.loadState(rl))).toList() {
     for (Feed f in _feeds) {
       if (f.state.dateModified?.isAfter(_lastModifiedFeed?.state.dateModified ?? DateTime(0)) ?? false) {

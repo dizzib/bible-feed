@@ -7,7 +7,7 @@ import 'dart:async' as _i10;
 import 'dart:ui' as _i6;
 
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i7;
-import 'package:bible_feed/manager/feeds_service.dart' as _i8;
+import 'package:bible_feed/manager/feeds_manager.dart' as _i8;
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
 import 'package:bible_feed/service/date_time_service.dart' as _i3;
@@ -173,10 +173,10 @@ class MockFeedAdvanceManager extends _i1.Mock
   );
 }
 
-/// A class which mocks [FeedsService].
+/// A class which mocks [FeedsManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeedsService extends _i1.Mock implements _i8.FeedsService {
+class MockFeedsManager extends _i1.Mock implements _i8.FeedsManager {
   @override
   bool get areChaptersRead =>
       (super.noSuchMethod(

@@ -1,17 +1,17 @@
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/manager/feed_store_manager.dart';
-import 'package:bible_feed/manager/feeds_service.dart';
+import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../test_data.dart';
-import 'feeds_service_test.mocks.dart';
+import 'feeds_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FeedStoreManager>()])
 void main() async {
-  late FeedsService testee;
+  late FeedsManager testee;
   late MockFeedStoreManager mockFeedStoreManager;
   late FeedState state0;
   late FeedState state1;
@@ -22,7 +22,7 @@ void main() async {
     state1 = FeedState(book: b1, dateModified: DateTime(2025, 1, 1, 2));
     when(mockFeedStoreManager.loadState(rl0)).thenReturn(state0);
     when(mockFeedStoreManager.loadState(rl1)).thenReturn(state1);
-    testee = FeedsService(mockFeedStoreManager, ReadingLists([rl0, rl1]));
+    testee = FeedsManager(mockFeedStoreManager, ReadingLists([rl0, rl1]));
   });
 
   group('property', () {

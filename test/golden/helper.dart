@@ -1,5 +1,5 @@
 import 'package:bible_feed/manager/chapter_split_toggler_manager.dart';
-import 'package:bible_feed/manager/feeds_service.dart';
+import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:watch_it/watch_it.dart';
 
 class Helper {
@@ -31,7 +31,7 @@ class Helper {
     ];
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 2; col++) {
-        final feed = sl<FeedsService>().feeds[row * 2 + col];
+        final feed = sl<FeedsManager>().feeds[row * 2 + col];
         feed.setBookChapterVerse(bookState[row][col], chapterState[row][col]);
         if (chapterReadState[row][col] == 1) feed.toggleIsRead();
       }

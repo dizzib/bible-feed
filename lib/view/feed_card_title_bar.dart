@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../model/feed.dart';
-import '../manager/feeds_service.dart';
+import '../manager/feeds_manager.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';
 
@@ -12,12 +12,12 @@ class FeedCardTitleBar extends WatchingWidget {
 
   @override
   build(context) {
-    final feedsService = watchIt<FeedsService>();
+    final feedsManager = watchIt<FeedsManager>();
 
     return Row(
       children: [
         Visibility(
-          visible: feed.state.isRead && identical(feed, feedsService.lastModifiedFeed),
+          visible: feed.state.isRead && identical(feed, feedsManager.lastModifiedFeed),
           child: const Padding(
             padding: EdgeInsets.only(left: 8.0),
             child: Tooltip(message: 'This is the last chapter you read', child: Icon(Icons.auto_stories)),

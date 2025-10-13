@@ -1,6 +1,6 @@
 import 'package:bible_feed/manager/feed_advance_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
-import 'package:bible_feed/manager/feeds_service.dart';
+import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds_advance_state.dart';
 import 'package:bible_feed/service/date_time_service.dart';
@@ -18,24 +18,24 @@ import 'feeds_advance_manager_test.mocks.dart';
   MockSpec<DateTimeService>(),
   MockSpec<Feed>(),
   MockSpec<FeedAdvanceManager>(),
-  MockSpec<FeedsService>(),
+  MockSpec<FeedsManager>(),
   MockSpec<SharedPreferences>(),
 ])
 void main() async {
   final mockFeedList = [MockFeed(), MockFeed()];
   late MockDateTimeService mockDateTimeService;
   late MockFeedAdvanceManager mockFeedAdvanceManager;
-  late MockFeedsService mockFeedsService;
+  late MockFeedsManager mockFeedsManager;
   late MockSharedPreferences mockSharedPreferences;
   late FeedsAdvanceManager testee;
 
   setUp(() {
     mockDateTimeService = MockDateTimeService();
     mockFeedAdvanceManager = MockFeedAdvanceManager();
-    mockFeedsService = MockFeedsService();
+    mockFeedsManager = MockFeedsManager();
     mockSharedPreferences = MockSharedPreferences();
-    when(mockFeedsService.feeds).thenReturn(mockFeedList);
-    testee = FeedsAdvanceManager(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceManager, mockFeedsService);
+    when(mockFeedsManager.feeds).thenReturn(mockFeedList);
+    testee = FeedsAdvanceManager(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceManager, mockFeedsManager);
   });
 
   verifyAllAdvanced() {
@@ -91,8 +91,8 @@ void main() async {
       Function verify,
     ) async {
       when(mockDateTimeService.now).thenReturn(date);
-      when(mockFeedsService.areChaptersRead).thenReturn(areChaptersRead);
-      when(mockFeedsService.lastModifiedFeed).thenReturn(mockFeedList[0]);
+      when(mockFeedsManager.areChaptersRead).thenReturn(areChaptersRead);
+      when(mockFeedsManager.lastModifiedFeed).thenReturn(mockFeedList[0]);
       when(mockFeedList[0].state).thenReturn(FeedState(book: b0, isRead: true, dateModified: date - sinceLastModified));
       expect(await testee.maybeAdvance(), expectedAdvanceState);
       verify();

@@ -5,23 +5,23 @@ import '../model/feed.dart';
 import '../model/feeds_advance_state.dart';
 import '../service/date_time_service.dart';
 import 'feed_advance_manager.dart';
-import 'feeds_service.dart';
+import 'feeds_manager.dart';
 
 @lazySingleton
 class FeedsAdvanceManager {
   final DateTimeService _dateTimeService;
   final SharedPreferences _sharedPreferences;
   final FeedAdvanceManager _feedAdvanceManager;
-  final FeedsService _feedsService;
+  final FeedsManager _feedsManager;
 
-  FeedsAdvanceManager(this._dateTimeService, this._sharedPreferences, this._feedAdvanceManager, this._feedsService);
+  FeedsAdvanceManager(this._dateTimeService, this._sharedPreferences, this._feedAdvanceManager, this._feedsManager);
 
   static const _hasEverAdvancedStoreKey = 'hasEverAdvanced';
 
   bool get hasEverAdvanced => _sharedPreferences.getBool(_hasEverAdvancedStoreKey) ?? false;
 
   Future<FeedsAdvanceState> advance() async {
-    for (Feed f in _feedsService.feeds) {
+    for (Feed f in _feedsManager.feeds) {
       _feedAdvanceManager.advance(f);
     }
     await _sharedPreferences.setBool(_hasEverAdvancedStoreKey, true);
@@ -29,8 +29,8 @@ class FeedsAdvanceManager {
   }
 
   Future<FeedsAdvanceState> maybeAdvance() async {
-    if (!_feedsService.areChaptersRead) return FeedsAdvanceState.notAllRead;
-    final lastDateModified = _feedsService.lastModifiedFeed?.state.dateModified;
+    if (!_feedsManager.areChaptersRead) return FeedsAdvanceState.notAllRead;
+    final lastDateModified = _feedsManager.lastModifiedFeed?.state.dateModified;
     if (lastDateModified == null) return FeedsAdvanceState.notAllRead;
     final now = _dateTimeService.now;
     final lastMidnightOfNow = DateTime(now.year, now.month, now.day);

@@ -3,7 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '../model/feed.dart';
 import '../manager/bible_reader_link_manager.dart';
-import '../manager/feeds_service.dart';
+import '../manager/feeds_manager.dart';
 import 'feed_card_body.dart';
 import 'feed_card_semantics.dart';
 
@@ -16,7 +16,7 @@ class FeedCard extends WatchingWidget {
     watch(feed);
     final brlm = watchIt<BibleReaderLinkManager>();
     final isRead = feed.state.isRead;
-    final isLastReadAndLinked = isRead && brlm.isLinked && identical(feed, sl<FeedsService>().lastModifiedFeed);
+    final isLastReadAndLinked = isRead && brlm.isLinked && identical(feed, sl<FeedsManager>().lastModifiedFeed);
     final secondsToFade = Duration(seconds: isLastReadAndLinked ? 30 : 0);
     final opacity = isRead ? 0.25 : 1.0;
     final elevation = isRead ? 0.0 : 12.0;

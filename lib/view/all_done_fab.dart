@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/feeds_service.dart';
+import '../manager/feeds_manager.dart';
 import '../manager/all_done_dialog_manager.dart';
 import 'all_done_dialog.dart';
 import 'build_context_extension.dart';
@@ -9,7 +9,7 @@ import 'build_context_extension.dart';
 class AllDoneFab extends WatchingWidget {
   @override
   build(context) {
-    final feedsService = watchIt<FeedsService>();
+    final feedsManager = watchIt<FeedsManager>();
 
     void showAllDoneDialog() {
       context.showDialogWithBlurBackground(AllDoneDialog());
@@ -20,7 +20,7 @@ class AllDoneFab extends WatchingWidget {
 
     return AnimatedScale(
       duration: const Duration(milliseconds: 200),
-      scale: feedsService.areChaptersRead ? 1 : 0,
+      scale: feedsManager.areChaptersRead ? 1 : 0,
       child: FloatingActionButton(
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
