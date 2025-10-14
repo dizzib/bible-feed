@@ -1,8 +1,14 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../injectable.env.dart';
+
+@golden
+@prod
 @lazySingleton
 class StoreService {
+  // TODO replace with SharedPreferencesWithCache when it supports unit tests
+  // https://github.com/flutter/flutter/issues/159597
   final SharedPreferences _sharedPreferences;
 
   StoreService(this._sharedPreferences);

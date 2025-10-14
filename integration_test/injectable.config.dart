@@ -41,12 +41,12 @@ import 'package:bible_feed/service/store_service.dart' as _i215;
 import 'package:bible_feed/service/url_launch_service.dart' as _i626;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
-import 'injectable.dart' as _i1027;
+import 'service/empty_store_service.dart' as _i617;
 import 'service/midnight_date_time_service.dart' as _i123;
 
 const String _golden = 'golden';
+const String _integration_test = 'integration_test';
 const String _prod = 'prod';
 const String _midnight_test = 'midnight_test';
 
@@ -57,14 +57,9 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final registerModule = _$RegisterModule();
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     final bibleReadersModule = _$BibleReadersModule();
-    await gh.singletonAsync<_i460.SharedPreferences>(
-      () => registerModule.clearedSharedPreferences,
-      preResolve: true,
-    );
     gh.lazySingleton<_i1033.BookListWheelState>(
       () => _i1033.BookListWheelState(),
     );
@@ -80,31 +75,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<List<_i270.BibleReader>>(
       () => bibleReadersModule.bibleReader,
     );
-    await gh.lazySingletonAsync<_i215.StoreService>(
-      () => _i215.StoreService.create(),
-      preResolve: true,
-    );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
+      registerFor: {_golden, _integration_test, _prod},
+    );
+    await gh.lazySingletonAsync<_i215.StoreService>(
+      () => _i215.StoreService.create(),
       registerFor: {_golden, _prod},
-    );
-    await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
-      () => _i729.ProductionHapticAvailabilityService.create(),
-      registerFor: {_midnight_test, _prod},
       preResolve: true,
-    );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i977.ProductionAppService.create(),
-      registerFor: {_midnight_test, _prod},
-      preResolve: true,
-    );
-    gh.lazySingleton<_i172.ChapterSplitTogglerManager>(
-      () => _i172.ChapterSplitTogglerManager(gh<_i215.StoreService>()),
     );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProductionPlatformService(),
-      registerFor: {_midnight_test, _prod},
+      registerFor: {_integration_test, _midnight_test, _prod},
+    );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i977.ProductionAppService.create(),
+      registerFor: {_integration_test, _midnight_test, _prod},
+      preResolve: true,
+    );
+    await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
+      () => _i729.ProductionHapticAvailabilityService.create(),
+      registerFor: {_integration_test, _midnight_test, _prod},
+      preResolve: true,
     );
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
@@ -128,6 +121,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i626.UrlLaunchService>(),
       ),
     );
+    await gh.lazySingletonAsync<_i215.StoreService>(
+      () => _i617.EmptyStoreService.create(),
+      registerFor: {_integration_test, _midnight_test},
+      preResolve: true,
+    );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
@@ -148,7 +146,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ProductionPlatformEventService(gh<_i578.PlatformService>()),
-      registerFor: {_midnight_test, _prod},
+      registerFor: {_integration_test, _midnight_test, _prod},
     );
     gh.lazySingleton<_i610.AppInstallManager>(
       () => _i610.AppInstallManager(
@@ -157,27 +155,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i516.PlatformEventService>(),
       ),
     );
-    gh.lazySingleton<_i10.ChapterSplitManager>(
-      () => _i10.ChapterSplitManager(
-        gh<_i1006.ChapterSplitters>(),
-        gh<_i172.ChapterSplitTogglerManager>(),
-      ),
-    );
-    gh.lazySingleton<_i716.FeedAdvanceManager>(
-      () => _i716.FeedAdvanceManager(gh<_i10.ChapterSplitManager>()),
+    gh.lazySingleton<_i172.ChapterSplitTogglerManager>(
+      () => _i172.ChapterSplitTogglerManager(gh<_i215.StoreService>()),
     );
     gh.lazySingleton<_i127.FeedsManager>(
       () => _i127.FeedsManager(
         gh<_i571.FeedStoreManager>(),
         gh<_i823.ReadingLists>(),
-      ),
-    );
-    gh.lazySingleton<_i477.FeedsAdvanceManager>(
-      () => _i477.FeedsAdvanceManager(
-        gh<_i99.DateTimeService>(),
-        gh<_i215.StoreService>(),
-        gh<_i716.FeedAdvanceManager>(),
-        gh<_i127.FeedsManager>(),
       ),
     );
     gh.lazySingleton<_i22.HapticService>(
@@ -191,6 +175,23 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
+      ),
+    );
+    gh.lazySingleton<_i10.ChapterSplitManager>(
+      () => _i10.ChapterSplitManager(
+        gh<_i1006.ChapterSplitters>(),
+        gh<_i172.ChapterSplitTogglerManager>(),
+      ),
+    );
+    gh.lazySingleton<_i716.FeedAdvanceManager>(
+      () => _i716.FeedAdvanceManager(gh<_i10.ChapterSplitManager>()),
+    );
+    gh.lazySingleton<_i477.FeedsAdvanceManager>(
+      () => _i477.FeedsAdvanceManager(
+        gh<_i99.DateTimeService>(),
+        gh<_i215.StoreService>(),
+        gh<_i716.FeedAdvanceManager>(),
+        gh<_i127.FeedsManager>(),
       ),
     );
     gh.singleton<_i111.AutoAdvanceManager>(
@@ -208,8 +209,6 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
-
-class _$RegisterModule extends _i1027.RegisterModule {}
 
 class _$ReadingListsModule extends _i823.ReadingListsModule {}
 

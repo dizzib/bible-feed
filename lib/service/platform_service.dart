@@ -12,6 +12,7 @@ class PlatformService {
   bool get isIOS => currentPlatform == TargetPlatform.iOS;
 }
 
+@integrationTest
 @midnightTest
 @prod
 @LazySingleton(as: PlatformService)

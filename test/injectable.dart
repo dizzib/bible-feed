@@ -19,10 +19,3 @@ Future configureDependencies(String environment) async {
   await di.reset();
   await di.init(environment: environment);
 }
-
-@module // register third-party
-abstract class RegisterModuleTest {
-  @preResolve
-  @singleton
-  Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
-}

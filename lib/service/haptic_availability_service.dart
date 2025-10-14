@@ -9,6 +9,7 @@ class HapticAvailabilityService {
   final bool isHapticAvailable;
 }
 
+@integrationTest
 @midnightTest
 @prod
 @LazySingleton(as: HapticAvailabilityService)

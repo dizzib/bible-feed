@@ -9,7 +9,6 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bible_feed/injectable.dart' as _i537;
 import 'package:bible_feed/manager/all_done_dialog_manager.dart' as _i541;
 import 'package:bible_feed/manager/app_install_manager.dart' as _i610;
 import 'package:bible_feed/manager/auto_advance_manager.dart' as _i111;
@@ -42,9 +41,9 @@ import 'package:bible_feed/service/store_service.dart' as _i215;
 import 'package:bible_feed/service/url_launch_service.dart' as _i626;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 const String _golden = 'golden';
+const String _integration_test = 'integration_test';
 const String _prod = 'prod';
 const String _midnight_test = 'midnight_test';
 
@@ -55,14 +54,9 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final registerThirdParty = _$RegisterThirdParty();
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     final bibleReadersModule = _$BibleReadersModule();
-    await gh.singletonAsync<_i460.SharedPreferences>(
-      () => registerThirdParty.sharedPreferences,
-      preResolve: true,
-    );
     gh.lazySingleton<_i1033.BookListWheelState>(
       () => _i1033.BookListWheelState(),
     );
@@ -78,31 +72,32 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<List<_i270.BibleReader>>(
       () => bibleReadersModule.bibleReader,
     );
-    await gh.lazySingletonAsync<_i215.StoreService>(
-      () => _i215.StoreService.create(),
-      preResolve: true,
-    );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
-      registerFor: {_golden, _prod},
+      registerFor: {_golden, _integration_test, _prod},
     );
-    await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
-      () => _i729.ProductionHapticAvailabilityService.create(),
-      registerFor: {_midnight_test, _prod},
+    await gh.lazySingletonAsync<_i215.StoreService>(
+      () => _i215.StoreService.create(),
+      registerFor: {_golden, _prod},
       preResolve: true,
+    );
+    gh.lazySingleton<_i578.PlatformService>(
+      () => _i578.ProductionPlatformService(),
+      registerFor: {_integration_test, _midnight_test, _prod},
     );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i977.ProductionAppService.create(),
-      registerFor: {_midnight_test, _prod},
+      registerFor: {_integration_test, _midnight_test, _prod},
       preResolve: true,
     );
     gh.lazySingleton<_i172.ChapterSplitTogglerManager>(
       () => _i172.ChapterSplitTogglerManager(gh<_i215.StoreService>()),
     );
-    gh.lazySingleton<_i578.PlatformService>(
-      () => _i578.ProductionPlatformService(),
-      registerFor: {_midnight_test, _prod},
+    await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
+      () => _i729.ProductionHapticAvailabilityService.create(),
+      registerFor: {_integration_test, _midnight_test, _prod},
+      preResolve: true,
     );
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
@@ -142,7 +137,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i516.PlatformEventService>(
       () => _i516.ProductionPlatformEventService(gh<_i578.PlatformService>()),
-      registerFor: {_midnight_test, _prod},
+      registerFor: {_integration_test, _midnight_test, _prod},
     );
     gh.lazySingleton<_i610.AppInstallManager>(
       () => _i610.AppInstallManager(
@@ -202,8 +197,6 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
-
-class _$RegisterThirdParty extends _i537.RegisterThirdParty {}
 
 class _$ReadingListsModule extends _i823.ReadingListsModule {}
 

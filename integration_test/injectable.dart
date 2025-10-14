@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import 'injectable.config.dart'; // AUTO-GENERATED
@@ -13,17 +12,4 @@ Future configureDependencies({required String environment}) async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   await di.reset();
   await di.init(environment: environment);
-}
-
-@module // register third-party
-abstract class RegisterModule {
-  // TODO replace with SharedPreferencesWithCache when it supports unit tests
-  // https://github.com/flutter/flutter/issues/159597
-  @preResolve
-  @singleton
-  Future<SharedPreferences> get clearedSharedPreferences async {
-    final sp = await SharedPreferences.getInstance();
-    await sp.clear();
-    return sp;
-  }
 }

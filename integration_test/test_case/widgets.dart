@@ -17,7 +17,7 @@ extension Helper on WidgetTester {
 }
 
 Future runWidgetTests() async {
-  await configureDependencies(environment: 'prod');
+  await configureDependencies(environment: 'integration_test');
 
   final gospels = sl<ReadingLists>()[0];
   final matthew = gospels[0];
