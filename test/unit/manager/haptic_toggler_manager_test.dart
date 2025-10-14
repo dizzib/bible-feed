@@ -1,10 +1,10 @@
 import 'package:bible_feed/manager/haptic_toggler_manager.dart';
 import 'package:bible_feed/service/haptic_availability_service.dart';
+import 'package:bible_feed/service/store_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'haptic_toggler_manager_test.mocks.dart';
 
@@ -12,16 +12,16 @@ class TestHapticAvailabilityService extends HapticAvailabilityService {
   TestHapticAvailabilityService() : super(isHapticAvailable: true);
 }
 
-@GenerateNiceMocks([MockSpec<SharedPreferences>()])
+@GenerateNiceMocks([MockSpec<StoreService>()])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  late MockSharedPreferences mockSharedPreferences;
+  late MockStoreService mockStoreService;
   late HapticTogglerManager testee;
 
   setUp(() {
-    mockSharedPreferences = MockSharedPreferences();
-    testee = HapticTogglerManager(mockSharedPreferences, TestHapticAvailabilityService());
+    mockStoreService = MockStoreService();
+    testee = HapticTogglerManager(mockStoreService, TestHapticAvailabilityService());
   });
 
   test('default isEnabled is false', () async {
@@ -29,7 +29,7 @@ void main() {
   });
 
   test('isEnabled getter returns stored value', () {
-    when(mockSharedPreferences.getBool('isEnabled.haptic')).thenReturn(true);
+    when(mockStoreService.getBool('isEnabled.haptic')).thenReturn(true);
     expect(testee.isEnabled, true);
   });
 
@@ -40,7 +40,7 @@ void main() {
     });
     testee.isEnabled = true;
     expect(notified, true);
-    verify(mockSharedPreferences.setBool('isEnabled.haptic', true)).called(1);
+    verify(mockStoreService.setBool('isEnabled.haptic', true)).called(1);
   });
 
   test('isAvailable returns true', () {

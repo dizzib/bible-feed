@@ -11,9 +11,9 @@ import 'package:bible_feed/manager/feeds_manager.dart' as _i8;
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i4;
 import 'package:bible_feed/service/date_time_service.dart' as _i3;
+import 'package:bible_feed/service/store_service.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
-import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -229,27 +229,10 @@ class MockFeedsManager extends _i1.Mock implements _i8.FeedsManager {
   );
 }
 
-/// A class which mocks [SharedPreferences].
+/// A class which mocks [StoreService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
-  @override
-  Set<String> getKeys() =>
-      (super.noSuchMethod(
-            Invocation.method(#getKeys, []),
-            returnValue: <String>{},
-            returnValueForMissingStub: <String>{},
-          )
-          as Set<String>);
-
-  @override
-  Object? get(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#get, [key]),
-            returnValueForMissingStub: null,
-          )
-          as Object?);
-
+class MockStoreService extends _i1.Mock implements _i9.StoreService {
   @override
   bool? getBool(String? key) =>
       (super.noSuchMethod(
@@ -257,14 +240,6 @@ class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
             returnValueForMissingStub: null,
           )
           as bool?);
-
-  @override
-  int? getInt(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getInt, [key]),
-            returnValueForMissingStub: null,
-          )
-          as int?);
 
   @override
   double? getDouble(String? key) =>
@@ -275,6 +250,14 @@ class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
           as double?);
 
   @override
+  int? getInt(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#getInt, [key]),
+            returnValueForMissingStub: null,
+          )
+          as int?);
+
+  @override
   String? getString(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#getString, [key]),
@@ -283,35 +266,9 @@ class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
           as String?);
 
   @override
-  bool containsKey(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#containsKey, [key]),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  List<String>? getStringList(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getStringList, [key]),
-            returnValueForMissingStub: null,
-          )
-          as List<String>?);
-
-  @override
   _i10.Future<bool> setBool(String? key, bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setBool, [key, value]),
-            returnValue: _i10.Future<bool>.value(false),
-            returnValueForMissingStub: _i10.Future<bool>.value(false),
-          )
-          as _i10.Future<bool>);
-
-  @override
-  _i10.Future<bool> setInt(String? key, int? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setInt, [key, value]),
             returnValue: _i10.Future<bool>.value(false),
             returnValueForMissingStub: _i10.Future<bool>.value(false),
           )
@@ -327,6 +284,15 @@ class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
           as _i10.Future<bool>);
 
   @override
+  _i10.Future<bool> setInt(String? key, int? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setInt, [key, value]),
+            returnValue: _i10.Future<bool>.value(false),
+            returnValueForMissingStub: _i10.Future<bool>.value(false),
+          )
+          as _i10.Future<bool>);
+
+  @override
   _i10.Future<bool> setString(String? key, String? value) =>
       (super.noSuchMethod(
             Invocation.method(#setString, [key, value]),
@@ -334,49 +300,4 @@ class MockSharedPreferences extends _i1.Mock implements _i9.SharedPreferences {
             returnValueForMissingStub: _i10.Future<bool>.value(false),
           )
           as _i10.Future<bool>);
-
-  @override
-  _i10.Future<bool> setStringList(String? key, List<String>? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setStringList, [key, value]),
-            returnValue: _i10.Future<bool>.value(false),
-            returnValueForMissingStub: _i10.Future<bool>.value(false),
-          )
-          as _i10.Future<bool>);
-
-  @override
-  _i10.Future<bool> remove(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#remove, [key]),
-            returnValue: _i10.Future<bool>.value(false),
-            returnValueForMissingStub: _i10.Future<bool>.value(false),
-          )
-          as _i10.Future<bool>);
-
-  @override
-  _i10.Future<bool> commit() =>
-      (super.noSuchMethod(
-            Invocation.method(#commit, []),
-            returnValue: _i10.Future<bool>.value(false),
-            returnValueForMissingStub: _i10.Future<bool>.value(false),
-          )
-          as _i10.Future<bool>);
-
-  @override
-  _i10.Future<bool> clear() =>
-      (super.noSuchMethod(
-            Invocation.method(#clear, []),
-            returnValue: _i10.Future<bool>.value(false),
-            returnValueForMissingStub: _i10.Future<bool>.value(false),
-          )
-          as _i10.Future<bool>);
-
-  @override
-  _i10.Future<void> reload() =>
-      (super.noSuchMethod(
-            Invocation.method(#reload, []),
-            returnValue: _i10.Future<void>.value(),
-            returnValueForMissingStub: _i10.Future<void>.value(),
-          )
-          as _i10.Future<void>);
 }

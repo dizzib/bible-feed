@@ -99,6 +99,9 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_midnight_test, _prod},
       preResolve: true,
     );
+    gh.lazySingleton<_i172.ChapterSplitTogglerManager>(
+      () => _i172.ChapterSplitTogglerManager(gh<_i215.StoreService>()),
+    );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProductionPlatformService(),
       registerFor: {_midnight_test, _prod},
@@ -115,9 +118,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1070.BibleReaders>(),
       ),
     );
-    gh.lazySingleton<_i172.ChapterSplitTogglerManager>(
-      () => _i172.ChapterSplitTogglerManager(gh<_i460.SharedPreferences>()),
-    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i123.MidnightDateTimeService(),
       registerFor: {_midnight_test},
@@ -131,14 +131,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
-    gh.lazySingleton<_i571.FeedStoreManager>(
-      () => _i571.FeedStoreManager(gh<_i215.StoreService>()),
-    );
     gh.lazySingleton<_i79.HapticTogglerManager>(
       () => _i79.HapticTogglerManager(
-        gh<_i460.SharedPreferences>(),
+        gh<_i215.StoreService>(),
         gh<_i729.HapticAvailabilityService>(),
       ),
+    );
+    gh.lazySingleton<_i571.FeedStoreManager>(
+      () => _i571.FeedStoreManager(gh<_i215.StoreService>()),
     );
     gh.lazySingleton<_i567.BibleReaderLinkManager>(
       () => _i567.BibleReaderLinkManager(
@@ -175,7 +175,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i477.FeedsAdvanceManager>(
       () => _i477.FeedsAdvanceManager(
         gh<_i99.DateTimeService>(),
-        gh<_i460.SharedPreferences>(),
+        gh<_i215.StoreService>(),
         gh<_i716.FeedAdvanceManager>(),
         gh<_i127.FeedsManager>(),
       ),

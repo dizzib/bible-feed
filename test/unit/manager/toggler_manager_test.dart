@@ -1,13 +1,13 @@
 import 'package:bible_feed/manager/toggler_manager.dart';
+import 'package:bible_feed/service/store_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'toggler_manager_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<SharedPreferences>()])
+@GenerateNiceMocks([MockSpec<StoreService>()])
 class TestTogglerManager extends TogglerManager {
   TestTogglerManager(super.sharedPreferences);
 
@@ -32,12 +32,12 @@ class TestCannotEnableTogglerManager extends TestTogglerManager {
 }
 
 void main() {
-  late MockSharedPreferences mockSharedPreferences;
+  late MockStoreService mockStoreService;
   late TestTogglerManager testee;
 
   setUp(() {
-    mockSharedPreferences = MockSharedPreferences();
-    testee = TestTogglerManager(mockSharedPreferences);
+    mockStoreService = MockStoreService();
+    testee = TestTogglerManager(mockStoreService);
   });
 
   parameterizedTest(
@@ -47,7 +47,7 @@ void main() {
       [true, true],
     ],
     (storeValue, expectValue) {
-      when(mockSharedPreferences.getBool('test.key')).thenReturn(storeValue);
+      when(mockStoreService.getBool('test.key')).thenReturn(storeValue);
       expect(testee.isEnabled, expectValue);
     },
   );
@@ -58,11 +58,11 @@ void main() {
       notified = true;
     });
     testee.isEnabled = true;
-    verify(mockSharedPreferences.setBool('test.key', true)).called(1);
+    verify(mockStoreService.setBool('test.key', true)).called(1);
     expect(notified, true);
   });
 
   test('if cannot enable, isEnabled setter to true fails assertion', () {
-    expect((() => TestCannotEnableTogglerManager(mockSharedPreferences).isEnabled = true), throwsAssertionError);
+    expect((() => TestCannotEnableTogglerManager(mockStoreService).isEnabled = true), throwsAssertionError);
   });
 }

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../service/store_service.dart';
 
 abstract class TogglerManager with ChangeNotifier {
-  final SharedPreferences _sharedPreferences;
+  final StoreService _storeService;
 
-  TogglerManager(this._sharedPreferences);
+  TogglerManager(this._storeService);
 
   bool get canEnable;
   String get storeKey;
   String get subtitle;
   String get title;
 
-  bool get isEnabled => canEnable && (_sharedPreferences.getBool(storeKey) ?? false);
+  bool get isEnabled => canEnable && (_storeService.getBool(storeKey) ?? false);
 
   set isEnabled(bool value) {
     assert(canEnable || !value);
-    _sharedPreferences.setBool(storeKey, value);
+    _storeService.setBool(storeKey, value);
     notifyListeners();
   }
 }

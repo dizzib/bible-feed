@@ -5,7 +5,7 @@ import 'toggler_manager.dart';
 
 @lazySingleton
 class HapticTogglerManager extends TogglerManager {
-  HapticTogglerManager(super.sharedPreferences, this._hapticAvailabilityService);
+  HapticTogglerManager(super._storeService, this._hapticAvailabilityService);
 
   final HapticAvailabilityService _hapticAvailabilityService;
 

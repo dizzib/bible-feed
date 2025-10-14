@@ -4,12 +4,12 @@ import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds_advance_state.dart';
 import 'package:bible_feed/service/date_time_service.dart';
+import 'package:bible_feed/service/store_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_data.dart';
 import 'feeds_advance_manager_test.mocks.dart';
@@ -19,23 +19,23 @@ import 'feeds_advance_manager_test.mocks.dart';
   MockSpec<Feed>(),
   MockSpec<FeedAdvanceManager>(),
   MockSpec<FeedsManager>(),
-  MockSpec<SharedPreferences>(),
+  MockSpec<StoreService>(),
 ])
 void main() async {
   final mockFeedList = [MockFeed(), MockFeed()];
   late MockDateTimeService mockDateTimeService;
   late MockFeedAdvanceManager mockFeedAdvanceManager;
   late MockFeedsManager mockFeedsManager;
-  late MockSharedPreferences mockSharedPreferences;
+  late MockStoreService mockStoreService;
   late FeedsAdvanceManager testee;
 
   setUp(() {
     mockDateTimeService = MockDateTimeService();
     mockFeedAdvanceManager = MockFeedAdvanceManager();
     mockFeedsManager = MockFeedsManager();
-    mockSharedPreferences = MockSharedPreferences();
+    mockStoreService = MockStoreService();
     when(mockFeedsManager.feeds).thenReturn(mockFeedList);
-    testee = FeedsAdvanceManager(mockDateTimeService, mockSharedPreferences, mockFeedAdvanceManager, mockFeedsManager);
+    testee = FeedsAdvanceManager(mockDateTimeService, mockStoreService, mockFeedAdvanceManager, mockFeedsManager);
   });
 
   verifyAllAdvanced() {
@@ -57,7 +57,7 @@ void main() async {
   test('advance should advance all feeds and store hasEverAdvanced as true', () async {
     expect(await testee.advance(), FeedsAdvanceState.listsAdvanced);
     verifyAllAdvanced();
-    verify(mockSharedPreferences.setBool('hasEverAdvanced', true)).called(1);
+    verify(mockStoreService.setBool('hasEverAdvanced', true)).called(1);
   });
 
   final midMonth = DateTime(2025, 7, 15, 12);
