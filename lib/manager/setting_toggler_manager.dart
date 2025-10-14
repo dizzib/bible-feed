@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../service/store_service.dart';
 
-abstract class TogglerManager with ChangeNotifier {
+abstract class SettingTogglerManager with ChangeNotifier {
   final StoreService _storeService;
 
-  TogglerManager(this._storeService);
+  SettingTogglerManager(this._storeService);
 
   bool get canEnable;
   String get storeKey;

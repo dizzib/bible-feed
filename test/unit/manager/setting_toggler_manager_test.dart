@@ -1,15 +1,15 @@
-import 'package:bible_feed/manager/toggler_manager.dart';
+import 'package:bible_feed/manager/setting_toggler_manager.dart';
 import 'package:bible_feed/service/store_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
-import 'toggler_manager_test.mocks.dart';
+import 'setting_toggler_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<StoreService>()])
-class TestTogglerManager extends TogglerManager {
-  TestTogglerManager(super.sharedPreferences);
+class TestSettingTogglerManager extends SettingTogglerManager {
+  TestSettingTogglerManager(super.sharedPreferences);
 
   @override
   bool get canEnable => true;
@@ -24,7 +24,7 @@ class TestTogglerManager extends TogglerManager {
   String get title => 'Test Title';
 }
 
-class TestCannotEnableTogglerManager extends TestTogglerManager {
+class TestCannotEnableTogglerManager extends TestSettingTogglerManager {
   TestCannotEnableTogglerManager(super.sharedPreferences);
 
   @override
@@ -33,11 +33,11 @@ class TestCannotEnableTogglerManager extends TestTogglerManager {
 
 void main() {
   late MockStoreService mockStoreService;
-  late TestTogglerManager testee;
+  late TestSettingTogglerManager testee;
 
   setUp(() {
     mockStoreService = MockStoreService();
-    testee = TestTogglerManager(mockStoreService);
+    testee = TestSettingTogglerManager(mockStoreService);
   });
 
   parameterizedTest(
