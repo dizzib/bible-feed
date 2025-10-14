@@ -20,6 +20,7 @@ import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
 import 'package:bible_feed/manager/feed_store_manager.dart' as _i571;
+import 'package:bible_feed/manager/feed_tap_manager.dart' as _i583;
 import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i477;
 import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
 import 'package:bible_feed/manager/haptic_setting_manager.dart' as _i274;
@@ -208,6 +209,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
+      ),
+    );
+    gh.lazySingleton<_i583.FeedTapManager>(
+      () => _i583.FeedTapManager(
+        gh<_i186.BibleReaderLaunchManager>(),
+        gh<_i567.BibleReaderLinkManager>(),
+        gh<_i22.HapticService>(),
       ),
     );
     gh.lazySingleton<_i541.AllDoneDialogManager>(
