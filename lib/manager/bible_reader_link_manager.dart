@@ -1,17 +1,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/bible_reader.dart';
 import '../model/bible_reader_key.dart';
+import '../service/store_service.dart';
 import 'bible_readers_certified_manager.dart';
 
 @lazySingleton
 class BibleReaderLinkManager with ChangeNotifier {
   final BibleReadersCertifiedManager _bibleReadersCertifiedManager;
-  final SharedPreferences _sharedPreferences;
+  final StoreService _storeService;
 
-  BibleReaderLinkManager(this._sharedPreferences, this._bibleReadersCertifiedManager) {
+  BibleReaderLinkManager(this._storeService, this._bibleReadersCertifiedManager) {
     _loadState();
   }
 
@@ -20,7 +20,7 @@ class BibleReaderLinkManager with ChangeNotifier {
   late BibleReaderKey _linkedBibleReaderKey; // ignore: avoid-late-keyword, guaranteed to be set in ctor -> _loadState
 
   void _loadState() {
-    final String? linkedReaderName = _sharedPreferences.getString(_linkedBibleReaderStoreKey);
+    final String? linkedReaderName = _storeService.getString(_linkedBibleReaderStoreKey);
     try {
       _linkedBibleReaderKey = BibleReaderKey.values.byName(linkedReaderName ?? BibleReaderKey.none.name);
       linkedBibleReader; // throws an exception if linkedBibleReader is invalid or uncertified
@@ -32,7 +32,7 @@ class BibleReaderLinkManager with ChangeNotifier {
   void _saveState(BibleReaderKey value) {
     if (value == _linkedBibleReaderKey) return;
     _linkedBibleReaderKey = value;
-    _sharedPreferences.setString(_linkedBibleReaderStoreKey, value.name);
+    _storeService.setString(_linkedBibleReaderStoreKey, value.name);
     notifyListeners();
   }
 
