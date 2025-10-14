@@ -1,15 +1,15 @@
-import 'package:bible_feed/manager/setting_toggler_manager.dart';
+import 'package:bible_feed/manager/setting_manager.dart';
 import 'package:bible_feed/service/store_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
-import 'setting_toggler_manager_test.mocks.dart';
+import 'setting_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<StoreService>()])
-class TestSettingTogglerManager extends SettingTogglerManager {
-  TestSettingTogglerManager(super.sharedPreferences);
+class TestSettingManager extends SettingManager {
+  TestSettingManager(super.sharedPreferences);
 
   @override
   bool get canEnable => true;
@@ -24,8 +24,8 @@ class TestSettingTogglerManager extends SettingTogglerManager {
   String get title => 'Test Title';
 }
 
-class TestCannotEnableTogglerManager extends TestSettingTogglerManager {
-  TestCannotEnableTogglerManager(super.sharedPreferences);
+class TestCannotEnableSettingManager extends TestSettingManager {
+  TestCannotEnableSettingManager(super.sharedPreferences);
 
   @override
   bool get canEnable => false;
@@ -33,11 +33,11 @@ class TestCannotEnableTogglerManager extends TestSettingTogglerManager {
 
 void main() {
   late MockStoreService mockStoreService;
-  late TestSettingTogglerManager testee;
+  late TestSettingManager testee;
 
   setUp(() {
     mockStoreService = MockStoreService();
-    testee = TestSettingTogglerManager(mockStoreService);
+    testee = TestSettingManager(mockStoreService);
   });
 
   parameterizedTest(
@@ -63,6 +63,6 @@ void main() {
   });
 
   test('if cannot enable, isEnabled setter to true fails assertion', () {
-    expect((() => TestCannotEnableTogglerManager(mockStoreService).isEnabled = true), throwsAssertionError);
+    expect((() => TestCannotEnableSettingManager(mockStoreService).isEnabled = true), throwsAssertionError);
   });
 }

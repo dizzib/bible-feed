@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../manager/chapter_split_toggler_manager.dart';
-import '../manager/haptic_toggler_manager.dart';
+import '../manager/chapter_split_setting_manager.dart';
+import '../manager/haptic_setting_manager.dart';
 import 'app_version.dart';
 import 'bible_reader_settings.dart';
 import 'constants.dart';
-import 'settings_toggler.dart';
+import 'setting_toggler.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -21,8 +21,8 @@ class Settings extends StatelessWidget {
               spacing: Constants.settingsSpacing,
               children: [
                 BibleReaderSettings(),
-                SettingsToggler<ChapterSplitTogglerManager>(),
-                SettingsToggler<HapticTogglerManager>(),
+                Setting<ChapterSplitSettingManager>(),
+                Setting<HapticSettingManager>(),
                 const AppVersion(),
               ],
             ),

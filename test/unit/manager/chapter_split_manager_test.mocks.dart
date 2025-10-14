@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:ui' as _i7;
 
-import 'package:bible_feed/manager/chapter_split_toggler_manager.dart' as _i6;
+import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i6;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i2;
 import 'package:bible_feed/model/chapter_splitters.dart' as _i5;
 import 'package:bible_feed/model/feed.dart' as _i4;
@@ -500,11 +500,11 @@ class MockChapterSplitters extends _i1.Mock implements _i5.ChapterSplitters {
           as _i2.ChapterSplitter);
 }
 
-/// A class which mocks [ChapterSplitTogglerManager].
+/// A class which mocks [ChapterSplitSettingManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChapterSplitTogglerManager extends _i1.Mock
-    implements _i6.ChapterSplitTogglerManager {
+class MockChapterSplitSettingManager extends _i1.Mock
+    implements _i6.ChapterSplitSettingManager {
   @override
   bool get canEnable =>
       (super.noSuchMethod(

@@ -1,10 +1,10 @@
 import 'package:injectable/injectable.dart';
 
-import 'setting_toggler_manager.dart';
+import 'setting_manager.dart';
 
 @lazySingleton
-class ChapterSplitTogglerManager extends SettingTogglerManager {
-  ChapterSplitTogglerManager(super.sharedPreferences);
+class ChapterSplitSettingManager extends SettingManager {
+  ChapterSplitSettingManager(super.sharedPreferences);
 
   @override
   bool get canEnable => true;

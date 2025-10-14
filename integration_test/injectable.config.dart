@@ -17,12 +17,12 @@ import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i567;
 import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
-import 'package:bible_feed/manager/chapter_split_toggler_manager.dart' as _i172;
+import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
 import 'package:bible_feed/manager/feed_store_manager.dart' as _i571;
 import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i477;
 import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
-import 'package:bible_feed/manager/haptic_toggler_manager.dart' as _i79;
+import 'package:bible_feed/manager/haptic_setting_manager.dart' as _i274;
 import 'package:bible_feed/manager/haptic_wireup_manager.dart' as _i519;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
@@ -129,8 +129,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
-    gh.lazySingleton<_i79.HapticTogglerManager>(
-      () => _i79.HapticTogglerManager(
+    gh.lazySingleton<_i274.HapticSettingManager>(
+      () => _i274.HapticSettingManager(
         gh<_i215.StoreService>(),
         gh<_i729.HapticAvailabilityService>(),
       ),
@@ -155,8 +155,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i516.PlatformEventService>(),
       ),
     );
-    gh.lazySingleton<_i172.ChapterSplitTogglerManager>(
-      () => _i172.ChapterSplitTogglerManager(gh<_i215.StoreService>()),
+    gh.lazySingleton<_i632.ChapterSplitSettingManager>(
+      () => _i632.ChapterSplitSettingManager(gh<_i215.StoreService>()),
+    );
+    gh.lazySingleton<_i22.HapticService>(
+      () => _i22.HapticService(gh<_i274.HapticSettingManager>()),
     );
     gh.lazySingleton<_i127.FeedsManager>(
       () => _i127.FeedsManager(
@@ -164,23 +167,20 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i823.ReadingLists>(),
       ),
     );
-    gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i79.HapticTogglerManager>()),
+    gh.lazySingleton<_i10.ChapterSplitManager>(
+      () => _i10.ChapterSplitManager(
+        gh<_i1006.ChapterSplitters>(),
+        gh<_i632.ChapterSplitSettingManager>(),
+      ),
     );
     gh.singleton<_i519.HapticWireupManager>(
       () => _i519.HapticWireupManager(
         gh<_i22.HapticService>(),
-        gh<_i172.ChapterSplitTogglerManager>(),
-        gh<_i79.HapticTogglerManager>(),
+        gh<_i632.ChapterSplitSettingManager>(),
+        gh<_i274.HapticSettingManager>(),
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
-      ),
-    );
-    gh.lazySingleton<_i10.ChapterSplitManager>(
-      () => _i10.ChapterSplitManager(
-        gh<_i1006.ChapterSplitters>(),
-        gh<_i172.ChapterSplitTogglerManager>(),
       ),
     );
     gh.lazySingleton<_i716.FeedAdvanceManager>(

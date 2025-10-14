@@ -3,7 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '../manager/bible_reader_launch_manager.dart';
 import '../manager/bible_reader_link_manager.dart';
-import '../manager/chapter_split_toggler_manager.dart';
+import '../manager/chapter_split_setting_manager.dart';
 import '../model/bible_reader_launch_result.dart';
 import '../model/feed.dart';
 import '../service/haptic_service.dart';
@@ -29,7 +29,7 @@ class FeedCardBody extends WatchingWidget {
   @override
   build(context) {
     watch(feed);
-    watchIt<ChapterSplitTogglerManager>();
+    watchIt<ChapterSplitSettingManager>();
 
     return InkWell(
       enableFeedback: false,
