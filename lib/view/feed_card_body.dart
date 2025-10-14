@@ -20,10 +20,8 @@ class FeedCardBody extends WatchingWidget {
   Future<void> _handleTap(BuildContext context) async {
     sl<HapticService>().impact();
     feed.toggleIsRead();
-    final result = await sl<BibleReaderLaunchManager>().maybeLaunch(
-      sl<BibleReaderLinkManager>().linkedBibleReader,
-      feed.state,
-    );
+    final linkedBibleReader = sl<BibleReaderLinkManager>().linkedBibleReader;
+    final result = await sl<BibleReaderLaunchManager>().maybeLaunch(linkedBibleReader, feed.state);
     if (result is! LaunchFailed) return;
     if (context.mounted) context.showDialogWithBlurBackground(BibleReaderLaunchFailedDialog(result));
   }
