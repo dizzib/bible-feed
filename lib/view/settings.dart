@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../manager/chapter_split_setting_manager.dart';
 import '../manager/haptic_setting_manager.dart';
+import '_constants.dart';
 import 'app_version.dart';
 import 'bible_reader_settings.dart';
-import 'constants.dart';
 import 'setting.dart';
 
 class Settings extends StatelessWidget {

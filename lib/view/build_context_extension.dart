@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../service/haptic_service.dart';
-import 'constants.dart';
+import '_constants.dart';
 
 extension BuildContextExtension<T> on BuildContext {
   // device

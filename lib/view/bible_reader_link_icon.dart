@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/bible_reader_link_manager.dart';
-import 'constants.dart';
+import '_constants.dart';
 
 class BibleReaderLinkIcon extends WatchingWidget {
   @override

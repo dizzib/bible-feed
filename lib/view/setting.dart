@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/setting_manager.dart';
-import 'constants.dart';
+import '_constants.dart';
 
 class Setting<T extends SettingManager> extends WatchingWidget {
   @override

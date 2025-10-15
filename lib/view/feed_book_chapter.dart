@@ -5,7 +5,7 @@ import 'package:watch_it/watch_it.dart';
 import '../manager/chapter_split_manager.dart';
 import '../manager/chapter_split_setting_manager.dart';
 import '../model/feed.dart';
-import 'constants.dart';
+import '_constants.dart';
 
 class FeedBookChapter extends WatchingWidget {
   final Feed feed;

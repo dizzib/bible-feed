@@ -5,7 +5,7 @@ import '../manager/app_install_manager.dart';
 import '../manager/bible_reader_launch_manager.dart';
 import '../manager/bible_reader_link_manager.dart';
 import '../manager/bible_readers_certified_manager.dart';
-import 'constants.dart';
+import '_constants.dart';
 
 class BibleReaderSettingsChips extends WatchingWidget {
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '_constants.dart';
 import 'bible_reader_link_icon.dart';
 import 'bible_reader_settings_chips.dart';
-import 'constants.dart';
 
 class BibleReaderSettings extends StatelessWidget {
   @override
