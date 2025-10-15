@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 
 import 'bible_reader_link_icon.dart';
 import 'bible_reader_settings_chips.dart';
+import 'constants.dart';
 
 class BibleReaderSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    const spacing = 12.0;
-
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(spacing),
+        padding: const EdgeInsets.all(Constants.settingsSpacing),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: spacing,
+          spacing: Constants.settingsSpacing,
           children: [
             BibleReaderLinkIcon(),
             Expanded(
               // https://docs.flutter.dev/ui/layout/constraints example 24-25
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: spacing,
+                spacing: Constants.settingsSpacing,
                 children: [
                   const Text('Bible Reader', style: TextStyle(fontSize: 20)),
                   const Text(
