@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../model/feed.dart' as model;
 import '../manager/bible_reader_link_manager.dart';
 import '../manager/feeds_manager.dart';
+import '../model/feed.dart' as model;
 import 'feed_body.dart';
 import 'feed_semantics.dart';
 
