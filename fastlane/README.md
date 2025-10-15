@@ -13,6 +13,25 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
+### gplay_internal
+
+```sh
+[bundle exec] fastlane gplay_internal
+```
+
+Deploy to Google Play internal
+
+### gplay_promote_internal_to_closed
+
+```sh
+[bundle exec] fastlane gplay_promote_internal_to_closed
+```
+
+Promote internal test to closed
+
+----
+
+
 ## Android
 
 ### android populate_changelog
