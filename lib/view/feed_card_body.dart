@@ -23,8 +23,6 @@ class FeedCardBody extends StatelessWidget {
 
   @override
   build(context) {
-    watch(feed);
-
     return InkWell(
       enableFeedback: false,
       onLongPress: () => context.showDialogWithBlurBackground(BookChapterDialog(feed)),
