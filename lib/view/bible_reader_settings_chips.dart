@@ -11,13 +11,13 @@ class BibleReaderSettingsChips extends WatchingWidget {
   @override
   Widget build(BuildContext context) {
     watchIt<AppInstallManager>();
-    final brcm = sl<BibleReadersCertifiedManager>();
     final brlm = watchIt<BibleReaderLinkManager>();
+    final certifiedBibleReaderList = sl<BibleReadersCertifiedManager>().certifiedBibleReaderList;
 
     return Wrap(
       spacing: Constants.settingsSpacing,
-      children: List.generate(brcm.certifiedBibleReaderList.length, (idx) {
-        final bibleReader = brcm.certifiedBibleReaderList[idx];
+      children: List.generate(certifiedBibleReaderList.length, (idx) {
+        final bibleReader = certifiedBibleReaderList[idx];
         // Using watchFuture here causes an infinite loop because .isAvailable always returns a new future.
         return FutureBuilder(
           future: sl<BibleReaderLaunchManager>().isAvailable(bibleReader),
