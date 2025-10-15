@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/feeds_advance_manager.dart';
+import '_build_context_extension.dart';
 import '_constants.dart';
-import 'build_context_extension.dart';
 
 class AllDoneDialog extends StatelessWidget {
   @override

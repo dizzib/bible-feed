@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/list_wheel_state.dart';
-import 'build_context_extension.dart';
+import '_build_context_extension.dart';
 import 'list_wheel_gradient.dart';
 import 'list_wheel_highlight.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'build_context_extension.dart';
+import '_build_context_extension.dart';
 
 // background fade effect
 class ListWheelGradient extends StatelessWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/feeds_manager.dart';
 import '../manager/all_done_dialog_manager.dart';
+import '../manager/feeds_manager.dart';
+import '_build_context_extension.dart';
 import 'all_done_dialog.dart';
-import 'build_context_extension.dart';
 
 class AllDoneFab extends WatchingWidget {
   @override

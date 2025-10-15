@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../model/feed.dart';
 import '../manager/feeds_manager.dart';
+import '../model/feed.dart';
+import '_build_context_extension.dart';
 import 'book_chapter_dialog.dart';
-import 'build_context_extension.dart';
 
 class FeedTitleBar extends WatchingWidget {
   final Feed feed;

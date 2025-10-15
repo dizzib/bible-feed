@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../service/haptic_service.dart';
+import '_build_context_extension.dart';
 import 'app.dart';
-import 'build_context_extension.dart';
 
 class AppBase extends StatelessWidget {
   @override

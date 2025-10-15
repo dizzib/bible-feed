@@ -4,7 +4,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '../model/feed.dart';
 import '../model/list_wheel_state.dart';
-import 'build_context_extension.dart';
+import '_build_context_extension.dart';
 
 class BookChapterDialogFooter extends WatchingWidget {
   final Feed feed;
