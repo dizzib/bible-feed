@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/bible_reader_link_manager.dart';
-import '../model/bible_reader_launch_result.dart';
 import 'constants.dart';
 
 class BibleReaderLaunchFailedDialog extends StatelessWidget {
-  final LaunchFailed launchResult;
+  final Exception exception;
 
-  const BibleReaderLaunchFailedDialog(this.launchResult);
+  const BibleReaderLaunchFailedDialog(this.exception);
 
   @override
   build(context) {
@@ -20,10 +19,7 @@ class BibleReaderLaunchFailedDialog extends StatelessWidget {
 
     return CupertinoAlertDialog(
       title: Text('Failed to launch the $bibleReaderName bible reader'),
-      content: Padding(
-        padding: Constants.defaultPadding,
-        child: Text('$message\n\n${launchResult.exception?.toString() ?? ''}'.trim()),
-      ),
+      content: Padding(padding: Constants.defaultPadding, child: Text('$message\n\n${exception.toString()}'.trim())),
       actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Ok'))],
     );
   }

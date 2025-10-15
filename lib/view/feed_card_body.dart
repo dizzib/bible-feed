@@ -3,7 +3,6 @@ import 'package:watch_it/watch_it.dart';
 
 import '../manager/chapter_split_setting_manager.dart';
 import '../manager/feed_tap_manager.dart';
-import '../model/bible_reader_launch_result.dart';
 import '../model/feed.dart';
 import 'bible_reader_launch_failed_dialog.dart';
 import 'book_chapter_dialog.dart';
@@ -16,9 +15,11 @@ class FeedCardBody extends WatchingWidget {
   const FeedCardBody(this.feed);
 
   Future<void> _handleTap(BuildContext context) async {
-    final result = await sl<FeedTapManager>().handleTap(feed);
-    if (result is! LaunchFailed) return;
-    if (context.mounted) context.showDialogWithBlurBackground(BibleReaderLaunchFailedDialog(result));
+    try {
+      await sl<FeedTapManager>().handleTap(feed);
+    } on Exception catch (e) {
+      if (context.mounted) context.showDialogWithBlurBackground(BibleReaderLaunchFailedDialog(e));
+    }
   }
 
   @override

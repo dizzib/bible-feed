@@ -1,8 +1,6 @@
-import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/bible_reader.dart';
-import '../model/bible_reader_launch_result.dart';
 import '../model/feed.dart';
 import '../service/platform_service.dart';
 import '../service/url_launch_service.dart';
@@ -29,13 +27,10 @@ class BibleReaderLaunchManager {
     return _urlLaunchService.canLaunchUrl(_getDeeplinkUrl(bibleReader, externalBookKey, 1));
   }
 
-  Future<BibleReaderLaunchResult> maybeLaunch(BibleReader bibleReader, FeedState state) async {
-    if (bibleReader.isNone || !state.isRead) return Future.value(LaunchBypassed());
-    try {
-      final url = _getDeeplinkUrl(bibleReader, state.book.key, state.chapter, state.verse);
-      return Future.value(await _urlLaunchService.launchUrl(url) ? LaunchOk() : LaunchFailed());
-    } on PlatformException catch (e) {
-      return Future.value(LaunchFailed(e));
-    }
+  Future<void> maybeLaunch(BibleReader bibleReader, FeedState state) async {
+    if (bibleReader.isNone || !state.isRead) return;
+    final url = _getDeeplinkUrl(bibleReader, state.book.key, state.chapter, state.verse);
+    final success = await _urlLaunchService.launchUrl(url);
+    if (!success) throw Exception('_urlLaunchService.launchUrl($url)');
   }
 }

@@ -4,16 +4,14 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:ui' as _i9;
+import 'dart:ui' as _i7;
 
 import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i3;
-import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i8;
+import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i6;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
-import 'package:bible_feed/model/bible_reader_launch_result.dart' as _i5;
-import 'package:bible_feed/model/feed.dart' as _i6;
-import 'package:bible_feed/service/platform_event_service.dart' as _i10;
+import 'package:bible_feed/model/feed.dart' as _i5;
+import 'package:bible_feed/service/platform_event_service.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -49,34 +47,23 @@ class MockBibleReaderLaunchManager extends _i1.Mock
           as _i4.Future<bool>);
 
   @override
-  _i4.Future<_i5.BibleReaderLaunchResult> maybeLaunch(
+  _i4.Future<void> maybeLaunch(
     _i2.BibleReader? bibleReader,
-    _i6.FeedState? state,
+    _i5.FeedState? state,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#maybeLaunch, [bibleReader, state]),
-            returnValue: _i4.Future<_i5.BibleReaderLaunchResult>.value(
-              _i7.dummyValue<_i5.BibleReaderLaunchResult>(
-                this,
-                Invocation.method(#maybeLaunch, [bibleReader, state]),
-              ),
-            ),
-            returnValueForMissingStub:
-                _i4.Future<_i5.BibleReaderLaunchResult>.value(
-                  _i7.dummyValue<_i5.BibleReaderLaunchResult>(
-                    this,
-                    Invocation.method(#maybeLaunch, [bibleReader, state]),
-                  ),
-                ),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i4.Future<_i5.BibleReaderLaunchResult>);
+          as _i4.Future<void>);
 }
 
 /// A class which mocks [BibleReaderLinkManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockBibleReaderLinkManager extends _i1.Mock
-    implements _i8.BibleReaderLinkManager {
+    implements _i6.BibleReaderLinkManager {
   @override
   bool get isLinked =>
       (super.noSuchMethod(
@@ -132,13 +119,13 @@ class MockBibleReaderLinkManager extends _i1.Mock
   );
 
   @override
-  void addListener(_i9.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i9.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -160,7 +147,7 @@ class MockBibleReaderLinkManager extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPlatformEventService extends _i1.Mock
-    implements _i10.PlatformEventService {
+    implements _i8.PlatformEventService {
   @override
   bool get hasListeners =>
       (super.noSuchMethod(
@@ -171,13 +158,13 @@ class MockPlatformEventService extends _i1.Mock
           as bool);
 
   @override
-  void addListener(_i9.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i9.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
