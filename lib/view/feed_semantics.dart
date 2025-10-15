@@ -4,11 +4,11 @@ import 'package:watch_it/watch_it.dart';
 import '../model/feed.dart';
 import '../manager/bible_reader_link_manager.dart';
 
-class FeedCardSemantics extends WatchingWidget {
+class FeedSemantics extends WatchingWidget {
   final Widget? child;
   final Feed feed;
 
-  const FeedCardSemantics({required this.feed, required this.child});
+  const FeedSemantics({required this.feed, required this.child});
 
   @override
   build(context) {

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../model/feed.dart';
+import '../model/feed.dart' as model;
 import '../manager/bible_reader_link_manager.dart';
 import '../manager/feeds_manager.dart';
-import 'feed_card_body.dart';
-import 'feed_card_semantics.dart';
+import 'feed_body.dart';
+import 'feed_semantics.dart';
 
-class FeedCard extends WatchingWidget {
-  final Feed feed;
-  const FeedCard(this.feed);
+class Feed extends WatchingWidget {
+  final model.Feed feed;
+  const Feed(this.feed);
 
   @override
   build(context) {
@@ -27,7 +27,7 @@ class FeedCard extends WatchingWidget {
       child: Card(
         elevation: elevation,
         clipBehavior: Clip.hardEdge,
-        child: FeedCardSemantics(feed: feed, child: FeedCardBody(feed)),
+        child: FeedSemantics(feed: feed, child: FeedBody(feed)),
       ),
     );
   }

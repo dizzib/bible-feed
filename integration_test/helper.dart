@@ -1,5 +1,5 @@
 import 'package:bible_feed/view/app_base.dart';
-import 'package:bible_feed/view/feed_card.dart';
+import 'package:bible_feed/view/feed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -37,7 +37,7 @@ extension AppTestHelper on WidgetTester {
   }
 
   Future tapAllLists() async {
-    var feedCards = find.byType(FeedCard).evaluate();
+    var feedCards = find.byType(Feed).evaluate();
     for (var el in feedCards) {
       await tapAt(getCenter(find.byWidget(el.widget)));
     }

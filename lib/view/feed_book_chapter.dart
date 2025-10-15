@@ -7,9 +7,9 @@ import '../manager/chapter_split_setting_manager.dart';
 import '../model/feed.dart';
 import 'constants.dart';
 
-class FeedCardBookChapter extends WatchingWidget {
+class FeedBookChapter extends WatchingWidget {
   final Feed feed;
-  const FeedCardBookChapter(this.feed);
+  const FeedBookChapter(this.feed);
 
   @override
   build(context) {

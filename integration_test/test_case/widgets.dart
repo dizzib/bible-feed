@@ -3,7 +3,7 @@ import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/manager/feed_store_manager.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
-import 'package:bible_feed/view/feed_card.dart';
+import 'package:bible_feed/view/feed.dart' as view;
 import 'package:bible_feed/view/feeds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -40,8 +40,8 @@ Future runWidgetTests() async {
     expectNoText(matthew.chapterCount);
   });
 
-  testWidgets('FeedCard', (t) async {
-    await t.initialiseWidget(FeedCard(feed));
+  testWidgets('Feed', (t) async {
+    await t.initialiseWidget(view.Feed(feed));
     expectText(gospels.name);
     expectBookAndChapter(matthew.name, 1);
   });

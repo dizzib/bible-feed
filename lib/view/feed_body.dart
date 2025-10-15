@@ -6,12 +6,12 @@ import '../model/feed.dart';
 import 'bible_reader_launch_failed_dialog.dart';
 import 'book_chapter_dialog.dart';
 import 'build_context_extension.dart';
-import 'feed_card_book_chapter.dart';
-import 'feed_card_title_bar.dart';
+import 'feed_book_chapter.dart';
+import 'feed_title_bar.dart';
 
-class FeedCardBody extends StatelessWidget {
+class FeedBody extends StatelessWidget {
   final Feed feed;
-  const FeedCardBody(this.feed);
+  const FeedBody(this.feed);
 
   Future<void> _handleTap(BuildContext context) async {
     try {
@@ -35,9 +35,9 @@ class FeedCardBody extends StatelessWidget {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Visibility(visible: isVisible, child: FeedCardTitleBar(feed)),
+              Visibility(visible: isVisible, child: FeedTitleBar(feed)),
               LinearProgressIndicator(backgroundColor: context.colorScheme.surface, value: feed.progress),
-              DefaultTextStyle.merge(style: TextStyle(fontSize: fontSize), child: FeedCardBookChapter(feed)),
+              DefaultTextStyle.merge(style: TextStyle(fontSize: fontSize), child: FeedBookChapter(feed)),
             ],
           );
         },

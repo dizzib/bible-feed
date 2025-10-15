@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/feeds_manager.dart';
-import 'feed_card.dart';
+import 'feed.dart';
 
 class Feeds extends StatelessWidget {
   // Columns and Rows work better than a GridView
@@ -13,8 +13,8 @@ class Feeds extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              Expanded(child: FeedCard(sl<FeedsManager>().feeds[index])),
-              Expanded(child: FeedCard(sl<FeedsManager>().feeds[index + 1])),
+              Expanded(child: Feed(sl<FeedsManager>().feeds[index])),
+              Expanded(child: Feed(sl<FeedsManager>().feeds[index + 1])),
             ],
           ),
         ),
