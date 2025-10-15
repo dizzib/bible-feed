@@ -14,7 +14,7 @@ import 'chapter_split_manager_test.mocks.dart';
 void main() {
   final mockChapterSplitter = MockChapterSplitter();
   final mockChapterSplitters = MockChapterSplitters();
-  final mockChapterSplitSettingManager  = MockChapterSplitSettingManager();
+  final mockChapterSplitSettingManager = MockChapterSplitSettingManager();
   final state = FeedState(book: b0);
   late ChapterSplitManager testee;
 

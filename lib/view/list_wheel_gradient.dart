@@ -17,9 +17,7 @@ class ListWheelGradient extends StatelessWidget {
           final colorEnd = context.colorScheme.surfaceContainerHigh.withValues(alpha: context.isDarkMode ? 1.0 : 0.0);
           return Container(
             height: constraints.maxHeight * 0.5,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(begin: begin, end: end, colors: [colorStart, colorEnd]),
-            ),
+            decoration: BoxDecoration(gradient: LinearGradient(begin: begin, end: end, colors: [colorStart, colorEnd])),
           );
         },
       ),
