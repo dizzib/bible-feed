@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/chapter_split_manager.dart';
+import '../manager/chapter_split_setting_manager.dart';
 import '../model/feed.dart';
 import 'constants.dart';
 
-class FeedCardBookChapter extends StatelessWidget {
+class FeedCardBookChapter extends WatchingWidget {
   final Feed feed;
   const FeedCardBookChapter(this.feed);
 
@@ -14,6 +15,7 @@ class FeedCardBookChapter extends StatelessWidget {
   build(context) {
     const maxLines = 2;
     final chapterSplitLabel = sl<ChapterSplitManager>().getLabel(feed.state);
+    watchIt<ChapterSplitSettingManager>();
 
     return Expanded(
       child: Padding(

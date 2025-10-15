@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/chapter_split_setting_manager.dart';
 import '../manager/feed_tap_manager.dart';
 import '../model/feed.dart';
 import 'bible_reader_launch_failed_dialog.dart';
@@ -10,7 +9,7 @@ import 'build_context_extension.dart';
 import 'feed_card_book_chapter.dart';
 import 'feed_card_title_bar.dart';
 
-class FeedCardBody extends WatchingWidget {
+class FeedCardBody extends StatelessWidget {
   final Feed feed;
   const FeedCardBody(this.feed);
 
@@ -25,7 +24,6 @@ class FeedCardBody extends WatchingWidget {
   @override
   build(context) {
     watch(feed);
-    watchIt<ChapterSplitSettingManager>();
 
     return InkWell(
       enableFeedback: false,
