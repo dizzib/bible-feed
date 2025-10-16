@@ -16,6 +16,14 @@ class BibleReaders extends BaseList<BibleReader> {
 
 // Android bible readers must be added to the queries section of AndroidManifest.xml.
 // IOS bible reader schemes must be added to LSApplicationQueriesSchemes in Info.plist.
+//
+// Certain Bible readers are uncertified due to the following issues:
+//
+// Accordance Bible ios: accord://read/John+3:17 displays verse 17 in isolation
+// AndBible: see below
+// Life Bible: see below
+// WeDevote android: not detected
+//
 @module
 abstract class BibleReadersModule {
   @lazySingleton
