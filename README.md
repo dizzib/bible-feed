@@ -1,7 +1,6 @@
 # Bible Feed
 
 [![Build Status](https://github.com/dizzib/bible-feed/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/dizzib/bible-feed/actions/workflows/ci.yml)
-[![Github All Releases](https://img.shields.io/github/downloads/dizzib/bible-feed/total.svg)]()
 
 This repository contains the open-source code for the Bible Feed app for Android and iOS.
 
