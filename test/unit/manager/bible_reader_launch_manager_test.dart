@@ -52,9 +52,9 @@ void main() async {
         [TargetPlatform.android, noneBibleReader, 1, false, false, false],
         [TargetPlatform.android, blbBibleReader, 1, false, false, false],
         [TargetPlatform.android, blbBibleReader, 1, true, true, true, 'blb://android/b0/1'],
-        [TargetPlatform.android, blbBibleReader, 2, true, true, true, 'blb://android/b0/1/2'],
+        [TargetPlatform.android, blbBibleReader, 7, true, true, true, 'blb://android/b0/1/7'],
         [TargetPlatform.iOS, blbBibleReader, 1, true, true, true, 'blb://ios/b0/1'],
-        [TargetPlatform.iOS, blbBibleReader, 2, true, true, true, 'blb://ios/b0/1/2'],
+        [TargetPlatform.iOS, blbBibleReader, 7, true, true, true, 'blb://ios/b0/1/7'],
       ],
       (
         TargetPlatform currentPlatform,
