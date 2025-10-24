@@ -3,6 +3,13 @@
 All notable changes to this project are documented here.
 
 
+## [1.6.1] - 2025-10-24
+
+### Changed
+- internal refactor
+- remove f-droid
+
+
 ## [1.6.0] - 2025-10-06
 
 ### Added
