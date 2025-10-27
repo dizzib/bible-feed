@@ -21,7 +21,7 @@ class ChapterSplitters extends BaseList<ChapterSplitter> {
 abstract class ChapterSplittersModule {
   @lazySingleton
   List<ChapterSplitter> get chapterSplitters => [
-    const ChapterSplitter('1ki', 8, [33]),
+    const ChapterSplitter('1ki', 8, [37]),
     const ChapterSplitter('act', 7, [30]),
     const ChapterSplitter('deu', 28, [36]),
     const ChapterSplitter('jer', 51, [33]),
