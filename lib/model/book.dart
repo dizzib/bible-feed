@@ -1,8 +1,12 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter/foundation.dart';
 
+part 'book.mapper.dart';
+
 // an individual book e.g. Matthew
+@MappableClass()
 @immutable
-final class Book {
+final class Book with BookMappable {
   const Book(this.key, this.name, this.chapterCount);
 
   final String key; // e.g. mar

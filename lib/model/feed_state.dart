@@ -1,6 +1,7 @@
 part of 'feed.dart';
 
-class FeedState {
+@MappableClass()
+class FeedState with FeedStateMappable {
   Book _book;
   int _chapter;
   DateTime? _dateModified;

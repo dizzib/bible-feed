@@ -1,9 +1,11 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter/foundation.dart';
 
 import 'book.dart';
 import 'reading_list.dart';
 
 part 'feed_state.dart';
+part 'feed.mapper.dart';
 
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
