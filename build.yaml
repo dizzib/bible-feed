@@ -11,15 +11,11 @@ targets:
     builders:
       # Sometimes the package name does not match the builder name.
       # In such case, refer to builder by {package_name}:{builder_key}.
-      #
-      # dart_mappable:dart_mappable_builder:
       dart_mappable_builder:
-        enabled: true
         generate_for:
           include:
             - lib/model/*.dart
       injectable_generator:injectable_builder:
-        enabled: true
         generate_for:
           include:
             - lib/injectable.dart
@@ -31,7 +27,6 @@ targets:
             - integration_test/injectable.dart
             - integration_test/service/*.dart
       mockito:mockBuilder:
-        enabled: true
         generate_for:
           include:
             - test/unit/manager/*.dart
