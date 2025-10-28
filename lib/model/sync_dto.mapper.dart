@@ -21,14 +21,17 @@ class SyncDtoMapper extends ClassMapperBase<SyncDto> {
   @override
   final String id = 'SyncDto';
 
-  static String _$version(SyncDto v) => v.version;
-  static const Field<SyncDto, String> _f$version = Field('version', _$version);
+  static String _$buildNumber(SyncDto v) => v.buildNumber;
+  static const Field<SyncDto, String> _f$buildNumber = Field(
+    'buildNumber',
+    _$buildNumber,
+  );
 
   @override
-  final MappableFields<SyncDto> fields = const {#version: _f$version};
+  final MappableFields<SyncDto> fields = const {#buildNumber: _f$buildNumber};
 
   static SyncDto _instantiate(DecodingData data) {
-    return SyncDto(version: data.dec(_f$version));
+    return SyncDto(buildNumber: data.dec(_f$buildNumber));
   }
 
   @override
@@ -88,7 +91,7 @@ extension SyncDtoValueCopy<$R, $Out> on ObjectCopyWith<$R, SyncDto, $Out> {
 
 abstract class SyncDtoCopyWith<$R, $In extends SyncDto, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? version});
+  $R call({String? buildNumber});
   SyncDtoCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -101,11 +104,12 @@ class _SyncDtoCopyWithImpl<$R, $Out>
   late final ClassMapperBase<SyncDto> $mapper =
       SyncDtoMapper.ensureInitialized();
   @override
-  $R call({String? version}) =>
-      $apply(FieldCopyWithData({if (version != null) #version: version}));
+  $R call({String? buildNumber}) => $apply(
+    FieldCopyWithData({if (buildNumber != null) #buildNumber: buildNumber}),
+  );
   @override
   SyncDto $make(CopyWithData data) =>
-      SyncDto(version: data.get(#version, or: $value.version));
+      SyncDto(buildNumber: data.get(#buildNumber, or: $value.buildNumber));
 
   @override
   SyncDtoCopyWith<$R2, SyncDto, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>

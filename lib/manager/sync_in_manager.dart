@@ -17,6 +17,6 @@ class SyncInManager {
     final syncDto = SyncDtoMapper.fromJson(json);
     Log.info(syncDto);
 
-    if (syncDto.version != _appService.version) throw Exception('version mismatch');
+    if (syncDto.buildNumber != _appService.buildNumber) throw Exception('version mismatch');
   }
 }

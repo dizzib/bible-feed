@@ -11,7 +11,7 @@ class SyncOutManager {
   SyncOutManager(this._appService);
 
   String getJson() {
-    final syncDto = SyncDto(version: _appService.version);
+    final syncDto = SyncDto(buildNumber: _appService.buildNumber);
 
     Log.info(syncDto.toJson());
     return syncDto.toJson();
