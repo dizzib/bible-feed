@@ -39,6 +39,8 @@
     <string>wdbible</string>
     <string>youversion</string>
   </array>
+  <key>NSCameraUsageDescription</key>
+  <string>camera access is needed to sync across devices using qr-codes</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
