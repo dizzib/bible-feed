@@ -9,6 +9,9 @@ class SyncIn extends StatelessWidget {
   @override
   build(context) {
     return ReaderWidget(
+      showFlashlight: false,
+      showGallery: false,
+      showToggleCamera: false,
       onScan: (qrcode) {
         try {
           sl<SyncInManager>().sync(qrcode.text);

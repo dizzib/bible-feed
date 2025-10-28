@@ -6,7 +6,7 @@ part 'sync_dto.mapper.dart';
 @immutable
 @MappableClass()
 class SyncDto with SyncDtoMappable {
-  SyncDto(this.version);
+  SyncDto({required this.version});
 
   final String version;
 }

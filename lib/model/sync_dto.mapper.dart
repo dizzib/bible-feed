@@ -28,7 +28,7 @@ class SyncDtoMapper extends ClassMapperBase<SyncDto> {
   final MappableFields<SyncDto> fields = const {#version: _f$version};
 
   static SyncDto _instantiate(DecodingData data) {
-    return SyncDto(data.dec(_f$version));
+    return SyncDto(version: data.dec(_f$version));
   }
 
   @override
@@ -105,7 +105,7 @@ class _SyncDtoCopyWithImpl<$R, $Out>
       $apply(FieldCopyWithData({if (version != null) #version: version}));
   @override
   SyncDto $make(CopyWithData data) =>
-      SyncDto(data.get(#version, or: $value.version));
+      SyncDto(version: data.get(#version, or: $value.version));
 
   @override
   SyncDtoCopyWith<$R2, SyncDto, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
