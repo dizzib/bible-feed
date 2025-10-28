@@ -4,6 +4,7 @@ import 'package:watch_it/watch_it.dart';
 import 'all_done_fab.dart';
 import 'bible_reader_link_icon.dart';
 import 'settings_icon_button.dart';
+import 'sync_icon_button.dart';
 
 class AppBarMain extends WatchingWidget implements PreferredSizeWidget {
   @override
@@ -13,7 +14,7 @@ class AppBarMain extends WatchingWidget implements PreferredSizeWidget {
       centerTitle: true,
       clipBehavior: Clip.none, // do not clip fab drop shadow
       title: AllDoneFab(),
-      actions: [SettingsIconButton()],
+      actions: [SyncIconButton(), SettingsIconButton()],
     );
   }
 

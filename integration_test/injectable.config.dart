@@ -25,6 +25,7 @@ import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i477;
 import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
 import 'package:bible_feed/manager/haptic_setting_manager.dart' as _i274;
 import 'package:bible_feed/manager/haptic_wireup_manager.dart' as _i519;
+import 'package:bible_feed/manager/sync_in_manager.dart' as _i837;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i19;
@@ -61,6 +62,7 @@ extension GetItInjectableX on _i174.GetIt {
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     final bibleReadersModule = _$BibleReadersModule();
+    gh.lazySingleton<_i837.SyncInManager>(() => _i837.SyncInManager());
     gh.lazySingleton<_i1033.BookListWheelState>(
       () => _i1033.BookListWheelState(),
     );
