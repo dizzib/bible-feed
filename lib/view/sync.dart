@@ -10,7 +10,7 @@ class Sync extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Sync devices')),
       body: Padding(
-        padding: const EdgeInsets.all(Constants.settingsSpacing),
+        padding: Constants.defaultPadding,
         child: Wrap(
           direction: Axis.horizontal,
           children: [
