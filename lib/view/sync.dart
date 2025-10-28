@@ -8,10 +8,9 @@ class Sync extends StatelessWidget {
   @override
   build(context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sync')),
+      appBar: AppBar(title: const Text('Sync devices')),
       body: Padding(
         padding: const EdgeInsets.all(Constants.settingsSpacing),
-        // child: Wrap(direction: Axis.horizontal, children: [SyncIn(), SyncOut()]),
         child: Wrap(
           direction: Axis.horizontal,
           children: [
