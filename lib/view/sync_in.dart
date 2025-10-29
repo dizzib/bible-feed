@@ -1,5 +1,5 @@
-import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -8,7 +8,7 @@ import '../manager/sync_in_manager.dart';
 class SyncIn extends StatelessWidget {
   @override
   build(context) {
-    final msc = MobileScannerController();
+    final controller = MobileScannerController();
     return Column(
       children: [
         const Padding(
@@ -20,14 +20,23 @@ class SyncIn extends StatelessWidget {
         ),
         Expanded(
           child: MobileScanner(
-            controller: msc,
+            controller: controller,
             onDetect: (result) {
               try {
+                controller.stop();
                 sl<SyncInManager>().sync(result.barcodes.first.rawValue);
-                msc.stop();
                 Navigator.pop(context);
-              } catch (e) {
-                Log.err(e);
+              } catch (err) {
+                const toastTimeSecs = 3;
+                Fluttertoast.cancel();
+                Fluttertoast.showToast(
+                  backgroundColor: Colors.red,
+                  msg: err.toString(),
+                  textColor: Colors.white,
+                  timeInSecForIosWeb: toastTimeSecs,
+                  toastLength: Toast.LENGTH_LONG,
+                );
+                Future.delayed(const Duration(seconds: toastTimeSecs), controller.start);
               }
             },
           ),
