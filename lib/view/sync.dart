@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '_build_context_extension.dart';
 import '_constants.dart';
 import 'sync_in.dart';
 import 'sync_out.dart';
@@ -7,19 +8,15 @@ import 'sync_out.dart';
 class Sync extends StatelessWidget {
   @override
   build(context) {
-    const size = 390.0;
     return Scaffold(
       appBar: AppBar(title: const Text('Sync devices')),
-      body: Padding(
-        padding: Constants.defaultPadding,
-        child: Wrap(
-          direction: Axis.horizontal,
-          children: [
-            SizedBox(height: size, width: size, child: SyncOut()),
-            SizedBox(height: 300, width: 400, child: SyncIn()),
-          ],
-        ),
-      ),
+      body:
+          Padding(
+            padding: Constants.defaultPadding,
+            child: context.isOrientationPortrait
+                ? Column(children: [Expanded(child: SyncOut()), Expanded(child: SyncIn())])
+                : Row(children: [Expanded(child: SyncOut()), Expanded(child: SyncIn())]),
+          ),
     );
   }
 }
