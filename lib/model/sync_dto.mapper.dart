@@ -14,6 +14,7 @@ class SyncDtoMapper extends ClassMapperBase<SyncDto> {
   static SyncDtoMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SyncDtoMapper._());
+      FeedStateMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -26,12 +27,23 @@ class SyncDtoMapper extends ClassMapperBase<SyncDto> {
     'buildNumber',
     _$buildNumber,
   );
+  static List<FeedState> _$feedStateList(SyncDto v) => v.feedStateList;
+  static const Field<SyncDto, List<FeedState>> _f$feedStateList = Field(
+    'feedStateList',
+    _$feedStateList,
+  );
 
   @override
-  final MappableFields<SyncDto> fields = const {#buildNumber: _f$buildNumber};
+  final MappableFields<SyncDto> fields = const {
+    #buildNumber: _f$buildNumber,
+    #feedStateList: _f$feedStateList,
+  };
 
   static SyncDto _instantiate(DecodingData data) {
-    return SyncDto(buildNumber: data.dec(_f$buildNumber));
+    return SyncDto(
+      buildNumber: data.dec(_f$buildNumber),
+      feedStateList: data.dec(_f$feedStateList),
+    );
   }
 
   @override
@@ -91,7 +103,9 @@ extension SyncDtoValueCopy<$R, $Out> on ObjectCopyWith<$R, SyncDto, $Out> {
 
 abstract class SyncDtoCopyWith<$R, $In extends SyncDto, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({String? buildNumber});
+  ListCopyWith<$R, FeedState, FeedStateCopyWith<$R, FeedState, FeedState>>
+  get feedStateList;
+  $R call({String? buildNumber, List<FeedState>? feedStateList});
   SyncDtoCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -104,12 +118,24 @@ class _SyncDtoCopyWithImpl<$R, $Out>
   late final ClassMapperBase<SyncDto> $mapper =
       SyncDtoMapper.ensureInitialized();
   @override
-  $R call({String? buildNumber}) => $apply(
-    FieldCopyWithData({if (buildNumber != null) #buildNumber: buildNumber}),
+  ListCopyWith<$R, FeedState, FeedStateCopyWith<$R, FeedState, FeedState>>
+  get feedStateList => ListCopyWith(
+    $value.feedStateList,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(feedStateList: v),
   );
   @override
-  SyncDto $make(CopyWithData data) =>
-      SyncDto(buildNumber: data.get(#buildNumber, or: $value.buildNumber));
+  $R call({String? buildNumber, List<FeedState>? feedStateList}) => $apply(
+    FieldCopyWithData({
+      if (buildNumber != null) #buildNumber: buildNumber,
+      if (feedStateList != null) #feedStateList: feedStateList,
+    }),
+  );
+  @override
+  SyncDto $make(CopyWithData data) => SyncDto(
+    buildNumber: data.get(#buildNumber, or: $value.buildNumber),
+    feedStateList: data.get(#feedStateList, or: $value.feedStateList),
+  );
 
   @override
   SyncDtoCopyWith<$R2, SyncDto, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>

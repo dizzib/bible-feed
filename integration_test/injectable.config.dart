@@ -97,12 +97,6 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_integration_test, _midnight_test, _prod},
       preResolve: true,
     );
-    gh.lazySingleton<_i837.SyncInManager>(
-      () => _i837.SyncInManager(gh<_i977.AppService>()),
-    );
-    gh.lazySingleton<_i30.SyncOutManager>(
-      () => _i30.SyncOutManager(gh<_i977.AppService>()),
-    );
     await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
       () => _i729.ProductionHapticAvailabilityService.create(),
       registerFor: {_integration_test, _midnight_test, _prod},
@@ -181,6 +175,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1006.ChapterSplitters>(),
         gh<_i632.ChapterSplitSettingManager>(),
       ),
+    );
+    gh.lazySingleton<_i837.SyncInManager>(
+      () =>
+          _i837.SyncInManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
+    );
+    gh.lazySingleton<_i30.SyncOutManager>(
+      () =>
+          _i30.SyncOutManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
     );
     gh.singleton<_i519.HapticWireupManager>(
       () => _i519.HapticWireupManager(

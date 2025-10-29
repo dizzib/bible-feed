@@ -7,6 +7,7 @@ import 'sync_out.dart';
 class Sync extends StatelessWidget {
   @override
   build(context) {
+    const size = 390.0;
     return Scaffold(
       appBar: AppBar(title: const Text('Sync devices')),
       body: Padding(
@@ -14,7 +15,7 @@ class Sync extends StatelessWidget {
         child: Wrap(
           direction: Axis.horizontal,
           children: [
-            SizedBox(height: 200, width: 110, child: SyncOut()),
+            SizedBox(height: size, width: size, child: SyncOut()),
             SizedBox(height: 300, width: 400, child: SyncIn()),
           ],
         ),

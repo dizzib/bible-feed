@@ -94,12 +94,6 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_integration_test, _midnight_test, _prod},
       preResolve: true,
     );
-    gh.lazySingleton<_i837.SyncInManager>(
-      () => _i837.SyncInManager(gh<_i977.AppService>()),
-    );
-    gh.lazySingleton<_i30.SyncOutManager>(
-      () => _i30.SyncOutManager(gh<_i977.AppService>()),
-    );
     gh.lazySingleton<_i632.ChapterSplitSettingManager>(
       () => _i632.ChapterSplitSettingManager(gh<_i215.StoreService>()),
     );
@@ -180,6 +174,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i716.FeedAdvanceManager>(),
         gh<_i127.FeedsManager>(),
       ),
+    );
+    gh.lazySingleton<_i837.SyncInManager>(
+      () =>
+          _i837.SyncInManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
+    );
+    gh.lazySingleton<_i30.SyncOutManager>(
+      () =>
+          _i30.SyncOutManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
     );
     gh.lazySingleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(

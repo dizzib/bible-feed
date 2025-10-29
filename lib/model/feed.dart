@@ -10,7 +10,7 @@ part 'feed.mapper.dart';
 // Feed manages the reading state of a given list of books
 class Feed with ChangeNotifier {
   final ReadingList _readingList;
-  final FeedState _state;
+  FeedState _state;
 
   Feed(this._readingList, this._state);
 
@@ -19,6 +19,11 @@ class Feed with ChangeNotifier {
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
   FeedState get state => _state;
+
+  set state(FeedState value) {
+    _state = value;
+    notifyListeners();
+  }
 
   void setBookChapterVerse(int bookIndex, int chapter, [int verse = 1]) {
     if (bookIndex == this.bookIndex && chapter == _state._chapter && verse == _state.verse) return;

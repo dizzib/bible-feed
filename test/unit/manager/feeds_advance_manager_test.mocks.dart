@@ -115,6 +115,12 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as _i2.FeedState);
 
   @override
+  set state(_i2.FeedState? value) => super.noSuchMethod(
+    Invocation.setter(#state, value),
+    returnValueForMissingStub: null,
+  );
+
+  @override
   bool get hasListeners =>
       (super.noSuchMethod(
             Invocation.getter(#hasListeners),
