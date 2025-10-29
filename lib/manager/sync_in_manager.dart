@@ -13,7 +13,7 @@ class SyncInManager {
   SyncInManager(this._appService, this._feedsManager);
 
   void sync(String? json) {
-    const help = 'Please ensure you are scanning a Bible Feed QR code.';
+    const help = 'Please ensure you are scanning a Bible Feed QR-code.';
 
     Log.info('sync $json');
     if (json == null || json.isEmpty) {
@@ -25,7 +25,7 @@ class SyncInManager {
       syncDto = SyncDtoMapper.fromJson(json);
     } catch (err) {
       Log.err(err);
-      throw Exception('The QR code is not recognised. $help');
+      throw Exception('The QR-code is not recognised. $help');
     }
 
     Log.info(syncDto);

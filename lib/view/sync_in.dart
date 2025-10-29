@@ -15,19 +15,26 @@ class SyncIn extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: Text(
             textAlign: TextAlign.center,
-            'Scan the QR-code shown on the other device to transfer its reading state to this device.',
+            'Scan the QR-code shown on the other device to download its reading state to this device.',
           ),
         ),
         Expanded(
           child: MobileScanner(
             controller: controller,
             onDetect: (result) {
+              const toastTimeSecs = 3;
               try {
                 controller.stop();
                 sl<SyncInManager>().sync(result.barcodes.first.rawValue);
                 Navigator.pop(context);
+                Fluttertoast.showToast(
+                  backgroundColor: Colors.green,
+                  msg: 'Successfully downloaded!',
+                  textColor: Colors.white,
+                  timeInSecForIosWeb: toastTimeSecs,
+                  toastLength: Toast.LENGTH_LONG,
+                );
               } catch (err) {
-                const toastTimeSecs = 3;
                 Fluttertoast.cancel();
                 Fluttertoast.showToast(
                   backgroundColor: Colors.red,
