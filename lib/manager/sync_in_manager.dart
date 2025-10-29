@@ -15,7 +15,6 @@ class SyncInManager {
   void sync(String? json) {
     const help = 'Please ensure you are scanning a Bible Feed QR-code.';
 
-    Log.info('sync $json');
     if (json == null || json.isEmpty) {
       throw Exception('No data was found. $help');
     }
@@ -27,8 +26,6 @@ class SyncInManager {
       Log.err(err);
       throw Exception('The QR-code is not recognised. $help');
     }
-
-    Log.info(syncDto);
 
     if (syncDto.buildNumber != _appService.buildNumber) {
       throw Exception(
