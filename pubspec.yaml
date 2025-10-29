@@ -37,12 +37,11 @@ dependencies:
   dart_mappable: ^4.6.0
   dartx: ^1.2.0
   df_log: ^0.3.27
-  flutter_zxing: ^2.2.1 # for sync
   haptic_feedback: ^0.5.1+1
-  image: ^4.5.4 # for sync
   injectable: ^2.5.1 # dependency injection
   mobile_scanner: ^7.1.3 # for sync
   package_info_plus: ^8.3.0
+  qr_flutter: ^4.1.0 # for sync
   shared_preferences: ^2.5.2
   url_launcher: ^6.3.2 # to launch bible reader deeplinks
   watch_it: ^1.7.0 # state management and service locator
