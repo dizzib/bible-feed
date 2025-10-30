@@ -29,7 +29,7 @@ class SyncIn extends StatelessWidget {
                 Navigator.pop(context);
                 Fluttertoast.showToast(
                   backgroundColor: Colors.green,
-                  msg: 'Successfully downloaded!',
+                  msg: 'Sync was successful!',
                   textColor: Colors.white,
                   timeInSecForIosWeb: toastTimeSecs,
                   toastLength: Toast.LENGTH_LONG,
