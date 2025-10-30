@@ -3,6 +3,7 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
     - '**.config.dart'
+    - '**.mapper.dart'
     - '**.mocks.dart'
 
   # This dcl plugin uses far too much cpu and ram on M1 Air base model!
