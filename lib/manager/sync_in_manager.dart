@@ -1,4 +1,3 @@
-import 'package:df_log/df_log.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/sync_dto.dart';
@@ -20,11 +19,11 @@ class SyncInManager {
     }
 
     SyncDto syncDto;
+
     try {
       syncDto = SyncDtoMapper.fromJson(json);
-    } catch (err) {
-      Log.err(err);
-      throw Exception('The QR-code is not recognised. $help');
+    } catch (err, stackTrace) {
+      Error.throwWithStackTrace(Exception('The QR-code is not recognised. $help'), stackTrace);
     }
 
     if (syncDto.buildNumber != _appService.buildNumber) {
