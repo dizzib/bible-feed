@@ -1,4 +1,3 @@
-import 'package:df_log/df_log.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/sync_dto.dart';
@@ -14,9 +13,6 @@ class SyncOutManager {
 
   String getJson() {
     final feedStateList = _feedsManager.feeds.map((f) => f.state).toList();
-    final syncDto = SyncDto(buildNumber: _appService.buildNumber, feedStateList: feedStateList);
-
-    Log.info(syncDto.toJson());
-    return syncDto.toJson();
+    return SyncDto(buildNumber: _appService.buildNumber, feedStateList: feedStateList).toJson();
   }
 }
