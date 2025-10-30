@@ -15,7 +15,7 @@ class SyncIn extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: Text(
             textAlign: TextAlign.center,
-            'Scan the QR-code shown on the other device to download its reading state to this device.',
+            'Scan the QR-code shown on the other device to transfer its reading state to this device.',
           ),
         ),
         Expanded(
