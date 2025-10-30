@@ -699,10 +699,10 @@ packages:
     dependency: "direct dev"
     description:
       name: parameterized_test
-      sha256: "6d3687e41f9de695262ecc314030cd210872692182c233ad71d60557bacd3c9f"
+      sha256: "05b0a09553fa69bb15f1efcd7369c38c4bf0cd320c084a0a12cde1c20df957a4"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   path:
     dependency: transitive
     description:
