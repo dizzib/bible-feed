@@ -37,6 +37,20 @@ void main() async {
     test('progress get', () {
       expect(testee.progress, 0.25);
     });
+
+    test('reading list get', () {
+      expect(testee.readingList, rl1);
+    });
+
+    test('state get', () {
+      expect(testee.state, state);
+    });
+
+    test('state set', () {
+      final state0 = FeedState(book: b0);
+      testee.state = state0;
+      expect(testee.state, state0);
+    });
   });
 
   group('method', () {
