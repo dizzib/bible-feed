@@ -8,7 +8,6 @@ All notable changes to this project are documented here.
 ### Added
 - Feature: sync devices
 
-
 ### Changed
 - internal refactor
 - remove f-droid
