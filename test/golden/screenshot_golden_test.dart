@@ -49,6 +49,7 @@ final scenarios = {
   const Scenario('home'),
   const Scenario('bookChapterDialog', tapKey: 'ep2'),
   const Scenario('settings', tapKey: 'settingsIconButton'),
+  const Scenario('sync', tapKey: 'syncIconButton'),
   const Scenario('home', brightness: Brightness.dark),
 };
 
