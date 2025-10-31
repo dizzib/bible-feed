@@ -7,7 +7,14 @@ import '../model/feeds_advance_state.dart';
 import '../service/date_time_service.dart';
 import 'feeds_advance_manager.dart';
 
-@lazySingleton
+// Using @lazysingleton breaks golden tests...
+//
+// The following assertion was thrown running a test:
+// A Timer is still pending even after the widget tree was disposed.
+// 'package:flutter_test/src/binding.dart':
+// Failed assertion: line 1617 pos 12: '!timersPending'
+//
+@singleton
 class AutoAdvanceManager with ChangeNotifier {
   final DateTimeService _dateTimeService;
   final FeedsAdvanceManager _feedsAdvanceManager;
