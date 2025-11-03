@@ -18,6 +18,8 @@ import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
+import 'package:bible_feed/manager/deeplink_in_manager.dart' as _i468;
+import 'package:bible_feed/manager/deeplink_out_manager.dart' as _i768;
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
 import 'package:bible_feed/manager/feed_store_manager.dart' as _i571;
 import 'package:bible_feed/manager/feed_tap_manager.dart' as _i583;
@@ -192,6 +194,9 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i30.SyncOutManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
     );
+    gh.singleton<_i468.DeepLinkInManager>(
+      () => _i468.DeepLinkInManager(gh<_i837.SyncInManager>()),
+    );
     gh.lazySingleton<_i567.BibleReaderLinkManager>(
       () => _i567.BibleReaderLinkManager(
         gh<_i215.StoreService>(),
@@ -204,6 +209,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i516.PlatformEventService>(),
       ),
+    );
+    gh.singleton<_i768.DeepLinkOutManager>(
+      () => _i768.DeepLinkOutManager(gh<_i30.SyncOutManager>()),
     );
     gh.singleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(

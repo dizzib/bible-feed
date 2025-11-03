@@ -32,6 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   app_install_events: ^0.0.3 # to detect bible reader (un)install
+  app_links: ^6.4.1 # for share in
   auto_size_text: ^3.0.0
   collection: ^1.19.1
   dart_mappable: ^4.6.0
@@ -43,7 +44,6 @@ dependencies:
   package_info_plus: ^8.3.0
   qr_flutter: ^4.1.0 # for share out
   shared_preferences: ^2.5.2
-  uni_links: ^0.5.1 # for share in
   url_launcher: ^6.3.2 # to launch bible reader deeplinks
   watch_it: ^1.7.0 # state management and service locator
 

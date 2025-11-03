@@ -10,17 +10,14 @@ class Sync extends StatelessWidget {
     return Dialog(
       child: Container(
         constraints: BoxConstraints(maxHeight: size, maxWidth: size),
-        child: Padding(
-          padding: Constants.defaultPadding * 2,
-          child: Column(
-            children: [
-              Text(
-                textAlign: TextAlign.center,
-                'Scan this QR-code to share the reading state to another device.',
-              ),
-              Expanded(child: SyncOut()),
-            ],
-          ),
+        child: Column(
+          children: [
+            Text(
+              textAlign: TextAlign.center,
+              'Scan this QR-code to share the reading state to another device.',
+            ),
+            Expanded(child: SyncOut()),
+          ],
         ),
       ),
     );
