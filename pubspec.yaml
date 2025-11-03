@@ -41,8 +41,9 @@ dependencies:
   haptic_feedback: ^0.5.1+1
   injectable: ^2.5.1 # dependency injection
   package_info_plus: ^8.3.0
-  qr_flutter: ^4.1.0 # for sync
+  qr_flutter: ^4.1.0 # for share out
   shared_preferences: ^2.5.2
+  uni_links: ^0.5.1 # for share in
   url_launcher: ^6.3.2 # to launch bible reader deeplinks
   watch_it: ^1.7.0 # state management and service locator
 
@@ -50,7 +51,7 @@ dev_dependencies:
   alchemist: ^0.12.1 # to generate screenshots
   build_runner: ^2.7.1
   dart_code_linter: ^3.1.1
-  dart_mappable_builder: ^4.6.0 # for sync
+  dart_mappable_builder: ^4.6.0 # for share in/out
   fake_async: ^1.3.3 # to advance timer in unit test
   flutter_driver:
     sdk: flutter
