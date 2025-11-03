@@ -20,8 +20,8 @@ class Scenario {
 
 final epistles2 = sl<ReadingLists>()[3];
 final state = sl<FeedStoreManager>().loadState(epistles2);
-final deviceConstraints = [const Size(360, 720), const Size(180, 360), const Size(834, 1194)];
-final dialogConstraints = [const Size(300, 600), const Size(200, 300), const Size(500, 900)];
+final deviceConstraints = [const Size(360, 720), const Size(720, 360), const Size(180, 360), const Size(834, 1194)];
+final dialogConstraints = [const Size(300, 600), const Size(600, 300), const Size(200, 300), const Size(500, 900)];
 
 final scenarios = {
   'home': Scenario(App(), deviceConstraints),
