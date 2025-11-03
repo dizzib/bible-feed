@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 
-import '_build_context_extension.dart';
 import '_constants.dart';
-import 'sync_in.dart';
 import 'sync_out.dart';
 
 class Sync extends StatelessWidget {
+  final size = 300.0;
   @override
   build(context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Sync devices')),
-      body:
-          Padding(
-            padding: Constants.defaultPadding,
-            child: context.isOrientationPortrait
-                ? Column(children: [Expanded(child: SyncOut()), Expanded(child: SyncIn())])
-                : Row(children: [Expanded(child: SyncOut()), Expanded(child: SyncIn())]),
+    return Dialog(
+      child: Container(
+        constraints: BoxConstraints(maxHeight: size, maxWidth: size),
+        child: Padding(
+          padding: Constants.defaultPadding * 2,
+          child: Column(
+            children: [
+              Text(
+                textAlign: TextAlign.center,
+                'Scan this QR-code to share the reading state to another device.',
+              ),
+              Expanded(child: SyncOut()),
+            ],
           ),
+        ),
+      ),
     );
   }
 }
