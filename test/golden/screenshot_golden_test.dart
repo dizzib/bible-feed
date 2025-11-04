@@ -14,7 +14,6 @@ import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
 import 'helper.dart';
-import 'stub/stub_platform_service.dart';
 
 enum Platform { android, iOS }
 
