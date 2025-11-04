@@ -16,7 +16,7 @@ class Sync extends StatelessWidget {
         constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxWidth * heightRatio),
         padding: const EdgeInsets.all(12.0),
         child: Column(
-          spacing: Constants.settingsSpacing,
+          spacing: Constants.defaultSpacing,
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(textAlign: TextAlign.center, 'Scan this QR-code to share the reading state to another device.'),

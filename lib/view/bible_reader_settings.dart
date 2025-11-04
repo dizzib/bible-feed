@@ -9,17 +9,17 @@ class BibleReaderSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(Constants.settingsSpacing),
+        padding: const EdgeInsets.all(Constants.defaultSpacing),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: Constants.settingsSpacing,
+          spacing: Constants.defaultSpacing,
           children: [
             BibleReaderLinkIcon(),
             Expanded(
               // https://docs.flutter.dev/ui/layout/constraints example 24-25
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: Constants.settingsSpacing,
+                spacing: Constants.defaultSpacing,
                 children: [
                   const Text('Bible Reader', style: TextStyle(fontSize: 20)),
                   const Text(

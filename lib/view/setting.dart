@@ -15,11 +15,11 @@ class Setting<T extends SettingManager> extends WatchingWidget {
         ignoring: !settingManager.canEnable,
         child: Card(
           child: Padding(
-            padding: const EdgeInsets.all(Constants.settingsSpacing),
+            padding: const EdgeInsets.all(Constants.defaultSpacing),
             child: SwitchListTile(
               title: Text(settingManager.title, style: const TextStyle(fontSize: 20)),
               subtitle: Padding(
-                padding: const EdgeInsets.only(top: Constants.settingsSpacing),
+                padding: const EdgeInsets.only(top: Constants.defaultSpacing),
                 child: Text(settingManager.subtitle),
               ),
               value: settingManager.isEnabled,

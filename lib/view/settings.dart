@@ -16,9 +16,9 @@ class Settings extends StatelessWidget {
         thumbVisibility: true,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(Constants.settingsSpacing).copyWith(top: 0),
+            padding: const EdgeInsets.all(Constants.defaultSpacing).copyWith(top: 0),
             child: Column(
-              spacing: Constants.settingsSpacing,
+              spacing: Constants.defaultSpacing,
               children: [
                 BibleReaderSettings(),
                 Setting<ChapterSplitSettingManager>(),
