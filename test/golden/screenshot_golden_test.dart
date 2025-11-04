@@ -5,12 +5,16 @@ library;
 // They are resized and moved to fastlane by external scripts.
 
 import 'package:alchemist/alchemist.dart';
+import 'package:bible_feed/service/platform_service.dart';
 import 'package:bible_feed/view/app_base.dart';
+import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:watch_it/watch_it.dart';
 
 import '../injectable.dart';
 import 'helper.dart';
+import 'stub/stub_platform_service.dart';
 
 enum Platform { android, iOS }
 
@@ -61,12 +65,17 @@ Future<void> main() async {
   Helper.initialiseFeeds();
 
   for (final device in Device.values.where((d) => d.enabled)) {
+    final targetPlatform = device.platform == Platform.android ? TargetPlatform.android : TargetPlatform.iOS;
     for (final (index, scenario) in scenarios.indexed) {
       // seems to generate in background, even after await!?
+      final filename = '${device.platform.name}/${device.name}_$index-${scenario.name}';
       goldenTest(
         'screenshot',
-        fileName: '${device.platform.name}/${device.name}_$index-${scenario.name}',
+        fileName: filename,
         pumpBeforeTest: (t) {
+          Log.info(filename);
+          sl.unregister<PlatformService>();
+          sl.registerSingleton(PlatformService(currentPlatform: targetPlatform));
           t.platformDispatcher.platformBrightnessTestValue = scenario.brightness;
           return t.pumpAndSettle();
         },
