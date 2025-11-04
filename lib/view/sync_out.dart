@@ -3,7 +3,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/deeplink_out_manager.dart';
-import '_constants.dart';
 
 class SyncOut extends StatelessWidget {
   @override
