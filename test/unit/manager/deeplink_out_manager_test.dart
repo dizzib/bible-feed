@@ -21,7 +21,7 @@ void main() {
     test('getUrl returns correct deep link URL with encoded JSON', () {
       final json = '{"key":"value"}';
       when(mockSyncOutManager.getJson()).thenReturn(json);
-      expect(testee.getUrl(), 'biblefeed://me2christ.com/share?json=%7B%22key%22%3A%22value%22%7D');
+      expect(testee.getUrl(), 'biblefeed://me2christ.com/share?json=H4sIAAAAAAAAA6tWyk6tVLJSKkvMKU1VqgUAv5wYPw8AAAA=');
     });
   });
 }

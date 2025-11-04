@@ -30,7 +30,7 @@ void main() {
 
     test('calls sync and shows success toast on valid deep link', () {
       when(mockDeepLinkService.uri).thenReturn(
-        Uri.parse('biblefeed://me2christ.com/share?${Constants.deeplinkQueryKey}=%7B%22key%22%3A%22value%22%7D'),
+        Uri.parse('biblefeed://me2christ.com/share?${Constants.deeplinkQueryKey}=H4sIAAAAAAAAA6tWyk6tVLJSKkvMKU1VqgUAv5wYPw8AAAA='),
       );
       DeepLinkInManager(mockDeepLinkService, JsonEncodingManager(), mockSyncInManager, mockToastService);
       verify(mockSyncInManager.sync('{"key":"value"}')).called(1);
