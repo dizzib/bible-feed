@@ -38,11 +38,13 @@ import 'package:bible_feed/model/reading_list.dart' as _i279;
 import 'package:bible_feed/model/reading_lists.dart' as _i823;
 import 'package:bible_feed/service/app_service.dart' as _i977;
 import 'package:bible_feed/service/date_time_service.dart' as _i99;
+import 'package:bible_feed/service/deeplink_service.dart' as _i326;
 import 'package:bible_feed/service/haptic_availability_service.dart' as _i729;
 import 'package:bible_feed/service/haptic_service.dart' as _i22;
 import 'package:bible_feed/service/platform_event_service.dart' as _i516;
 import 'package:bible_feed/service/platform_service.dart' as _i578;
 import 'package:bible_feed/service/store_service.dart' as _i215;
+import 'package:bible_feed/service/toast_service.dart' as _i942;
 import 'package:bible_feed/service/url_launch_service.dart' as _i626;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -83,6 +85,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => bibleReadersModule.bibleReader,
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
+    gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_golden, _integration_test, _prod},
@@ -129,6 +132,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i252.ScreenshotAppService.create(),
       registerFor: {_golden},
       preResolve: true,
+    );
+    gh.lazySingleton<_i326.DeepLinkService>(
+      () => _i326.DeepLinkService(gh<_i942.ToastService>()),
     );
     gh.lazySingleton<_i578.PlatformService>(
       () => _i250.ScreenshotPlatformService(),
@@ -194,9 +200,6 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i30.SyncOutManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
     );
-    gh.singleton<_i468.DeepLinkInManager>(
-      () => _i468.DeepLinkInManager(gh<_i837.SyncInManager>()),
-    );
     gh.lazySingleton<_i567.BibleReaderLinkManager>(
       () => _i567.BibleReaderLinkManager(
         gh<_i215.StoreService>(),
@@ -217,6 +220,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i111.AutoAdvanceManager(
         gh<_i99.DateTimeService>(),
         gh<_i477.FeedsAdvanceManager>(),
+      ),
+    );
+    gh.singleton<_i468.DeepLinkInManager>(
+      () => _i468.DeepLinkInManager(
+        gh<_i326.DeepLinkService>(),
+        gh<_i837.SyncInManager>(),
+        gh<_i942.ToastService>(),
       ),
     );
     gh.singleton<_i519.HapticWireupManager>(
