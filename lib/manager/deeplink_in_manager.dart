@@ -1,5 +1,6 @@
 import 'package:app_links/app_links.dart';
 import 'package:df_log/df_log.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
 
@@ -21,14 +22,25 @@ class DeepLinkInManager {
           final decodedJson = Uri.decodeComponent(value);
           Log.info(decodedJson);
           _syncInManager.sync(decodedJson);
-          Fluttertoast.showToast(msg: 'Success!');
-        } catch (e) {
-          Fluttertoast.showToast(msg: 'Error!');
+          _showToast(msg: 'Success!', backgroundColor: Colors.green);
+        } catch (err) {
+          _showToast(msg: err.toString(), backgroundColor: Colors.red);
         }
       },
       onError: (err) {
-        Log.err('Error receiving deep link: $err');
+        _showToast(msg: err.toString(), backgroundColor: Colors.red);
       },
+    );
+  }
+
+  void _showToast({required String msg, required Color backgroundColor}) {
+    final toastTimeSecs = 5;
+    Fluttertoast.showToast(
+      backgroundColor: backgroundColor,
+      msg: msg,
+      textColor: Colors.white,
+      timeInSecForIosWeb: toastTimeSecs,
+      toastLength: Toast.LENGTH_LONG,
     );
   }
 }
