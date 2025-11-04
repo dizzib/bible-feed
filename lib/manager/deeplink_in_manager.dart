@@ -1,5 +1,4 @@
 import 'package:app_links/app_links.dart';
-import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
@@ -15,14 +14,12 @@ class DeepLinkInManager {
     AppLinks().uriLinkStream.listen(
       (uri) {
         try {
-          final queryStart = '${Constants.deeplinkQueryKey}=';
-          if (!uri.query.startsWith(queryStart)) {
-            throw Exception('Invalid querystring does not start with "$queryStart"');
+          final queryKey = Constants.deeplinkQueryKey;
+          if (!uri.query.startsWith('$queryKey=')) {
+            throw Exception('The querystring key "$queryKey" was not found');
           }
-          final value = uri.query.substring(queryStart.length);
-          Log.info(value);
-          final decodedJson = Uri.decodeComponent(value);
-          Log.info(decodedJson);
+          final queryValue = uri.query.substring(queryKey.length + 1);
+          final decodedJson = Uri.decodeComponent(queryValue);
           _syncInManager.sync(decodedJson);
           _showToast(msg: 'Success!', backgroundColor: Colors.green);
         } catch (err) {
