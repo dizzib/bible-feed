@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../model/sync_dto.dart';
+import '../model/share_dto.dart';
 import '../service/app_service.dart';
 import 'feeds_manager.dart';
 
@@ -13,6 +13,6 @@ class SyncOutManager {
 
   String getJson() {
     final feedStateList = _feedsManager.feeds.map((f) => f.state).toList();
-    return SyncDto(buildNumber: _appService.buildNumber, feedStateList: feedStateList).toJson();
+    return ShareDto(buildNumber: _appService.buildNumber, feedStateList: feedStateList).toJson();
   }
 }

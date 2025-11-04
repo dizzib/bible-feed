@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'feed.dart';
 
-part 'sync_dto.mapper.dart';
+part 'share_dto.mapper.dart';
 
 @immutable
 @MappableClass()
-class SyncDto with SyncDtoMappable {
-  SyncDto({required this.buildNumber, required this.feedStateList});
+class ShareDto with ShareDtoMappable {
+  ShareDto({required this.buildNumber, required this.feedStateList});
 
   final String buildNumber;
   final List<FeedState> feedStateList;

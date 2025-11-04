@@ -65,6 +65,9 @@ extension GetItInjectableX on _i174.GetIt {
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     final bibleReadersModule = _$BibleReadersModule();
+    gh.lazySingleton<_i508.JsonEncodingManager>(
+      () => _i508.JsonEncodingManager(),
+    );
     gh.lazySingleton<_i1033.BookListWheelState>(
       () => _i1033.BookListWheelState(),
     );
@@ -82,9 +85,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
-    gh.lazySingleton<_i508.JsonEncodingManager>(
-      () => _i508.JsonEncodingManager(),
-    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_golden, _integration_test, _prod},

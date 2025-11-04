@@ -1,7 +1,7 @@
 import 'package:bible_feed/manager/feeds_manager.dart' show FeedsManager;
 import 'package:bible_feed/manager/sync_out_manager.dart';
 import 'package:bible_feed/model/feed.dart';
-import 'package:bible_feed/model/sync_dto.dart';
+import 'package:bible_feed/model/share_dto.dart';
 import 'package:bible_feed/service/app_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -32,7 +32,7 @@ void main() {
     when(mockFeed2.state).thenReturn(feedState2);
     when(mockFeedsManager.feeds).thenReturn([mockFeed1, mockFeed2]);
 
-    final expectDto = SyncDto(buildNumber: '123', feedStateList: [feedState1, feedState2]);
+    final expectDto = ShareDto(buildNumber: '123', feedStateList: [feedState1, feedState2]);
     expect(testee.getJson(), expectDto.toJson());
   });
 }

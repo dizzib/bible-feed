@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../model/sync_dto.dart';
+import '../model/share_dto.dart';
 import '../service/app_service.dart';
 import 'feeds_manager.dart';
 
@@ -18,10 +18,10 @@ class SyncInManager {
       throw Exception('No data was found. $help');
     }
 
-    SyncDto syncDto;
+    ShareDto syncDto;
 
     try {
-      syncDto = SyncDtoMapper.fromJson(json);
+      syncDto = ShareDtoMapper.fromJson(json);
     } catch (err, stackTrace) {
       Error.throwWithStackTrace(Exception('The QR-code is not recognised. $help'), stackTrace);
     }
