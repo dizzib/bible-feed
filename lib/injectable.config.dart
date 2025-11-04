@@ -27,6 +27,7 @@ import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i477;
 import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
 import 'package:bible_feed/manager/haptic_setting_manager.dart' as _i274;
 import 'package:bible_feed/manager/haptic_wireup_manager.dart' as _i519;
+import 'package:bible_feed/manager/json_encoding_manager.dart' as _i508;
 import 'package:bible_feed/manager/sync_in_manager.dart' as _i837;
 import 'package:bible_feed/manager/sync_out_manager.dart' as _i30;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
@@ -81,6 +82,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
+    gh.lazySingleton<_i508.JsonEncodingManager>(
+      () => _i508.JsonEncodingManager(),
+    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_golden, _integration_test, _prod},
@@ -191,20 +195,10 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i30.SyncOutManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
     );
-    gh.singleton<_i768.DeepLinkOutManager>(
-      () => _i768.DeepLinkOutManager(gh<_i30.SyncOutManager>()),
-    );
     gh.singleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(
         gh<_i99.DateTimeService>(),
         gh<_i477.FeedsAdvanceManager>(),
-      ),
-    );
-    gh.singleton<_i468.DeepLinkInManager>(
-      () => _i468.DeepLinkInManager(
-        gh<_i326.DeepLinkService>(),
-        gh<_i837.SyncInManager>(),
-        gh<_i942.ToastService>(),
       ),
     );
     gh.singleton<_i519.HapticWireupManager>(
@@ -224,10 +218,24 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i22.HapticService>(),
       ),
     );
+    gh.singleton<_i468.DeepLinkInManager>(
+      () => _i468.DeepLinkInManager(
+        gh<_i326.DeepLinkService>(),
+        gh<_i508.JsonEncodingManager>(),
+        gh<_i837.SyncInManager>(),
+        gh<_i942.ToastService>(),
+      ),
+    );
     gh.lazySingleton<_i541.AllDoneDialogManager>(
       () => _i541.AllDoneDialogManager(
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.singleton<_i768.DeepLinkOutManager>(
+      () => _i768.DeepLinkOutManager(
+        gh<_i508.JsonEncodingManager>(),
+        gh<_i30.SyncOutManager>(),
       ),
     );
     return this;

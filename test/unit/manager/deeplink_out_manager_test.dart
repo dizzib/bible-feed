@@ -1,4 +1,5 @@
 import 'package:bible_feed/manager/deeplink_out_manager.dart';
+import 'package:bible_feed/manager/json_encoding_manager.dart';
 import 'package:bible_feed/manager/sync_out_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -14,7 +15,7 @@ void main() {
 
     setUp(() {
       mockSyncOutManager = MockSyncOutManager();
-      testee = DeepLinkOutManager(mockSyncOutManager);
+      testee = DeepLinkOutManager(JsonEncodingManager(), mockSyncOutManager);
     });
 
     test('getUrl returns correct deep link URL with encoded JSON', () {
