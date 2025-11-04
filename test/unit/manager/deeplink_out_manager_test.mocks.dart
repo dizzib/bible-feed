@@ -3,7 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bible_feed/manager/sync_out_manager.dart' as _i2;
+import 'package:bible_feed/manager/json_encoding_manager.dart' as _i2;
+import 'package:bible_feed/manager/sync_out_manager.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
 
@@ -21,10 +22,46 @@ import 'package:mockito/src/dummies.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+/// A class which mocks [JsonEncodingManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockJsonEncodingManager extends _i1.Mock
+    implements _i2.JsonEncodingManager {
+  @override
+  String encode(String? json) =>
+      (super.noSuchMethod(
+            Invocation.method(#encode, [json]),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.method(#encode, [json]),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.method(#encode, [json]),
+            ),
+          )
+          as String);
+
+  @override
+  String decode(String? base64Encoded) =>
+      (super.noSuchMethod(
+            Invocation.method(#decode, [base64Encoded]),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.method(#decode, [base64Encoded]),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.method(#decode, [base64Encoded]),
+            ),
+          )
+          as String);
+}
+
 /// A class which mocks [SyncOutManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSyncOutManager extends _i1.Mock implements _i2.SyncOutManager {
+class MockSyncOutManager extends _i1.Mock implements _i4.SyncOutManager {
   @override
   String getJson() =>
       (super.noSuchMethod(

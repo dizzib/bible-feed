@@ -7,21 +7,24 @@ import 'package:mockito/mockito.dart';
 
 import 'deeplink_out_manager_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<SyncOutManager>()])
+@GenerateNiceMocks([MockSpec<JsonEncodingManager>(), MockSpec<SyncOutManager>()])
 void main() {
   group('DeepLinkOutManager', () {
     late MockSyncOutManager mockSyncOutManager;
+    late MockJsonEncodingManager mockJsonEncodingManager;
     late DeepLinkOutManager testee;
 
     setUp(() {
       mockSyncOutManager = MockSyncOutManager();
-      testee = DeepLinkOutManager(JsonEncodingManager(), mockSyncOutManager);
+      mockJsonEncodingManager = MockJsonEncodingManager();
+      testee = DeepLinkOutManager(mockJsonEncodingManager, mockSyncOutManager);
     });
 
     test('getUrl returns correct deep link URL with encoded JSON', () {
       final json = '{"key":"value"}';
       when(mockSyncOutManager.getJson()).thenReturn(json);
-      expect(testee.getUrl(), 'biblefeed://me2christ.com/share?json=H4sIAAAAAAAAA6tWyk6tVLJSKkvMKU1VqgUAv5wYPw8AAAA=');
+      when(mockJsonEncodingManager.encode(json)).thenReturn(Uri.encodeComponent(json));
+      expect(testee.getUrl(), 'biblefeed://me2christ.com/share?json=%7B%22key%22%3A%22value%22%7D');
     });
   });
 }
