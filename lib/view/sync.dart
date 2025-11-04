@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
+import 'package:watch_it/watch_it.dart';
 
+import '../manager/deeplink_out_manager.dart';
+import '_build_context_extension.dart';
 import '_constants.dart';
-import 'sync_out.dart';
 
 class Sync extends StatelessWidget {
   final maxWidth = 400.0;
@@ -17,7 +20,17 @@ class Sync extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(textAlign: TextAlign.center, 'Scan this QR-code to share the reading state to another device.'),
-            Flexible(child: AspectRatio(aspectRatio: 1, child: SyncOut())),
+            Flexible(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: PrettyQrView.data(
+                  data: sl<DeepLinkOutManager>().getUrl(),
+                  decoration: PrettyQrDecoration(
+                    shape: PrettyQrSmoothSymbol(color: context.isDarkMode ? Colors.white : Colors.black),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
