@@ -13,7 +13,7 @@ class SyncIconButton extends StatelessWidget {
     return IconButton(
       key: const Key('syncIconButton'), // for generate screenshots
       icon: Icon(icon, size: Constants.appbarIconSize),
-      tooltip: 'Open sync',
+      tooltip: 'Share reading state',
       onPressed: () => context.showDialogWithBlurBackground(Sync()),
     );
   }
