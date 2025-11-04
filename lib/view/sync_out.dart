@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '_build_context_extension.dart';
 import '../manager/deeplink_out_manager.dart';
 
 class SyncOut extends StatelessWidget {
   @override
-  build(context) {
-    return QrImageView(
-      backgroundColor: Colors.white,
+  build(BuildContext context) {
+    return PrettyQrView.data(
       data: sl<DeepLinkOutManager>().getUrl(),
-      errorStateBuilder: (_, err) => Center(child: Text('Unable to make qr code: $err', textAlign: TextAlign.center)),
-      gapless: true,
-      version: QrVersions.auto,
+      decoration: PrettyQrDecoration(
+        shape: PrettyQrSmoothSymbol(color: context.isDarkMode ? Colors.white : Colors.black),
+      ),
     );
   }
 }

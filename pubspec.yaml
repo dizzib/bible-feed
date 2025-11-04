@@ -42,7 +42,7 @@ dependencies:
   haptic_feedback: ^0.5.1+1
   injectable: ^2.5.1 # dependency injection
   package_info_plus: ^8.3.0
-  qr_flutter: ^4.1.0 # for share out
+  pretty_qr_code: ^3.5.0 # for share out
   shared_preferences: ^2.5.2
   url_launcher: ^6.3.2 # to launch bible reader deeplinks
   watch_it: ^1.7.0 # state management and service locator
