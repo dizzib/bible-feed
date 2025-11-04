@@ -20,5 +20,6 @@ class DeepLinkService with ChangeNotifier {
     );
   }
 
+  // ignore: avoid-late-keyword, guaranteed to be set before notifyListeners() is called
   late Uri uri;
 }

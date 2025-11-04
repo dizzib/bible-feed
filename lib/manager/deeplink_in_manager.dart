@@ -19,7 +19,7 @@ class DeepLinkInManager {
         if (!uri.query.startsWith('$queryKey=')) {
           throw Exception('The querystring key "$queryKey" was not found');
         }
-        final queryValue = uri.query.substring(queryKey.length + 1);
+        final queryValue = uri.query.substring(queryKey.length + 1); // ignore: avoid-substring, no emojis
         final decodedJson = Uri.decodeComponent(queryValue);
         _syncInManager.sync(decodedJson);
         _toastService.showOk('Success!');
