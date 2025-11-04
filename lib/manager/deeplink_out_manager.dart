@@ -11,6 +11,7 @@ class DeepLinkOutManager {
   String getUrl() {
     final json = _syncOutManager.getJson();
     final encodedJson = Uri.encodeComponent(json);
+    // scheme, host and path are defined in <intent-filter> in AndroidManifest.xml
     return 'biblefeed://me2christ.com/share?json=$encodedJson';
   }
 }
