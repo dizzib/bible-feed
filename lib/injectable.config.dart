@@ -94,6 +94,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i578.ProductionPlatformService(),
       registerFor: {_integration_test, _midnight_test, _prod},
     );
+    await gh.lazySingletonAsync<_i977.AppService>(
+      () => _i977.ProductionAppService.create(),
+      registerFor: {_integration_test, _midnight_test, _prod},
+      preResolve: true,
+    );
     gh.lazySingleton<_i632.ChapterSplitSettingManager>(
       () => _i632.ChapterSplitSettingManager(gh<_i215.StoreService>()),
     );
@@ -119,11 +124,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i578.PlatformService>(),
         gh<_i1070.BibleReaders>(),
       ),
-    );
-    await gh.lazySingletonAsync<_i977.AppService>(
-      () => _i977.ProductionAppService.create(),
-      registerFor: {_prod},
-      preResolve: true,
     );
     gh.lazySingleton<_i326.DeepLinkService>(
       () => _i326.DeepLinkService(gh<_i942.ToastService>()),

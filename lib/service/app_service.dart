@@ -10,8 +10,8 @@ abstract class AppService {
   final String version;
 }
 
-// @integrationTest
-// @midnightTest
+@integrationTest
+@midnightTest
 @prod
 @LazySingleton(as: AppService)
 class ProductionAppService extends AppService {
