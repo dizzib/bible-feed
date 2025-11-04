@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 
 import 'deeplink_out_manager_test.mocks.dart';
 
+// base64 is non deterministic, so mock JsonEncodingManager
 @GenerateNiceMocks([MockSpec<JsonEncodingManager>(), MockSpec<SyncOutManager>()])
 void main() {
   group('DeepLinkOutManager', () {
