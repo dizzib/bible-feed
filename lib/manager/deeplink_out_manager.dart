@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 
+import '../view/_constants.dart';
 import 'sync_out_manager.dart';
 
 @singleton
@@ -11,7 +12,8 @@ class DeepLinkOutManager {
   String getUrl() {
     final json = _syncOutManager.getJson();
     final encodedJson = Uri.encodeComponent(json);
-    // scheme, host and path are defined in <intent-filter> in AndroidManifest.xml
-    return 'biblefeed://me2christ.com/share?json=$encodedJson';
+    // for android: scheme, host and path are defined in <intent-filter> in AndroidManifest.xml
+    // for ios: scheme is defined in Info.plist
+    return 'biblefeed://me2christ.com/share?${Constants.deeplinkQueryKey}=$encodedJson';
   }
 }

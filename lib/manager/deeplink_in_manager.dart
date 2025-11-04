@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
 
+import '../view/_constants.dart';
 import 'sync_in_manager.dart';
 
 @singleton
@@ -14,10 +15,11 @@ class DeepLinkInManager {
     AppLinks().uriLinkStream.listen(
       (uri) {
         try {
-          if (!uri.query.startsWith('json=')) {
-            throw Exception('Invalid querystring');
+          final queryStart = '${Constants.deeplinkQueryKey}=';
+          if (!uri.query.startsWith(queryStart)) {
+            throw Exception('Invalid querystring does not start with "$queryStart"');
           }
-          final value = uri.query.substring('json='.length);
+          final value = uri.query.substring(queryStart.length);
           Log.info(value);
           final decodedJson = Uri.decodeComponent(value);
           Log.info(decodedJson);
