@@ -29,7 +29,7 @@ void main() {
   });
 
   test('handleTap triggers haptic, toggles read, and launches reader', () async {
-    final feed = Feed(rl0, FeedState(book: b0));
+    final feed = Feed(rl0, FeedState(bookKey: b0.key));
     when(mockLinkManager.linkedBibleReader).thenReturn(blbBibleReader);
 
     await feedTapManager.handleTap(feed);

@@ -14,7 +14,6 @@ class FeedStateMapper extends ClassMapperBase<FeedState> {
   static FeedStateMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = FeedStateMapper._());
-      BookMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -22,11 +21,11 @@ class FeedStateMapper extends ClassMapperBase<FeedState> {
   @override
   final String id = 'FeedState';
 
-  static Book _$_book(FeedState v) => v._book;
-  static const Field<FeedState, Book> _f$_book = Field(
-    '_book',
-    _$_book,
-    key: r'book',
+  static String _$_bookKey(FeedState v) => v._bookKey;
+  static const Field<FeedState, String> _f$_bookKey = Field(
+    '_bookKey',
+    _$_bookKey,
+    key: r'bookKey',
   );
   static int _$_chapter(FeedState v) => v._chapter;
   static const Field<FeedState, int> _f$_chapter = Field(
@@ -59,10 +58,10 @@ class FeedStateMapper extends ClassMapperBase<FeedState> {
     key: r'dateModified',
     opt: true,
   );
-  static Book _$book(FeedState v) => v.book;
-  static const Field<FeedState, Book> _f$book = Field(
-    'book',
-    _$book,
+  static String _$bookKey(FeedState v) => v.bookKey;
+  static const Field<FeedState, String> _f$bookKey = Field(
+    'bookKey',
+    _$bookKey,
     mode: FieldMode.member,
   );
   static int _$chapter(FeedState v) => v.chapter;
@@ -92,12 +91,12 @@ class FeedStateMapper extends ClassMapperBase<FeedState> {
 
   @override
   final MappableFields<FeedState> fields = const {
-    #_book: _f$_book,
+    #_bookKey: _f$_bookKey,
     #_chapter: _f$_chapter,
     #_verse: _f$_verse,
     #_isRead: _f$_isRead,
     #_dateModified: _f$_dateModified,
-    #book: _f$book,
+    #bookKey: _f$bookKey,
     #chapter: _f$chapter,
     #dateModified: _f$dateModified,
     #isRead: _f$isRead,
@@ -106,7 +105,7 @@ class FeedStateMapper extends ClassMapperBase<FeedState> {
 
   static FeedState _instantiate(DecodingData data) {
     return FeedState(
-      book: data.dec(_f$_book),
+      bookKey: data.dec(_f$_bookKey),
       chapter: data.dec(_f$_chapter),
       verse: data.dec(_f$_verse),
       isRead: data.dec(_f$_isRead),
@@ -173,9 +172,8 @@ extension FeedStateValueCopy<$R, $Out> on ObjectCopyWith<$R, FeedState, $Out> {
 
 abstract class FeedStateCopyWith<$R, $In extends FeedState, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  BookCopyWith<$R, Book, Book> get _book;
   $R call({
-    Book? book,
+    String? bookKey,
     int? chapter,
     int? verse,
     bool? isRead,
@@ -193,18 +191,15 @@ class _FeedStateCopyWithImpl<$R, $Out>
   late final ClassMapperBase<FeedState> $mapper =
       FeedStateMapper.ensureInitialized();
   @override
-  BookCopyWith<$R, Book, Book> get _book =>
-      $value._book.copyWith.$chain((v) => call(book: v));
-  @override
   $R call({
-    Book? book,
+    String? bookKey,
     int? chapter,
     int? verse,
     bool? isRead,
     Object? dateModified = $none,
   }) => $apply(
     FieldCopyWithData({
-      if (book != null) #book: book,
+      if (bookKey != null) #bookKey: bookKey,
       if (chapter != null) #chapter: chapter,
       if (verse != null) #verse: verse,
       if (isRead != null) #isRead: isRead,
@@ -213,7 +208,7 @@ class _FeedStateCopyWithImpl<$R, $Out>
   );
   @override
   FeedState $make(CopyWithData data) => FeedState(
-    book: data.get(#book, or: $value._book),
+    bookKey: data.get(#bookKey, or: $value._bookKey),
     chapter: data.get(#chapter, or: $value._chapter),
     verse: data.get(#verse, or: $value._verse),
     isRead: data.get(#isRead, or: $value._isRead),

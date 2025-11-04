@@ -44,12 +44,12 @@ void main() {
     syncInManager.sync(syncOutManager.getJson());
     final state0 = outFeedsManager.feeds[0].state;
     final state1 = outFeedsManager.feeds[1].state;
-    expect(state0.book, b0);
+    expect(state0.bookKey, b0.key);
     expect(state0.chapter, 1);
     expect(state0.verse, 1);
     expect(state0.isRead, false);
     expect(state0.dateModified, null);
-    expect(state1.book, b1);
+    expect(state1.bookKey, b1.key);
     expect(state1.chapter, 3);
     expect(state1.verse, 5);
     expect(state1.isRead, true);

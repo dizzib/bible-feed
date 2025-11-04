@@ -16,13 +16,13 @@ class ChapterSplitter {
   }
 
   int getNextVerse(FeedState state) {
-    assert(state.book.key == bookKey);
+    assert(state.bookKey == bookKey);
     assert(state.chapter == chapter);
     return verses.elementAtOrNull(verses.indexOf(state.verse) + 1) ?? 1;
   }
 
   String getLabel(FeedState state) {
-    assert(state.book.key == bookKey);
+    assert(state.bookKey == bookKey);
     assert(state.chapter == chapter);
     final nextVerse = getNextVerse(state);
     if (state.verse == 1) return _toNonBreakingSpace('to_verse_${nextVerse - 1}');

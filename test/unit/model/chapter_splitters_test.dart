@@ -28,7 +28,7 @@ void main() {
       [b2, 1, null],
     ],
     (Book book, int chapter, ChapterSplitter? expectChapterSplitter) {
-      expect(testee.find(FeedState(book: book, chapter: chapter)), expectChapterSplitter);
+      expect(testee.find(FeedState(bookKey: book.key, chapter: chapter)), expectChapterSplitter);
     },
   );
 }

@@ -9,13 +9,13 @@ void main() async {
   late FeedState state;
 
   setUp(() {
-    state = FeedState(book: b1);
+    state = FeedState(bookKey: b1.key);
     testee = Feed(rl1, state);
   });
 
   group('property', () {
     test('book get', () {
-      expect(testee.state.book, b1);
+      expect(testee.book, b1);
     });
 
     test('bookIndex get', () {
@@ -47,7 +47,7 @@ void main() async {
     });
 
     test('state set', () {
-      final state0 = FeedState(book: b0);
+      final state0 = FeedState(bookKey: b0.key);
       testee.state = state0;
       expect(testee.state, state0);
     });
@@ -55,7 +55,7 @@ void main() async {
 
   group('method', () {
     void checkState(Book expectedBook, int expectedChapter, [int expectedVerse = 1]) {
-      expect(testee.state.book, expectedBook);
+      expect(testee.book, expectedBook);
       expect(testee.state.chapter, expectedChapter);
       expect(testee.state.verse, expectedVerse);
     }

@@ -3,11 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:ui' as _i6;
+import 'dart:ui' as _i7;
 
-import 'package:bible_feed/manager/feeds_manager.dart' as _i7;
+import 'package:bible_feed/manager/feeds_manager.dart' as _i8;
+import 'package:bible_feed/model/book.dart' as _i5;
 import 'package:bible_feed/model/feed.dart' as _i2;
-import 'package:bible_feed/model/reading_list.dart' as _i5;
+import 'package:bible_feed/model/reading_list.dart' as _i6;
 import 'package:bible_feed/service/app_service.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
@@ -71,6 +72,21 @@ class MockAppService extends _i1.Mock implements _i3.AppService {
 /// See the documentation for Mockito's code generation for more information.
 class MockFeed extends _i1.Mock implements _i2.Feed {
   @override
+  _i5.Book get book =>
+      (super.noSuchMethod(
+            Invocation.getter(#book),
+            returnValue: _i4.dummyValue<_i5.Book>(
+              this,
+              Invocation.getter(#book),
+            ),
+            returnValueForMissingStub: _i4.dummyValue<_i5.Book>(
+              this,
+              Invocation.getter(#book),
+            ),
+          )
+          as _i5.Book);
+
+  @override
   int get bookIndex =>
       (super.noSuchMethod(
             Invocation.getter(#bookIndex),
@@ -98,19 +114,19 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as double);
 
   @override
-  _i5.ReadingList get readingList =>
+  _i6.ReadingList get readingList =>
       (super.noSuchMethod(
             Invocation.getter(#readingList),
-            returnValue: _i4.dummyValue<_i5.ReadingList>(
+            returnValue: _i4.dummyValue<_i6.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
-            returnValueForMissingStub: _i4.dummyValue<_i5.ReadingList>(
+            returnValueForMissingStub: _i4.dummyValue<_i6.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
           )
-          as _i5.ReadingList);
+          as _i6.ReadingList);
 
   @override
   _i2.FeedState get state =>
@@ -153,13 +169,13 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
   );
 
   @override
-  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -180,7 +196,7 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
 /// A class which mocks [FeedsManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeedsManager extends _i1.Mock implements _i7.FeedsManager {
+class MockFeedsManager extends _i1.Mock implements _i8.FeedsManager {
   @override
   bool get areChaptersRead =>
       (super.noSuchMethod(
@@ -209,13 +225,13 @@ class MockFeedsManager extends _i1.Mock implements _i7.FeedsManager {
           as bool);
 
   @override
-  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );

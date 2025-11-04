@@ -24,7 +24,7 @@ void main() async {
   group('loadState', () {
     test('should load defaults if store is empty', () async {
       final state = testee.loadState(rl1);
-      expect(state.book, b0);
+      expect(state.bookKey, b0.key);
       expect(state.chapter, 1);
       expect(state.dateModified, null);
       expect(state.isRead, false);
@@ -38,7 +38,7 @@ void main() async {
       when(mockStoreService.getBool('rl1.isRead')).thenReturn(true);
       when(mockStoreService.getInt('rl1.verse')).thenReturn(3);
       final state = testee.loadState(rl1);
-      expect(state.book, b1);
+      expect(state.bookKey, b1.key);
       expect(state.chapter, 2);
       expect(state.dateModified, yesterday);
       expect(state.isRead, true);
@@ -48,7 +48,7 @@ void main() async {
 
   group('saveState', () {
     test('should save to store', () async {
-      await testee.saveState(rl1, FeedState(book: b1, chapter: 2, dateModified: yesterday, isRead: true, verse: 3));
+      await testee.saveState(rl1, FeedState(bookKey: b1.key, chapter: 2, dateModified: yesterday, isRead: true, verse: 3));
       verify(mockStoreService.setString('rl1.book', 'b1')).called(1);
       verify(mockStoreService.setInt('rl1.chapter', 2)).called(1);
       verify(mockStoreService.setString('rl1.dateModified', yesterday.toIso8601String())).called(1);

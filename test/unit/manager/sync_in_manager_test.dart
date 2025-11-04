@@ -32,7 +32,7 @@ void main() {
   });
 
   test('sync throws exception on mismatched build number', () {
-    final feedState = FeedState(book: b0, chapter: 1);
+    final feedState = FeedState(bookKey: b0.key, chapter: 1);
     final syncDto = SyncDto(buildNumber: 'wrong_build', feedStateList: [feedState]);
     final json = syncDto.toJson();
     when(mockAppService.buildNumber).thenReturn('correct_build');
@@ -40,8 +40,8 @@ void main() {
   });
 
   test('sync updates feed states on valid JSON with matching build number', () {
-    final feedState1 = FeedState(book: b0, chapter: 1);
-    final feedState2 = FeedState(book: b1, chapter: 2);
+    final feedState1 = FeedState(bookKey: b0.key, chapter: 1);
+    final feedState2 = FeedState(bookKey: b1.key, chapter: 2);
     final syncDto = SyncDto(buildNumber: 'correct_build', feedStateList: [feedState1, feedState2]);
     final json = syncDto.toJson();
     final mockFeed1 = MockFeed();

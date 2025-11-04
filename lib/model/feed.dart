@@ -14,7 +14,8 @@ class Feed with ChangeNotifier {
 
   Feed(this._readingList, this._state);
 
-  int get bookIndex => _readingList.indexOf(_state._book);
+  Book get book => _readingList.getBook(_state._bookKey);
+  int get bookIndex => _readingList.indexOf(book);
   int get chaptersRead => _state._chapter - (_state._isRead ? 0 : 1);
   double get progress => _readingList.progressTo(bookIndex, chaptersRead);
   ReadingList get readingList => _readingList;
@@ -27,7 +28,7 @@ class Feed with ChangeNotifier {
 
   void setBookChapterVerse(int bookIndex, int chapter, [int verse = 1]) {
     if (bookIndex == this.bookIndex && chapter == _state._chapter && verse == _state.verse) return;
-    _state._book = readingList[bookIndex];
+    _state._bookKey = readingList[bookIndex].key;
     _state._chapter = chapter;
     _state._verse = verse;
     _state._isRead = false;

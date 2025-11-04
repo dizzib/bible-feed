@@ -14,7 +14,7 @@ class ChapterSplitters extends BaseList<ChapterSplitter> {
   static const psalm119VerseList = [17, 33, 49, 65, 81, 97, 113, 129, 145, 161]; // used by unit test
 
   ChapterSplitter? find(FeedState state) =>
-      firstOrNullWhere((item) => item.bookKey == state.book.key && item.chapter == state.chapter);
+      firstOrNullWhere((item) => item.bookKey == state.bookKey && item.chapter == state.chapter);
 }
 
 @module

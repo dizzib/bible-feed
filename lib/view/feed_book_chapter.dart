@@ -22,7 +22,7 @@ class FeedBookChapter extends WatchingWidget {
         padding: Constants.defaultPadding,
         child: Center(
           child: AutoSizeText(
-            '${feed.state.book.name} ${feed.state.chapter} $chapterSplitLabel'.trim(),
+            '${feed.book.name} ${feed.state.chapter} $chapterSplitLabel'.trim(),
             maxLines: maxLines,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

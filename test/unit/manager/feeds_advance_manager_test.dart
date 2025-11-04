@@ -93,7 +93,7 @@ void main() async {
       when(mockDateTimeService.now).thenReturn(date);
       when(mockFeedsManager.areChaptersRead).thenReturn(areChaptersRead);
       when(mockFeedsManager.lastModifiedFeed).thenReturn(mockFeedList[0]);
-      when(mockFeedList[0].state).thenReturn(FeedState(book: b0, isRead: true, dateModified: date - sinceLastModified));
+      when(mockFeedList[0].state).thenReturn(FeedState(bookKey: b0.key, isRead: true, dateModified: date - sinceLastModified));
       expect(await testee.maybeAdvance(), expectedAdvanceState);
       verify();
     },

@@ -15,7 +15,7 @@ class FeedStoreManager {
     const defaultVerse = 1;
 
     return FeedState(
-      book: readingList.getBook(_storeService.getString('${readingList.key}.book') ?? readingList[0].key),
+      bookKey: _storeService.getString('${readingList.key}.book') ?? readingList[0].key,
       chapter: _storeService.getInt('${readingList.key}.chapter') ?? defaultChapter,
       verse: _storeService.getInt('${readingList.key}.verse') ?? defaultVerse,
       isRead: _storeService.getBool('${readingList.key}.isRead') ?? false,
@@ -24,7 +24,7 @@ class FeedStoreManager {
   }
 
   Future saveState(ReadingList readingList, FeedState state) async {
-    await _storeService.setString('${readingList.key}.book', state.book.key);
+    await _storeService.setString('${readingList.key}.book', state.bookKey);
     await _storeService.setInt('${readingList.key}.chapter', state.chapter);
     await _storeService.setInt('${readingList.key}.verse', state.verse);
     await _storeService.setBool('${readingList.key}.isRead', state.isRead);

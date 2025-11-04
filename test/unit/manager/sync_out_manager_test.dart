@@ -23,8 +23,8 @@ void main() {
   });
 
   test('getJson returns correct JSON string', () {
-    final feedState1 = FeedState(book: b0, chapter: 1);
-    final feedState2 = FeedState(book: b1, chapter: 2);
+    final feedState1 = FeedState(bookKey: b0.key, chapter: 1);
+    final feedState2 = FeedState(bookKey: b1.key, chapter: 2);
     final mockFeed1 = MockFeed();
     final mockFeed2 = MockFeed();
     when(mockAppService.buildNumber).thenReturn('123');

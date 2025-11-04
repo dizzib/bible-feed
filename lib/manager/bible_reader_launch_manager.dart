@@ -29,7 +29,7 @@ class BibleReaderLaunchManager {
 
   Future<void> maybeLaunch(BibleReader bibleReader, FeedState state) async {
     if (bibleReader.isNone || !state.isRead) return;
-    final url = _getDeeplinkUrl(bibleReader, state.book.key, state.chapter, state.verse);
+    final url = _getDeeplinkUrl(bibleReader, state.bookKey, state.chapter, state.verse);
     final success = await _urlLaunchService.launchUrl(url);
     if (!success) throw Exception('_urlLaunchService.launchUrl($url)');
   }

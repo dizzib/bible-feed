@@ -18,8 +18,8 @@ void main() async {
 
   setUp(() {
     mockFeedStoreManager = MockFeedStoreManager();
-    state0 = FeedState(book: b0, isRead: true, dateModified: DateTime(2025, 1, 1, 1));
-    state1 = FeedState(book: b1, dateModified: DateTime(2025, 1, 1, 2));
+    state0 = FeedState(bookKey: b0.key, isRead: true, dateModified: DateTime(2025, 1, 1, 1));
+    state1 = FeedState(bookKey: b1.key, dateModified: DateTime(2025, 1, 1, 2));
     when(mockFeedStoreManager.loadState(rl0)).thenReturn(state0);
     when(mockFeedStoreManager.loadState(rl1)).thenReturn(state1);
     testee = FeedsManager(mockFeedStoreManager, ReadingLists([rl0, rl1]));

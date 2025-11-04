@@ -17,7 +17,7 @@ void main() async {
   late FeedAdvanceManager testee;
 
   setUp(() {
-    state = FeedState(book: b1);
+    state = FeedState(bookKey: b1.key);
     feed = Feed(rl1, state);
     when(mockChapterSplitManager.getNextVerse(state)).thenReturn(1);
     testee = FeedAdvanceManager(mockChapterSplitManager);
@@ -46,7 +46,7 @@ void main() async {
   }
 
   void checkState(Book expectBook, int expectChapter, [int expectVerse = 1]) {
-    expect(state.book.key, expectBook.key);
+    expect(state.bookKey, expectBook.key);
     expect(state.chapter, expectChapter);
     expect(state.verse, expectVerse);
   }

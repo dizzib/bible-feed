@@ -15,7 +15,7 @@ void main() {
   final mockChapterSplitter = MockChapterSplitter();
   final mockChapterSplitters = MockChapterSplitters();
   final mockChapterSplitSettingManager = MockChapterSplitSettingManager();
-  final state = FeedState(book: b0);
+  final state = FeedState(bookKey: b0.key);
   late ChapterSplitManager testee;
 
   setUp(() {

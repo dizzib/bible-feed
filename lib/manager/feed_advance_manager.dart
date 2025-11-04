@@ -15,7 +15,7 @@ class FeedAdvanceManager {
     var bookIndex = feed.bookIndex;
     var chapter = state.chapter;
     final verse = _chapterSplitService.getNextVerse(state);
-    if (verse == 1 && ++chapter > state.book.chapterCount) {
+    if (verse == 1 && ++chapter > feed.book.chapterCount) {
       bookIndex = (feed.bookIndex + 1) % feed.readingList.length;
       chapter = 1;
     }
