@@ -46,6 +46,7 @@ build
 fastlane/report.xml
 
 # golden tests
+**/golden/failures/
 **/goldens/ci
 **/goldens/macos
 **/goldens/linux
