@@ -19,7 +19,7 @@ class Share extends StatelessWidget {
           spacing: Constants.defaultSpacing,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(textAlign: TextAlign.center, 'Scan this QR-code to share the reading state to another device.'),
+            const Text(textAlign: TextAlign.center, 'Scan this QR-code to share the reading state with another device.'),
             Flexible(
               child: Padding(
                 padding: Constants.defaultPadding,
