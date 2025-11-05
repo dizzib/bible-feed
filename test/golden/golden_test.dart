@@ -5,7 +5,7 @@ import 'package:bible_feed/manager/feed_store_manager.dart';
 import 'package:bible_feed/view/app.dart';
 import 'package:bible_feed/view/book_chapter_dialog.dart';
 import 'package:bible_feed/view/settings.dart';
-import 'package:bible_feed/view/sync.dart';
+import 'package:bible_feed/view/share.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -27,7 +27,7 @@ final scenarios = {
   'home': Scenario(App(), deviceConstraints),
   'book_chapter_dialog': Scenario(BookChapterDialog(Feed(epistles2, state)), dialogConstraints),
   'settings': Scenario(Settings(), deviceConstraints),
-  'sync': Scenario(Sync(), deviceConstraints),
+  'share': Scenario(Share(), deviceConstraints),
 };
 
 Future<void> main() async {

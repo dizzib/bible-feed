@@ -6,7 +6,7 @@ import '../manager/deeplink_out_manager.dart';
 import '_build_context_extension.dart';
 import '_constants.dart';
 
-class Sync extends StatelessWidget {
+class Share extends StatelessWidget {
   final maxWidth = 400.0;
   final heightRatio = 1.2;
   @override

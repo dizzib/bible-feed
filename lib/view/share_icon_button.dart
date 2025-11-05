@@ -4,17 +4,17 @@ import 'package:watch_it/watch_it.dart';
 import '../service/platform_service.dart';
 import '_build_context_extension.dart';
 import '_constants.dart';
-import 'sync.dart';
+import 'share.dart';
 
-class SyncIconButton extends StatelessWidget {
+class ShareIconButton extends StatelessWidget {
   @override
   build(BuildContext context) {
     final icon = sl<PlatformService>().isAndroid ? Icons.share : Icons.ios_share;
     return IconButton(
-      key: const Key('syncIconButton'), // for generate screenshots
+      key: const Key('shareIconButton'), // for generate screenshots
       icon: Icon(icon, size: Constants.appbarIconSize),
       tooltip: 'Share reading state',
-      onPressed: () => context.showDialogWithBlurBackground(Sync()),
+      onPressed: () => context.showDialogWithBlurBackground(Share()),
     );
   }
 }
