@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 
 
+## [1.8.0] - 2025-11-05
+
+### Changed
+- Feature: share reading state
+
+
 ## [1.7.0] - 2025-10-30
 
 ### Added
