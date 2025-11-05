@@ -21,8 +21,8 @@ class Share extends StatelessWidget {
           children: [
             const Text(textAlign: TextAlign.center, 'Scan this QR-code to share the reading state to another device.'),
             Flexible(
-              child: AspectRatio(
-                aspectRatio: 1,
+              child: Padding(
+                padding: Constants.defaultPadding,
                 child: PrettyQrView.data(
                   data: sl<DeepLinkOutManager>().getUrl(),
                   decoration: PrettyQrDecoration(
