@@ -28,8 +28,8 @@ import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
 import 'package:bible_feed/manager/haptic_setting_manager.dart' as _i274;
 import 'package:bible_feed/manager/haptic_wireup_manager.dart' as _i519;
 import 'package:bible_feed/manager/json_encoding_manager.dart' as _i508;
-import 'package:bible_feed/manager/sync_in_manager.dart' as _i837;
-import 'package:bible_feed/manager/sync_out_manager.dart' as _i30;
+import 'package:bible_feed/manager/share_in_manager.dart' as _i864;
+import 'package:bible_feed/manager/share_out_manager.dart' as _i175;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
 import 'package:bible_feed/model/bible_readers.dart' as _i1070;
 import 'package:bible_feed/model/chapter_splitter.dart' as _i19;
@@ -188,13 +188,25 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i632.ChapterSplitSettingManager>(),
       ),
     );
-    gh.lazySingleton<_i837.SyncInManager>(
-      () =>
-          _i837.SyncInManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
+    gh.lazySingleton<_i864.ShareInManager>(
+      () => _i864.ShareInManager(
+        gh<_i977.AppService>(),
+        gh<_i127.FeedsManager>(),
+      ),
     );
-    gh.lazySingleton<_i30.SyncOutManager>(
-      () =>
-          _i30.SyncOutManager(gh<_i977.AppService>(), gh<_i127.FeedsManager>()),
+    gh.lazySingleton<_i175.ShareOutManager>(
+      () => _i175.ShareOutManager(
+        gh<_i977.AppService>(),
+        gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.singleton<_i468.DeepLinkInManager>(
+      () => _i468.DeepLinkInManager(
+        gh<_i326.DeepLinkService>(),
+        gh<_i508.JsonEncodingManager>(),
+        gh<_i864.ShareInManager>(),
+        gh<_i942.ToastService>(),
+      ),
     );
     gh.singleton<_i519.HapticWireupManager>(
       () => _i519.HapticWireupManager(
@@ -213,16 +225,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i22.HapticService>(),
       ),
     );
-    gh.singleton<_i468.DeepLinkInManager>(
-      () => _i468.DeepLinkInManager(
-        gh<_i326.DeepLinkService>(),
-        gh<_i508.JsonEncodingManager>(),
-        gh<_i837.SyncInManager>(),
-        gh<_i942.ToastService>(),
-      ),
-    );
     gh.lazySingleton<_i716.FeedAdvanceManager>(
       () => _i716.FeedAdvanceManager(gh<_i10.ChapterSplitManager>()),
+    );
+    gh.singleton<_i768.DeepLinkOutManager>(
+      () => _i768.DeepLinkOutManager(
+        gh<_i508.JsonEncodingManager>(),
+        gh<_i175.ShareOutManager>(),
+      ),
     );
     gh.lazySingleton<_i477.FeedsAdvanceManager>(
       () => _i477.FeedsAdvanceManager(
@@ -230,12 +240,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i215.StoreService>(),
         gh<_i716.FeedAdvanceManager>(),
         gh<_i127.FeedsManager>(),
-      ),
-    );
-    gh.singleton<_i768.DeepLinkOutManager>(
-      () => _i768.DeepLinkOutManager(
-        gh<_i508.JsonEncodingManager>(),
-        gh<_i30.SyncOutManager>(),
       ),
     );
     gh.singleton<_i111.AutoAdvanceManager>(

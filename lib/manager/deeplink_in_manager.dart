@@ -4,16 +4,16 @@ import '../service/deeplink_service.dart';
 import '../service/toast_service.dart';
 import '../view/_constants.dart';
 import 'json_encoding_manager.dart';
-import 'sync_in_manager.dart';
+import 'share_in_manager.dart';
 
 @singleton
 class DeepLinkInManager {
   final DeepLinkService _deepLinkService;
   final JsonEncodingManager _jsonEncodingManager;
-  final SyncInManager _syncInManager;
+  final ShareInManager _shareInManager;
   final ToastService _toastService;
 
-  DeepLinkInManager(this._deepLinkService, this._jsonEncodingManager, this._syncInManager, this._toastService) {
+  DeepLinkInManager(this._deepLinkService, this._jsonEncodingManager, this._shareInManager, this._toastService) {
     _deepLinkService.addListener(() {
       try {
         final queryKey = Constants.deeplinkQueryKey;
@@ -23,7 +23,7 @@ class DeepLinkInManager {
         }
         final queryValue = uri.query.substring(queryKey.length + 1); // ignore: avoid-substring, no emojis
         final decodedJson = _jsonEncodingManager.decode(queryValue);
-        _syncInManager.sync(decodedJson);
+        _shareInManager.sync(decodedJson);
         _toastService.showOk('Success!');
       } catch (err) {
         _toastService.showError(err.toString());

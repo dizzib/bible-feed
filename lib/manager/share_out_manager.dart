@@ -5,11 +5,11 @@ import '../service/app_service.dart';
 import 'feeds_manager.dart';
 
 @lazySingleton
-class SyncOutManager {
+class ShareOutManager {
   final AppService _appService;
   final FeedsManager _feedsManager;
 
-  SyncOutManager(this._appService, this._feedsManager);
+  ShareOutManager(this._appService, this._feedsManager);
 
   String getJson() {
     final feedStateList = _feedsManager.feeds.map((f) => f.state).toList();

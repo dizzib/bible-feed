@@ -5,11 +5,11 @@ import '../service/app_service.dart';
 import 'feeds_manager.dart';
 
 @lazySingleton
-class SyncInManager {
+class ShareInManager {
   final AppService _appService;
   final FeedsManager _feedsManager;
 
-  SyncInManager(this._appService, this._feedsManager);
+  ShareInManager(this._appService, this._feedsManager);
 
   void sync(String? json) {
     const help = 'Please ensure you are scanning a Bible Feed QR-code.';

@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:ui' as _i3;
 
-import 'package:bible_feed/manager/sync_in_manager.dart' as _i4;
+import 'package:bible_feed/manager/share_in_manager.dart' as _i4;
 import 'package:bible_feed/service/deeplink_service.dart' as _i2;
 import 'package:bible_feed/service/toast_service.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -85,10 +85,10 @@ class MockDeepLinkService extends _i1.Mock implements _i2.DeepLinkService {
   );
 }
 
-/// A class which mocks [SyncInManager].
+/// A class which mocks [ShareInManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSyncInManager extends _i1.Mock implements _i4.SyncInManager {
+class MockShareInManager extends _i1.Mock implements _i4.ShareInManager {
   @override
   void sync(String? json) => super.noSuchMethod(
     Invocation.method(#sync, [json]),

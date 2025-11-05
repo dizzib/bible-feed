@@ -4,7 +4,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/manager/json_encoding_manager.dart' as _i2;
-import 'package:bible_feed/manager/sync_out_manager.dart' as _i4;
+import 'package:bible_feed/manager/share_out_manager.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
 
@@ -58,10 +58,10 @@ class MockJsonEncodingManager extends _i1.Mock
           as String);
 }
 
-/// A class which mocks [SyncOutManager].
+/// A class which mocks [ShareOutManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSyncOutManager extends _i1.Mock implements _i4.SyncOutManager {
+class MockShareOutManager extends _i1.Mock implements _i4.ShareOutManager {
   @override
   String getJson() =>
       (super.noSuchMethod(

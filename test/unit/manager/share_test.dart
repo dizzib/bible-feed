@@ -1,7 +1,7 @@
 import 'package:bible_feed/manager/feed_store_manager.dart';
 import 'package:bible_feed/manager/feeds_manager.dart';
-import 'package:bible_feed/manager/sync_in_manager.dart';
-import 'package:bible_feed/manager/sync_out_manager.dart';
+import 'package:bible_feed/manager/share_in_manager.dart';
+import 'package:bible_feed/manager/share_out_manager.dart';
 import 'package:bible_feed/model/reading_lists.dart';
 import 'package:bible_feed/service/app_service.dart';
 import 'package:bible_feed/service/store_service.dart';
@@ -10,7 +10,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../test_data.dart';
-import 'sync_test.mocks.dart';
+import 'share_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AppService>(), MockSpec<StoreService>()])
 void main() {
@@ -21,8 +21,8 @@ void main() {
   late MockStoreService mockOutStoreService;
   late FeedsManager inFeedsManager;
   late FeedsManager outFeedsManager;
-  late SyncInManager syncInManager;
-  late SyncOutManager syncOutManager;
+  late ShareInManager shareInManager;
+  late ShareOutManager shareOutManager;
 
   setUp(() {
     mockAppService = MockAppService();
@@ -39,9 +39,9 @@ void main() {
     when(mockAppService.buildNumber).thenReturn('123');
     inFeedsManager = FeedsManager(FeedStoreManager(mockInStoreService), readingLists);
     outFeedsManager = FeedsManager(FeedStoreManager(mockOutStoreService), readingLists);
-    syncInManager = SyncInManager(mockAppService, inFeedsManager);
-    syncOutManager = SyncOutManager(mockAppService, outFeedsManager);
-    syncInManager.sync(syncOutManager.getJson());
+    shareInManager = ShareInManager(mockAppService, inFeedsManager);
+    shareOutManager = ShareOutManager(mockAppService, outFeedsManager);
+    shareInManager.sync(shareOutManager.getJson());
     final state0 = outFeedsManager.feeds[0].state;
     final state1 = outFeedsManager.feeds[1].state;
     expect(state0.bookKey, b0.key);

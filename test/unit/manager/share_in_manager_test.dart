@@ -1,5 +1,5 @@
 import 'package:bible_feed/manager/feeds_manager.dart';
-import 'package:bible_feed/manager/sync_in_manager.dart';
+import 'package:bible_feed/manager/share_in_manager.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/share_dto.dart';
 import 'package:bible_feed/service/app_service.dart';
@@ -8,18 +8,18 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../test_data.dart';
-import 'sync_in_manager_test.mocks.dart';
+import 'share_in_manager_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AppService>(), MockSpec<Feed>(), MockSpec<FeedsManager>()])
 void main() {
   late MockAppService mockAppService;
   late MockFeedsManager mockFeedsManager;
-  late SyncInManager testee;
+  late ShareInManager testee;
 
   setUp(() {
     mockAppService = MockAppService();
     mockFeedsManager = MockFeedsManager();
-    testee = SyncInManager(mockAppService, mockFeedsManager);
+    testee = ShareInManager(mockAppService, mockFeedsManager);
   });
 
   test('sync throws exception on null or empty JSON', () {
