@@ -1,4 +1,4 @@
-This app helps you keep track of your daily bible reading if you are using the Professor Grant Horner reading plan.
+This app helps you keep track of your daily bible reading if you are using the professor Grant Horner reading system.
 
 It removes the need for a printed sheet of paper or physical bookmarks.
 
