@@ -28,6 +28,7 @@ import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
 import 'package:bible_feed/manager/haptic_setting_manager.dart' as _i274;
 import 'package:bible_feed/manager/haptic_wireup_manager.dart' as _i519;
 import 'package:bible_feed/manager/json_encoding_manager.dart' as _i508;
+import 'package:bible_feed/manager/midnight_manager.dart' as _i438;
 import 'package:bible_feed/manager/share_in_manager.dart' as _i864;
 import 'package:bible_feed/manager/share_out_manager.dart' as _i175;
 import 'package:bible_feed/model/bible_reader.dart' as _i270;
@@ -153,6 +154,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i571.FeedStoreManager>(
       () => _i571.FeedStoreManager(gh<_i215.StoreService>()),
     );
+    gh.singleton<_i438.MidnightManager>(
+      () => _i438.MidnightManager(gh<_i99.DateTimeService>()),
+    );
     gh.lazySingleton<_i567.BibleReaderLinkManager>(
       () => _i567.BibleReaderLinkManager(
         gh<_i215.StoreService>(),
@@ -242,10 +246,10 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i127.FeedsManager>(),
       ),
     );
-    gh.singleton<_i111.AutoAdvanceManager>(
+    gh.lazySingleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(
-        gh<_i99.DateTimeService>(),
         gh<_i477.FeedsAdvanceManager>(),
+        gh<_i438.MidnightManager>(),
       ),
     );
     gh.lazySingleton<_i541.AllDoneDialogManager>(
