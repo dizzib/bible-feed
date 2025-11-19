@@ -11,10 +11,12 @@ class AutoAdvanceManager with ChangeNotifier {
   final MidnightManager _midnightManager;
 
   AutoAdvanceManager(this._feedsAdvanceManager, this._midnightManager) {
+    // ignore: avoid-passing-async-when-sync-expected, ignore return value
     AppLifecycleListener(onResume: _feedsAdvanceManager.maybeAdvance);
 
     _feedsAdvanceManager.maybeAdvance();
 
+    // ignore: avoid-passing-async-when-sync-expected, must test async return value
     _midnightManager.addListener(() async {
       if (await _feedsAdvanceManager.maybeAdvance() == FeedsAdvanceState.listsAdvanced) {
         notifyListeners();
