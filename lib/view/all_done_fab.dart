@@ -5,6 +5,7 @@ import '../manager/all_done_dialog_manager.dart';
 import '../manager/feeds_manager.dart';
 import '_build_context_extension.dart';
 import 'all_done_dialog.dart';
+import 'animated_fab.dart';
 
 class AllDoneFab extends WatchingWidget {
   @override
@@ -18,16 +19,12 @@ class AllDoneFab extends WatchingWidget {
 
     if (sl<AllDoneDialogManager>().isAutoShow) Future(showAllDoneDialog);
 
-    return AnimatedScale(
-      duration: const Duration(milliseconds: 200),
-      scale: feedsManager.areChaptersRead ? 1 : 0,
-      child: FloatingActionButton(
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.white,
-        onPressed: showAllDoneDialog,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.done, size: 35),
-      ),
+    return AnimatedFab(
+      backgroundColor: Colors.green,
+      foregroundColor: Colors.white,
+      iconData: Icons.done,
+      isVisible: feedsManager.areChaptersRead,
+      onPressed: showAllDoneDialog,
     );
   }
 }
