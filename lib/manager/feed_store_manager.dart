@@ -19,7 +19,7 @@ class FeedStoreManager {
       chapter: _storeService.getInt('${readingList.key}.chapter') ?? defaultChapter,
       verse: _storeService.getInt('${readingList.key}.verse') ?? defaultVerse,
       isRead: _storeService.getBool('${readingList.key}.isRead') ?? false,
-      dateModified: DateTime.tryParse(_storeService.getString('${readingList.key}.dateModified') ?? ''),
+      dateModified: _storeService.getDateTime('${readingList.key}.dateModified'),
     );
   }
 
@@ -28,6 +28,6 @@ class FeedStoreManager {
     await _storeService.setInt('${readingList.key}.chapter', state.chapter);
     await _storeService.setInt('${readingList.key}.verse', state.verse);
     await _storeService.setBool('${readingList.key}.isRead', state.isRead);
-    await _storeService.setString('${readingList.key}.dateModified', state.dateModified?.toIso8601String() ?? '');
+    await _storeService.setDateTime('${readingList.key}.dateModified', state.dateModified);
   }
 }

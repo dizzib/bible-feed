@@ -31,7 +31,7 @@ void main() {
   });
 
   test('sync-out sync-in interaction: should transfer across', () {
-    when(mockOutStoreService.getString('rl1.dateModified')).thenReturn(dateModified.toIso8601String());
+    when(mockOutStoreService.getDateTime('rl1.dateModified')).thenReturn(dateModified);
     when(mockOutStoreService.getString('rl1.book')).thenReturn('b1');
     when(mockOutStoreService.getInt('rl1.chapter')).thenReturn(3);
     when(mockOutStoreService.getInt('rl1.verse')).thenReturn(5);

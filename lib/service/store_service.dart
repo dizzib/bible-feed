@@ -24,7 +24,8 @@ class StoreService {
   String? getString(String key) => _sharedPreferences.getString(key);
 
   Future<bool> setBool(String key, bool value) => _sharedPreferences.setBool(key, value);
-  Future<bool> setDateTime(String key, DateTime value) => _sharedPreferences.setString(key, value.toIso8601String());
+  Future<bool> setDateTime(String key, DateTime? value) =>
+      _sharedPreferences.setString(key, value?.toIso8601String() ?? '');
   Future<bool> setDouble(String key, double value) => _sharedPreferences.setDouble(key, value);
   Future<bool> setInt(String key, int value) => _sharedPreferences.setInt(key, value);
   Future<bool> setString(String key, String value) => _sharedPreferences.setString(key, value);
