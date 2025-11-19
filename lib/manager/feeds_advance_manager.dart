@@ -18,8 +18,8 @@ class FeedsAdvanceManager {
 
   static const _lastAdvanceDateStoreKey = 'lastAdvanceDate';
 
-  bool get hasEverAdvanced => lastAdvanceDateTime != null;
-  DateTime? get lastAdvanceDateTime => _storeService.getDateTime(_lastAdvanceDateStoreKey);
+  bool get hasEverAdvanced => lastAdvanceDate != null;
+  DateTime? get lastAdvanceDate => _storeService.getDateTime(_lastAdvanceDateStoreKey);
 
   Future<FeedsAdvanceState> advance() async {
     for (Feed f in _feedsManager.feeds) {

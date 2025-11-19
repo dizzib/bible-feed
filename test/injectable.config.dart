@@ -92,7 +92,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
-    gh.lazySingleton<_i67.DaysBehindManager>(() => _i67.DaysBehindManager());
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_golden, _integration_test, _prod},
@@ -239,6 +238,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i186.BibleReaderLaunchManager>(),
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i516.PlatformEventService>(),
+      ),
+    );
+    gh.lazySingleton<_i67.DaysBehindManager>(
+      () => _i67.DaysBehindManager(
+        gh<_i99.DateTimeService>(),
+        gh<_i477.FeedsAdvanceManager>(),
       ),
     );
     gh.singleton<_i519.HapticWireupManager>(
