@@ -25,7 +25,7 @@ class FeedsAdvanceManager {
       _feedAdvanceManager.advance(f);
     }
     await _storeService.setBool(_hasEverAdvancedStoreKey, true);
-    return Future.value(FeedsAdvanceState.listsAdvanced);
+    return FeedsAdvanceState.listsAdvanced;
   }
 
   Future<FeedsAdvanceState> maybeAdvance() async {
@@ -40,6 +40,6 @@ class FeedsAdvanceManager {
       lastDateModified.day,
     );
     if (lastMidnightOfNow.isAfter(lastMidnightOfLastDateModified)) return advance();
-    return Future.value(FeedsAdvanceState.allReadAwaitingTomorrow);
+    return FeedsAdvanceState.allReadAwaitingTomorrow;
   }
 }
