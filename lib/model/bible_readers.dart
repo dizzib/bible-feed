@@ -91,6 +91,15 @@ abstract class BibleReadersModule {
       urlVersePath: '.VERSE',
     ),
     BibleReader(
+      key: BibleReaderKey.openBibleApp,
+      type: BibleReaderType.app,
+      name: 'OpenBible',
+      urlTemplate: UrlTemplate('openbible://BOOK/CHAPTER'),
+      certifiedPlatforms: const [TargetPlatform.android],
+      bookKeyExternaliser: BookKeyExternaliser.openBible,
+      urlVersePath: '/VERSE',
+    ),
+    BibleReader(
       key: BibleReaderKey.weDevoteApp,
       type: BibleReaderType.app,
       name: 'WeDevote',

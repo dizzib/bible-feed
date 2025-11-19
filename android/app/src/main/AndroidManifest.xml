@@ -59,6 +59,7 @@
         <package android:name="org.blueletterbible.blb" />
         <package android:name="com.logos.androidlogos" />
         <package android:name="biblereader.olivetree" />
+        <package android:name="com.schwegelbin.openbible" />
         <package android:name="com.sirma.mobile.bible.android" />
     </queries>
 </manifest>

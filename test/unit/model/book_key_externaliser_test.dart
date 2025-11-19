@@ -55,4 +55,6 @@ void main() {
   });
 
   runTest(BookKeyExternaliser.oliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
+
+  runTest(BookKeyExternaliser.openBible, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
 }
