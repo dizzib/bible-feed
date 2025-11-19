@@ -265,18 +265,18 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i175.ShareOutManager>(),
       ),
     );
-    gh.lazySingleton<_i541.AllDoneDialogManager>(
-      () => _i541.AllDoneDialogManager(
-        gh<_i477.FeedsAdvanceManager>(),
-        gh<_i127.FeedsManager>(),
-      ),
-    );
     gh.lazySingleton<_i67.DaysBehindManager>(
       () => _i67.DaysBehindManager(
         gh<_i545.AllDoneManager>(),
         gh<_i99.DateTimeService>(),
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i215.StoreService>(),
+      ),
+    );
+    gh.lazySingleton<_i541.AllDoneDialogManager>(
+      () => _i541.AllDoneDialogManager(
+        gh<_i545.AllDoneManager>(),
+        gh<_i477.FeedsAdvanceManager>(),
       ),
     );
     gh.lazySingleton<_i111.AutoAdvanceManager>(
