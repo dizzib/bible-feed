@@ -14,6 +14,7 @@ class AllDoneFab extends WatchingWidget {
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
       iconData: Icons.done,
+      keyValue: 'all_done_fab',
       isVisible: feedsManager.areChaptersRead,
       onPressed: sl<AllDoneDialogManager>().show,
     );

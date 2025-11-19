@@ -11,12 +11,12 @@ Future runEndToEndTest() async {
     await t.tapAllLists();
     await t.tapNo();
     expectChapters(1);
-    await t.tapFab();
+    await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(2);
     await t.tapAllLists();
     expectNoText('All done!'); // 2nd time
-    await t.tapFab();
+    await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(3);
     await t.tapIconButton('gos');

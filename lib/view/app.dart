@@ -5,6 +5,7 @@ import '../manager/auto_advance_manager.dart';
 import 'all_done_dialog.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
+import 'days_behind_fab.dart';
 import 'feeds.dart';
 import 'settings_icon_button.dart';
 
@@ -17,7 +18,7 @@ class App extends WatchingWidget {
     return LayoutBuilder(
       builder: (_, BoxConstraints bc) {
         final isShowAppBar = bc.maxHeight > 360;
-        final allDoneFabSize = bc.maxHeight < 260 ? 44.0 : null;
+        final fabSize = bc.maxHeight < 260 ? 44.0 : null;
 
         return Scaffold(
           appBar: isShowAppBar ? AppBarMain() : null,
@@ -25,7 +26,13 @@ class App extends WatchingWidget {
           bottomSheet: AllDoneDialog(), // invisible
           floatingActionButton: Visibility(
             visible: !isShowAppBar,
-            child: Stack(children: [SettingsIconButton(), SizedBox(height: allDoneFabSize, child: AllDoneFab())]),
+            child: Stack(
+              children: [
+                SettingsIconButton(),
+                SizedBox(height: fabSize, child: DaysBehindFab()),
+                SizedBox(height: fabSize, child: AllDoneFab()),
+              ],
+            ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
         );

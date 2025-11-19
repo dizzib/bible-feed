@@ -5,6 +5,7 @@ class AnimatedFab extends StatelessWidget {
   final Color foregroundColor;
   final IconData iconData;
   final bool isVisible;
+  final String keyValue;
   final Function() onPressed;
 
   const AnimatedFab({
@@ -12,6 +13,7 @@ class AnimatedFab extends StatelessWidget {
     required this.foregroundColor,
     required this.iconData,
     required this.isVisible,
+    required this.keyValue,
     required this.onPressed,
   });
 
@@ -25,6 +27,7 @@ class AnimatedFab extends StatelessWidget {
       child: FloatingActionButton(
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
+        key: Key(keyValue),
         onPressed: onPressed,
         shape: const CircleBorder(),
         child: Icon(iconData, size: fabSize),

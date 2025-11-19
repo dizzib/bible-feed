@@ -44,6 +44,11 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
+  Future tapAllDoneFab() async {
+    await tap(find.byKey(const Key('all_done_fab')));
+    await pumpAndSettle();
+  }
+
   Future tapFab() async {
     await tap(find.byType(FloatingActionButton));
     await pumpAndSettle();
