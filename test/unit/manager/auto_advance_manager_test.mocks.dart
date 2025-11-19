@@ -4,10 +4,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
-import 'dart:ui' as _i6;
+import 'dart:ui' as _i5;
 
 import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i2;
-import 'package:bible_feed/manager/midnight_manager.dart' as _i5;
+import 'package:bible_feed/manager/midnight_manager.dart' as _i6;
 import 'package:bible_feed/model/feeds_advance_state.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -40,6 +40,15 @@ class MockFeedsAdvanceManager extends _i1.Mock
           as bool);
 
   @override
+  bool get hasListeners =>
+      (super.noSuchMethod(
+            Invocation.getter(#hasListeners),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i3.Future<_i4.FeedsAdvanceState> advance() =>
       (super.noSuchMethod(
             Invocation.method(#advance, []),
@@ -64,12 +73,36 @@ class MockFeedsAdvanceManager extends _i1.Mock
             ),
           )
           as _i3.Future<_i4.FeedsAdvanceState>);
+
+  @override
+  void addListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+    Invocation.method(#addListener, [listener]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void removeListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+    Invocation.method(#removeListener, [listener]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void dispose() => super.noSuchMethod(
+    Invocation.method(#dispose, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+    Invocation.method(#notifyListeners, []),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [MidnightManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMidnightManager extends _i1.Mock implements _i5.MidnightManager {
+class MockMidnightManager extends _i1.Mock implements _i6.MidnightManager {
   @override
   bool get hasListeners =>
       (super.noSuchMethod(
@@ -80,13 +113,13 @@ class MockMidnightManager extends _i1.Mock implements _i5.MidnightManager {
           as bool);
 
   @override
-  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i5.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i5.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );

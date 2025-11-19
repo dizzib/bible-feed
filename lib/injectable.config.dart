@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/manager/all_done_dialog_manager.dart' as _i541;
+import 'package:bible_feed/manager/all_done_manager.dart' as _i545;
 import 'package:bible_feed/manager/app_install_manager.dart' as _i610;
 import 'package:bible_feed/manager/auto_advance_manager.dart' as _i111;
 import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
@@ -184,18 +185,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i823.ReadingLists>(),
       ),
     );
-    gh.lazySingleton<_i477.FeedsAdvanceManager>(
-      () => _i477.FeedsAdvanceManager(
+    gh.lazySingleton<_i545.AllDoneManager>(
+      () => _i545.AllDoneManager(
         gh<_i99.DateTimeService>(),
-        gh<_i215.StoreService>(),
-        gh<_i716.FeedAdvanceManager>(),
         gh<_i127.FeedsManager>(),
-      ),
-    );
-    gh.lazySingleton<_i111.AutoAdvanceManager>(
-      () => _i111.AutoAdvanceManager(
-        gh<_i477.FeedsAdvanceManager>(),
-        gh<_i438.MidnightManager>(),
+        gh<_i215.StoreService>(),
       ),
     );
     gh.lazySingleton<_i864.ShareInManager>(
@@ -218,10 +212,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i942.ToastService>(),
       ),
     );
-    gh.lazySingleton<_i67.DaysBehindManager>(
-      () => _i67.DaysBehindManager(
+    gh.lazySingleton<_i477.FeedsAdvanceManager>(
+      () => _i477.FeedsAdvanceManager(
         gh<_i99.DateTimeService>(),
-        gh<_i477.FeedsAdvanceManager>(),
+        gh<_i716.FeedAdvanceManager>(),
+        gh<_i127.FeedsManager>(),
+        gh<_i215.StoreService>(),
       ),
     );
     gh.singleton<_i519.HapticWireupManager>(
@@ -251,6 +247,20 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i541.AllDoneDialogManager(
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.lazySingleton<_i67.DaysBehindManager>(
+      () => _i67.DaysBehindManager(
+        gh<_i545.AllDoneManager>(),
+        gh<_i99.DateTimeService>(),
+        gh<_i477.FeedsAdvanceManager>(),
+        gh<_i215.StoreService>(),
+      ),
+    );
+    gh.lazySingleton<_i111.AutoAdvanceManager>(
+      () => _i111.AutoAdvanceManager(
+        gh<_i477.FeedsAdvanceManager>(),
+        gh<_i438.MidnightManager>(),
       ),
     );
     return this;

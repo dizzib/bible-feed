@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/feed.dart';
@@ -8,13 +9,13 @@ import 'feed_advance_manager.dart';
 import 'feeds_manager.dart';
 
 @lazySingleton
-class FeedsAdvanceManager {
+class FeedsAdvanceManager with ChangeNotifier {
   final DateTimeService _dateTimeService;
-  final StoreService _storeService;
   final FeedAdvanceManager _feedAdvanceManager;
   final FeedsManager _feedsManager;
+  final StoreService _storeService;
 
-  FeedsAdvanceManager(this._dateTimeService, this._storeService, this._feedAdvanceManager, this._feedsManager);
+  FeedsAdvanceManager(this._dateTimeService, this._feedAdvanceManager, this._feedsManager, this._storeService);
 
   static const _lastAdvanceDateStoreKey = 'lastAdvanceDate';
 
@@ -26,6 +27,7 @@ class FeedsAdvanceManager {
       _feedAdvanceManager.advance(f);
     }
     await _storeService.setDateTime(_lastAdvanceDateStoreKey, _dateTimeService.now);
+    notifyListeners();
     return FeedsAdvanceState.listsAdvanced;
   }
 
