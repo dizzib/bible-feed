@@ -1,17 +1,25 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import 'feeds_advance_manager.dart';
 import 'feeds_manager.dart';
 
 @lazySingleton
-class AllDoneDialogManager {
+class AllDoneDialogManager with ChangeNotifier {
   final FeedsManager _feedsManager;
   final FeedsAdvanceManager _feedsAdvanceManager;
 
-  AllDoneDialogManager(this._feedsAdvanceManager, this._feedsManager);
+  AllDoneDialogManager(this._feedsAdvanceManager, this._feedsManager) {
+    _feedsManager.addListener(() {
+      // For onboarding, auto-show dialog only the first time all chapters are read.
+      if (_feedsManager.areChaptersRead && !_feedsAdvanceManager.hasEverAdvanced && !_hasShown) show();
+    });
+  }
 
-  bool hasShown = false;
+  bool _hasShown = false;
 
-  // For onboarding, auto-show dialog only the first time all chapters are read.
-  bool get isAutoShow => _feedsManager.areChaptersRead && !_feedsAdvanceManager.hasEverAdvanced && !hasShown;
+  void show() {
+    notifyListeners();
+    _hasShown = true;
+  }
 }

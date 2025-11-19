@@ -17,6 +17,8 @@ class AnimatedFab extends StatelessWidget {
 
   @override
   build(context) {
+    const fabSize = 35.0;
+
     return AnimatedScale(
       duration: const Duration(milliseconds: 200),
       scale: isVisible ? 1 : 0,
@@ -25,7 +27,7 @@ class AnimatedFab extends StatelessWidget {
         foregroundColor: foregroundColor,
         onPressed: onPressed,
         shape: const CircleBorder(),
-        child: Icon(iconData, size: 35),
+        child: Icon(iconData, size: fabSize),
       ),
     );
   }
