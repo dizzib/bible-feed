@@ -16,15 +16,16 @@ class FeedsAdvanceManager {
 
   FeedsAdvanceManager(this._dateTimeService, this._storeService, this._feedAdvanceManager, this._feedsManager);
 
-  static const _hasEverAdvancedStoreKey = 'hasEverAdvanced';
+  static const _lastAdvanceDateStoreKey = 'lastAdvanceDate';
 
-  bool get hasEverAdvanced => _storeService.getBool(_hasEverAdvancedStoreKey) ?? false;
+  bool get hasEverAdvanced => lastAdvanceDateTime != null;
+  DateTime? get lastAdvanceDateTime => _storeService.getDateTime(_lastAdvanceDateStoreKey);
 
   Future<FeedsAdvanceState> advance() async {
     for (Feed f in _feedsManager.feeds) {
       _feedAdvanceManager.advance(f);
     }
-    await _storeService.setBool(_hasEverAdvancedStoreKey, true);
+    await _storeService.setDateTime(_lastAdvanceDateStoreKey, _dateTimeService.now);
     return FeedsAdvanceState.listsAdvanced;
   }
 

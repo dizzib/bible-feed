@@ -72,6 +72,14 @@ class MockStoreService extends _i1.Mock implements _i4.StoreService {
           as bool?);
 
   @override
+  DateTime? getDateTime(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#getDateTime, [key]),
+            returnValueForMissingStub: null,
+          )
+          as DateTime?);
+
+  @override
   double? getDouble(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#getDouble, [key]),
@@ -99,6 +107,15 @@ class MockStoreService extends _i1.Mock implements _i4.StoreService {
   _i5.Future<bool> setBool(String? key, bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setBool, [key, value]),
+            returnValue: _i5.Future<bool>.value(false),
+            returnValueForMissingStub: _i5.Future<bool>.value(false),
+          )
+          as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> setDateTime(String? key, DateTime? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setDateTime, [key, value]),
             returnValue: _i5.Future<bool>.value(false),
             returnValueForMissingStub: _i5.Future<bool>.value(false),
           )

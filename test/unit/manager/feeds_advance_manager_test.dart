@@ -54,10 +54,12 @@ void main() async {
     expect(testee.hasEverAdvanced, false);
   });
 
-  test('advance should advance all feeds and store hasEverAdvanced as true', () async {
+  test('advance should advance all feeds and store lastAdvanceDate as now', () async {
+    final now = DateTime.now();
+    when(mockDateTimeService.now).thenReturn(now);
     expect(await testee.advance(), FeedsAdvanceState.listsAdvanced);
     verifyAllAdvanced();
-    verify(mockStoreService.setBool('hasEverAdvanced', true)).called(1);
+    verify(mockStoreService.setDateTime('lastAdvanceDate', now)).called(1);
   });
 
   final midMonth = DateTime(2025, 7, 15, 12);
@@ -93,7 +95,9 @@ void main() async {
       when(mockDateTimeService.now).thenReturn(date);
       when(mockFeedsManager.areChaptersRead).thenReturn(areChaptersRead);
       when(mockFeedsManager.lastModifiedFeed).thenReturn(mockFeedList[0]);
-      when(mockFeedList[0].state).thenReturn(FeedState(bookKey: b0.key, isRead: true, dateModified: date - sinceLastModified));
+      when(
+        mockFeedList[0].state,
+      ).thenReturn(FeedState(bookKey: b0.key, isRead: true, dateModified: date - sinceLastModified));
       expect(await testee.maybeAdvance(), expectedAdvanceState);
       verify();
     },

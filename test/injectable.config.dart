@@ -18,6 +18,7 @@ import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
+import 'package:bible_feed/manager/days_behind_manager.dart' as _i67;
 import 'package:bible_feed/manager/deeplink_in_manager.dart' as _i468;
 import 'package:bible_feed/manager/deeplink_out_manager.dart' as _i768;
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
@@ -91,6 +92,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
+    gh.lazySingleton<_i67.DaysBehindManager>(() => _i67.DaysBehindManager());
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_golden, _integration_test, _prod},
