@@ -57,9 +57,9 @@ import 'manager/stub_midnight_manager.dart' as _i491;
 import 'service/empty_store_service.dart' as _i617;
 import 'service/stub_date_time_service.dart' as _i738;
 
+const String _integration_test = 'integration_test';
 const String _golden = 'golden';
 const String _prod = 'prod';
-const String _integration_test = 'integration_test';
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -91,6 +91,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
+    gh.lazySingleton<_i438.MidnightManager>(
+      () => _i491.StubMidnightManager(),
+      registerFor: {_integration_test},
+    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
       registerFor: {_golden, _prod},
@@ -115,10 +119,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
     );
-    gh.lazySingleton<_i438.MidnightManager>(
-      () => _i491.StubMidnightManager(),
-      registerFor: {_golden, _integration_test},
-    );
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
@@ -141,6 +141,10 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_integration_test, _prod},
       preResolve: true,
     );
+    gh.singleton<_i438.MidnightManager>(
+      () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
+      registerFor: {_golden, _prod},
+    );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
     );
@@ -156,10 +160,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProductionPlatformService(),
       registerFor: {_integration_test, _prod},
-    );
-    gh.singleton<_i438.MidnightManager>(
-      () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
-      registerFor: {_prod},
     );
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i274.HapticSettingManager>()),
