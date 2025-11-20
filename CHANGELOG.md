@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 
 
+## [1.9.0] - 2025-
+
+### Added
+- Android OpenBible app reader TODO check genesis link
+
+
 ## [1.8.0] - 2025-11-05
 
 ### Changed
