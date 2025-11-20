@@ -25,6 +25,7 @@ targets:
             - test/injectable.dart
             - test/golden/stub/**
             - integration_test/injectable.dart
+            - integration_test/manager/*.dart
             - integration_test/service/*.dart
       mockito:mockBuilder:
         generate_for:

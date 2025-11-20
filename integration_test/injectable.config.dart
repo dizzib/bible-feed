@@ -53,9 +53,9 @@ import 'package:bible_feed/service/url_launch_service.dart' as _i626;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import 'manager/stub_midnight_manager.dart' as _i491;
 import 'service/empty_store_service.dart' as _i617;
 import 'service/stub_date_time_service.dart' as _i738;
-import 'service/stub_midnight_manager.dart' as _i586;
 
 const String _golden = 'golden';
 const String _prod = 'prod';
@@ -115,6 +115,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
     );
+    gh.lazySingleton<_i438.MidnightManager>(
+      () => _i491.StubMidnightManager(),
+      registerFor: {_golden, _integration_test},
+    );
     gh.lazySingleton<_i1006.ChapterSplitters>(
       () => _i1006.ChapterSplitters(gh<List<_i19.ChapterSplitter>>()),
     );
@@ -126,10 +130,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i326.DeepLinkService>(
       () => _i326.DeepLinkService(gh<_i942.ToastService>()),
-    );
-    gh.lazySingleton<_i438.MidnightManager>(
-      () => _i586.StubMidnightManager(),
-      registerFor: {_golden, _integration_test},
     );
     await gh.lazySingletonAsync<_i729.HapticAvailabilityService>(
       () => _i729.ProductionHapticAvailabilityService.create(),
