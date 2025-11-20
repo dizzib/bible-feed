@@ -7,6 +7,7 @@ enum BibleReaderKey {
   lifeBibleApp,
   logosBibleApp,
   oliveTreeApp,
+  openBibleApp,
   youVersionApp,
   weDevoteApp,
 }
