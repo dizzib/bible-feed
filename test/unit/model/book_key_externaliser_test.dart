@@ -68,5 +68,7 @@ void main() {
     '1jn': '1jo',
     '2jn': '2jo',
     '3jn': '3jo',
+    'eze': 'eze',
+    'jam': 'jam',
   });
 }
