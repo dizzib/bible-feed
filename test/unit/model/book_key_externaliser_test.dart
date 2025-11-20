@@ -57,18 +57,18 @@ void main() {
   runTest(BookKeyExternaliser.oliveTree, const {'1cr': '1ch', '2cr': '2ch', 'jhn': 'jn', 'jud': 'jde', 'sos': 'ss'});
 
   runTest(BookKeyExternaliser.openBible, const {
-    'jdg': 'jug',
-    'rth': 'rut',
     '1cr': '1ch',
     '2cr': '2ch',
-    'prv': 'pro',
-    'sos': 'son',
-    'obd': 'oba',
-    'jhn': 'joh',
     '1jn': '1jo',
     '2jn': '2jo',
     '3jn': '3jo',
     'eze': 'eze',
     'jam': 'jam',
+    'jdg': 'jug',
+    'jhn': 'joh',
+    'obd': 'oba',
+    'prv': 'pro',
+    'rth': 'rut',
+    'sos': 'son',
   });
 }

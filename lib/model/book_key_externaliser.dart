@@ -5,7 +5,7 @@ enum BookKeyExternaliser {
   blueLetter([..._ext1Keys, 'jas', 'jde', 'sng']),
   logos([..._ext2Keys]),
   oliveTree([..._ext0Keys, 'jn', 'jde', 'ss']),
-  openBible([..._ext1Keys, 'jug', 'son', 'joh', '1jo', '2jo', '3jo', 'rut']),
+  openBible([..._ext1Keys, '1jo', '2jo', '3jo', 'jug', 'joh', 'rut', 'son']),
   osisParatext([..._ext2Keys, 'jol', 'nam', 'sng']);
 
   static const _ext0Keys = ['1ch', '2ch'];
@@ -18,22 +18,22 @@ enum BookKeyExternaliser {
     'ss': 'sos',
     '1ch': '1cr',
     '2ch': '2cr',
+    '1jo': '1jn',
+    '2jo': '2jn',
+    '3jo': '3jn',
     'ezk': 'eze',
     'jas': 'jam',
     'jde': 'jud',
+    'joh': 'jhn',
     'jol': 'joe',
+    'jug': 'jdg',
     'mrk': 'mar',
     'nam': 'nah',
     'oba': 'obd',
     'pro': 'prv',
     'rut': 'rth',
     'sng': 'sos',
-    'jug': 'jdg',
     'son': 'sos',
-    'joh': 'jhn',
-    '1jo': '1jn',
-    '2jo': '2jn',
-    '3jo': '3jn',
   };
 
   final List<String> _externalBookKeys;
