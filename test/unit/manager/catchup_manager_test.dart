@@ -4,6 +4,7 @@ import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
 import 'package:bible_feed/service/store_service.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -27,12 +28,16 @@ void main() {
   late CatchupManager testee;
 
   setUp(() {
+    WidgetsFlutterBinding.ensureInitialized();
+
     mockAllDoneManager = MockAllDoneManager();
     mockDateTimeService = MockDateTimeService();
     mockFeedsAdvanceManager = MockFeedsAdvanceManager();
     mockMidnightManager = MockMidnightManager();
     mockStoreService = MockStoreService();
+
     when(mockDateTimeService.now).thenReturn(DateTime(2025, 1, 5, 12));
+
     testee = CatchupManager(
       mockAllDoneManager,
       mockDateTimeService,
