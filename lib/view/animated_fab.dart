@@ -27,6 +27,7 @@ class AnimatedFab extends StatelessWidget {
       child: FloatingActionButton(
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
+        heroTag: keyValue, // must be unique across all FABs
         key: Key(keyValue),
         onPressed: onPressed,
         shape: const CircleBorder(),
