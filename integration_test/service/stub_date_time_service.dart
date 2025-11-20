@@ -11,4 +11,6 @@ class StubDateTimeService extends DateTimeService {
   DateTime get now => _now;
 
   set now(DateTime value) => _now = value;
+
+  void advance1day() => _now = _now.add(const Duration(days: 1));
 }

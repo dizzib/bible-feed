@@ -56,6 +56,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'service/empty_store_service.dart' as _i617;
 import 'service/midnight_date_time_service.dart' as _i123;
 import 'service/stub_date_time_service.dart' as _i738;
+import 'service/stub_midnight_manager.dart' as _i586;
 
 const String _golden = 'golden';
 const String _prod = 'prod';
@@ -134,6 +135,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i326.DeepLinkService>(
       () => _i326.DeepLinkService(gh<_i942.ToastService>()),
     );
+    gh.lazySingleton<_i438.MidnightManager>(
+      () => _i586.StubMidnightManager(),
+      registerFor: {_golden, _integration_test},
+    );
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i123.MidnightDateTimeService(),
       registerFor: {_midnight_test},
@@ -162,7 +167,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i571.FeedStoreManager(gh<_i215.StoreService>()),
     );
     gh.singleton<_i438.MidnightManager>(
-      () => _i438.MidnightManager(gh<_i99.DateTimeService>()),
+      () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i567.BibleReaderLinkManager>(
       () => _i567.BibleReaderLinkManager(

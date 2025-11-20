@@ -1,3 +1,4 @@
+import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
@@ -36,12 +37,15 @@ class FeedsAdvanceManager with ChangeNotifier {
     final lastDateModified = _feedsManager.lastModifiedFeed?.state.dateModified;
     if (lastDateModified == null) return FeedsAdvanceState.notAllRead;
     final now = _dateTimeService.now;
+    Log.info(now);
     final lastMidnightOfNow = DateTime(now.year, now.month, now.day);
     final lastMidnightOfLastDateModified = DateTime(
       lastDateModified.year,
       lastDateModified.month,
       lastDateModified.day,
     );
+    Log.info(lastMidnightOfNow);
+    Log.info(lastMidnightOfLastDateModified);
     if (lastMidnightOfNow.isAfter(lastMidnightOfLastDateModified)) return advance();
     return FeedsAdvanceState.allReadAwaitingTomorrow;
   }

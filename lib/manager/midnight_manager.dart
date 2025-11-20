@@ -5,6 +5,8 @@ import 'package:injectable/injectable.dart';
 
 import '../service/date_time_service.dart';
 
+abstract class MidnightManager with ChangeNotifier {}
+
 // Using @lazysingleton breaks golden tests...
 //
 // The following assertion was thrown running a test:
@@ -12,11 +14,12 @@ import '../service/date_time_service.dart';
 // 'package:flutter_test/src/binding.dart':
 // Failed assertion: line 1617 pos 12: '!timersPending'
 //
-@singleton
-class MidnightManager with ChangeNotifier {
+@prod
+@Singleton(as: MidnightManager)
+class ProdMidnightManager extends MidnightManager {
   final DateTimeService _dateTimeService;
 
-  MidnightManager(this._dateTimeService) {
+  ProdMidnightManager(this._dateTimeService) {
     AppLifecycleListener(onResume: _setTimer);
     _setTimer();
   }

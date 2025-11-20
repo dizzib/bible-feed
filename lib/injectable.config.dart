@@ -154,7 +154,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i571.FeedStoreManager(gh<_i215.StoreService>()),
     );
     gh.singleton<_i438.MidnightManager>(
-      () => _i438.MidnightManager(gh<_i99.DateTimeService>()),
+      () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i567.BibleReaderLinkManager>(
       () => _i567.BibleReaderLinkManager(
