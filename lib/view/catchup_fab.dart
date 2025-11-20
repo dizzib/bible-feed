@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/all_done_dialog_manager.dart';
-import '../manager/days_behind_manager.dart';
+import '../manager/catchup_manager.dart';
 import 'animated_fab.dart';
 
-class DaysBehindFab extends WatchingWidget {
+class CatchupFab extends WatchingWidget {
   @override
   build(context) {
-    final daysBehindManager = watchIt<DaysBehindManager>();
+    final catchupManager = watchIt<CatchupManager>();
 
     return AnimatedFab(
       backgroundColor: Colors.yellow,
       foregroundColor: Colors.black,
       iconData: Icons.priority_high,
-      keyValue: 'days_behind_fab',
-      isVisible: daysBehindManager.daysBehind > 0,
+      keyValue: 'catchup_fab',
+      isVisible: catchupManager.daysBehind > 0,
       onPressed: sl<AllDoneDialogManager>().show,
     );
   }

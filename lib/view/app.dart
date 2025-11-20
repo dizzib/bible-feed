@@ -5,7 +5,7 @@ import '../manager/auto_advance_manager.dart';
 import 'all_done_dialog.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
-import 'days_behind_fab.dart';
+import 'catchup_fab.dart';
 import 'feeds.dart';
 import 'settings_icon_button.dart';
 
@@ -29,7 +29,7 @@ class App extends WatchingWidget {
             child: Stack(
               children: [
                 SettingsIconButton(),
-                SizedBox(height: fabSize, child: DaysBehindFab()),
+                SizedBox(height: fabSize, child: CatchupFab()),
                 SizedBox(height: fabSize, child: AllDoneFab()),
               ],
             ),

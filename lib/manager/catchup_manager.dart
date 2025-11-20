@@ -10,13 +10,13 @@ import 'all_done_manager.dart';
 import 'feeds_advance_manager.dart';
 
 @lazySingleton
-class DaysBehindManager with ChangeNotifier {
+class CatchupManager with ChangeNotifier {
   final AllDoneManager _allDoneManager;
   final DateTimeService _dateTimeService;
   final FeedsAdvanceManager _feedsAdvanceManager;
   final StoreService _storeService;
 
-  DaysBehindManager(this._allDoneManager, this._dateTimeService, this._feedsAdvanceManager, this._storeService) {
+  CatchupManager(this._allDoneManager, this._dateTimeService, this._feedsAdvanceManager, this._storeService) {
     _feedsAdvanceManager.addListener(() {
       _storeService.setDateTime(
         _virtualAllDoneDateStoreKey,

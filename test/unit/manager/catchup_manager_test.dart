@@ -1,5 +1,5 @@
 import 'package:bible_feed/manager/all_done_manager.dart';
-import 'package:bible_feed/manager/days_behind_manager.dart';
+import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
 import 'package:bible_feed/service/store_service.dart';
@@ -8,7 +8,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
-import 'days_behind_manager_test.mocks.dart';
+import 'catchup_manager_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<AllDoneManager>(),
@@ -21,7 +21,7 @@ void main() {
   late MockDateTimeService mockDateTimeService;
   late MockFeedsAdvanceManager mockFeedsAdvanceManager;
   late MockStoreService mockStoreService;
-  late DaysBehindManager testee;
+  late CatchupManager testee;
 
   setUp(() {
     mockAllDoneManager = MockAllDoneManager();
@@ -29,7 +29,7 @@ void main() {
     mockFeedsAdvanceManager = MockFeedsAdvanceManager();
     mockStoreService = MockStoreService();
     when(mockDateTimeService.now).thenReturn(DateTime(2025, 1, 5, 12));
-    testee = DaysBehindManager(mockAllDoneManager, mockDateTimeService, mockFeedsAdvanceManager, mockStoreService);
+    testee = CatchupManager(mockAllDoneManager, mockDateTimeService, mockFeedsAdvanceManager, mockStoreService);
   });
 
   parameterizedTest(

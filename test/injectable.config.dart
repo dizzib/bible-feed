@@ -17,9 +17,9 @@ import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
 import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i567;
 import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
+import 'package:bible_feed/manager/catchup_manager.dart' as _i1045;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
-import 'package:bible_feed/manager/days_behind_manager.dart' as _i67;
 import 'package:bible_feed/manager/deeplink_in_manager.dart' as _i468;
 import 'package:bible_feed/manager/deeplink_out_manager.dart' as _i768;
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
@@ -265,8 +265,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i175.ShareOutManager>(),
       ),
     );
-    gh.lazySingleton<_i67.DaysBehindManager>(
-      () => _i67.DaysBehindManager(
+    gh.lazySingleton<_i1045.CatchupManager>(
+      () => _i1045.CatchupManager(
         gh<_i545.AllDoneManager>(),
         gh<_i99.DateTimeService>(),
         gh<_i477.FeedsAdvanceManager>(),

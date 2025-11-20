@@ -3,7 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import 'all_done_fab.dart';
 import 'bible_reader_link_icon.dart';
-import 'days_behind_fab.dart';
+import 'catchup_fab.dart';
 import 'settings_icon_button.dart';
 import 'share_icon_button.dart';
 
@@ -14,7 +14,7 @@ class AppBarMain extends WatchingWidget implements PreferredSizeWidget {
       leading: BibleReaderLinkIcon(),
       centerTitle: true,
       clipBehavior: Clip.none, // do not clip fab drop shadow
-      title: Stack(children: [DaysBehindFab(), AllDoneFab()]),
+      title: Stack(children: [CatchupFab(), AllDoneFab()]),
       actions: [ShareIconButton(), SettingsIconButton()],
     );
   }
