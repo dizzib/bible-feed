@@ -1,9 +1,13 @@
+import 'package:bible_feed/manager/catchup_manager.dart';
+import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
+import 'package:df_log/df_log.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../helper.dart';
 import '../injectable.dart';
+import '../manager/stub_midnight_manager.dart';
 import '../service/stub_date_time_service.dart';
 
 Future runCatchupTest() async {
@@ -11,11 +15,19 @@ Future runCatchupTest() async {
     await configureDependencies(environment: 'integration_test');
 
     final stubDateTimeService = sl<DateTimeService>() as StubDateTimeService;
-    stubDateTimeService.now = DateTime(2025, 1, 1);
+    final stubMidnightManager = sl<MidnightManager>() as StubMidnightManager;
 
     await t.startApp();
     expectChapters(1);
 
-    stubDateTimeService.now = DateTime(2025, 1, 2);
+    stubDateTimeService.advance1day();
+    stubMidnightManager.notify();
+
+    await t.pumpAndSettle(); // must wait for async code to run
+
+    final catchupManager = sl<CatchupManager>();
+    Log.info(catchupManager.daysBehind);
+
+    await t.tapCatchupFab();
   });
 }

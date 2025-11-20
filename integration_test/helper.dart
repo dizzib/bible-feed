@@ -49,6 +49,11 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
+  Future tapCatchupFab() async {
+    await tap(find.byKey(const Key('catchup_fab')));
+    await pumpAndSettle();
+  }
+
   Future tapFab() async {
     await tap(find.byType(FloatingActionButton));
     await pumpAndSettle();

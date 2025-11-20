@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dartx/dartx.dart';
+import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
@@ -27,27 +28,35 @@ class CatchupManager with ChangeNotifier {
   ) {
     AppLifecycleListener(onResume: notifyListeners);
 
+    if (virtualAllDoneDate == null) {
+      _save(_dateTimeService.now - const Duration(days: 1));
+    }
+
     _feedsAdvanceManager.addListener(() {
-      _storeService.setDateTime(
-        _virtualAllDoneDateStoreKey,
-        daysBehind > 0 ? virtualAllDoneDate + const Duration(days: 1) : _allDoneManager.allDoneDate,
-      );
-
-      _midnightManager.addListener(notifyListeners);
-
-      notifyListeners();
+      _save(daysBehind > 0 ? virtualAllDoneDate! + const Duration(days: 1) : _allDoneManager.allDoneDate);
     });
+
+    _midnightManager.addListener(notifyListeners);
+
+    notifyListeners();
   }
 
   static const _virtualAllDoneDateStoreKey = 'virtualAllDoneDate';
 
-  DateTime get virtualAllDoneDate =>
-      _storeService.getDateTime(_virtualAllDoneDateStoreKey) ?? _dateTimeService.now - const Duration(days: 1);
+  void _save(DateTime value) => _storeService.setDateTime(_virtualAllDoneDateStoreKey, value);
+
+  DateTime? get virtualAllDoneDate => _storeService.getDateTime(_virtualAllDoneDateStoreKey);
 
   int get daysBehind {
     final now = _dateTimeService.now;
     final midnightThisMorning = DateTime(now.year, now.month, now.day);
-    final midnightVirtualAllDone = DateTime(virtualAllDoneDate.year, virtualAllDoneDate.month, virtualAllDoneDate.day);
+    final midnightVirtualAllDone = DateTime(
+      virtualAllDoneDate!.year,
+      virtualAllDoneDate!.month,
+      virtualAllDoneDate!.day,
+    );
+    Log.info(midnightThisMorning);
+    Log.info(midnightVirtualAllDone);
     return max(0, midnightThisMorning.difference(midnightVirtualAllDone).inDays - 1);
   }
 }
