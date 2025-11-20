@@ -17,9 +17,9 @@ import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
 import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i567;
 import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
+import 'package:bible_feed/manager/catchup_manager.dart' as _i1045;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
-import 'package:bible_feed/manager/days_behind_manager.dart' as _i67;
 import 'package:bible_feed/manager/deeplink_in_manager.dart' as _i468;
 import 'package:bible_feed/manager/deeplink_out_manager.dart' as _i768;
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
@@ -55,10 +55,11 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import 'service/empty_store_service.dart' as _i617;
 import 'service/midnight_date_time_service.dart' as _i123;
+import 'service/stub_date_time_service.dart' as _i738;
 
 const String _golden = 'golden';
-const String _integration_test = 'integration_test';
 const String _prod = 'prod';
+const String _integration_test = 'integration_test';
 const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
@@ -93,7 +94,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
-      registerFor: {_golden, _integration_test, _prod},
+      registerFor: {_golden, _prod},
+    );
+    gh.lazySingleton<_i99.DateTimeService>(
+      () => _i738.StubDateTimeService(),
+      registerFor: {_integration_test},
     );
     await gh.lazySingletonAsync<_i215.StoreService>(
       () => _i215.StoreService.create(),
@@ -255,11 +260,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i215.StoreService>(),
       ),
     );
-    gh.lazySingleton<_i67.DaysBehindManager>(
-      () => _i67.DaysBehindManager(
+    gh.lazySingleton<_i1045.CatchupManager>(
+      () => _i1045.CatchupManager(
         gh<_i545.AllDoneManager>(),
         gh<_i99.DateTimeService>(),
         gh<_i477.FeedsAdvanceManager>(),
+        gh<_i438.MidnightManager>(),
         gh<_i215.StoreService>(),
       ),
     );

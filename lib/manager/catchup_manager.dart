@@ -8,20 +8,33 @@ import '../service/date_time_service.dart';
 import '../service/store_service.dart';
 import 'all_done_manager.dart';
 import 'feeds_advance_manager.dart';
+import 'midnight_manager.dart';
 
 @lazySingleton
 class CatchupManager with ChangeNotifier {
   final AllDoneManager _allDoneManager;
   final DateTimeService _dateTimeService;
   final FeedsAdvanceManager _feedsAdvanceManager;
+  final MidnightManager _midnightManager;
   final StoreService _storeService;
 
-  CatchupManager(this._allDoneManager, this._dateTimeService, this._feedsAdvanceManager, this._storeService) {
+  CatchupManager(
+    this._allDoneManager,
+    this._dateTimeService,
+    this._feedsAdvanceManager,
+    this._midnightManager,
+    this._storeService,
+  ) {
+    AppLifecycleListener(onResume: notifyListeners);
+
     _feedsAdvanceManager.addListener(() {
       _storeService.setDateTime(
         _virtualAllDoneDateStoreKey,
         daysBehind > 0 ? virtualAllDoneDate + const Duration(days: 1) : _allDoneManager.allDoneDate,
       );
+
+      _midnightManager.addListener(notifyListeners);
+
       notifyListeners();
     });
   }

@@ -12,7 +12,6 @@ abstract class DateTimeService {
 }
 
 @golden
-@integrationTest
 @prod
 @LazySingleton(as: DateTimeService)
 class NowDateTimeService extends DateTimeService {

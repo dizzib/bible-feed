@@ -8,9 +8,10 @@ import 'dart:ui' as _i3;
 
 import 'package:bible_feed/manager/all_done_manager.dart' as _i2;
 import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i5;
+import 'package:bible_feed/manager/midnight_manager.dart' as _i8;
 import 'package:bible_feed/model/feeds_advance_state.dart' as _i7;
 import 'package:bible_feed/service/date_time_service.dart' as _i4;
-import 'package:bible_feed/service/store_service.dart' as _i8;
+import 'package:bible_feed/service/store_service.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -173,10 +174,48 @@ class MockFeedsAdvanceManager extends _i1.Mock
   );
 }
 
+/// A class which mocks [MidnightManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMidnightManager extends _i1.Mock implements _i8.MidnightManager {
+  @override
+  bool get hasListeners =>
+      (super.noSuchMethod(
+            Invocation.getter(#hasListeners),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
+    Invocation.method(#addListener, [listener]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void removeListener(_i3.VoidCallback? listener) => super.noSuchMethod(
+    Invocation.method(#removeListener, [listener]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void dispose() => super.noSuchMethod(
+    Invocation.method(#dispose, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+    Invocation.method(#notifyListeners, []),
+    returnValueForMissingStub: null,
+  );
+}
+
 /// A class which mocks [StoreService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStoreService extends _i1.Mock implements _i8.StoreService {
+class MockStoreService extends _i1.Mock implements _i9.StoreService {
   @override
   bool? getBool(String? key) =>
       (super.noSuchMethod(

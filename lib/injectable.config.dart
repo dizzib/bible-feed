@@ -54,8 +54,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 const String _golden = 'golden';
-const String _integration_test = 'integration_test';
 const String _prod = 'prod';
+const String _integration_test = 'integration_test';
 const String _midnight_test = 'midnight_test';
 
 extension GetItInjectableX on _i174.GetIt {
@@ -90,7 +90,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
     gh.lazySingleton<_i99.DateTimeService>(
       () => _i99.NowDateTimeService(),
-      registerFor: {_golden, _integration_test, _prod},
+      registerFor: {_golden, _prod},
     );
     await gh.lazySingletonAsync<_i215.StoreService>(
       () => _i215.StoreService.create(),
@@ -237,18 +237,19 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i22.HapticService>(),
       ),
     );
-    gh.singleton<_i768.DeepLinkOutManager>(
-      () => _i768.DeepLinkOutManager(
-        gh<_i508.JsonEncodingManager>(),
-        gh<_i175.ShareOutManager>(),
-      ),
-    );
     gh.lazySingleton<_i1045.CatchupManager>(
       () => _i1045.CatchupManager(
         gh<_i545.AllDoneManager>(),
         gh<_i99.DateTimeService>(),
         gh<_i477.FeedsAdvanceManager>(),
+        gh<_i438.MidnightManager>(),
         gh<_i215.StoreService>(),
+      ),
+    );
+    gh.singleton<_i768.DeepLinkOutManager>(
+      () => _i768.DeepLinkOutManager(
+        gh<_i508.JsonEncodingManager>(),
+        gh<_i175.ShareOutManager>(),
       ),
     );
     gh.lazySingleton<_i541.AllDoneDialogManager>(
