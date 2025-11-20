@@ -13,7 +13,6 @@ class PlatformService {
 }
 
 @integrationTest
-@midnightTest
 @prod
 @LazySingleton(as: PlatformService)
 class ProductionPlatformService extends PlatformService {

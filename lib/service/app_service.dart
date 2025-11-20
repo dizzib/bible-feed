@@ -11,7 +11,6 @@ abstract class AppService {
 }
 
 @integrationTest
-@midnightTest
 @prod
 @LazySingleton(as: AppService)
 class ProductionAppService extends AppService {

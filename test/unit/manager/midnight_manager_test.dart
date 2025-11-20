@@ -20,7 +20,7 @@ void main() {
   test('at mignight, should notify listeners', () async {
     await fakeAsync((fakeAsync) {
       var notified = false;
-      MidnightManager(mockDateTimeService).addListener(() => notified = true);
+      ProdMidnightManager(mockDateTimeService).addListener(() => notified = true);
       fakeAsync.elapse(const Duration(minutes: 1, seconds: 5));
       expect(notified, true);
     });

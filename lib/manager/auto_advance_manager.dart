@@ -1,4 +1,3 @@
-import 'package:df_log/df_log.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
@@ -22,9 +21,7 @@ class AutoAdvanceManager with ChangeNotifier {
   }
 
   void maybeAdvance() async {
-    Log.info('maybeAdvance');
     if (await _feedsAdvanceManager.maybeAdvance() == FeedsAdvanceState.listsAdvanced) {
-      Log.info('ok!');
       notifyListeners();
     }
   }

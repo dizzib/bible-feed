@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @integrationTest
-@midnightTest
 @LazySingleton(as: StoreService)
 class EmptyStoreService extends StoreService {
   // TODO replace with SharedPreferencesWithCache when it supports unit tests

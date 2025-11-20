@@ -10,7 +10,6 @@ class HapticAvailabilityService {
 }
 
 @integrationTest
-@midnightTest
 @prod
 @LazySingleton(as: HapticAvailabilityService)
 class ProductionHapticAvailabilityService extends HapticAvailabilityService {
