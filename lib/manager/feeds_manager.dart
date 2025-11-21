@@ -29,7 +29,8 @@ class FeedsManager with ChangeNotifier {
   final List<Feed> _feeds;
   Feed? _lastModifiedFeed;
 
-  bool get areChaptersRead => _feeds.where((feed) => !feed.state.isRead).isEmpty;
+  bool get areChaptersRead => chaptersToRead == 0;
+  int get chaptersToRead => _feeds.where((feed) => !feed.state.isRead).length;
   List<Feed> get feeds => _feeds;
   Feed? get lastModifiedFeed => _lastModifiedFeed;
 }

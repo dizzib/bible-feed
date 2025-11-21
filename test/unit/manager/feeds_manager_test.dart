@@ -37,6 +37,16 @@ void main() async {
       expect(testee.areChaptersRead, true);
     });
 
+    test('chaptersToRead', () {
+      expect(testee.chaptersToRead, 1);
+      testee.feeds[0].toggleIsRead();
+      expect(testee.chaptersToRead, 2);
+      testee.feeds[1].toggleIsRead();
+      expect(testee.chaptersToRead, 1);
+      testee.feeds[0].toggleIsRead();
+      expect(testee.chaptersToRead, 0);
+    });
+
     group('lastModifiedFeed', () {
       test('should initialise from store', () {
         expect(testee.lastModifiedFeed, testee.feeds[1]);
