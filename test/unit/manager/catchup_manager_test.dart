@@ -84,12 +84,14 @@ void main() {
       [true, now - 1.days, 0, false, false],
       [true, now - 2.days, 1, true, false],
       [true, now - 3.days, 2, true, true],
+      [true, now - 4.days, 3, true, true],
     ],
     (isSettingEnabled, virtualAllDoneDate, expectDaysBehind, expectIsBehind, expectIsVeryBehind) {
       when(mockCatchupSettingManager.isEnabled).thenReturn(isSettingEnabled);
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? now - 1.days);
       expect(testee.daysBehind, expectDaysBehind);
       expect(testee.isBehind, expectIsBehind);
+      expect(testee.isVeryBehind, expectIsVeryBehind);
     },
   );
 
