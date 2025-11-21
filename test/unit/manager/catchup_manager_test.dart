@@ -2,7 +2,6 @@ import 'package:bible_feed/manager/all_done_manager.dart';
 import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
-import 'package:bible_feed/manager/feeds_advance_manager.dart';
 import 'package:bible_feed/service/store_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,14 +14,12 @@ import 'catchup_manager_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<AllDoneManager>(),
   MockSpec<DateTimeService>(),
-  MockSpec<FeedsAdvanceManager>(),
   MockSpec<MidnightManager>(),
   MockSpec<StoreService>(),
 ])
 void main() {
   late MockAllDoneManager mockAllDoneManager;
   late MockDateTimeService mockDateTimeService;
-  late MockFeedsAdvanceManager mockFeedsAdvanceManager;
   late MockMidnightManager mockMidnightManager;
   late MockStoreService mockStoreService;
   late CatchupManager testee;
@@ -32,19 +29,12 @@ void main() {
 
     mockAllDoneManager = MockAllDoneManager();
     mockDateTimeService = MockDateTimeService();
-    mockFeedsAdvanceManager = MockFeedsAdvanceManager();
     mockMidnightManager = MockMidnightManager();
     mockStoreService = MockStoreService();
 
     when(mockDateTimeService.now).thenReturn(DateTime(2025, 1, 5, 12));
 
-    testee = CatchupManager(
-      mockAllDoneManager,
-      mockDateTimeService,
-      mockFeedsAdvanceManager,
-      mockMidnightManager,
-      mockStoreService,
-    );
+    testee = CatchupManager(mockAllDoneManager, mockDateTimeService, mockMidnightManager, mockStoreService);
   });
 
   parameterizedTest(

@@ -1,4 +1,3 @@
-import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -10,8 +9,6 @@ class CatchupFab extends WatchingWidget {
   @override
   build(context) {
     final catchupManager = watchIt<CatchupManager>();
-
-    Log.info(catchupManager.isBehind);
 
     return AnimatedFab(
       backgroundColor: Colors.yellow,
