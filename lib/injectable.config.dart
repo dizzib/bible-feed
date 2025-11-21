@@ -17,6 +17,7 @@ import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
 import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i567;
 import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
+import 'package:bible_feed/manager/catchup_dialog_manager.dart' as _i156;
 import 'package:bible_feed/manager/catchup_manager.dart' as _i1045;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
@@ -250,6 +251,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i768.DeepLinkOutManager(
         gh<_i508.JsonEncodingManager>(),
         gh<_i175.ShareOutManager>(),
+      ),
+    );
+    gh.lazySingleton<_i156.CatchupDialogManager>(
+      () => _i156.CatchupDialogManager(
+        gh<_i1045.CatchupManager>(),
+        gh<_i127.FeedsManager>(),
       ),
     );
     gh.lazySingleton<_i541.AllDoneDialogManager>(

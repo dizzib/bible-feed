@@ -28,12 +28,12 @@ class CatchupManager with ChangeNotifier {
   ) {
     AppLifecycleListener(onResume: notifyListeners);
 
-    if (virtualAllDoneDate == null) {
-      _save(_dateTimeService.now - const Duration(days: 1));
+    if (_virtualAllDoneDate == null) {
+      _save(_dateTimeService.now - 1.days);
     }
 
     _feedsAdvanceManager.addListener(() {
-      _save(daysBehind > 0 ? virtualAllDoneDate! + const Duration(days: 1) : _allDoneManager.allDoneDate);
+      _save(daysBehind > 0 ? _virtualAllDoneDate! + 1.days : _allDoneManager.allDoneDate);
     });
 
     _midnightManager.addListener(notifyListeners);
@@ -44,19 +44,15 @@ class CatchupManager with ChangeNotifier {
   static const _virtualAllDoneDateStoreKey = 'virtualAllDoneDate';
 
   void _save(DateTime value) => _storeService.setDateTime(_virtualAllDoneDateStoreKey, value);
-
-  DateTime? get virtualAllDoneDate => _storeService.getDateTime(_virtualAllDoneDateStoreKey);
+  DateTime? get _virtualAllDoneDate => _storeService.getDateTime(_virtualAllDoneDateStoreKey);
 
   int get daysBehind {
-    final now = _dateTimeService.now;
-    final midnightThisMorning = DateTime(now.year, now.month, now.day);
-    final midnightVirtualAllDone = DateTime(
-      virtualAllDoneDate!.year,
-      virtualAllDoneDate!.month,
-      virtualAllDoneDate!.day,
-    );
+    final midnightThisMorning = _dateTimeService.now.date;
+    final midnightVirtualAllDone = _virtualAllDoneDate!.date;
     Log.info(midnightThisMorning);
-    Log.info(midnightVirtualAllDone);
+    // Log.info(midnightVirtualAllDone);
     return max(0, midnightThisMorning.difference(midnightVirtualAllDone).inDays - 1);
   }
+
+  bool get isBehind => daysBehind > 0;
 }

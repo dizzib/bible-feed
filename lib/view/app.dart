@@ -5,6 +5,7 @@ import '../manager/auto_advance_manager.dart';
 import 'all_done_dialog.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
+import 'catchup_dialog.dart';
 import 'catchup_fab.dart';
 import 'feeds.dart';
 import 'settings_icon_button.dart';
@@ -23,7 +24,7 @@ class App extends WatchingWidget {
         return Scaffold(
           appBar: isShowAppBar ? AppBarMain() : null,
           body: Feeds(),
-          bottomSheet: AllDoneDialog(), // invisible
+          bottomSheet: Stack(children: [AllDoneDialog(), CatchupDialog()]), // invisible
           floatingActionButton: Visibility(
             visible: !isShowAppBar,
             child: Stack(

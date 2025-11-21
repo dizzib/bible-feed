@@ -207,6 +207,15 @@ class MockFeedsManager extends _i1.Mock implements _i8.FeedsManager {
           as bool);
 
   @override
+  int get chaptersToRead =>
+      (super.noSuchMethod(
+            Invocation.getter(#chaptersToRead),
+            returnValue: 0,
+            returnValueForMissingStub: 0,
+          )
+          as int);
+
+  @override
   List<_i2.Feed> get feeds =>
       (super.noSuchMethod(
             Invocation.getter(#feeds),

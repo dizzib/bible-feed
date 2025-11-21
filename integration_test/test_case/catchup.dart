@@ -1,7 +1,5 @@
-import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
-import 'package:df_log/df_log.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -17,17 +15,22 @@ Future runCatchupTest() async {
     final stubDateTimeService = sl<DateTimeService>() as StubDateTimeService;
     final stubMidnightManager = sl<MidnightManager>() as StubMidnightManager;
 
+    Future advanceDay(String daysBehind, int expectChaptersToRead) async {
+      stubDateTimeService.advance1day();
+      stubMidnightManager.notify();
+      await t.pumpAndSettle(); // must wait for async code to run
+      await t.tapCatchupFab();
+      expectText('Catchup');
+      expectText('$daysBehind behind');
+      expectText('$expectChaptersToRead more');
+      await t.tap(find.text('Close'));
+      await t.pumpAndSettle();
+    }
+
     await t.startApp();
     expectChapters(1);
 
-    stubDateTimeService.advance1day();
-    stubMidnightManager.notify();
-
-    await t.pumpAndSettle(); // must wait for async code to run
-
-    final catchupManager = sl<CatchupManager>();
-    Log.info(catchupManager.daysBehind);
-
-    await t.tapCatchupFab();
+    await advanceDay('1 days', 20);
+    await advanceDay('2 days', 30);
   });
 }
