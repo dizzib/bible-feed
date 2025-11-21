@@ -21,14 +21,15 @@ import 'catchup_manager_test.mocks.dart';
   MockSpec<StoreService>(),
 ])
 void main() {
-  final now = DateTime.now();
-
   late MockAllDoneManager mockAllDoneManager;
   late MockCatchupSettingManager mockCatchupSettingManager;
   late MockDateTimeService mockDateTimeService;
   late MockMidnightManager mockMidnightManager;
   late MockStoreService mockStoreService;
   late CatchupManager testee;
+
+  late bool notified;
+  final now = DateTime.now();
 
   setUp(() {
     WidgetsFlutterBinding.ensureInitialized(); // testee calls AppLifecycleListener
@@ -38,6 +39,7 @@ void main() {
     mockDateTimeService = MockDateTimeService();
     mockMidnightManager = MockMidnightManager();
     mockStoreService = MockStoreService();
+    notified = false;
 
     when(mockCatchupSettingManager.isEnabled).thenReturn(true);
     when(mockDateTimeService.now).thenReturn(now);
@@ -49,6 +51,24 @@ void main() {
       mockMidnightManager,
       mockStoreService,
     );
+
+    testee.addListener(() => notified = true);
+  });
+
+  test('CatchupSettingManager listener should reset virtualAllDoneDate and notifyListeners', () {
+    when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now - 3.days);
+    when(mockAllDoneManager.allDoneDate).thenReturn(now);
+
+    // Capture the listener callback passed to addListener
+    late VoidCallback capturedListener;
+    for (var listener in verify(mockCatchupSettingManager.addListener(captureAny)).captured) {
+      capturedListener = listener as VoidCallback;
+    }
+
+    capturedListener(); // Trigger the listener manually
+
+    verify(mockStoreService.setDateTime(any, now)).called(1);
+    expect(notified, isTrue);
   });
 
   parameterizedTest(
@@ -82,9 +102,6 @@ void main() {
       [3.days, 2.days],
     ],
     (daysBehind, expectNewDaysBehind) {
-      var notified = false;
-      testee.addListener(() => notified = true);
-
       clearInteractions(mockStoreService); // ignore first call by ctor
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now - daysBehind);
       when(mockAllDoneManager.allDoneDate).thenReturn(now);
