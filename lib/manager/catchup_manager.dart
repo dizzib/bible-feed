@@ -57,4 +57,5 @@ class CatchupManager with ChangeNotifier {
   }
 
   bool get isBehind => daysBehind > 0;
+  bool get isVeryBehind => daysBehind > 1;
 }

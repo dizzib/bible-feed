@@ -74,18 +74,18 @@ void main() {
   parameterizedTest(
     'daysBehind, isBehind properties',
     [
-      [false, null, 0, false],
-      [false, now, 0, false],
-      [false, now - 1.days, 0, false],
-      [false, now - 2.days, 0, false],
-      [false, now - 3.days, 0, false],
-      [true, null, 0, false],
-      [true, now, 0, false],
-      [true, now - 1.days, 0, false],
-      [true, now - 2.days, 1, true],
-      [true, now - 3.days, 2, true],
+      [false, null, 0, false, false],
+      [false, now, 0, false, false],
+      [false, now - 1.days, 0, false, false],
+      [false, now - 2.days, 0, false, false],
+      [false, now - 3.days, 0, false, false],
+      [true, null, 0, false, false],
+      [true, now, 0, false, false],
+      [true, now - 1.days, 0, false, false],
+      [true, now - 2.days, 1, true, false],
+      [true, now - 3.days, 2, true, true],
     ],
-    (isSettingEnabled, virtualAllDoneDate, expectDaysBehind, expectIsBehind) {
+    (isSettingEnabled, virtualAllDoneDate, expectDaysBehind, expectIsBehind, expectIsVeryBehind) {
       when(mockCatchupSettingManager.isEnabled).thenReturn(isSettingEnabled);
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? now - 1.days);
       expect(testee.daysBehind, expectDaysBehind);

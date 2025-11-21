@@ -11,8 +11,8 @@ class CatchupFab extends WatchingWidget {
     final catchupManager = watchIt<CatchupManager>();
 
     return AnimatedFab(
-      backgroundColor: Colors.yellow,
-      foregroundColor: Colors.black,
+      backgroundColor: catchupManager.isVeryBehind ? Colors.red : Colors.yellow,
+      foregroundColor: catchupManager.isVeryBehind ? Colors.white : Colors.black,
       iconData: Icons.priority_high,
       keyValue: 'catchup_fab',
       isVisible: catchupManager.isBehind,
