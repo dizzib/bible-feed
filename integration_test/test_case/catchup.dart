@@ -15,11 +15,15 @@ Future runCatchupTest() async {
     final stubDateTimeService = sl<DateTimeService>() as StubDateTimeService;
     final stubMidnightManager = sl<MidnightManager>() as StubMidnightManager;
 
-    Future advanceDay(String daysBehind, int expectChaptersToRead) async {
+    Future advanceDay() async {
       stubDateTimeService.advance1day();
       stubMidnightManager.notify();
       await t.pumpAndSettle(); // must wait for async code to run
-      await t.tapCatchupFab();
+    }
+
+    Future openDialogAndTest(String daysBehind, int expectChaptersToRead) async {
+      await t.tapByKey('catchup_fab');
+      await t.pumpAndSettle();
       expectText('Catchup');
       expectText('$daysBehind behind');
       expectText('$expectChaptersToRead more');
@@ -28,8 +32,18 @@ Future runCatchupTest() async {
     }
 
     await t.startApp();
-
-    await advanceDay('1 days', 20);
-    await advanceDay('2 days', 30);
+    await advanceDay();
+    await openDialogAndTest('1 days', 20);
+    await advanceDay();
+    await openDialogAndTest('2 days', 30);
+    await t.tapAllLists();
+    await t.tapYes();
+    expectChapters(2);
+    await openDialogAndTest('1 days', 20);
+    await t.tapAllLists();
+    await t.tapAllDoneFab();
+    await t.tapYes();
+    expectChapters(3);
+    expectNotInteractiveByKey('catchup_fab');
   });
 }

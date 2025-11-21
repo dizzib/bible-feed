@@ -9,6 +9,8 @@ void expectBookAndChapter(String expectedBookName, int expectedChapter) =>
 void expectChapters(int expectedValue, {int count = 10}) =>
     expect(find.textContaining(expectedValue.toString()), findsExactly(count));
 
+void expectNotInteractiveByKey(String value) => expect(find.byKey(Key(value)).hitTestable(), findsNothing);
+
 // text helpers
 dynamic expectAtLeast1Text(dynamic expected) => expectText(expected.toString(), matcher: findsAtLeast(1));
 dynamic expectNoText(dynamic expected) => expectText(expected.toString(), matcher: findsNothing);
@@ -26,8 +28,8 @@ extension AppTestHelper on WidgetTester {
   Future scrollToLastBook() async => await scrollToLastItem('book_wheel');
   Future scrollToLastChapter() async => await scrollToLastItem('chapter_wheel');
 
-  Future scrollToLastItem(String keyVal) async {
-    await drag(find.byKey(Key(keyVal)), const Offset(0, -999));
+  Future scrollToLastItem(String value) async {
+    await drag(find.byKey(Key(value)), const Offset(0, -999));
     // await pumpAndSettle(); // uncommenting breaks!?
   }
 
@@ -46,12 +48,11 @@ extension AppTestHelper on WidgetTester {
   }
 
   Future tapAllDoneFab() async {
-    await tap(find.byKey(const Key('all_done_fab')));
-    await pumpAndSettle();
+    await tapByKey('all_done_fab');
   }
 
-  Future tapCatchupFab() async {
-    await tap(find.byKey(const Key('catchup_fab')));
+  Future tapByKey(String value) async {
+    await tap(find.byKey(Key(value)));
     await pumpAndSettle();
   }
 
@@ -60,8 +61,8 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  Future tapIconButton(String key) async {
-    await tap(find.byKey(Key(key)));
+  Future tapIconButton(String value) async {
+    await tap(find.byKey(Key(value)));
     await pumpAndSettle();
   }
 

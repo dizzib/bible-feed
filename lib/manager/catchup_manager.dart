@@ -32,8 +32,9 @@ class CatchupManager with ChangeNotifier {
       _save(_dateTimeService.now - 1.days);
     }
 
-    _feedsAdvanceManager.addListener(() {
+    _allDoneManager.addListener(() {
       _save(daysBehind > 0 ? _virtualAllDoneDate! + 1.days : _allDoneManager.allDoneDate);
+      notifyListeners();
     });
 
     _midnightManager.addListener(notifyListeners);
@@ -49,7 +50,7 @@ class CatchupManager with ChangeNotifier {
   int get daysBehind {
     final midnightThisMorning = _dateTimeService.now.date;
     final midnightVirtualAllDone = _virtualAllDoneDate!.date;
-    Log.info(midnightThisMorning);
+    // Log.info(midnightThisMorning);
     // Log.info(midnightVirtualAllDone);
     return max(0, midnightThisMorning.difference(midnightVirtualAllDone).inDays - 1);
   }

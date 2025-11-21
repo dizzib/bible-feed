@@ -23,6 +23,5 @@ class AllDoneManager with ChangeNotifier {
 
   static const _allDoneDateStoreKey = 'allDoneDate';
 
-  DateTime get allDoneDate =>
-      _storeService.getDateTime(_allDoneDateStoreKey) ?? _dateTimeService.now - const Duration(days: 1);
+  DateTime get allDoneDate => _storeService.getDateTime(_allDoneDateStoreKey) ?? _dateTimeService.now - 1.days;
 }
