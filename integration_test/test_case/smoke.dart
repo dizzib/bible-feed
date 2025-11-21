@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../helper.dart';
 import '../injectable.dart';
 
-Future runEndToEndTest() async {
+Future runSmokeTest() async {
   testWidgets('end-to-end', (t) async {
     await configureDependencies(environment: 'integration_test');
     await t.startApp();
