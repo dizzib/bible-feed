@@ -4,7 +4,7 @@ import '../helper.dart';
 import '../injectable.dart';
 
 Future runSmokeTest() async {
-  testWidgets('end-to-end', (t) async {
+  testWidgets('smoke', (t) async {
     await configureDependencies(environment: 'integration_test');
     await t.startApp();
     await t.tapAllLists();
