@@ -3,6 +3,7 @@ import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/store_service.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -18,6 +19,8 @@ import 'catchup_manager_test.mocks.dart';
   MockSpec<StoreService>(),
 ])
 void main() {
+  final now = DateTime.now();
+
   late MockAllDoneManager mockAllDoneManager;
   late MockDateTimeService mockDateTimeService;
   late MockMidnightManager mockMidnightManager;
@@ -32,7 +35,7 @@ void main() {
     mockMidnightManager = MockMidnightManager();
     mockStoreService = MockStoreService();
 
-    when(mockDateTimeService.now).thenReturn(DateTime(2025, 1, 5, 12));
+    when(mockDateTimeService.now).thenReturn(now);
 
     testee = CatchupManager(mockAllDoneManager, mockDateTimeService, mockMidnightManager, mockStoreService);
   });
@@ -41,13 +44,13 @@ void main() {
     'daysBehind',
     [
       [null, 0],
-      [DateTime(2025, 1, 5, 12), 0],
-      [DateTime(2025, 1, 4, 12), 0],
-      [DateTime(2025, 1, 3, 12), 1],
-      [DateTime(2025, 1, 2, 12), 2],
+      [now, 0],
+      [now - 1.days, 0],
+      [now - 2.days, 1],
+      [now - 3.days, 2],
     ],
     (virtualAllDoneDate, expectResult) {
-      when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate);
+      when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? now - 1.days);
       expect(testee.daysBehind, expectResult);
     },
   );
