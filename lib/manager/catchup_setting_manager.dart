@@ -10,7 +10,7 @@ class CatchupSettingManager extends SettingManager {
   bool get canEnable => true;
 
   @override
-  bool get defaultValue => true;
+  bool get isEnabledByDefault => true;
 
   @override
   get storeKey => 'isEnabled.catchup';

@@ -13,7 +13,7 @@ class HapticSettingManager extends SettingManager {
   bool get canEnable => _hapticAvailabilityService.isHapticAvailable;
 
   @override
-  bool get defaultValue => false;
+  bool get isEnabledByDefault => false;
 
   @override
   get storeKey => 'isEnabled.haptic';
