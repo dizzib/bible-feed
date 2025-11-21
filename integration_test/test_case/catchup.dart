@@ -24,7 +24,7 @@ Future runCatchupTest() async {
       await t.pumpAndSettle(); // must wait for async code to run
     }
 
-    Future openDialogAndTest(String daysBehind, int expectChaptersToRead) async {
+    Future testCatchupDialog(String daysBehind, int expectChaptersToRead) async {
       await t.tapByKey(fabKey);
       await t.pumpAndSettle();
       expectText('Catchup');
@@ -34,24 +34,36 @@ Future runCatchupTest() async {
       await t.pumpAndSettle();
     }
 
+    Future testSettingManager(bool value) async {
+      catchupSettingManager.isEnabled = value;
+      await t.pumpAndSettle();
+      expectNotInteractiveByKey(fabKey); // should reset when re-enabled
+    }
+
     await t.startApp();
     expectNotInteractiveByKey(fabKey);
+
     await advanceDay();
     await t.tapByKey('mat');
-    await openDialogAndTest('1 days', 19);
+    await testCatchupDialog('1 days', 19);
     await advanceDay();
     await t.tapByKey('gen');
-    await openDialogAndTest('2 days', 28);
+    await testCatchupDialog('2 days', 28);
     await t.setAllFeedsAsRead();
     await t.tapYes();
     expectChapters(2);
-    await openDialogAndTest('1 days', 20);
+    await testCatchupDialog('1 days', 20);
     await t.setAllFeedsAsRead();
     await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(3);
     expectNotInteractiveByKey(fabKey);
 
-    catchupSettingManager.isEnabled = false;
+    // disable then enable setting should clear alert
+    await advanceDay();
+    await advanceDay();
+    await testCatchupDialog('2 days', 30);
+    await testSettingManager(false);
+    await testSettingManager(true);
   });
 }
