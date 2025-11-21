@@ -28,7 +28,7 @@ void main() {
   late CatchupManager testee;
 
   setUp(() {
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized(); // testee calls AppLifecycleListener
 
     mockAllDoneManager = MockAllDoneManager();
     mockDateTimeService = MockDateTimeService();

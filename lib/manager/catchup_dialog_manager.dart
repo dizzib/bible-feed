@@ -18,7 +18,7 @@ class CatchupDialogManager with ChangeNotifier {
 
   bool _hasShown = true;
 
-  int get chaptersToRead => _catchupManager.daysBehind * 10 + _feedsManager.chaptersToRead;
+  int get chaptersToRead => _catchupManager.daysBehind * _feedsManager.feeds.length + _feedsManager.chaptersToRead;
 
   void show() {
     notifyListeners();
