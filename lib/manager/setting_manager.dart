@@ -8,11 +8,12 @@ abstract class SettingManager with ChangeNotifier {
   SettingManager(this._storeService);
 
   bool get canEnable;
+  bool get defaultValue;
   String get storeKey;
   String get subtitle;
   String get title;
 
-  bool get isEnabled => canEnable && (_storeService.getBool(storeKey) ?? false);
+  bool get isEnabled => canEnable && (_storeService.getBool(storeKey) ?? defaultValue);
 
   set isEnabled(bool value) {
     assert(canEnable || !value);

@@ -15,6 +15,9 @@ class TestSettingManager extends SettingManager {
   bool get canEnable => true;
 
   @override
+  bool get defaultValue => false;
+
+  @override
   String get storeKey => 'test.key';
 
   @override

@@ -10,6 +10,9 @@ class ChapterSplitSettingManager extends SettingManager {
   bool get canEnable => true;
 
   @override
+  bool get defaultValue => false;
+
+  @override
   get storeKey => 'isEnabled.splitChapters';
 
   @override

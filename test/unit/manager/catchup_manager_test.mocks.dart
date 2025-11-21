@@ -98,6 +98,15 @@ class MockCatchupSettingManager extends _i1.Mock
           as bool);
 
   @override
+  bool get defaultValue =>
+      (super.noSuchMethod(
+            Invocation.getter(#defaultValue),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   String get storeKey =>
       (super.noSuchMethod(
             Invocation.getter(#storeKey),
