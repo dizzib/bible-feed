@@ -1,3 +1,4 @@
+import 'package:bible_feed/manager/catchup_setting_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +13,8 @@ Future runCatchupTest() async {
   testWidgets('catchup', (t) async {
     await configureDependencies(environment: 'integration_test');
 
+    final fabKey = 'catchup_fab';
+    final catchupSettingManager = sl<CatchupSettingManager>();
     final stubDateTimeService = sl<DateTimeService>() as StubDateTimeService;
     final stubMidnightManager = sl<MidnightManager>() as StubMidnightManager;
 
@@ -22,7 +25,7 @@ Future runCatchupTest() async {
     }
 
     Future openDialogAndTest(String daysBehind, int expectChaptersToRead) async {
-      await t.tapByKey('catchup_fab');
+      await t.tapByKey(fabKey);
       await t.pumpAndSettle();
       expectText('Catchup');
       expectText('$daysBehind behind');
@@ -32,6 +35,7 @@ Future runCatchupTest() async {
     }
 
     await t.startApp();
+    expectNotInteractiveByKey(fabKey);
     await advanceDay();
     await t.tapByKey('mat');
     await openDialogAndTest('1 days', 19);
@@ -46,6 +50,8 @@ Future runCatchupTest() async {
     await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(3);
-    expectNotInteractiveByKey('catchup_fab');
+    expectNotInteractiveByKey(fabKey);
+
+    catchupSettingManager.isEnabled = false;
   });
 }
