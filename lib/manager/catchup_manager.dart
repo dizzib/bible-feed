@@ -19,16 +19,14 @@ class CatchupManager with ChangeNotifier {
   CatchupManager(this._allDoneManager, this._dateTimeService, this._midnightManager, this._storeService) {
     AppLifecycleListener(onResume: notifyListeners);
 
-    if (_virtualAllDoneDate == null) _save(_dateTimeService.now - 1.days);
-
     _allDoneManager.addListener(() {
-      // ignore: avoid-non-null-assertion, set in ctor
-      _save(isBehind ? _virtualAllDoneDate! + 1.days : _allDoneManager.allDoneDate);
+      _save([_virtualAllDoneDate + 1.days, _allDoneManager.allDoneDate].min()!); // ignore: avoid-non-null-assertion
       notifyListeners();
     });
 
     _midnightManager.addListener(notifyListeners);
 
+    _save(_virtualAllDoneDate);
     notifyListeners();
   }
 
@@ -36,9 +34,9 @@ class CatchupManager with ChangeNotifier {
 
   void _save(DateTime value) => _storeService.setDateTime(_virtualAllDoneDateStoreKey, value);
 
-  DateTime? get _virtualAllDoneDate => _storeService.getDateTime(_virtualAllDoneDateStoreKey);
+  DateTime get _virtualAllDoneDate =>
+      _storeService.getDateTime(_virtualAllDoneDateStoreKey) ?? _dateTimeService.now - 1.days;
 
-  // ignore: avoid-non-null-assertion, set in ctor
-  int get daysBehind => max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate!.date).inDays - 1);
+  int get daysBehind => max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate.date).inDays - 1);
   bool get isBehind => daysBehind > 0;
 }
