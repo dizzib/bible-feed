@@ -56,8 +56,8 @@ void main() {
   });
 
   test('CatchupSettingManager listener should reset virtualAllDoneDate and notifyListeners', () {
+    clearInteractions(mockStoreService); // ignore first call by ctor
     when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now - 3.days);
-    when(mockAllDoneManager.allDoneDate).thenReturn(now);
 
     // Capture the listener callback passed to addListener
     late VoidCallback capturedListener;
@@ -67,7 +67,7 @@ void main() {
 
     capturedListener(); // Trigger the listener manually
 
-    verify(mockStoreService.setDateTime(any, now)).called(1);
+    verify(mockStoreService.setDateTime(any, now - 1.days)).called(1);
     expect(notified, isTrue);
   });
 
