@@ -515,9 +515,9 @@ class MockChapterSplitSettingManager extends _i1.Mock
           as bool);
 
   @override
-  bool get defaultValue =>
+  bool get isEnabledByDefault =>
       (super.noSuchMethod(
-            Invocation.getter(#defaultValue),
+            Invocation.getter(#isEnabledByDefault),
             returnValue: false,
             returnValueForMissingStub: false,
           )

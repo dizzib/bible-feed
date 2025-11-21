@@ -54,6 +54,9 @@ Future runCatchupTest() async {
     expectChapters(2);
     await testCatchupDialog('1 day', 20);
     await t.setAllFeedsAsRead();
+    await t.tapByKey('mat');
+    await testCatchupDialog('1 day', 11);
+    await t.setAllFeedsAsRead();
     await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(3);

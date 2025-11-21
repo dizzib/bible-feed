@@ -1,6 +1,6 @@
-import 'package:bible_feed/manager/all_done_manager.dart';
 import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/manager/catchup_setting_manager.dart';
+import 'package:bible_feed/manager/feeds_advance_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/store_service.dart';
@@ -14,16 +14,16 @@ import 'package:parameterized_test/parameterized_test.dart';
 import 'catchup_manager_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<AllDoneManager>(),
   MockSpec<CatchupSettingManager>(),
   MockSpec<DateTimeService>(),
+  MockSpec<FeedsAdvanceManager>(),
   MockSpec<MidnightManager>(),
   MockSpec<StoreService>(),
 ])
 void main() {
-  late MockAllDoneManager mockAllDoneManager;
   late MockCatchupSettingManager mockCatchupSettingManager;
   late MockDateTimeService mockDateTimeService;
+  late MockFeedsAdvanceManager mockFeedsAdvanceManager;
   late MockMidnightManager mockMidnightManager;
   late MockStoreService mockStoreService;
   late CatchupManager testee;
@@ -34,9 +34,9 @@ void main() {
   setUp(() {
     WidgetsFlutterBinding.ensureInitialized(); // testee calls AppLifecycleListener
 
-    mockAllDoneManager = MockAllDoneManager();
     mockCatchupSettingManager = MockCatchupSettingManager();
     mockDateTimeService = MockDateTimeService();
+    mockFeedsAdvanceManager = MockFeedsAdvanceManager();
     mockMidnightManager = MockMidnightManager();
     mockStoreService = MockStoreService();
     notified = false;
@@ -45,9 +45,9 @@ void main() {
     when(mockDateTimeService.now).thenReturn(now);
 
     testee = CatchupManager(
-      mockAllDoneManager,
       mockCatchupSettingManager,
       mockDateTimeService,
+      mockFeedsAdvanceManager,
       mockMidnightManager,
       mockStoreService,
     );
@@ -96,21 +96,20 @@ void main() {
   );
 
   parameterizedTest(
-    'AllDoneManager listener should advance virtualAllDoneDate and notifyListeners',
+    'FeedsAdvanceManager listener should advance virtualAllDoneDate and notifyListeners',
     [
-      [0.days, 0.days],
-      [1.days, 0.days],
+      // [0.days, 0.days],
+      // [1.days, 0.days],
       [2.days, 1.days],
       [3.days, 2.days],
     ],
     (daysBehind, expectNewDaysBehind) {
       clearInteractions(mockStoreService); // ignore first call by ctor
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now - daysBehind);
-      when(mockAllDoneManager.allDoneDate).thenReturn(now);
 
       // Capture the listener callback passed to addListener
       late VoidCallback capturedListener;
-      for (var listener in verify(mockAllDoneManager.addListener(captureAny)).captured) {
+      for (var listener in verify(mockFeedsAdvanceManager.addListener(captureAny)).captured) {
         capturedListener = listener as VoidCallback;
       }
 

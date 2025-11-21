@@ -1,34 +1,36 @@
 import 'dart:math';
 
 import 'package:dartx/dartx.dart';
+import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../service/date_time_service.dart';
 import '../service/store_service.dart';
-import 'all_done_manager.dart';
 import 'catchup_setting_manager.dart';
+import 'feeds_advance_manager.dart';
 import 'midnight_manager.dart';
 
 @lazySingleton
 class CatchupManager with ChangeNotifier {
-  final AllDoneManager _allDoneManager;
   final CatchupSettingManager _catchupSettingManager;
   final DateTimeService _dateTimeService;
+  final FeedsAdvanceManager _feedsAdvanceManager;
   final MidnightManager _midnightManager;
   final StoreService _storeService;
 
   CatchupManager(
-    this._allDoneManager,
     this._catchupSettingManager,
     this._dateTimeService,
+    this._feedsAdvanceManager,
     this._midnightManager,
     this._storeService,
   ) {
     AppLifecycleListener(onResume: notifyListeners);
 
-    _allDoneManager.addListener(() {
-      _save([_virtualAllDoneDate + 1.days, _allDoneManager.allDoneDate].min()!); // ignore: avoid-non-null-assertion
+    _feedsAdvanceManager.addListener(() {
+      _save([_virtualAllDoneDate + 1.days, _defaultVirtualAllDoneDate].min()!); // ignore: avoid-non-null-assertion
+      // Log.info(_virtualAllDoneDate);
       notifyListeners();
     });
 
