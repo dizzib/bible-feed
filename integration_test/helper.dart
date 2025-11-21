@@ -35,8 +35,7 @@ extension AppTestHelper on WidgetTester {
 
   Future tapAllDoneButton(String text) async {
     expectText('All done!');
-    await tap(find.text(text));
-    await pumpAndSettle();
+    await tapText(text);
   }
 
   Future tapAllLists() async {
@@ -61,11 +60,6 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  Future tapIconButton(String value) async {
-    await tap(find.byKey(Key(value)));
-    await pumpAndSettle();
-  }
-
   Future tapList(String bookName) async {
     await tap(find.text(bookName));
     await pumpAndSettle();
@@ -73,6 +67,11 @@ extension AppTestHelper on WidgetTester {
 
   Future tapNo() async {
     await tapAllDoneButton('No');
+  }
+
+  Future tapText(String value) async {
+    await tap(find.text(value));
+    await pumpAndSettle();
   }
 
   Future tapYes() async {

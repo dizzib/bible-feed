@@ -18,12 +18,11 @@ Future runEndToEndTest() async {
     await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(3);
-    await t.tapIconButton('gos');
-    await t.pumpAndSettle();
+    await t.tapByKey('gos');
     await t.scrollToLastBook(); // subsequent t.pump breaks!?
     await t.scrollToLastChapter();
     await t.pumpAndSettle();
-    await t.tap(find.text('Update'));
+    await t.tapText('Update');
     await t.pumpAndSettle();
     expectBookAndChapter('John', 21);
     expectChapters(3, count: 9);
