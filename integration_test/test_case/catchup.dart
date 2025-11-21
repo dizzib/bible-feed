@@ -45,14 +45,14 @@ Future runCatchupTest() async {
 
     await advanceDay();
     await t.tapByKey('mat');
-    await testCatchupDialog('1 days', 19);
+    await testCatchupDialog('1 day', 19);
     await advanceDay();
     await t.tapByKey('gen');
     await testCatchupDialog('2 days', 28);
     await t.setAllFeedsAsRead();
     await t.tapYes();
     expectChapters(2);
-    await testCatchupDialog('1 days', 20);
+    await testCatchupDialog('1 day', 20);
     await t.setAllFeedsAsRead();
     await t.tapAllDoneFab();
     await t.tapYes();

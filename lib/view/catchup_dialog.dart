@@ -14,6 +14,8 @@ class CatchupDialog extends WatchingWidget {
     final catchupDialogManager = sl<CatchupDialogManager>();
 
     catchupDialogManager.addListener(() {
+      final daysBehind = catchupManager.daysBehind;
+
       context.showDialogWithBlurBackground(
         CupertinoAlertDialog(
           title: Text('Catchup alert!', style: context.textTheme.titleLarge),
@@ -21,7 +23,7 @@ class CatchupDialog extends WatchingWidget {
             child: Padding(
               padding: Constants.defaultPadding,
               child: Text(
-                "You are ${catchupManager.daysBehind} days behind, and have ${catchupDialogManager.chaptersToRead} more chapters to read today.\n\nIf you don't want to see this alert, you can disable it in settings.",
+                "You are $daysBehind day${daysBehind == 1 ? '' : 's'} behind, and have ${catchupDialogManager.chaptersToRead} more chapters to read today.\n\nIf you don't want to see this alert, you can disable it in settings.",
                 style: context.textTheme.bodyLarge,
               ),
             ),
