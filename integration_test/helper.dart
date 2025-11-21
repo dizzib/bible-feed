@@ -1,7 +1,9 @@
+import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:bible_feed/view/feed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:watch_it/watch_it.dart';
 
 void expectBookAndChapter(String expectedBookName, int expectedChapter) =>
     expectText('$expectedBookName $expectedChapter');
@@ -33,6 +35,13 @@ extension AppTestHelper on WidgetTester {
     // await pumpAndSettle(); // uncommenting breaks!?
   }
 
+  Future setAllFeedsAsRead() async {
+    for (final f in sl<FeedsManager>().feeds.where((f) => !f.state.isRead)) {
+      f.toggleIsRead();
+    }
+    await pumpAndSettle();
+  }
+
   Future tapAllDoneButton(String text) async {
     expectText('All done!');
     await tapText(text);
@@ -60,10 +69,10 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  Future tapList(String bookName) async {
-    await tap(find.text(bookName));
-    await pumpAndSettle();
-  }
+  // Future tapFeed(String value) async {
+  //   await tapAt(getCenter(find.text(bookName)));
+  //   await pumpAndSettle();
+  // }
 
   Future tapNo() async {
     await tapAllDoneButton('No');

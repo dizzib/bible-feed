@@ -33,14 +33,16 @@ Future runCatchupTest() async {
 
     await t.startApp();
     await advanceDay();
-    await openDialogAndTest('1 days', 20);
+    await t.tapByKey('mat');
+    await openDialogAndTest('1 days', 19);
     await advanceDay();
-    await openDialogAndTest('2 days', 30);
-    await t.tapAllLists();
+    await t.tapByKey('gen');
+    await openDialogAndTest('2 days', 28);
+    await t.setAllFeedsAsRead();
     await t.tapYes();
     expectChapters(2);
     await openDialogAndTest('1 days', 20);
-    await t.tapAllLists();
+    await t.setAllFeedsAsRead();
     await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(3);
