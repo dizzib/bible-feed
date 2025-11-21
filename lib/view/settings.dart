@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../manager/catchup_setting_manager.dart';
 import '../manager/chapter_split_setting_manager.dart';
 import '../manager/haptic_setting_manager.dart';
 import '_constants.dart';
@@ -22,6 +23,7 @@ class Settings extends StatelessWidget {
               children: [
                 BibleReaderSettings(),
                 Setting<ChapterSplitSettingManager>(),
+                Setting<CatchupSettingManager>(),
                 Setting<HapticSettingManager>(),
                 const AppVersion(),
               ],

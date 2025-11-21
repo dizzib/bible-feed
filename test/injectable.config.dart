@@ -19,6 +19,7 @@ import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
 import 'package:bible_feed/manager/catchup_dialog_manager.dart' as _i156;
 import 'package:bible_feed/manager/catchup_manager.dart' as _i1045;
+import 'package:bible_feed/manager/catchup_setting_manager.dart' as _i282;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
 import 'package:bible_feed/manager/deeplink_in_manager.dart' as _i468;
@@ -104,6 +105,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i632.ChapterSplitSettingManager>(
       () => _i632.ChapterSplitSettingManager(gh<_i215.StoreService>()),
+    );
+    gh.lazySingleton<_i282.CatchupSettingManager>(
+      () => _i282.CatchupSettingManager(gh<_i215.StoreService>()),
     );
     gh.lazySingleton<_i1070.BibleReaders>(
       () => _i1070.BibleReaders(gh<List<_i270.BibleReader>>()),
@@ -260,24 +264,19 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i22.HapticService>(),
       ),
     );
-    gh.lazySingleton<_i1045.CatchupManager>(
-      () => _i1045.CatchupManager(
-        gh<_i545.AllDoneManager>(),
-        gh<_i99.DateTimeService>(),
-        gh<_i438.MidnightManager>(),
-        gh<_i215.StoreService>(),
-      ),
-    );
     gh.singleton<_i768.DeepLinkOutManager>(
       () => _i768.DeepLinkOutManager(
         gh<_i508.JsonEncodingManager>(),
         gh<_i175.ShareOutManager>(),
       ),
     );
-    gh.lazySingleton<_i156.CatchupDialogManager>(
-      () => _i156.CatchupDialogManager(
-        gh<_i1045.CatchupManager>(),
-        gh<_i127.FeedsManager>(),
+    gh.lazySingleton<_i1045.CatchupManager>(
+      () => _i1045.CatchupManager(
+        gh<_i545.AllDoneManager>(),
+        gh<_i282.CatchupSettingManager>(),
+        gh<_i99.DateTimeService>(),
+        gh<_i438.MidnightManager>(),
+        gh<_i215.StoreService>(),
       ),
     );
     gh.lazySingleton<_i541.AllDoneDialogManager>(
@@ -290,6 +289,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i111.AutoAdvanceManager(
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i438.MidnightManager>(),
+      ),
+    );
+    gh.lazySingleton<_i156.CatchupDialogManager>(
+      () => _i156.CatchupDialogManager(
+        gh<_i1045.CatchupManager>(),
+        gh<_i127.FeedsManager>(),
       ),
     );
     return this;
