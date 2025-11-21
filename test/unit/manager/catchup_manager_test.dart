@@ -41,7 +41,7 @@ void main() {
   });
 
   parameterizedTest(
-    'daysBehind, isBehind',
+    'daysBehind, isBehind properties',
     [
       [null, 0, false],
       [now, 0, false],
@@ -53,6 +53,35 @@ void main() {
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? now - 1.days);
       expect(testee.daysBehind, expectDaysBehind);
       expect(testee.isBehind, expectIsBehind);
+    },
+  );
+
+  parameterizedTest(
+    'AllDoneManager listener should advance virtualAllDoneDate and notifyListeners',
+    [
+      [0.days, 0.days],
+      [1.days, 0.days],
+      [2.days, 1.days],
+      [3.days, 2.days],
+    ],
+    (daysBehind, expectNewDaysBehind) {
+      var notified = false;
+      testee.addListener(() => notified = true);
+
+      clearInteractions(mockStoreService); // ignore first call by ctor
+      when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now - daysBehind);
+      when(mockAllDoneManager.allDoneDate).thenReturn(now);
+
+      // Capture the listener callback passed to addListener
+      late VoidCallback capturedListener;
+      for (var listener in verify(mockAllDoneManager.addListener(captureAny)).captured) {
+        capturedListener = listener as VoidCallback;
+      }
+
+      capturedListener(); // Trigger the listener manually
+
+      verify(mockStoreService.setDateTime(any, now - expectNewDaysBehind)).called(1); // AllDoneManager listener
+      expect(notified, isTrue);
     },
   );
 }
