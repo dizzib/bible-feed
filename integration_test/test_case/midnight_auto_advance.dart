@@ -16,7 +16,6 @@ Future runMidnightAdvanceTest() async {
     final stubMidnightManager = sl<MidnightManager>() as StubMidnightManager;
 
     await t.startApp();
-    expectChapters(1);
     await t.tapAllLists();
     expectText('All done!');
 

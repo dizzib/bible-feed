@@ -20,6 +20,7 @@ extension AppTestHelper on WidgetTester {
     WidgetsFlutterBinding.ensureInitialized();
     runApp(AppBase());
     await pumpAndSettle();
+    expectChapters(1);
   }
 
   Future scrollToLastBook() async => await scrollToLastItem('book_wheel');

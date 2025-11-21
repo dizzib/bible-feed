@@ -7,7 +7,6 @@ Future runEndToEndTest() async {
   testWidgets('end-to-end', (t) async {
     await configureDependencies(environment: 'integration_test');
     await t.startApp();
-    expectChapters(1);
     await t.tapAllLists();
     await t.tapNo();
     expectChapters(1);

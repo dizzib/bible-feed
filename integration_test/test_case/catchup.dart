@@ -28,7 +28,6 @@ Future runCatchupTest() async {
     }
 
     await t.startApp();
-    expectChapters(1);
 
     await advanceDay('1 days', 20);
     await advanceDay('2 days', 30);
