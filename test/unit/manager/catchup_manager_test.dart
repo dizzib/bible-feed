@@ -41,17 +41,18 @@ void main() {
   });
 
   parameterizedTest(
-    'daysBehind',
+    'daysBehind, isBehind',
     [
-      [null, 0],
-      [now, 0],
-      [now - 1.days, 0],
-      [now - 2.days, 1],
-      [now - 3.days, 2],
+      [null, 0, false],
+      [now, 0, false],
+      [now - 1.days, 0, false],
+      [now - 2.days, 1, true],
+      [now - 3.days, 2, true],
     ],
-    (virtualAllDoneDate, expectResult) {
+    (virtualAllDoneDate, expectDaysBehind, expectIsBehind) {
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? now - 1.days);
-      expect(testee.daysBehind, expectResult);
+      expect(testee.daysBehind, expectDaysBehind);
+      expect(testee.isBehind, expectIsBehind);
     },
   );
 }
