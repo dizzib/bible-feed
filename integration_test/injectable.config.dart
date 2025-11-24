@@ -226,6 +226,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i516.PlatformEventService>(),
       ),
     );
+    gh.lazySingleton<_i541.AllDoneDialogManager>(
+      () => _i541.AllDoneDialogManager(
+        gh<_i215.StoreService>(),
+        gh<_i127.FeedsManager>(),
+      ),
+    );
     gh.lazySingleton<_i477.FeedsAdvanceManager>(
       () => _i477.FeedsAdvanceManager(
         gh<_i99.DateTimeService>(),
@@ -263,12 +269,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i438.MidnightManager>(),
       ),
     );
-    gh.lazySingleton<_i541.AllDoneDialogManager>(
-      () => _i541.AllDoneDialogManager(
-        gh<_i127.FeedsManager>(),
-        gh<_i477.FeedsAdvanceManager>(),
-      ),
-    );
     gh.lazySingleton<_i1045.CatchupManager>(
       () => _i1045.CatchupManager(
         gh<_i282.CatchupSettingManager>(),
@@ -280,6 +280,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i156.CatchupDialogManager>(
       () => _i156.CatchupDialogManager(
+        gh<_i215.StoreService>(),
         gh<_i1045.CatchupManager>(),
         gh<_i127.FeedsManager>(),
       ),

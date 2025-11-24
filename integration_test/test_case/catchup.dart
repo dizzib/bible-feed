@@ -24,9 +24,11 @@ Future runCatchupTest() async {
       await t.pumpAndSettle(); // must wait for async code to run
     }
 
-    Future testCatchupDialog(String daysBehind, int expectChaptersToRead) async {
-      await t.tapByKey(fabKey);
-      await t.pumpAndSettle();
+    Future testCatchupDialog(String daysBehind, int expectChaptersToRead, {expectOnboarding = false}) async {
+      if (!expectOnboarding) {
+        await t.tapByKey(fabKey);
+        await t.pumpAndSettle();
+      }
       expectText('Catchup');
       expectText('$daysBehind behind');
       expectText('$expectChaptersToRead more');
@@ -44,7 +46,7 @@ Future runCatchupTest() async {
     expectNotInteractiveByKey(fabKey);
     // on fresh install, should alert tomorrow if unread
     await advanceDay();
-    await testCatchupDialog('1 day', 20);
+    await testCatchupDialog('1 day', 20, expectOnboarding: true);
     await t.setAllFeedsAsRead();
     await t.tapYes();
     expectChapters(2);

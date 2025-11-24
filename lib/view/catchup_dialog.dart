@@ -28,7 +28,7 @@ class CatchupDialog extends WatchingWidget {
               ),
             ),
           ),
-          actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close'))],
+          actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')), const SizedBox.shrink()],
         ),
       );
     });

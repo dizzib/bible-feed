@@ -8,13 +8,14 @@ Future runSmokeTest() async {
     await configureDependencies(environment: 'integration_test');
     await t.startApp();
     await t.tapAllLists();
+    expectText('All done!'); // onboarding should happen
     await t.tapNo();
     expectChapters(1);
     await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(2);
     await t.tapAllLists();
-    expectNoText('All done!'); // 2nd time
+    expectNoText('All done!'); // onboarding should not happen
     await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(3);
