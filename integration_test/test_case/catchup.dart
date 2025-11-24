@@ -41,10 +41,22 @@ Future runCatchupTest() async {
     }
 
     await t.startApp();
+    // ensure toggle feed has no effect
     expectNotInteractiveByKey(fabKey);
+    await t.tapByKey('mat');
+    await t.tapByKey('mat');
+    expectNotInteractiveByKey(fabKey);
+    // on fresh install, should alert tomorrow if unread
+    await advanceDay();
+    await testCatchupDialog('1 day', 20);
     await t.setAllFeedsAsRead();
     await t.tapYes();
     expectChapters(2);
+    expectNotInteractiveByKey(fabKey);
+    await t.setAllFeedsAsRead();
+    await t.tapAllDoneFab();
+    await t.tapYes();
+    expectChapters(3);
     await advanceDay();
     expectNotInteractiveByKey(fabKey);
     await advanceDay();
@@ -56,7 +68,7 @@ Future runCatchupTest() async {
     await t.setAllFeedsAsRead();
     await t.tapAllDoneFab();
     await t.tapYes();
-    expectChapters(3);
+    expectChapters(4);
     await testCatchupDialog('1 day', 20);
     await t.setAllFeedsAsRead();
     await t.tapByKey('mat');
@@ -64,7 +76,7 @@ Future runCatchupTest() async {
     await t.setAllFeedsAsRead();
     await t.tapAllDoneFab();
     await t.tapYes();
-    expectChapters(4);
+    expectChapters(5);
     expectNotInteractiveByKey(fabKey);
     // disable then enable setting should clear alert
     await advanceDay();
