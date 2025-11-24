@@ -1,7 +1,5 @@
 import 'package:injectable/injectable.dart';
 
-import '/injectable.env.dart';
-
 // Prefer this to clock, due to issues like:
 //
 // - https://github.com/dart-lang/tools/issues/705 manifesting in integration tests.
@@ -11,7 +9,6 @@ abstract class DateTimeService {
   DateTime get now;
 }
 
-@golden
 @prod
 @LazySingleton(as: DateTimeService)
 class NowDateTimeService extends DateTimeService {

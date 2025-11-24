@@ -97,10 +97,6 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_integration_test},
     );
     gh.lazySingleton<_i99.DateTimeService>(
-      () => _i99.NowDateTimeService(),
-      registerFor: {_golden, _prod},
-    );
-    gh.lazySingleton<_i99.DateTimeService>(
       () => _i738.StubDateTimeService(),
       registerFor: {_integration_test},
     );
@@ -140,14 +136,14 @@ extension GetItInjectableX on _i174.GetIt {
       registerFor: {_integration_test, _prod},
       preResolve: true,
     );
+    gh.lazySingleton<_i99.DateTimeService>(
+      () => _i99.NowDateTimeService(),
+      registerFor: {_prod},
+    );
     await gh.lazySingletonAsync<_i977.AppService>(
       () => _i977.ProductionAppService.create(),
       registerFor: {_integration_test, _prod},
       preResolve: true,
-    );
-    gh.singleton<_i438.MidnightManager>(
-      () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
-      registerFor: {_golden, _prod},
     );
     gh.lazySingleton<_i823.ReadingLists>(
       () => _i823.ReadingLists(gh<List<_i279.ReadingList>>()),
@@ -164,6 +160,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i578.PlatformService>(
       () => _i578.ProductionPlatformService(),
       registerFor: {_integration_test, _prod},
+    );
+    gh.singleton<_i438.MidnightManager>(
+      () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i22.HapticService>(
       () => _i22.HapticService(gh<_i274.HapticSettingManager>()),

@@ -5,6 +5,10 @@ library;
 // They are resized and moved to fastlane by external scripts.
 
 import 'package:alchemist/alchemist.dart';
+import 'package:bible_feed/manager/catchup_dialog_manager.dart';
+import 'package:bible_feed/manager/catchup_setting_manager.dart';
+import 'package:bible_feed/manager/midnight_manager.dart';
+import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:df_log/df_log.dart';
@@ -15,6 +19,8 @@ import 'package:watch_it/watch_it.dart';
 import '../../integration_test/helper.dart';
 import '../injectable.dart';
 import 'helper.dart';
+import 'stub/stub_date_time_service.dart';
+import 'stub/stub_midnight_manager.dart';
 
 enum Platform { android, iOS }
 
@@ -42,9 +48,10 @@ enum Device {
 }
 
 class Scenario {
-  const Scenario(this.name, {this.brightness = Brightness.light, this.tapKey});
+  const Scenario(this.name, {this.advanceDay = false, this.brightness = Brightness.light, this.tapKey});
 
   final String name;
+  final bool advanceDay;
   final Brightness brightness;
   final String? tapKey;
 }
@@ -53,6 +60,7 @@ final scenarios = {
   const Scenario('home'),
   const Scenario('bookChapterDialog', tapKey: 'ep2'),
   const Scenario('settings', tapKey: 'settingsIconButton'),
+  const Scenario('catchup', advanceDay: true, tapKey: 'catchup_fab'),
   const Scenario('share', tapKey: 'shareIconButton'),
   const Scenario('home', brightness: Brightness.dark),
 };
@@ -63,6 +71,13 @@ Future<void> main() async {
 
   Helper.enableVerseScopes();
   Helper.initialiseFeeds();
+
+  final catchupDialogManager = sl<CatchupDialogManager>();
+  final catchupSettingManager = sl<CatchupSettingManager>();
+  final stubDateTimeService = sl<DateTimeService>() as StubDateTimeService;
+  final stubMidnightManager = sl<MidnightManager>() as StubMidnightManager;
+
+  catchupDialogManager.completeOnboarding();
 
   for (final device in Device.values.where((d) => d.enabled)) {
     final targetPlatform = device.platform == Platform.android ? TargetPlatform.android : TargetPlatform.iOS;
@@ -77,6 +92,11 @@ Future<void> main() async {
           sl.unregister<PlatformService>();
           sl.registerSingleton(PlatformService(currentPlatform: targetPlatform));
           t.platformDispatcher.platformBrightnessTestValue = scenario.brightness;
+          catchupSettingManager.isEnabled = true;
+          if (scenario.advanceDay) {
+            stubDateTimeService.advance1day();
+            stubMidnightManager.notify();
+          }
           return t.pumpAndSettle();
         },
         whilePerforming: (t) async {

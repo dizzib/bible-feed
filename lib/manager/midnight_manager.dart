@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
-import '../injectable.env.dart';
 import '../service/date_time_service.dart';
 
 abstract class MidnightManager with ChangeNotifier {}
@@ -15,7 +14,6 @@ abstract class MidnightManager with ChangeNotifier {}
 // 'package:flutter_test/src/binding.dart':
 // Failed assertion: line 1617 pos 12: '!timersPending'
 //
-@golden
 @prod
 @Singleton(as: MidnightManager)
 class ProdMidnightManager extends MidnightManager {

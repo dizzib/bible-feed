@@ -16,7 +16,9 @@ abstract class DialogManager with ChangeNotifier {
 
   //// concrete
 
-  bool get hasCompletedOnboarding => _storeService.getBool(onboardingStoreKey) ?? false;
+  String get _onboardingStoreKey => 'hasCompletedOnboarding.$onboardingStoreKey';
+
+  bool get hasCompletedOnboarding => _storeService.getBool(_onboardingStoreKey) ?? false;
 
   // ui props
 
@@ -26,12 +28,12 @@ abstract class DialogManager with ChangeNotifier {
 
   bool get hasAction => action != null;
 
-  String get storeKey => 'hasCompletedOnboarding.$onboardingStoreKey}';
-
   // methods
 
-  void show() async {
-    await _storeService.setBool(onboardingStoreKey, true);
+  void completeOnboarding() => _storeService.setBool(_onboardingStoreKey, true);
+
+  void show() {
+    completeOnboarding();
     notifyListeners();
   }
 }
