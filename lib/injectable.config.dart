@@ -10,7 +10,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/manager/all_done_dialog_manager.dart' as _i541;
-import 'package:bible_feed/manager/all_done_manager.dart' as _i545;
 import 'package:bible_feed/manager/app_install_manager.dart' as _i610;
 import 'package:bible_feed/manager/auto_advance_manager.dart' as _i111;
 import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
@@ -171,13 +170,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1070.BibleReaders>(),
       ),
     );
-    gh.lazySingleton<_i545.AllDoneManager>(
-      () => _i545.AllDoneManager(
-        gh<_i99.DateTimeService>(),
-        gh<_i127.FeedsManager>(),
-        gh<_i215.StoreService>(),
-      ),
-    );
     gh.lazySingleton<_i186.BibleReaderLaunchManager>(
       () => _i186.BibleReaderLaunchManager(
         gh<_i578.PlatformService>(),
@@ -248,16 +240,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i175.ShareOutManager>(),
       ),
     );
-    gh.lazySingleton<_i541.AllDoneDialogManager>(
-      () => _i541.AllDoneDialogManager(
-        gh<_i545.AllDoneManager>(),
-        gh<_i477.FeedsAdvanceManager>(),
-      ),
-    );
     gh.lazySingleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i438.MidnightManager>(),
+      ),
+    );
+    gh.lazySingleton<_i541.AllDoneDialogManager>(
+      () => _i541.AllDoneDialogManager(
+        gh<_i127.FeedsManager>(),
+        gh<_i477.FeedsAdvanceManager>(),
       ),
     );
     gh.lazySingleton<_i1045.CatchupManager>(
