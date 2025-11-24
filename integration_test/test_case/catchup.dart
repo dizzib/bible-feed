@@ -43,7 +43,7 @@ Future runCatchupTest() async {
     }
 
     await t.startApp();
-    expectNotInteractiveByKey(fabKey);
+    await testSettingManager(true); // enable
     // on fresh install, should alert tomorrow if unread
     await advanceDay();
     await testCatchupDialog('1 day', 20, expectOnboarding: true);
