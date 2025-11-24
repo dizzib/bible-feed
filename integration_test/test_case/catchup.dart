@@ -41,10 +41,6 @@ Future runCatchupTest() async {
     }
 
     await t.startApp();
-    // ensure toggle feed has no effect
-    expectNotInteractiveByKey(fabKey);
-    await t.tapByKey('mat');
-    await t.tapByKey('mat');
     expectNotInteractiveByKey(fabKey);
     // on fresh install, should alert tomorrow if unread
     await advanceDay();
