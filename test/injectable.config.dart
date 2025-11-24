@@ -237,14 +237,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i127.FeedsManager>(),
       ),
     );
-    gh.lazySingleton<_i477.FeedsAdvanceManager>(
-      () => _i477.FeedsAdvanceManager(
-        gh<_i99.DateTimeService>(),
-        gh<_i716.FeedAdvanceManager>(),
-        gh<_i127.FeedsManager>(),
-        gh<_i215.StoreService>(),
-      ),
-    );
     gh.singleton<_i519.HapticWireupManager>(
       () => _i519.HapticWireupManager(
         gh<_i22.HapticService>(),
@@ -253,6 +245,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i1033.ChapterListWheelState>(),
+      ),
+    );
+    gh.lazySingleton<_i477.FeedsAdvanceManager>(
+      () => _i477.FeedsAdvanceManager(
+        gh<_i99.DateTimeService>(),
+        gh<_i716.FeedAdvanceManager>(),
+        gh<_i127.FeedsManager>(),
       ),
     );
     gh.lazySingleton<_i583.FeedTapManager>(

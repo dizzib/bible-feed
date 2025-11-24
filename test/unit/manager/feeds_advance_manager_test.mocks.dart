@@ -3,7 +3,6 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i11;
 import 'dart:ui' as _i7;
 
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i8;
@@ -12,7 +11,6 @@ import 'package:bible_feed/model/book.dart' as _i4;
 import 'package:bible_feed/model/feed.dart' as _i2;
 import 'package:bible_feed/model/reading_list.dart' as _i6;
 import 'package:bible_feed/service/date_time_service.dart' as _i3;
-import 'package:bible_feed/service/store_service.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
 
@@ -258,94 +256,4 @@ class MockFeedsManager extends _i1.Mock implements _i9.FeedsManager {
     Invocation.method(#notifyListeners, []),
     returnValueForMissingStub: null,
   );
-}
-
-/// A class which mocks [StoreService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockStoreService extends _i1.Mock implements _i10.StoreService {
-  @override
-  bool? getBool(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getBool, [key]),
-            returnValueForMissingStub: null,
-          )
-          as bool?);
-
-  @override
-  DateTime? getDateTime(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getDateTime, [key]),
-            returnValueForMissingStub: null,
-          )
-          as DateTime?);
-
-  @override
-  double? getDouble(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getDouble, [key]),
-            returnValueForMissingStub: null,
-          )
-          as double?);
-
-  @override
-  int? getInt(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getInt, [key]),
-            returnValueForMissingStub: null,
-          )
-          as int?);
-
-  @override
-  String? getString(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#getString, [key]),
-            returnValueForMissingStub: null,
-          )
-          as String?);
-
-  @override
-  _i11.Future<bool> setBool(String? key, bool? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setBool, [key, value]),
-            returnValue: _i11.Future<bool>.value(false),
-            returnValueForMissingStub: _i11.Future<bool>.value(false),
-          )
-          as _i11.Future<bool>);
-
-  @override
-  _i11.Future<bool> setDateTime(String? key, DateTime? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setDateTime, [key, value]),
-            returnValue: _i11.Future<bool>.value(false),
-            returnValueForMissingStub: _i11.Future<bool>.value(false),
-          )
-          as _i11.Future<bool>);
-
-  @override
-  _i11.Future<bool> setDouble(String? key, double? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setDouble, [key, value]),
-            returnValue: _i11.Future<bool>.value(false),
-            returnValueForMissingStub: _i11.Future<bool>.value(false),
-          )
-          as _i11.Future<bool>);
-
-  @override
-  _i11.Future<bool> setInt(String? key, int? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setInt, [key, value]),
-            returnValue: _i11.Future<bool>.value(false),
-            returnValueForMissingStub: _i11.Future<bool>.value(false),
-          )
-          as _i11.Future<bool>);
-
-  @override
-  _i11.Future<bool> setString(String? key, String? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setString, [key, value]),
-            returnValue: _i11.Future<bool>.value(false),
-            returnValueForMissingStub: _i11.Future<bool>.value(false),
-          )
-          as _i11.Future<bool>);
 }

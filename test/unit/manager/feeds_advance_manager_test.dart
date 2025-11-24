@@ -4,7 +4,6 @@ import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/model/feeds_advance_state.dart';
 import 'package:bible_feed/service/date_time_service.dart';
-import 'package:bible_feed/service/store_service.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -19,23 +18,20 @@ import 'feeds_advance_manager_test.mocks.dart';
   MockSpec<Feed>(),
   MockSpec<FeedAdvanceManager>(),
   MockSpec<FeedsManager>(),
-  MockSpec<StoreService>(),
 ])
 void main() async {
   final mockFeedList = [MockFeed(), MockFeed()];
   late MockDateTimeService mockDateTimeService;
   late MockFeedAdvanceManager mockFeedAdvanceManager;
   late MockFeedsManager mockFeedsManager;
-  late MockStoreService mockStoreService;
   late FeedsAdvanceManager testee;
 
   setUp(() {
     mockDateTimeService = MockDateTimeService();
     mockFeedAdvanceManager = MockFeedAdvanceManager();
     mockFeedsManager = MockFeedsManager();
-    mockStoreService = MockStoreService();
     when(mockFeedsManager.feeds).thenReturn(mockFeedList);
-    testee = FeedsAdvanceManager(mockDateTimeService, mockFeedAdvanceManager, mockFeedsManager, mockStoreService);
+    testee = FeedsAdvanceManager(mockDateTimeService, mockFeedAdvanceManager, mockFeedsManager);
   });
 
   verifyAllAdvanced() {
@@ -50,16 +46,11 @@ void main() async {
     }
   }
 
-  test('hasEverAdvanced should default to false', () {
-    expect(testee.hasEverAdvanced, false);
-  });
-
-  test('advance should advance all feeds and store lastAdvanceDate as now', () async {
+  test('advance should advance all feeds', () async {
     final now = DateTime.now();
     when(mockDateTimeService.now).thenReturn(now);
     expect(await testee.advance(), FeedsAdvanceState.listsAdvanced);
     verifyAllAdvanced();
-    verify(mockStoreService.setDateTime('lastAdvanceDate', now)).called(1);
   });
 
   final midMonth = DateTime(2025, 7, 15, 12);

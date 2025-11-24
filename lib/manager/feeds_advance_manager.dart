@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 import '../model/feed.dart';
 import '../model/feeds_advance_state.dart';
 import '../service/date_time_service.dart';
-import '../service/store_service.dart';
 import 'feed_advance_manager.dart';
 import 'feeds_manager.dart';
 
@@ -14,20 +13,13 @@ class FeedsAdvanceManager with ChangeNotifier {
   final DateTimeService _dateTimeService;
   final FeedAdvanceManager _feedAdvanceManager;
   final FeedsManager _feedsManager;
-  final StoreService _storeService;
 
-  FeedsAdvanceManager(this._dateTimeService, this._feedAdvanceManager, this._feedsManager, this._storeService);
-
-  static const _lastAdvanceDateStoreKey = 'lastAdvanceDate';
-
-  bool get hasEverAdvanced => lastAdvanceDate != null;
-  DateTime? get lastAdvanceDate => _storeService.getDateTime(_lastAdvanceDateStoreKey);
+  FeedsAdvanceManager(this._dateTimeService, this._feedAdvanceManager, this._feedsManager);
 
   Future<FeedsAdvanceState> advance() async {
     for (Feed f in _feedsManager.feeds) {
       _feedAdvanceManager.advance(f);
     }
-    await _storeService.setDateTime(_lastAdvanceDateStoreKey, _dateTimeService.now);
     notifyListeners();
     return FeedsAdvanceState.listsAdvanced;
   }

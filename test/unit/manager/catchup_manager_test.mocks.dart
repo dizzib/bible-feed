@@ -174,15 +174,6 @@ class MockDateTimeService extends _i1.Mock implements _i5.DateTimeService {
 class MockFeedsAdvanceManager extends _i1.Mock
     implements _i6.FeedsAdvanceManager {
   @override
-  bool get hasEverAdvanced =>
-      (super.noSuchMethod(
-            Invocation.getter(#hasEverAdvanced),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
   bool get hasListeners =>
       (super.noSuchMethod(
             Invocation.getter(#hasListeners),
