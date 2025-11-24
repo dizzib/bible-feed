@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '../../integration_test/helper.dart';
 import '../injectable.dart';
 import 'helper.dart';
 
@@ -79,7 +80,7 @@ Future<void> main() async {
           return t.pumpAndSettle();
         },
         whilePerforming: (t) async {
-          if (scenario.tapKey != null) await t.tap(find.byKey(Key(scenario.tapKey!)));
+          if (scenario.tapKey != null) await t.tapByKey(scenario.tapKey!);
           await t.pumpAndSettle();
           return;
         },
