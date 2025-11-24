@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:dartx/dartx.dart';
-import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
@@ -29,8 +28,7 @@ class CatchupManager with ChangeNotifier {
     AppLifecycleListener(onResume: notifyListeners);
 
     _feedsAdvanceManager.addListener(() {
-      _save([_virtualAllDoneDate + 1.days, _defaultVirtualAllDoneDate].min()!); // ignore: avoid-non-null-assertion
-      // Log.info(_virtualAllDoneDate);
+      _save(isBehind ? _virtualAllDoneDate + 1.days : _dateTimeService.now.date);
       notifyListeners();
     });
 
@@ -47,7 +45,7 @@ class CatchupManager with ChangeNotifier {
 
   static const _virtualAllDoneDateStoreKey = 'virtualAllDoneDate';
 
-  DateTime get _defaultVirtualAllDoneDate => _dateTimeService.now - 1.days;
+  DateTime get _defaultVirtualAllDoneDate => _dateTimeService.now.date - 1.days;
   DateTime get _virtualAllDoneDate =>
       _storeService.getDateTime(_virtualAllDoneDateStoreKey) ?? _defaultVirtualAllDoneDate;
 
@@ -55,7 +53,7 @@ class CatchupManager with ChangeNotifier {
 
   int get daysBehind {
     if (!_catchupSettingManager.isEnabled) return 0;
-    return max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate.date).inDays - 1);
+    return max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate).inDays - 1);
   }
 
   bool get isBehind => daysBehind > 0;

@@ -42,7 +42,11 @@ Future runCatchupTest() async {
 
     await t.startApp();
     expectNotInteractiveByKey(fabKey);
-
+    await t.setAllFeedsAsRead();
+    await t.tapYes();
+    expectChapters(2);
+    await advanceDay();
+    expectNotInteractiveByKey(fabKey);
     await advanceDay();
     await t.tapByKey('mat');
     await testCatchupDialog('1 day', 19);
@@ -50,8 +54,9 @@ Future runCatchupTest() async {
     await t.tapByKey('gen');
     await testCatchupDialog('2 days', 28);
     await t.setAllFeedsAsRead();
+    await t.tapAllDoneFab();
     await t.tapYes();
-    expectChapters(2);
+    expectChapters(3);
     await testCatchupDialog('1 day', 20);
     await t.setAllFeedsAsRead();
     await t.tapByKey('mat');
@@ -59,9 +64,8 @@ Future runCatchupTest() async {
     await t.setAllFeedsAsRead();
     await t.tapAllDoneFab();
     await t.tapYes();
-    expectChapters(3);
+    expectChapters(4);
     expectNotInteractiveByKey(fabKey);
-
     // disable then enable setting should clear alert
     await advanceDay();
     await advanceDay();

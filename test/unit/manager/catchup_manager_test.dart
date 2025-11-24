@@ -55,9 +55,9 @@ void main() {
     testee.addListener(() => notified = true);
   });
 
-  test('CatchupSettingManager listener should reset virtualAllDoneDate and notifyListeners', () {
+  test('CatchupSettingManager listener should reset virtualAllDoneDate to default and notifyListeners', () {
     clearInteractions(mockStoreService); // ignore first call by ctor
-    when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now - 3.days);
+    when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now.date - 3.days);
 
     // Capture the listener callback passed to addListener
     late VoidCallback capturedListener;
@@ -67,7 +67,7 @@ void main() {
 
     capturedListener(); // Trigger the listener manually
 
-    verify(mockStoreService.setDateTime(any, now - 1.days)).called(1);
+    verify(mockStoreService.setDateTime(any, now.date - 1.days)).called(1);
     expect(notified, isTrue);
   });
 
@@ -75,20 +75,20 @@ void main() {
     'daysBehind, isBehind properties',
     [
       [false, null, 0, false, false],
-      [false, now, 0, false, false],
-      [false, now - 1.days, 0, false, false],
-      [false, now - 2.days, 0, false, false],
-      [false, now - 3.days, 0, false, false],
+      [false, now.date, 0, false, false],
+      [false, now.date - 1.days, 0, false, false],
+      [false, now.date - 2.days, 0, false, false],
+      [false, now.date - 3.days, 0, false, false],
       [true, null, 0, false, false],
-      [true, now, 0, false, false],
-      [true, now - 1.days, 0, false, false],
-      [true, now - 2.days, 1, true, false],
-      [true, now - 3.days, 2, true, true],
-      [true, now - 4.days, 3, true, true],
+      [true, now.date, 0, false, false],
+      [true, now.date - 1.days, 0, false, false],
+      [true, now.date - 2.days, 1, true, false],
+      [true, now.date - 3.days, 2, true, true],
+      [true, now.date - 4.days, 3, true, true],
     ],
     (isSettingEnabled, virtualAllDoneDate, expectDaysBehind, expectIsBehind, expectIsVeryBehind) {
       when(mockCatchupSettingManager.isEnabled).thenReturn(isSettingEnabled);
-      when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? now - 1.days);
+      when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? now.date - 1.days);
       expect(testee.daysBehind, expectDaysBehind);
       expect(testee.isBehind, expectIsBehind);
       expect(testee.isVeryBehind, expectIsVeryBehind);
@@ -105,7 +105,7 @@ void main() {
     ],
     (daysBehind, expectNewDaysBehind) {
       clearInteractions(mockStoreService); // ignore first call by ctor
-      when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now - daysBehind);
+      when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(now.date - daysBehind);
 
       // Capture the listener callback passed to addListener
       late VoidCallback capturedListener;
@@ -115,7 +115,7 @@ void main() {
 
       capturedListener(); // Trigger the listener manually
 
-      verify(mockStoreService.setDateTime(any, now - expectNewDaysBehind)).called(1); // AllDoneManager listener
+      verify(mockStoreService.setDateTime(any, now.date - expectNewDaysBehind)).called(1); // AllDoneManager listener
       expect(notified, isTrue);
     },
   );
