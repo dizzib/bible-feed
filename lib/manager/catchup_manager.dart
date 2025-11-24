@@ -39,7 +39,7 @@ class CatchupManager with ChangeNotifier {
 
     _midnightManager.addListener(notifyListeners);
 
-    _save(_virtualAllDoneDate); // ensure saved to store the first time app is run
+    _save(_virtualAllDoneDate); // ensure stored on first run
     notifyListeners();
   }
 
