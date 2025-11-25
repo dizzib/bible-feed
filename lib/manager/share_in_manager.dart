@@ -32,6 +32,12 @@ class ShareInManager {
       );
     }
 
+    final actualFeedsCount = syncDto.feedStateList.length;
+    final expectedFeedsCount = _feedsManager.feeds.length;
+    if (actualFeedsCount != expectedFeedsCount) {
+      throw Exception('Expected $expectedFeedsCount feeds in the QR-code but got $actualFeedsCount. $help');
+    }
+
     for (final (index, feed) in _feedsManager.feeds.indexed) {
       feed.state = syncDto.feedStateList[index];
     }
