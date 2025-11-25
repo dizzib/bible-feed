@@ -34,7 +34,11 @@ class AllDoneDialogManager extends DialogManager {
   String get closeText => 'No';
 
   @override
-  String Function() get getText => () => 'Lists advance at midnight.\n\nAdvance now?';
+  String Function() get getText => () {
+    final defaultText = 'Lists advance at midnight.';
+    final catchupText = 'You have ${_catchupManager.chaptersToRead} more chapters to read today.';
+    return '${_catchupManager.isBehind ? catchupText : defaultText}\n\nAdvance now?';
+  };
 
   @override
   String get title => 'All done!';

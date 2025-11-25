@@ -266,6 +266,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1045.CatchupManager(
         gh<_i282.CatchupSettingManager>(),
         gh<_i99.DateTimeService>(),
+        gh<_i127.FeedsManager>(),
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i438.MidnightManager>(),
         gh<_i215.StoreService>(),
@@ -282,7 +283,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i156.CatchupDialogManager(
         gh<_i215.StoreService>(),
         gh<_i1045.CatchupManager>(),
-        gh<_i127.FeedsManager>(),
       ),
     );
     return this;

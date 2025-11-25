@@ -1,7 +1,9 @@
 import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/manager/catchup_setting_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
+import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
+import 'package:bible_feed/model/feed.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/store_service.dart';
 import 'package:dartx/dartx.dart';
@@ -11,11 +13,13 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
+import '../test_data.dart';
 import 'catchup_manager_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<CatchupSettingManager>(),
   MockSpec<DateTimeService>(),
+  MockSpec<FeedsManager>(),
   MockSpec<FeedsAdvanceManager>(),
   MockSpec<MidnightManager>(),
   MockSpec<StoreService>(),
@@ -23,6 +27,7 @@ import 'catchup_manager_test.mocks.dart';
 void main() {
   late MockCatchupSettingManager mockCatchupSettingManager;
   late MockDateTimeService mockDateTimeService;
+  late MockFeedsManager mockFeedsManager;
   late MockFeedsAdvanceManager mockFeedsAdvanceManager;
   late MockMidnightManager mockMidnightManager;
   late MockStoreService mockStoreService;
@@ -36,6 +41,7 @@ void main() {
 
     mockCatchupSettingManager = MockCatchupSettingManager();
     mockDateTimeService = MockDateTimeService();
+    mockFeedsManager = MockFeedsManager();
     mockFeedsAdvanceManager = MockFeedsAdvanceManager();
     mockMidnightManager = MockMidnightManager();
     mockStoreService = MockStoreService();
@@ -43,10 +49,13 @@ void main() {
 
     when(mockCatchupSettingManager.isEnabled).thenReturn(true);
     when(mockDateTimeService.now).thenReturn(DateTime.now());
+    when(mockFeedsManager.chaptersToRead).thenReturn(7);
+    when(mockFeedsManager.feeds).thenReturn(List.generate(10, (_) => Feed(rl0, FeedState(bookKey: ''))));
 
     testee = CatchupManager(
       mockCatchupSettingManager,
       mockDateTimeService,
+      mockFeedsManager,
       mockFeedsAdvanceManager,
       mockMidnightManager,
       mockStoreService,
@@ -74,22 +83,23 @@ void main() {
   parameterizedTest(
     'daysBehind, isBehind properties',
     [
-      [false, null, 0, false, false],
-      [false, today, 0, false, false],
-      [false, today - 1.days, 0, false, false],
-      [false, today - 2.days, 0, false, false],
-      [false, today - 3.days, 0, false, false],
-      [true, null, 0, false, false],
-      [true, today, 0, false, false],
-      [true, today - 1.days, 0, false, false],
-      [true, today - 2.days, 1, true, false],
-      [true, today - 3.days, 2, true, true],
-      [true, today - 4.days, 3, true, true],
+      [false, null, 0, 7, false, false],
+      [false, today, 0, 7, false, false],
+      [false, today - 1.days, 0, 7, false, false],
+      [false, today - 2.days, 0, 7, false, false],
+      [false, today - 3.days, 0, 7, false, false],
+      [true, null, 0, 7, false, false],
+      [true, today, 0, 7, false, false],
+      [true, today - 1.days, 0, 7, false, false],
+      [true, today - 2.days, 1, 17, true, false],
+      [true, today - 3.days, 2, 27, true, true],
+      [true, today - 4.days, 3, 37, true, true],
     ],
-    (isSettingEnabled, virtualAllDoneDate, expectDaysBehind, expectIsBehind, expectIsVeryBehind) {
+    (isSettingEnabled, virtualAllDoneDate, expectDaysBehind, expectChaptersToRead, expectIsBehind, expectIsVeryBehind) {
       when(mockCatchupSettingManager.isEnabled).thenReturn(isSettingEnabled);
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? today - 1.days);
       expect(testee.daysBehind, expectDaysBehind);
+      expect(testee.chaptersToRead, expectChaptersToRead);
       expect(testee.isBehind, expectIsBehind);
       expect(testee.isVeryBehind, expectIsVeryBehind);
     },
@@ -98,8 +108,8 @@ void main() {
   parameterizedTest(
     'FeedsAdvanceManager listener should advance virtualAllDoneDate and notifyListeners',
     [
-      // [0.days, 0.days],
-      // [1.days, 0.days],
+      [0.days, 0.days],
+      [1.days, 0.days],
       [2.days, 1.days],
       [3.days, 2.days],
     ],

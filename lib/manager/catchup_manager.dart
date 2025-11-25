@@ -8,12 +8,14 @@ import '../service/date_time_service.dart';
 import '../service/store_service.dart';
 import 'catchup_setting_manager.dart';
 import 'feeds_advance_manager.dart';
+import 'feeds_manager.dart';
 import 'midnight_manager.dart';
 
 @lazySingleton
 class CatchupManager with ChangeNotifier {
   final CatchupSettingManager _catchupSettingManager;
   final DateTimeService _dateTimeService;
+  final FeedsManager _feedsManager;
   final FeedsAdvanceManager _feedsAdvanceManager;
   final MidnightManager _midnightManager;
   final StoreService _storeService;
@@ -21,6 +23,7 @@ class CatchupManager with ChangeNotifier {
   CatchupManager(
     this._catchupSettingManager,
     this._dateTimeService,
+    this._feedsManager,
     this._feedsAdvanceManager,
     this._midnightManager,
     this._storeService,
@@ -56,6 +59,7 @@ class CatchupManager with ChangeNotifier {
     return max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate).inDays - 1);
   }
 
+  int get chaptersToRead => daysBehind * _feedsManager.feeds.length + _feedsManager.chaptersToRead;
   bool get isBehind => daysBehind > 0;
   bool get isVeryBehind => daysBehind > 1;
 }
