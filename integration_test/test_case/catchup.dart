@@ -48,11 +48,11 @@ Future runCatchupTest() async {
     await advanceDay();
     await testCatchupDialog('1 day', 20, expectOnboarding: true);
     await t.setAllFeedsAsRead();
-    await t.tapYes();
+    await t.tapYes(); // onboarding
     expectChapters(2);
     expectNotInteractiveByKey(fabKey);
     await t.setAllFeedsAsRead();
-    await t.tapAllDoneFab();
+    await t.tapAllDoneFab(); // onboarded, not behind
     await t.tapYes();
     expectChapters(3);
     await advanceDay();
@@ -64,15 +64,14 @@ Future runCatchupTest() async {
     await t.tapByKey('gen');
     await testCatchupDialog('2 days', 28);
     await t.setAllFeedsAsRead();
-    await t.tapAllDoneFab();
-    await t.tapYes();
+    await t.tapYes(); // alldone should auto show
     expectChapters(4);
     await testCatchupDialog('1 day', 20);
     await t.setAllFeedsAsRead();
+    await t.tapNo();
     await t.tapByKey('mat');
     await testCatchupDialog('1 day', 11);
     await t.setAllFeedsAsRead();
-    await t.tapAllDoneFab();
     await t.tapYes();
     expectChapters(5);
     expectNotInteractiveByKey(fabKey);

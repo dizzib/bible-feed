@@ -58,16 +58,16 @@ class MockCatchupSettingManager extends _i1.Mock
           as bool);
 
   @override
-  String get storeKey =>
+  String get storeKeyFragment =>
       (super.noSuchMethod(
-            Invocation.getter(#storeKey),
+            Invocation.getter(#storeKeyFragment),
             returnValue: _i3.dummyValue<String>(
               this,
-              Invocation.getter(#storeKey),
+              Invocation.getter(#storeKeyFragment),
             ),
             returnValueForMissingStub: _i3.dummyValue<String>(
               this,
-              Invocation.getter(#storeKey),
+              Invocation.getter(#storeKeyFragment),
             ),
           )
           as String);

@@ -226,12 +226,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i516.PlatformEventService>(),
       ),
     );
-    gh.lazySingleton<_i541.AllDoneDialogManager>(
-      () => _i541.AllDoneDialogManager(
-        gh<_i215.StoreService>(),
-        gh<_i127.FeedsManager>(),
-      ),
-    );
     gh.singleton<_i519.HapticWireupManager>(
       () => _i519.HapticWireupManager(
         gh<_i22.HapticService>(),
@@ -275,6 +269,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i438.MidnightManager>(),
         gh<_i215.StoreService>(),
+      ),
+    );
+    gh.lazySingleton<_i541.AllDoneDialogManager>(
+      () => _i541.AllDoneDialogManager(
+        gh<_i215.StoreService>(),
+        gh<_i1045.CatchupManager>(),
+        gh<_i127.FeedsManager>(),
       ),
     );
     gh.lazySingleton<_i156.CatchupDialogManager>(
