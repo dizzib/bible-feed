@@ -2,9 +2,9 @@ import 'package:bible_feed/model/book_key_externaliser.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  void runTest(BookKeyExternaliser testee, Map<String, String> knownMappings) {
+  void runTest(BookKeyExternaliser testee, Map<String, String> expectedMappings) {
     group(testee.runtimeType.toString(), () {
-      knownMappings.forEach((from, to) {
+      expectedMappings.forEach((from, to) {
         test('getExternalBookKey "$from" should return "$to"', () {
           expect(testee.getExternalBookKey(from), to);
         });
