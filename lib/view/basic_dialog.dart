@@ -14,69 +14,63 @@ class BasicDialog<T extends DialogManager> extends StatefulWidget {
 }
 
 class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
-  late final T _dialogManager;
-  late final VoidCallback _listener;
+  T? _dialogManager; // nullable instead of late
   bool _isDialogShowing = false;
 
   @override
   void initState() {
     super.initState();
-
     _dialogManager = sl<T>();
-
-    _listener = () {
-      // Schedule after this frame so Theme.of(context) is safe
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        if (!mounted) return;
-        if (_isDialogShowing) return;
-
-        _isDialogShowing = true;
-
-        try {
-          await showDialog();
-        } finally {
-          // Without this, if anything throws during the async dialog operation, then:
-          // 	-	_isDialogShowing would stay stuck at true
-          // 	-	this widget would forever think the dialog is still open
-          // 	-	future attempts to show the dialog would silently fail
-          if (mounted) {
-            setState(() => _isDialogShowing = false);
-          } else {
-            _isDialogShowing = false;
-          }
-        }
-      });
-    };
-
-    _dialogManager.addListener(_listener);
+    _dialogManager?.addListener(_onDialogRequested);
   }
 
-  Future showDialog() async => await context.showDialogWithBlurBackground(
-    CupertinoAlertDialog(
-      title: Text(_dialogManager.title, style: context.textTheme.titleLarge),
-      content: SingleChildScrollView(
-        child: Padding(
-          padding: Constants.defaultPadding,
-          child: Text(_dialogManager.getText(), style: context.textTheme.bodyLarge),
-        ),
-      ),
-      actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: Text(_dialogManager.closeText)),
-        if (_dialogManager.hasAction)
-          TextButton(
-            onPressed: () {
-              _dialogManager.action?.call();
-              Navigator.pop(context);
-            },
-            child: Text(_dialogManager.actionText!),
+  void _onDialogRequested() {
+    final manager = _dialogManager; // Grab a local copy to avoid reading a nullable repeatedly
+    if (manager == null) return;
+
+    // Ensure safe timing
+    // ignore: avoid-passing-async-when-sync-expected, must await
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      if (_isDialogShowing) return;
+
+      _isDialogShowing = true;
+
+      await context.showDialogWithBlurBackground(
+        CupertinoAlertDialog(
+          title: Text(manager.title, style: context.textTheme.titleLarge),
+          content: SingleChildScrollView(
+            child: Padding(
+              padding: Constants.defaultPadding,
+              child: Text(manager.getText(), style: context.textTheme.bodyLarge),
+            ),
           ),
-      ],
-    ),
-  );
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: Text(manager.closeText)),
+            if (manager.hasAction)
+              TextButton(
+                onPressed: () {
+                  manager.action?.call();
+                  Navigator.pop(context);
+                },
+                child: Text(manager.actionText!), // ignore: avoid-non-null-assertion, passed hasAction guard
+              ),
+          ],
+        ),
+      );
+
+      if (mounted) {
+        setState(() => _isDialogShowing = false);
+      } else {
+        _isDialogShowing = false;
+      }
+    });
+  }
 
   @override
   void dispose() {
-    _dialogManager.removeListener(_listener);
+    _dialogManager?.removeListener(_onDialogRequested);
+    _dialogManager = null;
     super.dispose();
   }
 
