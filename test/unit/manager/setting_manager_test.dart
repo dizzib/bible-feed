@@ -18,7 +18,7 @@ class TestSettingManager extends SettingManager {
   bool get isEnabledByDefault => false;
 
   @override
-  String get storeKeyFragment => 'test.key';
+  String get storeKeyFragment => 'frag';
 
   @override
   String get subtitle => 'Test Subtitle';
@@ -50,7 +50,7 @@ void main() {
       [true, true],
     ],
     (storeValue, expectValue) {
-      when(mockStoreService.getBool('test.key')).thenReturn(storeValue);
+      when(mockStoreService.getBool('isEnabled.frag')).thenReturn(storeValue);
       expect(testee.isEnabled, expectValue);
     },
   );
@@ -61,7 +61,7 @@ void main() {
       notified = true;
     });
     testee.isEnabled = true;
-    verify(mockStoreService.setBool('test.key', true)).called(1);
+    verify(mockStoreService.setBool('isEnabled.frag', true)).called(1);
     expect(notified, true);
   });
 
