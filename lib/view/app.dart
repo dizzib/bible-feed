@@ -25,7 +25,7 @@ class App extends WatchingWidget {
         return Scaffold(
           appBar: isShowAppBar ? AppBarMain() : null,
           body: Feeds(),
-          bottomSheet: Stack(
+          bottomSheet: const Stack(
             children: [BasicDialog<AllDoneDialogManager>(), BasicDialog<CatchupDialogManager>()],
           ), // invisible
           floatingActionButton: Visibility(
