@@ -17,7 +17,7 @@ class AllDoneDialogManager extends DialogManager {
   }
 
   @override
-  String get onboardingStoreKey => 'allDone';
+  String get onboardingStoreKeyFragment => 'allDone';
 
   // ui props
 

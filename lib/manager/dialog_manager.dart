@@ -11,12 +11,12 @@ abstract class DialogManager with ChangeNotifier {
 
   String get closeText;
   String Function() get getText;
-  String get onboardingStoreKey;
+  String get onboardingStoreKeyFragment;
   String get title;
 
   //// concrete
 
-  String get _onboardingStoreKey => 'hasCompletedOnboarding.$onboardingStoreKey';
+  String get _onboardingStoreKey => 'hasCompletedOnboarding.$onboardingStoreKeyFragment';
 
   bool get hasCompletedOnboarding => _storeService.getBool(_onboardingStoreKey) ?? false;
 

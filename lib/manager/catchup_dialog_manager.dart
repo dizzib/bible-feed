@@ -17,7 +17,7 @@ class CatchupDialogManager extends DialogManager {
   }
 
   @override
-  String get onboardingStoreKey => 'catchup';
+  String get onboardingStoreKeyFragment => 'catchup';
 
   //// ui
 
