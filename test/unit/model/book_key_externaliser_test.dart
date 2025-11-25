@@ -1,17 +1,26 @@
 import 'package:bible_feed/model/book_key_externaliser.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:bible_feed/model/reading_lists.dart';
+
+class ProdReadingListsModule extends ReadingListsModule {}
 
 void main() {
   void runTest(BookKeyExternaliser testee, Map<String, String> expectedMappings) {
+    final defaultMappings = <String, String>{};
+    for (final readingList in ProdReadingListsModule().readingLists) {
+      for (final book in readingList) {
+        defaultMappings[book.key] = book.key;
+      }
+    }
+
+    final mergedMappings = Map<String, String>.from(defaultMappings);
+    mergedMappings.addAll(expectedMappings.map((k, v) => MapEntry(k, v)));
+
     group(testee.runtimeType.toString(), () {
-      expectedMappings.forEach((from, to) {
-        test('getExternalBookKey "$from" should return "$to"', () {
+      mergedMappings.forEach((from, to) {
+        test('${testee.name}.getExternalBookKey "$from" should return "$to"', () {
           expect(testee.getExternalBookKey(from), to);
         });
-      });
-
-      test('getExternalBookKey returns original key for unknown keys', () {
-        expect(testee.getExternalBookKey('unknown'), 'unknown');
       });
     });
   }
