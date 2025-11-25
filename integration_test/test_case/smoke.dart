@@ -10,6 +10,10 @@ Future runSmokeTest() async {
     await t.tapAllLists();
     expectText('All done!'); // onboarding should happen
     await t.tapNo();
+    await t.tapByKey('mat');
+    expectNotInteractiveByKey('all_done_fab');
+    await t.tapByKey('mat');
+    expectNoText('All done!'); // onboarding should not happen
     expectChapters(1);
     await t.tapAllDoneFab();
     await t.tapYes();
