@@ -6,6 +6,7 @@ All notable changes to this project are documented here.
 ## [1.9.0] - 2025-
 
 ### Added
+- New feature: catchup
 - Android OpenBible app reader TODO check genesis link
 
 
