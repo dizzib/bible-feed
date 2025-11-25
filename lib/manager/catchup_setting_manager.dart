@@ -13,7 +13,7 @@ class CatchupSettingManager extends SettingManager {
   bool get isEnabledByDefault => false;
 
   @override
-  get storeKey => 'isEnabled.catchup';
+  get storeKeyFragment => 'catchup';
 
   @override
   String get title => 'Catch Up';

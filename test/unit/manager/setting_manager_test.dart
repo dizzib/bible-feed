@@ -18,7 +18,7 @@ class TestSettingManager extends SettingManager {
   bool get isEnabledByDefault => false;
 
   @override
-  String get storeKey => 'test.key';
+  String get storeKeyFragment => 'test.key';
 
   @override
   String get subtitle => 'Test Subtitle';

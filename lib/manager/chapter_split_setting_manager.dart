@@ -13,7 +13,7 @@ class ChapterSplitSettingManager extends SettingManager {
   bool get isEnabledByDefault => false;
 
   @override
-  get storeKey => 'isEnabled.splitChapters';
+  get storeKeyFragment => 'splitChapters';
 
   @override
   String get title => 'Split Chapters';

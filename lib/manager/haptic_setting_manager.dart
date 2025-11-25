@@ -16,7 +16,7 @@ class HapticSettingManager extends SettingManager {
   bool get isEnabledByDefault => false;
 
   @override
-  get storeKey => 'isEnabled.haptic';
+  get storeKeyFragment => 'haptic';
 
   @override
   String get title => 'Haptic Feedback';
