@@ -21,8 +21,9 @@ Please [raise an issue](https://github.com/dizzib/bible-feed/issues) if you find
   <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_0-home_framed.png" width="150" />
   <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_1-bookChapterDialog_framed.png" width="150" />
   <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_2-settings_framed.png" width="150" />
-  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_3-share_framed.png" width="150" />
-  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_4-home_framed.png" width="150" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_3-catchup_framed.png" width="150" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_4-share_framed.png" width="150" />
+  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_5-home_framed.png" width="150" />
 </p>
 
 ## Credits
