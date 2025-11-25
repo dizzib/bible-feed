@@ -50,7 +50,7 @@ void main() {
     when(mockCatchupSettingManager.isEnabled).thenReturn(true);
     when(mockDateTimeService.now).thenReturn(DateTime.now());
     when(mockFeedsManager.chaptersToRead).thenReturn(7);
-    when(mockFeedsManager.feeds).thenReturn(List.generate(10, (_) => Feed(rl0, FeedState(bookKey: ''))));
+    when(mockFeedsManager.feeds).thenReturn(List.filled(10, Feed(rl0, FeedState(bookKey: ''))));
 
     testee = CatchupManager(
       mockCatchupSettingManager,
