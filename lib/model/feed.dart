@@ -41,4 +41,6 @@ class Feed with ChangeNotifier {
     _state._dateModified = DateTime.now();
     notifyListeners();
   }
+
+  void touch() => notifyListeners();
 }

@@ -1,5 +1,7 @@
+import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
 
+import '../model/feed.dart';
 import '../model/share_dto.dart';
 import '../service/app_service.dart';
 import 'feeds_manager.dart';
@@ -41,5 +43,9 @@ class ShareInManager {
     for (final (index, feed) in _feedsManager.feeds.indexed) {
       feed.state = syncDto.feedStateList[index];
     }
+
+    // touch the last modified feed to preserve lastModifiedDate
+    final latestBookKey = syncDto.feedStateList.maxBy((s) => s.dateModified ?? DateTime(1970))?.bookKey;
+    _feedsManager.feeds.firstWhere((Feed f) => f.book.key == latestBookKey).touch();
   }
 }

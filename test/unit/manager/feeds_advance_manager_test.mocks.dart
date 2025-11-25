@@ -7,12 +7,12 @@ import 'dart:ui' as _i7;
 
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i8;
 import 'package:bible_feed/manager/feeds_manager.dart' as _i9;
-import 'package:bible_feed/model/book.dart' as _i4;
-import 'package:bible_feed/model/feed.dart' as _i2;
-import 'package:bible_feed/model/reading_list.dart' as _i6;
-import 'package:bible_feed/service/date_time_service.dart' as _i3;
+import 'package:bible_feed/model/book.dart' as _i2;
+import 'package:bible_feed/model/feed.dart' as _i3;
+import 'package:bible_feed/model/reading_list.dart' as _i5;
+import 'package:bible_feed/service/date_time_service.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i5;
+import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -33,15 +33,20 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
     : super(parent, parentInvocation);
 }
 
-class _FakeFeedState_1 extends _i1.SmartFake implements _i2.FeedState {
-  _FakeFeedState_1(Object parent, Invocation parentInvocation)
+class _FakeBook_1 extends _i1.SmartFake implements _i2.Book {
+  _FakeBook_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeFeedState_2 extends _i1.SmartFake implements _i3.FeedState {
+  _FakeFeedState_2(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i3.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i4.DateTimeService {
   @override
   DateTime get now =>
       (super.noSuchMethod(
@@ -58,21 +63,18 @@ class MockDateTimeService extends _i1.Mock implements _i3.DateTimeService {
 /// A class which mocks [Feed].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeed extends _i1.Mock implements _i2.Feed {
+class MockFeed extends _i1.Mock implements _i3.Feed {
   @override
-  _i4.Book get book =>
+  _i2.Book get book =>
       (super.noSuchMethod(
             Invocation.getter(#book),
-            returnValue: _i5.dummyValue<_i4.Book>(
-              this,
-              Invocation.getter(#book),
-            ),
-            returnValueForMissingStub: _i5.dummyValue<_i4.Book>(
+            returnValue: _FakeBook_1(this, Invocation.getter(#book)),
+            returnValueForMissingStub: _FakeBook_1(
               this,
               Invocation.getter(#book),
             ),
           )
-          as _i4.Book);
+          as _i2.Book);
 
   @override
   int get bookIndex =>
@@ -102,34 +104,34 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
           as double);
 
   @override
-  _i6.ReadingList get readingList =>
+  _i5.ReadingList get readingList =>
       (super.noSuchMethod(
             Invocation.getter(#readingList),
-            returnValue: _i5.dummyValue<_i6.ReadingList>(
+            returnValue: _i6.dummyValue<_i5.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
-            returnValueForMissingStub: _i5.dummyValue<_i6.ReadingList>(
+            returnValueForMissingStub: _i6.dummyValue<_i5.ReadingList>(
               this,
               Invocation.getter(#readingList),
             ),
           )
-          as _i6.ReadingList);
+          as _i5.ReadingList);
 
   @override
-  _i2.FeedState get state =>
+  _i3.FeedState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
-            returnValue: _FakeFeedState_1(this, Invocation.getter(#state)),
-            returnValueForMissingStub: _FakeFeedState_1(
+            returnValue: _FakeFeedState_2(this, Invocation.getter(#state)),
+            returnValueForMissingStub: _FakeFeedState_2(
               this,
               Invocation.getter(#state),
             ),
           )
-          as _i2.FeedState);
+          as _i3.FeedState);
 
   @override
-  set state(_i2.FeedState? value) => super.noSuchMethod(
+  set state(_i3.FeedState? value) => super.noSuchMethod(
     Invocation.setter(#state, value),
     returnValueForMissingStub: null,
   );
@@ -153,6 +155,12 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
   @override
   void toggleIsRead() => super.noSuchMethod(
     Invocation.method(#toggleIsRead, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void touch() => super.noSuchMethod(
+    Invocation.method(#touch, []),
     returnValueForMissingStub: null,
   );
 
@@ -187,7 +195,7 @@ class MockFeed extends _i1.Mock implements _i2.Feed {
 class MockFeedAdvanceManager extends _i1.Mock
     implements _i8.FeedAdvanceManager {
   @override
-  void advance(_i2.Feed? feed) => super.noSuchMethod(
+  void advance(_i3.Feed? feed) => super.noSuchMethod(
     Invocation.method(#advance, [feed]),
     returnValueForMissingStub: null,
   );
@@ -216,13 +224,13 @@ class MockFeedsManager extends _i1.Mock implements _i9.FeedsManager {
           as int);
 
   @override
-  List<_i2.Feed> get feeds =>
+  List<_i3.Feed> get feeds =>
       (super.noSuchMethod(
             Invocation.getter(#feeds),
-            returnValue: <_i2.Feed>[],
-            returnValueForMissingStub: <_i2.Feed>[],
+            returnValue: <_i3.Feed>[],
+            returnValueForMissingStub: <_i3.Feed>[],
           )
-          as List<_i2.Feed>);
+          as List<_i3.Feed>);
 
   @override
   bool get hasListeners =>

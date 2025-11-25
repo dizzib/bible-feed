@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 // an individual book e.g. Matthew
+// marking as final breaks ShareInManagerTest
 @immutable
-final class Book {
+class Book {
   const Book(this.key, this.name, this.chapterCount);
 
   final String key; // e.g. mar

@@ -46,6 +46,8 @@ void main() {
     final json = syncDto.toJson();
     final mockFeed1 = MockFeed();
     final mockFeed2 = MockFeed();
+    when(mockFeed1.book).thenReturn(b0);
+    when(mockFeed2.book).thenReturn(b1);
     when(mockFeedsManager.feeds).thenReturn([mockFeed1, mockFeed2]);
     when(mockAppService.buildNumber).thenReturn('correct_build');
 
