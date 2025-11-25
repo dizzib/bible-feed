@@ -27,7 +27,7 @@ class CatchupDialogManager extends DialogManager {
   @override
   String Function() get getText => () {
     final daysBehind = _catchupManager.daysBehind;
-    return "You are $daysBehind day${daysBehind == 1 ? '' : 's'} behind, and have $chaptersToRead more chapters to read today.\n\nThis alert can be disabled in settings.";
+    return "You have $chaptersToRead chapters to read today, beloved, because you are $daysBehind day${daysBehind == 1 ? '' : 's'} behind.\n\n'Give us this day our daily bread'\nMatthew 6:11";
   };
 
   @override

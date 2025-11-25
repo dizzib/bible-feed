@@ -31,7 +31,7 @@ Future runCatchupTest() async {
       }
       expectText('Catchup');
       expectText('$daysBehind behind');
-      expectText('$expectChaptersToRead more');
+      expectText('$expectChaptersToRead chapters');
       await t.tap(find.text('Close'));
       await t.pumpAndSettle();
     }
