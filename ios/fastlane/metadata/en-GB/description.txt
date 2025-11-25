@@ -12,6 +12,7 @@ Optionally tap the settings (cog) icon to configure these additional features:
 
 - to open an external bible reader, such as Blue Letter Bible or Logos, at the book/chapter/verse when tapped. This feature works well in split screen mode on a tablet.
 - to split long chapters, such as Psalm 119 or Acts 7, into shorter sections.
+- to show a warning if you miss a day, and encourage you to catch up.
 - to vibrate the device on tap or select.
 
 Transfer your reading state between devices using the share feature.
