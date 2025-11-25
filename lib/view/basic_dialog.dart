@@ -33,29 +33,12 @@ class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
         _isDialogShowing = true;
 
         try {
-          await context.showDialogWithBlurBackground(
-            CupertinoAlertDialog(
-              title: Text(_dialogManager.title, style: context.textTheme.titleLarge),
-              content: SingleChildScrollView(
-                child: Padding(
-                  padding: Constants.defaultPadding,
-                  child: Text(_dialogManager.getText(), style: context.textTheme.bodyLarge),
-                ),
-              ),
-              actions: [
-                TextButton(onPressed: () => Navigator.pop(context), child: Text(_dialogManager.closeText)),
-                if (_dialogManager.hasAction)
-                  TextButton(
-                    onPressed: () {
-                      _dialogManager.action?.call();
-                      Navigator.pop(context);
-                    },
-                    child: Text(_dialogManager.actionText!),
-                  ),
-              ],
-            ),
-          );
+          await showDialog();
         } finally {
+          // Without this, if anything throws during the async dialog operation, then:
+          // 	-	_isDialogShowing would stay stuck at true
+          // 	-	this widget would forever think the dialog is still open
+          // 	-	future attempts to show the dialog would silently fail
           if (mounted) {
             setState(() => _isDialogShowing = false);
           } else {
@@ -67,6 +50,29 @@ class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
 
     _dialogManager.addListener(_listener);
   }
+
+  Future showDialog() async => await context.showDialogWithBlurBackground(
+    CupertinoAlertDialog(
+      title: Text(_dialogManager.title, style: context.textTheme.titleLarge),
+      content: SingleChildScrollView(
+        child: Padding(
+          padding: Constants.defaultPadding,
+          child: Text(_dialogManager.getText(), style: context.textTheme.bodyLarge),
+        ),
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context), child: Text(_dialogManager.closeText)),
+        if (_dialogManager.hasAction)
+          TextButton(
+            onPressed: () {
+              _dialogManager.action?.call();
+              Navigator.pop(context);
+            },
+            child: Text(_dialogManager.actionText!),
+          ),
+      ],
+    ),
+  );
 
   @override
   void dispose() {
