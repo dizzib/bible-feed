@@ -26,10 +26,10 @@ class CatchupPopupManager extends PopupManager {
   Color getForegroundColor() => _catchupManager.isVeryBehind ? Colors.white : Colors.black;
 
   @override
-  String Function() get getText => () {
+  String getText() {
     final daysBehind = _catchupManager.daysBehind;
     return "You have ${_catchupManager.chaptersToRead} chapters to read today, beloved, because you are $daysBehind day${daysBehind == 1 ? '' : 's'} behind!\n\n'Give us this day our daily bread'\nMatthew 6:11";
-  };
+  }
 
   @override
   String get title => 'Catchup alert!';
