@@ -12,6 +12,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
     final popupManager = sl<T>();
     final backgroundColor = popupManager.getBackgroundColor();
     final foregroundColor = popupManager.getForegroundColor();
+    final titleFontSize = 24.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -21,7 +22,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
           child: Text(
             popupManager.title,
             textAlign: TextAlign.center,
-            style: TextStyle(color: foregroundColor, fontSize: 24.0),
+            style: TextStyle(color: foregroundColor, fontSize: titleFontSize),
           ),
         ),
         Padding(
