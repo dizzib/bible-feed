@@ -28,6 +28,7 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
   Future showPopup() async {
     _isPopupShowing = true;
     await showModalBottomSheet(
+      barrierColor: const Color.fromRGBO(0, 0, 0, 0.1), // dim slightly
       context: context,
       isScrollControlled: true,
       builder: (context) {

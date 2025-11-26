@@ -12,6 +12,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
     final popupManager = sl<T>();
     final backgroundColor = popupManager.getBackgroundColor();
     final foregroundColor = popupManager.getForegroundColor();
+    final elevation = 8.0;
     final titleFontSize = 24.0;
 
     return Column(
@@ -35,6 +36,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: foregroundColor,
               foregroundColor: backgroundColor,
+              elevation: elevation,
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Constants.defaultBorderRadius)),
             ),
             onPressed: () {
