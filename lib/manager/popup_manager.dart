@@ -21,7 +21,7 @@ abstract class PopupManager with ChangeNotifier {
 
   // ui props
 
-  void action() {}
+  void action() {} // ignore: no-empty-block, default is do nothing
 
   String? get actionText => null;
 
