@@ -24,11 +24,14 @@ extension BuildContextExtension<T> on BuildContext {
 
   Future<T?> showDialogWithBlurBackground(Widget child) {
     sl<HapticService>().impact();
-    const blurSigma = 3.0;
     return showDialog(
       context: this,
-      // ignore: no-equal-arguments, x and y must be equal
-      builder: (_) => BackdropFilter(filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma), child: child),
+      builder:
+          (_) => BackdropFilter(
+            // ignore: no-equal-arguments, x and y must be equal
+            filter: ImageFilter.blur(sigmaX: Constants.blurSigma, sigmaY: Constants.blurSigma),
+            child: child,
+          ),
     );
   }
 }
