@@ -29,6 +29,7 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
     _isPopupShowing = true;
     await showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) {
         return BackdropFilter(
           // ignore: no-equal-arguments, x and y must be equal
