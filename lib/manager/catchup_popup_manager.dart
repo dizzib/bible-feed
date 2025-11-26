@@ -32,5 +32,5 @@ class CatchupPopupManager extends PopupManager {
   }
 
   @override
-  String get title => 'Catchup alert!';
+  String get title => 'Catchup!';
 }
