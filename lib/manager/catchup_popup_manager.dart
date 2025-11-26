@@ -21,7 +21,7 @@ class CatchupPopupManager extends PopupManager {
   //// ui
 
   @override
-  Color getBackgroundColor() => _catchupManager.isVeryBehind ? Colors.red : Colors.yellow.shade100;
+  Color getBackgroundColor() => _catchupManager.isVeryBehind ? Colors.red : Colors.yellow;
 
   @override
   Color getForegroundColor() => _catchupManager.isVeryBehind ? Colors.white : Colors.black;

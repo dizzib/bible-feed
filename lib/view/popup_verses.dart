@@ -23,7 +23,7 @@ class PopupVerses<T extends PopupManager> extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(text: verse.text, style: TextStyle(fontStyle: FontStyle.italic, color: foregroundColor)),
-                    const TextSpan(text: ' — '),
+                    TextSpan(text: ' — ', style: TextStyle(color: foregroundColor)),
                     TextSpan(text: verse.reference, style: TextStyle(color: foregroundColor)),
                   ],
                 ),

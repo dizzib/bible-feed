@@ -54,12 +54,14 @@ class CatchupManager with ChangeNotifier {
 
   void _save(DateTime value) => _storeService.setDateTime(_virtualAllDoneDateStoreKey, value);
 
+  int get chaptersToRead => daysBehind * _feedsManager.feeds.length + _feedsManager.chaptersToRead;
+
   int get daysBehind {
     if (!_catchupSettingManager.isEnabled) return 0;
     return max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate).inDays - 1);
   }
 
-  int get chaptersToRead => daysBehind * _feedsManager.feeds.length + _feedsManager.chaptersToRead;
+  int get daysBehindClamped => daysBehind.clamp(0, 2);
   bool get isBehind => daysBehind > 0;
   bool get isVeryBehind => daysBehind > 1;
 }

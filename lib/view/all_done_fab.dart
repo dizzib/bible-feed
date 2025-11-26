@@ -14,11 +14,10 @@ class AllDoneFab extends WatchingWidget {
 
     final backgroundColors = [Colors.green, Colors.yellow, Colors.red];
     final foregroundColors = [Colors.white, Colors.black, Colors.white];
-    final colorIndex = catchupManager.daysBehind.clamp(0, 2);
 
     return AnimatedFab(
-      backgroundColor: backgroundColors[colorIndex],
-      foregroundColor: foregroundColors[colorIndex],
+      backgroundColor: backgroundColors[catchupManager.daysBehindClamped],
+      foregroundColor: foregroundColors[catchupManager.daysBehindClamped],
       iconData: Icons.done,
       keyValue: 'all_done_fab',
       isVisible: feedsManager.areChaptersRead,

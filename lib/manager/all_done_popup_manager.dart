@@ -30,10 +30,10 @@ class AllDonePopupManager extends PopupManager {
   String? get actionText => 'Advance now >>';
 
   @override
-  Color getBackgroundColor() => _catchupManager.isBehind ? Colors.yellow.shade100 : Colors.green;
+  Color getBackgroundColor() => [Colors.green, Colors.yellow, Colors.red][_catchupManager.daysBehindClamped];
 
   @override
-  Color getForegroundColor() => _catchupManager.isBehind ? Colors.black : Colors.white;
+  Color getForegroundColor() => [Colors.white, Colors.black, Colors.white][_catchupManager.daysBehindClamped];
 
   @override
   String getText() {
@@ -45,5 +45,7 @@ class AllDonePopupManager extends PopupManager {
   }
 
   @override
-  String get title => 'All done for today!';
+  String get title {
+    return _catchupManager.isBehind ? 'Not yet done' : 'All done for today!';
+  }
 }
