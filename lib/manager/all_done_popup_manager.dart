@@ -37,11 +37,12 @@ class AllDonePopupManager extends PopupManager {
 
   @override
   String getText() {
-    final allDoneText = 'All done for today!\n\nLists will advance at midnight or you can advance them manually now.';
+    final allDoneText =
+        'You are now up to date, feeding and growing in the word of God, well done!\n\nLists will automatically advance at midnight or you can advance them now.';
     final catchupText = 'You still have ${_catchupManager.chaptersToRead} more chapters to read today!';
     return _catchupManager.isBehind ? catchupText : allDoneText;
   }
 
   @override
-  String get title => 'All done!';
+  String get title => 'All done for today!';
 }

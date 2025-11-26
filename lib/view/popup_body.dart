@@ -18,14 +18,22 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
       children: [
         Padding(
           padding: Constants.defaultPadding,
+          child: Text(
+            popupManager.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: foregroundColor, fontSize: 24.0),
+          ),
+        ),
+        Padding(
+          padding: Constants.defaultPadding,
           child: Text(popupManager.getText(), textAlign: TextAlign.center, style: TextStyle(color: foregroundColor)),
         ),
         if (popupManager.hasAction)
           ElevatedButton(
             key: const ValueKey('popup_action'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: backgroundColor,
-              foregroundColor: foregroundColor,
+              backgroundColor: foregroundColor,
+              foregroundColor: backgroundColor,
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Constants.defaultBorderRadius)),
             ),
             onPressed: () {
