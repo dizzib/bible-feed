@@ -20,6 +20,15 @@ void expectText(dynamic expected, {matcher = findsOneWidget}) =>
     expect(find.textContaining(expected.toString()), matcher);
 
 extension AppTestHelper on WidgetTester {
+  Future dismissPopup() async {
+    final barrierFinder = find.byWidgetPredicate((widget) => widget is ModalBarrier && widget.dismissible == true);
+
+    if (barrierFinder.evaluate().isNotEmpty) {
+      await tap(barrierFinder.last); // tap top-most barrier
+      await pumpAndSettle();
+    }
+  }
+
   Future startApp() async {
     WidgetsFlutterBinding.ensureInitialized();
     runApp(AppBase());
@@ -43,7 +52,7 @@ extension AppTestHelper on WidgetTester {
   }
 
   Future tapAllDoneButton(String text) async {
-    expectText('All done!');
+    expectText('All done');
     await tapText(text);
   }
 
@@ -69,21 +78,12 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  // Future tapFeed(String value) async {
-  //   await tapAt(getCenter(find.text(bookName)));
-  //   await pumpAndSettle();
-  // }
-
-  Future tapNo() async {
-    await tapAllDoneButton('No');
+  Future tapPopupAction() async {
+    await tapByKey('popup_action');
   }
 
   Future tapText(String value) async {
     await tap(find.text(value));
     await pumpAndSettle();
-  }
-
-  Future tapYes() async {
-    await tapAllDoneButton('Yes');
   }
 }

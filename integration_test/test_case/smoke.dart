@@ -8,20 +8,20 @@ Future runSmokeTest() async {
     await configureDependencies(environment: 'integration_test');
     await t.startApp();
     await t.tapAllLists();
-    expectText('All done!'); // onboarding should happen
-    await t.tapNo();
+    expectText('All done'); // onboarding should happen
+    await t.dismissPopup();
     await t.tapByKey('mat');
     expectNotInteractiveByKey('all_done_fab');
     await t.tapByKey('mat');
-    expectNoText('All done!'); // onboarding should not happen
+    expectNoText('All done'); // onboarding should not happen
     expectChapters(1);
     await t.tapAllDoneFab();
-    await t.tapYes();
+    await t.tapPopupAction();
     expectChapters(2);
     await t.tapAllLists();
-    expectNoText('All done!'); // onboarding should not happen
+    expectNoText('All done'); // onboarding should not happen
     await t.tapAllDoneFab();
-    await t.tapYes();
+    await t.tapPopupAction();
     expectChapters(3);
     await t.tapByKey('gos');
     await t.scrollToLastBook(); // subsequent t.pump breaks!?

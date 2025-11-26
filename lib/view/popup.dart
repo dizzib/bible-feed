@@ -60,6 +60,7 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
                   ),
                   if (manager.hasAction)
                     ElevatedButton(
+                      key: const ValueKey('popup_action'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: manager.backgroundColor(),
                         foregroundColor: manager.foregroundColor(),

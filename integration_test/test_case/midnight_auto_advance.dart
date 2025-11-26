@@ -17,13 +17,13 @@ Future runMidnightAdvanceTest() async {
 
     await t.startApp();
     await t.tapAllLists();
-    expectText('All done!');
+    expectText('All done');
 
     stubDateTimeService.advance1day();
     stubMidnightManager.notify();
 
     await t.pumpAndSettle(); // must wait for async code to run
     expectChapters(2);
-    expectNoText('All done!');
+    expectNoText('All done');
   });
 }
