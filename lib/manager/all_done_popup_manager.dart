@@ -38,9 +38,6 @@ class AllDonePopupManager extends PopupManager {
   Color getForegroundColor() => _catchupManager.isBehind ? Colors.black : Colors.white;
 
   @override
-  String get closeText => 'No';
-
-  @override
   String Function() get getText => () {
     final allDoneText = 'All done for today!\n\nLists will advance at midnight or you can advance them manually now.';
     final catchupText = 'You still have ${_catchupManager.chaptersToRead} more chapters to read today!';

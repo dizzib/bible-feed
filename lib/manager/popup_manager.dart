@@ -9,7 +9,6 @@ abstract class PopupManager with ChangeNotifier {
 
   //// abstract
 
-  String get closeText;
   String Function() get getText;
   String get onboardingStoreKeyFragment;
   String get title;
