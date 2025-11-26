@@ -51,7 +51,7 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: Constants.defaultPadding,
                     child: Text(
                       manager.getText(),
                       textAlign: TextAlign.center,
