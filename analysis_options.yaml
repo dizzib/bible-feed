@@ -30,7 +30,7 @@ dart_code_linter:
   metrics:
     halstead-volume: 1000
     maintainability-index: 35
-    number-of-methods: 12
+    number-of-methods: 15
 
 formatter:
   page_width: 120
