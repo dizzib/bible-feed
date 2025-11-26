@@ -3,6 +3,7 @@ import 'package:watch_it/watch_it.dart';
 
 import '../manager/popup_manager.dart';
 import '_constants.dart';
+import 'popup_verses.dart';
 
 class PopupBody<T extends PopupManager> extends StatelessWidget {
   const PopupBody({super.key});
@@ -30,6 +31,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
           padding: Constants.defaultPadding,
           child: Text(popupManager.getText(), textAlign: TextAlign.center, style: TextStyle(color: foregroundColor)),
         ),
+        PopupVerses<T>(),
         if (popupManager.hasAction)
           ElevatedButton(
             key: const ValueKey('popup_action'),

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import '../model/verse.dart';
 import '../service/store_service.dart';
 
 abstract class PopupManager with ChangeNotifier {
@@ -18,6 +19,8 @@ abstract class PopupManager with ChangeNotifier {
   String get _onboardingStoreKey => 'hasCompletedOnboarding.$onboardingStoreKeyFragment';
 
   bool get hasCompletedOnboarding => _storeService.getBool(_onboardingStoreKey) ?? false;
+
+  List<Verse>? get verses => null;
 
   // ui props
 
