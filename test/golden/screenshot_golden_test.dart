@@ -5,7 +5,7 @@ library;
 // They are resized and moved to fastlane by external scripts.
 
 import 'package:alchemist/alchemist.dart';
-import 'package:bible_feed/manager/catchup_dialog_manager.dart';
+import 'package:bible_feed/manager/catchup_popup_manager.dart';
 import 'package:bible_feed/manager/catchup_setting_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
@@ -72,7 +72,7 @@ Future<void> main() async {
   Helper.enableVerseScopes();
   Helper.initialiseFeeds();
 
-  final catchupDialogManager = sl<CatchupDialogManager>();
+  final catchupDialogManager = sl<CatchupPopupManager>();
   final catchupSettingManager = sl<CatchupSettingManager>();
   final stubDateTimeService = sl<DateTimeService>() as StubDateTimeService;
   final stubMidnightManager = sl<MidnightManager>() as StubMidnightManager;

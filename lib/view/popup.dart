@@ -3,38 +3,38 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/dialog_manager.dart';
+import '../manager/popup_manager.dart';
 import '_constants.dart';
 
-class BasicDialog<T extends DialogManager> extends StatefulWidget {
-  const BasicDialog({super.key});
+class Popup<T extends PopupManager> extends StatefulWidget {
+  const Popup({super.key});
 
   @override
-  State<BasicDialog<T>> createState() => _BasicDialogState<T>();
+  State<Popup<T>> createState() => _PopupState<T>();
 }
 
-class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
-  T? _dialogManager; // nullable instead of late
-  bool _isDialogShowing = false;
+class _PopupState<T extends PopupManager> extends State<Popup<T>> {
+  T? _popupManager; // nullable instead of late
+  bool _isPopupShowing = false;
 
   @override
   void initState() {
     super.initState();
-    _dialogManager = sl<T>();
-    _dialogManager?.addListener(_onDialogRequested);
+    _popupManager = sl<T>();
+    _popupManager?.addListener(_onPopupRequested);
   }
 
-  void _onDialogRequested() {
-    final manager = _dialogManager; // Grab a local copy to avoid reading a nullable repeatedly
+  void _onPopupRequested() {
+    final manager = _popupManager; // Grab a local copy to avoid reading a nullable repeatedly
     if (manager == null) return;
 
     // Ensure safe timing
     // ignore: avoid-passing-async-when-sync-expected, must await
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
-      if (_isDialogShowing) return;
+      if (_isPopupShowing) return;
 
-      _isDialogShowing = true;
+      _isPopupShowing = true;
 
       showModalBottomSheet(
         context: context,
@@ -79,17 +79,17 @@ class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
       );
 
       if (mounted) {
-        setState(() => _isDialogShowing = false);
+        setState(() => _isPopupShowing = false);
       } else {
-        _isDialogShowing = false;
+        _isPopupShowing = false;
       }
     });
   }
 
   @override
   void dispose() {
-    _dialogManager?.removeListener(_onDialogRequested);
-    _dialogManager = null;
+    _popupManager?.removeListener(_onPopupRequested);
+    _popupManager = null;
     super.dispose();
   }
 

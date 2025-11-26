@@ -9,15 +9,15 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bible_feed/manager/all_done_dialog_manager.dart' as _i541;
+import 'package:bible_feed/manager/all_done_popup_manager.dart' as _i471;
 import 'package:bible_feed/manager/app_install_manager.dart' as _i610;
 import 'package:bible_feed/manager/auto_advance_manager.dart' as _i111;
 import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
 import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i567;
 import 'package:bible_feed/manager/bible_readers_certified_manager.dart'
     as _i837;
-import 'package:bible_feed/manager/catchup_dialog_manager.dart' as _i156;
 import 'package:bible_feed/manager/catchup_manager.dart' as _i1045;
+import 'package:bible_feed/manager/catchup_popup_manager.dart' as _i92;
 import 'package:bible_feed/manager/catchup_setting_manager.dart' as _i282;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
@@ -255,15 +255,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i215.StoreService>(),
       ),
     );
-    gh.lazySingleton<_i541.AllDoneDialogManager>(
-      () => _i541.AllDoneDialogManager(
+    gh.lazySingleton<_i471.AllDonePopupManager>(
+      () => _i471.AllDonePopupManager(
         gh<_i215.StoreService>(),
         gh<_i1045.CatchupManager>(),
         gh<_i127.FeedsManager>(),
       ),
     );
-    gh.lazySingleton<_i156.CatchupDialogManager>(
-      () => _i156.CatchupDialogManager(
+    gh.lazySingleton<_i92.CatchupPopupManager>(
+      () => _i92.CatchupPopupManager(
         gh<_i215.StoreService>(),
         gh<_i1045.CatchupManager>(),
       ),

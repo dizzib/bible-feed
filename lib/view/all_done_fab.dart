@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/all_done_dialog_manager.dart';
+import '../manager/all_done_popup_manager.dart';
 import '../manager/catchup_manager.dart';
 import '../manager/feeds_manager.dart';
 import 'animated_fab.dart';
@@ -22,7 +22,7 @@ class AllDoneFab extends WatchingWidget {
       iconData: Icons.done,
       keyValue: 'all_done_fab',
       isVisible: feedsManager.areChaptersRead,
-      onPressed: sl<AllDoneDialogManager>().show,
+      onPressed: sl<AllDonePopupManager>().show,
     );
   }
 }

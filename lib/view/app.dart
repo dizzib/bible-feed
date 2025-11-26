@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../manager/all_done_dialog_manager.dart';
+import '../manager/all_done_popup_manager.dart';
 import '../manager/auto_advance_manager.dart';
-import '../manager/catchup_dialog_manager.dart';
+import '../manager/catchup_popup_manager.dart';
 import 'all_done_fab.dart';
 import 'app_bar_main.dart';
-import 'basic_dialog.dart';
 import 'catchup_fab.dart';
 import 'feeds.dart';
+import 'popup.dart';
 import 'settings_icon_button.dart';
 
 class App extends WatchingWidget {
@@ -25,9 +25,7 @@ class App extends WatchingWidget {
         return Scaffold(
           appBar: isShowAppBar ? AppBarMain() : null,
           body: Feeds(),
-          bottomSheet: const Stack(
-            children: [BasicDialog<AllDoneDialogManager>(), BasicDialog<CatchupDialogManager>()],
-          ), // invisible
+          bottomSheet: const Stack(children: [Popup<AllDonePopupManager>(), Popup<CatchupPopupManager>()]), // invisible
           floatingActionButton: Visibility(
             visible: !isShowAppBar,
             child: Stack(

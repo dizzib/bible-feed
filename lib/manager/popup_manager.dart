@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 
 import '../service/store_service.dart';
 
-abstract class DialogManager with ChangeNotifier {
+abstract class PopupManager with ChangeNotifier {
   final StoreService _storeService;
 
-  DialogManager(this._storeService);
+  PopupManager(this._storeService);
 
   //// abstract
 

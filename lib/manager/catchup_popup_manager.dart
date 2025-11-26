@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import 'catchup_manager.dart';
-import 'dialog_manager.dart';
+import 'popup_manager.dart';
 
 @lazySingleton
-class CatchupDialogManager extends DialogManager {
+class CatchupPopupManager extends PopupManager {
   final CatchupManager _catchupManager;
 
-  CatchupDialogManager(super._storeService, this._catchupManager) {
+  CatchupPopupManager(super._storeService, this._catchupManager) {
     _catchupManager.addListener(() {
-      // For onboarding, auto-show dialog only if onboarding not completed
       if (_catchupManager.isBehind && !hasCompletedOnboarding) show();
     });
   }
