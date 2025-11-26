@@ -62,7 +62,7 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
                       ),
                     ),
                     onPressed: () {
-                      _popupManager.action?.call();
+                      _popupManager.action();
                       Navigator.pop(context);
                     },
                     child: Text(_popupManager.actionText!), // ignore: avoid-non-null-assertion, passed hasAction guard

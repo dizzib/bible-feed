@@ -10,7 +10,7 @@ class CatchupPopupManager extends PopupManager {
 
   CatchupPopupManager(super._storeService, this._catchupManager) {
     _catchupManager.addListener(() {
-      if (_catchupManager.isBehind && !hasCompletedOnboarding) show();
+      if (_catchupManager.isBehind && !hasCompletedOnboarding) show(); // auto show
     });
   }
 

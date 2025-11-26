@@ -14,9 +14,7 @@ class AllDonePopupManager extends PopupManager {
 
   AllDonePopupManager(super._storeService, this._catchupManager, this._feedsManager) {
     _feedsManager.addListener(() {
-      // For onboarding, auto-show dialog only the first time all chapters are read and onboarding not completed,
-      // but always show if we need to catchup.
-      if (_feedsManager.areChaptersRead && (!hasCompletedOnboarding || _catchupManager.isBehind)) show();
+      if (_feedsManager.areChaptersRead && (!hasCompletedOnboarding || _catchupManager.isBehind)) show(); // auto show
     });
   }
 
@@ -26,7 +24,7 @@ class AllDonePopupManager extends PopupManager {
   // ui props
 
   @override
-  void Function()? get action => sl<FeedsAdvanceManager>().advance;
+  void action() => sl<FeedsAdvanceManager>().advance();
 
   @override
   String? get actionText => 'Advance now >>';
