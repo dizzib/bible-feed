@@ -22,11 +22,9 @@ void expectText(dynamic expected, {matcher = findsOneWidget}) =>
 extension AppTestHelper on WidgetTester {
   Future dismissPopup() async {
     final barrierFinder = find.byWidgetPredicate((widget) => widget is ModalBarrier && widget.dismissible == true);
-
-    if (barrierFinder.evaluate().isNotEmpty) {
-      await tap(barrierFinder.last); // tap top-most barrier
-      await pumpAndSettle();
-    }
+    if (barrierFinder.evaluate().isEmpty) return;
+    await tap(barrierFinder.last); // tap top-most barrier
+    await pumpAndSettle();
   }
 
   Future startApp() async {
