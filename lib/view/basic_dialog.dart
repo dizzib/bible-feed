@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../manager/dialog_manager.dart';
-import '_build_context_extension.dart';
 import '_constants.dart';
 
 class BasicDialog<T extends DialogManager> extends StatefulWidget {
@@ -36,27 +36,44 @@ class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
 
       _isDialogShowing = true;
 
-      await context.showDialogWithBlurBackground(
-        CupertinoAlertDialog(
-          title: Text(manager.title, style: context.textTheme.titleLarge),
-          content: SingleChildScrollView(
-            child: Padding(
-              padding: Constants.defaultPadding,
-              child: Text(manager.getText(), style: context.textTheme.bodyLarge),
-            ),
-          ),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: Text(manager.closeText)),
-            if (manager.hasAction)
-              TextButton(
-                onPressed: () {
-                  manager.action?.call();
-                  Navigator.pop(context);
-                },
-                child: Text(manager.actionText!), // ignore: avoid-non-null-assertion, passed hasAction guard
+      showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.yellow.shade100,
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
               ),
-          ],
-        ),
+              padding: Constants.defaultPadding,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      manager.getText(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.black87),
+                    ),
+                  ),
+                  if (manager.hasAction)
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      onPressed: () {
+                        manager.action?.call();
+                        Navigator.pop(context);
+                      },
+                      child: Text(manager.actionText!), // ignore: avoid-non-null-assertion, passed hasAction guard
+                    ),
+                ],
+              ),
+            ),
+          );
+        },
       );
 
       if (mounted) {
