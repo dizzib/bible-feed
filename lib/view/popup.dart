@@ -32,11 +32,12 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
         final backgroundColor = _popupManager.backgroundColor();
         final foregroundColor = _popupManager.foregroundColor();
         return BackdropFilter(
+          // ignore: no-equal-arguments, x and y must be equal
           filter: ImageFilter.blur(sigmaX: Constants.blurSigma, sigmaY: Constants.blurSigma),
           child: Container(
             decoration: BoxDecoration(
               color: backgroundColor,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius: const BorderRadius.vertical(top: Constants.defaultBorderRadius),
             ),
             padding: Constants.defaultPadding,
             child: Column(
@@ -56,7 +57,9 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: backgroundColor,
                       foregroundColor: foregroundColor,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Constants.defaultBorderRadius),
+                      ),
                     ),
                     onPressed: () {
                       _popupManager.action?.call();
