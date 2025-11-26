@@ -28,6 +28,10 @@ abstract class DialogManager with ChangeNotifier {
 
   bool get hasAction => action != null;
 
+  Color Function() get backgroundColor;
+
+  Color Function() get foregroundColor;
+
   // methods
 
   void completeOnboarding() => _storeService.setBool(_onboardingStoreKey, true);

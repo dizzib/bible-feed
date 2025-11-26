@@ -43,7 +43,7 @@ class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
             filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.yellow.shade100,
+                color: manager.backgroundColor(),
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
               ),
               padding: Constants.defaultPadding,
@@ -55,12 +55,14 @@ class _BasicDialogState<T extends DialogManager> extends State<BasicDialog<T>> {
                     child: Text(
                       manager.getText(),
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.black87),
+                      style: TextStyle(color: manager.foregroundColor()),
                     ),
                   ),
                   if (manager.hasAction)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: manager.backgroundColor(),
+                        foregroundColor: manager.foregroundColor(),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
                       onPressed: () {
