@@ -29,8 +29,8 @@ class _PopupState<T extends PopupManager> extends State<Popup<T>> {
     await showModalBottomSheet(
       context: context,
       builder: (context) {
-        final backgroundColor = _popupManager.backgroundColor();
-        final foregroundColor = _popupManager.foregroundColor();
+        final backgroundColor = _popupManager.getBackgroundColor();
+        final foregroundColor = _popupManager.getForegroundColor();
         return BackdropFilter(
           // ignore: no-equal-arguments, x and y must be equal
           filter: ImageFilter.blur(sigmaX: Constants.blurSigma, sigmaY: Constants.blurSigma),

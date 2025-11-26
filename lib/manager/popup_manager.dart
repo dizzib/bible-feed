@@ -28,9 +28,9 @@ abstract class PopupManager with ChangeNotifier {
 
   bool get hasAction => action != null;
 
-  Color Function() get backgroundColor;
+  Color getBackgroundColor();
 
-  Color Function() get foregroundColor;
+  Color getForegroundColor();
 
   // methods
 

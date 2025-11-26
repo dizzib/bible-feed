@@ -32,10 +32,10 @@ class AllDonePopupManager extends PopupManager {
   String? get actionText => 'Advance now >>';
 
   @override
-  Color Function() get backgroundColor => () => _catchupManager.isBehind ? Colors.yellow.shade100 : Colors.green;
+  Color getBackgroundColor() => _catchupManager.isBehind ? Colors.yellow.shade100 : Colors.green;
 
   @override
-  Color Function() get foregroundColor => () => _catchupManager.isBehind ? Colors.black : Colors.white;
+  Color getForegroundColor() => _catchupManager.isBehind ? Colors.black : Colors.white;
 
   @override
   String get closeText => 'No';
