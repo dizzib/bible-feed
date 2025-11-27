@@ -4,6 +4,10 @@ import 'package:watch_it/watch_it.dart';
 import '../manager/popup_manager.dart';
 import '_constants.dart';
 
+extension StringX on String {
+  String get nonBreaking => replaceAll(' ', '\u00A0');
+}
+
 class PopupVerses<T extends PopupManager> extends StatelessWidget {
   const PopupVerses({super.key});
 
@@ -20,11 +24,12 @@ class PopupVerses<T extends PopupManager> extends StatelessWidget {
             return Padding(
               padding: Constants.defaultPadding,
               child: RichText(
+                textAlign: TextAlign.center,
                 text: TextSpan(
                   children: [
                     TextSpan(text: verse.text, style: textStyle.copyWith(fontStyle: FontStyle.italic)),
-                    TextSpan(text: ' — ', style: textStyle),
-                    TextSpan(text: verse.reference, style: textStyle),
+                    TextSpan(text: ' ', style: textStyle),
+                    TextSpan(text: '— ${verse.reference}'.nonBreaking, style: textStyle),
                   ],
                 ),
               ),
