@@ -9,9 +9,9 @@ class PopupVerses<T extends PopupManager> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final popupManager = sl<T>();
-    final foregroundColor = popupManager.getForegroundColor();
-    final verses = popupManager.verses ?? [];
+    // golden screenshots render squares unless we specify the fontFamily
+    final textStyle = TextStyle(color: sl<T>().getForegroundColor(), fontFamily: 'Roboto');
+    final verses = sl<T>().verses ?? [];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,9 +22,9 @@ class PopupVerses<T extends PopupManager> extends StatelessWidget {
               child: RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: verse.text, style: TextStyle(fontStyle: FontStyle.italic, color: foregroundColor)),
-                    TextSpan(text: ' — ', style: TextStyle(color: foregroundColor)),
-                    TextSpan(text: verse.reference, style: TextStyle(color: foregroundColor)),
+                    TextSpan(text: verse.text, style: textStyle.copyWith(fontStyle: FontStyle.italic)),
+                    TextSpan(text: ' — ', style: textStyle),
+                    TextSpan(text: verse.reference, style: textStyle),
                   ],
                 ),
               ),
