@@ -31,34 +31,32 @@ class CatchupManager with ChangeNotifier {
     AppLifecycleListener(onResume: notifyListeners);
 
     _feedsAdvanceManager.addListener(() {
-      _save(isBehind ? _virtualAllDoneDate + 1.days : _dateTimeService.now.date);
+      virtualAllDoneDate = isBehind ? virtualAllDoneDate + 1.days : _dateTimeService.now.date;
       notifyListeners();
     });
 
     _catchupSettingManager.addListener(() {
-      _save(_defaultVirtualAllDoneDate);
+      virtualAllDoneDate = _defaultVirtualAllDoneDate;
       notifyListeners();
     });
 
     _midnightManager.addListener(notifyListeners);
 
-    _save(_virtualAllDoneDate); // ensure stored on first run
+    virtualAllDoneDate = virtualAllDoneDate; // ensure default is stored
     notifyListeners();
   }
 
-  static const _virtualAllDoneDateStoreKey = 'virtualAllDoneDate';
+  static const _storeKey = 'virtualAllDoneDate';
 
   DateTime get _defaultVirtualAllDoneDate => _dateTimeService.now.date - 1.days;
-  DateTime get _virtualAllDoneDate =>
-      _storeService.getDateTime(_virtualAllDoneDateStoreKey) ?? _defaultVirtualAllDoneDate;
 
-  void _save(DateTime value) => _storeService.setDateTime(_virtualAllDoneDateStoreKey, value);
+  //// public
 
   int get chaptersToRead => daysBehind * _feedsManager.feeds.length + _feedsManager.chaptersToRead;
 
   int get daysBehind {
     if (!_catchupSettingManager.isEnabled) return 0;
-    return max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate).inDays - 1);
+    return max(0, _dateTimeService.now.date.difference(virtualAllDoneDate).inDays - 1);
   }
 
   int get daysBehindClamped {
@@ -68,4 +66,7 @@ class CatchupManager with ChangeNotifier {
 
   bool get isBehind => daysBehind > 0;
   bool get isVeryBehind => daysBehind > 1;
+
+  DateTime get virtualAllDoneDate => _storeService.getDateTime(_storeKey) ?? _defaultVirtualAllDoneDate;
+  set virtualAllDoneDate(DateTime value) => _storeService.setDateTime(_storeKey, value);
 }
