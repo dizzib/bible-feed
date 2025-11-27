@@ -8,4 +8,5 @@ class Constants {
   static const defaultFontSize = 14.0;
   static const defaultPadding = EdgeInsets.all(8.0);
   static const defaultSpacing = 12.0;
+  static const nonBreakingSpace = '\u00A0'; // ignore: avoid-non-ascii-symbols, nbsp is ok
 }

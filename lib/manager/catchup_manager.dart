@@ -61,7 +61,11 @@ class CatchupManager with ChangeNotifier {
     return max(0, _dateTimeService.now.date.difference(_virtualAllDoneDate).inDays - 1);
   }
 
-  int get daysBehindClamped => daysBehind.clamp(0, 2);
+  int get daysBehindClamped {
+    final upperLimit = 2;
+    return daysBehind.clamp(0, upperLimit);
+  }
+
   bool get isBehind => daysBehind > 0;
   bool get isVeryBehind => daysBehind > 1;
 }

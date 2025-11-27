@@ -4,10 +4,6 @@ import 'package:watch_it/watch_it.dart';
 import '../manager/popup_manager.dart';
 import '_constants.dart';
 
-extension StringX on String {
-  String get nonBreaking => replaceAll(' ', '\u00A0');
-}
-
 class PopupVerses<T extends PopupManager> extends StatelessWidget {
   const PopupVerses({super.key});
 
@@ -29,7 +25,11 @@ class PopupVerses<T extends PopupManager> extends StatelessWidget {
                   children: [
                     TextSpan(text: verse.text, style: textStyle.copyWith(fontStyle: FontStyle.italic)),
                     TextSpan(text: ' ', style: textStyle),
-                    TextSpan(text: '— ${verse.reference}'.nonBreaking, style: textStyle),
+                    TextSpan(
+                      // ignore: avoid-non-ascii-symbols, long dash is ok
+                      text: '— ${verse.reference}'.replaceAll(' ', Constants.nonBreakingSpace),
+                      style: textStyle,
+                    ),
                   ],
                 ),
               ),
