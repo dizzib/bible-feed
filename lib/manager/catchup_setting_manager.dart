@@ -19,5 +19,5 @@ class CatchupSettingManager extends SettingManager {
   String get title => 'Catch Up';
 
   @override
-  String get subtitle => 'Show a warning if you miss a day, and encourage you to get back on track.';
+  String get subtitle => 'Show a notification if you miss a day, and encourage you to get back on track.';
 }

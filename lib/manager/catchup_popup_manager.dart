@@ -30,13 +30,13 @@ class CatchupPopupManager extends PopupManager {
   String getText() {
     final chaptersToRead = _catchupManager.chaptersToRead;
     final daysBehind = "${_catchupManager.daysBehind} day${_catchupManager.daysBehind == 1 ? '' : 's'}";
-    final alert = "You have $chaptersToRead chapters to read today, because you are now $daysBehind behind!";
+    final alert = "You have $chaptersToRead chapters to read today, because you are now $daysBehind behind.";
     final exhortation = 'Beloved, do not neglect to feed daily upon the word of God, for it is written...';
     return '$alert\n\n$exhortation';
   }
 
   @override
-  String get title => 'Catchup!';
+  String get title => 'Catch Up!';
 
   @override
   List<Verse>? get verses => [

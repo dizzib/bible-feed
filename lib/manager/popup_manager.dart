@@ -25,13 +25,11 @@ abstract class PopupManager with ChangeNotifier {
   // ui props
 
   void action() {} // ignore: no-empty-block, default is do nothing
-
+  Icon? get actionIcon => null;
   String? get actionText => null;
-
   bool get hasAction => actionText != null;
 
   Color getBackgroundColor();
-
   Color getForegroundColor();
 
   // methods

@@ -11,8 +11,10 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final popupManager = sl<T>();
+
     final backgroundColor = popupManager.getBackgroundColor();
     final foregroundColor = popupManager.getForegroundColor();
+    final actionButtonSpacing = 4.0;
     final elevation = 8.0;
     final titleFontSize = 24.0;
 
@@ -45,7 +47,12 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
               popupManager.action();
               Navigator.pop(context);
             },
-            child: Text(popupManager.actionText!), // ignore: avoid-non-null-assertion, passed hasAction guard
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: actionButtonSpacing,
+              // ignore: avoid-non-null-assertion, passed hasAction guard
+              children: [Text(popupManager.actionText!), popupManager.actionIcon!],
+            ),
           ),
       ],
     );

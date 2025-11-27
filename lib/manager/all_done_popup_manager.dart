@@ -27,7 +27,10 @@ class AllDonePopupManager extends PopupManager {
   void action() => sl<FeedsAdvanceManager>().advance();
 
   @override
-  String? get actionText => 'Advance now >>';
+  Icon? get actionIcon => const Icon(Icons.fast_forward);
+
+  @override
+  String? get actionText => 'Advance now';
 
   @override
   Color getBackgroundColor() => [Colors.green, Colors.yellow, Colors.red][_catchupManager.daysBehindClamped];
