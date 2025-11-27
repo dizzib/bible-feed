@@ -10,12 +10,10 @@ import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
-import 'package:bible_feed/service/store_service.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../../integration_test/helper.dart';
