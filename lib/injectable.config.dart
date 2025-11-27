@@ -205,13 +205,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i950.HapticManager>(
       () => _i950.HapticManager(
-        gh<_i22.HapticService>(),
-        gh<_i282.CatchupSettingManager>(),
-        gh<_i632.ChapterSplitSettingManager>(),
-        gh<_i274.HapticSettingManager>(),
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i1033.BookListWheelState>(),
+        gh<_i282.CatchupSettingManager>(),
         gh<_i1033.ChapterListWheelState>(),
+        gh<_i632.ChapterSplitSettingManager>(),
+        gh<_i22.HapticService>(),
+        gh<_i274.HapticSettingManager>(),
       ),
     );
     gh.lazySingleton<_i111.AutoAdvanceManager>(

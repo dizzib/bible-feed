@@ -9,28 +9,28 @@ import 'haptic_setting_manager.dart';
 
 @singleton
 class HapticManager {
-  final HapticService _hapticService;
-  final CatchupSettingManager _catchupSettingManager;
-  final ChapterSplitSettingManager _chapterSplitSettingService;
-  final HapticSettingManager _hapticSettingManager;
   final BibleReaderLinkManager _bibleReaderLinkManager;
   final BookListWheelState _bookListWheelState;
   final ChapterListWheelState _chapterListWheelState;
+  final CatchupSettingManager _catchupSettingManager;
+  final ChapterSplitSettingManager _chapterSplitSettingManager;
+  final HapticService _hapticService;
+  final HapticSettingManager _hapticSettingManager;
 
   HapticManager(
-    this._hapticService,
-    this._catchupSettingManager,
-    this._chapterSplitSettingService,
-    this._hapticSettingManager,
     this._bibleReaderLinkManager,
     this._bookListWheelState,
+    this._catchupSettingManager,
     this._chapterListWheelState,
+    this._chapterSplitSettingManager,
+    this._hapticService,
+    this._hapticSettingManager,
   ) {
     _bibleReaderLinkManager.addListener(_hapticService.impact);
     _bookListWheelState.addListener(_hapticService.impact);
     _catchupSettingManager.addListener(_hapticService.impact);
     _chapterListWheelState.addListener(_hapticService.impact);
-    _chapterSplitSettingService.addListener(_hapticService.impact);
+    _chapterSplitSettingManager.addListener(_hapticService.impact);
     _hapticSettingManager.addListener(_hapticService.impact);
   }
 }
