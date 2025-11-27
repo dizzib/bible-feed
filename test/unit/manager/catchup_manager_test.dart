@@ -83,22 +83,31 @@ void main() {
   parameterizedTest(
     'daysBehind, isBehind properties',
     [
-      [false, null, 0, 7, false, false],
-      [false, today, 0, 7, false, false],
-      [false, today - 1.days, 0, 7, false, false],
-      [false, today - 2.days, 0, 7, false, false],
-      [false, today - 3.days, 0, 7, false, false],
-      [true, null, 0, 7, false, false],
-      [true, today, 0, 7, false, false],
-      [true, today - 1.days, 0, 7, false, false],
-      [true, today - 2.days, 1, 17, true, false],
-      [true, today - 3.days, 2, 27, true, true],
-      [true, today - 4.days, 3, 37, true, true],
+      [false, null, 0, 0, 7, false, false],
+      [false, today, 0, 0, 7, false, false],
+      [false, today - 1.days, 0, 0, 7, false, false],
+      [false, today - 2.days, 0, 0, 7, false, false],
+      [false, today - 3.days, 0, 0, 7, false, false],
+      [true, null, 0, 0, 7, false, false],
+      [true, today, 0, 0, 7, false, false],
+      [true, today - 1.days, 0, 0, 7, false, false],
+      [true, today - 2.days, 1, 1, 17, true, false],
+      [true, today - 3.days, 2, 2, 27, true, true],
+      [true, today - 4.days, 3, 2, 37, true, true],
     ],
-    (isSettingEnabled, virtualAllDoneDate, expectDaysBehind, expectChaptersToRead, expectIsBehind, expectIsVeryBehind) {
+    (
+      isSettingEnabled,
+      virtualAllDoneDate,
+      expectDaysBehind,
+      expectDaysBehindClamped,
+      expectChaptersToRead,
+      expectIsBehind,
+      expectIsVeryBehind,
+    ) {
       when(mockCatchupSettingManager.isEnabled).thenReturn(isSettingEnabled);
       when(mockStoreService.getDateTime('virtualAllDoneDate')).thenReturn(virtualAllDoneDate ?? today - 1.days);
       expect(testee.daysBehind, expectDaysBehind);
+      expect(testee.daysBehindClamped, expectDaysBehindClamped);
       expect(testee.chaptersToRead, expectChaptersToRead);
       expect(testee.isBehind, expectIsBehind);
       expect(testee.isVeryBehind, expectIsVeryBehind);
