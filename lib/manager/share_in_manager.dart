@@ -1,17 +1,20 @@
 import 'package:dartx/dartx.dart';
+import 'package:df_log/df_log.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/feed.dart';
 import '../model/share_dto.dart';
 import '../service/app_service.dart';
+import 'catchup_manager.dart';
 import 'feeds_manager.dart';
 
 @lazySingleton
 class ShareInManager {
   final AppService _appService;
+  final CatchupManager _catchupManager;
   final FeedsManager _feedsManager;
 
-  ShareInManager(this._appService, this._feedsManager);
+  ShareInManager(this._appService, this._catchupManager, this._feedsManager);
 
   void sync(String? json) {
     const help = 'Please ensure you are scanning a Bible Feed QR-code.';
@@ -39,6 +42,8 @@ class ShareInManager {
     if (actualFeedsCount != expectedFeedsCount) {
       throw Exception('Expected $expectedFeedsCount feeds in the QR-code but got $actualFeedsCount. $help');
     }
+
+    _catchupManager.virtualAllDoneDate = syncDto.virtualAllDoneDate;
 
     for (final (index, feed) in _feedsManager.feeds.indexed) {
       feed.state = syncDto.feedStateList[index];

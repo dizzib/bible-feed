@@ -32,17 +32,24 @@ class ShareDtoMapper extends ClassMapperBase<ShareDto> {
     'feedStateList',
     _$feedStateList,
   );
+  static DateTime _$virtualAllDoneDate(ShareDto v) => v.virtualAllDoneDate;
+  static const Field<ShareDto, DateTime> _f$virtualAllDoneDate = Field(
+    'virtualAllDoneDate',
+    _$virtualAllDoneDate,
+  );
 
   @override
   final MappableFields<ShareDto> fields = const {
     #buildNumber: _f$buildNumber,
     #feedStateList: _f$feedStateList,
+    #virtualAllDoneDate: _f$virtualAllDoneDate,
   };
 
   static ShareDto _instantiate(DecodingData data) {
     return ShareDto(
       buildNumber: data.dec(_f$buildNumber),
       feedStateList: data.dec(_f$feedStateList),
+      virtualAllDoneDate: data.dec(_f$virtualAllDoneDate),
     );
   }
 
@@ -105,7 +112,11 @@ abstract class ShareDtoCopyWith<$R, $In extends ShareDto, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, FeedState, FeedStateCopyWith<$R, FeedState, FeedState>>
   get feedStateList;
-  $R call({String? buildNumber, List<FeedState>? feedStateList});
+  $R call({
+    String? buildNumber,
+    List<FeedState>? feedStateList,
+    DateTime? virtualAllDoneDate,
+  });
   ShareDtoCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -125,16 +136,25 @@ class _ShareDtoCopyWithImpl<$R, $Out>
     (v) => call(feedStateList: v),
   );
   @override
-  $R call({String? buildNumber, List<FeedState>? feedStateList}) => $apply(
+  $R call({
+    String? buildNumber,
+    List<FeedState>? feedStateList,
+    DateTime? virtualAllDoneDate,
+  }) => $apply(
     FieldCopyWithData({
       if (buildNumber != null) #buildNumber: buildNumber,
       if (feedStateList != null) #feedStateList: feedStateList,
+      if (virtualAllDoneDate != null) #virtualAllDoneDate: virtualAllDoneDate,
     }),
   );
   @override
   ShareDto $make(CopyWithData data) => ShareDto(
     buildNumber: data.get(#buildNumber, or: $value.buildNumber),
     feedStateList: data.get(#feedStateList, or: $value.feedStateList),
+    virtualAllDoneDate: data.get(
+      #virtualAllDoneDate,
+      or: $value.virtualAllDoneDate,
+    ),
   );
 
   @override

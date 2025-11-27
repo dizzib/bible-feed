@@ -1,3 +1,4 @@
+import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/manager/feed_store_manager.dart';
 import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/manager/share_in_manager.dart';
@@ -12,11 +13,12 @@ import 'package:mockito/mockito.dart';
 import '../test_data.dart';
 import 'share_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<AppService>(), MockSpec<StoreService>()])
+@GenerateNiceMocks([MockSpec<AppService>(), MockSpec<CatchupManager>(), MockSpec<StoreService>()])
 void main() {
   final dateModified = DateTime.now();
   final readingLists = ReadingLists([rl0, rl1]);
   late MockAppService mockAppService;
+  late MockCatchupManager mockCatchupManager;
   late MockStoreService mockInStoreService;
   late MockStoreService mockOutStoreService;
   late FeedsManager inFeedsManager;
@@ -26,22 +28,34 @@ void main() {
 
   setUp(() {
     mockAppService = MockAppService();
+    mockCatchupManager = MockCatchupManager();
     mockInStoreService = MockStoreService();
     mockOutStoreService = MockStoreService();
   });
 
   test('sync-out sync-in interaction: should transfer across', () {
+    final buildNumber = '123';
+    final virtualAllDoneDate = DateTime(2025, 12, 30);
     when(mockOutStoreService.getDateTime('rl1.dateModified')).thenReturn(dateModified);
     when(mockOutStoreService.getString('rl1.book')).thenReturn('b1');
     when(mockOutStoreService.getInt('rl1.chapter')).thenReturn(3);
     when(mockOutStoreService.getInt('rl1.verse')).thenReturn(5);
     when(mockOutStoreService.getBool('rl1.isRead')).thenReturn(true);
-    when(mockAppService.buildNumber).thenReturn('123');
+    when(mockAppService.buildNumber).thenReturn(buildNumber);
+    when(mockCatchupManager.virtualAllDoneDate).thenReturn(virtualAllDoneDate);
     inFeedsManager = FeedsManager(FeedStoreManager(mockInStoreService), readingLists);
     outFeedsManager = FeedsManager(FeedStoreManager(mockOutStoreService), readingLists);
-    shareInManager = ShareInManager(mockAppService, inFeedsManager);
-    shareOutManager = ShareOutManager(mockAppService, outFeedsManager);
+    shareInManager = ShareInManager(mockAppService, mockCatchupManager, inFeedsManager);
+    shareOutManager = ShareOutManager(mockAppService, mockCatchupManager, outFeedsManager);
+
+    // AI fails to improve this code!?
+    DateTime? capturedDate;
+    when(mockCatchupManager.virtualAllDoneDate = any).thenAnswer((invocation) {
+      capturedDate = invocation.positionalArguments[0] as DateTime;
+    });
+
     shareInManager.sync(shareOutManager.getJson());
+
     final state0 = outFeedsManager.feeds[0].state;
     final state1 = outFeedsManager.feeds[1].state;
     expect(state0.bookKey, b0.key);
@@ -54,5 +68,6 @@ void main() {
     expect(state1.verse, 5);
     expect(state1.isRead, true);
     expect(state1.dateModified, dateModified);
+    expect(capturedDate?.millisecondsSinceEpoch, virtualAllDoneDate.millisecondsSinceEpoch);
   });
 }

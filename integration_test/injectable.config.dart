@@ -193,30 +193,10 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i626.UrlLaunchService>(),
       ),
     );
-    gh.lazySingleton<_i864.ShareInManager>(
-      () => _i864.ShareInManager(
-        gh<_i977.AppService>(),
-        gh<_i127.FeedsManager>(),
-      ),
-    );
-    gh.lazySingleton<_i175.ShareOutManager>(
-      () => _i175.ShareOutManager(
-        gh<_i977.AppService>(),
-        gh<_i127.FeedsManager>(),
-      ),
-    );
     gh.lazySingleton<_i567.BibleReaderLinkManager>(
       () => _i567.BibleReaderLinkManager(
         gh<_i215.StoreService>(),
         gh<_i837.BibleReadersCertifiedManager>(),
-      ),
-    );
-    gh.singleton<_i468.DeepLinkInManager>(
-      () => _i468.DeepLinkInManager(
-        gh<_i326.DeepLinkService>(),
-        gh<_i508.JsonEncodingManager>(),
-        gh<_i864.ShareInManager>(),
-        gh<_i942.ToastService>(),
       ),
     );
     gh.lazySingleton<_i610.AppInstallManager>(
@@ -250,12 +230,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i22.HapticService>(),
       ),
     );
-    gh.singleton<_i768.DeepLinkOutManager>(
-      () => _i768.DeepLinkOutManager(
-        gh<_i508.JsonEncodingManager>(),
-        gh<_i175.ShareOutManager>(),
-      ),
-    );
     gh.lazySingleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(
         gh<_i477.FeedsAdvanceManager>(),
@@ -272,6 +246,28 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i215.StoreService>(),
       ),
     );
+    gh.lazySingleton<_i864.ShareInManager>(
+      () => _i864.ShareInManager(
+        gh<_i977.AppService>(),
+        gh<_i1045.CatchupManager>(),
+        gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.lazySingleton<_i175.ShareOutManager>(
+      () => _i175.ShareOutManager(
+        gh<_i977.AppService>(),
+        gh<_i1045.CatchupManager>(),
+        gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.singleton<_i468.DeepLinkInManager>(
+      () => _i468.DeepLinkInManager(
+        gh<_i326.DeepLinkService>(),
+        gh<_i508.JsonEncodingManager>(),
+        gh<_i864.ShareInManager>(),
+        gh<_i942.ToastService>(),
+      ),
+    );
     gh.lazySingleton<_i471.AllDonePopupManager>(
       () => _i471.AllDonePopupManager(
         gh<_i215.StoreService>(),
@@ -283,6 +279,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i92.CatchupPopupManager(
         gh<_i215.StoreService>(),
         gh<_i1045.CatchupManager>(),
+      ),
+    );
+    gh.singleton<_i768.DeepLinkOutManager>(
+      () => _i768.DeepLinkOutManager(
+        gh<_i508.JsonEncodingManager>(),
+        gh<_i175.ShareOutManager>(),
       ),
     );
     return this;

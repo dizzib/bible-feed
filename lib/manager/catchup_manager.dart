@@ -32,18 +32,15 @@ class CatchupManager with ChangeNotifier {
 
     _feedsAdvanceManager.addListener(() {
       virtualAllDoneDate = isBehind ? virtualAllDoneDate + 1.days : _dateTimeService.now.date;
-      notifyListeners();
     });
 
     _catchupSettingManager.addListener(() {
       virtualAllDoneDate = _defaultVirtualAllDoneDate;
-      notifyListeners();
     });
 
     _midnightManager.addListener(notifyListeners);
 
     virtualAllDoneDate = virtualAllDoneDate; // ensure default is stored
-    notifyListeners();
   }
 
   static const _storeKey = 'virtualAllDoneDate';
@@ -65,8 +62,13 @@ class CatchupManager with ChangeNotifier {
   }
 
   bool get isBehind => daysBehind > 0;
+
   bool get isVeryBehind => daysBehind > 1;
 
   DateTime get virtualAllDoneDate => _storeService.getDateTime(_storeKey) ?? _defaultVirtualAllDoneDate;
-  set virtualAllDoneDate(DateTime value) => _storeService.setDateTime(_storeKey, value);
+
+  set virtualAllDoneDate(DateTime value) {
+    _storeService.setDateTime(_storeKey, value);
+    notifyListeners();
+  }
 }
