@@ -7,7 +7,7 @@ import 'chapter_split_setting_manager.dart';
 import 'haptic_setting_manager.dart';
 
 @singleton
-class HapticWireupManager {
+class HapticManager {
   final HapticService _hapticService;
   final ChapterSplitSettingManager _chapterSplitSettingService;
   final HapticSettingManager _hapticSettingManager;
@@ -15,7 +15,7 @@ class HapticWireupManager {
   final BookListWheelState _bookListWheelState;
   final ChapterListWheelState _chapterListWheelState;
 
-  HapticWireupManager(
+  HapticManager(
     this._hapticService,
     this._chapterSplitSettingService,
     this._hapticSettingManager,

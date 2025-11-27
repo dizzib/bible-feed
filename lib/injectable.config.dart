@@ -28,8 +28,8 @@ import 'package:bible_feed/manager/feed_store_manager.dart' as _i571;
 import 'package:bible_feed/manager/feed_tap_manager.dart' as _i583;
 import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i477;
 import 'package:bible_feed/manager/feeds_manager.dart' as _i127;
+import 'package:bible_feed/manager/haptic_manager.dart' as _i950;
 import 'package:bible_feed/manager/haptic_setting_manager.dart' as _i274;
-import 'package:bible_feed/manager/haptic_wireup_manager.dart' as _i519;
 import 'package:bible_feed/manager/json_encoding_manager.dart' as _i508;
 import 'package:bible_feed/manager/midnight_manager.dart' as _i438;
 import 'package:bible_feed/manager/share_in_manager.dart' as _i864;
@@ -189,8 +189,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i516.PlatformEventService>(),
       ),
     );
-    gh.singleton<_i519.HapticWireupManager>(
-      () => _i519.HapticWireupManager(
+    gh.singleton<_i950.HapticManager>(
+      () => _i950.HapticManager(
         gh<_i22.HapticService>(),
         gh<_i632.ChapterSplitSettingManager>(),
         gh<_i274.HapticSettingManager>(),
