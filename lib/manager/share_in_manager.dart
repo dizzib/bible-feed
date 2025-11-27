@@ -1,5 +1,4 @@
 import 'package:dartx/dartx.dart';
-import 'package:df_log/df_log.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/feed.dart';
