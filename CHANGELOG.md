@@ -3,11 +3,11 @@
 All notable changes to this project are documented here.
 
 
-## [1.9.0] - 2025-
+## [1.9.0] - 2025-11-27
 
 ### Added
-- New feature: catchup
-- Android OpenBible app reader TODO check genesis link
+- Feature: catchup
+- Android OpenBible app reader
 
 
 ## [1.8.0] - 2025-11-05

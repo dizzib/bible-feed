@@ -1,0 +1,3 @@
+Added
+- Feature: catchup
+- Android OpenBible app reader
