@@ -206,16 +206,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i516.PlatformEventService>(),
       ),
     );
-    gh.singleton<_i950.HapticManager>(
-      () => _i950.HapticManager(
-        gh<_i22.HapticService>(),
-        gh<_i632.ChapterSplitSettingManager>(),
-        gh<_i274.HapticSettingManager>(),
-        gh<_i567.BibleReaderLinkManager>(),
-        gh<_i1033.BookListWheelState>(),
-        gh<_i1033.ChapterListWheelState>(),
-      ),
-    );
     gh.lazySingleton<_i477.FeedsAdvanceManager>(
       () => _i477.FeedsAdvanceManager(
         gh<_i99.DateTimeService>(),
@@ -228,6 +218,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i186.BibleReaderLaunchManager>(),
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i22.HapticService>(),
+      ),
+    );
+    gh.singleton<_i950.HapticManager>(
+      () => _i950.HapticManager(
+        gh<_i22.HapticService>(),
+        gh<_i282.CatchupSettingManager>(),
+        gh<_i632.ChapterSplitSettingManager>(),
+        gh<_i274.HapticSettingManager>(),
+        gh<_i567.BibleReaderLinkManager>(),
+        gh<_i1033.BookListWheelState>(),
+        gh<_i1033.ChapterListWheelState>(),
       ),
     );
     gh.lazySingleton<_i111.AutoAdvanceManager>(
