@@ -1,8 +1,14 @@
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart';
 import 'package:bible_feed/manager/feeds_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 class Helper {
+  static Future clearSharedPrefs() async {
+    final sp = await SharedPreferences.getInstance();
+    await sp.clear();
+  }
+
   static void enableVerseScopes() {
     sl<ChapterSplitSettingManager>().isEnabled = true;
   }
@@ -23,17 +29,17 @@ class Helper {
       [40, 7],
     ];
     var chapterReadState = [
-      [0, 1],
-      [0, 0],
-      [1, 0],
-      [0, 1],
-      [1, 0],
+      [false, true],
+      [false, false],
+      [true, false],
+      [false, true],
+      [true, false],
     ];
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 2; col++) {
         final feed = sl<FeedsManager>().feeds[row * 2 + col];
         feed.setBookChapterVerse(bookState[row][col], chapterState[row][col]);
-        if (chapterReadState[row][col] == 1) feed.toggleIsRead();
+        if (chapterReadState[row][col] != feed.state.isRead) feed.toggleIsRead();
       }
     }
   }

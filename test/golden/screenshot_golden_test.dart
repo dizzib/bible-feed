@@ -6,13 +6,16 @@ library;
 
 import 'package:alchemist/alchemist.dart';
 import 'package:bible_feed/manager/catchup_setting_manager.dart';
+import 'package:bible_feed/manager/feeds_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:bible_feed/service/platform_service.dart';
+import 'package:bible_feed/service/store_service.dart';
 import 'package:bible_feed/view/app_base.dart';
 import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../../integration_test/helper.dart';
@@ -60,11 +63,18 @@ final scenarios = {
   const Scenario('bookChapterDialog', tapKey: 'ep2'),
   const Scenario('settings', tapKey: 'settingsIconButton'),
   const Scenario('catchup', setup: setupCatchup),
+  const Scenario('allDone', setup: setupAllDone),
   const Scenario('share', tapKey: 'shareIconButton'),
   const Scenario('home', brightness: Brightness.dark),
 };
 
-Future setupCatchup() async {
+void setupAllDone() {
+  for (final f in sl<FeedsManager>().feeds.where((f) => !f.state.isRead)) {
+    f.toggleIsRead();
+  }
+}
+
+void setupCatchup() {
   (sl<DateTimeService>() as StubDateTimeService).advance1day();
   (sl<MidnightManager>() as StubMidnightManager).notify();
 }
@@ -73,25 +83,32 @@ Future main() async {
   await configureDependencies('golden');
   WidgetsApp.debugAllowBannerOverride = false; // hide the debug banner
 
+  Device? lastDevice;
   Helper.enableVerseScopes();
-  Helper.initialiseFeeds();
 
   for (final device in Device.values.where((d) => d.enabled)) {
+    Log.info(device.name);
     final targetPlatform = device.platform == Platform.android ? TargetPlatform.android : TargetPlatform.iOS;
     for (final (index, scenario) in scenarios.indexed) {
       // seems to generate in background, even after await!?
       final filename = '${device.platform.name}/${device.name}_$index-${scenario.name}';
-      goldenTest(
+      await goldenTest(
         'screenshot',
         fileName: filename,
-        pumpBeforeTest: (t) {
+        pumpBeforeTest: (t) async {
+          if (device != lastDevice) {
+            Log.info('initialise environment for new device $device');
+            await Helper.clearSharedPrefs();
+            Helper.initialiseFeeds();
+            lastDevice = device;
+          }
           Log.info(filename);
           sl.unregister<PlatformService>();
           sl.registerSingleton(PlatformService(currentPlatform: targetPlatform));
           t.platformDispatcher.platformBrightnessTestValue = scenario.brightness;
           sl<CatchupSettingManager>().isEnabled = true;
           if (scenario.setup != null) scenario.setup!();
-          return t.pumpAndSettle();
+          await t.pumpAndSettle();
         },
         whilePerforming: (t) async {
           if (scenario.tapKey != null) await t.tapByKey(scenario.tapKey!);
