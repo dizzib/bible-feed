@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:dartx/dartx.dart';
 import 'package:df_log/df_log.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
@@ -40,21 +43,28 @@ class HapticManager extends RouteObserver<PageRoute<dynamic>> {
       _feedTapManager,
       _hapticSettingManager,
     ];
-    _hapticSettingManager.addListener(() {
-      for (final notifier in notifiers) {
-        notifier.addListener(_maybeImpact);
-      }
-    });
+    for (final notifier in notifiers) {
+      notifier.addListener(_debounceMaybeImpact);
+    }
   }
 
-  void _maybeImpact() {
+  final delay = 10.milliseconds;
+  bool canRun = true;
+  Timer? timer;
+
+  void _debounceMaybeImpact() {
+    if (!canRun) return; // ignore: dead_code
+    canRun = false;
+    timer?.cancel(); // ignore: dead_code
+    timer = Timer(delay, () => canRun = true);
+
     Log.info(_hapticSettingManager.isEnabled);
     if (_hapticSettingManager.isEnabled) _hapticService.impact();
   }
 
   @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) => _maybeImpact();
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) => _debounceMaybeImpact();
 
   @override
-  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => _maybeImpact();
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => _debounceMaybeImpact();
 }
