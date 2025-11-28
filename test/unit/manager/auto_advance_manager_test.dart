@@ -25,18 +25,19 @@ void main() {
     verify(mockFeedsAdvanceManager.maybeAdvance()).called(1);
   });
 
-  test('at mignight, should call maybeAdvance and notify listeners if advanced', () async {
-    when(mockFeedsAdvanceManager.maybeAdvance()).thenAnswer((_) async => FeedsAdvanceState.listsAdvanced);
+  test('at midnight, should call maybeAdvance and notify listeners if advanced', () async {
+    late Function() listener;
+
+    when(mockFeedsAdvanceManager.maybeAdvance()).thenReturn(FeedsAdvanceState.listsAdvanced);
     when(mockMidnightManager.addListener(any)).thenAnswer((invocation) {
-      final listener = invocation.positionalArguments[0] as void Function();
-      listener(); // Simulate listener call immediately for testing
+      listener = invocation.positionalArguments[0] as void Function();
     });
 
     var notified = false;
     AutoAdvanceManager(mockFeedsAdvanceManager, mockMidnightManager).addListener(() => notified = true);
+    listener();
 
     verify(mockFeedsAdvanceManager.maybeAdvance()).called(2); // initial then timed
-    await Future.delayed(Duration.zero); // Wait for async listener to complete
     expect(notified, true);
   });
 }

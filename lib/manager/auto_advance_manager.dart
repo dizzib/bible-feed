@@ -18,8 +18,8 @@ class AutoAdvanceManager with ChangeNotifier {
     _maybeAdvance();
   }
 
-  Future _maybeAdvance() async {
-    if (await _feedsAdvanceManager.maybeAdvance() == FeedsAdvanceState.listsAdvanced) {
+  void _maybeAdvance() {
+    if (_feedsAdvanceManager.maybeAdvance() == FeedsAdvanceState.listsAdvanced) {
       notifyListeners();
     }
   }

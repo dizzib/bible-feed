@@ -16,7 +16,7 @@ class FeedsAdvanceManager with ChangeNotifier {
 
   FeedsAdvanceManager(this._dateTimeService, this._feedAdvanceManager, this._feedsManager);
 
-  Future<FeedsAdvanceState> advance() async {
+  FeedsAdvanceState advance() {
     for (Feed f in _feedsManager.feeds) {
       _feedAdvanceManager.advance(f);
     }
@@ -24,7 +24,7 @@ class FeedsAdvanceManager with ChangeNotifier {
     return FeedsAdvanceState.listsAdvanced;
   }
 
-  Future<FeedsAdvanceState> maybeAdvance() async {
+  FeedsAdvanceState maybeAdvance() {
     if (!_feedsManager.areChaptersRead) return FeedsAdvanceState.notAllRead;
     final lastDateModified = _feedsManager.lastModifiedFeed?.state.dateModified;
     if (lastDateModified == null) return FeedsAdvanceState.notAllRead;

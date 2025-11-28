@@ -49,7 +49,7 @@ void main() async {
   test('advance should advance all feeds', () async {
     final now = DateTime.now();
     when(mockDateTimeService.now).thenReturn(now);
-    expect(await testee.advance(), FeedsAdvanceState.listsAdvanced);
+    expect(testee.advance(), FeedsAdvanceState.listsAdvanced);
     verifyAllAdvanced();
   });
 
@@ -89,7 +89,7 @@ void main() async {
       when(
         mockFeedList[0].state,
       ).thenReturn(FeedState(bookKey: b0.key, isRead: true, dateModified: date - sinceLastModified));
-      expect(await testee.maybeAdvance(), expectedAdvanceState);
+      expect(testee.maybeAdvance(), expectedAdvanceState);
       verify();
     },
   );
