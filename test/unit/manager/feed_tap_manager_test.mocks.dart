@@ -11,7 +11,6 @@ import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i6;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
 import 'package:bible_feed/model/feed.dart' as _i5;
 import 'package:bible_feed/service/haptic_service.dart' as _i8;
-import 'package:flutter/widgets.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -149,89 +148,8 @@ class MockBibleReaderLinkManager extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockHapticService extends _i1.Mock implements _i8.HapticService {
   @override
-  void didPush(_i9.Route<dynamic>? route, _i9.Route<dynamic>? previousRoute) =>
-      super.noSuchMethod(
-        Invocation.method(#didPush, [route, previousRoute]),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void didPop(_i9.Route<dynamic>? route, _i9.Route<dynamic>? previousRoute) =>
-      super.noSuchMethod(
-        Invocation.method(#didPop, [route, previousRoute]),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   void impact() => super.noSuchMethod(
     Invocation.method(#impact, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  bool debugObservingRoute(_i9.PageRoute<dynamic>? route) =>
-      (super.noSuchMethod(
-            Invocation.method(#debugObservingRoute, [route]),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  void subscribe(_i9.RouteAware? routeAware, _i9.PageRoute<dynamic>? route) =>
-      super.noSuchMethod(
-        Invocation.method(#subscribe, [routeAware, route]),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void unsubscribe(_i9.RouteAware? routeAware) => super.noSuchMethod(
-    Invocation.method(#unsubscribe, [routeAware]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void didRemove(
-    _i9.Route<dynamic>? route,
-    _i9.Route<dynamic>? previousRoute,
-  ) => super.noSuchMethod(
-    Invocation.method(#didRemove, [route, previousRoute]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void didReplace({
-    _i9.Route<dynamic>? newRoute,
-    _i9.Route<dynamic>? oldRoute,
-  }) => super.noSuchMethod(
-    Invocation.method(#didReplace, [], {
-      #newRoute: newRoute,
-      #oldRoute: oldRoute,
-    }),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void didChangeTop(
-    _i9.Route<dynamic>? topRoute,
-    _i9.Route<dynamic>? previousTopRoute,
-  ) => super.noSuchMethod(
-    Invocation.method(#didChangeTop, [topRoute, previousTopRoute]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void didStartUserGesture(
-    _i9.Route<dynamic>? route,
-    _i9.Route<dynamic>? previousRoute,
-  ) => super.noSuchMethod(
-    Invocation.method(#didStartUserGesture, [route, previousRoute]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void didStopUserGesture() => super.noSuchMethod(
-    Invocation.method(#didStopUserGesture, []),
     returnValueForMissingStub: null,
   );
 }

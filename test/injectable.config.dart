@@ -93,6 +93,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<List<_i270.BibleReader>>(
       () => bibleReadersModule.bibleReader,
     );
+    gh.lazySingleton<_i22.HapticService>(() => _i22.HapticService());
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
     await gh.lazySingletonAsync<_i215.StoreService>(
@@ -180,9 +181,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
       registerFor: {_prod},
     );
-    gh.lazySingleton<_i22.HapticService>(
-      () => _i22.HapticService(gh<_i274.HapticSettingManager>()),
-    );
     gh.lazySingleton<_i716.FeedAdvanceManager>(
       () => _i716.FeedAdvanceManager(gh<_i10.ChapterSplitManager>()),
     );
@@ -228,28 +226,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i127.FeedsManager>(),
       ),
     );
-    gh.lazySingleton<_i583.FeedTapManager>(
-      () => _i583.FeedTapManager(
-        gh<_i186.BibleReaderLaunchManager>(),
-        gh<_i567.BibleReaderLinkManager>(),
-        gh<_i22.HapticService>(),
-      ),
-    );
-    gh.singleton<_i950.HapticManager>(
-      () => _i950.HapticManager(
-        gh<_i567.BibleReaderLinkManager>(),
-        gh<_i1033.BookListWheelState>(),
-        gh<_i282.CatchupSettingManager>(),
-        gh<_i1033.ChapterListWheelState>(),
-        gh<_i632.ChapterSplitSettingManager>(),
-        gh<_i22.HapticService>(),
-        gh<_i274.HapticSettingManager>(),
-      ),
-    );
     gh.lazySingleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i438.MidnightManager>(),
+      ),
+    );
+    gh.lazySingleton<_i583.FeedTapManager>(
+      () => _i583.FeedTapManager(
+        gh<_i186.BibleReaderLaunchManager>(),
+        gh<_i567.BibleReaderLinkManager>(),
       ),
     );
     gh.lazySingleton<_i1045.CatchupManager>(
@@ -301,6 +287,18 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i768.DeepLinkOutManager(
         gh<_i508.JsonEncodingManager>(),
         gh<_i175.ShareOutManager>(),
+      ),
+    );
+    gh.singleton<_i950.HapticManager>(
+      () => _i950.HapticManager(
+        gh<_i567.BibleReaderLinkManager>(),
+        gh<_i1033.BookListWheelState>(),
+        gh<_i282.CatchupSettingManager>(),
+        gh<_i1033.ChapterListWheelState>(),
+        gh<_i632.ChapterSplitSettingManager>(),
+        gh<_i583.FeedTapManager>(),
+        gh<_i22.HapticService>(),
+        gh<_i274.HapticSettingManager>(),
       ),
     );
     return this;

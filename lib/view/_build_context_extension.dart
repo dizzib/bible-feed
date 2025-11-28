@@ -1,9 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:watch_it/watch_it.dart';
 
-import '../service/haptic_service.dart';
 import '_constants.dart';
 
 extension BuildContextExtension<T> on BuildContext {
@@ -22,16 +20,13 @@ extension BuildContextExtension<T> on BuildContext {
 
   void navigateTo(Widget page) => Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
 
-  Future<T?> showDialogWithBlurBackground(Widget child) {
-    sl<HapticService>().impact();
-    return showDialog(
-      context: this,
-      builder:
-          (_) => BackdropFilter(
-            // ignore: no-equal-arguments, x and y must be equal
-            filter: ImageFilter.blur(sigmaX: Constants.blurSigma, sigmaY: Constants.blurSigma),
-            child: child,
-          ),
-    );
-  }
+  Future<T?> showDialogWithBlurBackground(Widget child) => showDialog(
+    context: this,
+    builder:
+        (_) => BackdropFilter(
+          // ignore: no-equal-arguments, x and y must be equal
+          filter: ImageFilter.blur(sigmaX: Constants.blurSigma, sigmaY: Constants.blurSigma),
+          child: child,
+        ),
+  );
 }

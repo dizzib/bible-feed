@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../service/haptic_service.dart';
+import '../manager/haptic_manager.dart';
 import '_build_context_extension.dart';
 import 'app.dart';
 
@@ -20,7 +20,7 @@ class AppBase extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
-        navigatorObservers: [sl<HapticService>()],
+        navigatorObservers: [sl<HapticManager>()],
         title: 'Bible Feed',
         themeMode: ThemeMode.system,
         theme: theme(Brightness.light),

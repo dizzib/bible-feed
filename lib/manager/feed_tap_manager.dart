@@ -1,20 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../model/feed.dart';
-import '../service/haptic_service.dart';
 import 'bible_reader_launch_manager.dart';
 import 'bible_reader_link_manager.dart';
 
 @lazySingleton
-class FeedTapManager {
+class FeedTapManager with ChangeNotifier {
   final BibleReaderLaunchManager _bibleReaderLaunchManager;
   final BibleReaderLinkManager _bibleReaderLinkManager;
-  final HapticService _hapticService;
 
-  FeedTapManager(this._bibleReaderLaunchManager, this._bibleReaderLinkManager, this._hapticService);
+  FeedTapManager(this._bibleReaderLaunchManager, this._bibleReaderLinkManager);
 
   Future<void> handleTap(Feed feed) {
-    _hapticService.impact();
+    notifyListeners();
     feed.toggleIsRead();
     return _bibleReaderLaunchManager.maybeLaunch(_bibleReaderLinkManager.linkedBibleReader, feed.state);
   }
