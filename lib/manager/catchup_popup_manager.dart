@@ -28,6 +28,7 @@ class CatchupPopupManager extends PopupManager {
 
   @override
   String getText() {
+    assert(_catchupManager.isBehind);
     final chaptersToRead = _catchupManager.chaptersToRead;
     final daysBehind = "${_catchupManager.daysBehind} day${_catchupManager.daysBehind == 1 ? '' : 's'}";
     final alert = "You have $chaptersToRead chapters to read today, because you are now $daysBehind behind.";
