@@ -10,7 +10,6 @@ import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i3;
 import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i6;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
 import 'package:bible_feed/model/feed.dart' as _i5;
-import 'package:bible_feed/service/haptic_service.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -139,17 +138,6 @@ class MockBibleReaderLinkManager extends _i1.Mock
   @override
   void notifyListeners() => super.noSuchMethod(
     Invocation.method(#notifyListeners, []),
-    returnValueForMissingStub: null,
-  );
-}
-
-/// A class which mocks [HapticService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockHapticService extends _i1.Mock implements _i8.HapticService {
-  @override
-  void impact() => super.noSuchMethod(
-    Invocation.method(#impact, []),
     returnValueForMissingStub: null,
   );
 }

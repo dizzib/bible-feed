@@ -21,6 +21,7 @@ import 'package:bible_feed/manager/catchup_popup_manager.dart' as _i92;
 import 'package:bible_feed/manager/catchup_setting_manager.dart' as _i282;
 import 'package:bible_feed/manager/chapter_split_manager.dart' as _i10;
 import 'package:bible_feed/manager/chapter_split_setting_manager.dart' as _i632;
+import 'package:bible_feed/manager/debounce_manager.dart' as _i527;
 import 'package:bible_feed/manager/deeplink_in_manager.dart' as _i468;
 import 'package:bible_feed/manager/deeplink_out_manager.dart' as _i768;
 import 'package:bible_feed/manager/feed_advance_manager.dart' as _i716;
@@ -89,6 +90,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i22.HapticService>(() => _i22.HapticService());
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
+    gh.lazySingleton<_i527.DebounceManager>(() => _i527.DebounceManager());
     await gh.lazySingletonAsync<_i215.StoreService>(
       () => _i215.StoreService.create(),
       registerFor: {_golden, _prod},
@@ -259,14 +261,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i950.HapticManager>(
       () => _i950.HapticManager(
+        gh<_i527.DebounceManager>(),
+        gh<_i22.HapticService>(),
+        gh<_i274.HapticSettingManager>(),
         gh<_i567.BibleReaderLinkManager>(),
         gh<_i1033.BookListWheelState>(),
         gh<_i282.CatchupSettingManager>(),
         gh<_i1033.ChapterListWheelState>(),
         gh<_i632.ChapterSplitSettingManager>(),
         gh<_i583.FeedTapManager>(),
-        gh<_i22.HapticService>(),
-        gh<_i274.HapticSettingManager>(),
       ),
     );
     return this;
