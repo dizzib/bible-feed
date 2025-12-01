@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
-enum AppLifecyclePriority { high, normal, low }
+import '../model/priority.dart';
 
 @lazySingleton
 class AppLifecycleManager {
@@ -9,16 +9,12 @@ class AppLifecycleManager {
     AppLifecycleListener(onResume: runCallbacks);
   }
 
-  final Map<AppLifecyclePriority, List<VoidCallback>> _resumeCallbacks = {
-    AppLifecyclePriority.high: [],
-    AppLifecyclePriority.normal: [],
-    AppLifecyclePriority.low: [],
-  };
+  final Map<Priority, List<VoidCallback>> _resumeCallbacks = {Priority.high: [], Priority.normal: [], Priority.low: []};
 
   /// TODO: make private
   void runCallbacks() {
     // Execute HIGH > NORMAL > LOW
-    for (final priority in AppLifecyclePriority.values) {
+    for (final priority in Priority.values) {
       for (final callback in _resumeCallbacks[priority]!) {
         callback();
       }
@@ -26,7 +22,7 @@ class AppLifecycleManager {
   }
 
   /// Register a callback for app-resume with optional priority.
-  void onResume(VoidCallback callback, {AppLifecyclePriority priority = AppLifecyclePriority.normal}) {
+  void onResume(VoidCallback callback, {Priority priority = Priority.normal}) {
     _resumeCallbacks[priority]!.add(callback);
   }
 }

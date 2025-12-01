@@ -17,7 +17,7 @@ class AutoAdvanceManager with ChangeNotifier {
   AutoAdvanceManager(this._appLifecycleManager, this._feedsAdvanceManager, this._midnightManager) {
     Log.info('ctor');
     // these must run before catchup
-    _appLifecycleManager.onResume(_maybeAdvance, priority: AppLifecyclePriority.high);
+    _appLifecycleManager.onResume(_maybeAdvance, priority: Priority.high);
     _midnightManager.addListener(_maybeAdvance, priority: Priority.high);
     _maybeAdvance();
   }

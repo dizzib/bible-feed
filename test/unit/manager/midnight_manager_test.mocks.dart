@@ -6,7 +6,8 @@
 import 'dart:ui' as _i3;
 
 import 'package:bible_feed/manager/app_lifecycle_manager.dart' as _i2;
-import 'package:bible_feed/service/date_time_service.dart' as _i4;
+import 'package:bible_feed/model/priority.dart' as _i4;
+import 'package:bible_feed/service/date_time_service.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -42,7 +43,7 @@ class MockAppLifecycleManager extends _i1.Mock
   @override
   void onResume(
     _i3.VoidCallback? callback, {
-    _i2.AppLifecyclePriority? priority = _i2.AppLifecyclePriority.normal,
+    _i4.Priority? priority = _i4.Priority.normal,
   }) => super.noSuchMethod(
     Invocation.method(#onResume, [callback], {#priority: priority}),
     returnValueForMissingStub: null,
@@ -52,7 +53,7 @@ class MockAppLifecycleManager extends _i1.Mock
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i4.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i5.DateTimeService {
   @override
   DateTime get now =>
       (super.noSuchMethod(

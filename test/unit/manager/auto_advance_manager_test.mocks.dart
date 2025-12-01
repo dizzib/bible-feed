@@ -6,10 +6,10 @@
 import 'dart:ui' as _i3;
 
 import 'package:bible_feed/manager/app_lifecycle_manager.dart' as _i2;
-import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i4;
-import 'package:bible_feed/manager/midnight_manager.dart' as _i6;
-import 'package:bible_feed/model/feeds_advance_state.dart' as _i5;
-import 'package:bible_feed/model/priority.dart' as _i7;
+import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i5;
+import 'package:bible_feed/manager/midnight_manager.dart' as _i7;
+import 'package:bible_feed/model/feeds_advance_state.dart' as _i6;
+import 'package:bible_feed/model/priority.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -40,7 +40,7 @@ class MockAppLifecycleManager extends _i1.Mock
   @override
   void onResume(
     _i3.VoidCallback? callback, {
-    _i2.AppLifecyclePriority? priority = _i2.AppLifecyclePriority.normal,
+    _i4.Priority? priority = _i4.Priority.normal,
   }) => super.noSuchMethod(
     Invocation.method(#onResume, [callback], {#priority: priority}),
     returnValueForMissingStub: null,
@@ -51,7 +51,7 @@ class MockAppLifecycleManager extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFeedsAdvanceManager extends _i1.Mock
-    implements _i4.FeedsAdvanceManager {
+    implements _i5.FeedsAdvanceManager {
   @override
   bool get hasListeners =>
       (super.noSuchMethod(
@@ -62,22 +62,22 @@ class MockFeedsAdvanceManager extends _i1.Mock
           as bool);
 
   @override
-  _i5.FeedsAdvanceState advance() =>
+  _i6.FeedsAdvanceState advance() =>
       (super.noSuchMethod(
             Invocation.method(#advance, []),
-            returnValue: _i5.FeedsAdvanceState.notAllRead,
-            returnValueForMissingStub: _i5.FeedsAdvanceState.notAllRead,
+            returnValue: _i6.FeedsAdvanceState.notAllRead,
+            returnValueForMissingStub: _i6.FeedsAdvanceState.notAllRead,
           )
-          as _i5.FeedsAdvanceState);
+          as _i6.FeedsAdvanceState);
 
   @override
-  _i5.FeedsAdvanceState maybeAdvance() =>
+  _i6.FeedsAdvanceState maybeAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#maybeAdvance, []),
-            returnValue: _i5.FeedsAdvanceState.notAllRead,
-            returnValueForMissingStub: _i5.FeedsAdvanceState.notAllRead,
+            returnValue: _i6.FeedsAdvanceState.notAllRead,
+            returnValueForMissingStub: _i6.FeedsAdvanceState.notAllRead,
           )
-          as _i5.FeedsAdvanceState);
+          as _i6.FeedsAdvanceState);
 
   @override
   void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
@@ -107,7 +107,7 @@ class MockFeedsAdvanceManager extends _i1.Mock
 /// A class which mocks [MidnightManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMidnightManager extends _i1.Mock implements _i6.MidnightManager {
+class MockMidnightManager extends _i1.Mock implements _i7.MidnightManager {
   @override
   bool get hasListeners =>
       (super.noSuchMethod(
@@ -120,7 +120,7 @@ class MockMidnightManager extends _i1.Mock implements _i6.MidnightManager {
   @override
   void addListener(
     _i3.VoidCallback? listener, {
-    _i7.Priority? priority = _i7.Priority.normal,
+    _i4.Priority? priority = _i4.Priority.normal,
   }) => super.noSuchMethod(
     Invocation.method(#addListener, [listener], {#priority: priority}),
     returnValueForMissingStub: null,
