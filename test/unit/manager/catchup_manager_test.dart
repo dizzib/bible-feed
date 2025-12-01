@@ -40,8 +40,6 @@ void main() {
   final today = DateTime.now().date;
 
   setUp(() {
-    WidgetsFlutterBinding.ensureInitialized(); // testee calls AppLifecycleListener
-
     mockAppLifecycleManager = MockAppLifecycleManager();
     mockCatchupSettingManager = MockCatchupSettingManager();
     mockDateTimeService = MockDateTimeService();
