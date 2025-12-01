@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bible_feed/manager/priority_change_notifier.dart';
+import 'package:bible_feed/manager/priority_notifier.dart';
 import 'package:bible_feed/model/priority.dart';
 
 class TestNotifier with ChangeNotifier, PriorityNotifier {}
