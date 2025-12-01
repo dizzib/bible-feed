@@ -1,4 +1,3 @@
-import 'package:df_log/df_log.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,15 +14,12 @@ class AutoAdvanceManager with ChangeNotifier {
   final MidnightManager _midnightManager;
 
   AutoAdvanceManager(this._appLifecycleManager, this._feedsAdvanceManager, this._midnightManager) {
-    Log.info('ctor');
-    // these must run before catchup
-    _appLifecycleManager.onResume(_maybeAdvance, priority: Priority.high);
-    _midnightManager.addListener(_maybeAdvance, priority: Priority.high);
+    _appLifecycleManager.onResume(_maybeAdvance, priority: Priority.high); // must run before catchup
+    _midnightManager.addListener(_maybeAdvance, priority: Priority.high); // must run before catchup
     _maybeAdvance();
   }
 
   void _maybeAdvance() {
-    Log.info('maybeAdvance');
     if (_feedsAdvanceManager.maybeAdvance() == FeedsAdvanceState.listsAdvanced) {
       notifyListeners();
     }

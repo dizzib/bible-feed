@@ -1,4 +1,3 @@
-import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,7 +11,6 @@ class CatchupPopupManager extends PopupManager {
 
   CatchupPopupManager(super._storeService, this._catchupManager) {
     _catchupManager.addListener(() {
-      Log.info('_catchupManager.notify');
       if (_catchupManager.isBehind && !hasCompletedOnboarding) show(); // auto show
     });
   }

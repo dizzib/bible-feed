@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:dartx/dartx.dart';
-import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
@@ -32,7 +31,6 @@ class CatchupManager with ChangeNotifier {
     this._midnightManager,
     this._storeService,
   ) {
-    Log.info('ctor');
     _appLifecycleManager.onResume(notifyListeners);
 
     _feedsAdvanceManager.addListener(() {
