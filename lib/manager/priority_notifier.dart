@@ -13,7 +13,7 @@ mixin PriorityNotifier on ChangeNotifier {
   @override
   void notifyListeners() {
     for (final priority in Priority.values) {
-      for (final listener in List<VoidCallback>.from(_listeners[priority]!)) {
+      for (final listener in List<VoidCallback>.of(_listeners[priority]!)) {
         listener();
       }
     }
