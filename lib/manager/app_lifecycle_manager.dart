@@ -6,7 +6,7 @@ enum AppLifecyclePriority { high, normal, low }
 @lazySingleton
 class AppLifecycleManager {
   AppLifecycleManager() {
-    AppLifecycleListener(onResume: _handleResume);
+    AppLifecycleListener(onResume: runCallbacks);
   }
 
   final Map<AppLifecyclePriority, List<VoidCallback>> _resumeCallbacks = {
@@ -15,7 +15,8 @@ class AppLifecycleManager {
     AppLifecyclePriority.low: [],
   };
 
-  void _handleResume() {
+  /// TODO: make private
+  void runCallbacks() {
     // Execute HIGH > NORMAL > LOW
     for (final priority in AppLifecyclePriority.values) {
       for (final callback in _resumeCallbacks[priority]!) {
