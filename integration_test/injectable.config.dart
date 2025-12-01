@@ -168,10 +168,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i578.ProductionPlatformService(),
       registerFor: {_integration_test, _prod},
     );
-    gh.singleton<_i438.MidnightManager>(
-      () => _i438.ProdMidnightManager(gh<_i99.DateTimeService>()),
-      registerFor: {_prod},
-    );
     gh.lazySingleton<_i716.FeedAdvanceManager>(
       () => _i716.FeedAdvanceManager(gh<_i10.ChapterSplitManager>()),
     );
@@ -190,6 +186,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i578.PlatformService>(),
         gh<_i1070.BibleReaders>(),
       ),
+    );
+    gh.singleton<_i438.MidnightManager>(
+      () => _i438.ProdMidnightManager(
+        gh<_i540.AppLifecycleManager>(),
+        gh<_i99.DateTimeService>(),
+      ),
+      registerFor: {_prod},
     );
     gh.lazySingleton<_i186.BibleReaderLaunchManager>(
       () => _i186.BibleReaderLaunchManager(

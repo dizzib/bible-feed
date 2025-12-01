@@ -1,3 +1,4 @@
+import 'package:bible_feed/manager/app_lifecycle_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
 import 'package:bible_feed/service/date_time_service.dart';
 import 'package:fake_async/fake_async.dart';
@@ -8,8 +9,9 @@ import 'package:mockito/mockito.dart';
 
 import 'midnight_manager_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<DateTimeService>()])
+@GenerateNiceMocks([MockSpec<AppLifecycleManager>(), MockSpec<DateTimeService>()])
 void main() {
+  final mockAppLifecycleManager = MockAppLifecycleManager();
   final mockDateTimeService = MockDateTimeService();
 
   setUp(() async {
@@ -20,7 +22,7 @@ void main() {
   test('at mignight, should notify listeners', () async {
     await fakeAsync((fakeAsync) {
       var notified = false;
-      ProdMidnightManager(mockDateTimeService).addListener(() => notified = true);
+      ProdMidnightManager(mockAppLifecycleManager, mockDateTimeService).addListener(() => notified = true);
       fakeAsync.elapse(const Duration(minutes: 1, seconds: 5));
       expect(notified, true);
     });

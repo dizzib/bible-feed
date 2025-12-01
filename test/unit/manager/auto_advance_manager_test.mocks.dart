@@ -31,6 +31,12 @@ import 'package:mockito/mockito.dart' as _i1;
 class MockAppLifecycleManager extends _i1.Mock
     implements _i2.AppLifecycleManager {
   @override
+  void runCallbacks() => super.noSuchMethod(
+    Invocation.method(#runCallbacks, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
   void onResume(
     _i3.VoidCallback? callback, {
     _i2.AppLifecyclePriority? priority = _i2.AppLifecyclePriority.normal,

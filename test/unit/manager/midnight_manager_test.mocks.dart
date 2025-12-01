@@ -3,7 +3,10 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bible_feed/service/date_time_service.dart' as _i2;
+import 'dart:ui' as _i3;
+
+import 'package:bible_feed/manager/app_lifecycle_manager.dart' as _i2;
+import 'package:bible_feed/service/date_time_service.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -25,10 +28,31 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
     : super(parent, parentInvocation);
 }
 
+/// A class which mocks [AppLifecycleManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAppLifecycleManager extends _i1.Mock
+    implements _i2.AppLifecycleManager {
+  @override
+  void runCallbacks() => super.noSuchMethod(
+    Invocation.method(#runCallbacks, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onResume(
+    _i3.VoidCallback? callback, {
+    _i2.AppLifecyclePriority? priority = _i2.AppLifecyclePriority.normal,
+  }) => super.noSuchMethod(
+    Invocation.method(#onResume, [callback], {#priority: priority}),
+    returnValueForMissingStub: null,
+  );
+}
+
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i2.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i4.DateTimeService {
   @override
   DateTime get now =>
       (super.noSuchMethod(

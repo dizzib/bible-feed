@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 import '../service/date_time_service.dart';
+import 'app_lifecycle_manager.dart';
 
 abstract class MidnightManager with ChangeNotifier {}
 
@@ -17,10 +18,11 @@ abstract class MidnightManager with ChangeNotifier {}
 @prod
 @Singleton(as: MidnightManager)
 class ProdMidnightManager extends MidnightManager {
+  final AppLifecycleManager _appLifecycleManager;
   final DateTimeService _dateTimeService;
 
-  ProdMidnightManager(this._dateTimeService) {
-    AppLifecycleListener(onResume: _setTimer);
+  ProdMidnightManager(this._appLifecycleManager, this._dateTimeService) {
+    _appLifecycleManager.onResume(_setTimer);
     _setTimer();
   }
 
