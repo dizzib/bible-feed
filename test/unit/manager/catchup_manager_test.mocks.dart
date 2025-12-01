@@ -3,7 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i13;
+import 'dart:async' as _i14;
 import 'dart:ui' as _i3;
 
 import 'package:bible_feed/manager/app_lifecycle_manager.dart' as _i2;
@@ -13,8 +13,9 @@ import 'package:bible_feed/manager/feeds_manager.dart' as _i7;
 import 'package:bible_feed/manager/midnight_manager.dart' as _i11;
 import 'package:bible_feed/model/feed.dart' as _i8;
 import 'package:bible_feed/model/feeds_advance_state.dart' as _i10;
+import 'package:bible_feed/model/priority.dart' as _i12;
 import 'package:bible_feed/service/date_time_service.dart' as _i6;
-import 'package:bible_feed/service/store_service.dart' as _i12;
+import 'package:bible_feed/service/store_service.dart' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
 
@@ -328,8 +329,11 @@ class MockMidnightManager extends _i1.Mock implements _i11.MidnightManager {
           as bool);
 
   @override
-  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#addListener, [listener]),
+  void addListener(
+    _i3.VoidCallback? listener, {
+    _i12.Priority? priority = _i12.Priority.normal,
+  }) => super.noSuchMethod(
+    Invocation.method(#addListener, [listener], {#priority: priority}),
     returnValueForMissingStub: null,
   );
 
@@ -355,7 +359,7 @@ class MockMidnightManager extends _i1.Mock implements _i11.MidnightManager {
 /// A class which mocks [StoreService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStoreService extends _i1.Mock implements _i12.StoreService {
+class MockStoreService extends _i1.Mock implements _i13.StoreService {
   @override
   bool? getBool(String? key) =>
       (super.noSuchMethod(
@@ -397,47 +401,47 @@ class MockStoreService extends _i1.Mock implements _i12.StoreService {
           as String?);
 
   @override
-  _i13.Future<bool> setBool(String? key, bool? value) =>
+  _i14.Future<bool> setBool(String? key, bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setBool, [key, value]),
-            returnValue: _i13.Future<bool>.value(false),
-            returnValueForMissingStub: _i13.Future<bool>.value(false),
+            returnValue: _i14.Future<bool>.value(false),
+            returnValueForMissingStub: _i14.Future<bool>.value(false),
           )
-          as _i13.Future<bool>);
+          as _i14.Future<bool>);
 
   @override
-  _i13.Future<bool> setDateTime(String? key, DateTime? value) =>
+  _i14.Future<bool> setDateTime(String? key, DateTime? value) =>
       (super.noSuchMethod(
             Invocation.method(#setDateTime, [key, value]),
-            returnValue: _i13.Future<bool>.value(false),
-            returnValueForMissingStub: _i13.Future<bool>.value(false),
+            returnValue: _i14.Future<bool>.value(false),
+            returnValueForMissingStub: _i14.Future<bool>.value(false),
           )
-          as _i13.Future<bool>);
+          as _i14.Future<bool>);
 
   @override
-  _i13.Future<bool> setDouble(String? key, double? value) =>
+  _i14.Future<bool> setDouble(String? key, double? value) =>
       (super.noSuchMethod(
             Invocation.method(#setDouble, [key, value]),
-            returnValue: _i13.Future<bool>.value(false),
-            returnValueForMissingStub: _i13.Future<bool>.value(false),
+            returnValue: _i14.Future<bool>.value(false),
+            returnValueForMissingStub: _i14.Future<bool>.value(false),
           )
-          as _i13.Future<bool>);
+          as _i14.Future<bool>);
 
   @override
-  _i13.Future<bool> setInt(String? key, int? value) =>
+  _i14.Future<bool> setInt(String? key, int? value) =>
       (super.noSuchMethod(
             Invocation.method(#setInt, [key, value]),
-            returnValue: _i13.Future<bool>.value(false),
-            returnValueForMissingStub: _i13.Future<bool>.value(false),
+            returnValue: _i14.Future<bool>.value(false),
+            returnValueForMissingStub: _i14.Future<bool>.value(false),
           )
-          as _i13.Future<bool>);
+          as _i14.Future<bool>);
 
   @override
-  _i13.Future<bool> setString(String? key, String? value) =>
+  _i14.Future<bool> setString(String? key, String? value) =>
       (super.noSuchMethod(
             Invocation.method(#setString, [key, value]),
-            returnValue: _i13.Future<bool>.value(false),
-            returnValueForMissingStub: _i13.Future<bool>.value(false),
+            returnValue: _i14.Future<bool>.value(false),
+            returnValueForMissingStub: _i14.Future<bool>.value(false),
           )
-          as _i13.Future<bool>);
+          as _i14.Future<bool>);
 }

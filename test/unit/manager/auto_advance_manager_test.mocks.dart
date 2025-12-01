@@ -9,6 +9,7 @@ import 'package:bible_feed/manager/app_lifecycle_manager.dart' as _i2;
 import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i4;
 import 'package:bible_feed/manager/midnight_manager.dart' as _i6;
 import 'package:bible_feed/model/feeds_advance_state.dart' as _i5;
+import 'package:bible_feed/model/priority.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -117,8 +118,11 @@ class MockMidnightManager extends _i1.Mock implements _i6.MidnightManager {
           as bool);
 
   @override
-  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#addListener, [listener]),
+  void addListener(
+    _i3.VoidCallback? listener, {
+    _i7.Priority? priority = _i7.Priority.normal,
+  }) => super.noSuchMethod(
+    Invocation.method(#addListener, [listener], {#priority: priority}),
     returnValueForMissingStub: null,
   );
 

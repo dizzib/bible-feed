@@ -5,8 +5,9 @@ import 'package:injectable/injectable.dart';
 
 import '../service/date_time_service.dart';
 import 'app_lifecycle_manager.dart';
+import 'priority_change_notifier.dart';
 
-abstract class MidnightManager with ChangeNotifier {}
+abstract class MidnightManager with ChangeNotifier, PriorityNotifier {}
 
 // Using @lazysingleton breaks golden tests...
 //
