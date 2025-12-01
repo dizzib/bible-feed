@@ -18,10 +18,12 @@ extension CatchupTestHelper on WidgetTester {
     await pumpAndSettle(); // must wait for async code to run
   }
 
-  Future testCatchupPopup(String daysBehind, int expectChaptersToRead, {expectOnboarding = false}) async {
-    if (!expectOnboarding) {
-      await tapByKey(catchupFabKey);
-    }
+  Future testAllDoneButStillBehindPopup(int expectChaptersToRead) async {
+    expectText('$expectChaptersToRead more chapters');
+    await tapPopupAction();
+  }
+
+  Future testCatchupPopup(String daysBehind, int expectChaptersToRead) async {
     expectText('$daysBehind behind');
     expectText('$expectChaptersToRead chapters');
     await dismissPopup();

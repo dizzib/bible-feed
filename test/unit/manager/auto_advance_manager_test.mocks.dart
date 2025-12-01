@@ -32,17 +32,17 @@ import 'package:mockito/mockito.dart' as _i1;
 class MockAppLifecycleManager extends _i1.Mock
     implements _i2.AppLifecycleManager {
   @override
-  void runCallbacks() => super.noSuchMethod(
-    Invocation.method(#runCallbacks, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
   void onResume(
     _i3.VoidCallback? callback, {
     _i4.Priority? priority = _i4.Priority.normal,
   }) => super.noSuchMethod(
     Invocation.method(#onResume, [callback], {#priority: priority}),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void runCallbacks() => super.noSuchMethod(
+    Invocation.method(#runCallbacks, []),
     returnValueForMissingStub: null,
   );
 }

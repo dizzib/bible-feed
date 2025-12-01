@@ -70,6 +70,10 @@ extension GetItInjectableX on _i174.GetIt {
     final readingListsModule = _$ReadingListsModule();
     final chapterSplittersModule = _$ChapterSplittersModule();
     final bibleReadersModule = _$BibleReadersModule();
+    gh.lazySingleton<_i540.AppLifecycleManager>(
+      () => _i540.AppLifecycleManager(),
+    );
+    gh.lazySingleton<_i527.DebounceManager>(() => _i527.DebounceManager());
     gh.lazySingleton<_i508.JsonEncodingManager>(
       () => _i508.JsonEncodingManager(),
     );
@@ -91,10 +95,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i22.HapticService>(() => _i22.HapticService());
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
-    gh.lazySingleton<_i527.DebounceManager>(() => _i527.DebounceManager());
-    gh.lazySingleton<_i540.AppLifecycleManager>(
-      () => _i540.AppLifecycleManager(),
-    );
     await gh.lazySingletonAsync<_i215.StoreService>(
       () => _i215.StoreService.create(),
       registerFor: {_golden, _prod},
@@ -227,17 +227,18 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i215.StoreService>(),
       ),
     );
-    gh.lazySingleton<_i471.AllDonePopupManager>(
-      () => _i471.AllDonePopupManager(
+    gh.lazySingleton<_i92.CatchupPopupManager>(
+      () => _i92.CatchupPopupManager(
         gh<_i215.StoreService>(),
         gh<_i1045.CatchupManager>(),
         gh<_i127.FeedsManager>(),
       ),
     );
-    gh.lazySingleton<_i92.CatchupPopupManager>(
-      () => _i92.CatchupPopupManager(
+    gh.lazySingleton<_i471.AllDonePopupManager>(
+      () => _i471.AllDonePopupManager(
         gh<_i215.StoreService>(),
         gh<_i1045.CatchupManager>(),
+        gh<_i127.FeedsManager>(),
       ),
     );
     gh.singleton<_i950.HapticManager>(

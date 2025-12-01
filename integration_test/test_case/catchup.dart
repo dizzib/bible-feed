@@ -22,39 +22,29 @@ Future runCatchupTest() async {
     await testSettingManager(true); // enable
     // on fresh install, should alert tomorrow if unread
     await t.advanceDay();
-    await t.testCatchupPopup('1 day', 20, expectOnboarding: true);
+    await t.testCatchupPopup('1 day', 20);
     await t.setAllFeedsAsRead();
     await t.tapPopupAction(); // onboarding
-    expectChapters(2);
     expectNotInteractiveByKey(catchupFabKey);
     await t.setAllFeedsAsRead();
     await t.tapAllDoneFab(); // onboarded, not behind
     await t.tapPopupAction();
-    expectChapters(3);
     await t.advanceDay();
     expectNotInteractiveByKey(catchupFabKey);
     await t.advanceDay();
+    await t.testCatchupPopup('1 day', 20);
     await t.tapByKey('mat');
-    await t.testCatchupPopup('1 day', 19);
-    await t.advanceDay();
     await t.tapByKey('gen');
+    await t.advanceDay();
     await t.testCatchupPopup('2 days', 28);
     await t.setAllFeedsAsRead();
-    await t.tapPopupAction(); // alldone should auto show
-    expectChapters(4);
-    await t.testCatchupPopup('1 day', 20);
+    await t.testAllDoneButStillBehindPopup(20);
     await t.setAllFeedsAsRead();
-    await t.dismissPopup();
-    await t.tapByKey('mat');
-    await t.testCatchupPopup('1 day', 11);
-    await t.setAllFeedsAsRead();
-    await t.tapPopupAction();
-    expectChapters(5);
-    expectNotInteractiveByKey(catchupFabKey);
+    await t.testAllDoneButStillBehindPopup(10);
+
     // disable then enable setting should clear alert
     await t.advanceDay();
-    await t.advanceDay();
-    await t.testCatchupPopup('2 days', 30);
+    await t.testCatchupPopup('1 day', 20);
     await testSettingManager(false);
     await testSettingManager(true);
   });

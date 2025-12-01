@@ -3,15 +3,17 @@ import 'package:injectable/injectable.dart';
 
 import '../model/verse.dart';
 import 'catchup_manager.dart';
+import 'feeds_manager.dart';
 import 'popup_manager.dart';
 
 @lazySingleton
 class CatchupPopupManager extends PopupManager {
   final CatchupManager _catchupManager;
+  final FeedsManager _feedsManager;
 
-  CatchupPopupManager(super._storeService, this._catchupManager) {
+  CatchupPopupManager(super._storeService, this._catchupManager, this._feedsManager) {
     _catchupManager.addListener(() {
-      if (_catchupManager.isBehind && !hasCompletedOnboarding) show(); // auto show
+      if (_catchupManager.isBehind && !_feedsManager.areChaptersRead) show(); // auto show
     });
   }
 
