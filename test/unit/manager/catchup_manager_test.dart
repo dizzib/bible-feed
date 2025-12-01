@@ -1,3 +1,4 @@
+import 'package:bible_feed/manager/app_lifecycle_manager.dart';
 import 'package:bible_feed/manager/catchup_manager.dart';
 import 'package:bible_feed/manager/catchup_setting_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
@@ -17,6 +18,7 @@ import '../test_data.dart';
 import 'catchup_manager_test.mocks.dart';
 
 @GenerateNiceMocks([
+  MockSpec<AppLifecycleManager>(),
   MockSpec<CatchupSettingManager>(),
   MockSpec<DateTimeService>(),
   MockSpec<FeedsManager>(),
@@ -25,6 +27,7 @@ import 'catchup_manager_test.mocks.dart';
   MockSpec<StoreService>(),
 ])
 void main() {
+  late MockAppLifecycleManager mockAppLifecycleManager;
   late MockCatchupSettingManager mockCatchupSettingManager;
   late MockDateTimeService mockDateTimeService;
   late MockFeedsManager mockFeedsManager;
@@ -39,6 +42,7 @@ void main() {
   setUp(() {
     WidgetsFlutterBinding.ensureInitialized(); // testee calls AppLifecycleListener
 
+    mockAppLifecycleManager = MockAppLifecycleManager();
     mockCatchupSettingManager = MockCatchupSettingManager();
     mockDateTimeService = MockDateTimeService();
     mockFeedsManager = MockFeedsManager();
@@ -53,6 +57,7 @@ void main() {
     when(mockFeedsManager.feeds).thenReturn(List.filled(10, Feed(rl0, FeedState(bookKey: ''))));
 
     testee = CatchupManager(
+      mockAppLifecycleManager,
       mockCatchupSettingManager,
       mockDateTimeService,
       mockFeedsManager,

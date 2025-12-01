@@ -3,19 +3,20 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i12;
-import 'dart:ui' as _i4;
+import 'dart:async' as _i13;
+import 'dart:ui' as _i3;
 
-import 'package:bible_feed/manager/catchup_setting_manager.dart' as _i2;
-import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i8;
-import 'package:bible_feed/manager/feeds_manager.dart' as _i6;
-import 'package:bible_feed/manager/midnight_manager.dart' as _i10;
-import 'package:bible_feed/model/feed.dart' as _i7;
-import 'package:bible_feed/model/feeds_advance_state.dart' as _i9;
-import 'package:bible_feed/service/date_time_service.dart' as _i5;
-import 'package:bible_feed/service/store_service.dart' as _i11;
+import 'package:bible_feed/manager/app_lifecycle_manager.dart' as _i2;
+import 'package:bible_feed/manager/catchup_setting_manager.dart' as _i4;
+import 'package:bible_feed/manager/feeds_advance_manager.dart' as _i9;
+import 'package:bible_feed/manager/feeds_manager.dart' as _i7;
+import 'package:bible_feed/manager/midnight_manager.dart' as _i11;
+import 'package:bible_feed/model/feed.dart' as _i8;
+import 'package:bible_feed/model/feeds_advance_state.dart' as _i10;
+import 'package:bible_feed/service/date_time_service.dart' as _i6;
+import 'package:bible_feed/service/store_service.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i3;
+import 'package:mockito/src/dummies.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -36,11 +37,26 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
     : super(parent, parentInvocation);
 }
 
+/// A class which mocks [AppLifecycleManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAppLifecycleManager extends _i1.Mock
+    implements _i2.AppLifecycleManager {
+  @override
+  void onResume(
+    _i3.VoidCallback? callback, {
+    _i2.AppLifecyclePriority? priority = _i2.AppLifecyclePriority.normal,
+  }) => super.noSuchMethod(
+    Invocation.method(#onResume, [callback], {#priority: priority}),
+    returnValueForMissingStub: null,
+  );
+}
+
 /// A class which mocks [CatchupSettingManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCatchupSettingManager extends _i1.Mock
-    implements _i2.CatchupSettingManager {
+    implements _i4.CatchupSettingManager {
   @override
   bool get canEnable =>
       (super.noSuchMethod(
@@ -63,11 +79,11 @@ class MockCatchupSettingManager extends _i1.Mock
   String get storeKeyFragment =>
       (super.noSuchMethod(
             Invocation.getter(#storeKeyFragment),
-            returnValue: _i3.dummyValue<String>(
+            returnValue: _i5.dummyValue<String>(
               this,
               Invocation.getter(#storeKeyFragment),
             ),
-            returnValueForMissingStub: _i3.dummyValue<String>(
+            returnValueForMissingStub: _i5.dummyValue<String>(
               this,
               Invocation.getter(#storeKeyFragment),
             ),
@@ -78,11 +94,11 @@ class MockCatchupSettingManager extends _i1.Mock
   String get title =>
       (super.noSuchMethod(
             Invocation.getter(#title),
-            returnValue: _i3.dummyValue<String>(
+            returnValue: _i5.dummyValue<String>(
               this,
               Invocation.getter(#title),
             ),
-            returnValueForMissingStub: _i3.dummyValue<String>(
+            returnValueForMissingStub: _i5.dummyValue<String>(
               this,
               Invocation.getter(#title),
             ),
@@ -93,11 +109,11 @@ class MockCatchupSettingManager extends _i1.Mock
   String get subtitle =>
       (super.noSuchMethod(
             Invocation.getter(#subtitle),
-            returnValue: _i3.dummyValue<String>(
+            returnValue: _i5.dummyValue<String>(
               this,
               Invocation.getter(#subtitle),
             ),
-            returnValueForMissingStub: _i3.dummyValue<String>(
+            returnValueForMissingStub: _i5.dummyValue<String>(
               this,
               Invocation.getter(#subtitle),
             ),
@@ -129,13 +145,13 @@ class MockCatchupSettingManager extends _i1.Mock
           as bool);
 
   @override
-  void addListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -156,7 +172,7 @@ class MockCatchupSettingManager extends _i1.Mock
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i5.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i6.DateTimeService {
   @override
   DateTime get now =>
       (super.noSuchMethod(
@@ -173,7 +189,7 @@ class MockDateTimeService extends _i1.Mock implements _i5.DateTimeService {
 /// A class which mocks [FeedsManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFeedsManager extends _i1.Mock implements _i6.FeedsManager {
+class MockFeedsManager extends _i1.Mock implements _i7.FeedsManager {
   @override
   bool get areChaptersRead =>
       (super.noSuchMethod(
@@ -193,13 +209,13 @@ class MockFeedsManager extends _i1.Mock implements _i6.FeedsManager {
           as int);
 
   @override
-  List<_i7.Feed> get feeds =>
+  List<_i8.Feed> get feeds =>
       (super.noSuchMethod(
             Invocation.getter(#feeds),
-            returnValue: <_i7.Feed>[],
-            returnValueForMissingStub: <_i7.Feed>[],
+            returnValue: <_i8.Feed>[],
+            returnValueForMissingStub: <_i8.Feed>[],
           )
-          as List<_i7.Feed>);
+          as List<_i8.Feed>);
 
   @override
   bool get hasListeners =>
@@ -211,13 +227,13 @@ class MockFeedsManager extends _i1.Mock implements _i6.FeedsManager {
           as bool);
 
   @override
-  void addListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -239,7 +255,7 @@ class MockFeedsManager extends _i1.Mock implements _i6.FeedsManager {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFeedsAdvanceManager extends _i1.Mock
-    implements _i8.FeedsAdvanceManager {
+    implements _i9.FeedsAdvanceManager {
   @override
   bool get hasListeners =>
       (super.noSuchMethod(
@@ -250,31 +266,31 @@ class MockFeedsAdvanceManager extends _i1.Mock
           as bool);
 
   @override
-  _i9.FeedsAdvanceState advance() =>
+  _i10.FeedsAdvanceState advance() =>
       (super.noSuchMethod(
             Invocation.method(#advance, []),
-            returnValue: _i9.FeedsAdvanceState.notAllRead,
-            returnValueForMissingStub: _i9.FeedsAdvanceState.notAllRead,
+            returnValue: _i10.FeedsAdvanceState.notAllRead,
+            returnValueForMissingStub: _i10.FeedsAdvanceState.notAllRead,
           )
-          as _i9.FeedsAdvanceState);
+          as _i10.FeedsAdvanceState);
 
   @override
-  _i9.FeedsAdvanceState maybeAdvance() =>
+  _i10.FeedsAdvanceState maybeAdvance() =>
       (super.noSuchMethod(
             Invocation.method(#maybeAdvance, []),
-            returnValue: _i9.FeedsAdvanceState.notAllRead,
-            returnValueForMissingStub: _i9.FeedsAdvanceState.notAllRead,
+            returnValue: _i10.FeedsAdvanceState.notAllRead,
+            returnValueForMissingStub: _i10.FeedsAdvanceState.notAllRead,
           )
-          as _i9.FeedsAdvanceState);
+          as _i10.FeedsAdvanceState);
 
   @override
-  void addListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -295,7 +311,7 @@ class MockFeedsAdvanceManager extends _i1.Mock
 /// A class which mocks [MidnightManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMidnightManager extends _i1.Mock implements _i10.MidnightManager {
+class MockMidnightManager extends _i1.Mock implements _i11.MidnightManager {
   @override
   bool get hasListeners =>
       (super.noSuchMethod(
@@ -306,13 +322,13 @@ class MockMidnightManager extends _i1.Mock implements _i10.MidnightManager {
           as bool);
 
   @override
-  void addListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i4.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i3.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -333,7 +349,7 @@ class MockMidnightManager extends _i1.Mock implements _i10.MidnightManager {
 /// A class which mocks [StoreService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStoreService extends _i1.Mock implements _i11.StoreService {
+class MockStoreService extends _i1.Mock implements _i12.StoreService {
   @override
   bool? getBool(String? key) =>
       (super.noSuchMethod(
@@ -375,47 +391,47 @@ class MockStoreService extends _i1.Mock implements _i11.StoreService {
           as String?);
 
   @override
-  _i12.Future<bool> setBool(String? key, bool? value) =>
+  _i13.Future<bool> setBool(String? key, bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setBool, [key, value]),
-            returnValue: _i12.Future<bool>.value(false),
-            returnValueForMissingStub: _i12.Future<bool>.value(false),
+            returnValue: _i13.Future<bool>.value(false),
+            returnValueForMissingStub: _i13.Future<bool>.value(false),
           )
-          as _i12.Future<bool>);
+          as _i13.Future<bool>);
 
   @override
-  _i12.Future<bool> setDateTime(String? key, DateTime? value) =>
+  _i13.Future<bool> setDateTime(String? key, DateTime? value) =>
       (super.noSuchMethod(
             Invocation.method(#setDateTime, [key, value]),
-            returnValue: _i12.Future<bool>.value(false),
-            returnValueForMissingStub: _i12.Future<bool>.value(false),
+            returnValue: _i13.Future<bool>.value(false),
+            returnValueForMissingStub: _i13.Future<bool>.value(false),
           )
-          as _i12.Future<bool>);
+          as _i13.Future<bool>);
 
   @override
-  _i12.Future<bool> setDouble(String? key, double? value) =>
+  _i13.Future<bool> setDouble(String? key, double? value) =>
       (super.noSuchMethod(
             Invocation.method(#setDouble, [key, value]),
-            returnValue: _i12.Future<bool>.value(false),
-            returnValueForMissingStub: _i12.Future<bool>.value(false),
+            returnValue: _i13.Future<bool>.value(false),
+            returnValueForMissingStub: _i13.Future<bool>.value(false),
           )
-          as _i12.Future<bool>);
+          as _i13.Future<bool>);
 
   @override
-  _i12.Future<bool> setInt(String? key, int? value) =>
+  _i13.Future<bool> setInt(String? key, int? value) =>
       (super.noSuchMethod(
             Invocation.method(#setInt, [key, value]),
-            returnValue: _i12.Future<bool>.value(false),
-            returnValueForMissingStub: _i12.Future<bool>.value(false),
+            returnValue: _i13.Future<bool>.value(false),
+            returnValueForMissingStub: _i13.Future<bool>.value(false),
           )
-          as _i12.Future<bool>);
+          as _i13.Future<bool>);
 
   @override
-  _i12.Future<bool> setString(String? key, String? value) =>
+  _i13.Future<bool> setString(String? key, String? value) =>
       (super.noSuchMethod(
             Invocation.method(#setString, [key, value]),
-            returnValue: _i12.Future<bool>.value(false),
-            returnValueForMissingStub: _i12.Future<bool>.value(false),
+            returnValue: _i13.Future<bool>.value(false),
+            returnValueForMissingStub: _i13.Future<bool>.value(false),
           )
-          as _i12.Future<bool>);
+          as _i13.Future<bool>);
 }

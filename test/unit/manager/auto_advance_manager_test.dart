@@ -1,3 +1,4 @@
+import 'package:bible_feed/manager/app_lifecycle_manager.dart';
 import 'package:bible_feed/manager/auto_advance_manager.dart';
 import 'package:bible_feed/manager/feeds_advance_manager.dart';
 import 'package:bible_feed/manager/midnight_manager.dart';
@@ -9,19 +10,21 @@ import 'package:mockito/mockito.dart';
 
 import 'auto_advance_manager_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<FeedsAdvanceManager>(), MockSpec<MidnightManager>()])
+@GenerateNiceMocks([MockSpec<AppLifecycleManager>(), MockSpec<FeedsAdvanceManager>(), MockSpec<MidnightManager>()])
 void main() {
+  late MockAppLifecycleManager mockAppLifecycleManager;
   late MockFeedsAdvanceManager mockFeedsAdvanceManager;
   late MockMidnightManager mockMidnightManager;
 
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    mockAppLifecycleManager = MockAppLifecycleManager();
     mockFeedsAdvanceManager = MockFeedsAdvanceManager();
     mockMidnightManager = MockMidnightManager();
   });
 
   test('constructor should call maybeAdvance', () async {
-    AutoAdvanceManager(mockFeedsAdvanceManager, mockMidnightManager);
+    AutoAdvanceManager(mockAppLifecycleManager, mockFeedsAdvanceManager, mockMidnightManager);
     verify(mockFeedsAdvanceManager.maybeAdvance()).called(1);
   });
 
@@ -34,7 +37,8 @@ void main() {
     });
 
     var notified = false;
-    AutoAdvanceManager(mockFeedsAdvanceManager, mockMidnightManager).addListener(() => notified = true);
+    final testee = AutoAdvanceManager(mockAppLifecycleManager, mockFeedsAdvanceManager, mockMidnightManager);
+    testee.addListener(() => notified = true);
     listener();
 
     verify(mockFeedsAdvanceManager.maybeAdvance()).called(2); // initial then timed

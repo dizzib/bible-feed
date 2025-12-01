@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:bible_feed/manager/all_done_popup_manager.dart' as _i471;
 import 'package:bible_feed/manager/app_install_manager.dart' as _i610;
+import 'package:bible_feed/manager/app_lifecycle_manager.dart' as _i540;
 import 'package:bible_feed/manager/auto_advance_manager.dart' as _i111;
 import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i186;
 import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i567;
@@ -95,6 +96,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i626.UrlLaunchService>(() => _i626.UrlLaunchService());
     gh.lazySingleton<_i942.ToastService>(() => _i942.ToastService());
     gh.lazySingleton<_i527.DebounceManager>(() => _i527.DebounceManager());
+    gh.lazySingleton<_i540.AppLifecycleManager>(
+      () => _i540.AppLifecycleManager(),
+    );
     gh.lazySingleton<_i438.MidnightManager>(
       () => _i491.StubMidnightManager(),
       registerFor: {_integration_test},
@@ -215,6 +219,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i111.AutoAdvanceManager>(
       () => _i111.AutoAdvanceManager(
+        gh<_i540.AppLifecycleManager>(),
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i438.MidnightManager>(),
       ),
@@ -227,12 +232,39 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1045.CatchupManager>(
       () => _i1045.CatchupManager(
+        gh<_i540.AppLifecycleManager>(),
         gh<_i282.CatchupSettingManager>(),
         gh<_i99.DateTimeService>(),
         gh<_i127.FeedsManager>(),
         gh<_i477.FeedsAdvanceManager>(),
         gh<_i438.MidnightManager>(),
         gh<_i215.StoreService>(),
+      ),
+    );
+    gh.lazySingleton<_i471.AllDonePopupManager>(
+      () => _i471.AllDonePopupManager(
+        gh<_i215.StoreService>(),
+        gh<_i1045.CatchupManager>(),
+        gh<_i127.FeedsManager>(),
+      ),
+    );
+    gh.lazySingleton<_i92.CatchupPopupManager>(
+      () => _i92.CatchupPopupManager(
+        gh<_i215.StoreService>(),
+        gh<_i1045.CatchupManager>(),
+      ),
+    );
+    gh.singleton<_i950.HapticManager>(
+      () => _i950.HapticManager(
+        gh<_i527.DebounceManager>(),
+        gh<_i22.HapticService>(),
+        gh<_i274.HapticSettingManager>(),
+        gh<_i567.BibleReaderLinkManager>(),
+        gh<_i1033.BookListWheelState>(),
+        gh<_i282.CatchupSettingManager>(),
+        gh<_i1033.ChapterListWheelState>(),
+        gh<_i632.ChapterSplitSettingManager>(),
+        gh<_i583.FeedTapManager>(),
       ),
     );
     gh.lazySingleton<_i864.ShareInManager>(
@@ -257,36 +289,10 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i942.ToastService>(),
       ),
     );
-    gh.lazySingleton<_i471.AllDonePopupManager>(
-      () => _i471.AllDonePopupManager(
-        gh<_i215.StoreService>(),
-        gh<_i1045.CatchupManager>(),
-        gh<_i127.FeedsManager>(),
-      ),
-    );
-    gh.lazySingleton<_i92.CatchupPopupManager>(
-      () => _i92.CatchupPopupManager(
-        gh<_i215.StoreService>(),
-        gh<_i1045.CatchupManager>(),
-      ),
-    );
     gh.singleton<_i768.DeepLinkOutManager>(
       () => _i768.DeepLinkOutManager(
         gh<_i508.JsonEncodingManager>(),
         gh<_i175.ShareOutManager>(),
-      ),
-    );
-    gh.singleton<_i950.HapticManager>(
-      () => _i950.HapticManager(
-        gh<_i527.DebounceManager>(),
-        gh<_i22.HapticService>(),
-        gh<_i274.HapticSettingManager>(),
-        gh<_i567.BibleReaderLinkManager>(),
-        gh<_i1033.BookListWheelState>(),
-        gh<_i282.CatchupSettingManager>(),
-        gh<_i1033.ChapterListWheelState>(),
-        gh<_i632.ChapterSplitSettingManager>(),
-        gh<_i583.FeedTapManager>(),
       ),
     );
     return this;

@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:dartx/dartx.dart';
+import 'package:df_log/df_log.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../service/date_time_service.dart';
 import '../service/store_service.dart';
+import 'app_lifecycle_manager.dart';
 import 'catchup_setting_manager.dart';
 import 'feeds_advance_manager.dart';
 import 'feeds_manager.dart';
@@ -13,6 +15,7 @@ import 'midnight_manager.dart';
 
 @lazySingleton
 class CatchupManager with ChangeNotifier {
+  final AppLifecycleManager _appLifecycleManager;
   final CatchupSettingManager _catchupSettingManager;
   final DateTimeService _dateTimeService;
   final FeedsManager _feedsManager;
@@ -21,6 +24,7 @@ class CatchupManager with ChangeNotifier {
   final StoreService _storeService;
 
   CatchupManager(
+    this._appLifecycleManager,
     this._catchupSettingManager,
     this._dateTimeService,
     this._feedsManager,
@@ -28,7 +32,8 @@ class CatchupManager with ChangeNotifier {
     this._midnightManager,
     this._storeService,
   ) {
-    AppLifecycleListener(onResume: notifyListeners);
+    Log.info('ctor');
+    _appLifecycleManager.onResume(notifyListeners);
 
     _feedsAdvanceManager.addListener(() {
       virtualAllDoneDate = isBehind ? virtualAllDoneDate + 1.days : _dateTimeService.now.date;
