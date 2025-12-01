@@ -11,7 +11,12 @@ class AppLifecycleManager {
 
   final Map<Priority, List<VoidCallback>> _resumeCallbacks = {Priority.high: [], Priority.normal: [], Priority.low: []};
 
-  /// TODO: make private
+  // Register a callback for app-resume with optional priority.
+  void onResume(VoidCallback callback, {Priority priority = Priority.normal}) {
+    _resumeCallbacks[priority]!.add(callback);
+  }
+
+  // public for unit tests -- can it be made private?
   void runCallbacks() {
     // Execute HIGH > NORMAL > LOW
     for (final priority in Priority.values) {
@@ -19,10 +24,5 @@ class AppLifecycleManager {
         callback();
       }
     }
-  }
-
-  /// Register a callback for app-resume with optional priority.
-  void onResume(VoidCallback callback, {Priority priority = Priority.normal}) {
-    _resumeCallbacks[priority]!.add(callback);
   }
 }
