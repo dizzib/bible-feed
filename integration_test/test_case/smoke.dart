@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../helper.dart';
+import '_helper.dart';
 import '../injectable.dart';
 
 Future runSmokeTest() async {

@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../../integration_test/helper.dart';
+import '../../integration_test/test_case/_helper.dart';
 import '../injectable.dart';
 import 'helper.dart';
 import 'stub/stub_date_time_service.dart';

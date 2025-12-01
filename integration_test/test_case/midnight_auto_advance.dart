@@ -3,7 +3,7 @@ import 'package:bible_feed/service/date_time_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:watch_it/watch_it.dart';
 
-import '../helper.dart';
+import '_helper.dart';
 import '../injectable.dart';
 import '../manager/stub_midnight_manager.dart';
 import '../service/stub_date_time_service.dart';
