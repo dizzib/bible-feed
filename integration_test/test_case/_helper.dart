@@ -75,8 +75,8 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
-  Future tapCatchupReset() async {
-    await tapByKey('catchup_reset');
+  Future tapCancelCatchup() async {
+    await tapByKey('catchup_cancel');
   }
 
   Future tapFab() async {

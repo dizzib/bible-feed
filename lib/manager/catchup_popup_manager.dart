@@ -42,9 +42,9 @@ class CatchupPopupManager extends PopupManager {
   @override
   PopupAction get popupAction => PopupAction(
     action: _catchupManager.reset,
-    icon: const Icon(Icons.delete),
-    key: 'catchup_reset',
-    text: 'Ignore and reset',
+    icon: const Icon(Icons.cancel),
+    key: 'catchup_cancel',
+    text: 'Ignore and Cancel',
   );
 
   @override

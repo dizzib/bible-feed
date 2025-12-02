@@ -29,7 +29,7 @@ extension CatchupTestHelper on WidgetTester {
     expectText('$daysBehind behind');
     expectText('$expectChaptersToRead chapters');
     if (isReset) {
-      await tapCatchupReset();
+      await tapCancelCatchup();
       expectNoText('$daysBehind behind');
       expectNotInteractiveByKey(catchupFabKey);
     } else {
