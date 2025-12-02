@@ -24,11 +24,11 @@ Future runCatchupTest() async {
     await t.advanceDay();
     await t.testCatchupPopup('1 day', 20);
     await t.setAllFeedsAsRead();
-    await t.tapPopupAction(); // onboarding
+    await t.tapAdvanceNow(); // onboarding
     expectNotInteractiveByKey(catchupFabKey);
     await t.setAllFeedsAsRead();
     await t.tapAllDoneFab(); // onboarded, not behind
-    await t.tapPopupAction();
+    await t.tapAdvanceNow();
     await t.advanceDay();
     expectNotInteractiveByKey(catchupFabKey);
     await t.advanceDay();

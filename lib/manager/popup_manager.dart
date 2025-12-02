@@ -14,25 +14,20 @@ abstract class PopupManager with ChangeNotifier {
   String get onboardingStoreKeyFragment;
   String get title;
 
-  //// concrete
-
-  String get _onboardingStoreKey => 'hasCompletedOnboarding.$onboardingStoreKeyFragment';
-
-  bool get hasCompletedOnboarding => _storeService.getBool(_onboardingStoreKey) ?? false;
-
-  List<Verse>? get verses => null;
-
-  // ui props
-
-  void action() {} // ignore: no-empty-block, default is do nothing
-  Icon? get actionIcon => null;
-  String? get actionText => null;
-  bool get hasAction => actionText != null;
+  void action();
+  Icon get actionIcon;
+  String get actionKey;
+  String get actionText;
 
   Color getBackgroundColor();
   Color getForegroundColor();
 
-  // methods
+  //// concrete
+
+  String get _onboardingStoreKey => 'hasCompletedOnboarding.$onboardingStoreKeyFragment';
+  bool get hasAction => actionKey != '';
+  bool get hasCompletedOnboarding => _storeService.getBool(_onboardingStoreKey) ?? false;
+  List<Verse>? get verses => null;
 
   void completeOnboarding() => _storeService.setBool(_onboardingStoreKey, true);
 

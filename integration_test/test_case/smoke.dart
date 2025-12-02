@@ -16,12 +16,12 @@ Future runSmokeTest() async {
     expectNoText('All done'); // onboarding should not happen
     expectChapters(1);
     await t.tapAllDoneFab();
-    await t.tapPopupAction();
+    await t.tapAdvanceNow();
     expectChapters(2);
     await t.tapAllLists();
     expectNoText('All done'); // onboarding should not happen
     await t.tapAllDoneFab();
-    await t.tapPopupAction();
+    await t.tapAdvanceNow();
     expectChapters(3);
     await t.tapByKey('gos');
     await t.scrollToLastBook(); // subsequent t.pump breaks!?

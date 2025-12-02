@@ -36,7 +36,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
         PopupVerses<T>(),
         if (popupManager.hasAction)
           ElevatedButton(
-            key: const ValueKey('popup_action'),
+            key: ValueKey(popupManager.actionKey),
             style: ElevatedButton.styleFrom(
               backgroundColor: foregroundColor,
               foregroundColor: backgroundColor,
@@ -51,7 +51,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               spacing: actionButtonSpacing,
               // ignore: avoid-non-null-assertion, passed hasAction guard
-              children: [Text(popupManager.actionText!), popupManager.actionIcon!],
+              children: [Text(popupManager.actionText), popupManager.actionIcon],
             ),
           ),
       ],

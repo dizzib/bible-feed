@@ -49,6 +49,10 @@ extension AppTestHelper on WidgetTester {
     await pumpAndSettle();
   }
 
+  Future tapAdvanceNow() async {
+    await tapByKey('advance_now');
+  }
+
   Future tapAllDoneButton(String text) async {
     expectText('All done');
     await tapText(text);
@@ -67,17 +71,17 @@ extension AppTestHelper on WidgetTester {
   }
 
   Future tapByKey(String value) async {
-    await tap(find.byKey(Key(value)));
+    await tap(find.byKey(ValueKey(value)));
     await pumpAndSettle();
+  }
+
+  Future tapCaptureIgnore() async {
+    await tapByKey('capture_ignore');
   }
 
   Future tapFab() async {
     await tap(find.byType(FloatingActionButton));
     await pumpAndSettle();
-  }
-
-  Future tapPopupAction() async {
-    await tapByKey('popup_action');
   }
 
   Future tapText(String value) async {

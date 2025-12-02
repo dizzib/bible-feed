@@ -20,7 +20,7 @@ extension CatchupTestHelper on WidgetTester {
 
   Future testAllDoneButStillBehindPopup(int expectChaptersToRead) async {
     expectText('$expectChaptersToRead more chapters');
-    await tapPopupAction();
+    await tapAdvanceNow();
   }
 
   Future testCatchupPopup(String daysBehind, int expectChaptersToRead) async {
