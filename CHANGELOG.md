@@ -3,6 +3,15 @@
 All notable changes to this project are documented here.
 
 
+## [1.9.1] - 2025-12-02
+
+### Added
+- cancel catchup button
+
+### Changed
+- bugfixes
+
+
 ## [1.9.0] - 2025-11-27
 
 ### Added
