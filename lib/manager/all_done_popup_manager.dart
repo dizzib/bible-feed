@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '../model/popup_action.dart';
 import 'catchup_manager.dart';
 import 'popup_manager.dart';
 import 'feeds_advance_manager.dart';
@@ -21,19 +22,7 @@ class AllDonePopupManager extends PopupManager {
   @override
   String get onboardingStoreKeyFragment => 'allDone';
 
-  // ui props
-
-  @override
-  void action() => sl<FeedsAdvanceManager>().advance();
-
-  @override
-  Icon get actionIcon => const Icon(Icons.fast_forward);
-
-  @override
-  String get actionKey => 'advance_now';
-
-  @override
-  String get actionText => 'Advance now';
+  /// ui
 
   @override
   Color getBackgroundColor() => [Colors.green, Colors.yellow, Colors.red][_catchupManager.daysBehindClamped];
@@ -49,6 +38,14 @@ class AllDonePopupManager extends PopupManager {
     final catchupText = 'You have ${_catchupManager.chaptersToRead} more chapters to read today!$catchupAdvanceText';
     return _catchupManager.isBehind ? catchupText : allDoneText;
   }
+
+  @override
+  PopupAction get popupAction => PopupAction(
+    action: sl<FeedsAdvanceManager>().advance,
+    icon: const Icon(Icons.fast_forward),
+    key: 'advance_now',
+    text: 'Advance now',
+  );
 
   @override
   String get title {

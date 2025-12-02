@@ -16,6 +16,7 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
     final foregroundColor = popupManager.getForegroundColor();
     final actionButtonSpacing = 4.0;
     final elevation = 8.0;
+    final popupAction = popupManager.popupAction;
     final titleFontSize = 24.0;
 
     return Column(
@@ -34,9 +35,9 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
           child: Text(popupManager.getText(), textAlign: TextAlign.center, style: TextStyle(color: foregroundColor)),
         ),
         PopupVerses<T>(),
-        if (popupManager.hasAction)
+        if (popupAction != null)
           ElevatedButton(
-            key: ValueKey(popupManager.actionKey),
+            key: ValueKey(popupAction.key),
             style: ElevatedButton.styleFrom(
               backgroundColor: foregroundColor,
               foregroundColor: backgroundColor,
@@ -44,14 +45,14 @@ class PopupBody<T extends PopupManager> extends StatelessWidget {
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Constants.defaultBorderRadius)),
             ),
             onPressed: () {
-              popupManager.action();
+              popupAction.action();
               Navigator.pop(context);
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               spacing: actionButtonSpacing,
               // ignore: avoid-non-null-assertion, passed hasAction guard
-              children: [Text(popupManager.actionText), popupManager.actionIcon],
+              children: [Text(popupAction.text), popupAction.icon],
             ),
           ),
       ],

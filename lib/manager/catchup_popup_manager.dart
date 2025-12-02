@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../model/popup_action.dart';
 import '../model/verse.dart';
 import 'catchup_manager.dart';
 import 'feeds_manager.dart';
@@ -20,19 +21,7 @@ class CatchupPopupManager extends PopupManager {
   @override
   String get onboardingStoreKeyFragment => 'catchup';
 
-  //// ui
-
-  @override
-  void action() => _catchupManager.reset();
-
-  @override
-  Icon get actionIcon => const Icon(Icons.delete);
-
-  @override
-  String get actionKey => 'catchup_reset';
-
-  @override
-  String get actionText => 'Ignore this alert';
+  /// ui
 
   @override
   Color getBackgroundColor() => _catchupManager.isVeryBehind ? Colors.red : Colors.yellow;
@@ -49,6 +38,14 @@ class CatchupPopupManager extends PopupManager {
     final exhortation = 'Beloved, do not neglect to feed daily upon the word of God, for it is written...';
     return '$alert\n\n$exhortation';
   }
+
+  @override
+  PopupAction get popupAction => PopupAction(
+    action: _catchupManager.reset,
+    icon: const Icon(Icons.delete),
+    key: 'catchup_reset',
+    text: 'Ignore this alert',
+  );
 
   @override
   String get title => 'Catch Up!';

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import '../model/popup_action.dart';
 import '../model/verse.dart';
 import '../service/store_service.dart';
 
@@ -10,22 +11,18 @@ abstract class PopupManager with ChangeNotifier {
 
   //// abstract
 
-  String getText();
   String get onboardingStoreKeyFragment;
+
+  /// ui
+  PopupAction? get popupAction;
   String get title;
-
-  void action();
-  Icon get actionIcon;
-  String get actionKey;
-  String get actionText;
-
   Color getBackgroundColor();
   Color getForegroundColor();
+  String getText();
 
   //// concrete
 
   String get _onboardingStoreKey => 'hasCompletedOnboarding.$onboardingStoreKeyFragment';
-  bool get hasAction => actionKey != '';
   bool get hasCompletedOnboarding => _storeService.getBool(_onboardingStoreKey) ?? false;
   List<Verse>? get verses => null;
 
