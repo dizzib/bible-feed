@@ -23,6 +23,15 @@ class CatchupPopupManager extends PopupManager {
   //// ui
 
   @override
+  void action() => _catchupManager.reset();
+
+  @override
+  Icon? get actionIcon => const Icon(Icons.delete);
+
+  @override
+  String? get actionText => 'Ignore this alert';
+
+  @override
   Color getBackgroundColor() => _catchupManager.isVeryBehind ? Colors.red : Colors.yellow;
 
   @override

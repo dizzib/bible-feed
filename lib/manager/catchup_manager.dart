@@ -37,10 +37,7 @@ class CatchupManager with ChangeNotifier {
       virtualAllDoneDate = isBehind ? virtualAllDoneDate + 1.days : _dateTimeService.now.date;
     });
 
-    _catchupSettingManager.addListener(() {
-      virtualAllDoneDate = _defaultVirtualAllDoneDate;
-    });
-
+    _catchupSettingManager.addListener(reset);
     _midnightManager.addListener(notifyListeners);
 
     virtualAllDoneDate = virtualAllDoneDate; // ensure default is stored
@@ -73,5 +70,9 @@ class CatchupManager with ChangeNotifier {
   set virtualAllDoneDate(DateTime value) {
     _storeService.setDateTime(_storeKey, value);
     notifyListeners();
+  }
+
+  void reset() {
+    virtualAllDoneDate = _defaultVirtualAllDoneDate;
   }
 }
