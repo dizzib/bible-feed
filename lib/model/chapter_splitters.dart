@@ -28,6 +28,7 @@ abstract class ChapterSplittersModule {
     const ChapterSplitter('jer', 49, [20]),
     const ChapterSplitter('jer', 50, [23]),
     const ChapterSplitter('jer', 51, [33]),
+    const ChapterSplitter('lam', 3, [33]),
     const ChapterSplitter('jhn', 6, [41]),
     const ChapterSplitter('lev', 13, [29]),
     const ChapterSplitter('luk', 1, [39]),
