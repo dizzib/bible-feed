@@ -23,9 +23,15 @@ extension CatchupTestHelper on WidgetTester {
     await tapAdvanceNow();
   }
 
-  Future testCatchupPopup(String daysBehind, int expectChaptersToRead) async {
+  Future testCatchupPopup(String daysBehind, int expectChaptersToRead, {bool isReset = false}) async {
     expectText('$daysBehind behind');
     expectText('$expectChaptersToRead chapters');
-    await dismissPopup();
+    if (isReset) {
+      await tapCatchupReset();
+      expectNoText('$daysBehind behind');
+      expectNotInteractiveByKey(catchupFabKey);
+    } else {
+      await dismissPopup();
+    }
   }
 }

@@ -7,6 +7,7 @@ import '_helper.dart';
 import '_helper_catchup.dart';
 
 Future runCatchupTest() async {
+  // beware, splitting this test causes strange issues with initialisation!?
   testWidgets('catchup', (t) async {
     await configureDependencies(environment: 'integration_test');
 
@@ -20,14 +21,13 @@ Future runCatchupTest() async {
 
     await t.startApp();
     await testSettingManager(true); // enable
-    // on fresh install, should alert tomorrow if unread
+
+    /// on fresh install, should alert tomorrow if unread
     await t.advanceDay();
-    await t.testCatchupPopup('1 day', 20);
+    await t.testCatchupPopup('1 day', 20, isReset: true);
     await t.setAllFeedsAsRead();
-    await t.tapAdvanceNow(); // onboarding
-    expectNotInteractiveByKey(catchupFabKey);
-    await t.setAllFeedsAsRead();
-    await t.tapAllDoneFab(); // onboarded, not behind
+
+    /// test fall behind then catch up
     await t.tapAdvanceNow();
     await t.advanceDay();
     expectNotInteractiveByKey(catchupFabKey);
@@ -42,7 +42,7 @@ Future runCatchupTest() async {
     await t.setAllFeedsAsRead();
     await t.testAllDoneButStillBehindPopup(10);
 
-    // disable then enable setting should clear alert
+    /// test disable then enable setting should clear alert
     await t.advanceDay();
     await t.testCatchupPopup('1 day', 20);
     await testSettingManager(false);

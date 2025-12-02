@@ -44,7 +44,7 @@ class CatchupPopupManager extends PopupManager {
     action: _catchupManager.reset,
     icon: const Icon(Icons.delete),
     key: 'catchup_reset',
-    text: 'Ignore this alert',
+    text: 'Ignore and reset',
   );
 
   @override
