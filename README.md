@@ -7,8 +7,6 @@ This repository contains the open-source code for the Bible Feed app for Android
 Bible Feed is a reading tracker for the [professor Grant Horner reading system](https://sohmer.net/media/professor_grant_horners_bible_reading_system.pdf).
 To learn more about this app, [see here](https://raw.githubusercontent.com/dizzib/bible-feed/refs/heads/dev/fastlane/metadata/android/en-US/full_description.txt).
 
-Please [raise an issue](https://github.com/dizzib/bible-feed/issues) if you find any bugs or have any suggestions.
-
 ## Download
 
 | Android | iOS |
