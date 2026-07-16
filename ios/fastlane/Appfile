@@ -1,7 +1,6 @@
 ### ios
 
 apple_id ENV["APPLE_ID"] # your apple email address
-app_identifier ENV["APPLE_APP_IDENTIFIER"] # app bundle identifier
 itc_team_id ENV["APPLE_ITC_TEAM_ID"] # app store connect team id
 team_id ENV["APPLE_TEAM_ID"] # developer portal team id
 
