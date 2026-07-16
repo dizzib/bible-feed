@@ -3,7 +3,7 @@
 require "yaml"
 ver = YAML.load_file("../../pubspec.yaml")["version"]
 $vname, $vcode = ver.split('+')[0], ver.split('+')[1]
-$vcode_file = "./metadata/android/en-US/changelogs/#{$vcode}.txt"
+$vcode_file = "./metadata/android/en-GB/changelogs/#{$vcode}.txt"
 print "Version: #{ver}\n"
 #
 $project_name = ENV["PROJECT"].split('.')[-1]
@@ -24,7 +24,7 @@ platform :android do
       changelog_path: '../CHANGELOG.md',
       section_identifier: "[#{$vname}]"
     )
-    file = "./metadata/android/en-US/changelogs/#{$vcode}.txt"
+    file = "./metadata/android/en-GB/changelogs/#{$vcode}.txt"
     File.open(file, 'w') do |f| f << changelog end
   end
 
