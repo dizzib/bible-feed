@@ -26,13 +26,13 @@ platform :ios do
 
     deliver(
       app_review_information: {
-        first_name: ENV["APP_REVIEW_FIRST_NAME"],
-        last_name: ENV["APP_REVIEW_LAST_NAME"],
-        email_address: ENV["APP_REVIEW_EMAIL"],
-        phone_number: ENV["APP_REVIEW_PHONE"],
+        first_name: ENV["APPLE_APP_REVIEW_FIRST_NAME"],
+        last_name: ENV["APPLE_APP_REVIEW_LAST_NAME"],
+        email_address: ENV["APPLE_APP_REVIEW_EMAIL"],
+        phone_number: ENV["APPLE_APP_REVIEW_PHONE"],
       },
       app_version: $vname,
-      copyright: "#{Time.now.year} #{ENV["APP_REVIEW_FIRST_NAME"]} #{ENV["APP_REVIEW_LAST_NAME"]}",
+      copyright: "#{Time.now.year} #{ENV["APPLE_APP_REVIEW_FIRST_NAME"]} #{ENV["APPLE_APP_REVIEW_LAST_NAME"]}",
       force: true,
       # ipa: "../build/bible-feed.ipa",
       precheck_include_in_app_purchases: false,
