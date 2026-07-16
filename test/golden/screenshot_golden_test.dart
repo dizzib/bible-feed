@@ -28,20 +28,29 @@ import 'helper.dart';
 enum Platform { android, iOS }
 
 enum Device {
-  googlePixel3(true, 'google-pixel-3', Platform.android, Size(1080, 2160), density: 3),
+  googlePixel3(true, 'google-pixel-3', 'phoneScreenshots', Platform.android, Size(1080, 2160), density: 3),
   // name must be ipadPro129 to upload to 3rd-gen slot (13")
-  iPadPro12(true, 'ipadPro129', Platform.iOS, Size(2048, 2732), density: 2, inches: 12.9),
+  iPadPro12(true, 'ipadPro129', '', Platform.iOS, Size(2048, 2732), density: 2, inches: 12.9),
   // iPadPro11(true, 'ipad-pro-11', Platform.iOS, Size(1668, 2388), density: 2, inches: 11),
-  iPhoneXsMax(true, 'iphone-xs-max', Platform.iOS, Size(1242, 2688), density: 3, inches: 6.5);
+  iPhoneXsMax(true, 'iphone-xs-max', '', Platform.iOS, Size(1242, 2688), density: 3, inches: 6.5);
   // iPhone8Plus(true, 'iphone-8-plus', Platform.iOS, Size(1242, 2208), density: 3, inches: 5.5);
   // These are not yet supported in fastlane...
   // iPhone16ProMax(true, 'iphone-16-pro-max', Platforms.iOS, Size(1320, 2868), density: 3, inches: 6.9),
   // iPhone16Pro(true, 'iphone-16-pro', Platforms.iOS, Size(1206, 2622), density: 3, inches: 6.3),
 
-  const Device(this.enabled, this.name, this.platform, this.physicalSize, {required this.density, this.inches});
+  const Device(
+    this.enabled,
+    this.name,
+    this.folder,
+    this.platform,
+    this.physicalSize, {
+    required this.density,
+    this.inches,
+  });
 
   final bool enabled;
   final String name;
+  final String folder;
   final Platform platform;
   final Size physicalSize;
   final double density;
@@ -94,7 +103,7 @@ Future main() async {
     final targetPlatform = device.platform == Platform.android ? TargetPlatform.android : TargetPlatform.iOS;
     for (final (index, scenario) in scenarios.indexed) {
       // seems to generate in background, even after await!?
-      final filename = '${device.platform.name}/${device.name}_$index-${scenario.name}';
+      final filename = '${device.platform.name}/${device.folder}/${device.name}_$index-${scenario.name}';
       await goldenTest(
         'screenshot',
         fileName: filename,
