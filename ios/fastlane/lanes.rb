@@ -3,7 +3,7 @@ ver = YAML.load_file("../../pubspec.yaml")["version"]
 $vname, $vcode = ver.split('+')[0], ver.split('+')[1]
 
 platform :ios do
-  $app_identifier = "com.me2christ.bible-feed" # bundle ID
+  $app_identifier = "com.me2christ.bible-feed" # bundle ID -- DO NOT CHANGE!!!
   $api_key = app_store_connect_api_key(
     key_id: "P84TK6TW3J",
     issuer_id: "1393d029-6490-46aa-95a5-27ab94c40cfe",
