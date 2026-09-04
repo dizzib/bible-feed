@@ -5,7 +5,7 @@
 This repository contains the open-source code for the Bible Feed app for Android and iOS.
 
 Bible Feed is a reading tracker for the [professor Grant Horner reading system](https://sohmer.net/media/professor_grant_horners_bible_reading_system.pdf).
-To learn more about this app, [see here](https://raw.githubusercontent.com/RisenCodeLab/bible-feed/refs/heads/dev/android/fastlane/metadata/android/en-US/full_description.txt).
+To learn more about this app, [see here](https://raw.githubusercontent.com/RisenCodeLab/bible-feed/refs/heads/dev/android/fastlane/metadata/android/en-GB/full_description.txt).
 
 ## Download
 
@@ -16,13 +16,13 @@ To learn more about this app, [see here](https://raw.githubusercontent.com/Risen
 ## Screenshots
 
 <p float="left">
-  <img src="/android/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_0-home_framed.png" width="150" />
-  <img src="/android/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_1-bookChapterDialog_framed.png" width="150" />
-  <img src="/android/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_2-settings_framed.png" width="150" />
-  <img src="/android/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_3-catchup_framed.png" width="150" />
-  <img src="/android/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_4-allDone_framed.png" width="150" />
-  <img src="/android/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_5-share_framed.png" width="150" />
-  <img src="/android/fastlane/metadata/android/en-US/images/phoneScreenshots/google-pixel-3_6-home_framed.png" width="150" />
+  <img src="/android/fastlane/metadata/android/en-GB/images/phoneScreenshots/google-pixel-3_0-home_framed.png" width="150" />
+  <img src="/android/fastlane/metadata/android/en-GB/images/phoneScreenshots/google-pixel-3_1-bookChapterDialog_framed.png" width="150" />
+  <img src="/android/fastlane/metadata/android/en-GB/images/phoneScreenshots/google-pixel-3_2-settings_framed.png" width="150" />
+  <img src="/android/fastlane/metadata/android/en-GB/images/phoneScreenshots/google-pixel-3_3-catchup_framed.png" width="150" />
+  <img src="/android/fastlane/metadata/android/en-GB/images/phoneScreenshots/google-pixel-3_4-allDone_framed.png" width="150" />
+  <img src="/android/fastlane/metadata/android/en-GB/images/phoneScreenshots/google-pixel-3_5-share_framed.png" width="150" />
+  <img src="/android/fastlane/metadata/android/en-GB/images/phoneScreenshots/google-pixel-3_6-home_framed.png" width="150" />
 </p>
 
 ## Credits
