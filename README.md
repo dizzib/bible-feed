@@ -9,9 +9,9 @@ To learn more about this app, [see here](https://raw.githubusercontent.com/Risen
 
 ## Download
 
-| Android | iOS |
-|:-:|:-:|
-| Get the latest APK from [GitHub Releases](https://github.com/RisenCodeLab/bible-feed/releases/latest). | [<img src="asset/appstore-badge.png" height="50">](https://apps.apple.com/gb/app/bible-feed/id6749379835)
+| Android APK | Android | iOS |
+|:-:|:-:|:-:|
+| Get the latest APK from [GitHub Releases](https://github.com/RisenCodeLab/bible-feed/releases/latest). | [<img src="asset/google-play-badge.png" height="50">](https://play.google.com/store/apps/details?id=com.risencode.bible_feed) | [<img src="asset/appstore-badge.png" height="50">](https://apps.apple.com/gb/app/bible-feed/id6749379835)
 
 ## Screenshots
 
