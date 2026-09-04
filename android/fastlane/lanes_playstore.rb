@@ -18,6 +18,7 @@ desc "Promote internal test to closed"
 lane :gplay_promote_internal_to_closed do
   upload_to_play_store(
     aab: ENV['FR_AAB'],
+    release_status: 'draft',
     skip_upload_aab: true,
     skip_upload_metadata: true,
     skip_upload_changelogs: true,
@@ -25,6 +26,7 @@ lane :gplay_promote_internal_to_closed do
     skip_upload_screenshots: true,
     track: 'internal',
     track_promote_to: "alpha",
+    version_code: $vcode,
   )
 end
 
