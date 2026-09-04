@@ -27,3 +27,17 @@ lane :gplay_promote_internal_to_closed do
     track_promote_to: "alpha",
   )
 end
+
+desc "Upload metadata to Google Play"
+lane :upload_metadata do
+  upload_to_play_store(
+    aab: ENV['FR_AAB'],
+    skip_upload_aab: true,
+    skip_upload_changelogs: true,
+    skip_upload_metadata: false,
+    skip_upload_images: false,
+    skip_upload_screenshots: false,
+    track: 'internal',
+    version_code: $vcode,
+  )
+end
