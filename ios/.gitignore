@@ -27,6 +27,7 @@ Flutter/flutter_export_environment.sh
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
 /fastlane/preview.html
+/fastlane/README.md
 /fastlane/report.xml
 /fastlane/screenshots/
 
