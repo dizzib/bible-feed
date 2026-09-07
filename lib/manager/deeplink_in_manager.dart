@@ -18,10 +18,10 @@ class DeepLinkInManager {
       try {
         final queryKey = Constants.deeplinkQueryKey;
         final uri = _deepLinkService.uri;
-        if (!uri.query.startsWith('$queryKey=')) {
+        final queryValue = uri.queryParameters[queryKey];
+        if (queryValue == null || queryValue.isEmpty) {
           throw Exception('The querystring key "$queryKey" was not found');
         }
-        final queryValue = uri.query.substring(queryKey.length + 1); // ignore: avoid-substring, no emojis
         final decodedJson = _jsonEncodingManager.decode(queryValue);
         _shareInManager.sync(decodedJson);
         _toastService.showOk('Success!');
