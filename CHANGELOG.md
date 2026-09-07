@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 
 
+## [1.12.1] - 2026-09-14
+
+### Changed
+- fix share to check version, not build number
+
+
 ## [1.12.0] - 2026-07-15
 
 ### Changed

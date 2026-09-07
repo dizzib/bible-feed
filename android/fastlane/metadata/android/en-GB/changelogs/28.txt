@@ -1,0 +1,2 @@
+Changed
+- fix share to check version, not build number
