@@ -40,12 +40,12 @@ void main() {
 
   test('sync throws exception on mismatched build number', () {
     final feed = Feed(bookKey: b0.key, chapter: 1);
-    final syncDto = ShareDto(
+    final shareDto = ShareDto(
       buildNumber: 'wrong_build',
       feedList: [feed],
       virtualAllDoneDate: virtualAllDoneDate,
     );
-    final json = syncDto.toJson();
+    final json = shareDto.toJson();
     when(mockAppService.buildNumber).thenReturn('correct_build');
     expect(() => testee.sync(json), throwsException);
   });

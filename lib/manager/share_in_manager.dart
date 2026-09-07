@@ -22,34 +22,34 @@ class ShareInManager {
       throw Exception('No data was found. $help');
     }
 
-    ShareDto syncDto;
+    ShareDto shareDto;
 
     try {
-      syncDto = ShareDtoMapper.fromJson(json);
+      shareDto = ShareDtoMapper.fromJson(json);
     } catch (err, stackTrace) {
       Error.throwWithStackTrace(Exception('The QR-code is not recognised. $help'), stackTrace);
     }
 
-    if (syncDto.buildNumber != _appService.buildNumber) {
+    if (shareDto.buildNumber != _appService.buildNumber) {
       throw Exception(
         'The Bible Feed app versions must be identical. Please ensure Bible Feed is up to date on both devices.',
       );
     }
 
-    final actualFeedsCount = syncDto.feedList.length;
+    final actualFeedsCount = shareDto.feedList.length;
     final expectedFeedsCount = _feedsManager.feedManagers.length;
     if (actualFeedsCount != expectedFeedsCount) {
       throw Exception('Expected $expectedFeedsCount feeds in the QR-code but got $actualFeedsCount. $help');
     }
 
-    _catchupManager.virtualAllDoneDate = syncDto.virtualAllDoneDate;
+    _catchupManager.virtualAllDoneDate = shareDto.virtualAllDoneDate;
 
     for (final (index, feed) in _feedsManager.feedManagers.indexed) {
-      feed.feed = syncDto.feedList[index];
+      feed.feed = shareDto.feedList[index];
     }
 
     // touch the last modified feed to preserve lastModifiedDate
-    final latestBookKey = syncDto.feedList.maxBy((s) => s.dateModified ?? DateTime(1970))?.bookKey;
+    final latestBookKey = shareDto.feedList.maxBy((s) => s.dateModified ?? DateTime(1970))?.bookKey;
     _feedsManager.feedManagers.firstWhere((FeedManager fm) => fm.book.key == latestBookKey).touch();
   }
 }
