@@ -32,15 +32,15 @@ void main() {
     final feedManager1 = FeedManager(rl0, feed1);
     final feedManager2 = FeedManager(rl1, feed2);
 
-    final buildNumber = '123';
+    final buildNumber = '1.2.3';
     final virtualAllDoneDate = DateTime(2025, 12, 30);
 
-    when(mockAppService.buildNumber).thenReturn(buildNumber);
+    when(mockAppService.version).thenReturn(buildNumber);
     when(mockCatchupManager.virtualAllDoneDate).thenReturn(virtualAllDoneDate);
     when(mockFeedsManager.feedManagers).thenReturn([feedManager1, feedManager2]);
 
     final expectDto = ShareDto(
-      buildNumber: buildNumber,
+      version: buildNumber,
       feedList: [feed1, feed2],
       virtualAllDoneDate: virtualAllDoneDate,
     );

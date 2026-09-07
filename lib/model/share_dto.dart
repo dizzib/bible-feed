@@ -8,9 +8,9 @@ part 'share_dto.mapper.dart';
 @immutable
 @MappableClass()
 class ShareDto with ShareDtoMappable {
-  ShareDto({required this.buildNumber, required this.feedList, required this.virtualAllDoneDate});
+  ShareDto({required this.version, required this.feedList, required this.virtualAllDoneDate});
 
-  final String buildNumber;
+  final String version;
   final List<Feed> feedList;
   final DateTime virtualAllDoneDate;
 }

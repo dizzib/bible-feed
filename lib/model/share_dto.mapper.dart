@@ -23,11 +23,8 @@ class ShareDtoMapper extends ClassMapperBase<ShareDto> {
   @override
   final String id = 'ShareDto';
 
-  static String _$buildNumber(ShareDto v) => v.buildNumber;
-  static const Field<ShareDto, String> _f$buildNumber = Field(
-    'buildNumber',
-    _$buildNumber,
-  );
+  static String _$version(ShareDto v) => v.version;
+  static const Field<ShareDto, String> _f$version = Field('version', _$version);
   static List<Feed> _$feedList(ShareDto v) => v.feedList;
   static const Field<ShareDto, List<Feed>> _f$feedList = Field(
     'feedList',
@@ -41,14 +38,14 @@ class ShareDtoMapper extends ClassMapperBase<ShareDto> {
 
   @override
   final MappableFields<ShareDto> fields = const {
-    #buildNumber: _f$buildNumber,
+    #version: _f$version,
     #feedList: _f$feedList,
     #virtualAllDoneDate: _f$virtualAllDoneDate,
   };
 
   static ShareDto _instantiate(DecodingData data) {
     return ShareDto(
-      buildNumber: data.dec(_f$buildNumber),
+      version: data.dec(_f$version),
       feedList: data.dec(_f$feedList),
       virtualAllDoneDate: data.dec(_f$virtualAllDoneDate),
     );
@@ -113,7 +110,7 @@ abstract class ShareDtoCopyWith<$R, $In extends ShareDto, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, Feed, FeedCopyWith<$R, Feed, Feed>> get feedList;
   $R call({
-    String? buildNumber,
+    String? version,
     List<Feed>? feedList,
     DateTime? virtualAllDoneDate,
   });
@@ -137,19 +134,19 @@ class _ShareDtoCopyWithImpl<$R, $Out>
       );
   @override
   $R call({
-    String? buildNumber,
+    String? version,
     List<Feed>? feedList,
     DateTime? virtualAllDoneDate,
   }) => $apply(
     FieldCopyWithData({
-      if (buildNumber != null) #buildNumber: buildNumber,
+      if (version != null) #version: version,
       if (feedList != null) #feedList: feedList,
       if (virtualAllDoneDate != null) #virtualAllDoneDate: virtualAllDoneDate,
     }),
   );
   @override
   ShareDto $make(CopyWithData data) => ShareDto(
-    buildNumber: data.get(#buildNumber, or: $value.buildNumber),
+    version: data.get(#version, or: $value.version),
     feedList: data.get(#feedList, or: $value.feedList),
     virtualAllDoneDate: data.get(
       #virtualAllDoneDate,

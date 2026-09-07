@@ -30,9 +30,9 @@ class ShareInManager {
       Error.throwWithStackTrace(Exception('The QR-code is not recognised. $help'), stackTrace);
     }
 
-    if (shareDto.buildNumber != _appService.buildNumber) {
+    if (shareDto.version != _appService.version) {
       throw Exception(
-        'The Bible Feed app versions must be identical. Please ensure Bible Feed is up to date on both devices.',
+        'The Bible Feed versions must be identical. Please ensure Bible Feed is up to date on both devices.',
       );
     }
 

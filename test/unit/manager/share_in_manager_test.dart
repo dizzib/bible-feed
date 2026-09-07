@@ -12,14 +12,19 @@ import 'package:mockito/mockito.dart';
 import '../test_data.dart';
 import 'share_in_manager_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<AppService>(), MockSpec<CatchupManager>(), MockSpec<FeedManager>(), MockSpec<FeedsManager>()])
+@GenerateNiceMocks([
+  MockSpec<AppService>(),
+  MockSpec<CatchupManager>(),
+  MockSpec<FeedManager>(),
+  MockSpec<FeedsManager>(),
+])
 void main() {
   late MockAppService mockAppService;
   late MockCatchupManager mockCatchupManager;
   late MockFeedsManager mockFeedsManager;
   late ShareInManager testee;
 
-  final buildNumber = '1.2.3';
+  final version = '1.2.3';
   final virtualAllDoneDate = DateTime(2025, 12, 30);
 
   setUp(() {
@@ -38,31 +43,23 @@ void main() {
     expect(() => testee.sync('invalid json'), throwsException);
   });
 
-  test('sync throws exception on mismatched build number', () {
+  test('sync throws exception on mismatched version', () {
     final feed = Feed(bookKey: b0.key, chapter: 1);
-    final shareDto = ShareDto(
-      buildNumber: 'wrong_build',
-      feedList: [feed],
-      virtualAllDoneDate: virtualAllDoneDate,
-    );
+    final shareDto = ShareDto(version: 'wrong_version', feedList: [feed], virtualAllDoneDate: virtualAllDoneDate);
     final json = shareDto.toJson();
-    when(mockAppService.buildNumber).thenReturn('correct_build');
+    when(mockAppService.version).thenReturn('correct_version');
     expect(() => testee.sync(json), throwsException);
   });
 
-  test('sync updates feed states and CatchupManager.virtualAllDoneDate on valid JSON with matching build number', () {
+  test('sync updates feed states and CatchupManager.virtualAllDoneDate on valid JSON with matching version', () {
     final feed1 = Feed(bookKey: b0.key, chapter: 1);
     final feed2 = Feed(bookKey: b1.key, chapter: 2);
-    final shareDto = ShareDto(
-      buildNumber: buildNumber,
-      feedList: [feed1, feed2],
-      virtualAllDoneDate: virtualAllDoneDate,
-    );
+    final shareDto = ShareDto(feedList: [feed1, feed2], version: version, virtualAllDoneDate: virtualAllDoneDate);
     final json = shareDto.toJson();
     final mockFeed1 = MockFeedManager();
     final mockFeed2 = MockFeedManager();
 
-    when(mockAppService.buildNumber).thenReturn(buildNumber);
+    when(mockAppService.version).thenReturn(version);
     when(mockCatchupManager.virtualAllDoneDate).thenReturn(virtualAllDoneDate);
     when(mockFeed1.book).thenReturn(b0);
     when(mockFeed2.book).thenReturn(b1);
