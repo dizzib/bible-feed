@@ -8,7 +8,7 @@ class HapticSetting extends Setting<bool> {
   bool get defaultValue => false;
 
   @override
-  get storeKeyFragment => 'haptic';
+  String get storeKeyFragment => 'haptic';
 
   @override
   String get title => 'Haptic Feedback';

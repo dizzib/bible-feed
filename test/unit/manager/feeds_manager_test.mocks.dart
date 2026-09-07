@@ -50,11 +50,11 @@ class MockFeedStoreManager extends _i1.Mock implements _i3.FeedStoreManager {
           as _i2.Feed);
 
   @override
-  _i5.Future<dynamic> save(_i4.ReadingList? readingList, _i2.Feed? state) =>
+  _i5.Future<void> save(_i4.ReadingList? readingList, _i2.Feed? state) =>
       (super.noSuchMethod(
             Invocation.method(#save, [readingList, state]),
-            returnValue: _i5.Future<dynamic>.value(),
-            returnValueForMissingStub: _i5.Future<dynamic>.value(),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
           )
-          as _i5.Future<dynamic>);
+          as _i5.Future<void>);
 }

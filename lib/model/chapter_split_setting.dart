@@ -8,7 +8,7 @@ class ChapterSplitSetting extends Setting<bool> {
   bool get defaultValue => false;
 
   @override
-  get storeKeyFragment => 'splitChapters';
+  String get storeKeyFragment => 'splitChapters';
 
   @override
   String get title => 'Split Chapters';

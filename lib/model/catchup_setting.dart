@@ -8,7 +8,7 @@ class CatchupSetting extends Setting<bool> {
   bool get defaultValue => false;
 
   @override
-  get storeKeyFragment => 'catchup';
+  String get storeKeyFragment => 'catchup';
 
   @override
   String get title => 'Catch Up';

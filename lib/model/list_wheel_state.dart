@@ -7,6 +7,7 @@ abstract class ListWheelState with ChangeNotifier {
   int get index => _index;
 
   set index(int index) {
+    if (index == _index) return;
     _index = index;
     notifyListeners();
   }

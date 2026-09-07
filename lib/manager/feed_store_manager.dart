@@ -23,7 +23,7 @@ class FeedStoreManager {
     );
   }
 
-  Future save(ReadingList readingList, Feed state) async {
+  Future<void> save(ReadingList readingList, Feed state) async {
     await _storeService.set('${readingList.key}.book', state.bookKey);
     await _storeService.set('${readingList.key}.chapter', state.chapter);
     await _storeService.set('${readingList.key}.verse', state.verse);

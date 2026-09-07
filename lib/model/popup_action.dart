@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PopupAction {
-  final Function() action;
+  final VoidCallback action;
   final Icon icon;
   final String key;
   final String text;
