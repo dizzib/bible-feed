@@ -9,7 +9,7 @@ import 'dart:ui' as _i7;
 import 'package:bible_feed/manager/bible_reader_launch_manager.dart' as _i3;
 import 'package:bible_feed/manager/bible_reader_link_manager.dart' as _i6;
 import 'package:bible_feed/model/bible_reader.dart' as _i2;
-import 'package:bible_feed/manager/feed_manager.dart' as _i5;
+import 'package:bible_feed/model/feed.dart' as _i5;
 import 'package:bible_feed/service/platform_event_service.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -26,6 +26,7 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeBibleReader_0 extends _i1.SmartFake implements _i2.BibleReader {
   _FakeBibleReader_0(Object parent, Invocation parentInvocation)
@@ -47,10 +48,7 @@ class MockBibleReaderLaunchManager extends _i1.Mock
           as _i4.Future<bool>);
 
   @override
-  _i4.Future<void> maybeLaunch(
-    _i2.BibleReader? bibleReader,
-    _i5.Feed? state,
-  ) =>
+  _i4.Future<void> maybeLaunch(_i2.BibleReader? bibleReader, _i5.Feed? state) =>
       (super.noSuchMethod(
             Invocation.method(#maybeLaunch, [bibleReader, state]),
             returnValue: _i4.Future<void>.value(),
