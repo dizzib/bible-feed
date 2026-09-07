@@ -16,6 +16,7 @@ void main() {
     ],
     (int verse, int expectNextVerse, String expectLabel) {
       final testee = ChapterSplitter(b0.key, 1, ChapterSplitters.psalm119VerseList);
+      expect(testee.getNextVerse(Feed(bookKey: b0.key, verse: verse)), expectNextVerse);
       expect(testee.getLabel(Feed(bookKey: b0.key, verse: verse)), expectLabel);
     },
   );
