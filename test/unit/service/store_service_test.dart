@@ -36,6 +36,13 @@ void main() {
     expect(value, now);
   });
 
+  test('date-like strings are intentionally coerced to DateTime', () async {
+    const value = '2026-09-07T10:30:00.000Z';
+    await testee.set('dateLikeStringKey', value);
+    final parsed = testee.get<DateTime>('dateLikeStringKey');
+    expect(parsed, DateTime.parse(value));
+  });
+
   test('returns null for missing key', () {
     final value = testee.get<String>('missingKey');
     expect(value, isNull);

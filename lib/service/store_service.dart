@@ -27,6 +27,9 @@ class StoreService {
       case int _:
         return value as T;
       case String _:
+        // Intentionally coerce ISO-like strings to DateTime.
+        // This service stores DateTime as ISO strings in SharedPreferences, and callers
+        // are expected to use non-date-like values for plain String keys.
         final dt = DateTime.tryParse(value);
         return (dt ?? value) as T;
       case null:
